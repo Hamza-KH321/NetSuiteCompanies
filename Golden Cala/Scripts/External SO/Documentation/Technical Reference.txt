@@ -1,0 +1,26 @@
+* Custom Record: 
+- Customer Users (customrecord_vs_customer_users)
+
+* Scripts:
+- SL || Admin Page
+- SL || Login
+- SL || Customer Sales Order
+- SL || View SO Lines
+- VS_Token_Helper (Token Module in suitescripts)
+
+* Files: 
+- Folder: External SO
+- VS_Admin_Page.html
+- VS_Admin_Style.css
+- VS_Login_Page.html
+- VS_login_style.css
+- View_SO_Lines.html
+- Customer_SalesOrders.css
+- Customer_SalesOrders.html
+- Create_SalesOrder.css
+- Create_SalesOrder.html
+
+* Fields :
+-  External SO custbody_vs_external_so in Sales Order
+-  External SO User custbody_vs_external_so_user in Sales Order
+

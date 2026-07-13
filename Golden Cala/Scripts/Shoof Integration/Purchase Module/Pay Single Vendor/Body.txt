@@ -1,0 +1,5 @@
+{
+  "vendor": 1238,   // vendor internal id
+  "account": 234,   // account internal id (bank/cash)
+  "amount": 100   // total amount to pay
+}

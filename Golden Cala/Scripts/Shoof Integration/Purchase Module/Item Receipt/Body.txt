@@ -1,0 +1,14 @@
+{
+  "entity": 1238,
+  "createdfrom": 576218,
+  "items": [
+    {
+      "id": "12345",
+      "quantity": 5,
+      "inventoryAssignments": [
+        { "inventoryNumber": "LOT-Shoof-1", "quantity": 3 },
+        { "inventoryNumber": "LOT-Shoof-2", "quantity": 2 }
+      ]
+    }
+  ]
+}

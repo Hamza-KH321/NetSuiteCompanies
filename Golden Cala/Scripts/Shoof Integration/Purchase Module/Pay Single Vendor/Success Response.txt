@@ -1,0 +1,5 @@
+{
+    "success": true,
+    "paymentId": 576225,
+    "message": "Vendor Payment created successfully."
+}

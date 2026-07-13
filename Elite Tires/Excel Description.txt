@@ -1,0 +1,69 @@
+<table width="800" border="0" cellpadding="5" style="margin:auto;">
+            <tbody>
+              <tr>
+                <th width="514" style="font-size: 36px; text-align:center; color:#28a745; font-weight:bold;">
+                  SAME DAY PROCESSING
+                </th>
+                <th width="260" style="text-align:center;">
+                  <img src="https://i.ebayimg.com/00/s/MzQwWDM0MA==/z/YIMAAOSw2BdjK3nB/$_27.PNG?set_id=8800005007" 
+                       width="249" 
+                       height="249" 
+                       alt="Same Day Processing Icon" 
+                       style="border:1px solid #ddd; border-radius:4px;">
+                </th>
+              </tr>
+            </tbody>
+          </table>
+        </th>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Additional Product Details Section -->
+  <div style="margin-top:20px; font-size:18px; padding:15px; border:1px solid #ccc; border-radius:4px; background-color:#f9f9f9;">
+    <h2 style="color:#333; text-align:left; font-size:24px;">High-Quality 14x1.25 Spline Lug Bolt Kit – Secure Your Wheels with Confidence</h2>
+    <p style="margin-top:10px; color:#555; text-align:left;">
+      Upgrade your vehicle with the Galaxy Spline Lug Bolt Kit, engineered for maximum security and durability. These lug bolts feature a 14x1.25 thread size with a 0.93" overall length and a 2.12" flange, ensuring a precise fit. The high-strength steel construction and corrosion-resistant chrome finish provide long-lasting performance.
+    </p>
+
+    <h3 style="color:#333; font-size:20px; margin-top:15px;">Key Features:</h3>
+    <ul style="color:#555; padding-left:20px; line-height:1.8;">
+      <li>Includes 20 spline lug bolts and 1 installation key.</li>
+      <li>Thread size: 14x1.25 – Compatible with a variety of vehicles.</li>
+      <li>Corrosion-resistant chrome finish.</li>
+      <li>Conical 60° seat for a secure and precise fit.</li>
+      <li>Easy installation with included spline key.</li>
+    </ul>
+
+    <h3 style="color:#333; font-size:20px; margin-top:15px;">Specifications:</h3>
+    <ul style="color:#555; padding-left:20px; line-height:1.8;">
+      <li><strong>Brand:</strong> Galaxy</li>
+      <li><strong>Thread Size:</strong> 14x1.25</li>
+      <li><strong>Overall Length:</strong> 0.93"</li>
+      <li><strong>Flange Size:</strong> 2.12"</li>
+      <li><strong>Weight:</strong> 6.25 lbs</li>
+      <li><strong>Dimensions:</strong> 6.06 x 6.38 x 2.37 inches</li>
+    </ul>
+
+    <h3 style="color:#333; font-size:20px; margin-top:15px;">What’s Included:</h3>
+    <ul style="color:#555; padding-left:20px; line-height:1.8;">
+      <li>20 spline lug bolts</li>
+      <li>1 installation key</li>
+    </ul>
+
+    <h3 style="color:#333; font-size:20px; margin-top:15px;">Why Choose Galaxy?</h3>
+    <p style="margin-top:10px; color:#555; text-align:left;">
+      Galaxy lug bolts are built for strength, security, and style. Whether upgrading or replacing old hardware, this premium lug bolt kit ensures a precise and reliable fit every time.
+    </p>
+  </div>
+
+  <!-- Policies Section -->
+  <div style="margin-top:30px; padding:15px; border:1px solid #ccc; border-radius:4px; background-color:#f4f4f4;">
+    <h3 style="color:#333; font-size:20px;">Policies</h3>
+    <ul style="color:#555; line-height:1.8; padding-left:20px;">
+      <li><strong>Returns:</strong> Not accepted for this product.</li>
+      <li><strong>Warranty:</strong> Sold as-is with no warranty.</li>
+      <li><strong>Shipping Guarantee:</strong> Ships within 2 business days.</li>
+    </ul>
+  </div>
+</div>

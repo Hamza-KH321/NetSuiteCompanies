@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+
+    <title>Create Sales Order</title>
+    <link rel="stylesheet" type="text/css"
+        href="https://6371802.app.netsuite.com/core/media/media.nl?id=39174&c=6371802&h=gihPrHE9D-w6vXknSAAOP2Bp7ckE25OpGtU_CVHsM2GBKhSl&_xt=.css">
+
+</head>
+
+<body>
+    <div class="container">
+        <div class="header-bar"
+            style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+            <div style="display: flex; align-items: center; gap: 20px;">
+                <img src="https://6371802-sb1.app.netsuite.com/core/media/media.nl?id=12&c=&h=yE6kgGe_2QrefIFBJO4xc9ksRT7UhJpAMWcYjvFGXZyCW84X"
+                    alt="Company Logo" style="width:15%;height:15%;margin-right: 40px;">
+                <div>
+                    <h2 style="margin: 0; font-size: 24px;">
+                        ➕ Create Sales Order<span id="customerName" style="font-weight: 500;"></span>
+                    </h2>
+                    <p style="margin: 4px 0 0; font-size: 14px; color: #555;">👤 <span id="userName">User</span> |
+                        📍 <span id="userLocation">Location</span> |
+                        🏢 <span id="userBranch">Branch</span></p>
+                </div>
+            </div>
+            <button class="btn" onclick="goBackToSalesOrders()">🔙 Back to Sales Orders</button>
+            <button class="btn" style="background-color:#dc3545;" onclick="logout()">🚪 Change User</button>
+
+        </div>
+
+        <div class="so-section">
+            <h3>🧾 Header Information</h3>
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="soDate">Date:</label>
+                    <input type="date" id="soDate" />
+                </div>
+                <div class="form-group">
+                    <label for="soMemo">Memo:</label>
+                    <input type="text" id="soMemo" placeholder="Enter Memo" />
+                </div>
+                <div class="form-group">
+                    <label for="soPO">PO #:</label>
+                    <input type="text" id="soPO" placeholder="Enter PO Number" />
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="locationText">Location:</label>
+                    <input type="text" id="locationText" disabled />
+                    <input type="hidden" id="locationId" />
+                </div>
+                <div class="form-group">
+                    <label for="branchText">Branch:</label>
+                    <input type="text" id="branchText" disabled />
+                    <input type="hidden" id="branchId" />
+                </div>
+            </div>
+        </div>
+
+        <div class="so-section">
+            <h3>🔍 Item Filters</h3>
+            <div class="filter-row" style="display: flex; gap: 20px; flex-wrap: wrap;">
+                <div class="form-group" style="flex: 1;">
+                    <label for="filterClass">Brand:</label>
+                    <select id="filterClass">
+                        <option value="">-- Any --</option>
+                    </select>
+                </div>
+                <div class="form-group" style="flex: 1;">
+                    <label for="filterCustItem27">Color:</label>
+                    <select id="filterCustItem27">
+                        <option value="">-- Any --</option>
+                    </select>
+                </div>
+                <div class="form-group" style="flex: 1;">
+                    <label for="filterCustItem28">Lens Type:</label>
+                    <select id="filterCustItem28">
+                        <option value="">-- Any --</option>
+                    </select>
+                </div>
+            </div>
+            <!-- <button class="btn" onclick="applySegmentFilter()">Get Filtered Items</button> -->
+        </div>
+
+
+
+        <div class="so-section">
+            <h3>📦 Item Lines</h3>
+            <table class="item-table">
+                <thead>
+                    <tr>
+                        <th>Item</th>
+                        <th>Description</th>
+                        <th>Brand</th>
+                        <th>Available Qty</th>
+
+                        <th>Quantity</th>
+                        <th>Rate</th>
+                        <th>Amount</th>
+                        <th>Tax</th>
+                        <th>Gross Amount</th>
+                        <th>Remove</th>
+                    </tr>
+                </thead>
+                <tbody id="itemLinesBody">
+                    <tr>
+                        <td><select class="item-select">
+                                <option value="">Select Item</option>
+                            </select></td>
+                        <td><input type="text" class="description" disabled /></td>
+                        <td><input type="text" class="brand" disabled /></td>
+                        <td><input type="text" class="qty-available" disabled /></td>
+
+                        <td><input type="number" min="1" value="1" class="qty-input" /></td>
+                        <td><input type="number" class="rate-input" step="0.01" disabled /></td>
+                        <td><input type="number" class="amount-input" step="0.01" disabled /></td>
+                        <td><input type="number" class="taxamt" step="0.01" disabled /></td>
+                        <td><input type="number" class="gross-amount-input" step="0.01" disabled /></td>
+                        <td><button type="button" onclick="removeThisLine(this)">🗑️</button></td>
+                    </tr>
+                </tbody>
+            </table>
+            <button class="btn" onclick="addLine()">➕ Add Line</button>
+            <button class="btn" onclick="openMultiItemModal()">➕ Add Multiple</button>
+
+            <button class="btn" style="background-color: #007bff;" onclick="submitSalesOrder()">📝 Submit
+                Order</button>
+        </div>
+    </div>
+    <!-- Add Multiple Items Modal -->
+    <div id="multiItemModal" style="display:none; position:fixed; top:10%; left:50%; transform:translateX(-50%);
+            background:white; border:1px solid #ccc; padding:0; max-height:70%; overflow:auto;
+            z-index:999; box-shadow:0 4px 12px rgba(0,0,0,0.2); border-radius:10px; width:80%;">
+        <div style="padding: 20px;">
+            <h3>Select Items</h3>
+            <table class="item-table">
+                <thead>
+                    <tr>
+                        <th>Select</th>
+                        <th>Item</th>
+                        <th>Quantity</th>
+                        <th>Rate</th>
+                    </tr>
+                </thead>
+                <tbody id="multiItemBody"></tbody>
+            </table>
+        </div>
+        <div
+            style="position: sticky; bottom: 0; background: white; padding: 10px 20px; border-top: 1px solid #ccc; text-align: right;">
+            <button class="btn" onclick="applyMultiSelection()">✅ Done</button>
+            <button class="btn" style="background-color:#aaa;" onclick="closeMultiItemModal()">❌ Cancel</button>
+        </div>
+    </div>
+
+    <!-- Loading Indicator -->
+    <div id="loadingOverlay" class="loading-overlay">
+        <div class="loading-spinner"></div>
+        <div class="loading-text">Loading, please wait...</div>
+    </div>
+
+
+    <!-- Dynamic Script Initialization -->
+    <script>
+        const itemRequestTracker = {}; // itemId => totalRequestedQty
+        let userInfo = {}, itemPricing = {}, allItems = [], backUrl = '';
+        let segmentFilters = [];
+
+        let filteredItemsCacheSetExplicitly = false;
+
+        document.addEventListener('DOMContentLoaded', async () => {
+            document.getElementById("loadingOverlay").style.display = "flex";
+
+            try {
+                const response = await fetch(window.location.href, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ action: 'getFormContext' })
+                });
+
+                const data = await response.json();
+                userInfo = data.userInfo || {};
+                document.getElementById('userName').textContent = userInfo.userName || '';
+                document.getElementById('userLocation').textContent = userInfo.userLocationText || '';
+                document.getElementById('userBranch').textContent = userInfo.userBranchText || '';
+                document.getElementById('customerName').textContent = ' - ' + (userInfo.customerName || '');
+
+                itemPricing = data.itemPricing || {};
+                allItems = data.itemOptions || [];
+                backUrl = data.backUrl || '';
+
+                segmentFilters = data.segmentFilters || [];
+
+                document.getElementById('soDate').value = new Date().toISOString().split('T')[0];
+                document.getElementById('locationText').value = userInfo.userLocationText || '';
+                document.getElementById('locationId').value = userInfo.userLocationId || '';
+                document.getElementById('branchText').value = userInfo.userBranchText || '';
+                document.getElementById('branchId').value = userInfo.userBranchId || '';
+
+                initializeBrandDropdown();
+
+
+                populateItemSelect(document.querySelector('.item-select'));
+                applySegmentFilter(); // 🔥 Run filter once on load using default/any selections
+
+            } catch (err) {
+                alert("Failed to load form context.");
+                console.error(err);
+            } finally {
+                document.getElementById("loadingOverlay").style.display = "none";
+            }
+        });
+
+        function populateDropdown(id, options) {
+            const select = document.getElementById(id);
+            select.innerHTML = '<option value="">-- Any --</option>';
+            options.forEach(opt => {
+                const option = document.createElement('option');
+                option.value = opt.id;
+                option.textContent = opt.text;
+                select.appendChild(option);
+            });
+        }
+
+        function goBackToSalesOrders() {
+            if (!backUrl) {
+                alert('Back URL is not available.');
+                return;
+            }
+            window.location.href = backUrl;
+        }
+
+        let filteredItemsCache = [];
+
+        function addLine() {
+            const tbody = document.getElementById('itemLinesBody');
+            const row = document.createElement('tr');
+            row.innerHTML = `
+    <td><select class="item-select"><option value="">Select Item</option></select></td>
+    <td><input type="text" class="description" disabled /></td>
+    <td><input type="text" class="brand" disabled /></td>
+    <td><input type="text" class="qty-available" disabled /></td>
+
+    <td><input type="number" min="1" value="1" class="qty-input" /></td>
+    <td><input type="number" class="rate-input" step="0.01" disabled /></td>
+    <td><input type="number" class="amount-input" step="0.01" disabled /></td>
+    <td><input type="number" class="taxamt" step="0.01" disabled /></td>
+    <td><input type="number" class="gross-amount-input" step="0.01" disabled /></td>
+    <td><button type="button" onclick="removeThisLine(this)">🗑️</button></td>
+  `;
+            tbody.appendChild(row);
+            populateItemSelect(row.querySelector('.item-select'), null, filteredItemsCache.length > 0);
+        }
+
+        function removeThisLine(button) {
+            const row = button.closest('tr');
+            const tbody = document.getElementById('itemLinesBody');
+            if (tbody.rows.length > 1) {
+                row.remove();
+            } else {
+                alert("At least one item line is required.");
+            }
+        }
+
+        function populateItemSelect(selectElement, preselectedId = null, useFiltered = false) {
+            const itemsToUse = useFiltered ? filteredItemsCache : allItems;
+
+            const currentValue = selectElement.value;
+            const valueToSelect = preselectedId || currentValue;
+
+            // Clear and re-populate
+            selectElement.innerHTML = '<option value="">Select Item</option>';
+
+            let foundInList = false;
+            itemsToUse.forEach(item => {
+                const opt = document.createElement('option');
+                opt.value = item.id;
+                opt.textContent = item.text;
+                if (item.id === valueToSelect) foundInList = true;
+                selectElement.appendChild(opt);
+            });
+
+            if (valueToSelect && !foundInList) {
+                const originalItem = allItems.find(i => i.id === valueToSelect);
+                if (originalItem) {
+                    const opt = document.createElement('option');
+                    opt.value = originalItem.id;
+                    opt.textContent = originalItem.text;
+                    selectElement.appendChild(opt);
+                }
+            }
+
+            // Set and trigger change
+            if (valueToSelect) {
+                selectElement.value = valueToSelect;
+                selectElement.dispatchEvent(new Event('change'));
+            }
+
+            if (!selectElement.dataset.listenerAdded) {
+                selectElement.addEventListener('change', () => {
+                    const row = selectElement.closest('tr');
+                    const selectedItem = allItems.find(i => i.id === selectElement.value);
+
+                    const description = row.querySelector('.description');
+                    const brand = row.querySelector('.brand');
+                    const qty = row.querySelector('.qty-input');
+                    const rate = row.querySelector('.rate-input');
+                    const amount = row.querySelector('.amount-input');
+                    const tax = row.querySelector('.taxamt');
+                    const gross = row.querySelector('.gross-amount-input');
+                    const qtyAvailable = row.querySelector('.qty-available');
+
+                    if (selectedItem) {
+                        description.value = selectedItem.description || '';
+                        brand.value = selectedItem.brand || '';
+                        qtyAvailable.value = selectedItem.locationquantityavailable || 0;
+
+                        const rateValue = parseFloat(itemPricing[selectedItem.id] || selectedItem.rate || 0);
+                        rate.value = rateValue.toFixed(2);
+
+                        const updateAmounts = () => {
+                            const itemId = selectElement.value;
+                            const q = parseFloat(qty.value) || 0;
+                            const r = parseFloat(rate.value) || 0;
+                            const available = parseFloat(qtyAvailable.value) || 0;
+
+                            // Get total requested quantity for this item excluding this row
+                            let totalRequested = 0;
+                            document.querySelectorAll('#itemLinesBody tr').forEach(rw => {
+                                const sel = rw.querySelector('.item-select');
+                                const qInput = rw.querySelector('.qty-input');
+                                if (sel && qInput && sel.value === itemId && rw !== row) {
+                                    totalRequested += parseFloat(qInput.value) || 0;
+                                }
+                            });
+
+                            const newTotal = totalRequested + q;
+
+                            if (available === 0) {
+                                alert('Item is out of stock. Please choose a different item.');
+                                qty.value = '';
+                                amount.value = '';
+                                tax.value = '';
+                                gross.value = '';
+                                return;
+                            }
+
+                            if (newTotal > available) {
+                                const remaining = available - totalRequested;
+                                alert(`You have requested more than the available quantity. Maximum Order Quantity is ${remaining}.`);
+                                qty.value = remaining > 0 ? remaining : '';
+                                return;
+                            }
+
+                            const a = q * r;
+                            let t = 0;
+                            let g = a;
+
+                            if (selectedItem.taxschedule !== 'Non-Taxable') {
+                                t = a * 0.15;
+                                g = a + t;
+                            }
+
+                            amount.value = a.toFixed(2);
+                            tax.value = t.toFixed(2);
+                            gross.value = g.toFixed(2);
+                        };
+
+                        qty.addEventListener('input', updateAmounts);
+                        updateAmounts();
+                    } else {
+                        description.value = '';
+                        brand.value = '';
+                        qtyAvailable.value = '';
+                        rate.value = '';
+                        amount.value = '';
+                        tax.value = '';
+                        gross.value = '';
+                    }
+                });
+
+                selectElement.dataset.listenerAdded = "true";
+            }
+        }
+
+
+        function submitSalesOrder() {
+            const customerId = userInfo.customerId;
+            if (!customerId) return alert("Missing customer ID from context.");
+
+            const userCustomerName = userInfo.userCustomerName;
+            const userCustomerPhoneNumber = userInfo.userCustomerPhoneNumber;
+
+            const soDate = document.getElementById('soDate').value;
+            const memo = document.getElementById('soMemo').value;
+            const poNumber = document.getElementById('soPO').value;
+            const locationId = document.getElementById('locationId').value;
+            const branchId = document.getElementById('branchId').value;
+
+            const lines = [];
+            document.querySelectorAll('#itemLinesBody tr').forEach(row => {
+                const itemId = row.querySelector('.item-select').value;
+                const qty = parseFloat(row.querySelector('.qty-input').value || 0);
+                const rate = parseFloat(row.querySelector('.rate-input').value || 0);
+                if (itemId && qty > 0) {
+                    lines.push({ item: itemId, quantity: qty, rate });
+                }
+            });
+
+            if (lines.length === 0) {
+                alert("Please add at least one valid item.");
+                return;
+            }
+
+            document.getElementById("loadingOverlay").style.display = "flex";
+
+            fetch(window.location.href, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    action: 'createSalesOrder',
+                    customerId,
+                    userCustomerName,
+                    userCustomerPhoneNumber,
+                    soDate,
+                    memo,
+                    poNumber,
+                    locationId,
+                    branchId,
+                    lines
+                })
+            })
+                .then(res => res.text())
+                .then(msg => {
+                    if (msg.includes('meta http-equiv="refresh"')) {
+                        window.location.reload();
+                        return;
+                    }
+                    alert(msg);
+                    window.location.reload();
+
+                })
+                .catch(err => {
+                    console.error(err);
+                    alert("Error creating Sales Order.");
+                })
+                .finally(() => {
+                    document.getElementById("loadingOverlay").style.display = "none";
+                });
+        }
+
+        function applySegmentFilter() {
+            document.getElementById("loadingOverlay").style.display = "flex";
+            try {
+                const selectedBrand = document.getElementById("filterClass").value;
+                const selectedColor = document.getElementById("filterCustItem27").value;
+                const selectedType = document.getElementById("filterCustItem28").value;
+
+                // Get valid combinations based on segmentFilters
+                const validCombinations = segmentFilters.filter(seg => {
+                    return (!selectedBrand || seg.brandId === selectedBrand) &&
+                        (!selectedColor || seg.colorId === selectedColor) &&
+                        (!selectedType || seg.typeId === selectedType);
+                });
+
+                // Convert to a Set of allowed item keys (brand|color|type)
+                const allowedKeys = new Set(validCombinations.map(seg =>
+                    `${seg.brandId}|${seg.colorId}|${seg.typeId}`
+                ));
+
+                filteredItemsCache = allItems.filter(item => {
+                    const itemKey = `${item.classId}|${item.custitem27}|${item.custitem28}`;
+                    return allowedKeys.has(itemKey);
+                });
+
+                filteredItemsCacheSetExplicitly = true;
+
+                // Reapply current selections
+                const selects = document.querySelectorAll('.item-select');
+                selects.forEach(select => {
+                    const selectedItemId = select.value;
+                    populateItemSelect(select, selectedItemId, true);
+                });
+            } finally {
+                document.getElementById("loadingOverlay").style.display = "none";
+            }
+        }
+
+        function openMultiItemModal() {
+            const modal = document.getElementById('multiItemModal');
+            const body = document.getElementById('multiItemBody');
+            body.innerHTML = '';
+
+            const itemsToShow = filteredItemsCacheSetExplicitly ? filteredItemsCache : allItems;
+
+            itemsToShow.forEach(item => {
+                let baseRate = parseFloat(itemPricing[item.id] || item.rate || 0);
+                const row = document.createElement('tr');
+                row.innerHTML = `
+      <td><input type="checkbox" class="multi-check" data-id="${item.id}" data-name="${item.text}" /></td>
+      <td>${item.text}</td>
+      <td><input type="number" class="multi-qty" min="1" value="1" /></td>
+      <td><input type="number" class="multi-rate" min="0" step="0.01" value="${baseRate.toFixed(2)}" disabled /></td>
+    `;
+                body.appendChild(row);
+            });
+
+            modal.style.display = 'block';
+        }
+
+
+        function closeMultiItemModal() {
+            document.getElementById('multiItemModal').style.display = 'none';
+        }
+
+        function applyMultiSelection() {
+            const checks = document.querySelectorAll('.multi-check:checked');
+            const rows = document.getElementById('itemLinesBody');
+
+            if (rows.rows.length === 1 && !rows.querySelector('.item-select')?.value) {
+                rows.innerHTML = '';
+            }
+
+            checks.forEach(check => {
+                const itemId = check.dataset.id;
+                const item = allItems.find(i => i.id === itemId);
+                const available = parseFloat(item?.locationquantityavailable || 0);
+
+                const qtyInput = check.closest('tr').querySelector('.multi-qty');
+                let newQty = parseFloat(qtyInput.value) || 1;
+
+                let existingRow = null;
+                let existingQty = 0;
+
+                // Check if item already exists in current lines
+                document.querySelectorAll('#itemLinesBody tr').forEach(row => {
+                    const sel = row.querySelector('.item-select');
+                    const qInput = row.querySelector('.qty-input');
+                    if (sel && sel.value === itemId) {
+                        existingRow = row;
+                        existingQty += parseFloat(qInput.value) || 0;
+                    }
+                });
+
+                const totalRequested = existingQty + newQty;
+
+                if (available === 0) {
+                    alert(`"${item.text}" is out of stock. Please choose a different item.`);
+                    return;
+                }
+
+                if (totalRequested > available) {
+                    const remaining = available - existingQty;
+                    alert(`You have requested more than available for "${item.text}". You can request only ${remaining} more.`);
+                    return;
+                }
+
+                if (existingRow) {
+                    // Update existing line quantity
+                    const qtyField = existingRow.querySelector('.qty-input');
+                    qtyField.value = existingQty + newQty;
+                    qtyField.dispatchEvent(new Event('input'));
+                } else {
+                    // Add new line
+                    const newRow = document.createElement('tr');
+                    newRow.innerHTML = `
+                <td><select class="item-select"><option value="">Select Item</option></select></td>
+                <td><input type="text" class="description" disabled /></td>
+                <td><input type="text" class="brand" disabled /></td>
+                <td><input type="text" class="qty-available" disabled /></td>
+                <td><input type="number" min="1" value="${newQty}" class="qty-input" /></td>
+                <td><input type="number" step="0.01" class="rate-input" disabled /></td>
+                <td><input type="number" step="0.01" class="amount-input" disabled /></td>
+                <td><input type="number" step="0.01" class="taxamt" disabled /></td>
+                <td><input type="number" step="0.01" class="gross-amount-input" disabled /></td>
+                <td><button type="button" onclick="removeThisLine(this)">🗑️</button></td>
+            `;
+                    rows.appendChild(newRow);
+                    const selectElement = newRow.querySelector('.item-select');
+                    populateItemSelect(selectElement, itemId);
+
+                    // Trigger change event
+                    setTimeout(() => {
+                        selectElement.value = itemId;
+                        selectElement.dispatchEvent(new Event('change'));
+                    }, 10);
+                }
+            });
+
+            closeMultiItemModal();
+        }
+
+
+        function initializeBrandDropdown() {
+            const brandSelect = document.getElementById("filterClass");
+            brandSelect.innerHTML = '<option value="">-- Any --</option>';
+
+            const uniqueBrands = new Map();
+            segmentFilters.forEach(entry => {
+                if (entry.brandId && !uniqueBrands.has(entry.brandId)) {
+                    uniqueBrands.set(entry.brandId, entry.brand);
+                }
+            });
+
+            uniqueBrands.forEach((text, id) => {
+                const option = document.createElement('option');
+                option.value = id;
+                option.textContent = text;
+                brandSelect.appendChild(option);
+            });
+
+            // Load all filters initially
+            initializeColorDropdown(); // all colors
+            initializeTypeDropdown();  // all types
+
+            // Optional filtering
+            brandSelect.addEventListener('change', () => {
+                const brandId = brandSelect.value;
+                initializeColorDropdown(brandId);
+                initializeTypeDropdown(brandId);
+                applySegmentFilter();
+
+            });
+        }
+
+
+        function initializeColorDropdown(brandId = null) {
+            const colorSelect = document.getElementById("filterCustItem27");
+            colorSelect.innerHTML = '<option value="">-- Any --</option>';
+
+            const uniqueColors = new Map();
+            segmentFilters.forEach(entry => {
+                if ((!brandId || entry.brandId === brandId) && entry.colorId && !uniqueColors.has(entry.colorId)) {
+                    uniqueColors.set(entry.colorId, entry.color);
+                }
+            });
+
+            uniqueColors.forEach((text, id) => {
+                const option = document.createElement('option');
+                option.value = id;
+                option.textContent = text;
+                colorSelect.appendChild(option);
+            });
+
+            // Optional filtering for Type when color is changed
+            colorSelect.addEventListener('change', () => {
+                initializeTypeDropdown(brandId, colorSelect.value);
+                applySegmentFilter();
+
+            });
+        }
+
+        function initializeTypeDropdown(brandId = null, colorId = null) {
+            const typeSelect = document.getElementById("filterCustItem28");
+            typeSelect.innerHTML = '<option value="">-- Any --</option>';
+
+            const uniqueTypes = new Map();
+            segmentFilters.forEach(entry => {
+                if (
+                    (!brandId || entry.brandId === brandId) &&
+                    (!colorId || entry.colorId === colorId) &&
+                    entry.typeId &&
+                    !uniqueTypes.has(entry.typeId)
+                ) {
+                    uniqueTypes.set(entry.typeId, entry.type);
+                }
+            });
+
+            uniqueTypes.forEach((text, id) => {
+                const option = document.createElement('option');
+                option.value = id;
+                option.textContent = text;
+                typeSelect.appendChild(option);
+            });
+            typeSelect.addEventListener('change', () => {
+                applySegmentFilter();
+            });
+
+        }
+
+
+
+
+        function clearDropdown(id) {
+            const select = document.getElementById(id);
+            select.innerHTML = '<option value="">-- Any --</option>';
+        }
+
+
+
+        function logout() {
+            document.getElementById("loadingOverlay").style.display = "flex";
+
+            fetch(window.location.href, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ action: 'logout' })
+            })
+                .then(res => res.text())
+                .then(html => {
+                    // You could also check for a redirect or refresh
+                    document.open();
+                    document.write(html);
+                    document.close();
+                })
+                .catch(err => {
+                    console.error(err);
+                    alert("Logout failed.");
+                })
+                .finally(() => {
+                    document.getElementById("loadingOverlay").style.display = "none";
+                });
+        }
+
+
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,7 @@
+{
+    "success": true,
+    "recordType": "salesorder",
+    "internalId": "576233",
+    "customerDepositId": "576234",
+    "warnings": []
+}

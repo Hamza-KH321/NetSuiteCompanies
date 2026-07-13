@@ -1,0 +1,264 @@
+<?xml version="1.0"?><!DOCTYPE pdf PUBLIC "-//big.faceless.org//report" "report-1.1.dtd">
+<pdf>
+<head>
+	<link name="arabtype" type="font" subtype="opentype" src="https://5349550.app.netsuite.com/core/media/media.nl?id=3749&amp;c=5349550&amp;h=be1d79a1b63d55bdd14b&amp;_xt=.ttf" src-bold="https://5349550-sb1.app.netsuite.com/core/media/media.nl?id=1615&amp;c=5349550_SB1&amp;h=4ba0e0a4767b6f8984a4&amp;_xt=.ttf" bytes="2" subset="false"/>
+  <!--<link name="arabtypewriter" type="font" subtype="opentype" src="https://tstdrv2163315.app.netsuite.com/core/media/media.nl?id=15000&amp;c=TSTDRV2163315&amp;h=be19b6c92af3a66b4b88&amp;_xt=.ttf" src-bold="https://tstdrv2163315.app.netsuite.com/core/media/media.nl?id=15001&amp;c=TSTDRV2163315&amp;h=cc9c3afbd6d6717ded06&amp;_xt=.ttf" bytes="2" subset="false"/>-->
+	<#if .locale == "zh_CN">
+		<link name="NotoSansCJKsc" type="font" subtype="opentype" src="${nsfont.NotoSansCJKsc_Regular}" src-bold="${nsfont.NotoSansCJKsc_Bold}" bytes="2" />
+	<#elseif .locale == "zh_TW">
+		<link name="NotoSansCJKtc" type="font" subtype="opentype" src="${nsfont.NotoSansCJKtc_Regular}" src-bold="${nsfont.NotoSansCJKtc_Bold}" bytes="2" />
+	<#elseif .locale == "ja_JP">
+		<link name="NotoSansCJKjp" type="font" subtype="opentype" src="${nsfont.NotoSansCJKjp_Regular}" src-bold="${nsfont.NotoSansCJKjp_Bold}" bytes="2" />
+	<#elseif .locale == "ko_KR">
+		<link name="NotoSansCJKkr" type="font" subtype="opentype" src="${nsfont.NotoSansCJKkr_Regular}" src-bold="${nsfont.NotoSansCJKkr_Bold}" bytes="2" />
+	<#elseif .locale == "th_TH">
+		<link name="NotoSansThai" type="font" subtype="opentype" src="${nsfont.NotoSansThai_Regular}" src-bold="${nsfont.NotoSansThai_Bold}" bytes="2" />
+	</#if>
+    <macrolist>
+        <macro id="nlheader">
+         
+            <table class="header" style="width: 100%;"><tr>
+	<td padding-top="-10px"><img align="center" src="https://5349550.app.netsuite.com/core/media/media.nl?id=12114&amp;c=5349550&amp;h=aioxmul61vNv0_B32iyx_ggZQYCKoDG9rWPRWXjtAcWYWmsF" style="margin: 7px;" /></td>
+	</tr></table>
+        </macro>
+        <macro id="nlfooter">	
+         
+            <table class="footer" style="width: 100%;"><tr>
+	<td><img align="center" src="https://5349550.app.netsuite.com/core/media/media.nl?id=12115&amp;c=5349550&amp;h=_oyo0-WNipvAVkNoOuGev10xWuSmQA1qp2Zlb9998xpTZtji" style="width: 700px; height: 90px;"/></td>
+	</tr>
+	<tr>
+	<td>${record.tranid} - Page <pagenumber/> of <TotalPages/></td>
+	<td align="right"> </td>
+	</tr></table>
+        </macro>
+    </macrolist>
+    <style type="text/css">*:lang(ar){font-family:arabtype;}
+      table {
+			font-size: 9pt;
+			border-collapse: collapse;
+		<#if .locale == "zh_CN">
+			font-family: NotoSans, NotoSansCJKsc, sans-serif;
+		<#elseif .locale == "zh_TW">
+			font-family: NotoSans, NotoSansCJKtc, sans-serif;
+		<#elseif .locale == "ja_JP">
+			font-family: NotoSans, NotoSansCJKjp, sans-serif;
+		<#elseif .locale == "ko_KR">
+			font-family: NotoSans, NotoSansCJKkr, sans-serif;
+		<#elseif .locale == "th_TH">
+			font-family: NotoSans, NotoSansThai, sans-serif;
+		<#else>
+			font-family: NotoSans,arabtype, sans-serif;
+		</#if>
+      }
+</style>
+</head>
+<body header="nlheader" header-height="3.3cm" footer="nlfooter" footer-height="30pt" padding="0in 0.5in 0.8in 0.5in" size="Letter">
+   <table width="100%"><tr>
+	<td padding-top="-20px" align="center" colspan="2" style="text-align: center; height: 22px;"><span align="center" style="font-size:20px; ">Tax Invoice<br />فاتورة ضريبية</span></td>
+	</tr></table>
+  <table padding-top="-5px" border="0" style="width:100%;"><tr>
+	<td><span style="font-size:18px; font-family:arabtype;">Invoice No:&nbsp;</span><br />&nbsp;</td>
+	<td align="center" style="text-align: center;"><span style="align:right ; font-size:18px;">${record.tranid}</span></td>
+	<td align="right" style="text-align: right;"><span style="font-size:18px; lang:ar; font-family:arabtype;">:فاتورة رقم </span></td>
+	</tr>
+    <tr>
+    <td><span style="font-size:18px; font-family:arabtype;">Date:&nbsp;</span><br />&nbsp;</td>
+	<td align="center" style="text-align: center;"><span style="align:right ; font-size:18px;">${record.trandate?string("yyyy-MM-dd")}</span></td>
+      <td align="right" style="text-align: right;"><span style="font-size:18px; lang:ar; font-family:arabtype;">:التاريخ</span></td>
+    </tr>
+</table>
+
+
+<div>
+<table border="1" width="100%"><tr>
+	<td>
+	<table border="0" style="float:left; height : auto; width : auto"><tr>
+		<td align="left">&nbsp;من : شركة سجل التقنية للتطبيقات الالكترونية المتكاملة المحدودة&nbsp;</td>
+		</tr>
+		<tr>
+		<td align="right">س.ت : 4030139938</td>
+		</tr>
+		<tr>
+		<td align="right">ص.ب : 127317 جدة 21352</td>
+		</tr>
+		<tr>
+		<td align="right">حي المحمدية طريق الملك عبدالعزيز أبوداوود كوارتز<br/> الدور الثاني المملكة العربية السعودية</td>
+		</tr>
+		<tr>
+		<td align="right">هاتف: 966126064970&nbsp; &nbsp; &nbsp; &nbsp;فاكس : 966126062448&nbsp;</td>
+		</tr>
+		<tr>
+		<td align="right">رقم التسجيل بضريبة القيمة المضافه :&nbsp;300254927400003</td>
+		</tr></table>
+
+	<table border="0" style="float: left; width:60%"><tr>
+      <td align="right" border-left="1" style="width:50px;">${record.entity.companyname} <#if record.entity.custentity39?length gt 0><br/>${record.entity.custentity39}</#if></td>
+      <td align="right"  style="width: 190px;">:الى: اسم العميل</td>
+		</tr>
+		<tr>
+		<td align="right" border-left="1" style="width:100px;">${record.entity.address}</td>
+          <td align="right"  style="width: 190px;">: العنوان</td>
+		</tr>
+		<tr>
+		<td align="right" border-left="1" style="width: 100px;">${record.otherrefnum}</td>
+          <td align="right"  style="width: 190px;">:رقم امر الشراء</td>
+		</tr>
+		<tr>
+		<td align="right" border-left="1" style="width: 50px;">${record.custbody_vat_reg}</td>
+          <td align="right"  style="width: 250px;">:رقم التسجيل الضريبي</td>
+		</tr>
+		<tr>
+          <td align="right" border-left="1" style="width: 419px; padding-bottom:11px">&nbsp;</td>
+		</tr></table>
+	</td>
+	</tr></table>
+</div>
+
+<#if record.item?has_content><#assign num=1>
+<!--start of problem-->
+<table border="1px" border-bottom="0px" border-collapse="collapse" border-right="0px" margin-top="5px" width="100%"><#list record.item as item><#if item_index==0>
+<thead>
+	<tr border-right="1px">
+	<th align="center" border-right="1px" colspan="1" rowspan="3">
+      <p align='center'><span>الإجمالي <br/></span><br/>Total</p>
+	</th>
+	<th align="center" border-right="1px" colspan="1" rowspan="3">
+      <p align='center'>نسبة<br/>الضريبة<br/>VAT</p>
+	</th>
+	<th align="center" border-right="1px" colspan="1" rowspan="3" style=' word-break:keep all;'><p align='center'>
+      
+      
+	سعر<br/>الوحدة
+      <br/>
+     Quoted Unit Price</p></th>
+	<th align="center" border-right="1px" colspan="1" rowspan="3">
+      <p align='center'><span>العدد</span><br/>Qty</p>
+	</th>
+	<th align="center" border-bottom="1px" border-right="1px" width="250px">
+      <p align='center'><span>الوصف</span><br/>Description</p>
+	</th>
+	<th align="center" border-right="1px" rowspan="3">
+	<p align='center'><span>تسلسل</span><br/>#</p>
+	</th>
+	</tr>
+	<tr border-bottom="1px" border-right="1px">
+	<th align="center" border-right="1px" rowspan="2" width="250px">${record.memo}</th>
+	</tr>
+
+</thead>
+  
+</#if><tr border-bottom="1px" border-right="1px" height="50px">
+ <#assign varA = item.quantity>
+<#assign varB = item.amount>
+  <#assign varc = (varB/varA)>
+	<td align="center" border-right="1px">${item.grossamt?string(",##0.00")}</td>
+	<td align="center" border-right="1px">${item.taxrate1}</td>
+    <td align="center" border-right="1px"><!-- HERE IS THE AFFECTED FIELD, we tried to replace it with item.amount?string(",##0.00") but it resulted in an error -->
+${varc?string(",##0.00")}
+	</td><!-- end of TD -->
+	<td align="center" border-right="1px">${item.quantity}</td>
+	<td align="left" border-right="1px" width="250px" style = "font-size:9px;">${item.description}</td>
+	<td align="center" border-right="1px">${num}</td>
+	</tr>
+	<#assign num+=1/></#list>
+   </table>
+  <table style='margin-top:2px;'>
+	<tr border-rhight="0px">
+	<td align="center" border-left="1px"  border-bottom="1px" border-right="1px">
+	<p>${(record.subtotal)?string(",##0.00")}</p>
+	</td>
+	<td align="right"  border-right="0px" colspan="3" lang="ar">
+	<p>الإجمالي قبل الضريبة بالريال السعودي</p>
+	</td>
+      <td>Total without VAT</td>
+	</tr>
+    	<tr border-rhight="0px">
+	<td align="center" border-left="1px"  border-bottom="1px" border-right="1px">
+	<p>${(record.discounttotal * -1)?string(",##0.00")}</p>
+	</td>
+	<td align="right"  border-right="0px" colspan="3" lang="ar">
+	<p>قيمة الخصم</p>
+	</td>
+      <td>Total Discount</td>
+	</tr>
+    	<tr border-rhight="0px">
+	<td align="center" border-left="1px"  border-bottom="1px" border-right="1px">
+	<p>${(record.subtotal + record.discounttotal)?string(",##0.00")}</p>
+	</td>
+	<td align="right"  border-right="0px" colspan="3" lang="ar">
+	<p>الإجمالي بعد الخصم</p>
+	</td>
+      <td>Total After Discount</td>
+	</tr>
+	<tr>
+	<td align="center"  border-left="1px" border-bottom="1px" border-right="1px">
+	<p><#if record.discounttotal ==0>${record.taxtotal?string(",##0.00")}<#else>${((record.subtotal + record.discounttotal) * 0.150 )?string(",##0.000")}</#if></p>
+	</td>
+	<td align="right"  border-right="0px" colspan="3" lang="ar">
+	<p>إجمالي ضريبة القيمة المضافة بالريال السعودي</p>
+	</td>
+      <td>Total VAT</td>
+	</tr>
+	<tr>
+	<td align="center"  border-left="1px" border-bottom="1px" border-right="1px">
+	<p>${record.total?string(",##0.00")}</p>
+	</td>
+	<td align="right" border-bottom="0px" border-left="0px" border-right="0px" colspan="3" lang="ar">
+	<p>الإجمالي مع ضريبة القيمة المضافة بالريال السعودي</p>
+	</td>
+      <td>Total With VAT</td>
+	</tr></table>
+  
+  <!--end of problem-->
+
+<table margin-left="40px" width="100%">
+<thead>
+</thead><tr>
+	<td align="right" lang="ar" margin-left="100px">(${record.custbody_amt_to_word_arabic_})</td>
+	<td align="right" font-size="medium" lang="ar">إجمالي مبلغ الفاتورة :</td>
+	</tr></table>
+
+<table width="100%"><tr>
+	<td align="left">Payment Method :</td>
+	<td align="right" colspan="5" lang="ar">طريقة الدفع :</td>
+	</tr></table>
+
+<table border="1px" width="100%"><tr>
+	<td align="left">Kindly make the transfer to :</td>
+	<td align="right" colspan="5" lang="ar">يرجى التسديد بتحويل المبلغ أعلاه لحسابنا الجاري :</td>
+	</tr>
+  <#if record.custbody39 ==false>
+	<tr>
+	<td align="left">BENEFICIARY: Sejel Technology CO.LTD. For Electronic Integrated Application</td>
+	<td align="right" colspan="5" lang="ar">بإسم : شركة سجل التقنية للتطبيقات الإلكترونية المتكاملة المحدودة</td>
+	</tr>
+	 
+  <tr>
+	<td align="left">BANK : GULF INTERNATIONAL BANK</td>
+	<td align="right" colspan="5" lang="ar">تحويل إلى بنك الخليج الدولي</td>
+  </tr>
+	<tr>
+	<td align="left">IBAN : SA339&nbsp;000&nbsp;0000&nbsp;0200&nbsp;00002342</td>
+	<td align="right" colspan="5" lang="ar">رقم الآيبان :SA339&nbsp;000&nbsp;0000&nbsp;0200&nbsp;00002342</td>
+	</tr>
+  <#else>
+    	<tr>
+	<td align="left">BENEFICIARY: Sejel Technology CO.LTD.</td>
+	<td align="right" colspan="5" lang="ar">بإسم : شركة سجل التقنية للتطبيقات الإلكترونية المتكاملة المحدودة</td>
+	</tr>
+      <tr>
+	<td align="left">BANK : SAUDI NATIONAL BANK</td>
+	<td align="right" colspan="5" lang="ar">البنك الأهلي السعودي</td>
+  </tr>
+	<tr>
+	<td align="left">IBAN : SA301&nbsp;000&nbsp;0062&nbsp;2162&nbsp;96000102</td>
+	<td align="right" colspan="5" lang="ar">رقم الآيبان :SA301&nbsp;000&nbsp;0062&nbsp;2162&nbsp;96000102</td>
+	</tr>
+    </#if>
+  </table>
+
+<p padding-top="-10px" lang="ar" style="font-family:arabtype;" align="center">**This Is A System Generated Document , No Signature Required** <br/> **هذا المستند تم انشاؤه بواسطة النظام , ولا يحتاج الى توقيع**</p>
+   <barcode style='margin-left:20px;' align='center' codetype="qrcode" height='60' width='64' showtext="true" value="${record.custbody37}"/>
+  <!-- <img align="center" src="https://5349550.app.netsuite.com/core/media/media.nl?id=12115&amp;c=5349550&amp;h=_oyo0-WNipvAVkNoOuGev10xWuSmQA1qp2Zlb9998xpTZtji" style="width: 700px; height: 100px;"/>--></#if>
+</body>
+</pdf>

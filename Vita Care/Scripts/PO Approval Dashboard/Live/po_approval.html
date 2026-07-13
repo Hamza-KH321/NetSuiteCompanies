@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Purchase Order Approval</title>
+  <link rel="stylesheet" href="po_approval.css">
+</head>
+
+<body>
+
+  <!-- ================= LOADING OVERLAY =================
+       Shown during any async operation (fetch, approve, reject, resubmit).
+       #loadingTitle  : describes the current operation
+       #loadingStatus : reserved for per-record progress messages (future)
+  ====================================================== -->
+  <div class="loading-overlay" id="loadingOverlay">
+    <div class="loading-box">
+      <div class="spinner"></div>
+      <div id="loadingTitle">Processing...</div>
+      <div id="loadingStatus"></div>
+    </div>
+  </div>
+
+  <!-- ================= VENDOR SEARCH MODAL =================
+       Opens when the user clicks the Vendor filter input.
+       Vendors are loaded once on page init and filtered client-side.
+  ========================================================= -->
+  <div class="modal-overlay" id="vendorModal" onclick="closeVendorModal(event)">
+    <div class="modal-content" onclick="event.stopPropagation()">
+      <div class="modal-header">
+        <h2>Select Vendor</h2>
+        <button class="modal-close" onclick="closeVendorModal()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <input type="text" id="vendorSearchInput" placeholder="Search vendors..." oninput="filterVendors()" />
+        <div class="vendor-list" id="vendorList">
+          <!-- Populated by populateVendorList() -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= MAIN CONTAINER ================= -->
+  <div class="container">
+
+    <h1 class="title">Purchase Order Approval</h1>
+
+    <!-- ================= FILTER SECTION =================
+         All inputs feed into fetchPurchaseOrders() → POST getData.
+         vendorFilter (hidden) holds the selected vendor internal ID.
+         vendorDisplay (readonly) shows the selected vendor name.
+    ====================================================== -->
+    <div class="filter-section">
+
+      <label>
+        Date From
+        <input type="date" id="fromDate" />
+      </label>
+
+      <label>
+        Date To
+        <input type="date" id="toDate" />
+      </label>
+
+      <label>
+        Vendor
+        <div class="vendor-search-container">
+          <input type="text" id="vendorDisplay" readonly placeholder="Select Vendor" onclick="openVendorModal()" />
+        </div>
+        <!-- Hidden field holds the actual vendor internal ID for POST -->
+        <input type="hidden" id="vendorFilter" />
+      </label>
+
+      <label>
+        Subsidiary
+        <select id="subsidiaryFilter">
+          <option value="">All Subsidiaries</option>
+        </select>
+      </label>
+
+      <label>
+        Location
+        <select id="locationFilter">
+          <option value="">All Locations</option>
+        </select>
+      </label>
+
+      <button class="search-btn" onclick="fetchPurchaseOrders()">Get Purchase Orders</button>
+
+    </div><!-- /filter-section -->
+
+    <!-- ================= ACTION SECTION =================
+         Shows selected count and bulk action buttons.
+         Three actions: Approve / Reject / Re-Submit.
+         Re-Submit is a workflow action available after the
+         Initial State (in BD Manager, S&OP, and SOP Reject states).
+    ====================================================== -->
+    <div class="action-section">
+
+      <div id="selection_count">
+        Selected: 0 / 100
+      </div>
+
+      <div class="action-buttons">
+        <button class="search-btn approve-btn" onclick="approveSelected()">Approve Selected</button>
+        <button class="search-btn reject-btn" onclick="rejectSelected()">Reject Selected</button>
+        <button class="search-btn resubmit-btn" onclick="resubmitSelected()">Re-Submit Selected</button>
+      </div>
+
+    </div><!-- /action-section -->
+
+    <!-- ================= TABLE =================
+         Columns:
+           Checkbox         — bulk selection (max 100)
+           ID               — PO internal ID
+           Document No      — tranid
+           Transaction Name — transactionname
+           Vendor           — mainname
+           Date             — trandate
+           Amount           — formatted with commas + 2 decimals
+           Approval Stage   — derived label from resolveApprovalStageLabel()
+                              (shows which workflow state the PO is in)
+           Action           — 👁 view button opens record in new tab
+    ======================================== -->
+    <div class="table-wrapper">
+      <table class="transaction-table">
+        <thead>
+          <tr>
+            <th><input type="checkbox" id="check_all" onclick="toggleCheckAll(this)"></th>
+            <th>ID</th>
+            <th>Document No</th>
+            <th>Transaction Name</th>
+            <th>Vendor</th>
+            <th>Date</th>
+            <th>Amount</th>
+            <th>Approval Stage</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody id="po_table_body">
+          <tr>
+            <td colspan="9" class="no-data">No purchase orders found</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div><!-- /container -->
+
+
+  <!-- ================= JAVASCRIPT ================= -->
+  <script>
+
+    /* =====================================================
+     * STATE
+     * allPayments      — full PO array returned from the server
+     * selectedPayments — Set of selected PO IDs (strings), max 100
+     * allVendors       — loaded once on init; filtered client-side in modal
+     * allLocations     — loaded once on init; populates dropdown
+     * allSubsidiaries  — loaded once on init; populates dropdown
+     * ===================================================== */
+    let allPayments = [];
+    let selectedPayments = new Set();
+    let allVendors = [];
+    let allLocations = [];
+    let allSubsidiaries = [];
+
+
+    /* =====================================================
+     * INIT — called once on DOM ready (bottom of script)
+     * Loads all reference data in parallel, then fetches POs.
+     * ===================================================== */
+    function init() {
+      loadVendors();
+      loadSubsidiaries();
+      loadLocations();
+      fetchPurchaseOrders();
+    }
+
+
+    /* =====================================================
+     * REFERENCE DATA LOADERS
+     * Each calls a POST action and stores results in the
+     * corresponding state variable, then populates the UI.
+     * ===================================================== */
+
+    /** Load vendors for the modal search list */
+    function loadVendors() {
+      postAction({ action: 'getVendors' })
+        .then(res => {
+          if (!res.success) return;
+          allVendors = res.data || [];
+          populateVendorList(allVendors);
+        })
+        .catch(err => console.error('[loadVendors] Failed:', err));
+    }
+
+    /** Load subsidiaries for the Subsidiary dropdown filter */
+    function loadSubsidiaries() {
+      postAction({ action: 'getSubsidiaries' })
+        .then(res => {
+          if (!res.success) return;
+          allSubsidiaries = res.data || [];
+          populateSubsidiaryDropdown();
+        })
+        .catch(err => console.error('[loadSubsidiaries] Failed:', err));
+    }
+
+    /** Load locations for the Location dropdown filter */
+    function loadLocations() {
+      postAction({ action: 'getLocations' })
+        .then(res => {
+          if (!res.success) return;
+          allLocations = res.data || [];
+          populateLocationDropdown();
+        })
+        .catch(err => console.error('[loadLocations] Failed:', err));
+    }
+
+
+    /* =====================================================
+     * FETCH PURCHASE ORDERS
+     * Reads all filter inputs and POSTs getData to the suitelet.
+     * On success, resets selection and re-renders the table.
+     * ===================================================== */
+    function fetchPurchaseOrders() {
+      showLoading('Loading Purchase Orders...');
+
+      postAction({
+        action: 'getData',
+        fromDate: document.getElementById('fromDate').value,
+        toDate: document.getElementById('toDate').value,
+        vendorId: document.getElementById('vendorFilter').value,
+        subsidiaryId: document.getElementById('subsidiaryFilter').value,
+        locationId: document.getElementById('locationFilter').value
+      })
+        .then(data => {
+          allPayments = data.data || [];
+          selectedPayments.clear();
+          renderTable();
+        })
+        .catch(err => {
+          console.error('[fetchPurchaseOrders]', err);
+          alert('Failed to load purchase orders. Check console for details.');
+        })
+        .finally(() => hideLoading());
+    }
+
+
+    /* =====================================================
+     * RENDER TABLE
+     * Builds the table rows from allPayments.
+     * Each row shows PO data + a stage badge + view button.
+     * ===================================================== */
+    function renderTable() {
+      const tbody = document.getElementById('po_table_body');
+
+      if (!allPayments.length) {
+        tbody.innerHTML = `<tr><td colspan="9" class="no-data">No purchase orders found</td></tr>`;
+        updateSelectionCount();
+        return;
+      }
+
+      tbody.innerHTML = allPayments.map(po => `
+        <tr>
+          <td>
+            <input type="checkbox" class="row-checkbox"
+              data-id="${po.id}"
+              onchange="handleCheckboxChange(this)">
+          </td>
+          <td>${po.id}</td>
+          <td>${escapeHtml(po.documentNo || '')}</td>
+          <td>${escapeHtml(po.transName || '')}</td>
+          <td>${escapeHtml(po.vendor || '')}</td>
+          <td>${po.date}</td>
+          <td style="text-align:right">${formatAmount(po.amount)}</td>
+          <td>
+            <span class="stage-badge ${getStageBadgeClass(po.approvalStage)}">
+              ${escapeHtml(po.approvalStage || '')}
+            </span>
+          </td>
+          <td>
+            <button class="view-btn" onclick="viewRecord(${po.id})">👁</button>
+          </td>
+        </tr>
+      `).join('');
+
+      updateSelectionCount();
+    }
+
+
+    /* =====================================================
+     * APPROVAL STAGE BADGE CLASS
+     * Maps the approvalStage string to a CSS class for
+     * colour-coding the badge in the table.
+     * ===================================================== */
+    function getStageBadgeClass(stage) {
+      if (!stage) return 'badge-initial';
+      const s = stage.toLowerCase();
+
+      // ── Initial ─────────────────────────────────────────────
+      if (s.includes('initial')) return 'badge-initial';
+
+      // ── BD Manager role-based approval states ───────────────
+      if (s.includes('bd manager approval')) return 'badge-bd-manager';
+
+      // ── BD Manager user-based review states ─────────────────
+      //    (S&OP Reject, Comm Dir Reject groups, fallback labels)
+      if (s.includes('bd manager review') ||
+        s.includes('s & op reject') ||
+        s.includes('comm dir reject')) return 'badge-bd-review';
+
+      // ── S & OP Approval ─────────────────────────────────────
+      if (s.includes('s & op approval')) return 'badge-sop-approval';
+
+      // ── Reject → Comm Dir review states (check before plain comm dir) ──
+      //    "cfo reject → comm dir"  (Branch D, state361)
+      //    "f&a reject → comm dir"  (Branch E, state363)
+      if (s.includes('reject → comm dir') ||
+        s.includes('cfo reject →') ||
+        s.includes('f&a reject →')) return 'badge-comm-review';
+
+      // ── Commercial Director Approval ────────────────────────
+      if (s.includes('commercial director approval')) return 'badge-comm-dir';
+
+      // ── CFO Approval (Branch D) ─────────────────────────────
+      if (s.includes('cfo approval')) return 'badge-cfo';
+
+      // ── CEO Reject → F&A review (Branch E, state364) ────────
+      //    Check before plain "f&a" to avoid partial match
+      if (s.includes('ceo reject →') ||
+        s.includes('ceo reject → f&a')) return 'badge-fa-review';
+
+      // ── F&A Director Approval (Branch E, state356) ──────────
+      if (s.includes('f&a director approval')) return 'badge-fa';
+
+      // ── CEO Approval (Branch E, state357) ───────────────────
+      if (s.includes('ceo approval')) return 'badge-ceo';
+
+      // ── Fallback ─────────────────────────────────────────────
+      return 'badge-default';
+    }
+
+
+    /* =====================================================
+     * BULK ACTION HANDLERS
+     * Each calls processAction() with the appropriate
+     * POST action name and loading title.
+     * ===================================================== */
+
+    function approveSelected() {
+      // "Approve" in Initial State = Submit for Approval (handled server-side)
+      processAction('approve', 'Approving / Submitting Purchase Orders...');
+    }
+
+    function rejectSelected() {
+      processAction('reject', 'Rejecting Purchase Orders...');
+    }
+
+    function resubmitSelected() {
+      // Re-Submit is only valid from BD Manager / SOP / SOP Reject states
+      // The server will return an error for Initial State records
+      processAction('resubmit', 'Re-Submitting Purchase Orders for Approval...');
+    }
+
+
+    /* =====================================================
+     * PROCESS ACTION
+     * Generic handler for approve / reject / resubmit.
+     * 1. Validates selection is not empty
+     * 2. Shows loading overlay
+     * 3. POSTs action + selected IDs
+     * 4. Refreshes the table on success
+     * 5. Shows error details if any records failed
+     * ===================================================== */
+    function processAction(action, loadingTitle) {
+      if (selectedPayments.size === 0) {
+        alert('Please select at least one purchase order.');
+        return;
+      }
+
+      showLoading(loadingTitle);
+
+      postAction({
+        action: action,
+        ids: Array.from(selectedPayments)
+      })
+        .then(res => {
+          if (!res.success && res.errors && res.errors.length) {
+            // Some records failed — show details
+            const msg = res.errors.map(e => `PO ${e.poId}: ${e.message}`).join('\n');
+            alert('Some records could not be processed:\n\n' + msg);
+          }
+          // Refresh table regardless (successful ones will have moved out of view)
+          fetchPurchaseOrders();
+        })
+        .catch(err => {
+          console.error('[processAction]', action, err);
+          alert('Operation failed: ' + (err.message || 'Unknown error'));
+        })
+        .finally(() => hideLoading());
+    }
+
+
+    /* =====================================================
+     * VIEW RECORD
+     * Resolves the NS record URL on the server and opens
+     * it in a new browser tab.
+     * ===================================================== */
+    function viewRecord(id) {
+      postAction({ action: 'view_record', id: id })
+        .then(data => {
+          if (data.url) {
+            window.open(data.url, '_blank');
+          } else {
+            alert('Could not resolve record URL.');
+          }
+        })
+        .catch(err => {
+          console.error('[viewRecord]', err);
+          alert('Error opening record.');
+        });
+    }
+
+
+    /* =====================================================
+     * CHECKBOX MANAGEMENT
+     * ===================================================== */
+
+    /** Called when a row checkbox changes */
+    function handleCheckboxChange(cb) {
+      const id = cb.dataset.id;
+
+      if (cb.checked) {
+        if (selectedPayments.size >= 100) {
+          alert('Maximum 100 records may be selected at once.');
+          cb.checked = false;
+          return;
+        }
+        selectedPayments.add(id);
+      } else {
+        selectedPayments.delete(id);
+      }
+
+      syncCheckAll();
+      updateSelectionCount();
+    }
+
+    /** Toggle all checkboxes via the header checkbox */
+    function toggleCheckAll(source) {
+      const checkboxes = document.querySelectorAll('.row-checkbox');
+
+      if (source.checked) {
+        // Select all, respecting the 100-record limit
+        for (const cb of checkboxes) {
+          if (selectedPayments.size >= 100) break;
+          cb.checked = true;
+          selectedPayments.add(cb.dataset.id);
+        }
+      } else {
+        // Deselect all
+        checkboxes.forEach(cb => { cb.checked = false; });
+        selectedPayments.clear();
+      }
+
+      updateSelectionCount();
+    }
+
+    /** Keep the header checkbox in sync with row checkboxes */
+    function syncCheckAll() {
+      const checkboxes = document.querySelectorAll('.row-checkbox');
+      const allChecked = checkboxes.length > 0 && [...checkboxes].every(cb => cb.checked);
+      document.getElementById('check_all').checked = allChecked;
+    }
+
+    /** Update "Selected: X / 100" label */
+    function updateSelectionCount() {
+      document.getElementById('selection_count').textContent =
+        `Selected: ${selectedPayments.size} / 100`;
+    }
+
+
+    /* =====================================================
+     * VENDOR MODAL
+     * ===================================================== */
+
+    function openVendorModal() {
+      document.getElementById('vendorModal').style.display = 'flex';
+      document.getElementById('vendorSearchInput').value = '';
+      document.getElementById('vendorSearchInput').focus();
+      populateVendorList(allVendors); // Reset to full list on open
+    }
+
+    function closeVendorModal(event) {
+      if (!event ||
+        event.target.id === 'vendorModal' ||
+        event.target.classList.contains('modal-close')) {
+        document.getElementById('vendorModal').style.display = 'none';
+      }
+    }
+
+    /** Client-side filter of the vendor list inside the modal */
+    function filterVendors() {
+      const term = document.getElementById('vendorSearchInput').value.toLowerCase();
+      const filtered = allVendors.filter(v => v.name.toLowerCase().includes(term));
+      populateVendorList(filtered);
+    }
+
+    /** Render vendor items inside the modal list */
+    function populateVendorList(vendors) {
+      const list = document.getElementById('vendorList');
+
+      if (!vendors.length) {
+        list.innerHTML = '<div class="vendor-item no-results">No vendors found</div>';
+        return;
+      }
+
+      list.innerHTML = vendors.map(v => `
+        <div class="vendor-item"
+             onclick="selectVendor('${v.id}', '${escapeHtmlAttr(v.name)}')">
+          ${escapeHtml(v.name)}
+        </div>
+      `).join('');
+    }
+
+    /** Called when a vendor item is clicked in the modal */
+    function selectVendor(id, name) {
+      document.getElementById('vendorFilter').value = id;
+      document.getElementById('vendorDisplay').value = name;
+      closeVendorModal();
+    }
+
+    /** Clear the vendor filter (shows a tiny ✕ could be wired here) */
+    function clearVendor() {
+      document.getElementById('vendorFilter').value = '';
+      document.getElementById('vendorDisplay').value = '';
+    }
+
+
+    /* =====================================================
+     * DROPDOWN POPULATORS
+     * ===================================================== */
+
+    function populateSubsidiaryDropdown() {
+      const sel = document.getElementById('subsidiaryFilter');
+      sel.innerHTML = `<option value="">All Subsidiaries</option>` +
+        allSubsidiaries.map(s =>
+          `<option value="${s.id}">${escapeHtml(s.name)}</option>`
+        ).join('');
+    }
+
+    function populateLocationDropdown() {
+      const sel = document.getElementById('locationFilter');
+      sel.innerHTML = `<option value="">All Locations</option>` +
+        allLocations.map(l =>
+          `<option value="${l.id}">${escapeHtml(l.name)}</option>`
+        ).join('');
+    }
+
+
+    /* =====================================================
+     * LOADING OVERLAY HELPERS
+     * ===================================================== */
+
+    function showLoading(title) {
+      document.getElementById('loadingTitle').textContent = title || 'Processing...';
+      document.getElementById('loadingStatus').textContent = '';
+      document.getElementById('loadingOverlay').style.display = 'flex';
+    }
+
+    function hideLoading() {
+      document.getElementById('loadingOverlay').style.display = 'none';
+    }
+
+
+    /* =====================================================
+     * UTILITY
+     * ===================================================== */
+
+    /** Generic POST to the suitelet; returns parsed JSON */
+    function postAction(payload) {
+      return fetch(window.location.href, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      }).then(res => res.json());
+    }
+
+    /** Escape for innerHTML rendering */
+    function escapeHtml(text) {
+      const d = document.createElement('div');
+      d.textContent = text || '';
+      return d.innerHTML;
+    }
+
+    /** Escape for use inside HTML attribute values (onclick etc.) */
+    function escapeHtmlAttr(text) {
+      return (text || '').replace(/'/g, "\\'").replace(/"/g, '&quot;');
+    }
+
+    /** Format a number as currency with 2 decimal places */
+    function formatAmount(val) {
+      return Number(val || 0).toLocaleString(undefined, {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+      });
+    }
+
+
+    /* =====================================================
+     * AUTO-INIT ON PAGE LOAD
+     * ===================================================== */
+    init();
+
+  </script>
+
+</body>
+
+</html>

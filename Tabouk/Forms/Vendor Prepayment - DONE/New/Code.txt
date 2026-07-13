@@ -1,0 +1,182 @@
+<?xml version="1.0"?><!DOCTYPE pdf PUBLIC "-//big.faceless.org//report" "report-1.1.dtd">
+<pdf>
+<head>
+	<link name="NotoSansArabic" type="font" subtype="opentype" src="${nsfont.NotoSansArabic_Regular}" src-bold="${nsfont.NotoSansArabic_Bold}" bytes="2" subset="false"/>
+	<link name="NotoSans" type="font" subtype="truetype" src="${nsfont.NotoSans_Regular}" src-bold="${nsfont.NotoSans_Bold}" src-italic="${nsfont.NotoSans_Italic}" src-bolditalic="${nsfont.NotoSans_BoldItalic}" bytes="2" />
+	<#if .locale == "zh_CN">
+		<link name="NotoSansCJKsc" type="font" subtype="opentype" src="${nsfont.NotoSansCJKsc_Regular}" src-bold="${nsfont.NotoSansCJKsc_Bold}" bytes="2" />
+	<#elseif .locale == "zh_TW">
+		<link name="NotoSansCJKtc" type="font" subtype="opentype" src="${nsfont.NotoSansCJKtc_Regular}" src-bold="${nsfont.NotoSansCJKtc_Bold}" bytes="2" />
+	<#elseif .locale == "ja_JP">
+		<link name="NotoSansCJKjp" type="font" subtype="opentype" src="${nsfont.NotoSansCJKjp_Regular}" src-bold="${nsfont.NotoSansCJKjp_Bold}" bytes="2" />
+	<#elseif .locale == "ko_KR">
+		<link name="NotoSansCJKkr" type="font" subtype="opentype" src="${nsfont.NotoSansCJKkr_Regular}" src-bold="${nsfont.NotoSansCJKkr_Bold}" bytes="2" />
+	<#elseif .locale == "th_TH">
+		<link name="NotoSansThai" type="font" subtype="opentype" src="${nsfont.NotoSansThai_Regular}" src-bold="${nsfont.NotoSansThai_Bold}" bytes="2" />
+	</#if>
+<macrolist>
+<macro id="nlheader">
+<#if record.subsidiary == "Lazure beach and resort">
+<table style="width: 100%; padding: 4px;" class = "bgColorLazureBeachResort">
+<#elseif record.subsidiary == "Royal Lazure">
+<table style="width: 100%; padding: 4px;" class = "bgColorRoyalLazure">
+<#elseif record.subsidiary == "Lasour executive resident">
+<table style="width: 100%; padding: 4px;" class = "bgColorLazureResidance">
+<#elseif record.subsidiary == "Envirol- facility management">
+<table style="width: 100%; padding: 4px;" class = "bgColorEnviro">
+<#elseif record.subsidiary == "Eventti Catering">
+<table style="width: 100%; padding: 4px;" class = "bgColorEventi">
+<#elseif record.subsidiary == "Tabuk investment and tourism (Holding)">
+<table style="width: 100%; padding: 4px;" class = "bgColorTabouk">
+</#if>
+<tr>
+	<td style="font-size: 30px;"><b>Vendor Prepayment</b> <span font-size="14px">(${record.approvalstatus})</span></td>
+<td>
+<#if record.subsidiary == "Lazure beach and resort">
+<img src="https://9072131.app.netsuite.com/core/media/media.nl?id=908&amp;c=9072131&amp;h=Se8nlfSaqXoc6A4ENantoQRKe-ehpRjwSEBR7xCwGkqhe0Z6" style="width:30%; height: 25%;"/>
+<#elseif record.subsidiary == "Royal Lazure">
+<img src="https://9072131.app.netsuite.com/core/media/media.nl?id=825&amp;c=9072131&amp;h=7swBHe9nOYJoxG64jAi6vkUQiIslqVroqagLEgQ7GBthQ5AC" style="width:40%; height: 30%;"/>
+<#elseif record.subsidiary == "Lasour executive resident">
+<img src="https://9072131.app.netsuite.com/core/media/media.nl?id=909&amp;c=9072131&amp;h=eDhAMlK6sUhlW9UMiDhjlEh0ir6sbwzmtNqMqE5Rk4sRIauM" style="width:60%; height: 60%;"/>
+<#elseif record.subsidiary == "Envirol- facility management">
+<img src="https://9072131.app.netsuite.com/core/media/media.nl?id=906&amp;c=9072131&amp;h=kc2BSBn1kURAs9Sapqkn_iMYVMFQjaQZbI80KPUmbcibdFTw" style="width:10%; height: 9%;"/>
+<#elseif record.subsidiary == "Eventti Catering">
+<img src="https://9072131.app.netsuite.com/core/media/media.nl?id=907&amp;c=9072131&amp;h=viVk_MXWSNdy4Ou_XDCTt7GmuzsF1RFUn47pTuBkT2ahUSNC" style="width:70%; height: 70%;"/>
+<#elseif record.subsidiary == "Tabuk investment and tourism (Holding)">
+<img src="https://9072131.app.netsuite.com/core/media/media.nl?id=830&amp;c=9072131&amp;h=C35CfZfzS7NrV4s5k5xGjetHiWDptMCapgiMVeZRwj1-Nn4S" style="width:70%; height: 70%;" />
+</#if>
+</td>
+</tr>
+	<tr>
+	<#if record.subsidiary == "Lazure beach and resort">
+	<td style="font-size: 25px; color: white;"><b>L&#39;AZURE BEACH &amp; RESORT</b></td>
+    <#elseif record.subsidiary == "Royal Lazure">
+    <td style="font-size: 25px; color: white;"><b>Royal Lazure</b></td>
+    <#elseif record.subsidiary == "Lasour Executive Resident">
+    <td style="font-size: 25px; color: white;"><b>Lasour Executive Resident</b></td>
+    <#elseif record.subsidiary == "Envirol- facility management">
+    <td style="font-size: 25px; color: white;"><b>Envirol- facility management</b></td>
+    <#elseif record.subsidiary == "Eventti Catering">
+    <td style="font-size: 25px; color: white;"><b>Eventti Catering</b></td>
+    <#elseif record.subsidiary == "Tabuk investment and tourism (Holding)">
+    <td style="font-size: 25px; color: white;"><b>Tabuk investment and tourism (Holding)</b></td>
+    </#if>
+    </tr>
+	<tr>
+	<td>&nbsp;</td>
+	</tr>
+</table>
+</macro>
+<macro id="nlfooter">
+&nbsp;
+</macro>
+    </macrolist>
+    <style type="text/css">* {
+			<#if .locale == "zh_CN">
+				font-family: NotoSans, NotoSansCJKsc, sans-serif;
+			<#elseif .locale == "zh_TW">
+				font-family: NotoSans, NotoSansCJKtc, sans-serif;
+			<#elseif .locale == "ja_JP">
+				font-family: NotoSans, NotoSansCJKjp, sans-serif;
+			<#elseif .locale == "ko_KR">
+				font-family: NotoSans, NotoSansCJKkr, sans-serif;
+			<#elseif .locale == "th_TH">
+				font-family: NotoSans, NotoSansThai, sans-serif;
+			<#else>
+				font-family: NotoSans, sans-serif;
+			</#if>
+			}
+.bgColorTabouk {
+background-color:'#adadb0';
+}
+.bgColorRoyalLazure {
+background-color:'#c2b59b';
+}
+.bgColorLazureBeachResort {
+background-color:'#0098A7';
+}
+.bgColorLazureResidance {
+background-color:'#889094';
+}
+.bgColorEnviro {
+background-color:'#52b280';
+}
+.bgColorEventi {
+background-color:'#1F839C';
+}
+.borderColorTabouk {
+border-color:'#adadb0';
+}
+.borderColorRoyalLazure {
+border-color:'#c2b59b';
+}
+.borderColorLazureBeachResort {
+border-color:'#0098A7';
+}
+.borderColorLazureResidance {
+border-color:'#889094';
+}
+.borderColorEnviro {
+border-color:'#52b280';
+}
+.borderColorEventi {
+border-color:'#1F839C';
+}
+.mixColorTabouk {
+background-color:'#adadb0';
+border-color:'#1F839C';
+}
+.mixColorRoyalLazure {
+background-color:'#c2b59b';
+border-color:'#c2b59b';
+}
+.mixColorLazureBeachResort {
+background-color:'#0098A7';
+border-color:'#0098A7';
+}
+.mixColorLazureResidance {
+background-color:'#889094';
+border-color:'#889094';
+}
+.mixColorEnviro {
+background-color:'#52b280';
+border-color:'#52b280';
+}
+.mixColorEventi {
+background-color:'#1F839C';
+border-color:'#1F839C';
+}
+* {
+    font-family: NotoSansArabic, NotoSans, sans-serif;
+}
+</style>
+</head>
+<body header="nlheader" header-height="20%" footer="nlfooter" footer-height="30%" padding="0.5in 0.5in 0.5in 0.5in" size="Letter">
+<br/>
+<br/>
+<table width = "100%" border = "1">
+    <tbody>
+      <tr>
+        <td style = "font-size: 12px; padding: 4px;">Date</td>
+        <td style = "font-size: 12px; padding: 4px;">${record.trandate}</td>
+      </tr>
+      <tr>
+        <td style = "font-size: 12px; padding: 4px;">Account</td>
+        <td style = "font-size: 12px; padding: 4px;">${record.account}</td>
+      </tr>
+      <tr>
+        <td style = "font-size: 12px; padding: 4px;">Payee</td>
+        <td style = "font-size: 12px; padding: 4px;">${record.entity}</td>
+      </tr>
+      <tr>
+        <td style = "font-size: 12px; padding: 4px;">Memo</td>
+        <td style = "font-size: 12px; padding: 4px;">${record.memo}</td>
+      </tr>
+      <tr>
+        <td style = "font-size: 15px; padding: 4px;"><b>Payment Amount</b></td>
+        <td style = "font-size: 15px; padding: 4px;"><b>${record.payment}</b></td>
+      </tr>
+    </tbody>
+</table>
+</body>
+</pdf>

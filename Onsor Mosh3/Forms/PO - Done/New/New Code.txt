@@ -1,0 +1,278 @@
+<?xml version="1.0"?><!DOCTYPE pdf PUBLIC "-//big.faceless.org//report" "report-1.1.dtd">
+<pdf>
+<head>
+   <link name="GraphikArabic" type="font" subtype="opentype" src="https://td2890562.app.netsuite.com/core/media/media.nl?id=9084&amp;c=TD2890562&amp;h=Gs0n_E9L-s5FzGrOGIn957Q1X3ecq9zVReKl889LVpVXpIRG&amp;_xt=.otf" src-bold="https://td2890562.app.netsuite.com/core/media/media.nl?id=9083&amp;c=TD2890562&amp;h=ss0z225oXaehIKzkTB23cKazonuc-OxaOyGmqNfDBrmIX6ub&amp;_xt=.otf" bytes="2" subset="false"/>
+   <link name="NotoSansArabic" type="font" subtype="opentype" src="${nsfont.NotoSansArabic_Regular}" src-bold="${nsfont.NotoSansArabic_Bold}" bytes="2" subset="false"/>
+	<link name="NotoSans" type="font" subtype="truetype" src="${nsfont.NotoSans_Regular}" src-bold="${nsfont.NotoSans_Bold}" src-italic="${nsfont.NotoSans_Italic}" src-bolditalic="${nsfont.NotoSans_BoldItalic}" bytes="2" />
+	<#if .locale == "zh_CN">
+		<link name="NotoSansCJKsc" type="font" subtype="opentype" src="${nsfont.NotoSansCJKsc_Regular}" src-bold="${nsfont.NotoSansCJKsc_Bold}" bytes="2" />
+	<#elseif .locale == "zh_TW">
+		<link name="NotoSansCJKtc" type="font" subtype="opentype" src="${nsfont.NotoSansCJKtc_Regular}" src-bold="${nsfont.NotoSansCJKtc_Bold}" bytes="2" />
+	<#elseif .locale == "ja_JP">
+		<link name="NotoSansCJKjp" type="font" subtype="opentype" src="${nsfont.NotoSansCJKjp_Regular}" src-bold="${nsfont.NotoSansCJKjp_Bold}" bytes="2" />
+	<#elseif .locale == "ko_KR">
+		<link name="NotoSansCJKkr" type="font" subtype="opentype" src="${nsfont.NotoSansCJKkr_Regular}" src-bold="${nsfont.NotoSansCJKkr_Bold}" bytes="2" />
+	<#elseif .locale == "th_TH">
+		<link name="NotoSansThai" type="font" subtype="opentype" src="${nsfont.NotoSansThai_Regular}" src-bold="${nsfont.NotoSansThai_Bold}" bytes="2" />
+	</#if>
+    <macrolist>
+        <macro id="nlheader">
+            <table class="header" style="width: 100%;"><tr>
+	<td rowspan="2" style="font-size: 37; border-top: 5px solid black; padding-top: 10px; width: 489px;"><b>Purchase Order</b></td>
+	<td style="width: 74px;">&nbsp;</td>
+	<td style="font-size: 15.7; border-top: 5px solid black; padding-top: 9px; width: 237px;"><b>P.O. Number <span>${record.tranid}</span></b></td>
+	</tr>
+	<tr>
+	<td style="width: 74px;">&nbsp;</td>
+	<td style="font-size: 16; width: 237px;"><b>${record.trandate?string('dd — MM — yyyy')}</b></td>
+	</tr>
+          <tr>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+              </tr>
+              <tr>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+              </tr>
+              <tr>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+              </tr>
+              <tr>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+              </tr><tr>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+              </tr>
+              <tr style="border-bottom:5px solid black;">
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+              </tr>
+          </table>
+        </macro>
+        <macro id="nlfooter">
+            <table class="footer" style="width: 100%;"><tr>
+	<td style="font-size: 10pt; border-top: 5px solid black; padding-top: 10px; width: 489px;"><b>Terms and Condition</b></td>
+	<td style="width: 70px;">&nbsp;</td>
+	<td style="font-size: 10pt; border-top: 5px solid black; padding-top: 10px; width: 237px;"><b>Signature</b></td>
+	</tr>
+	<tr>
+	<td colspan="1" rowspan="4" style="font-size: 9pt; padding-top: 10px; height: 150px; line-height: 11; width: 480px;border-bottom:5px solid black;">${record.custbody_vs_termsadnconditions}</td>
+	<td style="width: 70px;">&nbsp;</td>
+	<td style="width: 250px;">&nbsp;</td>
+	</tr>
+	<tr>
+	<td style="width: 70px;">&nbsp;</td>
+	<td style="font-size: 11px; padding-top: 35px; width: 250px;"><b>Mohammed M Hubayshi</b></td>
+	</tr>
+	<tr>
+	<td style="width: 70px;">&nbsp;</td>
+	<td style="font-size: 10px; padding-bottom: 15px; width: 250px;">Client Servicing Director<br />cs@om.sa</td>
+	</tr>
+	<tr>
+	<td style="height: 64px; width: 70px;">&nbsp;</td>
+	<td style="font-size: 11px; padding-top: 12px; height: 48px; width: 250px;"><b>Client Signature</b></td>
+	</tr>
+              <tr>
+                <td style="font-size:10pt;padding-top: 5px;line-height:20"><b>Payment Terms</b><span style="font-size:9pt;line-height:9"><br/>${record.custbody_vs_paymentterms}</span></td>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+              </tr>
+<tr>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+              </tr>
+              <tr>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+              </tr><tr>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+              </tr>
+	<tr>
+	<td style="width: 480px;">&nbsp;</td>
+	<td style="width: 70px;">&nbsp;</td>
+	<td style="font-size: 11px; padding-top: 10px; width: 250px;border-top:5px solid black"><b>Onsor Mosha Advertising LLC</b></td>
+	</tr>
+	<tr>
+	<td style="width: 480px;"><img width = "9%" height="9%" src="https://7114540.app.netsuite.com/core/media/media.nl?id=444&amp;c=7114540&amp;h=yup1-1i93E632IhkWzWB4_7PsFt_T-UCCfL779LR5mgNBZMu"/></td>
+	<td style="width: 70px;">&nbsp;</td>
+	<td style="font-size: 11px; padding-top: 4px; width: 250px; line-height: 9;">C.R. 1010385024<br />OM VAT: 301238868700003<br />7970 King Abdulaziz road<br />Rabie Dist. &mdash; Riyadh 13315-4478<br />T +966 11 234 8092<br />Riyadh<br /><b>www.om.sa</b></td>
+	</tr></table>
+        </macro>
+    </macrolist>
+    <style type="text/css">* {
+		<#if .locale == "zh_CN">
+			font-family: NotoSans, NotoSansCJKsc, sans-serif;
+		<#elseif .locale == "zh_TW">
+			font-family: NotoSans, NotoSansCJKtc, sans-serif;
+		<#elseif .locale == "ja_JP">
+			font-family: NotoSans, NotoSansCJKjp, sans-serif;
+		<#elseif .locale == "ko_KR">
+			font-family: NotoSans, NotoSansCJKkr, sans-serif;
+		<#elseif .locale == "th_TH">
+			font-family: NotoSans, NotoSansThai, sans-serif;
+		<#else>
+			font-family: GraphikArabic, sans-serif;
+		</#if>
+		}
+		table {
+			font-size: 9pt;
+			table-layout: fixed;
+		}
+      table.footer td {
+            padding: 0;
+            font-size: 8pt;
+        }
+        th {
+            font-weight: bold;
+            font-size: 11;
+            vertical-align: middle;
+            padding: 5px 6px 3px;
+            border-bottom:1px solid black;
+          padding-bottom:4px;
+          padding-top:4px
+        }
+        td.omitems {
+            padding: 4px 6px;
+          border-bottom:1px solid black
+        }
+		td p { align:left }
+        b {
+            font-weight: bold;
+            color: #333333;
+        }
+        table.header td {
+            padding: 0;
+            font-size: 10pt;
+        }
+        table.itemtable th {
+            padding-bottom: 10px;
+            padding-top: 10px;
+        }
+        table.body td {
+            padding-top: 2px;
+        }
+        table.total {
+            page-break-inside: avoid;
+        }
+        tr.totalrow {
+            background-color: #e3e3e3;
+            line-height: 200%;
+        }
+        td.totalboxtop {
+            font-size: 12pt;
+            background-color: #e3e3e3;
+        }
+        td.addressheader {
+            font-size: 8pt;
+            padding-top: 6px;
+            padding-bottom: 2px;
+        }
+        td.address {
+            padding-top: 0;
+        }
+        td.totalboxmid {
+            font-size: 28pt;
+            padding-top: 20px;
+            background-color: #e3e3e3;
+        }
+        td.totalboxbot {
+            background-color: #e3e3e3;
+            font-weight: 900;
+        }
+        span.title {
+            font-size: 28pt;
+        }
+        span.number {
+            font-size: 16pt;
+        }
+        span.itemname {
+            font-weight: bold;
+            line-height: 150%;
+        }
+        hr {
+            width: 100%;
+            color: #d3d3d3;
+            background-color: #d3d3d3;
+            height: 1px;
+        }
+</style>
+</head>
+<body header="nlheader" header-height="17%" footer="nlfooter" footer-height="40%" padding="0.4in 0.4in 0.4in 0.4in" size="A4">
+    <table style="width:100%;border-bottom:5px solid black"><tr>
+	<td style="font-size:11;padding-top:12px;border-bottom:1px solid black;padding-bottom:9px"><b>Supplier</b></td>
+	<td style="font-size:11;padding-top:12px;border-bottom:1px solid black"><b>Project Name</b></td>
+	<td style="font-size:11;padding-top:12px;border-bottom:1px solid black"><b>&nbsp;&nbsp;&nbsp;Requested By</b></td>
+	<td style="font-size:11;padding-top:12px;border-bottom:1px solid black"><b>Proposal Reference #</b></td>
+	</tr>
+	<tr>
+	<td style="font-size:11;padding-bottom:7px;padding-top:7px">${record.entity}</td>
+	<td style="font-size:11;padding-top:7px;padding-bottom:7px">${record.class}</td>
+	<td style="font-size:10;padding-bottom:7px;padding-top:7px">${record.custbody_vs_createdby}</td>
+	<td style="font-size:10;padding-bottom:7px;padding-top:7px">${record.custbody_vs_proposalref}</td>
+	</tr></table>
+<#if record.item?has_content>
+
+<table class="body" style="width:100%;"><!-- start items --><#list record.item as item><#if item_index==0>
+<thead>
+	<tr>
+	<th style="width: 75px;"><b>No.</b></th>
+	<th style="width: 254px;"><b>Description</b></th>
+	<th style="width: 159px;"><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Price</b></th>
+	<th style="width: 99px;vertical-align:center;align:center"><b>VAT(15%)</b></th>
+	<th style="width: 121px;align:right"><b>Price with VAT</b></th>
+	</tr>
+</thead>
+</#if><tr>
+	<td class="omitems" style="width: 75px; height: 45px; vertical-align: middle;">${item?index+1}</td>
+	<td class="omitems" style="width: 254px; height: 45px; vertical-align: middle;">${item.description}</td>
+	<td class="omitems" style="width: 159px; height: 45px; vertical-align: middle;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${record.currencysymbol} ${item.amount?string['#,##0.00']}</td>
+	<td class="omitems" style="height: 45px; vertical-align: middle; width: 99px;">&nbsp;&nbsp;${record.currencysymbol} ${item.taxrate1?string['#,##0.00']}</td>
+	<td class="omitems" style="height: 45px; vertical-align: middle; width: 121px;">&nbsp;&nbsp;&nbsp;&nbsp;${record.currencysymbol} ${item.grossamt?string['#,##0.00']}</td>
+	</tr>
+	</#list></table>
+
+<table style="width:100%"><tr>
+	<td style="width: 512px;">&nbsp;</td>
+	<td style="border-bottom: 1px solid black; padding-top: 10px; padding-bottom: 10px; width: 134px; font-size: 8;"><b>Total SAR</b></td>
+	<td style="border-bottom: 1px solid black; padding-top: 10px; padding-bottom: 10px; width: 148px; font-size: 8;">${record.currencysymbol} ${record.total?string['#,##0.00']}</td>
+	</tr>
+	<tr>
+	<td style="width: 512px;">&nbsp;</td>
+	<td style="border-bottom: 3px solid black; padding-top: 10px; padding-bottom: 10px; width: 134px; font-size: 8;"><b>Account<br />Manager</b></td>
+	<td style="border-bottom: 3px solid black; padding-top: 10px; padding-bottom: 10px; width: 148px; font-size: 8;">${record.custbody_vs_accountmanager}</td>
+	</tr>
+	<tr>
+	<td style="width: 512px;">&nbsp;</td>
+	<td style="width: 134px;">&nbsp;</td>
+	<td style="width: 148px;">&nbsp;</td>
+	</tr>
+	<tr>
+	<td style="width: 512px;">&nbsp;</td>
+	<td style="width: 134px;">&nbsp;</td>
+	<td style="width: 148px;">&nbsp;</td>
+	</tr></table>
+
+
+
+<!--<table style="width: 181px;align:right"><tr>
+	<td style="border-bottom: 1px solid black; width: 100px;padding-top:10px;padding-bottom:10px;width: 250px;"><b>Total SAR</b></td>
+	<td style="border-bottom: 1px solid black; width: 89px;padding-top:10px;padding-bottom:10px">${record.currencysymbol}${record.total?string['#,##0.00']}</td>
+	</tr>
+	<tr>
+	<td style="border-bottom: 2px solid black; width: 100px;padding-top:6px;padding-bottom:6px;width: 150px;"><b>Account Manager</b></td>
+	<td style="border-bottom: 2px solid black; width: 89px;padding-top:6px;padding-bottom:6px">&nbsp;</td>
+	</tr></table>--></#if>
+</body>
+</pdf>

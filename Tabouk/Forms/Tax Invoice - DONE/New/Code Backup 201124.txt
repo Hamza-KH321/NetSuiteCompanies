@@ -1,0 +1,259 @@
+<?xml version="1.0"?><!DOCTYPE pdf PUBLIC "-//big.faceless.org//report" "report-1.1.dtd">
+<pdf>
+<head>
+<link name="NotoSansArabic" type="font" subtype="opentype" src="${nsfont.NotoSansArabic_Regular}" src-bold="${nsfont.NotoSansArabic_Bold}" bytes="2" subset="false"/>
+	<link name="NotoSans" type="font" subtype="truetype" src="${nsfont.NotoSans_Regular}" src-bold="${nsfont.NotoSans_Bold}" src-italic="${nsfont.NotoSans_Italic}" src-bolditalic="${nsfont.NotoSans_BoldItalic}" bytes="2" />
+	<#if .locale == "zh_CN">
+		<link name="NotoSansCJKsc" type="font" subtype="opentype" src="${nsfont.NotoSansCJKsc_Regular}" src-bold="${nsfont.NotoSansCJKsc_Bold}" bytes="2" />
+	<#elseif .locale == "zh_TW">
+		<link name="NotoSansCJKtc" type="font" subtype="opentype" src="${nsfont.NotoSansCJKtc_Regular}" src-bold="${nsfont.NotoSansCJKtc_Bold}" bytes="2" />
+	<#elseif .locale == "ja_JP">
+		<link name="NotoSansCJKjp" type="font" subtype="opentype" src="${nsfont.NotoSansCJKjp_Regular}" src-bold="${nsfont.NotoSansCJKjp_Bold}" bytes="2" />
+	<#elseif .locale == "ko_KR">
+		<link name="NotoSansCJKkr" type="font" subtype="opentype" src="${nsfont.NotoSansCJKkr_Regular}" src-bold="${nsfont.NotoSansCJKkr_Bold}" bytes="2" />
+	<#elseif .locale == "th_TH">
+		<link name="NotoSansThai" type="font" subtype="opentype" src="${nsfont.NotoSansThai_Regular}" src-bold="${nsfont.NotoSansThai_Bold}" bytes="2" />
+	</#if>
+    <macrolist>
+        <macro id="nlheader">
+<table style="width:100%;" cellspacing = "2">
+<tr>
+  <#if record.subsidiary == "00 Tabuk investment and tourism (Holding)">
+	<td rowspan="4"><img src="https://9072131.app.netsuite.com/core/media/media.nl?id=437&amp;c=9072131&amp;h=u7VmYyxKdr0nGidP9psP9hgqUywsdwc7sna77qO2x6EYz2s0" /></td>
+      <#else>
+        	<td rowspan="4"></td>
+              </#if>
+                	<td>&nbsp;</td>
+	<#if record.subsidiary == "41 Eco Clean Central Laundry">
+  	<td colspan="1" rowspan="2"><img src="https://9072131.app.netsuite.com/core/media/media.nl?id=820&amp;c=9072131&amp;h=y4vS7JEl6jB48anw7UF6QGDgErz2m8K3VkuWdKq0Qe3e8qTy" style="width:30%; height:30%; align: center;" /></td>
+     <#elseif record.subsidiary == "31 Eventti Catering">
+  	<td colspan="1" rowspan="2"><img src="https://9072131.app.netsuite.com/core/media/media.nl?id=4310&amp;c=9072131&amp;h=Sze5L87RUBs6XDoPPnbs7uG535AGAhw3VpAhuo7H-KODuUTD" style="width:15%; height:15%; align: center;" /></td>
+     <#elseif record.subsidiary == "13 Lazure executive residences">
+  	<td colspan="1" rowspan="2"><img src="https://9072131.app.netsuite.com/core/media/media.nl?id=4312&amp;c=9072131&amp;h=RQG-D1w5a8lTD58DcpLM6b9S5Mh4kHoBKhi6OdmxOfiC92HI" style="width:40%; height:40%; align: center;" /></td>
+     <#elseif record.subsidiary == "11 Royal Lazure">
+  	<td colspan="1" rowspan="2"><img src="https://9072131.app.netsuite.com/core/media/media.nl?id=4313&amp;c=9072131&amp;h=iY3d3BwgHCBfjkApg4Dvidrae-STBNPALL6vj073_tXSXRpr" style="width:40%; height:40%; align: center;" /></td>
+    <#elseif record.subsidiary == "12 Lazure beach and resort">
+  	<td colspan="1" rowspan="2"><img src="https://9072131.app.netsuite.com/core/media/media.nl?id=4311&amp;c=9072131&amp;h=Rp8HfqT-lAwViKU9gEjSOTJXevFiZvBTus4-xQCrDBK37JK9" style="width:30%; height:30%; align: center;" /></td>
+     <#elseif record.subsidiary == "21 Enviro- facility management- Alula">
+  	<td colspan="1" rowspan="2"><img src="https://9072131.app.netsuite.com/core/media/media.nl?id=4309&amp;c=9072131&amp;h=2rEROyot6awqyBa0J1Ji___IPooCrgIEPpNow4PqEl7OFUcR" style="width:30%; height:30%; align: center;" /></td>
+ 	<#elseif record.subsidiary?contains("22")>
+  	<td colspan="1" rowspan="2"><img src="https://9072131.app.netsuite.com/core/media/media.nl?id=4309&amp;c=9072131&amp;h=2rEROyot6awqyBa0J1Ji___IPooCrgIEPpNow4PqEl7OFUcR" style="width:30%; height:30%; align: center;" /></td>
+	<#elseif record.subsidiary == "00 Tabuk investment and tourism (Holding)">
+  	<td colspan="1" rowspan="2" style = "align:center"><img src="https://9072131-sb1.app.netsuite.com/core/media/media.nl?id=438&amp;c=&amp;h=GiovM1yCANWDa9fkQMcvq5LoxrnPuDm2GSKRiSTioH_o0KwC" style="width:70%; height:70%; align: center;" /></td>
+	<#elseif record.subsidiary == "14 Neom Sports Village">
+  	<td colspan="1" rowspan="2"><img src="https://9072131.app.netsuite.com/core/media/media.nl?id=105756&amp;c=9072131&amp;h=AyBjaE2iPWPnhfpSDEy0eZZFEcsSSS0jgnl1KnDbp9AqcxSL" style="width:30%; height:30%; align: center;" /></td>
+</#if>
+
+	<td>&nbsp;</td>
+           <#if record.subsidiary == "00 Tabuk investment and tourism (Holding)">
+	<td rowspan="4"><img src="https://9072131.app.netsuite.com/core/media/media.nl?id=436&amp;c=9072131&amp;h=32YkYs2wzLFp-d7h6BbKGIXcAJA_Wmks4YTJLYvTgwBlU9Ws" /></td>
+             <#else>
+               	<td rowspan="4"></td>
+             </#if>
+	</tr>
+	<tr>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	</tr>
+	<tr>
+	<td>&nbsp;</td>
+	<td style="align: center; color: white; background-color: black; font-size: 18px;"><b>Tax Invoice فاتورة ضريبية</b></td>
+	<td>&nbsp;</td>
+	</tr>
+	<tr>
+	<td>&nbsp;</td>
+	<td style="align: center;">VAT Reg. No: <strong>الرقم الضريبي</strong>: 300596264800003</td>
+	<td>&nbsp;</td>
+	</tr></table>
+        </macro>
+        <macro id="nlfooter">
+
+
+<#if record.subsidiary == "00 Tabuk investment and tourism (Holding)">
+<p align = "center" text-align = "center" font-size = "12px">Note: Kindly send payment advice to this Email ar@lazurehospitality.com</p>
+<#elseif record.subsidiary == "11 Royal Lazure">
+<p align = "center" text-align = "center" font-size = "12px">Note: Kindly send payment advice to this Email ar@lazurehospitality.com</p>
+<#elseif record.subsidiary == "12 Lazure beach and resort">
+<p align = "center" text-align = "center" font-size = "12px">Note: Kindly send payment advice to this Email ar@lazurehospitality.com</p>
+<#elseif record.subsidiary == "31 Eventti Catering">
+<p align = "center" text-align = "center" font-size = "12px">Note: Kindly send payment advice to this Email ar@eventtiksa.com</p>
+<#elseif record.subsidiary == "21 Enviro- facility management- Alula">
+<p align = "center" text-align = "center" font-size = "12px">Note: Kindly send payment advice to this Email ar@enviro-fm.com</p>
+<#elseif record.subsidiary?contains("22")>
+<p align = "center" text-align = "center" font-size = "12px">Note: Kindly send payment advice to this Email ar@enviro-fm.com</p>
+<#elseif record.subsidiary == "14 Neom Sports Village">
+<p align = "center" text-align = "center" font-size = "12px">Note: Kindly send payment advice to this Email ar@lazurehospitality.com</p>
+</#if>
+
+<table width = "100%">
+<tr>
+<td width = "20%"><p align = "center" text-align = "center"> <#if record.custbody_psg_ei_qr_string?has_content> <barcode style="width:90px;height:90px;" align = "center" text-align = "center" codetype="qrcode" showtext="true" value="${record.custbody_psg_ei_qr_string}"/></#if></p></td>
+<#if record.subsidiary == "00 Tabuk investment and tourism (Holding)">
+<td width = "80%"><img width = "60%" height = "60%" src = "https://9072131.app.netsuite.com/core/media/media.nl?id=4433&amp;c=9072131&amp;h=VSXkFLY-gJKp7dFZnmjwTJX5Zopyd2goBBFNYd5rihAhBPmB"/></td>
+<#elseif record.subsidiary == "11 Royal Lazure">
+<td width = "80%"><img width = "60%" height = "60%" src = "https://9072131.app.netsuite.com/core/media/media.nl?id=4432&amp;c=9072131&amp;h=fDsIqWa77bARdLOdt_fOxUn1UDZ7uJVwCUDFjkyhYpCpbirH"/></td>
+<#elseif record.subsidiary == "12 Lazure beach and resort">
+<td width = "80%"><img width = "60%" height = "60%" src = "https://9072131.app.netsuite.com/core/media/media.nl?id=4431&amp;c=9072131&amp;h=kY3nBi-yKyiWagjMCTY5nWQxvBMNvAb1W4xB16RvQALFB-wE"/></td>
+<#elseif record.subsidiary == "31 Eventti Catering">
+<td width = "80%"><img width = "60%" height = "60%" src = "https://9072131.app.netsuite.com/core/media/media.nl?id=4430&amp;c=9072131&amp;h=ioB_MbtW2epaamE1mlP5piEMPKG0T-rW8DBwHNrZVSjFqiOW"/></td>
+<#elseif record.subsidiary == "21 Enviro- facility management- Alula">
+<td width = "80%"><img width = "60%" height = "60%" src = "https://9072131.app.netsuite.com/core/media/media.nl?id=4429&amp;c=9072131&amp;h=hkP3CNB2VT1cOEfqTzvGxXM9uB7a51Z1hi0fdM9RlzaH15el"/></td>
+<#elseif record.subsidiary?contains("22")>
+<td width = "80%"><img width = "60%" height = "60%" src = "https://9072131.app.netsuite.com/core/media/media.nl?id=4429&amp;c=9072131&amp;h=hkP3CNB2VT1cOEfqTzvGxXM9uB7a51Z1hi0fdM9RlzaH15el"/></td>
+<#elseif record.subsidiary == "13 Lazure executive residences">
+<td width = "80%"><img width = "60%" height = "60%" src = "https://9072131.app.netsuite.com/core/media/media.nl?id=4433&amp;c=9072131&amp;h=VSXkFLY-gJKp7dFZnmjwTJX5Zopyd2goBBFNYd5rihAhBPmB"/></td>
+<#elseif record.subsidiary == "14 Neom Sports Village">
+<td width = "80%"><img width = "60%" height = "60%" src = "https://9072131.app.netsuite.com/core/media/media.nl?id=4432&amp;c=9072131&amp;h=fDsIqWa77bARdLOdt_fOxUn1UDZ7uJVwCUDFjkyhYpCpbirH"/></td>
+<#elseif record.subsidiary == "41 Eco Clean Central Laundry">
+<td width = "80%"><img width = "55%" height = "55%" src = "https://9072131.app.netsuite.com/core/media/media.nl?id=123187&amp;c=9072131&amp;h=x7-xZLsneR4oyeYIW4JJulvAP19hG20AoywrkEaFSxrdh_zR"/></td>
+
+</#if>
+</tr>
+</table>
+         <table width = "100%">
+           <tr>
+             <td><hr/></td>
+           </tr>
+           <tr>
+             <td style = "font-size: 10px; align: center;"> ص.ب ٢٦٦٦ تبوك ٧١٤٦١ ، المملكة العربية السعودية | تلفون: ٩٦٦٥٣٠٧٦٢٢٢٢
+<br/>P.O. Box 2666 Tabuk 71461, Kingdom of Saudi Arabia | Tel.: +966 53 0090076<br/>
+Email: info@tabukinvestment.com | tabukinvestment.com</td>
+           </tr>
+          </table>
+        </macro>
+    </macrolist>
+    <style type="text/css">* {
+		<#if .locale == "zh_CN">
+			font-family: NotoSans, NotoSansCJKsc, sans-serif;
+		<#elseif .locale == "zh_TW">
+			font-family: NotoSans, NotoSansCJKtc, sans-serif;
+		<#elseif .locale == "ja_JP">
+			font-family: NotoSans, NotoSansCJKjp, sans-serif;
+		<#elseif .locale == "ko_KR">
+			font-family: NotoSans, NotoSansCJKkr, sans-serif;
+		<#elseif .locale == "th_TH">
+			font-family: NotoSans, NotoSansThai, sans-serif;
+		<#else>
+			font-family: NotoSans, sans-serif;
+		</#if>
+		}
+     * {
+                font-family: NotoSansArabic, NotoSans, sans-serif;
+          }
+</style>
+</head>
+<body header="nlheader" header-height="18%" footer="nlfooter" footer-height="16%" padding="0.3in 0.3in 0.3in 0.3in" size="A4">
+<table width = "100%">
+<tr>
+<td font-size = "15px" align = "left" text-align = "left">Tabuk Investment &amp; Tourism Co.</td>
+<td font-size = "15px" align = "right" text-align = "right">شركة تبوك للاستثمار و السياحة</td>
+</tr>
+<tr>
+<td font-size = "15px" align = "left" text-align = "left">Tabuk,Almorouj, 71461</td>
+<td font-size = "15px" align = "right" text-align = "right">تبوك,المروج,العام,71461</td>
+</tr>
+</table>
+    <table width="100%" padding-top = "6"><tr>
+	<td align="left" font-size="13px" style="width: 403px;"><b>Bill to</b></td>
+	<td style="width: 56px; font-size: 12px;">&nbsp;</td>
+	<td align="right" font-size="13px" style="width: 335px;"><b>فاتورة إلى</b></td>
+	</tr>
+	<tr>
+	<td font-size = "13px" align = "left" text-align = "left" style="width: 403px; align: left; text-align: left;">VAT Reg. No: ${record.entity.vatregnumber}</td>
+	<td style="width: 56px; font-size: 12px;">&nbsp;</td>
+	<td font-size = "13px" align = "right" text-align = "right" style="width: 335px;">${record.entity.vatregnumber} :الرقم الضريبي</td>
+	</tr>
+	<tr>
+	<td align="left" style="width: 403px; font-size: 11pt;">Name: ${record.entity}</td>
+	<td colspan="1" rowspan="5" style="width: 56px;">&nbsp;</td>
+	<td align="right" style="width: 335px; font-size: 11pt;">الاسم: ${record.entity.custentity_vs_arabicname}</td>
+	</tr>
+	<tr>
+	<td colspan="1" rowspan="3" style="width: 403px;">Address: ${record.entity.custentity_vs_englishaddress}</td>
+	<td style="width: 335px; align: right; text-align: right;">العنوان :${record.entity.custentity_vs_arabiclocation}</td>
+	</tr>
+	<tr>
+	<td style="width: 335px;">&nbsp;</td>
+	</tr>
+</table>
+<!--_____________________________________________-->
+
+<table style="width:100%;"><tr>
+	<td style="width: 340px;"><b>Dear Sir/s</b></td>
+	<td style="width: 263px; font-size: 14px;">Invoice No.&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;رقم الفاتورة:</td>
+	<td style="width: 191px; font-size: 14px; align: right; text-align: right;">${record.tranid}</td>
+	</tr>
+	<tr>
+	<td colspan="1" rowspan="3" style="width: 340px; font-size: 12px;">We have pleasure in submitting the following invoice<br />for favour of an early payment.</td>
+	<td style="width: 263px; font-size: 14px;">Invoice Date&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;تاريخ الفاتورة:</td>
+	<td style="width: 191px; font-size: 14px; align: right; text-align: right;">${record.trandate}</td>
+	</tr>
+	<tr>
+	<td style="width: 263px; font-size: 14px;">Currency&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; العملة:</td>
+	<td style="width: 191px; font-size: 14px; align: right; text-align: right;">${record.currencysymbol}</td>
+	</tr>
+	<tr>
+	<td style="width: 263px; font-size: 14px;">Due Date:</td>
+	<td style="width: 191px; font-size: 14px; align: right; text-align: right;">${record.duedate}</td>
+	</tr>
+	<tr>
+	<td style="width: 340px;">&nbsp;</td>
+	<td style="width: 263px; font-size: 14px;">Payment Terms:</td>
+	<td style="width: 191px; font-size: 14px; align: right; text-align: right;">${record.terms}</td>
+	</tr>
+</table>
+<!--_____________________________________________-->
+<br/>
+<table style="width:100%; border: 1px;"><#list record.item as item><#if item_index==0>
+  	<tr>
+	<td style="color: white; background-color: black; font-weight: bold; width: 71px; font-size: 12px; align: center; border-right: 1px; border-bottom: 1px;">S.No.<br />الرقم</td>
+	<td style="color: white; background-color: black; font-weight: bold; width: 244px; font-size: 12px; align: center; border-right: 1px; border-bottom: 1px;">Description of Goods/ Services<br />وصف المنتج أو الخدمة</td>
+	<td style="color: white; background-color: black; font-weight: bold; width: 71px; font-size: 12px; align: center; border-right: 1px; border-bottom: 1px;">Qty<br />الكمية</td>
+	<td style="color: white; background-color: black; font-weight: bold; width: 111px; font-size: 12px; align: center; border-right: 1px; border-bottom: 1px;">Rate<br />السعر</td>
+	<td style="color: white; background-color: black; font-weight: bold; width: 118px; font-size: 10px; align: center; border-right: 1px; border-bottom: 1px;">Taxable Value<br />القيمة الخاضعة للضريبة</td>
+	<td style="color: white; background-color: black; font-weight: bold; width: 111px; font-size: 12px; align: center; border-right: 1px; border-bottom: 1px;">Tax Rate<br />معدل الضريبة</td>
+	<td style="color: white; background-color: black; font-weight: bold; width: 114px; font-size: 12px; align: center; border-right: 1px; border-bottom: 1px;">Tax Amount<br />مبلغ الضريبة</td>
+	<td style="color: white; background-color: black; font-weight: bold; width: 119px; font-size: 12px; align: center; border-bottom: 1px;">Total Include Tax<br />المبلغ شامل الضريبة</td>
+	</tr>
+	</#if>
+	<tr>
+	<td style="width: 71px; font-size: 10px; align: center; border-right: 1px; border-bottom: 1px;">${item?index + 1}</td>
+	<td style="width: 244px; font-size: 10px; align: center; border-right: 1px; border-bottom: 1px;">${item.description}</td>
+	<td style="width: 71px; font-size: 10px; align: center; border-right: 1px; border-bottom: 1px;">${item.quantity}</td>
+	<td style="width: 111px; font-size: 10px; align: center; border-right: 1px; border-bottom: 1px;">${item.rate}</td>
+	<td style="width: 118px; font-size: 10px; align: center; border-right: 1px; border-bottom: 1px;">${((item.rate) * (item.quantity))?string["#,##0.00"]}</td>
+	<td style="width: 111px; font-size: 10px; align: center; border-right: 1px; border-bottom: 1px;">${item.taxrate1}</td>
+	<td style="width: 114px; font-size: 10px; align: center; border-right: 1px; border-bottom: 1px;">${item.tax1amt?string["#,##0.00"]}</td>
+	<td style="width: 119px; font-size: 10px; align: center; border-bottom: 1px;">${item.Grossamt?string["#,##0.00"]}</td>
+	</tr>
+	</#list></table>
+<!--_____________________________________________-->
+
+<table style="width: 100%;">
+<#assign custom1Value = record.subtotal>
+<#assign custom2Value = record.discounttotal> 
+<#assign result = custom1Value + custom2Value>
+
+<tr>
+	<td style="font-size: 12px; border-left: 1px; border-right: 1px; border-bottom: 1px; width: 80%;"><b>Total Taxable Amount (Excluding VAT) (غير شامل ضريبة القيمة المضافة) الإجمالي الخاضع للضريبة</b></td>
+	<td align = "right" text-align = "right" style = "border-right: 1px; border-bottom: 1px;"><b>${record.subtotal?string["#,##0.00"]}</b></td>
+</tr>
+<tr>
+	<td style="font-size: 12px; border-left: 1px; border-right: 1px; border-bottom: 1px; width: 80%;"><b> Total Discount مجموع الخصم </b></td>
+	<td align = "right" text-align = "right" style = "border-right: 1px; border-bottom: 1px;"><b>${record.discounttotal?string["#,##0.00"]}</b></td>
+</tr>
+<tr>
+	<td style="font-size: 12px; border-left: 1px; border-right: 1px; border-bottom: 1px; width: 80%;"><b>Total Amount after Disc Excluding VAT إجمالي المبلغ بعد الخصم باستثناء ضريبة القيمة المضافة </b></td>
+	<td align = "right" text-align = "right" style = "border-right: 1px; border-bottom: 1px;"><b>${result?string["#,##0.00"]}</b></td>
+</tr>
+<tr>
+	<td style="font-size: 12px; border-left: 1px; border-right: 1px; border-bottom: 1px; width:80%;"><b>Total VAT  مجموع ضريبة القيمة المضافة </b></td>
+	<td align = "right" text-align = "right" style = "border-right: 1px; border-bottom: 1px;"><b>${record.taxtotal?string["#,##0.00"]}</b></td>
+</tr>
+<tr>
+    <td style="font-size: 12px; border-left: 1px; border-right: 1px; border-bottom: 1px; width:80%;"><b>Total Amount Due إجمالي المبلغ المستحق</b></td>
+	<td align = "right" text-align = "right" style = "border-right: 1px; border-bottom: 1px;"><b>${record.total?string["#,##0.00"]}</b></td>
+</tr>
+</table>
+</body>
+</pdf>

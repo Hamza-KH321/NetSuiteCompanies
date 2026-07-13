@@ -1,0 +1,639 @@
+<?xml version="1.0"?><!DOCTYPE pdf PUBLIC "-//big.faceless.org//report" "report-1.1.dtd">
+<pdf>
+
+<head>
+<link name="NotoSansArabic" type="font" subtype="opentype" src="${nsfont.NotoSansArabic_Regular}" src-bold="${nsfont.NotoSansArabic_Bold}" bytes="2" subset="false"/>
+	<link name="NotoSans" type="font" subtype="truetype" src="${nsfont.NotoSans_Regular}" src-bold="${nsfont.NotoSans_Bold}" src-italic="${nsfont.NotoSans_Italic}" src-bolditalic="${nsfont.NotoSans_BoldItalic}" bytes="2" />
+	<#if .locale == "zh_CN">
+		<link name="NotoSansCJKsc" type="font" subtype="opentype" src="${nsfont.NotoSansCJKsc_Regular}" src-bold="${nsfont.NotoSansCJKsc_Bold}" bytes="2" />
+	<#elseif .locale == "zh_TW">
+		<link name="NotoSansCJKtc" type="font" subtype="opentype" src="${nsfont.NotoSansCJKtc_Regular}" src-bold="${nsfont.NotoSansCJKtc_Bold}" bytes="2" />
+	<#elseif .locale == "ja_JP">
+		<link name="NotoSansCJKjp" type="font" subtype="opentype" src="${nsfont.NotoSansCJKjp_Regular}" src-bold="${nsfont.NotoSansCJKjp_Bold}" bytes="2" />
+	<#elseif .locale == "ko_KR">
+		<link name="NotoSansCJKkr" type="font" subtype="opentype" src="${nsfont.NotoSansCJKkr_Regular}" src-bold="${nsfont.NotoSansCJKkr_Bold}" bytes="2" />
+	<#elseif .locale == "th_TH">
+		<link name="NotoSansThai" type="font" subtype="opentype" src="${nsfont.NotoSansThai_Regular}" src-bold="${nsfont.NotoSansThai_Bold}" bytes="2" />
+	</#if>
+    <macrolist>
+        <macro id="nlheader" style = "width: 100%">
+
+          <table class="header" style="width: 100%;">
+              <tr>
+                 <td style="line-height: 15px"><span style = "font-weight: bold; font-size: 7pt">PAN ARABIA MEDICAL COMPANY LTD. </span><br/> 
+                         <span style= "font-size: 7pt">Riyadh - Al Zahraa District <br/>
+                         C.R. 1010261806 <br/>
+                         VAT Number: 300120965200003 <br/>
+                         Limited Company - Share capital (500,000) riyals</span>
+                </td>
+                <td style="width: 10%; "><img src="https://7939761.app.netsuite.com/core/media/media.nl?id=1445&amp;c=7939761&amp;h=ZB22aUBs_QwJDbcXEdAa3nYtDZWPZIv5E5Zt471Tu6FPF6BC" style="height: 50%; width: 50%; margin-top: 0; padding-top:0" />
+                </td>
+                <td align="right" style="line-height: 15px"><p style="text-align: right"><span style = "font-weight: bold; font-size: 7pt">شركة عبر العربية الطبية المحدودة </span><br/>
+                         <span  style= "font-size: 7pt">الرياض - حي الزهراء سجل تجاري رقم<br/>
+                         ١٠١٠٢٦١٨٠٦ الرقم الضريبي<br/>
+                         ٣٠٠١٢٠٩٦٥٢٠٠٠٠٣ شركة ذات مسؤولية <br/>
+                         محدودة - رأس المال ( ٥٠٠,٠٠٠ ) ريال</span></p>
+                </td>
+			</tr>
+          </table>
+        </macro>
+
+        <macro id="nlfooter">
+            <table class="footer" style="width: 100%;">
+              <tr>
+				<td style="width:100%; align:center; font-size: 7pt"><p style="text-align: center;">
+                  <b>تلفون : ٩٦٦۱۱۲۰۶۰۳۰۰ فاكس : ٩٦٦١١۲٠٦١٤١٥+ ص . ب ٥٩٦٦٣ الرياض ۱۱٥٣٥ المملكة العربية السعودية</b>
+				  <br/>Tel: +966 11 206 0300 Fax: +966 11 206 1415 P.O.Box 59663 Riyadh 11535 Saudi Arabia
+				  <br/>www.pamedco.com   |   info@pamedco.com
+                  </p>
+                </td>
+			</tr>
+          </table>
+
+
+          <table width="100%">
+                <tr>
+                    <td align="right">
+                        <p style="font-size:10px;">
+                            Page <pagenumber/> of <totalpages/>
+                        </p>
+                    </td>
+                </tr>
+            </table>
+          
+        </macro>
+    </macrolist>
+    <style type="text/css">* {
+		<#if .locale == "zh_CN">
+			font-family: NotoSans, NotoSansCJKsc, sans-serif;
+		<#elseif .locale == "zh_TW">
+			font-family: NotoSans, NotoSansCJKtc, sans-serif;
+		<#elseif .locale == "ja_JP">
+			font-family: NotoSans, NotoSansCJKjp, sans-serif;
+		<#elseif .locale == "ko_KR">
+			font-family: NotoSans, NotoSansCJKkr, sans-serif;
+		<#elseif .locale == "th_TH">
+			font-family: NotoSans, NotoSansThai, sans-serif;
+		<#else>
+			font-family: NotoSansArabic, sans-serif;
+		</#if>
+		}
+		table {
+			font-size: 9pt;
+			table-layout: fixed;
+		}
+        th {
+            font-weight: bold;
+            font-size: 8pt;
+            vertical-align: middle;
+            padding: 5px 6px 3px;
+            background-color: #e3e3e3;
+            color: #333333;        
+        }
+        td {
+            padding: 4px 6px;
+        }
+		td p { align:left }
+        b {
+            font-weight: bold;
+            color: #333333;
+        }
+        table.header td {
+            padding: 0px;
+            font-size: 10pt;
+        }
+        table.footer td {
+            padding: 0px;
+            font-size: 8pt;
+        }
+        table.itemtable th {
+            padding-bottom: 10px;
+            padding-top: 10px;
+        }
+        table.body td {
+            padding-top: 2px;
+        }
+        table.total {
+            page-break-inside: avoid;
+        }
+        tr.totalrow {
+            background-color: #e3e3e3;
+            line-height: 200%;
+        }
+        td.totalboxtop {
+            font-size: 12pt;
+            background-color: #e3e3e3;
+        }
+        td.addressheader {
+            font-size: 8pt;
+            padding-top: 6px;
+            padding-bottom: 2px;
+        }
+        td.address {
+            padding-top: 0px;
+        }
+        td.totalboxmid {
+            font-size: 28pt;
+            padding-top: 20px;
+            background-color: #e3e3e3;
+        }
+        td.totalboxbot {
+            background-color: #e3e3e3;
+            font-weight: bold;
+        }
+        span.title {
+            font-size: 28pt;
+        }
+        span.number {
+            font-size: 16pt;
+        }
+        span.itemname {
+            font-weight: bold;
+            line-height: 150%;
+        }
+        hr {
+            width: 100%;
+            color: #d3d3d3;
+            background-color: #d3d3d3;
+            height: 1px;
+        }
+</style>
+</head>
+<body header="nlheader" header-height="13%"  footer="nlfooter" footer-height="13pt" padding="0.5in 0.5in 0.5in 0.5in" size="A4-LANDSCAPE">
+  
+  <table style="width: 100%; margin-bottom: 15px">
+    <tr>
+      <td style="align:right;  vertical-align: middle;" align= "center">
+
+        <p style="text-align:center; font-size: 10pt; font-weight: bold;">Tax Invoice / فاتورة ضريبية <br /><span style="text-align:center; font-size: 10pt; font-weight: 400;padding-top:30px"> Summary / ملخص الفاتورة </span></p>
+
+        <!-- <P>${record.type}</P> -->
+
+      </td>
+      <!-- <td style="width: 15%; align:right; "><img src="https://7939761-sb1.app.netsuite.com/core/media/media.nl?id=1274&amp;c=7939761_SB1&amp;h=tdOW3b2cZshFS15T-YSst1xKWhMvXf8q5KNAsNUgbhViGTfO" style="height: 100%; width: 100%" />
+      </td> -->
+    </tr>
+  </table>
+  
+  <table style="width:100%; ">
+    <tr>
+      <td style="align:left; font-size: 7pt">Invoice Number :</td>
+      <td style="align:center; font-size: 7pt">#${record.tranid}</td>
+      <td style="align:right; font-size: 7pt">:  رقم الفاتورة &nbsp;&nbsp;</td>
+      <td style="align:left; font-size: 7pt">Invoice Date:</td>
+      <td style="align:center; font-size: 7pt">${record.trandate}</td>
+      <td style="align:right; font-size: 7pt">: تاريخ الفاتورة</td>
+    </tr>
+	<tr>
+	   <td style="align:left; font-size: 7pt"> PO Number :</td>
+	   <td style="align:center; font-size: 7pt">#${record.otherrefnum}</td>
+	   <td style="align:right; font-size: 7pt">:  رقم امر الشراء &nbsp;&nbsp;</td>
+       <td style="align:left; font-size: 7pt">Release Number:</td>
+       <td style="align:right; font-size: 7pt" >${record.memo}</td>
+       <td style="align:right; font-size: 7pt">: رقم الدفعة</td>
+	<!-- <td style="align:left;">Customer Reference Number:</td> -->
+    <!-- <td style="align:center;">${record.custbody_vs_customerreferencenumber}</td>
+    <td style="align:right;">: الرقم المرجعي للعميل</td> -->
+	</tr>
+    <tr>
+	   <td style="align:left; font-size: 7pt"> Credit Memo Number:</td>
+	   <td style="align:center; font-size: 7pt">#${record.custbody_vs_creditmemo}</td>
+	   <!-- <td style="align:right;">:  test  &nbsp;&nbsp;</td> -->
+	</tr>
+    
+  </table>
+  
+  <table style="width:100%; padding-top:0;">
+    <tr>
+      <td style="width: 50%;  align:center; border: 1px;  margin-right: 15px; font-size: 8pt">Clint Information / معلومات العميل</td>
+      <td style="width: 48.5%;  align:center; border: 1px; font-size: 8pt">Seller Information / معلومات المورد</td> 
+    </tr>
+  </table>
+
+  <table style="width:50%; border: 1px; float:left;  margin-right: 100px; padding-top:0; margin-top: 0">
+    <tr >
+      <td style="align: right; font-size: 7pt" colspan = "2">${record.entity.custentity14}</td>
+      <td style="align: right; font-size: 7pt" colspan = "1"> :اسم العميل</td>
+    </tr>
+    <tr style="margin-top: 0; padding-top: 0">
+      <td style="align: left; font-size: 7pt" colspan = "1">Customer Name:</td>
+      <td colspan = "2" style="font-size: 7pt">${record.entity.companyname}</td>
+    </tr>
+    <tr style="margin-top: 0; padding-top: 0">
+      <td colspan = "1" style="font-size: 7pt">VAT Number:</td>
+      <td colspan = "1" style="align: center; font-size: 7pt">${record.entity.vatregnumber} </td>
+      <td colspan = "1" style="align: right; font-size: 7pt">:الرقم الضريبي</td>
+    </tr>
+     <tr style="margin-top: 0;  padding-top: 0">
+      <td colspan = "1" style="font-size: 7pt">CR Number:</td>
+      <td colspan = "1" style="align: center; font-size: 7pt">${record.entity.custentity1}</td>
+      <td colspan = "1" style="align: right; font-size: 7pt">:رقم السجل التجاري</td>
+    </tr>
+    <tr style="margin-top: 0;  padding-top: 0">
+      <td colspan = "2" style="font-size: 7pt">Customer Address:</td>
+      <td colspan = "1" style="align: right; font-size: 7pt">:عنوان العميل</td>
+    </tr>
+    <tr style="margin-top: 0;  padding-top: 0">
+      <td colspan = "3" style="font-size: 7pt"  align= "center"> <p style="text-align: center;">
+          ${record.entity.shipzip} - ${record.entity.billcity}  - ${record.billingaddress.addrtext} 
+        </p>
+      </td>
+    </tr>
+    <tr style="margin-top: 0;  padding-top: 0">
+      <td  colspan = "2" align= "left" style="font-size: 7pt"> Customer reference number</td>
+      <!-- <td align= "right">${record.entity.custentity32}</td> -->
+      <td style="align:center; font-size: 7pt">${record.custbody_vs_referencenumber}</td>
+    </tr>
+  </table>
+
+  <table style="width:50%; border: 1px; float:right; margin-left:100px ">
+    <tr style="margin-top: 0;  padding-top: 0">
+      <td style="align: right;font-size: 7pt " colspan = "2">شركة عبر العربية الطبية المحدودة</td>
+      <td style="align: right; font-size: 7pt" colspan = "1"> :اسم المورد</td>
+    </tr>
+    <tr style="margin-top: 0;  padding-top: 0">
+      <td style="align: left; font-size: 7pt" colspan = "1">Supplier Name:</td>
+      <td colspan = "2" style="font-size: 7pt">${companyInformation.companyName} </td>
+    </tr>
+    <tr style="margin-top: 0;  padding-top: 0">
+      <td colspan = "1" style="font-size: 7pt">VAT Number:</td>
+      <td colspan = "1" style="align: center;font-size: 7pt ">${companyInformation.employerid}</td>
+      <td colspan = "1" style="align: right; font-size: 7pt">:الرقم الضريبي</td>
+    </tr>
+     <tr style="margin-top: 0;  padding-top: 0">
+      <td colspan = "1" style="font-size: 7pt">CR Number:</td>
+      <td colspan = "1" style="align: center;font-size: 7pt">${companyInformation.custrecord_ksa_seller_id}</td>
+      <td colspan = "1" style="align: right; font-size: 7pt">:رقم السجل التجاري</td>
+    </tr>
+    <tr style="margin-top: 0;  padding-top: 0">
+      <td colspan = "2" style="font-size: 7pt">Supplier Address:</td>
+      <td colspan = "1" style="align: right; font-size: 7pt">:عنوان المورد</td>
+    </tr>
+    <tr style="margin-top: 0;  padding-top: 0">
+      <td colspan = "3" style="font-size: 7pt" align= "center"> <p style="text-align: center;">
+        ${companyInformation.country} - ${companyInformation.zip} - ${companyInformation.city}
+        </p>
+      </td>
+    </tr>
+    <tr style="margin-top: 0;  padding-top: 0">
+      <td  colspan = "2"  align = "left" style="font-size: 7pt"> PAMEDCO Supplier Number</td>
+      <td align = "right" style="font-size: 7pt">${record.entity.custentity_vs_pamedco_suppliernumber}</td>
+    </tr>
+  </table>
+
+
+   <#if record.custbody_vs_nd?boolean>
+
+           <#if record.item?has_content>
+
+			<table style="width: 100%; border: 1px">
+				  <tr style="border-bottom:1px">
+                       <td style="border-right: 1px">#</td>
+                       <td style="align:right; border-right: 1px"><p style="text-align: center; font-size:6pt">كود السلعة او الخدمة Product Id </p></td>
+					   <td style="border-right: 1px"><p style="text-align: center; font-size: 6pt">NUPCO Code</p></td>
+                       <td  style="border-right: 1px"><p style="text-align: center; font-size: 6pt">Price</p></td>
+                       <td style="border-right: 1px"  colspan = "2"><p style="text-align: center; font-size: 6pt">NUPCO Description</p></td>
+                       <td  style="border-right: 1px"><p style="text-align: center; font-size: 6pt; ">QTY الكمية </p></td>
+                       <td style="border-right: 1px"><p style="text-align: center; font-size: 6pt"> Country of Origin </p></td>
+                       <!-- <td style="border-right: 1px"><p style="text-align: center; font-size: 6pt">Customer Reference</p></td> -->
+					   <#if record.custbody_vs_mohdata?boolean>
+                       <td style="border-right: 1px"><p style="text-align: center; font-size: 6pt">MOH Code</p></td>
+					  </#if>
+					  <#if record.custbody_vs_moddata?boolean>
+                         <td style="border-right: 1px"><p style="text-align: center; font-size: 6pt">MOD Code</p></td>
+					  </#if>
+                      <td  style="border-right: 1px"><p style="text-align: center; font-size: 6pt; ">Lot Number</p></td>
+                      <td  style="border-right: 1px"><p style="text-align: center; font-size: 6pt; ">QTY الكمية </p></td>
+                      <td  style="border-right: 1px"><p style="text-align: center; font-size: 6pt; ">Exp Date </p></td>
+                      <td  style="border-right: 1px"><p style="text-align: center; font-size: 6pt; ">Production Date</p></td>
+                      <td  style="border-right: 1px"><p style="text-align: center; font-size: 6pt; ">Status </p></td>
+                      <td  style="border-right: 1px"><p style="text-align: center; font-size: 6pt; ">الكمية المجانية</p></td>
+                      <td  style="border-right: 1px"><p style="text-align: center; font-size: 6pt; ">Discount Rate</p></td>
+                      <td  colspan="1"  style="border-right: 1px"><p style="text-align: center; font-size: 6pt;">إجمالي المبلغ (غير شامل الضريبة) Amt Excl. VAT</p></td>
+                      <td  style="border-right: 1px"><p style="text-align: center; font-size: 6pt; ">معدل الضريبة (%) VAT</p></td>
+                      <td  style="border-right: 1px"><p style="text-align: center; font-size: 6pt; ">مبلغ الضريبة VAT Amount</p></td>
+                      <td  style="border-right: 1px"><p style="text-align: center; font-size: 6pt">إجمالي المبلغ (شامل الضريبة) Amt Incl. VAT</p></td>
+
+      <!--<td><p style="text-align: center; font-size: 8pt"> الخصم Discount</p></td>-->
+     
+              </tr>
+
+				<#assign totalQuantityRemaining = 0 />
+
+				<#-- Example to handle JSON data in NetSuite Advanced PDF -->
+				<#list record.item as item>
+				<#if item.custcol_vs_inventory_details_json?has_content>
+				<#assign objData = item.custcol_vs_inventory_details_json?eval />
+				<#if objData?size gt 0>
+					<#list objData as data>
+			             <tr style="border-bottom: 1px">
+                             <td style="border-right: 1px">${item_index+1}</td>
+                             <td align="center"  style="border-right: 1px"><p style="text-align: center; font-size: 6pt">${item.custcol_vsitemid}</p></td>
+				             <td style="border-right: 1px"><p class="itemname" style="text-align: center; font-size: 6pt">${item.custcol_vs_nupcocode}</p></td>
+                             <td style="border-right: 1px"><p class="itemname" style="text-align: center; font-size: 6pt">${item.custcol_vs_nupcoprice}</p></td>
+                             <td style="border-right: 1px"  colspan = "2"><p class="itemname" style="text-align: center; font-size: 6pt">${item.custcol_vs_nupcodescription}</p></td>
+                             <td align="center"  line-height="150%" style="border-right: 1px"><p style="text-align: center; font-size: 6pt"><#if data.q?has_content>${data.q}</#if></p></td>
+                             <td align="center" style="border-right: 1px"><p style="text-align: center; font-size: 6pt">${item.custcol_vs_item_country}</p></td>
+                             <!-- <td style="border-right: 1px"><p class="itemname" style="text-align: center; font-size: 6pt">${item.custcol_vs_customerreference}</p></td> -->
+				             <#if record.custbody_vs_mohdata?boolean>
+                                 <td style="border-right: 1px"><p class="itemname" style="text-align: center; font-size: 6pt">${item.custcol_vs_mohcode}</p></td>
+				             </#if>
+				             <#if record.custbody_vs_moddata?boolean>
+                                <td style="border-right: 1px"><p class="itemname" style="text-align: center; font-size: 6pt">${item.custcol_vs_modcode}</p></td>
+				             </#if>
+                           <td align="center"  line-height="150%" style="border-right: 1px"><p style="text-align: center; font-size: 6pt"><#if data.l?has_content>${data.l}</#if> </p></td>
+                           <td align="center"  line-height="150%" style="border-right: 1px"><p style="text-align: center; font-size: 6pt"><#if data.q?has_content>${data.q}</#if></p></td>
+                           <td align="center"  line-height="150%" style="border-right: 1px"><p style="text-align: center; font-size: 6pt"><#if data.exp?has_content>${data.exp}</#if></p></td>
+                           <td align="center"  line-height="150%" style="border-right: 1px"><p style="text-align: center; font-size: 6pt"><#if data.pdate?has_content>${data.pdate}</#if></p></td>
+                           <td align="center"  line-height="150%" style="border-right: 1px"><p style="text-align: center; font-size: 6pt"><#if data.s?has_content>${data.s}</#if></p></td>
+                           <td align="center"  line-height="150%" style="border-right: 1px"><p style="text-align: center; font-size: 6pt"></p></td>
+                           <td align="center" colspan="1" style="border-right: 1px"><p style="text-align: center; font-size: 6pt"> ${item.custcol_vs_discountrate}</p></td>
+                            <td align="center" colspan="1" style="border-right: 1px"><p style="text-align: center; font-size: 6pt"> ${item.amount}</p></td>
+                           <td align="center" style="border-right: 1px"> <p style="text-align: center; font-size: 6pt">${item.taxrate1}</p></td>
+                           <td align="right" style="border-right: 1px;"> <p style="text-align: center; font-size: 6pt">${item.tax1amt}</p></td>
+                           <td align="center"> <p style="text-align: center; font-size: 6pt">${item.grossamt}</p></td>
+
+                      </tr>
+					</#list>
+				</#if>
+				<#else>
+					<tr style="border-bottom: 1px">
+                          <td style="border-right: 1px">${item_index+1}</td>
+                          <td align="center"  style="border-right: 1px"><p style="text-align: center; font-size: 6pt">${item.custcol_vsitemid}</p></td>
+				          <td style="border-right: 1px"><p class="itemname" style="text-align: center; font-size: 6pt">${item.custcol_vs_nupcocode}</p></td>
+                          <td style="border-right: 1px"><p class="itemname" style="text-align: center; font-size: 6pt">${item.custcol_vs_nupcoprice}</p></td>
+                          <td style="border-right: 1px"  colspan = "2"><p class="itemname" style="text-align: center; font-size: 6pt">${item.custcol_vs_nupcodescription}</p></td>
+                          <td align="center"  line-height="150%" style="border-right: 1px"><p style="text-align: center; font-size: 6pt"><#if data.q?has_content>${data.q} </#if></p></td>
+                          <td align="center" style="border-right: 1px"><p style="text-align: center; font-size: 6pt">${item.custcol_vs_item_country}</p></td>
+                          <td style="border-right: 1px"><p class="itemname" style="text-align: center; font-size: 6pt">${item.custcol_vs_customerreference}</p></td>
+				          <#if record.custbody_vs_mohdata?boolean>
+                              <td style="border-right: 1px"><p class="itemname" style="text-align: center; font-size: 6pt">${item.custcol_vs_mohcode}</p></td>
+				          </#if>
+				          <#if record.custbody_vs_moddata?boolean>
+                              <td style="border-right: 1px"><p class="itemname" style="text-align: center; font-size: 6pt">${item.custcol_vs_modcode}</p></td>
+				          </#if>
+                  
+                          <td align="center"  line-height="150%" style="border-right: 1px"><p style="text-align: center; font-size: 6pt"><#if data.l?has_content >${data.l!"N/A" } </#if></p></td>
+                          <td align="center"  line-height="150%" style="border-right: 1px"><p style="text-align: center; font-size: 6pt"><#if data.q?has_content>${data.q!"N/A"} </#if></p></td>
+                          <td align="center"  line-height="150%" style="border-right: 1px"><p style="text-align: center; font-size: 6pt"><#if data.exp?has_content>${data.exp!"N/A" } </#if></p></td>
+                          <td align="center"  line-height="150%" style="border-right: 1px"><p style="text-align: center; font-size: 6pt"><#if data.pdate?has_content>${data.pdate!"N/A" }</#if></p></td>
+                          <td align="center"  line-height="150%" style="border-right: 1px"><p style="text-align: center; font-size: 6pt"><#if data.s?has_content>${data.s!"N/A" }</#if></p></td>
+                          <td align="center"  line-height="150%" style="border-right: 1px"><p style="text-align: center; font-size: 6pt"></p></td>
+                          <td align="center" colspan="1" style="border-right: 1px"><p style="text-align: center; font-size: 6pt"> ${item.custcol_vs_discountrate}</p></td>
+                          <td align="center" colspan="1" style="border-right: 1px"><p style="text-align: center; font-size: 6pt"> ${item.amount}</p></td>
+                          <td align="center" style="border-right: 1px"> <p style="text-align: center; font-size: 6pt">${item.taxrate1}</p></td>
+                          <td align="right" style="border-right: 1px;"> <p style="text-align: center; font-size: 6pt">${item.tax1amt}</p></td>
+                          <td align="center"> <p style="text-align: center; font-size: 6pt">${item.grossamt}</p></td>
+                </tr>
+				</#if>
+				<#assign totalQuantityRemaining += item.quantity />
+				</#list>
+			</table>
+		</#if>
+
+
+  <#assign totalAmount = 0>
+  <#list record.item as item>
+  	<#assign totalAmount = totalAmount + item.amount>
+  </#list>
+
+   <#assign taxamt = 0>
+   <#list record.item as item>
+  	 <#assign taxamt = taxamt + item.tax1amt>
+   </#list>
+
+   <#assign grossamt = 0>
+   <#list record.item as item>
+  	 <#assign grossamt = grossamt + item.grossamt>
+   </#list>
+     
+  <table style="width: 100%; margin-top: 7px;">
+	<tr style="border:1px">
+       <td colspan = "14" align="left" style=" font-size: 7pt">Total Amount إجمالي المبلغ</td>
+      <td  colspan = "1"  align="left" style="font-size: 7pt; ">${totalAmount}</td>
+      <td  align="right" style="font-size: 7pt" >${taxamt}</td>
+      <td align="center" style="">${grossamt}</td>
+    </tr>
+  </table>
+
+    
+  <#else>
+    
+<#if record.item?has_content>
+
+			<table style="width: 100%; border: 1px">
+				 <tr style="border-bottom:1px">
+                       <td style="border-right: 1px">#</td>
+                       <td style="align:right; border-right: 1px"><p style="text-align: center; font-size: 6pt">كود السلعة او الخدمة Product Id </p></td>
+                       <#if record.custbody_vsbothdes?boolean>
+                             <td colspan = "3" style="border-right: 1px"><p style="text-align: center; font-size: 6pt"> Description</p></td>
+                             <td colspan = "3" style="border-right: 1px"><p style="text-align: center; font-size: 6pt"> وصف الخدمة أو السلعة</p></td>
+                      <#else>
+                             <td colspan = "3" style="border-right: 1px"><p style="text-align: center; font-size: 6pt"> وصف الخدمة أو السلعة Description</p></td>
+                       </#if>
+                       <td style="border-right: 1px"><p style="text-align: center; font-size: 6pt"> Country of Origin </p></td>
+                       <td  style="border-right: 1px"><p style="text-align: center; font-size: 6pt; "> سعر الوحدة Price</p></td>
+                       <!-- <td  style="border-right: 1px"><p style="text-align: center; font-size: 6pt; "> QTY الكمية </p></td> -->
+                       <td  style="border-right: 1px"><p style="text-align: center; font-size: 6pt; "> الوحدة Unit</p></td>
+                       <td  style="border-right: 1px"><p style="text-align: center; font-size: 6pt; ">Lot Number</p></td>  
+                       <td  style="border-right: 1px"><p style="text-align: center; font-size: 6pt; ">Quantity</p></td>
+                       <td  style="border-right: 1px"><p style="text-align: center; font-size: 6pt; ">Exp Date</p></td>
+                       <td  style="border-right: 1px"><p style="text-align: center; font-size: 6pt; ">Production Date</p></td>
+                       <td  style="border-right: 1px"><p style="text-align: center; font-size: 6pt; ">Status </p></td>
+                       <td  style="border-right: 1px"><p style="text-align: center; font-size: 6pt; ">  الكمية المجانية</p></td>
+                       <td  style="border-right: 1px"><p style="text-align: center; font-size: 6pt; ">Discount Rate</p></td>
+                       <td  colspan="1"  style="border-right: 1px"><p style="text-align: center; font-size: 6pt;"> إجمالي المبلغ (غير شامل الضريبة) Amt Excl. VAT</p></td>
+                       <td  style="border-right: 1px"><p style="text-align: center; font-size: 6pt; ">  معدل الضريبة (%) VAT</p></td>
+                       <td  style="border-right: 1px"><p style="text-align: center; font-size: 6pt; "> مبلغ الضريبة VAT Amount</p></td>
+                       <td  style="border-right: 1px"><p style="text-align: center; font-size: 6pt"> إجمالي المبلغ (شامل الضريبة) Amt Incl. VAT</p></td>
+      <!--<td><p style="text-align: center; font-size: 8pt"> الخصم Discount</p></td>-->
+     
+                </tr>
+
+				<#assign totalQuantityRemaining = 0 />
+
+				<#-- Example to handle JSON data in NetSuite Advanced PDF -->
+				<#list record.item as item>
+				<#if item.custcol_vs_inventory_details_json?has_content>
+				<#assign objData = item.custcol_vs_inventory_details_json?eval />
+				<#if objData?has_content && objData?size gt 0  >
+					<#list objData as data>
+
+						 <tr style="border-bottom: 1px">
+                            <td style="border-right: 1px">${item_index+1}</td>
+                            <td align="center"  style="border-right: 1px"><p style="text-align: center; font-size: 6pt">${item.custcol_vsitemid}</p></td>
+                         <#if record.custbody_vsbothdes?boolean>
+                             <td colspan = "3" style="border-right: 1px"><p class="itemname" style="text-align: left; font-size: 6pt">${item.custcol_vs_description}</p></td>
+                             <td colspan = "3" style="border-right: 1px"><p class="itemname" style="text-align: left; font-size: 6pt">${item.item.custitem5}</p></td>
+                         <#else>
+                              <#if record.custbody_vs_arabicdis?boolean>
+                                  <td colspan = "3" style="border-right: 1px"><p class="itemname" style="text-align: left; font-size: 6pt">${item.item.custitem5}</p></td>
+                             <#else>
+                                   <td colspan = "3" style="border-right: 1px"><p class="itemname" style="text-align: left; font-size: 6pt">${item.custcol_vs_description}</p></td>
+                             </#if>
+                          </#if>
+                            <td align="center" style="border-right: 1px"><p style="text-align: center; font-size: 6pt">${item.custcol_vs_item_country}</p></td>
+                            <td align="center" style="border-right: 1px"><p style="text-align: center; font-size: 6pt">${item.rate}</p></td>
+                            <!-- <td align="center"  line-height="150%" style="border-right: 1px"><p style="text-align: center; font-size: 6pt">${item.quantity}</p></td> -->
+                            <td align="center"  line-height="150%" style="border-right: 1px"><p style="text-align: center; font-size: 6pt">${item.units}</p></td>
+                            <td align="center"  line-height="150%" style="border-right: 1px"><p style="text-align: center; font-size: 6pt"><#if data.l?has_content>${data.l!"N/A"}</#if> </p></td>
+                            <td align="center"  line-height="150%" style="border-right: 1px"><p style="text-align: center; font-size: 6pt"><#if data.q?has_content>${data.q!"N/A"}</#if></p></td>
+                            <td align="center"  line-height="150%" style="border-right: 1px"><p style="text-align: center; font-size: 6pt"><#if data.exp?has_content>${data.exp!"N/A" }</#if></p></td>
+                            <td align="center"  line-height="150%" style="border-right: 1px"><p style="text-align: center; font-size: 6pt"><#if data.pdate?has_content>${data.pdate!"N/A" }</#if></p></td>
+                            <td align="center"  line-height="150%" style="border-right: 1px"><p style="text-align: center; font-size: 6pt"><#if data.s?has_content>${data.s!"N/A" }</#if></p></td>
+                            <td align="center"  line-height="150%" style="border-right: 1px"><p style="text-align: center; font-size: 6pt"></p></td>
+                            <td align="center" colspan="1" style="border-right: 1px"><p style="text-align: center; font-size: 6pt"> ${item.custcol_vs_discountrate}</p></td>
+                            <td align="center" colspan="1" style="border-right: 1px"><p style="text-align: center; font-size: 6pt"><#if data.tnotax?has_content>  ${data.tnotax?string("0.00") }</#if></p></td>
+                            <td align="center" style="border-right: 1px"> <p style="text-align: center; font-size: 6pt">${item.taxrate1}</p></td>
+                            <td align="center" style="border-right: 1px"> <p style="text-align: center; font-size: 6pt">${data.taxq!"N/A" }</p></td>
+                            <td align="center"> <p style="text-align: center; font-size: 6pt"><#if data.tAmttax?has_content>${data.tAmttax}</#if></p></td>
+                       </tr>
+					</#list>
+				</#if>
+				<#else>
+					 <tr style="border-bottom: 1px">
+                           <td style="border-right: 1px">${item_index+1}</td>
+                           <td align="center"  style="border-right: 1px"><p style="text-align: center; font-size: 6pt">${item.custcol_vsitemid}</p></td>               
+                             <#if record.custbody_vsbothdes?boolean>
+                                 <td colspan = "3" style="border-right: 1px"><p class="itemname" style="text-align: left; font-size: 6pt">${item.description}</p></td>
+                                 <td colspan = "3" style="border-right: 1px"><p class="itemname" style="text-align: left; font-size: 6pt">${item.item.custitem5}</p></td>
+                            <#else>
+                                  <#if record.custbody_vs_arabicdis?boolean>
+                                      <td colspan = "3" style="border-right: 1px"><p class="itemname" style="text-align: left; font-size: 6pt">${item.item.custitem5}</p></td>
+                                  <#else>
+                                   <td colspan = "3" style="border-right: 1px"><p class="itemname" style="text-align: left; font-size: 6pt">${item.description}</p></td>
+                                 </#if>
+                             </#if>
+
+                           <td align="center" style="border-right: 1px"><p style="text-align: center; font-size: 6pt">${item.custcol_vs_item_country}</p></td>
+                           <td align="center" style="border-right: 1px"><p style="text-align: center; font-size: 6pt">${item.rate}</p></td>
+                           <!-- <td align="center"  line-height="150%" style="border-right: 1px"><p style="text-align: center; font-size: 6pt">${item.quantity}</p></td> -->
+                           <td align="center"  line-height="150%" style="border-right: 1px"><p style="text-align: center; font-size: 6pt">${item.units}</p></td>
+                           <td align="center"  line-height="150%" style="border-right: 1px"><p style="text-align: center; font-size: 6pt"><#if data.l?has_content && data.l?? >${data.l} </#if></p></td>
+                           <td align="center"  line-height="150%" style="border-right: 1px"><p style="text-align: center; font-size: 6pt"><#if data.q?has_content && data??>${data.q} </#if></p></td>
+                           <td align="center"  line-height="150%" style="border-right: 1px"><p style="text-align: center; font-size: 6pt"><#if data.exp?has_content && data??>${data.exp} </#if></p></td>
+                           <td align="center"  line-height="150%" style="border-right: 1px"><p style="text-align: center; font-size: 6pt"><#if data.pdate?has_content && data??>${data.pdate}</#if></p></td>
+                           <td align="center"  line-height="150%" style="border-right: 1px"><p style="text-align: center; font-size: 6pt"><#if data.s?has_content && data??>${data.s} </#if></p></td>
+                           <td align="center"  line-height="150%" style="border-right: 1px"><p style="text-align: center; font-size: 6pt"></p></td>
+                           <td align="center" colspan="1" style="border-right: 1px"><p style="text-align: center; font-size: 6pt"> ${item.custcol_vs_discountrate}</p></td>
+                           <td align="center" colspan="1" style="border-right: 1px"><p style="text-align: center; font-size: 6pt"><#if data.tnotax?has_content && data?has_content> ${data.tnotax?string("0.00")} </#if></p></td>
+                           <td align="center" style="border-right: 1px"> <p style="text-align: center; font-size: 6pt">${item.taxrate}</p></td>
+                           <td align="center" style="border-right: 1px"> <p style="text-align: center; font-size: 6pt"><#if data.taxq?has_content && data?has_content>${data.taxq} </#if></p></td>
+                           <td align="center"> <p style="text-align: center; font-size: 6pt"><#if data.tAmttax?has_content && data?has_content>${data.tAmttax}</#if></p></td>
+                           <!-- <td border-bottom="1" style="width:5%;align:">${data.expirationdate} </td> -->
+            </tr>
+		</#if>
+				<#assign totalQuantityRemaining += item.quantity />
+		</#list>
+	</table>
+</#if>
+   
+
+  <#assign totalAmount = 0>
+  <#list record.item as item>
+  	<#assign totalAmount = totalAmount + item.amount>
+  </#list>
+
+   <#assign taxamt = 0>
+   <#list record.item as item>
+  	 <#assign taxamt = taxamt + item.tax1amt>
+   </#list>
+
+   <#assign grossamt = 0>
+   <#list record.item as item>
+  	 <#assign grossamt = grossamt + item.grossamt>
+   </#list>
+
+  <table style="width: 100%; margin-top: 7px;">
+	<tr style="border:1px">
+       <td colspan = "12" align="left" style=" font-size: 7pt">Total Amount إجمالي المبلغ</td>
+      <td colspan="1" align="center" style="font-size: 7pt; ">${totalAmount}</td>
+      <td  align="right" style="font-size: 7pt" >${taxamt}</td>
+      <td align="center" style="font-size: 7pt">${grossamt}</td>
+    </tr>
+  </table>
+  </#if>
+
+       
+  <table style="width:40%; align: left; float:left;">
+    <tr>
+      <td style="width: 10%; align:left; " >
+        <!-- <img src="https://7939761-sb1.app.netsuite.com/core/media/media.nl?id=1273&amp;c=7939761_SB1&amp;h=UlUsfdrofNvJxHo43z6xIeYuNFJogoifEK-9BK6xiaYnv0Wk" style="height: 100%; width: 100%" /> -->
+        <#if record.custbody_psg_ei_qr_string?length gt 0>
+          <barcode codetype="qrcode" showtext="true" height="100" width="100" value="${record.custbody_psg_ei_qr_string}"/>
+        </#if>
+      </td>
+    </tr>
+    <tr>
+      <td style="font-size: 7pt">Payment Term:  ${record.entity.terms} </td>
+    </tr>
+  </table>
+     
+     
+<#assign totaTax15 = 0>
+<#list record.item as item>
+  <#if item.taxrate1 == 0.15> <!-- Check if quantity is greater than 0 -->
+    <#assign totaTax15 = totaTax15 + item.amount > <!-- Multiply amount by quantity and add to totalAmount -->
+  </#if>
+</#list>
+  
+<#assign totaTax0 = 0>
+<#list record.item as item>
+  <#if item.taxrate1 == 0.0> <!-- Check if quantity is greater than 0 -->
+    <#assign totaTax0 = totaTax0 + item.grossamt > <!-- Multiply amount by quantity and add to totalAmount -->
+  </#if>
+</#list>
+
+<#assign TotalInv = record.subtotal + record.taxtotal>
+
+<#assign totalDiscount = 0>
+<#list record.item as item>
+    <#assign totalDiscount = totalDiscount + item.custcol_vs_discountrate > <!-- Multiply amount by quantity and add to totalAmount -->
+</#list>
+
+  
+  <table style="width:60%; float:right; margin-left:100px">
+    <tr style="border-bottom: 1px">
+      <td style="align:left; font-size: 7pt; width:30"><p style="text-align: center; font-size: 7pt">${totalDiscount}</p></td>
+      <td style="align:right; font-size: 7pt; width:70"><p style="text-align: center; font-size: 7pt">Invoice Level Discount خصم الفاتورة</p></td>
+    </tr>
+    <tr style="border-bottom: 1px">
+      <!-- <td style="align:left; font-size: 8pt"><p style="text-align: center; font-size: 8pt">${record.subtotal}</p></td> -->
+      <td style="align:left; font-size: 7pt"><p style="text-align: center; font-size: 7pt">${totaTax15}</p></td>
+      <td style="align:right; "><p style="text-align: center; font-size: 7pt">Amount Subject to VAT المبلغ الخاضع للضريبة </p></td>
+    </tr>
+
+    <tr style="border-bottom: 1px">
+      <td style="align:left; font-size: 7pt"><p style="text-align: center; font-size: 7pt">${totaTax15}</p></td>
+      <td style="align:right; "><p style="text-align: center; font-size: 7pt; ">Standard Rate خاضع للنسبة الاساسية %15 </p></td>
+    </tr>
+
+    <tr style="border-bottom: 1px">
+      <td style="align:left; font-size: 7pt"><p style="text-align: center; font-size: 7pt">${totaTax0}</p></td>
+      <td style="align:right; "><p style="text-align: center; font-size: 7pt; ">Zero Rate خاضع للنسبة الصفرية </p></td>
+    </tr>
+    
+     <tr style="border-bottom: 1px">
+      <td style="align:left; font-size: 7pt"><p style="text-align: center; font-size: 7pt">${record.taxtotal}</p></td>
+      <td style="align:right; "><p style="text-align: center; font-size: 7pt;">VAT Amount مبلغ الضريبة  </p></td>
+    </tr>
+
+   <tr style="border-bottom: 1px">
+     <!-- <td style="align:left; font-size: 8pt"><p style="text-align: center; font-size: 8pt">${TotalInv}</p></td> -->
+     <td style="align:left; font-size: 7pt"><p style="text-align: center; font-size: 7pt">${record.total}</p></td>
+     <td style="align:right; font-size: 7pt"><p style="text-align: right;"> Total Invoice (Inclusive VAT) إجمالي قيمة الفاتورة (شاملة ضريبة القيمة المضافة) </p></td>
+    </tr>
+  </table>
+  
+  <table style="width:100%; float: right; margin-top:10px">
+    <tr>
+      <td style="align:right; font-size: 7pt">جميع المبالغ في الفاتورة بالريال السعودي</td>
+    </tr>
+     <tr>
+      <td style="align:right; font-size: 7pt">الأصناف الواردة بنسبة %0 ضريبة في الفاتورة بسبب تصنيفها بقائمة هيئة الغذاء والدواء السعودية</td>
+    </tr>
+  </table>
+
+    
+</body>
+</pdf>

@@ -1,0 +1,382 @@
+<?xml version="1.0"?>
+<!DOCTYPE pdf PUBLIC "-//big.faceless.org//report" "report-1.1.dtd">
+<pdf>
+<head>
+<link name="NotoSansArabic" type="font" subtype="opentype" src="${nsfont.NotoSansArabic_Regular}" src-bold="${nsfont.NotoSansArabic_Bold}" bytes="2" subset="false"/>
+	<link name="NotoSans" type="font" subtype="truetype" src="${nsfont.NotoSans_Regular}" src-bold="${nsfont.NotoSans_Bold}" src-italic="${nsfont.NotoSans_Italic}" src-bolditalic="${nsfont.NotoSans_BoldItalic}" bytes="2" />
+	<#if .locale == "zh_CN">
+		<link name="NotoSansCJKsc" type="font" subtype="opentype" src="${nsfont.NotoSansCJKsc_Regular}" src-bold="${nsfont.NotoSansCJKsc_Bold}" bytes="2" />
+	<#elseif .locale == "zh_TW">
+		<link name="NotoSansCJKtc" type="font" subtype="opentype" src="${nsfont.NotoSansCJKtc_Regular}" src-bold="${nsfont.NotoSansCJKtc_Bold}" bytes="2" />
+	<#elseif .locale == "ja_JP">
+		<link name="NotoSansCJKjp" type="font" subtype="opentype" src="${nsfont.NotoSansCJKjp_Regular}" src-bold="${nsfont.NotoSansCJKjp_Bold}" bytes="2" />
+	<#elseif .locale == "ko_KR">
+		<link name="NotoSansCJKkr" type="font" subtype="opentype" src="${nsfont.NotoSansCJKkr_Regular}" src-bold="${nsfont.NotoSansCJKkr_Bold}" bytes="2" />
+	<#elseif .locale == "th_TH">
+		<link name="NotoSansThai" type="font" subtype="opentype" src="${nsfont.NotoSansThai_Regular}" src-bold="${nsfont.NotoSansThai_Bold}" bytes="2" />
+	</#if>
+	
+<macrolist>
+<macro id="nlheader">
+<table class="header" style="width: 100%;"><tr>
+	<td align="left"><img src="https://6371802-sb1.app.netsuite.com/core/media/media.nl?id=3684&c=6371802_SB1&h=GW7-AC0hYPc6IU-5uWUhZZg3DgiJCTsfxtIiMf_UnlEMjbrW" style="width:300px;height:200px" /></td>
+	<td align="center"><br /><br /><#if record.custbody_psg_ei_qr_string?length gt 0><barcode codetype="qrcode" showtext="true" height="70" width="70" value="${record.custbody_psg_ei_qr_string}"/></#if><!--custbody_psg_ei_qr_string-->
+	<p style="text-align:center;margin:0; padding: 0;font-size:17px;">فاتوره مسودة</p>
+
+	<p style="text-align:center;margin:0; padding-top: 3px;font-size:17px">Draft Invoice</p>
+	</td>
+	<td align="right"><img src="https://6371802-sb1.app.netsuite.com/core/media/media.nl?id=836&c=&h=of7w7wZjdG3m9m7JiABFcQo9OP_lJZvk5lEJa5OfYt7x-quS" style="width:300px;height:200px" /></td>
+	</tr>
+</table>
+</macro>
+
+<macro id="nlfooter">
+<table style="width: 100%;">
+    <tr>
+      <td style="align:center">
+      <p style = "text-align:center"> ٧٩٧٢ طﺎرق ﺑن زﯾﺎد – اﻟﺳﻠﯾﻣﺎﻧﯾﺔ وﺣدة رﻗم ٩٨ – ﺣﻔر اﻟﺑﺎطن ٣٩٩٥٢ - ٥٣٥٤ – اﻟﺳﻌودﯾﺔ  </p>
+      </td>
+    </tr>
+</table>
+
+<table class="footer" style="width: 100%;">
+<tr>
+	<td align="right"><pagenumber/> of <totalpages/></td>
+</tr>
+</table>
+
+</macro>
+    </macrolist>
+    <style>
+		* {
+		<#if .locale == "zh_CN">
+			font-family: NotoSans, NotoSansCJKsc, sans-serif;
+		<#elseif .locale == "zh_TW">
+			font-family: NotoSans, NotoSansCJKtc, sans-serif;
+		<#elseif .locale == "ja_JP">
+			font-family: NotoSans, NotoSansCJKjp, sans-serif;
+		<#elseif .locale == "ko_KR">
+			font-family: NotoSans, NotoSansCJKkr, sans-serif;
+		<#elseif .locale == "th_TH">
+			font-family: NotoSans, NotoSansThai, sans-serif;
+		<#else>
+			font-family: NotoSans, sans-serif;
+		</#if>
+		}
+        table {
+            font-size: 9pt;
+            table-layout: fixed;
+        }
+        th {
+            font-weight: bold;
+            font-size: 8pt;
+            vertical-align: middle;
+            padding: 5px 6px 3px;
+            background-color: #e3e3e3;
+            color: #333333;
+        }
+        td {
+            padding: 4px 6px;
+        }
+		td p { align:left }
+        b {
+            font-weight: bold;
+            color: #333333;
+        }
+        table.header td {
+            padding: 0;
+            font-size: 10pt;
+        }
+        table.footer td {
+            padding: 0;
+            font-size: 8pt;
+        }
+        table.itemtable th {
+            padding-bottom: 10px;
+            padding-top: 10px;
+        }
+        table.body td {
+            padding-top: 2px;
+        }
+        table.total {
+            page-break-inside: avoid;
+        }
+        tr.totalrow {
+            background-color: #e3e3e3;
+            line-height: 200%;
+        }
+        td.totalboxtop {
+            font-size: 12pt;
+            background-color: #e3e3e3;
+        }
+        td.addressheader {
+            font-size: 8pt;
+            padding-top: 6px;
+            padding-bottom: 2px;
+        }
+        td.address {
+            padding-top: 0;
+        }
+        td.totalboxmid {
+            font-size: 28pt;
+            padding-top: 20px;
+            background-color: #e3e3e3;
+        }
+        td.totalboxbot {
+            background-color: #e3e3e3;
+            font-weight: bold;
+        }
+        span.title {
+            font-size: 28pt;
+        }
+        span.number {
+            font-size: 16pt;
+        }
+        span.itemname {
+            font-weight: bold;
+            line-height: 150%;
+        }
+        hr {
+            width: 100%;
+            color: #d3d3d3;
+            background-color: #d3d3d3;
+            height: 1px;
+        }
+          * {font-family: NotoSansArabic, NotoSans, sans-serif;}
+    </style>
+</head>
+<body header="nlheader" header-height="17%" footer="nlfooter" footer-height="20pt" padding="0.3in 0.3in 0.3in 0.3in" size="B4">
+
+<table border="1" style="width: 100%">
+<tr>
+	<td align="center" border-bottom="1">
+	<p style="text-align:center;margin:0; padding: 0;">&nbsp;</p>
+
+	<p style="text-align:center;margin:0; padding: 0;">&nbsp;</p>
+	</td>
+	<td align="center" border-bottom="1">
+	&nbsp;
+	</td>
+	<td align="center" border-bottom="1" border-right="1">
+	<p style="text-align:center;margin:0; padding: 0;">${record.entity.vatregnumber}</p>
+
+	<p style="text-align:center;margin:0; padding: 0;">&nbsp;</p>
+	</td>
+	<td align="center" border-bottom="1" border-right="1">
+	<p style="text-align:center;margin:0; padding: 0;">اﻟرﻗم اﻟﺿرﯾﺑﻲ</p>
+
+	<p style="text-align:center;margin:0; padding: 0;">VAT No.</p>
+	</td>
+	<td align="center" border-bottom="1" border-right="1">
+	<p style="text-align:center;margin:0; padding: 0;">${record.entity}</p>
+	<p style="text-align:center;margin:0; padding: 0;"></p>
+	</td>
+	<td align="center" border-bottom="1" border-right="1">
+	<p style="text-align:center;margin:0; padding: 0;">اسم العميل</p>
+	<p style="text-align:center;margin:0; padding: 0;">Customer</p>
+	</td>
+</tr>
+<tr>
+	<td align="center" border-bottom="1" border-right="1">
+	<p style="text-align:center;margin:0; padding: 0;">${record.tranid}</p>
+	</td>
+	<td align="center" border-bottom="1" border-right="1">
+	<p style="text-align:center;margin:0; padding: 0;">الرقم التسلسلي</p>
+	<p style="text-align:center;margin:0; padding: 0;">Serial No.</p>
+	</td>
+	<td align="center" border-bottom="1" border-right="1">
+	<p style="text-align:center;margin:0; padding: 0;">${record.entity.phone}</p>
+	</td>
+	<td align="center" border-bottom="1" border-right="1">
+	<p style="text-align:center;margin:0; padding: 0;">الهاتف</p>
+	<p style="text-align:center;margin:0; padding: 0;">Tel</p>
+	</td>
+	<td align="center" border-bottom="1" border-right="1">
+	<p style="text-align:center;margin:0; padding: 0;">${record.trandate}</p>
+	</td>
+	<td align="center" border-bottom="1" border-right="1">
+	<p style="text-align:center;margin:0; padding: 0;">التاريخ</p>
+	<p style="text-align:center;margin:0; padding: 0;">Date</p>
+	</td>
+</tr>
+<tr>
+	<td align="center" border-bottom="1" border-right="1">
+	<p style="text-align:center;margin:0; padding: 0;">${record.otherrefnum}</p>
+	</td>
+	<td align="center" border-bottom="1" border-right="1">
+	<p style="text-align:center;margin:0; padding: 0;">رﻗم أﻣر اﻟﺷراء</p>
+	<p style="text-align:center;margin:0; padding: 0;">PO No.</p>
+	</td>
+	<td align="center" border-bottom="1" border-right="1" colspan="3" rowspan="1">${record.location}</td>
+	<td align="center" border-bottom="1" border-right="1">
+	<p style="text-align:center;margin:0; padding: 0;">اﻟﻌﻧوان</p>
+	<p style="text-align:center;margin:0; padding: 0;">Address</p>
+	</td>
+</tr>
+<tr>
+	<td align="center"  border-right="1">
+	<p style="text-align:center;margin:0; padding: 0;">&nbsp;</p>
+	<p style="text-align:center;margin:0; padding: 0;">&nbsp;</p>
+	</td>
+	<td align="center" border-right="1">
+	<p style="text-align:center;margin:0; padding: 0;">طرﯾﻘﺔ اﻟدﻓﻊ</p>
+	<p style="text-align:center;margin:0; padding: 0;">Payment Method</p>
+	</td>
+	<td align="center" border-right="1" colspan="3" rowspan="1">${record.memo}</td>
+	<td align="center" border-right="1">
+	<p style="text-align:center;margin:0; padding: 0;">اﻟـﺑـﯾـــﺎن</p>
+	<p style="text-align:center;margin:0; padding: 0;">Description</p>
+	</td>
+</tr>
+</table>
+
+<div style="margin-top: 15px;">&nbsp;</div>
+
+<table border-left="1" cellpadding="5" cellspacing="0" style="width:100%;"><#assign TotalQuantity = 0><#assign TotalCost = 0><#if record.item?has_content><#list record.item as item><#if item_index==0>
+<tr>
+	<td  border-right="1" border-top="1" style="align:center;width:7%;font-size:10px;">
+	<p style="text-align:center;margin:0; padding: 0;">ﺗﺎرﯾﺦ اﻻﻧﺗﮭﺎء</p>
+
+	<p style="text-align:center;margin:0; padding: 0;">Expiry Date</p>
+	</td>
+	<td  border-right="1" border-top="1" style="align:center;width:7%;font-size:10px;">
+	<p style="text-align:center;margin:0; padding: 0;">اﻟﮭداﯾﺎ</p>
+
+	<p style="text-align:center;margin:0; padding: 0;">Gifts</p>
+	</td>
+	<td  border-right="1" border-top="1" style="align:center;width:7%;font-size:10px;">
+	<p style="text-align:center;margin:0; padding: 0;">اﻟﺗﺷﻐﯾﻠﺔ</p>
+
+	<p style="text-align:center;margin:0; padding: 0;">Lot Number</p>
+	</td>
+	<td  border-right="1" border-top="1" style="align:center;width:7%;font-size:10px;">
+	<p style="text-align:center;margin:0; padding: 0;">اﻹﺟﻣﺎﻟﻲ ﺑﻌد الضريبة</p>
+
+	<p style="text-align:center;margin:0; padding: 0;">Total + VAT%</p>
+	</td>
+	<td  border-right="1" border-top="1" style="align:center;width:7%;font-size:10px;">
+	<p style="text-align:center;margin:0; padding: 0;">اﻟﺿرﯾﺑﺔ%</p>
+
+	<p style="text-align:center;margin:0; padding: 0;">VAT%</p>
+	</td>
+	<td  border-right="1" border-top="1" style="align:center;width:7%;font-size:10px;">
+	<p style="text-align:center;margin:0; padding: 0;">إﺟﻣﺎﻟﻲ</p>
+
+	<p style="text-align:center;margin:0; padding: 0;">Total</p>
+	</td>
+	<td  border-right="1" border-top="1" style="align:center;width:7%;font-size:10px;">
+	<p style="text-align:center;margin:0; padding: 0;">اﻟﺳﻌر</p>
+
+	<p style="text-align:center;margin:0; padding: 0;">Cost</p>
+	</td>
+	<td border-right="1" border-top="1" style="align:center;width:7%;font-size:10px;">
+	<p style="text-align:center;margin:0; padding: 0;">اﻟﻛﻣﯾﺔ</p>
+
+	<p style="text-align:center;margin:0; padding: 0;">Quantity</p>
+	</td>
+	<td  border-right="1" border-top="1" style="align:center;width:7%;font-size:10px;">
+	<p style="text-align:center;margin:0; padding: 0;">كود العميل</p>
+
+	<p style="text-align:center;margin:0; padding: 0;">Customer Code</p>
+	</td>
+	<td  border-right="1" border-top="1" style="align:center;width:12%;font-size:10px;">
+	<p style="text-align:center;margin:0; padding: 0;">اﺳم اﻟﻣﺎدة</p>
+
+	<p style="text-align:center;margin:0; padding: 0;">Item Description</p>
+	</td>
+	<td  border-right="1" border-top="1" style="align:center;width:7%;font-size:10px;">
+	<p style="text-align:center;margin:0; padding: 0;">م</p>
+
+	<p style="text-align:center;margin:0; padding: 0;">No.</p>
+	</td>
+</tr>
+	</#if>
+<tr>
+	<td border-top="1" border-right="1" style="width:7%;align:center;">&nbsp;</td>
+	<td border-top="1" border-right="1" style="width:7%;align:center;">&nbsp;</td>
+	<td border-top="1" border-right="1" style="width:7%;align:center;">&nbsp;</td>
+	<td border-top="1" border-right="1" style="width:7%;align:center;">${item.Grossamt?string['#,##0.00']}</td>
+	<td border-top="1" border-right="1" style="width:7%;align:center;">${item.taxrate1?string['#,##0.00']}</td>
+	<td border-top="1" border-right="1" style="width:7%;align:center;">${item.amount?string['#,##0.00']}</td>
+	<td border-top="1" border-right="1" style="width:7%;align:center;">${item.rate?string['#,##0.00']}</td>
+	<td border-top="1" border-right="1" style="width:7%;align:center;">${item.quantity?string['#,##0.00']}</td>
+	<td border-top="1" border-right="1" style="width:7%;align:center;">${item.custcol_vs_itemcodes}</td>
+	<td border-top="1" border-right="1" style="width:12%;align:center;">${item.item}</td>
+	<td border-top="1" border-right="1" style="width:7%;align:center;">${item?index+1}</td>
+</tr>
+	<#assign TotalQuantity = TotalQuantity + item.quantity><#assign TotalCost = TotalCost + item.rate></#list></#if>
+<tr>
+	<td border-top="1" border-right="1" colspan="5" rowspan="1" style="align:center;font-size:10px;">
+	<p style="text-align:center;margin:0; padding: 0;">ريال سعودي</p>
+
+	<p style="text-align:center;margin:0; padding: 0;">SAR</p>
+	</td>
+	<td border-top="1" border-right="1" style="align:center;font-size:10px;">
+	<p style="text-align:center;margin:0; padding: 0;">${record.subtotal?string['#,##0.00']}</p>
+	</td>
+	<td border-top="1" border-right="1" style="align:center;font-size:10px;">
+	<p style="text-align:center;margin:0; padding: 0;">${TotalCost?string['#,##0.00']}</p>
+	</td>
+	<td border-top="1" border-right="1" style="align:center;font-size:10px;">
+	<p style="text-align:center;margin:0; padding: 0;">${TotalQuantity}</p>
+	</td>
+	<td border-top="1" border-right="1" colspan="3" rowspan="1" style="align:center;font-size:10px;">
+	<p style="text-align:center;margin:0; padding: 0;">اﻟﻣﺟﻣوع</p>
+
+	<p style="text-align:center;margin:0; padding: 0;">Total</p>
+	</td>
+</tr>
+<tr>
+	<td border-top="1" border-right="1" colspan="3" rowspan="1" style="align:center;font-size:10px;">
+	<p style="text-align:center;margin:0; padding: 0;">ريال سعودي</p>
+	<p style="text-align:center;margin:0; padding: 0;">SAR</p>
+	</td>
+	<td border-top="1" border-right="1" style="align:center;font-size:10px;">
+	<p style="text-align:center;margin:0; padding: 0;">${record.total?string['#,##0.00']}</p>
+	</td>
+	<td border-top="1" border-right="1" colspan="4" rowspan="1" style="align:center;font-size:10px;">
+	<p style="text-align:center;margin:0; padding: 0;">&nbsp;</p>
+	<p style="text-align:center;margin:0; padding: 0;">&nbsp;</p>
+	</td>
+	<td border-top="1" border-right="1" colspan="3" rowspan="1" style="align:center;font-size:10px;">
+	<p style="text-align:center;margin:0; padding: 0;">اﻹﺟﻣﺎﻟﻲ ﻣﻊ اﻟﺿرﯾﺑﺔ</p>
+	<p style="text-align:center;margin:0; padding: 0;">Total + VAT</p>
+	</td>
+</tr>
+<tr>
+	<td border-top="1" border-right="1" colspan="8" rowspan="1" style="align:center;font-size:10px;">
+	<p style="text-align:center;margin:0; padding: 0;">&nbsp;</p>
+	<p style="text-align:center;margin:0; padding: 0;">&nbsp;</p>
+	</td>
+	<td border-top="1" border-right="1" colspan="3" rowspan="1" style="align:center;font-size:10px;">
+	<p style="text-align:center;margin:0; padding: 0;">رﺳوم ﺷﺣن </p>
+	<p style="text-align:center;margin:0; padding: 0;"> Shipping Fees</p>
+	</td>
+</tr>
+<tr>
+	<td border-top="1" border-right="1" colspan="4" rowspan="1" style="align:center;font-size:10px;">
+	<p style="text-align:center;margin:0; padding: 0;">ريال سعودي</p>
+	</td>
+	<td border-top="1" border-right="1" colspan="4" rowspan="1" style="align:center;font-size:10px;">
+	<p style="text-align:center;margin:0; padding: 0;">${record.total?string['#,##0.00']}</p>
+	</td>
+	<td border-top="1" border-right="1" colspan="3" rowspan="1" style="align:center;font-size:10px;">
+	<p style="text-align:center;margin:0; padding: 0;">اﻟﻣﺑﻠﻎ اﻹﺟﻣﺎﻟﻲ </p>
+	<p style="text-align:center;margin:0; padding: 0;">Total amount </p>
+	</td>
+</tr>
+<tr>
+	<td border-bottom="1" border-right="1" border-top="1" colspan="8" rowspan="1" style="align:center;font-size:10px;">
+	<p style="text-align:center;margin:0; padding: 0;">${record.custbody_vs_amt_in_words}</p>
+
+	</td>
+	<td border-bottom="1" border-right="1" border-top="1" colspan="3" rowspan="1" style="align:center;font-size:10px;">
+	<p style="text-align:center;margin:0; padding: 0;">اﻟﻣﺑﻠﻎ ﻛﺗﺎﺑﺔ </p>
+	<p style="text-align:center;margin:0; padding: 0;">Written amount </p>
+	</td>
+</tr>
+</table>
+
+
+</body>
+</pdf>

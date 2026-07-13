@@ -1,0 +1,26 @@
+- PART NO: itemid (EXIST)
+- Bolt Pattern: custitem_bold_pattern (EXIST)
+- Bore Diameter: custitem_vs_bore_diameter (Not EXIST)
+- Thickness: custitem_thick (EXIST)
+- Material: custitem_vs_material (Not EXIST)
+- Finish: custitem_finish (EXIST)
+- Compatibility: custitem_vs_compatibility (Not EXIST)
+- Color: custitem_wheel_color (EXIST)
+- Packing Way: custitem_vs_packing_way (Not EXIST)
+- Enhance Your Ride with Galaxy custitem_group (EXIST) ****
+- Recap: custitem_vs_recap (Not EXIST)
+- Key Features: custitem_vs_key_features (Not EXIST)
+- Dimensions: custitem_vs_dimensions (Not EXIST)
+- Weight: custitemwheel_weight_lbs (EXIST)
+- Whats Included: custitem_vs_whats_included (Not EXIST)
+- Why Choose Galaxy: Galaxy specializes in premium automotive accessories that combine innovative engineering with top-tier   materials. Trust Galaxy for products that deliver unmatched quality and performance. (EXIST) ****
+- Policies: 	Returns: Not accepted for this product. ****
+		Warranty: Sold as-is with no warranty.
+		Shipping Guarantee: Ships within 2 business days.
+
+
+
+
+
+
+

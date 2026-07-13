@@ -1,0 +1,326 @@
+<?xml version="1.0"?><!DOCTYPE pdf PUBLIC "-//big.faceless.org//report" "report-1.1.dtd">
+<pdf>
+<head>
+	<link name="NotoSans" type="font" subtype="truetype" src="${nsfont.NotoSans_Regular}" src-bold="${nsfont.NotoSans_Bold}" src-italic="${nsfont.NotoSans_Italic}" src-bolditalic="${nsfont.NotoSans_BoldItalic}" bytes="2" />
+	<#if .locale == "zh_CN">
+		<link name="NotoSansCJKsc" type="font" subtype="opentype" src="${nsfont.NotoSansCJKsc_Regular}" src-bold="${nsfont.NotoSansCJKsc_Bold}" bytes="2" />
+	<#elseif .locale == "zh_TW">
+		<link name="NotoSansCJKtc" type="font" subtype="opentype" src="${nsfont.NotoSansCJKtc_Regular}" src-bold="${nsfont.NotoSansCJKtc_Bold}" bytes="2" />
+	<#elseif .locale == "ja_JP">
+		<link name="NotoSansCJKjp" type="font" subtype="opentype" src="${nsfont.NotoSansCJKjp_Regular}" src-bold="${nsfont.NotoSansCJKjp_Bold}" bytes="2" />
+	<#elseif .locale == "ko_KR">
+		<link name="NotoSansCJKkr" type="font" subtype="opentype" src="${nsfont.NotoSansCJKkr_Regular}" src-bold="${nsfont.NotoSansCJKkr_Bold}" bytes="2" />
+	<#elseif .locale == "th_TH">
+		<link name="NotoSansThai" type="font" subtype="opentype" src="${nsfont.NotoSansThai_Regular}" src-bold="${nsfont.NotoSansThai_Bold}" bytes="2" />
+	</#if>
+    <macrolist>
+        <macro id="nlheader">
+            <table class="header" style="width: 100%;"><tr>
+	<td><img align="left" height="40px" src="https://7901302.app.netsuite.com/core/media/media.nl?id=771&amp;c=7901302&amp;h=PzCH61yfBQdyONsHDCXF14pXyWN5V8CkzTy95lQMKE8pPwej" width="100px" /></td>
+	</tr>
+	<tr>
+	<td align="center"><strong>TAX INVOICE</strong></td>
+	</tr>
+	<tr>
+	<td align="center" color="red" font-weight="bold">TRN 100354811000003</td>
+	</tr></table>
+        </macro>
+        <macro id="nlfooter">
+            <table class="footer" style="width: 100%;"><tr>
+	<td><img align="center" height="100%" src="https://7901302.app.netsuite.com/core/media/media.nl?id=772&amp;c=7901302&amp;h=QZKTKe68rQWprbreFqXNHMVONJA4BJZ1qex8mkFOywFDP5WM" width="100%" /></td>
+	</tr></table>
+        </macro>
+    </macrolist>
+    <style type="text/css">* {
+		<#if .locale == "zh_CN">
+			font-family: NotoSans, NotoSansCJKsc, sans-serif;
+		<#elseif .locale == "zh_TW">
+			font-family: NotoSans, NotoSansCJKtc, sans-serif;
+		<#elseif .locale == "ja_JP">
+			font-family: NotoSans, NotoSansCJKjp, sans-serif;
+		<#elseif .locale == "ko_KR">
+			font-family: NotoSans, NotoSansCJKkr, sans-serif;
+		<#elseif .locale == "th_TH">
+			font-family: NotoSans, NotoSansThai, sans-serif;
+		<#else>
+			font-family: NotoSans, sans-serif;
+		</#if>
+		}
+		table {
+			font-size: 9pt;
+			table-layout: fixed;
+		}
+        th {
+            font-weight: bold;
+            font-size: 8pt;
+            vertical-align: middle;
+            padding: 5px 6px 3px;
+            background-color: #e3e3e3;
+            color: #333333;
+        }
+        td {
+            padding: 4px 6px;
+        }
+		td p { align:left }
+        b {
+            font-weight: bold;
+            color: #333333;
+        }
+        table.header td {
+            padding: 0px;
+            font-size: 10pt;
+        }
+        table.footer td {
+            padding: 0px;
+            font-size: 8pt;
+        }
+        table.itemtable th {
+            padding-bottom: 10px;
+            padding-top: 10px;
+        }
+        table.body td {
+            padding-top: 2px;
+        }
+        table.total {
+            page-break-inside: avoid;
+        }
+        tr.totalrow {
+            background-color: #e3e3e3;
+            line-height: 200%;
+        }
+        td.totalboxtop {
+            font-size: 12pt;
+            background-color: #e3e3e3;
+        }
+        td.addressheader {
+            font-size: 8pt;
+            padding-top: 6px;
+            padding-bottom: 2px;
+        }
+        td.address {
+            padding-top: 0px;
+        }
+        td.totalboxmid {
+            font-size: 28pt;
+            padding-top: 20px;
+            background-color: #e3e3e3;
+        }
+        td.totalboxbot {
+            background-color: #e3e3e3;
+            font-weight: bold;
+        }
+        span.title {
+            font-size: 28pt;
+        }
+        span.number {
+            font-size: 16pt;
+        }
+        span.itemname {
+            font-weight: bold;
+            line-height: 150%;
+        }
+        hr {
+            width: 100%;
+            color: #d3d3d3;
+            background-color: #d3d3d3;
+            height: 1px;
+        }
+</style>
+</head>
+<body header="nlheader" header-height="10%" footer="nlfooter" footer-height="20pt" padding="0.5in 0.5in 0.5in 0.5in" size="Letter">
+    <table width="100%"><tr>
+	<td align="left">Invoice To :-<br /><span font-weight="bold">${record.billaddress}<br />TRN : 100229459100003</span></td>
+	</tr>
+	<tr>
+	<td align="right" font-weight="bold">Invoice Date : ${record.trandate}</td>
+	</tr>
+	<tr>
+	<td align="right" font-weight="bold">Invoice No : ${record.custbody_altinvno}</td>
+	</tr>
+	<tr>
+	<td align="left" font-weight="bold">Attention :${record.billingaddress.attention}</td>
+	</tr></table>
+<!--<table border="1" width="100%"><tr>
+	<td>
+	<table border="0" style="float: left; width:70%;"><tr>
+		<td>&nbsp;</td>
+		</tr>
+		<tr>
+		<td font-size="7pt">SUB: INVOICE FOR LUMP SUM AGREEMENT PRICE</td>
+		</tr>
+		<tr>
+		<td font-size="7pt">Agreement Ref:</td>
+		</tr>
+		<tr>
+		<td font-size="7pt">Project No:</td>
+		</tr>
+		<tr>
+		<td font-size="7pt">Project Title:</td>
+		</tr></table>
+
+	<table border="0" font-size="9pt" style="float: left; width:30%"><tr>
+		<td font-size="7pt" border-left="1">Bank Name</td>
+		</tr>
+		<tr>
+		<td border-left="1" font-size="7pt" width="5%">Abu Dhabi Commercial Bank</td>
+		</tr>
+		<tr>
+		<td font-size="7pt" border-left="1">Account Name</td>
+		</tr>
+		<tr>
+		<td border-left="1" font-size="7pt">PROBUS ENG &amp; CONST PTE LTD-ABU DHABI</td>
+		</tr>
+      <tr>
+      	<td font-size="7pt" border-left="1">USD Account No.</td>
+      </tr>
+      <tr>
+      	<td font-size="7pt" border-left="1">IBAN No.</td>
+      </tr>
+      <tr>
+      	<td font-size="7pt" border-left="1">Swift Code:</td>
+      </tr>
+      </table>
+	</td>
+	</tr></table>-->
+
+<table width="100%"><tr>
+	<td border-left="1" border-top="1" style="width: 414px;">&nbsp;</td>
+	<td border-left="1" border-right="1" border-top="1" style="width: 366px;"><strong>Bank Name</strong></td>
+	</tr>
+	<tr>
+	<td border-left="1" style="width: 414px;"><strong><u>SUB: INVOICE FOR LUMP SUM AGREEMENT PRICE</u></strong></td>
+	<td border-left="1" border-right="1" style="width: 366px;">${record.custbody_namebank}</td>
+	</tr>
+	<tr>
+	<td border-left="1" style="width: 414px;"><u>Agreement Ref: ${record.custbody_agref}</u></td>
+	<td border-left="1" border-right="1" style="width: 366px;"><strong>Account Name</strong><br /><br />${record.custbody_accccname}</td>
+	</tr>
+	<tr>
+	<td border-left="1" style="width: 414px;">&nbsp;</td>
+	<td border-left="1" border-right="1" style="width: 366px;"><strong>Currency:</strong> ${record.currency}</td>
+	</tr>
+	<tr>
+	<td border-left="1" style="width: 414px;"><u>Project No. ${record.job}</u></td>
+	<td border-left="1" border-right="1" style="width: 366px;"><strong>USD Account No.</strong><br />${record.custbody_usdacccc}</td>
+	</tr>
+	<tr>
+	<td border-left="1" style="width: 414px;"><u>Project Title: ${record.custbody_projtitle}</u></td>
+	<td border-left="1" border-right="1" style="width: 366px;"><strong>IBAN No</strong><br />${record.custbody_ibannn}</td>
+	</tr>
+	<tr>
+	<td border-bottom="1" border-left="1" style="width: 414px;">&nbsp;</td>
+	<td border-bottom="1" border-left="1" border-right="1" style="width: 366px;"><strong>Swift Code:</strong><br />${record.custbody_swifff}</td>
+	</tr></table>
+<br /><#if record.item?has_content><!--<#assign advanced = 0>
+<#assign amount = 0>-->
+<table border="1" style="width:100%;"><!--<#list record.item as item>
+    <#if item.item == 'Advance Payment Recovery'>
+     <#assign advanced = advanced + item.amount?abs>
+    <#else>
+      <#assign amount = amount + item.amount>
+       </#if>
+  </#list>-->
+  <#assign formula1 = record.item[0].rate * record.exchangerate >
+    <#if record.items?length gt 1>
+   <#assign formula2 = record.item[1].rate * record.exchangerate >
+     <#else> <#assign formula2 = 0>
+     </#if>
+   
+
+     <#assign formula3 = record.discounttotal * record.exchangerate >
+       <#if record.items?length gt 1>
+     <#assign formula4 = ((record.item[0].rate - (record.item[1].rate )?abs) - (record.discounttotal)?abs) >
+       <#else>
+         <#assign formula4 = ((record.item[0].rate) - (record.discounttotal)?abs) >
+       </#if>
+       <#assign formula42 = formula4 * record.exchangerate >
+         <#assign formula5 = record.taxtotal * record.exchangerate >
+           <#assign formula6 = record.total * record.exchangerate >
+  <tr>
+	<td align="center" border-bottom="1" border-right="1" colspan="4" rowspan="1">Description</td>
+	<td align="center" border-bottom="1">Amount ${record.currency}</td>
+	<td align="center" border-bottom="1">Exchange Rate</td>
+	<td align="center" border-bottom="1">Amount AED</td>
+	</tr>
+	<tr>
+	<td border-right="1" colspan="4" rowspan="1">${record.custbody_invoicedesc}</td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	</tr>
+	<tr>
+	<td border-right="1" colspan="4" rowspan="1">${record.item[0].description}</td>
+	<td>${record.item[0].rate?string(",##0.00")}</td>
+	<td>${record.exchangerate?string(",##0.00")}</td>
+	<td>${formula1?string(",##0.00")}</td>
+	</tr>
+             <#if record.items?length gt 1>
+	<tr>
+	<td border-right="1" colspan="4" rowspan="1">Less:${record.custbody_less}</td>
+    <#if record.items?length gt 1>
+	<td>${record.item[1].rate?string(",##0.00")}</td>
+      <#else>
+        <td>0</td>
+        </#if>     
+	<td>${record.exchangerate?string(",##0.00")}</td>
+	<td>${formula2?string(",##0.00")}</td>
+	</tr>
+               </#if>
+	<tr>
+	<td border-right="1" colspan="4" rowspan="1">Less: ${record.custbody_less2}</td>
+	<td>${record.discounttotal?string(",##0.00")}</td>
+	<td>${record.exchangerate?string(",##0.00")}</td>
+	<td>${formula3?string(",##0.00")}</td>
+	</tr>
+	<tr>
+	<td border-right="1" colspan="4" rowspan="1">Net Invoice Amount</td>
+	<td>${formula4?string(",##0.00")}</td>
+	<td>${record.exchangerate?string(",##0.00")}</td>
+	<td>${formula42?string(",##0.00")}</td>
+	</tr>
+	<tr>
+	<td border-right="1" colspan="4" rowspan="1">Value Added Tax (VAT) at 5% Standard Rate</td>
+	<td>${record.taxtotal?string(",##0.00")}</td>
+	<td>${record.exchangerate?string(",##0.00")}</td>
+	<td>${formula5?string(",##0.00")}</td>
+	</tr>
+	<tr>
+	<td border-right="1" colspan="4" rowspan="1">Net Invoice Value including VAT</td>
+	<td border-bottom="1" border-top="1">${record.total?string(",##0.00")}</td>
+	<td border-bottom="1" border-top="1">${record.exchangerate?string(",##0.00")}</td>
+	<td border-bottom="1" border-top="1">${formula6?string(",##0.00")}</td>
+	</tr>
+	<tr>
+	<td border-right="1" colspan="4" rowspan="1">&nbsp;</td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	</tr>
+	<tr>
+	<td border-right="1" colspan="4" rowspan="1" style="height: 20px;"><u><strong>Total Amount</strong></u> ${record.currency}</td>
+	<td style="height: 20px;">${record.total?string(",##0.00")}</td>
+	<td style="height: 20px;">&nbsp;</td>
+	<td style="height: 20px;">&nbsp;</td>
+	</tr>
+	<tr>
+	<td border-right="1" colspan="4" rowspan="1">&nbsp;</td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	</tr>
+	<tr>
+	<td border-right="1" colspan="4"><u><strong>Total Amount</strong></u> UAE Dirhams</td>
+	<td>${(record.total * record.exchangerate)?string(",##0.00")}</td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	</tr></table>
+</#if>
+
+<p font-size="9pt">Probus E &amp; C</p>
+&nbsp;
+
+<table><tr>
+	<td border-top="1">Project Manager</td>
+	</tr></table>
+</body>
+</pdf>

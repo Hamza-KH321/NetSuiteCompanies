@@ -1,0 +1,50 @@
+* point 1, x days must be on the brand when quotation is created.
+  x days must be implemented in lines, each RFQ or PO can have more than one item and each item   have   different brand, so it will require more than one approval.
+
+* point 2, one user must make acknowledgement, when press on ack user must upload attachment, add   on po   form the po status if is it draft or acknowledgement.
+
+* point 3, new record in netsuite, .
+
+* point 4, each customer must have different department and job title. 
+
+* point 5, on items a custom field must added called nupco prices, if the sales order have item   that   it's price is less than nepco price a warning will apear and stop the user until he changed   the item   price so it will be more than nepco price, pan have 3 price levels, if order have items   as a gift the   order must have approval cycle. 
+
+* point 6, on SO must add fields number of days (Field tyoe is date), send email weekly until the       order is fulfilled, must compare due date with lead time, sales rep, sales manage (product   manager),   chief of logistics, chief of finance (must add number of due days in the email). 
+
+* point 7, 
+
+* remove point 8.
+
+* point 9, Sales order add 3 forms, blanked so, planned so, and standard, on planned and blanked   must   have contract like 100 item must be sold on a specific amount of time.
+
+* point 10, if the customer has invoice that is not paid and exceeded the due date it will ask for     approval, also if the customer exceeded credit limit it will ask for approval.
+
+* point 11, First level approval from finance manager and then senior  then JV wil be posted.
+
+* point 12, Approval on Expense report, supervisot approval and finance manager approval.
+
+* point 13, send email for sales rep , finance , supervisor and product line manager, for PO it   will   send emails for previous users if after 90 days and we did not make any receipt then it will   send        emails weekly.
+
+* point 14, when the invoice reach due date an emnail will be sent weekly until the payment is     receipt   for CEO and others.
+
+* point 15, no need
+
+* point 16, Approval on RMA, approval by sales manager then senior accountant.
+
+* point 17, repeated
+
+* point 18, repeated
+
+* point 19, virtual WH, when recieving specific items it will be allocated on the virtual wh after     inspections and quality warehouse the user can make inventory adjustment to the original   warehouse,   can't make any transaction unitll this item is transfered for original WH.
+
+* point 20, repeated. 
+
+* point 21, add field item per line nepco description, nepco code .
+
+
+
+
+
+
+
+

@@ -1,0 +1,351 @@
+/* @fileName VSP_Login.css */
+
+:root {
+    color-scheme: light;
+    --ink: #12172b;
+    --muted: #6b7290;
+    --muted-soft: #9599b3;
+    --line: #e7e9f5;
+    --bg: #f5f6fb;
+    --panel: #ffffff;
+    --indigo: #4f46e5;
+    --indigo-dark: #3d33c7;
+    --amber: #ff7a1a;
+    --danger: #e0344a;
+    --danger-bg: #fdeced;
+    --radius-lg: 22px;
+    --radius-md: 14px;
+    --shadow-panel: 0 24px 60px -18px rgba(24, 20, 70, 0.28);
+    --font-display: "Plus Jakarta Sans", "Segoe UI", -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-body: "Inter", "Segoe UI", -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: var(--font-body);
+    color: var(--ink);
+    background: var(--bg);
+    -webkit-font-smoothing: antialiased;
+}
+
+.login-shell {
+    position: relative;
+    min-height: 100vh;
+    min-height: 100dvh;
+    display: grid;
+    place-items: center;
+    padding: 24px;
+    overflow: hidden;
+}
+
+.login-shell::before,
+.login-shell::after {
+    content: "";
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(60px);
+    z-index: 0;
+    pointer-events: none;
+}
+
+.login-shell::before {
+    width: 380px;
+    height: 380px;
+    top: -140px;
+    left: -120px;
+    background: rgba(79, 70, 229, 0.16);
+}
+
+.login-shell::after {
+    width: 340px;
+    height: 340px;
+    bottom: -130px;
+    right: -110px;
+    background: rgba(255, 122, 26, 0.14);
+}
+
+.login-panel {
+    position: relative;
+    z-index: 1;
+    width: min(400px, 100%);
+    background: var(--panel);
+    border-radius: var(--radius-lg);
+    padding: 38px 32px 32px;
+    box-shadow: var(--shadow-panel);
+    overflow: hidden;
+}
+
+.login-panel::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--indigo), var(--amber), var(--indigo));
+    background-size: 200% 100%;
+    animation: flow 5s linear infinite;
+}
+
+@keyframes flow {
+    to {
+        background-position: -200% 0;
+    }
+}
+
+.login-brand {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 30px;
+}
+
+.company-logo {
+    width: 52px;
+    height: 52px;
+    border-radius: var(--radius-md);
+    object-fit: contain;
+    background: #f4f4fb;
+}
+
+.brand-mark {
+    width: 52px;
+    height: 52px;
+    flex: 0 0 auto;
+    border-radius: var(--radius-md);
+    display: grid;
+    place-items: center;
+    background: linear-gradient(135deg, var(--indigo), #7c74f0);
+    color: #fff;
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 17px;
+    letter-spacing: 0.02em;
+    box-shadow: 0 10px 20px -8px rgba(79, 70, 229, 0.55);
+}
+
+.company-legal-name {
+    max-width: 220px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: var(--muted);
+    font-size: 12.5px;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+}
+
+.hidden {
+    display: none !important;
+}
+
+h1 {
+    margin: 2px 0 0;
+    font-family: var(--font-display);
+    font-size: 25px;
+    font-weight: 800;
+    letter-spacing: -0.01em;
+    line-height: 1.2;
+}
+
+.field {
+    margin-bottom: 16px;
+}
+
+label {
+    display: block;
+    margin: 0 0 7px 2px;
+    color: var(--muted);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+}
+
+.input-wrap {
+    position: relative;
+}
+
+input {
+    width: 100%;
+    height: 50px;
+    border: 1.5px solid transparent;
+    border-radius: var(--radius-md);
+    background: #f4f5fa;
+    padding: 0 16px;
+    font-family: var(--font-body);
+    font-size: 15px;
+    color: var(--ink);
+    transition: border-color 0.15s ease, background 0.15s ease;
+}
+
+input::placeholder {
+    color: var(--muted-soft);
+}
+
+input:focus {
+    outline: none;
+    border-color: var(--indigo);
+    background: #fff;
+}
+
+#password {
+    padding-right: 46px;
+}
+
+.toggle-password {
+    position: absolute;
+    top: 0;
+    right: 4px;
+    height: 50px;
+    width: 42px;
+    display: grid;
+    place-items: center;
+    background: transparent;
+    border: 0;
+    padding: 0;
+    color: var(--muted);
+    cursor: pointer;
+}
+
+.toggle-password svg {
+    width: 20px;
+    height: 20px;
+}
+
+.toggle-password .eye-off {
+    display: none;
+}
+
+.toggle-password.is-visible .eye {
+    display: none;
+}
+
+.toggle-password.is-visible .eye-off {
+    display: block;
+}
+
+button[type="submit"] {
+    position: relative;
+    width: 100%;
+    height: 52px;
+    margin-top: 8px;
+    border: 0;
+    border-radius: var(--radius-md);
+    background: linear-gradient(135deg, var(--indigo), var(--indigo-dark));
+    color: #fff;
+    font-family: var(--font-display);
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+    cursor: pointer;
+    box-shadow: 0 14px 26px -10px rgba(79, 70, 229, 0.55);
+    transition: transform 0.12s ease, box-shadow 0.12s ease, opacity 0.12s ease;
+}
+
+button[type="submit"]:hover {
+    transform: translateY(-1px);
+}
+
+button[type="submit"]:active {
+    transform: translateY(0);
+}
+
+button[type="submit"]:disabled {
+    opacity: 0.75;
+    cursor: wait;
+    transform: none;
+}
+
+.btn-label {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.btn-spinner {
+    display: none;
+    width: 17px;
+    height: 17px;
+    border: 2.5px solid rgba(255, 255, 255, 0.4);
+    border-top-color: #fff;
+    border-radius: 50%;
+    animation: spin 0.7s linear infinite;
+}
+
+button[type="submit"].is-loading .btn-spinner {
+    display: inline-block;
+}
+
+button[type="submit"].is-loading .btn-text {
+    opacity: 0.85;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.error-message {
+    display: none;
+    align-items: center;
+    gap: 8px;
+    margin: 0 0 16px;
+    padding: 10px 12px;
+    border-radius: 10px;
+    background: var(--danger-bg);
+    color: var(--danger);
+    font-size: 12.5px;
+    font-weight: 600;
+    line-height: 1.4;
+}
+
+.error-message:not(:empty) {
+    display: flex;
+}
+
+.error-message.shake {
+    animation: shake 0.32s ease;
+}
+
+@keyframes shake {
+    25% {
+        transform: translateX(-4px);
+    }
+    75% {
+        transform: translateX(4px);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .login-panel::before,
+    .btn-spinner,
+    .error-message.shake {
+        animation: none;
+    }
+}
+
+@media (max-width: 420px) {
+    .login-panel {
+        padding: 30px 22px 26px;
+    }
+
+    .login-brand {
+        margin-bottom: 26px;
+    }
+
+    h1 {
+        font-size: 22px;
+    }
+}

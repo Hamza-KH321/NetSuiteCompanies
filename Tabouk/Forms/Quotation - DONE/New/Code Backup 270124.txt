@@ -1,0 +1,168 @@
+<?xml version="1.0"?><!DOCTYPE pdf PUBLIC "-//big.faceless.org//report" "report-1.1.dtd">
+<pdf>
+<head>
+	<link name="NotoSans" type="font" subtype="truetype" src="${nsfont.NotoSans_Regular}" src-bold="${nsfont.NotoSans_Bold}" src-italic="${nsfont.NotoSans_Italic}" src-bolditalic="${nsfont.NotoSans_BoldItalic}" bytes="2" />
+	<#if .locale == "zh_CN">
+		<link name="NotoSansCJKsc" type="font" subtype="opentype" src="${nsfont.NotoSansCJKsc_Regular}" src-bold="${nsfont.NotoSansCJKsc_Bold}" bytes="2" />
+	<#elseif .locale == "zh_TW">
+		<link name="NotoSansCJKtc" type="font" subtype="opentype" src="${nsfont.NotoSansCJKtc_Regular}" src-bold="${nsfont.NotoSansCJKtc_Bold}" bytes="2" />
+	<#elseif .locale == "ja_JP">
+		<link name="NotoSansCJKjp" type="font" subtype="opentype" src="${nsfont.NotoSansCJKjp_Regular}" src-bold="${nsfont.NotoSansCJKjp_Bold}" bytes="2" />
+	<#elseif .locale == "ko_KR">
+		<link name="NotoSansCJKkr" type="font" subtype="opentype" src="${nsfont.NotoSansCJKkr_Regular}" src-bold="${nsfont.NotoSansCJKkr_Bold}" bytes="2" />
+	<#elseif .locale == "th_TH">
+		<link name="NotoSansThai" type="font" subtype="opentype" src="${nsfont.NotoSansThai_Regular}" src-bold="${nsfont.NotoSansThai_Bold}" bytes="2" />
+	</#if>
+    <macrolist>
+        <macro id="nlheader">
+                      <table style="width:100%;">
+              <tr>
+   <#if record.subsidiary == "Tabuk investment and tourism (Holding)">
+	<td rowspan="4"><img src="https://9072131.app.netsuite.com/core/media/media.nl?id=437&amp;c=9072131&amp;h=u7VmYyxKdr0nGidP9psP9hgqUywsdwc7sna77qO2x6EYz2s0" /></td>
+      <#else>
+        	<td rowspan="4"></td>
+              </#if>
+                	<td>&nbsp;</td>
+              <#if record.subsidiary == "Eco Clean">
+  	<td colspan="1" rowspan="2"><img src="https://9072131.app.netsuite.com/core/media/media.nl?id=820&amp;c=9072131&amp;h=y4vS7JEl6jB48anw7UF6QGDgErz2m8K3VkuWdKq0Qe3e8qTy" style="width:30%; height:30%; align: center;" /></td>
+                
+     <#elseif record.subsidiary == "Eventti">
+  	<td colspan="1" rowspan="2"><img src="https://9072131.app.netsuite.com/core/media/media.nl?id=822&amp;c=9072131&amp;h=GeghFcgNCRo60BHsBDF9qEKeFAANcoS4bFNgSVlIm8F2KY-5" style="width:15%; height:15%; align: center;" /></td>
+                
+     <#elseif record.subsidiary == "Lasour executive resident">
+  	<td colspan="1" rowspan="2"><img src="https://9072131.app.netsuite.com/core/media/media.nl?id=824&amp;c=9072131&amp;h=asxnxonYt6GpwWkG_bCjSNQT38Isz-xnznanFsZ803Mwa33q" style="width:55%; height:55%; align: center;" /></td>
+                
+     <#elseif record.subsidiary == "Royal tulip sharma resort">
+  	<td colspan="1" rowspan="2"><img src="https://9072131.app.netsuite.com/core/media/media.nl?id=825&amp;c=9072131&amp;h=7swBHe9nOYJoxG64jAi6vkUQiIslqVroqagLEgQ7GBthQ5AC" style="width:65%; height:65%; align: center;" /></td>
+                
+    <#elseif record.subsidiary == "Lasour beach and resort">
+  	<td colspan="1" rowspan="2"><img src="https://9072131.app.netsuite.com/core/media/media.nl?id=823&amp;c=9072131&amp;h=UH8a7WybFpsnxflFIQzrZBY1MCyaOKYOwY6V2iRy5dz0cevZ" style="width:30%; height:30%; align: center;" /></td>
+                
+     <#elseif record.subsidiary == "Envirol- facility managemen">
+  	<td colspan="1" rowspan="2"><img src="https://9072131.app.netsuite.com/core/media/media.nl?id=821&amp;c=9072131&amp;h=14VCCJdag5D2Y_pZa4o_lcv6bJ8w47J5aH0dMYEmeoMkcmr7" style="width:30%; height:30%; align: center;" /></td>
+ 
+<#elseif record.subsidiary == "Tabuk investment and tourism (Holding)">
+  	<td colspan="1" rowspan="2" style = "align:center"><img src="https://9072131-sb1.app.netsuite.com/core/media/media.nl?id=438&amp;c=&amp;h=GiovM1yCANWDa9fkQMcvq5LoxrnPuDm2GSKRiSTioH_o0KwC" style="width:70%; height:70%; align: center;" /></td>
+</#if>
+
+	<td>&nbsp;</td>
+           <#if record.subsidiary == "Tabuk investment and tourism (Holding)">
+	<td rowspan="4"><img src="https://9072131.app.netsuite.com/core/media/media.nl?id=436&amp;c=9072131&amp;h=32YkYs2wzLFp-d7h6BbKGIXcAJA_Wmks4YTJLYvTgwBlU9Ws" /></td>
+             <#else>
+               	<td rowspan="4"></td>
+             </#if>
+	</tr>
+</table>
+            <table border="1" cellspacing="1" width="100%"><tr>
+	<td font-size="18px;" style="height: 15px;"><b>QUOTATION</b></td>
+	<td style="height: 15px;">&nbsp;</td>
+	<td style="height: 15px;">&nbsp;</td>
+	</tr>
+	<tr>
+	<td background-color="black" color="white"><strong>Tabuk Investment &amp; Tourism Company (T.I.T)</strong></td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	</tr>
+	<tr>
+	<td>VAT Reg No # 3005962800003<br />CR No # 3550022261<br />Al Ula Kingdom of Saudi Arabia</td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	</tr></table>
+
+<hr /><!--___________________________________________________________________-->
+        </macro>
+        <macro id="nlfooter">
+            <table border="1" style="border-color: gray; float: left;" width="50%"><tr>
+	<td style="background-color: gray; font-size: 14px;"><b>Quotation Terms &amp; Conditions:&nbsp;</b></td>
+	</tr>
+	<tr>
+	<td style="font-size: 10px;">- Payment Term: 100 % Advance<br />- Payment Bank info:<br />&bull; Beneficiary: TABUK INVESTMENT &amp; TOURISM CO<br />&bull; Bank: ARAB NATIONAL BANK<br />&bull; IBAN: SA 8030 4001 0809 52450 60019<br />&bull; Branch: CORPORATE BRANCH NO.177<br />&bull; Bank Address:&nbsp;RIYADH&nbsp;-&nbsp;KSA</td>
+	</tr></table>
+<!--___________________________________________________________________________________-->
+
+<table style="border-color: gray; cellspacing: 1; float: right;" width="50%"><tr>
+	<td style="border-right: 1px; border-left: 1px; border-top: 1px; border-bottom: 1px; border-color: gray;"><b>Total Before VAT<br />${record.subtotal}</b></td>
+	<td style="border-right: 1px; border-left: 1px; border-top: 1px; border-bottom: 1px; border-color: gray;"><b>VAT (15%)<br />${record.taxtotal}</b></td>
+	</tr>
+	<tr>
+	<td colspan="2" style="border-right: 1px; border-left: 1px; border-top: 1px; border-bottom: 1px; border-color: gray;"><b>Grand Total<br />${record.total}<br />${record.custbody_vs_amt_in_words}</b></td>
+	</tr>
+	<tr>
+	<td colspan="2" style="border-right: 1px; border-left: 1px; border-top: 1px; border-bottom: 1px; border-color: gray;"><b>Prepared By:</b></td>
+	</tr></table>
+<!--___________________________________________________________________________________-->
+
+<table style="cellspacing: 1; width: 100%;"><tr>
+	<td style="border-right: 1px; border-left: 1px; border-top: 1px; border-bottom: 1px; border-color: gray;"><b>Purchasing Manager:</b></td>
+	<td style="border-right: 1px; border-left: 1px; border-top: 1px; border-bottom: 1px; border-color: gray;"><b>Financial Controller:</b></td>
+	<td style="border-right: 1px; border-left: 1px; border-top: 1px; border-bottom: 1px; border-color: gray;"><b>Purchasing Manager:</b></td>
+	</tr></table>
+<!--___________________________________________________________________________________-->
+        </macro>
+    </macrolist>
+    <style type="text/css">* {
+		<#if .locale == "zh_CN">
+			font-family: NotoSans, NotoSansCJKsc, sans-serif;
+		<#elseif .locale == "zh_TW">
+			font-family: NotoSans, NotoSansCJKtc, sans-serif;
+		<#elseif .locale == "ja_JP">
+			font-family: NotoSans, NotoSansCJKjp, sans-serif;
+		<#elseif .locale == "ko_KR">
+			font-family: NotoSans, NotoSansCJKkr, sans-serif;
+		<#elseif .locale == "th_TH">
+			font-family: NotoSans, NotoSansThai, sans-serif;
+		<#else>
+			font-family: NotoSans, sans-serif;
+		</#if>
+		}
+</style>
+</head>
+<body header="nlheader" header-height="25%" footer="nlfooter" footer-height="20%" padding="0.1in 0.2in 0.1in 0.2in" size="Letter">
+    <!--___________________________________________________________________-->
+<table cellspacing="1"><tr>
+	<td style="color: white; background-color: gray; width: 387px;">Quotation No # ${record.tranid}</td>
+	<td style="width: 415px; color: white; background-color: gray;">QUOTATION FOR CONCRETE BASE</td>
+	</tr></table>
+<!--___________________________________________________________________-->
+
+<table width="100%"><tr>
+	<td style="width: 398px;"><b>Customer Name: ${record.entity}</b></td>
+	<td rowspan="4" style="width: 401px;"><span align="center" text-align="center"><barcode codetype="code128" showtext="true" value="${record.entity}"/></span></td>
+	</tr>
+	<tr>
+	<td style="width: 398px;">Al Ula</td>
+	</tr>
+	<tr>
+	<td style="width: 398px;">Kingdom of Saudi Arabia</td>
+	</tr>
+	<tr>
+	<td style="width: 398px;">&nbsp;</td>
+	</tr></table>
+&nbsp; <!--___________________________________________________________________-->
+
+<table background-color="gray" width="100%"><tr>
+	<th font-size="14px"><b>Dear/Sir Madam,</b></th>
+	</tr>
+	<tr>
+	<th font-size="11px">We are pleased to submit the following quotation details for the favor of final approval to server you better.</th>
+	</tr></table>
+&nbsp; <!--___________________________________________________________________--> <#list record.item as item>
+
+<table style="border-top: 1px; border-bottom: 1px; width: 100%; align: center; text-align: center;"><#if item_index==0><tr>
+	<td align="left" style="font-size: 13px; align: left; text-align: left;"><b>Desc of Service</b></td>
+	<td style="font-size: 13px; text-align: center; vertical-align: middle; align: center;"><b>Qty.</b></td>
+	<td style="font-size: 13px; text-align: center; vertical-align: middle; align: center;"><b>Rate</b></td>
+	<td style="font-size: 13px; text-align: center; vertical-align: middle; align: center;"><b>VAT 15%</b></td>
+	<td style="font-size: 13px; text-align: center; vertical-align: middle; align: center;"><b>Total Cost</b></td>
+	</tr>
+	</#if>
+	<tr>
+	<td align="left" style="font-size: 10px; align: left; text-align: left;">${item.description}</td>
+	<td align="left" style="font-size: 10px; align: center; text-align: center;">${item.quantity}</td>
+	<td align="left" style="font-size: 10px; align: center; text-align: center;">${item.rate}</td>
+	<td align="left" style="font-size: 10px; align: center; text-align: center;">${item.tax1amt}</td>
+	<td align="left" style="font-size: 10px; align: center; text-align: center;">${item.Grossamt}</td>
+	</tr></table>
+</#list> <!--___________________________________________________________________-->
+</body>
+</pdf>

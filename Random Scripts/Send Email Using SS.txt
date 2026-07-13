@@ -1,0 +1,45 @@
+/**
+ * @NApiVersion 2.x
+ * @NScriptType ScheduledScript
+ * @NModuleScope SameAccount
+ */
+define(['N/email', 'N/search'], function(email, search) {
+
+    function execute(context) {
+        // Employee IDs to whom the email will be sent
+        var employeeIds = [1, 2, 3];
+        // Subject of the email
+        var subject = 'ALERT';
+        // Body of the email
+        var body = 'Hello, this is a gentle reminder that you have to make adjustments on inventory';
+
+        // Search for employees with the specified IDs
+        var employeeSearch = search.create({
+            type: search.Type.EMPLOYEE,
+            filters: [
+                ['internalid', 'anyof', employeeIds]
+            ],
+            columns: ['email']
+        });
+
+        // Run the search and process the results
+        employeeSearch.run().each(function(result) {
+            var recipientEmail = result.getValue({ name: 'email' });
+
+            // Send email to each employee
+            email.send({
+                author: context.executionContext.user,
+                recipients: recipientEmail,
+                subject: subject,
+                body: body
+            });
+
+            // Continue processing remaining results
+            return true;
+        });
+    }
+
+    return {
+        execute: execute
+    };
+});

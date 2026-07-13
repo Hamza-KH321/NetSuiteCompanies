@@ -1,0 +1,144 @@
+<?xml version="1.0"?><!DOCTYPE pdf PUBLIC "-//big.faceless.org//report" "report-1.1.dtd">
+<pdf>
+<head>
+<link name="NotoSansArabic" type="font" subtype="opentype" src="${nsfont.NotoSansArabic_Regular}" src-bold="${nsfont.NotoSansArabic_Bold}" bytes="2" subset="false"/>
+	<link name="NotoSans" type="font" subtype="truetype" src="${nsfont.NotoSans_Regular}" src-bold="${nsfont.NotoSans_Bold}" src-italic="${nsfont.NotoSans_Italic}" src-bolditalic="${nsfont.NotoSans_BoldItalic}" bytes="2" />
+	<#if .locale == "zh_CN">
+		<link name="NotoSansCJKsc" type="font" subtype="opentype" src="${nsfont.NotoSansCJKsc_Regular}" src-bold="${nsfont.NotoSansCJKsc_Bold}" bytes="2" />
+	<#elseif .locale == "zh_TW">
+		<link name="NotoSansCJKtc" type="font" subtype="opentype" src="${nsfont.NotoSansCJKtc_Regular}" src-bold="${nsfont.NotoSansCJKtc_Bold}" bytes="2" />
+	<#elseif .locale == "ja_JP">
+		<link name="NotoSansCJKjp" type="font" subtype="opentype" src="${nsfont.NotoSansCJKjp_Regular}" src-bold="${nsfont.NotoSansCJKjp_Bold}" bytes="2" />
+	<#elseif .locale == "ko_KR">
+		<link name="NotoSansCJKkr" type="font" subtype="opentype" src="${nsfont.NotoSansCJKkr_Regular}" src-bold="${nsfont.NotoSansCJKkr_Bold}" bytes="2" />
+	<#elseif .locale == "th_TH">
+		<link name="NotoSansThai" type="font" subtype="opentype" src="${nsfont.NotoSansThai_Regular}" src-bold="${nsfont.NotoSansThai_Bold}" bytes="2" />
+	</#if>
+    <macrolist>
+        <macro id="nlheader">
+            <table style="width:100%;"><tr>
+	<td style="align:left;">
+	<hr class="bold-hr" /></td>
+	<td style="align:left;">
+	<hr class="bold-hr"/></td>
+	</tr>
+	<tr>
+	<td colspan="1" font-size="24pt" rowspan="2" style="width: 457px; font-style: GraphikArabic; align: left; text-align: left; padding-top: -6px;"><strong style="align">Quotation</strong></td>
+	<td style="width: 343px; text-align: left; padding-top: -6px;"><b>No.</b> ${record.tranid}</td>
+	</tr>
+	<tr>
+	<td style="width: 343px; text-align: left;"><b>${record.trandate}</b></td>
+	</tr>
+	<tr>
+	<td style="align:left;">
+	<hr class="bold-hr" /></td>
+	<td style="align:left;">
+	<hr class="bold-hr" /></td>
+	</tr></table>
+        </macro>
+        <macro id="nlfooter">
+            <!--______________________________________________________________-->
+<table style="width:100%;"><tr>
+	<td style="text-align: left; align: left;">
+	<hr class="bold-hr" /></td>
+	<td style="text-align: left; align: left;">
+	<hr class="bold-hr" /></td>
+	</tr>
+	<tr>
+	<td colspan="1" rowspan="4" style="width: 652px; font-size: 8px; padding-top: -6px;"><strong>Terms and Conditions</strong><br />- This quotation is valid for 14 days.<br />- Work will commence only after the Client&rsquo;s signature to this quotation and sharing<br />&nbsp;&nbsp;the PO &amp;&nbsp; processing the advanced payment.<br />- Change orders or briefing updates, amendments, or changes requested by the Client<br />&nbsp;&nbsp;shall not be&nbsp; effective unless accepted in writing by the Agency.<br />- Email is considered an official communication channel and all approvals sent through<br />&nbsp;&nbsp;email are&nbsp; contractually binding.<br />- Neither party shall be liable for any failure or delay in performing its obligations if it is<br />&nbsp;&nbsp;caused by a&nbsp; Force Majeure event.</td>
+	<td style="width: 608px; font-size: 12px; text-align: left; padding-top: -6px;"><strong>Signature</strong></td>
+	</tr>
+	<tr>
+	<td style="width: 608px; text-align: left;">&nbsp;</td>
+	</tr>
+	<tr>
+	<td style="width: 608px; font-size: 12px; text-align: left;"><strong>Anas Sufyan</strong><br />Client Servicing Manager<br />Anas@om.sa</td>
+	</tr>
+	<tr>
+	<td style="width: 608px; font-size: 12px; text-align: left;"><strong>Client Signature</strong></td>
+	</tr></table>
+<!--______________________________________________________________-->
+
+<table style="width:100%;"><tr>
+	<td>&nbsp;</td>
+	<td style="width: 94px;">&nbsp;</td>
+	<td style="width: 510px;">
+	<hr class="bold-hr" style="align:left;" /></td>
+	</tr>
+	<tr>
+	<td colspan="2" rowspan="1" style="width: 751px; padding-top: 40px; vertical-align: bottom;"><img src="https://7114540-sb1.app.netsuite.com/core/media/media.nl?id=442&amp;c=7114540_SB1&amp;h=0JhaVWY8azqvsCtUkPtk-OUdPVJ-csvW8Iltfm_i5DfZKOCQ" style="width: 160px; height: 75px;" /></td>
+	<td style="width: 510px; font-size: 12px; padding-top: -6px;"><strong style="text-align: left; align: center;">Onsor Mosha Advertising LLC</strong><br />C.R. 1010385024<br />OM VAT: 301238868700003<br />7970 King Abdulaziz road<br />Rabie Dist. &mdash; Riyadh 13315-4478<br />T +966 11 234 8092<br />Riyadh<br /><br /><br /><strong>www.om.sa</strong></td>
+	</tr>
+	<tr>
+	<td>&nbsp;</td>
+	<td style="width: 94px;">&nbsp;</td>
+	<td style="width: 510px; font-size: 12px; vertical-align: middle;">&nbsp;</td>
+	</tr></table>
+        </macro>
+    </macrolist>
+    <style type="text/css">* {
+		<#if .locale == "zh_CN">
+			font-family: NotoSans, NotoSansCJKsc, sans-serif;
+		<#elseif .locale == "zh_TW">
+			font-family: NotoSans, NotoSansCJKtc, sans-serif;
+		<#elseif .locale == "ja_JP">
+			font-family: NotoSans, NotoSansCJKjp, sans-serif;
+		<#elseif .locale == "ko_KR">
+			font-family: NotoSans, NotoSansCJKkr, sans-serif;
+		<#elseif .locale == "th_TH">
+			font-family: NotoSans, NotoSansThai, sans-serif;
+		<#else>
+			font-family: NotoSans, sans-serif;
+		</#if>
+		}
+     * {
+                font-family: NotoSansArabic, NotoSans, sans-serif,GraphikArabic;
+          }
+
+.bold-hr {
+    border: none;
+    border-top: 5px solid bold;
+}
+</style>
+</head>
+<body header="nlheader" header-height="10%" footer="nlfooter" footer-height="30%" padding="0.5in 0.5in 0.5in 0.5in" width="100%" height="10%" size = "letter">
+    <!--______________________________________________________________-->
+<table style="width:100%;"><tr>
+	<td style="width: 641px; text-align: left;">${record.entity}</td>
+	<td style="width: 619px; font-size: 9pt; text-align: left;">&nbsp;<b>Attention to</b><br />&nbsp;<b>Mrs. Noora Alissa</b><br />&nbsp;<b>noora.alissa@hungerstation.com</b></td>
+	</tr></table>
+<br /><!--______________________________________________________________-->
+<table style="width:100%;"><#list record.item as item><#if item_index==0><tr>
+	<td align="center" border-bottom="1" border-right="1" style="border-top: 5px solid black; width: 344px; font-style: GraphikArabic;"><b>Item</b></td>
+	<td align="center" border-bottom="1" border-right="1" style="border-top: 5px solid black; width: 107px; font-style: GraphikArabic;"><strong>Qty</strong></td>
+	<td align="center" border-bottom="1" border-right="1" style="border-top: 5px solid black; width: 122px; font-style: GraphikArabic;"><b>Unit</b></td>
+	<td align="center" border-bottom="1" border-right="1" style="border-top: 5px solid black; width: 218px; font-style: GraphikArabic;"><b>Total</b></td>
+	</tr>
+	</#if>
+	<tr>
+	<td align="left" border-bottom="1" border-right="1" style="font-size: 11px; height: 84px; width: 344px; font-style: GraphikArabic;">${item.description}</td>
+	<td border-bottom="1" border-right="1" style="font-size: 11px; height: 84px; width: 107px; vertical-align: middle; text-align: center; align: center; font-style: GraphikArabic;">${item.quantity?string['#,##0.00']}</td>
+	<td align="center" border-bottom="1" border-right="1" style="font-size: 11px; height: 84px; vertical-align: middle; width: 122px; text-align: center; align: center; font-style: GraphikArabic;">${item.units}</td>
+	<td align="center" border-bottom="1" border-right="1" style="font-size: 11px; height: 84px; vertical-align: middle; width: 218px; font-style: GraphikArabic;">${(item.quantity * item.rate)?string['#,##0.00']}</td>
+	</tr>
+	</#list></table>
+<!--______________________________________________________________-->
+
+<table width="100%"><tr>
+	<td style="width: 428px; font-size: 11px; font-style: GraphikArabic;">Deliverables:<br />&bull; 3 Main videos (Restaurants - Grocery - Stores)<br />&bull; 10Sec + 6Sec cutdown<br />&bull; Edits and Changed Messaging options (Up to 6)</td>
+	<td border-bottom="1" style="width: 149px; vertical-align: middle; font-size: 11px; font-style: GraphikArabic;"><strong>Total</strong></td>
+	<td border-bottom="1" style="width: 217px; vertical-align: middle; font-size: 11px; font-style: GraphikArabic;">${record.subtotal?string['#,##0.00']}</td>
+	</tr>
+	<tr>
+	<td style="width: 428px;">&nbsp;</td>
+	<td border-bottom="1" style="width: 149px; font-size: 11px; font-style: GraphikArabic;"><strong>Vat (15%)</strong></td>
+	<td border-bottom="1" style="width: 217px; font-size: 11px; font-style: GraphikArabic;">${record.taxtotal?string['#,##0.00']}</td>
+	</tr>
+	<tr>
+	<td style="width: 428px;">&nbsp;</td>
+	<td border-bottom="1" style="width: 149px; font-size: 11px; font-style: GraphikArabic;"><strong>Amount Due</strong></td>
+	<td border-bottom="1" style="width: 217px; font-size: 11px; font-style: GraphikArabic;">${record.total?string['#,##0.00']}</td>
+	</tr></table>
+<!--______________________________________________________________-->
+</body>
+</pdf>

@@ -1,0 +1,521 @@
+<?xml version="1.0"?><!DOCTYPE pdf PUBLIC "-//big.faceless.org//report" "report-1.1.dtd">
+<pdf>
+<head>
+	<link name="NotoSans" type="font" subtype="truetype" src="${nsfont.NotoSans_Regular}" src-bold="${nsfont.NotoSans_Bold}" src-italic="${nsfont.NotoSans_Italic}" src-bolditalic="${nsfont.NotoSans_BoldItalic}" bytes="2" />
+	<#if .locale == "zh_CN">
+		<link name="NotoSansCJKsc" type="font" subtype="opentype" src="${nsfont.NotoSansCJKsc_Regular}" src-bold="${nsfont.NotoSansCJKsc_Bold}" bytes="2" />
+	<#elseif .locale == "zh_TW">
+		<link name="NotoSansCJKtc" type="font" subtype="opentype" src="${nsfont.NotoSansCJKtc_Regular}" src-bold="${nsfont.NotoSansCJKtc_Bold}" bytes="2" />
+	<#elseif .locale == "ja_JP">
+		<link name="NotoSansCJKjp" type="font" subtype="opentype" src="${nsfont.NotoSansCJKjp_Regular}" src-bold="${nsfont.NotoSansCJKjp_Bold}" bytes="2" />
+	<#elseif .locale == "ko_KR">
+		<link name="NotoSansCJKkr" type="font" subtype="opentype" src="${nsfont.NotoSansCJKkr_Regular}" src-bold="${nsfont.NotoSansCJKkr_Bold}" bytes="2" />
+	<#elseif .locale == "th_TH">
+		<link name="NotoSansThai" type="font" subtype="opentype" src="${nsfont.NotoSansThai_Regular}" src-bold="${nsfont.NotoSansThai_Bold}" bytes="2" />
+	</#if>
+    <style type="text/css">table { font-size: 9pt; table-layout: fixed; width: 100%; }
+th { font-weight: bold; font-size: 8pt; vertical-align: middle; padding: 5px 6px 3px; background-color: #e3e3e3; color: #333333; padding-bottom: 10px; padding-top: 10px; }
+td { padding: 4px 6px; }
+b { font-weight: bold; color: #333333; }
+      .iconResize {
+        width: 20px;
+        height: 20px;
+      }
+      .iconResize2{
+        width: 25px;
+        height: 25px;
+      }
+</style>
+</head>
+<body padding="0.3in 0.3in 0.3in 0.3in" size="Letter">
+    <#list results as result><#if result_index == 0>
+<table border="0" cellpadding="1" cellspacing="1" style="width:100%;"><tr>
+	<td rowspan="3" style="font-size:20px;"><span style="color:red;font-size:20px;">CREATIVE</span><br />DESIGN BRIEF</td>
+	<td>Sales Executive:</td>
+	<td>${results.salesrep}</td>
+	<td rowspan="3"><img height="30%" src="https://8629816-sb1.app.netsuite.com/core/media/media.nl?id=11&amp;c=8629816_SB1&amp;h=HuEtnQD-2t_yuJfn9lUQbiMal71Wbp39RGbs1q8UAMjpgvTB" width="40%" /></td>
+	</tr>
+	<tr>
+	<td>Designer:</td>
+	<td>${results[0].custentity_vs_designer}</td>
+	</tr>
+	<tr>
+	<td>Date:</td>
+	<td>${results[0].custentity_vs_date}</td>
+	</tr></table>
+
+<table border="0" cellpadding="1" cellspacing="1" style="width:100%;"><tr>
+	<td style="color: red; font-weight: bold; width: 192px; font-size: 12px;">Client Information</td>
+	<td style="width: 590px;">
+	<hr /></td>
+	</tr>
+	<tr>
+	<td style="width: 192px;">Exhibition Name&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; :</td>
+	<td style="width: 590px;">${results[0].custentity_vs_exhibitionname}</td>
+	</tr>
+	<tr>
+	<td style="width: 192px;">Client Name&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;:</td>
+	<td style="width: 590px;">${results[0].custentity_vs_clientname}</td>
+	</tr>
+	<tr>
+	<td style="width: 192px;">Contact Person&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;:</td>
+	<td style="width: 590px;">${results[0].custentity_vs_contactperson}</td>
+	</tr>
+	<tr>
+	<td style="width: 192px;">Contact Details&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;:</td>
+	<td style="width: 590px;">${results[0].custentity_vs_contactdetails}</td>
+	</tr>
+	<tr>
+	<td style="width: 192px;">Website&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;:</td>
+	<td style="width: 590px;">${results[0].custentity_vs_website}</td>
+	</tr>
+	<tr>
+	<td style="width: 192px;">Stand Budget&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; :</td>
+	<td style="width: 590px;">${results[0].custentity_vs_standbudget}</td>
+	</tr>
+	<tr>
+	<td style="width: 192px;">No.of Options&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;:</td>
+	<td style="width: 590px;">${results[0].custentity_vs_noofoptions}</td>
+	</tr>
+	<tr>
+	<td style="width: 192px;">Date of Brief&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;:</td>
+	<td style="width: 590px;">${results[0].custentity_vs_dateofbrief}</td>
+	</tr>
+	<tr>
+	<td style="width: 192px;">Date Of Design Submission&nbsp; &nbsp; &nbsp; &nbsp;:</td>
+	<td style="width: 590px;">${results[0].custentity_vs_dateofdesignsubmission}</td>
+	</tr></table>
+
+<table border="0" cellpadding="1" cellspacing="1" style="width:100%;"><tr>
+	<td style="width: 199px;"><span style="color: red; font-weight: bold; font-size: 12px;">Project Information&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</span></td>
+	<td style="width: 583px;">
+	<hr /></td>
+	</tr>
+	<tr>
+	<td style="width: 199px;">Stand Number&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; :</td>
+	<td style="width: 583px;">${results[0].custentity_vs_standnumber}</td>
+	</tr>
+	<tr>
+	<td style="width: 199px;">Hall No.&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;:</td>
+	<td style="width: 583px;">${results[0].custentity_vs_hallno}</td>
+	</tr>
+	<tr>
+	<td style="width: 199px;">Total Stand Area&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; :</td>
+	<td style="width: 583px;">${results[0].custentity_vs_totalstandarea}</td>
+	</tr>
+	<tr>
+	<td style="width: 199px;">Dimension&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;:</td>
+	<td style="width: 583px;">${results[0].custentity_vs_dimension}</td>
+	</tr>
+	<tr>
+	<td style="width: 199px;">Sides Open&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; :</td>
+	<td style="width: 583px;">${results[0].custentity_vs_sidesopen}</td>
+	</tr>
+	<tr>
+	<td style="width: 199px;">Floor Pan&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; :</td>
+	<td style="width: 583px;">${results[0].custentity_vs_floorpan}</td>
+	</tr></table>
+
+<p>____________________________________ <span style="font-weight: bold;">Stand Requirements</span>____________________________________</p>
+
+<p style="text-align: center; font-size: 12px; margin-left: auto; margin-right: auto; width: 94%; font-weight: bold;">General Concept</p>
+
+<table border="1" cellpadding="1.5" style="background-color:#D8D8D8;"><tr>
+	<td style="width: 33px;"><#if results[0].custentity_vs_generalconcept == "Modern"><input checked="checked" disabled="disabled" name="myCheckbox1" type="checkbox" value="1" /><#else><input disabled="disabled" name="myCheckbox2" type="checkbox" unchecked="unchecked" value="1" /></#if></td>
+	<td style="width: 153px; border-right: 1px;">Modern</td>
+	<td style="width: 12px;"><#if results[0].custentity_vs_generalconcept == "Futuristic/Hi-Tech"><input checked="checked" disabled="disabled" name="myCheckbox3" type="checkbox" value="1" /><#else><input disabled="disabled" name="myCheckbox4" type="checkbox" unchecked="unchecked" value="1" /></#if></td>
+	<td style="width: 158px; border-right: 1px;">Futuristic/Hi-Tech</td>
+	<td style="width: 23px;"><#if results[0].custentity_vs_generalconcept == "Classic"><input checked="checked" disabled="disabled" name="myCheckbox5" type="checkbox" value="1" /><#else><input disabled="disabled" name="myCheckbox5" type="checkbox" unchecked="unchecked" value="1" /></#if></td>
+	<td style="width: 137px; border-right:1px;">Classic</td>
+	<td style="width: 27px;"><#if results[0].custentity_vs_generalconcept == "Others:"><input checked="checked" disabled="disabled" name="myCheckbox6" type="checkbox" value="1" /><#else><input disabled="disabled" name="myCheckbox7" type="checkbox" unchecked="unchecked" value="1" /></#if></td>
+	<td style="width: 145px;">Others:</td>
+	</tr></table>
+
+<div style="margin-top: 2px;">
+<table border="1" cellpadding="1" cellspacing="1" style="width:100%; background-color:#D8D8D8;"><tr>
+	<td rowspan="2" style="width: 35px;"><img class="iconResize" src="https://8629816-sb1.app.netsuite.com/core/media/media.nl?id=435&amp;c=8629816_SB1&amp;h=5K3j30HNIiIW5lXge9DWAMSEeVcsy6LXvxKEif3Bw_mod6ff" />Storey</td>
+	<td style="width: 23px;"><#if results[0].custentity_vs_storey == "Single Deck"><input checked="checked" disabled="disabled" name="myCheckbox8" type="checkbox" value="1" /> <#else> <input disabled="disabled" name="myCheckbox9" type="checkbox" unchecked="unchecked" value="1" /> </#if></td>
+	<td style="width: 76px;">Single Deck</td>
+	<td style="width: 26px;">&nbsp;</td>
+	<td rowspan="2" style="width: 46px; border-left:1px;"><img class="iconResize" src="https://8629816-sb1.app.netsuite.com/core/media/media.nl?id=436&amp;c=8629816_SB1&amp;h=OH-_5bpn-N1WYZaGq-mciLdzkPnHu5UY0dYVQUi8VJbHgo-e" />Flooring</td>
+	<td style="width: 19px;"><#if results[0].custentity_vs_flooring == "Parquet"><input checked="checked" disabled="disabled" name="myCheckbox1" type="checkbox" value="1" /> <#else><input disabled="disabled" name="myCheckbox2" type="checkbox" unchecked="unchecked" value="1" /> </#if></td>
+	<td style="width: 56px;">Parquet</td>
+	<td style="width: 22px;"><#if results[0].custentity_vs_flooring == "Melamine"><input checked="checked" disabled="disabled" name="myCheckbox1" type="checkbox" value="1" /> <#else><input disabled="disabled" name="myCheckbox2" type="checkbox" unchecked="unchecked" value="1" /> </#if></td>
+	<td style="width: 56px;">Melamine</td>
+	<td style="width: 19px;">&nbsp;</td>
+	<td rowspan="2" style="width: 92.8264px; border-left:1px;"><img class="iconResize" src="https://8629816-sb1.app.netsuite.com/core/media/media.nl?id=440&amp;c=8629816_SB1&amp;h=rbKhX0TjDgC4SyTc8MpbqAebpEjkbKx5qLWYMrFhRLanpqwC" /><span style="font-size: 12px; ">Reception Counter</span></td>
+	<td style="width: 15px;"><#if results[0].custentity_vs_receptioncounter == "1"><input checked="checked" disabled="disabled" name="myCheckbox1" type="checkbox" value="1" /> <#else><input disabled="disabled" name="myCheckbox2" type="checkbox" unchecked="unchecked" value="1" /></#if></td>
+	<td style="width: 35px;">1</td>
+	<td style="width: 21px;"><#if results[0].custentity_vs_receptioncounter == "3"><input checked="checked" disabled="disabled" name="myCheckbox1" type="checkbox" value="1" /> <#else><input disabled="disabled" name="myCheckbox2" type="checkbox" unchecked="unchecked" value="1" /></#if></td>
+	<td style="width: 57px;">3</td>
+	</tr>
+	<tr>
+	<td style="width: 23px;"><#if results[0].custentity_vs_storey == "Double Deck"><input checked="checked" disabled="disabled" name="myCheckbox1" type="checkbox" value="1" /> <#else> <input disabled="disabled" name="myCheckbox2" type="checkbox" unchecked="unchecked" value="1" /> </#if></td>
+	<td style="width: 76px;">Double Deck</td>
+	<td style="width: 26px;">&nbsp;</td>
+	<td style="width: 19px;"><#if results[0].custentity_vs_flooring == "Carpet"><input checked="checked" disabled="disabled" name="myCheckbox1" type="checkbox" value="1" /> <#else><input disabled="disabled" name="myCheckbox2" type="checkbox" unchecked="unchecked" value="1" /></#if></td>
+	<td style="width: 56px;">Carpet</td>
+	<td style="width: 22px;"><#if results[0].custentity_vs_flooring == "Glass tiles"><input checked="checked" disabled="disabled" name="myCheckbox1" type="checkbox" value="1" /> <#else><input disabled="disabled" name="myCheckbox2" type="checkbox" unchecked="unchecked" value="1" /></#if></td>
+	<td style="width: 56px;">Glass tiles</td>
+	<td style="width: 19px;">&nbsp;</td>
+	<td style="width: 15px;"><#if results[0].custentity_vs_receptioncounter == "2"><input checked="checked" disabled="disabled" name="myCheckbox1" type="checkbox" value="1" /> <#else><input disabled="disabled" name="myCheckbox2" type="checkbox" unchecked="unchecked" value="1" /></#if></td>
+	<td style="width: 35px;">2</td>
+	<td style="width: 21px;"><#if results[0].custentity_vs_receptioncounter == "4"><input checked="checked" disabled="disabled" name="myCheckbox1" type="checkbox" value="1" /> <#else><input disabled="disabled" name="myCheckbox2" type="checkbox" unchecked="unchecked" value="1" /></#if></td>
+	<td style="width: 57px;">4</td>
+	</tr></table>
+</div>
+
+<div style="margin-top: 2px;">
+<table border="1" cellpadding="1" cellspacing="1" style="width:100%; background-color:#D8D8D8;"><tr>
+	<td rowspan="2" style="width: 63px;"><img class="iconResize2" src="https://8629816-sb1.app.netsuite.com/core/media/media.nl?id=439&amp;c=8629816_SB1&amp;h=f_27grZkhT5TOt0D1pl7xNuh60Kvtr9C6yblyH_0OYlGHmrd" />Meeting Area</td>
+	<td style="width: 14px;"><#if results[0].custentity_vs_meetingarea == "Closed"><input checked="checked" disabled="disabled" name="myCheckbox1" type="checkbox" value="1" /> <#else><input disabled="disabled" name="myCheckbox2" type="checkbox" unchecked="unchecked" value="1" /></#if></td>
+	<td style="width: 75px;">Closed</td>
+	<td style="width: 17px;"><#if results[0].custentity_vs_meetingarea == "Private/Vip"><input checked="checked" disabled="disabled" name="myCheckbox1" type="checkbox" value="1" /> <#else><input disabled="disabled" name="myCheckbox2" type="checkbox" unchecked="unchecked" value="1" /></#if></td>
+	<td style="width: 58px;">Private/Vip</td>
+	<td style="width: 10px;">&nbsp;</td>
+	<td rowspan="2" style="width: 101px; border-left:1px;"><img class="iconResize2" src="https://8629816-sb1.app.netsuite.com/core/media/media.nl?id=442&amp;c=8629816_SB1&amp;h=hrw3W61tgKY86JeaV-wbdv_i45BX0V6PtuOjUwG5yH68ci_g" />Waiting Area</td>
+	<td style="width: 21px;"><#if results[0].custentity_vs_waitingarea == "Yes"><input checked="checked" disabled="disabled" name="myCheckbox1" type="checkbox" value="1" /> <#else><input disabled="disabled" name="myCheckbox2" type="checkbox" unchecked="unchecked" value="1" /></#if></td>
+	<td style="width: 38px;">Yes</td>
+	<td style="width: 16px;">&nbsp;</td>
+	<td rowspan="2" style="width: 64px; border-left:1px;"><img class="iconResize2" src="https://8629816-sb1.app.netsuite.com/core/media/media.nl?id=443&amp;c=8629816_SB1&amp;h=fEaQe9DvQtFgXBtOwK2rRfNtkYI8NrZcu85LJEkhzTMGuOp7" />Workstation</td>
+	<td style="width: 25px;"><#if results[0].custentity_vs_workstationpodium == "1"><input checked="checked" disabled="disabled" name="myCheckbox1" type="checkbox" value="1" /> <#else><input disabled="disabled" name="myCheckbox2" type="checkbox" unchecked="unchecked" value="1" /></#if></td>
+	<td style="width: 22px;">1</td>
+	<td style="width: 27px;"><#if results[0].custentity_vs_workstationpodium == "3"><input checked="checked" disabled="disabled" name="myCheckbox1" type="checkbox" value="1" /> <#else><input disabled="disabled" name="myCheckbox2" type="checkbox" unchecked="unchecked" value="1" /></#if></td>
+	<td style="width: 48px;">3</td>
+	</tr>
+	<tr>
+	<td style="width: 14px;"><#if results[0].custentity_vs_meetingarea == "Semi-Private"><input checked="checked" disabled="disabled" name="myCheckbox1" type="checkbox" value="1" /> <#else><input disabled="disabled" name="myCheckbox2" type="checkbox" unchecked="unchecked" value="1" /></#if></td>
+	<td style="width: 75px;">Semi-Private</td>
+	<td style="width: 17px;"><#if results[0].custentity_vs_meetingarea == "Open"><input checked="checked" disabled="disabled" name="myCheckbox1" type="checkbox" value="1" /> <#else><input disabled="disabled" name="myCheckbox2" type="checkbox" unchecked="unchecked" value="1" /></#if></td>
+	<td style="width: 58px;">Open</td>
+	<td style="width: 10px;">&nbsp;</td>
+	<td style="width: 21px;"><#if results[0].custentity_vs_waitingarea == "No"><input checked="checked" disabled="disabled" name="myCheckbox1" type="checkbox" value="1" /> <#else><input disabled="disabled" name="myCheckbox2" type="checkbox" unchecked="unchecked" value="1" /></#if></td>
+	<td style="width: 38px;">No</td>
+	<td style="width: 16px;">&nbsp;</td>
+	<td style="width: 25px;"><#if results[0].custentity_vs_workstationpodium == "2"><input checked="checked" disabled="disabled" name="myCheckbox1" type="checkbox" value="1" /> <#else><input disabled="disabled" name="myCheckbox2" type="checkbox" unchecked="unchecked" value="1" /></#if></td>
+	<td style="width: 22px;">2</td>
+	<td style="width: 27px;"><#if results[0].custentity_vs_workstationpodium == "4"><input checked="checked" disabled="disabled" name="myCheckbox1" type="checkbox" value="1" /> <#else><input disabled="disabled" name="myCheckbox2" type="checkbox" unchecked="unchecked" value="1" /></#if></td>
+	<td style="width: 48px;">4</td>
+	</tr></table>
+</div>
+
+<div style="margin-top: 2px;">
+<table border="1" cellpadding="1" cellspacing="1" style="width:100%; background-color:#D8D8D8;"><tr>
+	<td rowspan="2" style="width: 85px;"><img class="iconResize2" src="https://8629816-sb1.app.netsuite.com/core/media/media.nl?id=438&amp;c=8629816_SB1&amp;h=6CWW5i-f-toWAwhsBy3SmcFoFXdnmX181bqjkLZQPGT2R-pc" />Pantry Area</td>
+	<td style="width: 49px;"><#if results[0].custentity_vs_pantryarea == "Yes"><input checked="checked" disabled="disabled" name="myCheckbox1" type="checkbox" value="1" /> <#else><input disabled="disabled" name="myCheckbox2" type="checkbox" unchecked="unchecked" value="1" /></#if></td>
+	<td style="width: 56px;">Yes</td>
+	<td style="width: 20px;">&nbsp;</td>
+	<td rowspan="2" style="width: 95px; border-left:1px;"><img class="iconResize2" src="https://8629816-sb1.app.netsuite.com/core/media/media.nl?id=441&amp;c=8629816_SB1&amp;h=rmjYJC1K1hqeivxFIqZ_o7lsQU49VRcpJOg0nedqwHC62ZY6" />Storage Area</td>
+	<td style="width: 37px;"><#if results[0].custentity_vs_storagearea == "Yes"><input checked="checked" disabled="disabled" name="myCheckbox1" type="checkbox" value="1" /> <#else><input disabled="disabled" name="myCheckbox2" type="checkbox" unchecked="unchecked" value="1" /></#if></td>
+	<td style="width: 47px;">Yes</td>
+	<td style="width: 12px;">&nbsp;</td>
+	<td rowspan="2" style="width: 122px; border-left:1px;"><img class="iconResize2" src="https://8629816-sb1.app.netsuite.com/core/media/media.nl?id=437&amp;c=8629816_SB1&amp;h=B0HJVOvyfrd6JCbMxNu62wmjd1QansuknkKQ8fy9O2jb5xl8" />Hospitality Area</td>
+	<td style="width: 55px;"><#if results[0].custentity_vs_hospitalityarea == "Yes"><input checked="checked" disabled="disabled" name="myCheckbox1" type="checkbox" value="1" /> <#else><input disabled="disabled" name="myCheckbox2" type="checkbox" unchecked="unchecked" value="1" /></#if></td>
+	<td style="width: 78px;">Yes</td>
+	</tr>
+	<tr>
+	<td style="width: 49px;"><#if results[0].custentity_vs_pantryarea == "No"><input checked="checked" disabled="disabled" name="myCheckbox1" type="checkbox" value="1" /> <#else><input disabled="disabled" name="myCheckbox2" type="checkbox" unchecked="unchecked" value="1" /></#if></td>
+	<td style="width: 56px;">No</td>
+	<td style="width: 20px;">&nbsp;</td>
+	<td style="width: 37px;"><#if results[0].custentity_vs_storagearea == "No"><input checked="checked" disabled="disabled" name="myCheckbox1" type="checkbox" value="1" /> <#else><input disabled="disabled" name="myCheckbox2" type="checkbox" unchecked="unchecked" value="1" /></#if></td>
+	<td style="width: 47px;">No</td>
+	<td style="width: 12px;">&nbsp;</td>
+	<td style="width: 55px;"><#if results[0].custentity_vs_hospitalityarea == "No"><input checked="checked" disabled="disabled" name="myCheckbox1" type="checkbox" value="1" /> <#else><input disabled="disabled" name="myCheckbox2" type="checkbox" unchecked="unchecked" value="1" /></#if></td>
+	<td style="width: 78px;">No</td>
+	</tr></table>
+
+<p>_______________________________________ <span style="font-weight: bold;">Activation</span>__________________________________________</p>
+
+<table border="1" style="width:100%; background-color:#D8D8D8;"><tr></tr>
+	<tr>
+	<td style="border-right:1px; border-bottom:1px;"><strong>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Technology</strong></td>
+	<td style="border-right:1px; border-bottom:1px;"><strong>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Activities</strong></td>
+	<td style="border-right:1px; border-bottom:1px;"><strong>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Other</strong></td>
+	</tr>
+	<tr>
+	<td style="border-right:1px;">&nbsp;</td>
+	<td style="border-right:1px;">&nbsp;</td>
+	<td>&nbsp;</td>
+	</tr>
+	<tr>
+	<td style="height: 59px; border-right:1px;">&nbsp;</td>
+	<td style="height: 59px; border-right:1px;">&nbsp;</td>
+	<td style="height: 59px;">&nbsp;</td>
+	</tr></table>
+
+<table border="0" cellpadding="1" cellspacing="1" style="width:100%;"><tr>
+	<td style="height: 72px;">&nbsp;</td>
+	</tr></table>
+</div>
+&nbsp;
+
+<p>____________________________________ <span style="font-weight: bold;">Product Display</span>____________________________________</p>
+
+<table><tr>
+	<td colspan="2" rowspan="1">&nbsp;</td>
+	<td style="width: 93px;"><#if results[0].custentity_vs_productdisplay == "Open"><input checked="checked" disabled="disabled" name="myCheckbox1" type="checkbox" value="1" /> <#else><input disabled="disabled" name="myCheckbox2" type="checkbox" unchecked="unchecked" value="1" /></#if></td>
+	<td style="width: 55px;">Open</td>
+	<td>&nbsp;</td>
+	<td style="width: 97px;"><#if results[0].custentity_vs_productdisplay == "Close (security)"><input checked="checked" disabled="disabled" name="myCheckbox1" type="checkbox" value="1" /> <#else><input disabled="disabled" name="myCheckbox2" type="checkbox" unchecked="unchecked" value="1" /></#if></td>
+	<td style="width: 51px;">Close</td>
+	<td style="width: 64px;">&nbsp;</td>
+	<td style="width: 84px;">&nbsp;</td>
+	</tr>
+	<tr>
+	<td colspan="9">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;If you please specify the items</td>
+	</tr>
+	<tr>
+	<td>&nbsp;</td>
+	<td colspan="2" rowspan="1" style="width: 183px;">Quantity</td>
+	<td colspan="2" rowspan="1" style="width: 145px;">Weight</td>
+	<td colspan="2" rowspan="1">Size</td>
+	<td colspan="2" rowspan="1">Location in the Stand</td>
+	</tr>
+	<tr>
+	<td>&nbsp;</td>
+	<td colspan="2" rowspan="1" style="width: 183px;">${results[0].custentity_vs_quantity}</td>
+	<td colspan="2" rowspan="1" style="width: 145px;">${results[0].custentity_vs_weight}</td>
+	<td colspan="2" rowspan="1">${results[0].custentity_vs_size}</td>
+	<td colspan="2" rowspan="1">${results[0].custentity_vs_locationinthestand}</td>
+	</tr>
+	<tr>
+	<td colspan="9">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;For the items do you need</td>
+	</tr></table>
+
+<table><tr>
+	<td style="width: 181px;">&nbsp;</td>
+	<td style="width: 75px;"><#if results[0].custentity_vs_displaytype == "Display Podium"><input checked="checked" disabled="disabled" name="myCheckbox1" type="checkbox" value="1" /> <#else><input disabled="disabled" name="myCheckbox2" type="checkbox" unchecked="unchecked" value="1" /></#if></td>
+	<td style="width: 105px;">Display Podium</td>
+	<td style="width: 55px;">&nbsp;</td>
+	<td style="width: 89px;"><#if results[0].custentity_vs_displaytype == "Display Shelves"><input checked="checked" disabled="disabled" name="myCheckbox1" type="checkbox" value="1" /> <#else><input disabled="disabled" name="myCheckbox2" type="checkbox" unchecked="unchecked" value="1" /></#if></td>
+	<td style="width: 144px;">Display Shelves</td>
+	<td style="width: 51px;">&nbsp;</td>
+	</tr></table>
+
+<table><tr>
+	<td style="height: 68px;"><br /><strong>Extra Notes:<br />___________________________________</strong><br />&nbsp;</td>
+	</tr>
+	<tr>
+	<td style="height: 68px;">&nbsp;</td>
+	</tr></table>
+
+<p>___________________________________<span style="font-weight: bold;">Computer Workstation</span>___________________________________</p>
+
+<table><tr>
+	<td><img class="iconResize2" src="https://8629816-sb1.app.netsuite.com/core/media/media.nl?id=443&amp;c=8629816_SB1&amp;h=fEaQe9DvQtFgXBtOwK2rRfNtkYI8NrZcu85LJEkhzTMGuOp7" /></td>
+	<td style="width: 50px;">Desktop</td>
+	<td style="width: 26px;"><#if results[0].custentity_vs_computerworkstation == "Desktop"><input checked="checked" disabled="disabled" name="myCheckbox1" type="checkbox" value="1" /> <#else><input disabled="disabled" name="myCheckbox2" type="checkbox" unchecked="unchecked" value="1" /></#if></td>
+	<td>&nbsp;</td>
+	<td><img class="iconResize2" src="https://8629816-sb1.app.netsuite.com/core/media/media.nl?id=445&amp;c=8629816_SB1&amp;h=QWZpmZrZqwzzdAfJB-La7K9zICqToiH4EZ7XPEeD0hUUJeFB" /></td>
+	<td>I pad</td>
+	<td><#if results[0].custentity_vs_computerworkstation == "I pad"><input checked="checked" disabled="disabled" name="myCheckbox1" type="checkbox" value="1" /> <#else><input disabled="disabled" name="myCheckbox2" type="checkbox" unchecked="unchecked" value="1" /></#if></td>
+	<td>&nbsp;</td>
+	<td><img class="iconResize2" src="https://8629816-sb1.app.netsuite.com/core/media/media.nl?id=446&amp;c=8629816_SB1&amp;h=3Qh2WhvX9MNaoCGeBy2sPhQOyhqLLesf4LYpWJNsFX-Ce6Rt" /></td>
+	<td>Laptop</td>
+	<td><#if results[0].custentity_vs_computerworkstation == "Laptop"><input checked="checked" disabled="disabled" name="myCheckbox1" type="checkbox" value="1" /> <#else><input disabled="disabled" name="myCheckbox2" type="checkbox" unchecked="unchecked" value="1" /></#if></td>
+	<td>&nbsp;</td>
+	<td><img class="iconResize2" src="https://8629816-sb1.app.netsuite.com/core/media/media.nl?id=461&amp;c=8629816_SB1&amp;h=8Cwre79S2oLDOyrkxhv9ybvMYHazOe2Vk_J1w77zhAe4YV1b" /></td>
+	<td>Touch<br />Screen</td>
+	<td><#if results[0].custentity_vs_computerworkstation == "VR"><input checked="checked" disabled="disabled" name="myCheckbox1" type="checkbox" value="1" /> <#else><input disabled="disabled" name="myCheckbox2" type="checkbox" unchecked="unchecked" value="1" /></#if></td>
+	</tr></table>
+
+<table><tr>
+	<td style="height: 68px;"><br /><strong>Extra Notes:<br />___________________________________</strong><br />&nbsp;</td>
+	</tr>
+	<tr>
+	<td style="height: 68px;">&nbsp;</td>
+	</tr></table>
+
+<p>_____________________________________ <span style="font-weight: bold;">Audio Visual</span>____________________________________</p>
+
+<table><tr>
+	<td>&nbsp;</td>
+	<td>&nbsp; &nbsp;<img class="iconResize2" src="https://8629816-sb1.app.netsuite.com/core/media/media.nl?id=448&amp;c=8629816_SB1&amp;h=cWJ-kRGmcOrjVLEUhvlkz_bA3RQCUvrvRsrWFMXzRSdRtLYR" />LED/LCD Screen</td>
+	<td>&nbsp;</td>
+	<td>&nbsp; &nbsp;<img class="iconResize2" src="https://8629816-sb1.app.netsuite.com/core/media/media.nl?id=449&amp;c=8629816_SB1&amp;h=AHxmgidyFDdTG0FZfAurmZtk3eAqRrPl3SbrUpOLUl86fSFP" />Video Wall</td>
+	<td>&nbsp;</td>
+	<td>&nbsp; &nbsp;<img class="iconResize2" src="https://8629816-sb1.app.netsuite.com/core/media/media.nl?id=450&amp;c=8629816_SB1&amp;h=52SQzd4U5DC6Zsf8eGXfVLOvHCG8IU4p7Ig3tJvJjTTfvALo" />Video Projector</td>
+	<td>&nbsp;</td>
+	</tr>
+	<tr>
+	<td><strong>Quantity</strong></td>
+	<td>${results[0].custentity_vs_ledlcdscreenqty}</td>
+	<td>&nbsp;</td>
+	<td>${results[0].custentity_vs_videowallqty}</td>
+	<td>&nbsp;</td>
+	<td>${results[0].custentity_vs_touchscreenquantity}</td>
+	<td>&nbsp;</td>
+	</tr>
+	<tr>
+	<td><strong>Size</strong></td>
+	<td>${results[0].custentity_vs_ledlcdscreensize}</td>
+	<td>&nbsp;</td>
+	<td>${results[0].custentity_vs_videowallsize}</td>
+	<td>&nbsp;</td>
+	<td>${results[0].custentity_vs_touchscreensize}</td>
+	<td>&nbsp;</td>
+	</tr>
+	<tr>
+	<td><strong>Location</strong></td>
+	<td>${results[0].custentity_vs_ledlcdscreenlocation}</td>
+	<td>&nbsp;</td>
+	<td>${results[0].custentity_vs_videowalllocation}</td>
+	<td>&nbsp;</td>
+	<td>${results[0].custentity_vs_touchscreenlocation}</td>
+	<td>&nbsp;</td>
+	</tr></table>
+
+<table><tr>
+	<td style="height: 68px;"><br /><br /><strong>Extra Notes:<br />___________________________________</strong></td>
+	</tr>
+	<tr>
+	<td style="height: 78px;"><br /><br /><br /><br />&nbsp;</td>
+	</tr></table>
+
+<p><br />_____________________________________ <span style="font-weight: bold;">Furniture</span>______________________________________</p>
+
+<table><tr>
+	<td>&nbsp;&nbsp;<img class="iconResize2" src="https://8629816-sb1.app.netsuite.com/core/media/media.nl?id=451&amp;c=8629816_SB1&amp;h=DcysVgzSTzKTemOWZG0cS5CZRlDKcODuPwrON208cI_mN-f3" /></td>
+	<td>&nbsp;&nbsp;<img class="iconResize2" src="https://8629816-sb1.app.netsuite.com/core/media/media.nl?id=452&amp;c=8629816_SB1&amp;h=LCkQCFaqRxbpJx5MAdj75SsuXCYhQmvdQhMuO6RC1HldSfLQ" /></td>
+	<td>&nbsp;&nbsp;<img class="iconResize2" src="https://8629816-sb1.app.netsuite.com/core/media/media.nl?id=453&amp;c=8629816_SB1&amp;h=azuZkfAbjqBFkoNiujv4uvJdliSsJD4ExVO_ejtfcvcnJ89L" /></td>
+	<td>&nbsp;&nbsp;<img class="iconResize2" src="https://8629816-sb1.app.netsuite.com/core/media/media.nl?id=454&amp;c=8629816_SB1&amp;h=QAZU7v7577bZUW-NLRGDL0ouo3Hly5SIXk36jg3Ce88y463h" /></td>
+	<td>&nbsp;&nbsp;<img class="iconResize2" src="https://8629816-sb1.app.netsuite.com/core/media/media.nl?id=455&amp;c=8629816_SB1&amp;h=ji236_1kTwZV_NxYvX6CxCP53MLbBNiXeQ0rZQDs9z2zVUF2" /></td>
+	<td>&nbsp;&nbsp;<img class="iconResize2" src="https://8629816-sb1.app.netsuite.com/core/media/media.nl?id=456&amp;c=8629816_SB1&amp;h=qkk8XvbW3b2nqGvsjp-0RgkHYxF4gq-UlE7zehFxB8nyCaId" /></td>
+	<td>&nbsp;&nbsp;<img class="iconResize2" src="https://8629816-sb1.app.netsuite.com/core/media/media.nl?id=457&amp;c=8629816_SB1&amp;h=QSK5LyjYZIUOaTSHRdkmTJCKwncdJmntqy-Wq9HB4Wm-nLYs" /></td>
+	</tr>
+	<tr>
+	<td><#if results[0].custentity_vs_trashbasket == "Yes"><input checked="checked" disabled="disabled" name="myCheckbox1" type="checkbox" value="1" /> <#else><input disabled="disabled" name="myCheckbox2" type="checkbox" unchecked="unchecked" value="1" /></#if>Trash basket</td>
+	<td><#if results[0].custentity_vs_flowers == "Yes"><input checked="checked" disabled="disabled" name="myCheckbox1" type="checkbox" value="1" /> <#else><input disabled="disabled" name="myCheckbox2" type="checkbox" unchecked="unchecked" value="1" /></#if>Flowers</td>
+	<td><#if results[0].custentity_vs_armchair == "Yes"><input checked="checked" disabled="disabled" name="myCheckbox1" type="checkbox" value="1" /> <#else><input disabled="disabled" name="myCheckbox2" type="checkbox" unchecked="unchecked" value="1" /></#if>Arm/Chair</td>
+	<td><#if results[0].custentity_vs_barstools == "Yes"><input checked="checked" disabled="disabled" name="myCheckbox1" type="checkbox" value="1" /> <#else><input disabled="disabled" name="myCheckbox2" type="checkbox" unchecked="unchecked" value="1" /></#if>Bar Stools</td>
+	<td><#if results[0].custentity_vs_table == "Yes"><input checked="checked" disabled="disabled" name="myCheckbox1" type="checkbox" value="1" /> <#else><input disabled="disabled" name="myCheckbox2" type="checkbox" unchecked="unchecked" value="1" /></#if>Table</td>
+	<td><#if results[0].custentity_vs_lounge == "Yes"><input checked="checked" disabled="disabled" name="myCheckbox1" type="checkbox" value="1" /> <#else><input disabled="disabled" name="myCheckbox2" type="checkbox" unchecked="unchecked" value="1" /></#if>Lounge</td>
+	<td><#if results[0].custentity_vs_sofas == "Yes"><input checked="checked" disabled="disabled" name="myCheckbox1" type="checkbox" value="1" /> <#else><input disabled="disabled" name="myCheckbox2" type="checkbox" unchecked="unchecked" value="1" /></#if>Sofas</td>
+	</tr></table>
+
+<table><tr>
+	<td style="height: 68px;"><br /><strong>Extra Notes:<br />___________________________________</strong></td>
+	</tr>
+	<tr>
+	<td style="height: 68px;">&nbsp;</td>
+	</tr></table>
+
+<p>____________________________________<span style="font-weight: bold;">Branding / Graphics</span>____________________________________</p>
+
+<table><tr>
+	<td><strong style="color:red;">LOGO</strong></td>
+	<td>&nbsp;</td>
+	<td><img class="iconResize2" src="https://8629816-sb1.app.netsuite.com/core/media/media.nl?id=458&amp;c=8629816_SB1&amp;h=IWEimaX2pSXd-dXuuGB7poM_VSaBArLMjLFJzFgxQQc1D86Y" /></td>
+	<td>&nbsp;</td>
+	<td><img class="iconResize2" src="https://8629816-sb1.app.netsuite.com/core/media/media.nl?id=459&amp;c=8629816_SB1&amp;h=BWoCwjbSDIs4eo3sNvBDLih1d06RMKIihXWUKcg88J3nKv8A" /></td>
+	<td>&nbsp;</td>
+	<td>Vinyl Logo</td>
+	<td>&nbsp;</td>
+	<td><img class="iconResize2" src="https://8629816-sb1.app.netsuite.com/core/media/media.nl?id=460&amp;c=8629816_SB1&amp;h=8FXp2459zmi0sDi968ft66oVtDNnIPC7yrnUFfHKTR12MDgI" /></td>
+	</tr>
+	<tr>
+	<td><#if results[0].custentity_vs_logo == "3D Cut"><input checked="checked" disabled="disabled" name="myCheckbox1" type="checkbox" value="1" /> <#else><input disabled="disabled" name="myCheckbox2" type="checkbox" unchecked="unchecked" value="1" /></#if> 3D cut</td>
+	<td>&nbsp;</td>
+	<td><#if results[0].custentity_vs_lightbox == "Yes"><input checked="checked" disabled="disabled" name="myCheckbox1" type="checkbox" value="1" /> <#else><input disabled="disabled" name="myCheckbox2" type="checkbox" unchecked="unchecked" value="1" /></#if>Light Box</td>
+	<td>&nbsp;</td>
+	<td>${results[0].custentity_vs_corporatecolor}</td>
+	<td>&nbsp;</td>
+	<td><#if results[0].custentity_vs_vinylcut == "Yes"><input checked="checked" disabled="disabled" name="myCheckbox1" type="checkbox" value="1" /> <#else><input disabled="disabled" name="myCheckbox2" type="checkbox" unchecked="unchecked" value="1" /></#if>Vinyl Cut</td>
+	<td>&nbsp;</td>
+	<td><#if results[0].custentity_vs_rotator == "Yes"><input checked="checked" disabled="disabled" name="myCheckbox1" type="checkbox" value="1" /> <#else><input disabled="disabled" name="myCheckbox2" type="checkbox" unchecked="unchecked" value="1" /></#if>Rotator&nbsp;</td>
+	</tr>
+	<tr>
+	<td><#if results[0].custentity_vs_logo == "Sticker"><input checked="checked" disabled="disabled" name="myCheckbox1" type="checkbox" value="1" /> <#else><input disabled="disabled" name="myCheckbox2" type="checkbox" unchecked="unchecked" value="1" /></#if>Sticker</td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	</tr>
+	<tr>
+	<td><#if results[0].custentity_vs_logo == "BackLight"><input checked="checked" disabled="disabled" name="myCheckbox1" type="checkbox" value="1" /> <#else><input disabled="disabled" name="myCheckbox2" type="checkbox" unchecked="unchecked" value="1" /></#if>BackLight</td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	</tr></table>
+
+<p>_______________________&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;_______________________&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;_______________________</p>
+
+<table><tr>
+	<td style="height: 68px;"><strong>Extra Notes:<br />___________________________________</strong></td>
+	</tr>
+	<tr>
+	<td style="height: 39px;">&nbsp;</td>
+	</tr></table>
+
+<table style="width: 793px;"><tr>
+	<td colspan="4" rowspan="1" style="width: 278px;"><strong>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Hanging Structure</strong></td>
+	<td style="width: 21px;">&nbsp;</td>
+	<td colspan="2" rowspan="1" style="width: 174px;"><strong>&nbsp; &nbsp; &nbsp; &nbsp;Wall Painting&nbsp;</strong></td>
+	<td style="width: 21px;">&nbsp;</td>
+	<td colspan="2" rowspan="1" style="width: 171px;"><strong>&nbsp; &nbsp; &nbsp; &nbsp; Manual App</strong></td>
+	<td style="width: 51px;">&nbsp;</td>
+	</tr>
+	<tr>
+	<td style="width: 76px;">Bulk head</td>
+	<td style="width: 38px;">&nbsp;</td>
+	<td style="width: 37px;"><#if results[0].custentity_vs_light == "Yes"><input checked="checked" disabled="disabled" name="myCheckbox1" type="checkbox" value="1" /> <#else><input disabled="disabled" name="myCheckbox2" type="checkbox" unchecked="unchecked" value="1" /></#if></td>
+	<td style="width: 77px;">Light</td>
+	<td style="width: 21px;">&nbsp;</td>
+	<td style="width: 95px;"><#if results[0].custentity_vs_brush == "Yes"><input checked="checked" disabled="disabled" name="myCheckbox1" type="checkbox" value="1" /> <#else><input disabled="disabled" name="myCheckbox2" type="checkbox" unchecked="unchecked" value="1" /></#if></td>
+	<td style="width: 73px;">Brush</td>
+	<td style="width: 21px;">&nbsp;</td>
+	<td style="width: 67px;"><#if results[0].custentity_vs_normalwood == "Yes"><input checked="checked" disabled="disabled" name="myCheckbox1" type="checkbox" value="1" /> <#else><input disabled="disabled" name="myCheckbox2" type="checkbox" unchecked="unchecked" value="1" /></#if></td>
+	<td style="width: 70px;">Normal Wood</td>
+	<td style="width: 51px;">&nbsp;</td>
+	</tr>
+	<tr>
+	<td style="width: 76px;">Yes</td>
+	<td style="width: 38px;"><#if results[0].custentity_vs_bulkhead == "yes"><input checked="checked" disabled="disabled" name="myCheckbox1" type="checkbox" value="1" /> <#else><input disabled="disabled" name="myCheckbox2" type="checkbox" unchecked="unchecked" value="1" /></#if></td>
+	<td style="width: 37px;"><#if results[0].custentity_vs_speciallight == "Yes"><input checked="checked" disabled="disabled" name="myCheckbox1" type="checkbox" value="1" /> <#else><input disabled="disabled" name="myCheckbox2" type="checkbox" unchecked="unchecked" value="1" /></#if></td>
+	<td style="width: 77px;">Special Light</td>
+	<td style="width: 21px;">&nbsp;</td>
+	<td style="width: 95px;"><#if results[0].custentity_vs_spraypaint == "Yes"><input checked="checked" disabled="disabled" name="myCheckbox1" type="checkbox" value="1" /> <#else><input disabled="disabled" name="myCheckbox2" type="checkbox" unchecked="unchecked" value="1" /></#if></td>
+	<td style="width: 73px;">Spray paint</td>
+	<td style="width: 21px;">&nbsp;</td>
+	<td style="width: 67px;"><#if results[0].custentity_vs_naturalwood == "Yes"><input checked="checked" disabled="disabled" name="myCheckbox1" type="checkbox" value="1" /> <#else><input disabled="disabled" name="myCheckbox2" type="checkbox" unchecked="unchecked" value="1" /></#if></td>
+	<td style="width: 70px;">Natural Wood</td>
+	<td style="width: 51px;">&nbsp;</td>
+	</tr>
+	<tr>
+	<td style="width: 76px;">No</td>
+	<td style="width: 38px;"><#if results[0].custentity_vs_bulkhead == "no"><input checked="checked" disabled="disabled" name="myCheckbox1" type="checkbox" value="1" /> <#else><input disabled="disabled" name="myCheckbox2" type="checkbox" unchecked="unchecked" value="1" /></#if></td>
+	<td style="width: 37px;"><#if results[0].custentity_vs_brands == "Yes"><input checked="checked" disabled="disabled" name="myCheckbox1" type="checkbox" value="1" /> <#else><input disabled="disabled" name="myCheckbox2" type="checkbox" unchecked="unchecked" value="1" /></#if></td>
+	<td style="width: 77px;">Brands</td>
+	<td style="width: 21px;">&nbsp;</td>
+	<td style="width: 95px;"><#if results[0].custentity_vs_wallpaper == "Yes"><input checked="checked" disabled="disabled" name="myCheckbox1" type="checkbox" value="1" /> <#else><input disabled="disabled" name="myCheckbox2" type="checkbox" unchecked="unchecked" value="1" /></#if></td>
+	<td style="width: 73px;">Wallpaper</td>
+	<td style="width: 21px;">&nbsp;</td>
+	<td style="width: 67px;"><#if results[0].custentity_vs_other == "Yes"><input checked="checked" disabled="disabled" name="myCheckbox1" type="checkbox" value="1" /> <#else><input disabled="disabled" name="myCheckbox2" type="checkbox" unchecked="unchecked" value="1" /></#if></td>
+	<td style="width: 70px;">Other</td>
+	<td style="width: 51px;">&nbsp;</td>
+	</tr></table>
+</#if></#list>
+
+<table><tr>
+	<td style="height: 57px;"><br /><strong>Extra Notes:<br />___________________________________</strong></td>
+	</tr>
+	<tr>
+	<td style="height: 22px;">&nbsp;</td>
+	</tr></table>
+
+<p>___________________________<span style="font-weight: bold;">Additional Information / Special Instruction</span>______________________________</p>
+
+<table border="1"><tr>
+	<td style="height: 18px;"><br /><br /><br />&nbsp;</td>
+	</tr></table>
+</body>
+</pdf>

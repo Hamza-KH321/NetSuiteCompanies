@@ -1,0 +1,194 @@
+<?xml version="1.0"?><!DOCTYPE pdf PUBLIC "-//big.faceless.org//report" "report-1.1.dtd">
+<pdf>
+<head>
+<link name="NotoSansArabic" type="font" subtype="opentype" src="${nsfont.NotoSansArabic_Regular}" src-bold="${nsfont.NotoSansArabic_Bold}" bytes="2" subset="false"/>
+	<link name="NotoSans" type="font" subtype="truetype" src="${nsfont.NotoSans_Regular}" src-bold="${nsfont.NotoSans_Bold}" src-italic="${nsfont.NotoSans_Italic}" src-bolditalic="${nsfont.NotoSans_BoldItalic}" bytes="2" />
+	<#if .locale == "zh_CN">
+		<link name="NotoSansCJKsc" type="font" subtype="opentype" src="${nsfont.NotoSansCJKsc_Regular}" src-bold="${nsfont.NotoSansCJKsc_Bold}" bytes="2" />
+	<#elseif .locale == "zh_TW">
+		<link name="NotoSansCJKtc" type="font" subtype="opentype" src="${nsfont.NotoSansCJKtc_Regular}" src-bold="${nsfont.NotoSansCJKtc_Bold}" bytes="2" />
+	<#elseif .locale == "ja_JP">
+		<link name="NotoSansCJKjp" type="font" subtype="opentype" src="${nsfont.NotoSansCJKjp_Regular}" src-bold="${nsfont.NotoSansCJKjp_Bold}" bytes="2" />
+	<#elseif .locale == "ko_KR">
+		<link name="NotoSansCJKkr" type="font" subtype="opentype" src="${nsfont.NotoSansCJKkr_Regular}" src-bold="${nsfont.NotoSansCJKkr_Bold}" bytes="2" />
+	<#elseif .locale == "th_TH">
+		<link name="NotoSansThai" type="font" subtype="opentype" src="${nsfont.NotoSansThai_Regular}" src-bold="${nsfont.NotoSansThai_Bold}" bytes="2" />
+	</#if>
+    <macrolist>
+<macro id="nlheader">
+<table width="100%">
+<tr>
+<td><img src = "https://7939761-sb1.app.netsuite.com/core/media/media.nl?id=1280&amp;c=7939761_SB1&amp;h=Cb6WvwKkb5HJoq23N2tpJFcJq2B7-dL8SJXKoUc5AaWOHWb6"/></td>
+</tr>
+  <tr>
+	<td align="center" font-size="20pt" text-align="center"><b>Sales Order</b></td>
+	</tr>
+</table>
+ </macro>
+<macro id="nlfooter">
+<table width = "100%">
+<tr>
+<td><img width = "100%" src = "https://7939761-sb1.app.netsuite.com/core/media/media.nl?id=1281&amp;c=7939761_SB1&amp;h=M7HEIa6VhLKpl3xEjeTYNQn1GCH4O3j1RKVvH1le6KSbigXo"/></td>
+</tr>
+</table>
+</macro>
+    </macrolist>
+    <style type="text/css">* {
+		<#if .locale == "zh_CN">
+			font-family: NotoSans, NotoSansCJKsc, sans-serif;
+		<#elseif .locale == "zh_TW">
+			font-family: NotoSans, NotoSansCJKtc, sans-serif;
+		<#elseif .locale == "ja_JP">
+			font-family: NotoSans, NotoSansCJKjp, sans-serif;
+		<#elseif .locale == "ko_KR">
+			font-family: NotoSans, NotoSansCJKkr, sans-serif;
+		<#elseif .locale == "th_TH">
+			font-family: NotoSans, NotoSansThai, sans-serif;
+		<#else>
+			font-family: NotoSans, sans-serif;
+		</#if>
+		}
+		table {
+			font-size: 9pt;
+			table-layout: fixed;
+		}
+        th {
+            font-weight: bold;
+            font-size: 8pt;
+            vertical-align: middle;
+            padding: 5px 6px 3px;
+            background-color: #e3e3e3;
+            color: #333333;
+        }
+        td {
+            padding: 4px 6px;
+        }
+		td p { align:left }
+     * {
+                font-family: NotoSansArabic, NotoSans, sans-serif;
+          }
+</style>
+</head>
+<body header="nlheader" header-height="17%" footer="nlfooter" footer-height="5%" padding="0.3in 0.3in 0.3in 0.3in" size="Letter">
+    <table padding="1" style="float:left; border: 1px;" width="50%"><tr>
+	<th border-bottom="1" border-right="1">Source Document</th>
+	<td border-bottom="1">${record.otherrefnum}</td>
+	</tr>
+	<tr>
+	<th border-bottom="1" border-right="1">Type</th>
+	<td border-bottom="1">Cash</td>
+	</tr>
+	<tr>
+	<th border-bottom="1" border-right="1">Client</th>
+	<td border-bottom="1">${record.entity}</td>
+	</tr>
+	<tr>
+	<th border-bottom="1" border-right="1">Order Number</th>
+	<td border-bottom="1">${record.tranid}</td>
+	</tr>
+	<tr>
+	<th border-bottom="1" border-right="1">Order Date</th>
+	<td border-bottom="1">${record.trandate}</td>
+	</tr>
+	<tr>
+	<th border-bottom="1" border-right="1">Buyer Email</th>
+	<td border-bottom="1">${record.entity.email}</td>
+	</tr>
+	<tr>
+	<th border-bottom="1" border-right="1">Department</th>
+	<td border-bottom="1">${record.department}</td>
+	</tr>
+	<tr>
+	<th border-bottom="1" border-right="1">Due Date</th>
+	<td border-bottom="1">${record.enddate}</td>
+	</tr>
+	<tr>
+	<th border-right="1">Number Of Lines</th>
+	<td>${record.custbody_vs_numberoflines}</td>
+	</tr></table>
+
+<table padding="1" style="float:right; margin-left:50px; border: 1px;" width="50%"><tr>
+	<th border-bottom="1" border-right="1">Sales Rep</th>
+	<td border-bottom="1">${record.salesrep}</td>
+	</tr>
+	<tr>
+	<th border-bottom="1" border-right="1">Project</th>
+	<td border-bottom="1">${record.class}</td>
+	</tr>
+	<tr>
+	<th border-bottom="1" border-right="1">Quotation Ref</th>
+	<td border-bottom="1">${record.createdfrom}</td>
+	</tr>
+	<tr>
+	<th border-bottom="1" border-right="1">Status</th>
+	<td border-bottom="1">Open/Partial</td>
+	</tr>
+	<tr>
+	<th border-bottom="1" border-right="1">Region</th>
+	<td border-bottom="1">${record.location}</td>
+	</tr>
+	<tr>
+	<th border-bottom="1" border-right="1">City</th>
+	<td border-bottom="1">${record.department}</td>
+	</tr>
+	<tr>
+	<th border-right="1">Buyer</th>
+	<td>${record.entity}</td>
+	</tr></table>
+
+<table border="1" width="100%"><#list record.item as item><#if item_index==0><tr>
+	<th align="center" border-bottom="1" border-right="1" text-align="center"><b>Line</b></th>
+	<th border-bottom="1" border-right="1" width="15%"><b>Description</b></th>
+	<th border-bottom="1" border-right="1" width="15%"><b>Item Ref</b></th>
+	<th align="center" border-bottom="1" border-right="1" text-align="center"><b>Qty</b></th>
+	<th align="center" border-bottom="1" border-right="1" text-align="center"><b>UOM</b></th>
+	<th align="center" border-bottom="1" border-right="1" text-align="center"><b>Unit Price</b></th>
+	<th align="center" border-bottom="1" border-right="1" text-align="center"><b>Total</b></th>
+	<th align="center" border-bottom="1" border-right="1" text-align="center"><b>VAT</b></th>
+	<th align="center" border-bottom="1" text-align="center"><b>Line total Inc.VAT</b></th>
+	</tr>
+	</#if>
+	<tr>
+	<td align="center" border-bottom="1" border-right="1" text-align="center">${item?index+1}</td>
+	<td border-bottom="1" border-right="1" width="15%">${item.description}</td>
+	<td border-bottom="1" border-right="1" width="15%">${item.item}</td>
+	<td align="center" border-bottom="1" border-right="1" text-align="center">${item.quantity}</td>
+	<td align="center" border-bottom="1" border-right="1" text-align="center">${item.units}</td>
+	<td align="center" border-bottom="1" border-right="1" text-align="center">${item.rate}</td>
+	<td align="center" border-bottom="1" border-right="1" text-align="center">${item.amount}</td>
+	<td align="center" border-bottom="1" border-right="1" text-align="center">${item.tax1amt}</td>
+	<td align="center" border-bottom="1" text-align="center">${item.grossamt}</td>
+	</tr>
+	</#list>
+	<tr>
+	<td border-right="1" colspan="2" rowspan="1"><b>Total Release Value</b></td>
+	<td align="center" colspan="7" rowspan="1" text-align="center">${record.total}</td>
+	</tr></table>
+
+<table padding="1" margin-top = "20" border="1" width="100%">
+    <tr>
+	<th border-right = "1" border-bottom = "1"><b>Ship To</b></th>
+	<td colspan="2" rowspan="1" align = "center" text-align = "center" border-bottom = "1">${record.shipaddress}</td>
+	</tr>
+    <tr>
+	<th border-right = "1" border-bottom = "1"><b>Payment Terms</b></th>
+	<td colspan="2" rowspan="1" align = "center" text-align = "center" border-bottom = "1">Terms</td>
+	</tr>
+	<tr>
+	<th border-right = "1" border-bottom = "1"><b>Total Sales Order Value</b></th>
+	<td colspan="2" rowspan="1" align = "center" text-align = "center" border-bottom = "1">${record.total}</td>
+	</tr>
+	<tr>
+	<th border-right = "1" border-bottom = "1"><b>Approved By</b></th>
+	<td colspan="2" rowspan="1" align = "center" text-align = "center" border-bottom = "1">Approved</td>
+	</tr>
+	<tr>
+	<th border-right = "1" border-bottom = "1"><b>Vendor Number</b></th>
+	<td colspan="2" rowspan="1" align = "center" text-align = "center" border-bottom = "1">${record.entity.entityid}</td>
+	</tr>
+	<tr>
+	<th border-right = "1"><b>Special Notes</b></th>
+	<td colspan="2" rowspan="1" align = "center" text-align = "center">${record.memo}</td>
+	</tr></table>
+</body>
+</pdf>

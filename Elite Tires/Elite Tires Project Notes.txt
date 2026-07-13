@@ -1,0 +1,53 @@
+GMAIL:
+Username:omar.efat@ewwfl.com
+Password:omar@123
+
+NetSuite:
+omar.efat@ewwfl.com
+ChangeMyPassword2025!
+
+- location is tampa, subsidiary use the primary.
+- item name/number is the SKU
+- item type is inventory
+
+
+- create eBay queue record same as record in NetSuite (DONE)
+- create a custom record (eBay token) to store the token, must have two fields (token and refresh token) type must be long text. (DONE)
+- based on the postman collection, must create a schedule script for t3rees refresh. (DONE)
+
+
+- Rename Ebay token record to Ebay configuration (DONE)
+- Add client id and secret id to the Ebay configuration record , add base url field base url: https://api.sandbox.ebay.com
+base url: https://api.ebay.com	(DONE)
+
+
+- Add the name field and set the value to Sandbox. (DONE)
+- on item reocrd add new subtab named with eBay. (DONE)
+- in the item record must add field list of Ebay configuration. (DONE) 
+
+1- add the required fields to item records and queue (if needed). (DONE)
+
+2- create a UE (In item afterSubmit, that has eBay configuration set) script that creates a queue line. (DONE)
+
+3- create a UE (In IF, IR afterSubmit, for the items that have eBay configuration set) script that creates a queue line. (DONE)
+
+4- create a MR script that processes the queue and updates accordingly.
+ if 
+ item -> mapping
+else
+
+
+get input stage: create search for ebay queue record that Processed is processing and return it to the map stage 
+
+map stage :  first load the eBay Configuration record , must get the custrecord_vs_token and custrecord_vs_base_url 
+then must check custrecord_vs_update_type which is returned from the search if value is Item Creation/Update then you have to call this PUT API (base url)/sell/inventory/v1/inventory_item/(custrecord_vs_item_to_update from the search) 
+else if custrecord_vs_update_type value is Item Availability then you have to call this API (base url)/sell/inventory/v1/inventory_item/(custrecord_vs_item_to_update from the search) but only change the avaiablity 
+
+
+
+
+
+
+
+
+

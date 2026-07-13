@@ -1,0 +1,243 @@
+{
+	"info": {
+		"_postman_id": "cadcb2f9-94d2-419b-98cd-61b33091c155",
+		"name": "NS",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "5091667",
+		"_collection_link": "https://my-work-994.postman.co/workspace/Vita-Care~59482cb2-218c-4d47-886e-0ef73370f505/collection/5091667-cadcb2f9-94d2-419b-98cd-61b33091c155?action=share&source=collection_link&creator=5091667"
+	},
+	"item": [
+		{
+			"name": "APIs",
+			"item": [
+				{
+					"name": "Auth",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									" jwtToken = pm.response.json().data.token;\r",
+									"pm.collectionVariables.set(\"jwt\", jwtToken);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"username\": \"IntegrationPRD\",\r\n  \"password\": \"123456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Host}}/api/Auth",
+							"host": [
+								"{{Host}}"
+							],
+							"path": [
+								"api",
+								"Auth"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "AddNSInvoice",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"odooPOId\": 1, // U can use from 2 - 7 and every id can use one time\r\n    \"customerCode\": 1,\r\n    \"branchId\": 1,\r\n    \"mwSalesOrderNumber\": 1,\r\n    \"invoiceId\": 1,\r\n    \"invoiceCode\": \"IN-NS-0001\",\r\n    \"invoiceDate\": \"2024-05-21T11:56:05.462Z\",\r\n    \"invoiceItems\": [\r\n        {\r\n            \"sku\": \"101011000048\",\r\n            \"qty\": 12,\r\n            \"price\": 7.85,\r\n            \"expiryDate\": \"2024-05-21T11:56:05.462Z\",\r\n            \"batchNumber\": \"NS-Batch-0001\"\r\n        },\r\n        {\r\n            \"sku\": \"101011000061\",\r\n            \"qty\": 5,\r\n            \"price\": 10.5,\r\n            \"expiryDate\": \"2024-05-21T11:56:05.462Z\",\r\n            \"batchNumber\": \"NS-Batch-0001\"\r\n        },\r\n        {\r\n            \"sku\": \"101011000074\",\r\n            \"qty\": 9,\r\n            \"price\": 1.125,\r\n            \"expiryDate\": \"2024-05-21T11:56:05.462Z\",\r\n            \"batchNumber\": \"NS-Batch-0001\"\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Host}}/api/Integration/NSInvoice/Add",
+							"host": [
+								"{{Host}}"
+							],
+							"path": [
+								"api",
+								"Integration",
+								"NSInvoice",
+								"Add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetNSInvoice",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"odooPOId\": 1,\r\n    \"invoiceCode\": \"IN-NS-0001\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Host}}/api/Integration/NSInvoice/Get",
+							"host": [
+								"{{Host}}"
+							],
+							"path": [
+								"api",
+								"Integration",
+								"NSInvoice",
+								"Get"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "AddTicketComment",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"ticketId\": 1,\r\n  \"status\": \"Done\",\r\n  \"comment\": \"We Fix Issues\",\r\n  \"attachment\": \"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Host}}/api/Integration/AddTicketComment",
+							"host": [
+								"{{Host}}"
+							],
+							"path": [
+								"api",
+								"Integration",
+								"AddTicketComment"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "jwt",
+			"value": "1",
+			"type": "string"
+		},
+		{
+			"key": "Host",
+			"value": "https://test-pos.vitacareonline.com:8181",
+			"type": "string"
+		}
+	]
+}

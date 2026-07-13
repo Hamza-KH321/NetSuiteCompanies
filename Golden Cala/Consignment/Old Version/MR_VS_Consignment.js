@@ -1,0 +1,319 @@
+/**
+ * @NApiVersion 2.1
+ * @NScriptType MapReduceScript
+ */
+define(['N/record', 'N/file', 'N/search', 'N/runtime', 'N/format'], function (record, file, search, runtime, format) {
+    var lotQuantities = {};
+
+    function getInputData(context) {
+        try {
+            var fileId = runtime.getCurrentScript().getParameter({ name: 'custscript_vs_cons_file_id_new' });
+            var customerId = runtime.getCurrentScript().getParameter({ name: 'custscript_vs_customer_id' });
+            var fileName = runtime.getCurrentScript().getParameter({ name: 'custscript_vs_cons_file_name' });
+            var logFileID = runtime.getCurrentScript().getParameter({ name: 'custscript_vs_log_file_id' });
+
+            if (!fileId || !customerId) {
+                throw new Error('File ID or Customer ID is missing. Please check the Suitelet script.');
+            }
+
+            var uploadedFile = file.load({ id: fileId });
+            var fileContent = uploadedFile.getContents();
+            var lines = fileContent.split('\n');
+            var headers = lines[0].split(',');
+
+            var customerRecord = record.load({ type: record.Type.CUSTOMER, id: customerId });
+            var customerLocation = customerRecord.getValue({ fieldId: 'custentity_vs_cons_location_customer' });
+
+            var data = lines.slice(1).map(function (line) {
+                var values = line.split(',');
+                if (values.length === headers.length) {
+                    var row = {};
+                    headers.forEach(function (header, index) {
+                        row[header.trim()] = values[index].trim();
+                    });
+                    row.customerId = customerId;
+                    row.fileName = fileName;
+                    row.logFileID = logFileID;
+                    row.customerLocation = customerLocation;
+                    return row;
+                }
+            }).filter(Boolean); // Remove undefined entries
+
+            return data;
+        } catch (error) {
+            log.error('ERROR in getInputData Stage', error);
+        }
+    }
+
+    function map(context) {
+        try {
+            var data = JSON.parse(context.value);
+
+            var itemId = data['Item ID'];
+            var storeCode = data['Store Code'];
+            var quantity = parseFloat(data['# Units']);
+            var customerId = data.customerId;
+            var date = data['Month'];
+            var customerLocation = data.customerLocation;
+            var fileName = data.fileName;
+            var logFileID = data.logFileID;
+
+            var isValid = true;
+            var message = '';
+
+            // Validate store code
+            var storeCodeValid = checkStoreCode(storeCode, customerId);
+            if (!storeCodeValid) {
+                message = `Invalid store code (${storeCode}) for item ${itemId}.`;
+                log.error('Invalid Store Code', message);
+                appendToLogFile(logFileID, message);
+                isValid = false;
+            }
+
+            // Check if item is lot-numbered and get available lot details
+            var isLotNumbered = checkIfLotNumbered(itemId);
+            var lotDetails = [];
+            if (isLotNumbered) {
+                lotDetails = getLotDetails(itemId, quantity, customerLocation);
+                var totalAvailableQty = lotDetails.reduce(function (sum, lot) {
+                    return sum + lot.quantity;
+                }, 0);
+                if (totalAvailableQty < quantity) {
+                    message = `Not enough quantity for item ${itemId}. Requested: ${quantity}, Available: ${totalAvailableQty}.`;
+                    log.error('Not Enough Quantity', message);
+                    appendToLogFile(logFileID, message);
+                    isValid = false;
+                }
+            }
+
+            // Log all data for this line
+            log.debug('Processed Line Data', {
+                itemId: itemId,
+                storeCode: storeCode,
+                quantity: quantity,
+                customerId: customerId,
+                date: date,
+                customerLocation: customerLocation,
+                storeCodeValid: storeCodeValid,
+                isLotNumbered: isLotNumbered,
+                lotDetails: lotDetails,
+                isValid: isValid,
+                fileName: fileName,
+                logFileID: logFileID
+            });
+
+            context.write({
+                key: '1',
+                value: JSON.stringify({
+                    itemId: itemId,
+                    storeCode: storeCode,
+                    quantity: quantity,
+                    itemDescription: data['Item Descreption'],
+                    customerId: customerId,
+                    date: date,
+                    customerLocation: customerLocation,
+                    storeCodeValid: storeCodeValid,
+                    isLotNumbered: isLotNumbered,
+                    lotDetails: lotDetails,
+                    isValid: isValid,
+                    fileName: fileName,
+                    logFileID: logFileID
+                })
+            });
+        } catch (error) {
+            log.error('ERROR in map Stage', error);
+        }
+    }
+
+    function reduce(context) {
+        try {
+            var itemData = context.values.map(JSON.parse);
+            var firstEntry = itemData[0];
+            var customerId = firstEntry.customerId;
+            var fileName = firstEntry.fileName;
+            var logFileID = firstEntry.logFileID;
+
+            if (!customerId) {
+                var message = `Customer is invalid or missing for entry: ${JSON.stringify(firstEntry)}`;
+                log.error('Invalid Customer', message);
+                appendToLogFile(logFileID, message);
+                throw new Error(message);
+            }
+
+            var hasInvalidLine = itemData.some(function (entry) {
+                return !entry.isValid;
+            });
+
+            if (hasInvalidLine) {
+                var message = `Invoice creation aborted. Some lines have invalid store codes or insufficient quantity.`;
+                log.error('Invoice Aborted', message);
+                appendToLogFile(logFileID, message);
+                return;
+            }
+
+            var customerLocation = firstEntry.customerLocation;
+
+            var invoiceRecord = record.create({ type: record.Type.INVOICE, isDynamic: true });
+            invoiceRecord.setValue({ fieldId: 'entity', value: customerId });
+            invoiceRecord.setValue({ fieldId: 'location', value: customerLocation });
+            invoiceRecord.setValue({ fieldId: 'custbody_vs_consignment_source', value: fileName });
+
+            if (firstEntry.date) {
+                var parsedDate = format.parse({ value: firstEntry.date, type: format.Type.DATE });
+                invoiceRecord.setValue({ fieldId: 'trandate', value: parsedDate });
+            } else {
+                invoiceRecord.setValue({ fieldId: 'trandate', value: new Date() });
+            }
+
+            // Add all lines and log each line's data
+            itemData.forEach(function (entry) {
+                if (entry.isLotNumbered) {
+                    addInvoiceLineWithInventoryDetails(invoiceRecord, entry.itemId, entry.lotDetails, entry.itemDescription, entry.storeCode, entry.logFileID);
+                } else {
+                    addInvoiceLineWithoutInventoryDetails(invoiceRecord, entry.itemId, entry.quantity, entry.itemDescription, entry.storeCode);
+                }
+
+                // Log grouped data for the line
+                log.debug('Invoice Line Data', {
+                    itemId: entry.itemId,
+                    quantity: entry.quantity,
+                    description: entry.itemDescription,
+                    storeCode: entry.storeCode,
+                    isLotNumbered: entry.isLotNumbered,
+                    lotDetails: entry.lotDetails
+                });
+            });
+
+            var invoiceId = invoiceRecord.save();
+            log.debug('Invoice Created', `Invoice ID: ${invoiceId}`);
+        } catch (error) {
+            log.error('ERROR in reduce Stage', error);
+            throw error;
+        }
+    }
+
+    function checkIfLotNumbered(itemId) {
+        var itemTypeSearch = search.lookupFields({
+            type: search.Type.ITEM,
+            id: itemId,
+            columns: ['islotitem', 'isserialitem']
+        });
+        return itemTypeSearch.islotitem || itemTypeSearch.isserialitem;
+    }
+
+    function getLotDetails(itemId, requiredQuantity, customerLocation) {
+        var remainingQty = requiredQuantity;
+        var lotDetails = [];
+        var inventorynumberSearchObj = search.create({
+            type: 'inventorynumber',
+            filters: [
+                ["item.internalid", "anyof", itemId],
+                "AND",
+                ["location", "anyof", customerLocation],
+                "AND",
+                ["quantityonhand", "greaterthan", "0"]
+            ],
+            columns: [
+                search.createColumn({ name: "inventorynumber", label: "Number" }),
+                search.createColumn({ name: "item", label: "Item" }),
+                search.createColumn({ name: "location", label: "Location" }),
+                search.createColumn({ name: "quantityonhand", label: "On Hand" }),
+                search.createColumn({ name: "quantityavailable", label: "Available" }),
+                search.createColumn({ name: "internalid", label: "Internal ID" })
+            ]
+        });
+
+        inventorynumberSearchObj.run().each(function (result) {
+            var lotNumberId = result.getValue({ name: 'internalid' });
+            var availableQty = parseFloat(result.getValue({ name: 'quantityavailable' }));
+
+            if (lotQuantities[lotNumberId] !== undefined) {
+                availableQty = lotQuantities[lotNumberId];
+            }
+
+            if (remainingQty > 0 && availableQty > 0) {
+                var allocatedQty = Math.min(remainingQty, availableQty);
+                lotDetails.push({ lotNumber: lotNumberId, quantity: allocatedQty });
+                remainingQty -= allocatedQty;
+                lotQuantities[lotNumberId] = availableQty - allocatedQty;
+            }
+
+            return remainingQty > 0;
+        });
+
+        return lotDetails;
+    }
+
+    function addInvoiceLineWithInventoryDetails(invoiceRecord, itemId, lotDetails, description, storeCode, logFileID) {
+        try {
+            invoiceRecord.selectNewLine({ sublistId: 'item' });
+            invoiceRecord.setCurrentSublistValue({ sublistId: 'item', fieldId: 'item', value: itemId });
+            invoiceRecord.setCurrentSublistValue({ sublistId: 'item', fieldId: 'description', value: description });
+            invoiceRecord.setCurrentSublistValue({ sublistId: 'item', fieldId: 'custcol_vs_storecode', value: storeCode });
+
+            var totalQuantity = lotDetails.reduce(function (sum, lot) {
+                return sum + lot.quantity;
+            }, 0);
+            invoiceRecord.setCurrentSublistValue({ sublistId: 'item', fieldId: 'quantity', value: totalQuantity });
+
+            var inventoryDetail = invoiceRecord.getCurrentSublistSubrecord({ sublistId: 'item', fieldId: 'inventorydetail' });
+            lotDetails.forEach(function (lot) {
+                inventoryDetail.selectNewLine({ sublistId: 'inventoryassignment' });
+                inventoryDetail.setCurrentSublistValue({ sublistId: 'inventoryassignment', fieldId: 'issueinventorynumber', value: lot.lotNumber });
+                inventoryDetail.setCurrentSublistValue({ sublistId: 'inventoryassignment', fieldId: 'quantity', value: lot.quantity });
+                inventoryDetail.commitLine({ sublistId: 'inventoryassignment' });
+            });
+
+            invoiceRecord.commitLine({ sublistId: 'item' });
+        } catch (error) {
+            var logMessage = `Error processing item ${itemId} with Store Code: ${storeCode}. Error: ${error.message}`;
+            appendToLogFile(logFileID, logMessage);
+            throw error;
+        }
+    }
+
+    function addInvoiceLineWithoutInventoryDetails(invoiceRecord, itemId, quantity, description, storeCode) {
+        invoiceRecord.selectNewLine({ sublistId: 'item' });
+        invoiceRecord.setCurrentSublistValue({ sublistId: 'item', fieldId: 'item', value: itemId });
+        invoiceRecord.setCurrentSublistValue({ sublistId: 'item', fieldId: 'quantity', value: quantity });
+        invoiceRecord.setCurrentSublistValue({ sublistId: 'item', fieldId: 'description', value: description });
+        invoiceRecord.setCurrentSublistValue({ sublistId: 'item', fieldId: 'custcol_vs_storecode', value: storeCode });
+        invoiceRecord.commitLine({ sublistId: 'item' });
+    }
+
+    function checkStoreCode(storeCode, customer) {
+        var customrecord_vs_add_new_store_consrepSearchObj = search.create({
+            type: "customrecord_vs_add_new_store_consrep",
+            filters: [
+                ["custrecord_vs_consrep_storecode", "is", storeCode],
+                "AND",
+                ["custrecord_vs_store_customer", "anyof", customer]
+            ],
+            columns: [
+                search.createColumn({ name: "internalid", label: "Internal ID" })
+            ]
+        });
+
+        var result = customrecord_vs_add_new_store_consrepSearchObj.run().getRange({ start: 0, end: 1 });
+        return result.length > 0;
+    }
+
+    function appendToLogFile(logFileID, message) {
+        try {
+            var logFile = file.load({ id: logFileID });
+            var fileContent = logFile.getContents();
+            fileContent += `\n${message}`;
+            var newFile = file.create({
+                name: logFile.name,
+                fileType: file.Type.PLAINTEXT,
+                contents: fileContent,
+                folder: logFile.folder
+            });
+            newFile.save();
+        } catch (error) {
+            log.error('Error appending to log file', error);
+        }
+    }
+
+    return { getInputData, map, reduce };
+});

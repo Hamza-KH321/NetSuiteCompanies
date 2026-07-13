@@ -1,0 +1,143 @@
+<?xml version="1.0"?><!DOCTYPE pdf PUBLIC "-//big.faceless.org//report" "report-1.1.dtd">
+<pdf>
+<head>
+	<link name="NotoSans" type="font" subtype="truetype" src="${nsfont.NotoSans_Regular}" src-bold="${nsfont.NotoSans_Bold}" src-italic="${nsfont.NotoSans_Italic}" src-bolditalic="${nsfont.NotoSans_BoldItalic}" bytes="2" />
+	<#if .locale == "zh_CN">
+		<link name="NotoSansCJKsc" type="font" subtype="opentype" src="${nsfont.NotoSansCJKsc_Regular}" src-bold="${nsfont.NotoSansCJKsc_Bold}" bytes="2" />
+	<#elseif .locale == "zh_TW">
+		<link name="NotoSansCJKtc" type="font" subtype="opentype" src="${nsfont.NotoSansCJKtc_Regular}" src-bold="${nsfont.NotoSansCJKtc_Bold}" bytes="2" />
+	<#elseif .locale == "ja_JP">
+		<link name="NotoSansCJKjp" type="font" subtype="opentype" src="${nsfont.NotoSansCJKjp_Regular}" src-bold="${nsfont.NotoSansCJKjp_Bold}" bytes="2" />
+	<#elseif .locale == "ko_KR">
+		<link name="NotoSansCJKkr" type="font" subtype="opentype" src="${nsfont.NotoSansCJKkr_Regular}" src-bold="${nsfont.NotoSansCJKkr_Bold}" bytes="2" />
+	<#elseif .locale == "th_TH">
+		<link name="NotoSansThai" type="font" subtype="opentype" src="${nsfont.NotoSansThai_Regular}" src-bold="${nsfont.NotoSansThai_Bold}" bytes="2" />
+	</#if>
+    <macrolist>
+        <macro id="nlheader">
+            <table><tr>
+	<td><img src="https://8204691-sb1.app.netsuite.com/core/media/media.nl?id=680&amp;c=8204691_SB1&amp;h=Pw47ITxX-XXsuaMGv0XxDNc0pNvLV1aHtE9Gb9iJxUMTS0Dg" /></td>
+	</tr></table>
+
+<table style="text-align:cnter; align:center;"><tr>
+	<td style="text-align:cnter; align:center; font-size:16px;"><b>الحلول العاموديه للاستشارات والكمبيوتر ذ م م</b></td>
+	</tr>
+	<tr>
+	<td style="text-align:cnter; align:center; font-size:16px;"><b>Vertical Advance IT Solutions</b></td>
+	</tr>
+	<tr>
+	<td style="text-align:cnter; align:center; font-size:16px;"><b>Invoice ${record.location.tranprefix} ${record.tranid} export</b></td>
+	</tr></table>
+        </macro>
+        <macro id="nlfooter">
+            <hr />
+<table style="text-align:cnter; align:center;"><tr>
+	<td style="text-align:cnter; align:center;">Office 3-4 City Gate Building, Dubai, UAE │ Tel: +971-0-553610752 │ info@ver-solutions.com</td>
+	</tr>
+	<tr>
+	<td style="text-align:cnter; align:center;">Sales1@ver-solutions.com │ www.ver-solutions.com</td>
+	</tr></table>
+        </macro>
+    </macrolist>
+    <style type="text/css">* {
+		<#if .locale == "zh_CN">
+			font-family: NotoSans, NotoSansCJKsc, sans-serif;
+		<#elseif .locale == "zh_TW">
+			font-family: NotoSans, NotoSansCJKtc, sans-serif;
+		<#elseif .locale == "ja_JP">
+			font-family: NotoSans, NotoSansCJKjp, sans-serif;
+		<#elseif .locale == "ko_KR">
+			font-family: NotoSans, NotoSansCJKkr, sans-serif;
+		<#elseif .locale == "th_TH">
+			font-family: NotoSans, NotoSansThai, sans-serif;
+		<#else>
+			font-family: NotoSans, sans-serif;
+		</#if>
+		}
+		table {
+			font-size: 9pt;
+			table-layout: fixed;
+		}
+      .border{
+		border-right:1px;
+        border-top:1px;
+      }
+      * {
+         font-family: NotoSansArabic, NotoSans, sans-serif;
+       }
+      hr {
+            border: none;
+            border-top: 3px solid darkblue;
+            font-weight: bold;
+        }
+</style>
+</head>
+<body header="nlheader" header-height="10%" footer="nlfooter" footer-height="20pt" padding="0.5in 0.5in 0.5in 0.5in" size="Letter">
+    <br /><br /><br /><!-- __________________________________________________________________________ -->
+<table border="0" cellspacing="1" style="width:100%;"><tr>
+	<td font-size="12px"><b>Customer Name:</b> ${record.entity}</td>
+	</tr>
+	<tr>
+	<td>&nbsp;</td>
+	</tr>
+	<tr>
+	<td font-size="12px"><b>Date:</b> ${record.trandate}</td>
+	</tr></table>
+
+<hr /><!-- __________________________________________________________________________ --><#list record.item as item>
+<table border="1" style="width:100%; text-align:center; align:center;"><#if item_index==0><tr>
+	<td border-bottom="1" border-right="1" style="color: white; background-color: rgb(0, 0, 139); width: 317px; height: 33px; align:center;"><strong>Description</strong></td>
+	<td border-bottom="1" border-right="1" style="color: white; background-color: rgb(0, 0, 139); width: 211px; height: 33px; align:center;"><strong>Total Price</strong></td>
+	<td border-bottom="1" style="color: white; background-color: rgb(0, 0, 139); height: 33px; align:center;"><strong>Total Price ${record.currencysymbol}</strong></td>
+	</tr>
+	</#if>
+	<tr>
+	<td border-bottom="1" border-right="1" style="width: 317px; height: 33px;" align = "center">${item.item} ${item.description}</td>
+	<td border-bottom="1" border-right="1" style="width: 211px; height: 33px;" align = "center">${item.rate}</td>
+	<td border-bottom="1" style="height: 33px;" align = "center">${item.amount}</td>
+	</tr></table>
+</#list><!-- __________________________________________________________________________ -->
+
+<table style="width:100%;"><tr>
+	<td align = "right" border-left = "1" border-bottom = "1"><strong>Total Amount</strong></td>
+	<td align = "center" border-left = "1" border-bottom = "1" border-right = "1"><b>${record.total}</b></td>
+	</tr></table>&nbsp;&nbsp;
+<!-- __________________________________________________________________________ -->
+
+<table border="1" style="text-align:center;width:100%;"><tr>
+	<td style="text-align:center; align:center; font-size:14px;">Account Name: VERTICAL ADVANCE IT SOLUTIONS LLC</td>
+	</tr>
+	<tr>
+	<td style="text-align:center; align:center; font-size:14px;">IBAN Currency: AE06 0400 0008 8307 2425 002 USD</td>
+	</tr>
+	<tr>
+	<td style="text-align:center; align:center; font-size:14px;">Account No: 0883072425002</td>
+	</tr>
+	<tr>
+	<td style="text-align:center; align:center; font-size:14px;">Swift Code: NRAKAEAK</td>
+	</tr>
+	<tr>
+	<td style="text-align:center; align:center; font-size:14px;">Purpose Code: PMS</td>
+	</tr>
+	<tr>
+	<td style="text-align:center; align:center; font-size:14px;">Beneficiary Bank: NATIONAL BANK OF RAS AL KHAIMAH (P.J.S.C)</td>
+	</tr>
+	<tr>
+	<td style="text-align:center; align:center; font-size:14px;">Beneficiary Bank Address: Dubai.UAE</td>
+	</tr></table>
+<!-- __________________________________________________________________________ -->&nbsp;&nbsp;
+
+<table align="center" border="1" style="width: 675px; text-align: center;"><tr>
+	<td border-right="1px" style="height: 24px; text-align:center; align:center; background-color:#0096FF; color:white;"><b>Vertical Solutions for Consulting &amp; IT LLC</b></td>
+	<td border-bottom="1px" style="height: 24px; text-align: center; background-color: rgb(0, 150, 255); color: white; width: 339px;"><b>Customer</b></td>
+	</tr>
+	<tr>
+	<td class="border" style="height: 23px;"><b>Faris Fleifel</b></td>
+	<td border-bottom="1px" style="height: 23px; width: 339px;"><b>Name and Signature</b></td>
+	</tr>
+	<tr>
+	<td class="border" style="height: 51px;">&nbsp;</td>
+	<td style="height: 50px; width: 339px;">&nbsp;</td>
+	</tr></table>
+</body>
+</pdf>

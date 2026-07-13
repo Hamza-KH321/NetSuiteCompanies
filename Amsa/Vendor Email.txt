@@ -1,0 +1,21 @@
+Request for Approval pf Purchase Order - [{tranid}]
+Dear {entity},
+
+This is an automated notification from our Oracle NetSuite ERP System. A purchase order (PO) requiring your approval has been granted.
+
+Purchase Order Details:
+
+PO Number: {tranid}
+Vendor: {entity}
+Total Amount: {total}
+Description: {memo} 
+
+You are kindly requested to review the purchase order and provide your approval. Your prompt attention to this matter is appreciated as it will help us maintain our procurement schedule and fulfill our commitments.
+
+To approve the purchase order, please click the following link: {tranid}
+
+If you have any questions or require further information regarding this purchase, please contact the creator ({custbody_vs_creator})
+
+Thank you for your cooperation in ensuring the smooth processing of this purchase order.
+
+Best Regards.

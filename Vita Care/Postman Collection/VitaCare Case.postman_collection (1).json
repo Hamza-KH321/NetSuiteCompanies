@@ -1,0 +1,72 @@
+{
+	"info": {
+		"_postman_id": "262db686-cb9f-46b1-b9b9-8777afa92ffe",
+		"name": "VitaCare Case",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "27300924"
+	},
+	"item": [
+		{
+			"name": "Create Case",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"value": "123",
+						"type": "text"
+					},
+					{
+						"key": "User-Agent",
+						"value": "Mozilla/5.0",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"subject\" : \"Test Subject\",\r\n    \"Name\" : \"8977\",\r\n    \"Email\" : \"test@mail.com\",\r\n    \"Phone\" :\"12345689\",\r\n    \"Message\" : \"TEST MESSAGE\",\r\n    \"CaseType\" : \"Technical\",\r\n    \"Branch\": \"Jeddah\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://7065838-sb1.extforms.netsuite.com/app/site/hosting/scriptlet.nl?script=2902&deploy=1&compid=7065838_SB1&h=c05484047d6e94697d02",
+					"protocol": "https",
+					"host": [
+						"7065838-sb1",
+						"extforms",
+						"netsuite",
+						"com"
+					],
+					"path": [
+						"app",
+						"site",
+						"hosting",
+						"scriptlet.nl"
+					],
+					"query": [
+						{
+							"key": "script",
+							"value": "2902"
+						},
+						{
+							"key": "deploy",
+							"value": "1"
+						},
+						{
+							"key": "compid",
+							"value": "7065838_SB1"
+						},
+						{
+							"key": "h",
+							"value": "c05484047d6e94697d02"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

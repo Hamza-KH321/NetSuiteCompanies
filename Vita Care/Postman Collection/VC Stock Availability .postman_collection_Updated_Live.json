@@ -1,0 +1,58 @@
+{
+	"info": {
+		"_postman_id": "2766c1ae-2873-4d95-b0aa-0f16c8c9af7f",
+		"name": "VC Stock Availability ",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "28321459"
+	},
+	"item": [
+		{
+			"name": "Stock Availability API",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "token",
+						"value": "jg6546v16vfr4t98dr4t6h",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://7065838.extforms.netsuite.com/app/site/hosting/scriptlet.nl?script=1995&deploy=1&compid=7065838&ns-at=AAEJ7tMQqfvxdmo9EzSLZLykT4mQtoXcryjyjd9Y5Nd5H4NGYyo",
+					"protocol": "https",
+					"host": [
+						"7065838",
+						"extforms",
+						"netsuite",
+						"com"
+					],
+					"path": [
+						"app",
+						"site",
+						"hosting",
+						"scriptlet.nl"
+					],
+					"query": [
+						{
+							"key": "script",
+							"value": "1995"
+						},
+						{
+							"key": "deploy",
+							"value": "1"
+						},
+						{
+							"key": "compid",
+							"value": "7065838"
+						},
+						{
+							"key": "ns-at",
+							"value": "AAEJ7tMQqfvxdmo9EzSLZLykT4mQtoXcryjyjd9Y5Nd5H4NGYyo"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

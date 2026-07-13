@@ -1,0 +1,31 @@
+/**
+ * Adds a specified number of days to a date formatted as dd/mm/yyyy.
+ * @param {string} dateStr - The date string in dd/mm/yyyy format.
+ * @param {number} days - The number of days to add.
+ * @returns {string} - The new date string in dd/mm/yyyy format.
+ */
+function addDaysToDate(dateStr, days) {
+    // Split the date string into day, month, and year components
+    var parts = dateStr.split('/');
+    var day = parseInt(parts[0], 10);
+    var month = parseInt(parts[1], 10) - 1; // Month is zero-based in JavaScript Date object
+    var year = parseInt(parts[2], 10);
+
+    // Create a new Date object
+    var date = new Date(year, month, day);
+
+    // Add the specified number of days
+    date.setDate(date.getDate() + days);
+
+    // Format the new date back to dd/mm/yyyy
+    var newDay = ("0" + date.getDate()).slice(-2); // Add leading zero if needed
+    var newMonth = ("0" + (date.getMonth() + 1)).slice(-2); // Month is zero-based, so add 1
+    var newYear = date.getFullYear();
+
+    return newDay + '/' + newMonth + '/' + newYear;
+}
+
+// Example usage
+var originalDate = "15/05/2024";
+var daysToAdd = 35;
+var newDate = addDaysToDate(originalDate, daysToAdd);

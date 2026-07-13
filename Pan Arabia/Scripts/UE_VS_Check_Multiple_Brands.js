@@ -1,0 +1,107 @@
+/**
+ * @NApiVersion 2.1
+ * @NScriptType UserEventScript
+ * @NModuleScope SameAccount
+ * @fileName UE || Check Multiple Brands
+ */
+define(['N/record'], function (record) {
+
+    function beforeSubmit(context) {
+
+        // Run only in Create mode
+        // if (context.type !== context.UserEventType.CREATE) {
+        //     log.debug("Skipping Script", "Not in Create Mode");
+        //     return;
+        // }
+
+        var newRecord = context.newRecord;
+        var classValues = []; // Store class values
+        var sublistId = getSublistWithField(newRecord, 'class');
+
+        if (!sublistId) {
+            log.debug("Sublist Not Found", "No sublist contains the 'class' field.");
+            return;
+        }
+
+        var lineCount = newRecord.getLineCount({ sublistId: sublistId });
+
+        // Loop through all expense lines
+        for (var i = 0; i < lineCount; i++) {
+            var classValue = newRecord.getSublistValue({ sublistId: sublistId, fieldId: 'class', line: i });
+
+            if (classValue && classValues.indexOf(classValue) === -1) {
+                classValues.push(classValue); // Store unique class values
+            }
+        }
+
+        // Define class value groups
+        // Brands
+        var cgwClasses = [7, 1, 3, 8];
+        var tfmClasses = [9, 2, 4, 5, 13];
+        var urgoClasses = [6];
+        var hoClasses = [10];
+        var flenClasses = [16, 17];
+
+        // Function to check if any class value exists in a specific group
+        function containsClass(classArray) {
+            for (var i = 0; i < classValues.length; i++) {
+                if (classArray.indexOf(parseInt(classValues[i])) !== -1) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        // Check which brands exist in the items
+        var hasCGW = containsClass(cgwClasses);
+        var hasTFM = containsClass(tfmClasses);
+        var hasURGO = containsClass(urgoClasses);
+        var hasHO = containsClass(hoClasses);
+        var hasflen = containsClass(flenClasses);
+
+        log.debug('Brand Check:',
+            {
+                hasCGW: hasCGW,
+                hasTFM: hasTFM,
+                hasURGO: hasURGO,
+                hasHO: hasHO,
+                hasflen: hasflen,
+            }
+        );
+
+        // Set checkboxes based on class values
+        newRecord.setValue({ fieldId: 'custbody_vs_cgw_brand', value: hasCGW });
+        newRecord.setValue({ fieldId: 'custbody_vs_tfm_brand', value: hasTFM });
+        newRecord.setValue({ fieldId: 'custbody_vs_urgo_brand', value: hasURGO });
+        newRecord.setValue({ fieldId: 'custbody_vs_ho_brand', value: hasHO });
+        newRecord.setValue({ fieldId: 'custbody_vs_flen_brand', value: hasflen });
+
+        // Set "approved" checkboxes if the brand is NOT found
+        newRecord.setValue({ fieldId: 'custbody_vs_cgw_approved', value: !hasCGW });
+        newRecord.setValue({ fieldId: 'custbody_vs_tfm_approved', value: !hasTFM });
+        newRecord.setValue({ fieldId: 'custbody_vs_urgo_approved', value: !hasURGO });
+        newRecord.setValue({ fieldId: 'custbody_vs_ho_approved', value: !hasHO });
+        newRecord.setValue({ fieldId: 'custbody_vs_flen_approved', value: !hasflen });
+
+    }
+
+    function getSublistWithField(recordObj, fieldId) {
+        var sublists = recordObj.getSublists();
+        for (var i = 0; i < sublists.length; i++) {
+            var sublistId = sublists[i];
+            try {
+                var fieldExists = recordObj.getSublistField({ sublistId: sublistId, fieldId: fieldId, line: 0 });
+                if (fieldExists) {
+                    return sublistId;
+                }
+            } catch (e) {
+                log.error('ERROR', e);
+            }
+        }
+        return null;
+    }
+
+    return {
+        beforeSubmit: beforeSubmit
+    };
+});

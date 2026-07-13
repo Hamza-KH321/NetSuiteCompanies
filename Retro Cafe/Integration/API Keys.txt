@@ -1,0 +1,8 @@
+http://api-stage.sapaad.com/erp_interface/v4/get_orders?start_time=xxxx&end_time=xxxx&vendor_key=xxxx&company_key=xxxx&location_key=xxxx&nonce=xxx&time_stamp=xxxx&f=json
+
+Configurations:
+---------------
+vendor_key : d08183f9052bb9c471d532450afcb288
+secret_key : 2890d932c3bcc1e7
+company_key: 0716437a218408883ac9c3f54a0572c4
+location_key: f777048856618eaba8951f815345a6c2

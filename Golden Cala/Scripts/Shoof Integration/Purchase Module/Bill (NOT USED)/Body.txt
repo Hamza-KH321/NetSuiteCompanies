@@ -1,0 +1,5 @@
+{
+  "entity": "CICCARELLI Tooth Paste Factory",
+  "createdfrom": 575957,
+  "itemreceipts": [575958]
+}

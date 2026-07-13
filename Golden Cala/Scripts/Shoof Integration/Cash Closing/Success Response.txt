@@ -1,0 +1,5 @@
+{
+    "success": true,
+    "id": 1223853,
+    "message": "Journal Entry created successfully."
+}

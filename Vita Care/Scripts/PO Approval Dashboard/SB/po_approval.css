@@ -1,0 +1,562 @@
+/* =========================================================
+   DESIGN TOKENS — MONOCHROME ENTERPRISE
+   (PO Approval Dashboard)
+========================================================= */
+:root {
+  --bg-page       : #f6f7f9;
+  --surface       : #ffffff;
+  --surface-soft  : #fafafa;
+
+  --border        : #e5e7eb;
+
+  --text-main     : #111827;
+  --text-muted    : #6b7280;
+
+  --radius-sm     : 8px;
+  --radius        : 12px;
+  --radius-lg     : 18px;
+
+  --shadow-xs     : 0 1px 2px rgba(0,0,0,0.05);
+  --shadow-sm     : 0 4px 12px rgba(0,0,0,0.08);
+  --shadow-md     : 0 12px 30px rgba(0,0,0,0.12);
+
+  --transition    : all 0.25s ease;
+
+  /* ── Approval Stage Badge Colours ───────────────── */
+  --badge-initial-bg      : #f3f4f6;
+  --badge-initial-text    : #374151;
+  --badge-bd-bg           : #eff6ff;
+  --badge-bd-text         : #1d4ed8;
+  --badge-sop-app-bg      : #f0fdf4;
+  --badge-sop-app-text    : #15803d;
+  --badge-sop-rej-bg      : #fef2f2;
+  --badge-sop-rej-text    : #b91c1c;
+  --badge-default-bg      : #f9fafb;
+  --badge-default-text    : #6b7280;
+}
+
+/* =========================================================
+   RESET
+========================================================= */
+* {
+  margin     : 0;
+  padding    : 0;
+  box-sizing : border-box;
+}
+
+/* =========================================================
+   BASE
+========================================================= */
+body {
+  font-family : Inter, -apple-system, BlinkMacSystemFont, "Segoe UI",
+                Roboto, Arial, sans-serif;
+  background  : var(--bg-page);
+  min-height  : 100vh;
+  padding     : 24px;
+  color       : var(--text-main);
+}
+
+/* =========================================================
+   LOADING OVERLAY (CENTERED)
+   Displayed during: getData, approve, reject, resubmit
+========================================================= */
+.loading-overlay {
+  position   : fixed;
+  inset      : 0;
+  background : rgba(255,255,255,0.92);
+  display    : none;          /* shown via JS: style.display = 'flex' */
+  align-items     : center;
+  justify-content : center;
+  z-index    : 9999;
+}
+
+.loading-box {
+  background    : #fff;
+  padding       : 32px 40px;
+  border-radius : 14px;
+  text-align    : center;
+  box-shadow    : var(--shadow-md);
+  animation     : fadeIn 0.25s ease-out;
+}
+
+.spinner {
+  width         : 44px;
+  height        : 44px;
+  border-radius : 50%;
+  border        : 4px solid #e5e7eb;
+  border-top-color : #000;
+  animation     : spin 0.8s linear infinite;
+  margin        : 0 auto 16px;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+#loadingTitle {
+  font-size   : 16px;
+  font-weight : 700;
+}
+
+#loadingStatus {
+  margin-top  : 6px;
+  font-size   : 12px;
+  color       : var(--text-muted);
+  font-family : monospace;
+}
+
+/* =========================================================
+   CONTAINER
+========================================================= */
+.container {
+  max-width     : 1500px;
+  margin        : 0 auto;
+  background    : var(--surface);
+  border-radius : var(--radius-lg);
+  box-shadow    : var(--shadow-md);
+  overflow      : hidden;
+}
+
+/* =========================================================
+   TITLE
+========================================================= */
+.title {
+  padding       : 26px 32px;
+  font-size     : 26px;
+  font-weight   : 800;
+  color         : #000000;
+  letter-spacing: -0.3px;
+}
+
+/* =========================================================
+   FILTER SECTION
+========================================================= */
+.filter-section {
+  display               : grid;
+  grid-template-columns : repeat(auto-fit, minmax(180px, 1fr));
+  gap                   : 16px;
+  padding               : 24px 32px;
+  background            : var(--surface-soft);
+  border-bottom         : 1px solid var(--border);
+  align-items           : end;
+}
+
+.filter-section label {
+  font-size      : 12px;
+  font-weight    : 700;
+  color          : var(--text-muted);
+  text-transform : uppercase;
+  letter-spacing : 0.4px;
+  display        : flex;
+  flex-direction : column;
+  gap            : 6px;
+}
+
+.filter-section input,
+.filter-section select {
+  height        : 44px;
+  padding       : 0 14px;
+  border-radius : var(--radius-sm);
+  border        : 1px solid var(--border);
+  font-size     : 14px;
+  background    : #fff;
+  transition    : var(--transition);
+}
+
+.filter-section input:focus,
+.filter-section select:focus {
+  outline    : none;
+  border-color : #000;
+  box-shadow : 0 0 0 3px rgba(0,0,0,0.08);
+}
+
+/* =========================================================
+   ACTION SECTION
+   Contains selection counter + Approve / Reject / Re-Submit
+========================================================= */
+.action-section {
+  display         : flex;
+  justify-content : space-between;
+  align-items     : center;
+  padding         : 20px 32px;
+  border-bottom   : 1px solid var(--border);
+}
+
+.action-buttons {
+  display : flex;
+  gap     : 10px;
+}
+
+#selection_count {
+  background  : #f3f4f6;
+  color       : #000;
+  font-weight : 600;
+  font-size   : 12px;
+  padding     : 6px 10px;
+  border-radius : 6px;
+  border      : 1px solid var(--border);
+}
+
+/* =========================================================
+   BUTTONS — BASE
+========================================================= */
+button {
+  height        : 44px;
+  padding       : 0 20px;
+  border-radius : var(--radius-sm);
+  border        : none;
+  font-size     : 13px;
+  font-weight   : 700;
+  cursor        : pointer;
+  transition    : var(--transition);
+  letter-spacing: 0.4px;
+  background    : #000;
+  color         : #fff;
+  box-shadow    : var(--shadow-xs);
+}
+
+button:hover {
+  box-shadow : var(--shadow-sm);
+  transform  : translateY(-1px);
+}
+
+button:disabled {
+  opacity   : 0.5;
+  cursor    : not-allowed;
+  transform : none;
+}
+
+/* Get Purchase Orders / general search */
+.search-btn {
+  background : #2563eb;
+  color      : #fff;
+}
+.search-btn:hover {
+  background : #1d4ed8;
+}
+
+/* Approve — green */
+.approve-btn {
+  background : #16a34a;
+  color      : #fff;
+}
+.approve-btn:hover {
+  background : #15803d;
+}
+
+/* Reject — red */
+.reject-btn {
+  background : #dc2626;
+  color      : #fff;
+}
+.reject-btn:hover {
+  background : #b91c1c;
+}
+
+/* Re-Submit — amber/orange
+   Re-Submit sends the PO back through the approval chain.
+   Applicable in: BD Manager, S&OP Approval, S&OP Reject states.
+   NOT available from the Initial State.                         */
+.resubmit-btn {
+  background : #d97706;
+  color      : #fff;
+}
+.resubmit-btn:hover {
+  background : #b45309;
+}
+
+/* =========================================================
+   TABLE WRAPPER (horizontal scroll on small screens)
+========================================================= */
+.table-wrapper {
+  overflow-x : auto;
+}
+
+/* =========================================================
+   TABLE
+========================================================= */
+.transaction-table {
+  width            : 100%;
+  border-collapse  : collapse;
+  font-size        : 13px;
+}
+
+.transaction-table thead {
+  background : #111827;
+  color      : #fff;
+}
+
+.transaction-table th {
+  padding        : 14px;
+  font-size      : 11px;
+  text-transform : uppercase;
+  letter-spacing : 0.6px;
+  font-weight    : 800;
+  white-space    : nowrap;
+}
+
+.transaction-table td {
+  padding       : 12px 14px;
+  border-bottom : 1px solid var(--border);
+  color         : var(--text-main);
+  text-align    : center;
+  white-space   : nowrap;
+}
+
+.transaction-table tbody tr:hover {
+  background : #f9fafb;
+}
+
+/* =========================================================
+   APPROVAL STAGE BADGES
+   Colour-codes each workflow state for at-a-glance clarity.
+
+   badge-initial     : Initial State — grey (not yet submitted)
+   badge-bd-manager  : BD Manager Approval — blue (all branches)
+   badge-sop-approval: S & OP Approval — green (workflowstate345)
+   badge-sop-reject  : S & OP Reject BD Manager — red (workflowstate358)
+   badge-default     : Unknown / future states — light grey
+========================================================= */
+.stage-badge {
+  display       : inline-block;
+  padding       : 3px 10px;
+  border-radius : 999px;
+  font-size     : 11px;
+  font-weight   : 700;
+  letter-spacing: 0.2px;
+  white-space   : nowrap;
+}
+
+.badge-initial {
+  background : var(--badge-initial-bg);
+  color      : var(--badge-initial-text);
+}
+
+.badge-bd-manager {
+  background : var(--badge-bd-bg);
+  color      : var(--badge-bd-text);
+}
+
+.badge-sop-approval {
+  background : var(--badge-sop-app-bg);
+  color      : var(--badge-sop-app-text);
+}
+
+.badge-sop-reject {
+  background : var(--badge-sop-rej-bg);
+  color      : var(--badge-sop-rej-text);
+}
+
+.badge-default {
+  background : var(--badge-default-bg);
+  color      : var(--badge-default-text);
+}
+
+/* =========================================================
+   CHECKBOX
+========================================================= */
+input[type="checkbox"] {
+  width        : 18px;
+  height       : 18px;
+  accent-color : #000;
+  cursor       : pointer;
+}
+
+/* =========================================================
+   VIEW BUTTON
+========================================================= */
+.view-btn {
+  background    : #000;
+  color         : #fff;
+  padding       : 6px 14px;
+  border-radius : var(--radius-sm);
+  font-size     : 14px;
+  height        : auto;
+}
+
+.view-btn:hover {
+  background : #1f2937;
+}
+
+/* =========================================================
+   EMPTY STATE
+========================================================= */
+.no-data {
+  padding     : 48px !important;
+  color       : var(--text-muted);
+  font-style  : italic;
+  text-align  : center;
+}
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+@media (max-width: 768px) {
+  body { padding: 12px; }
+
+  .title { font-size: 22px; }
+
+  .action-section {
+    flex-direction : column;
+    gap            : 14px;
+    align-items    : stretch;
+  }
+
+  .action-buttons {
+    flex-direction : column;
+  }
+}
+
+/* =========================================================
+   SCROLLBAR
+========================================================= */
+::-webkit-scrollbar       { width: 8px; }
+::-webkit-scrollbar-thumb { background: #c7cdd6; border-radius: 4px; }
+
+
+/* =========================================================
+   VENDOR SEARCH MODAL
+========================================================= */
+.modal-overlay {
+  position        : fixed;
+  inset           : 0;
+  background      : rgba(0,0,0,0.5);
+  display         : none;       /* shown via JS: style.display = 'flex' */
+  align-items     : center;
+  justify-content : center;
+  z-index         : 10000;
+  animation       : fadeIn 0.2s ease-out;
+}
+
+.modal-content {
+  background    : var(--surface);
+  border-radius : var(--radius-lg);
+  box-shadow    : var(--shadow-md);
+  width         : 90%;
+  max-width     : 500px;
+  max-height    : 80vh;
+  display       : flex;
+  flex-direction: column;
+  animation     : slideUp 0.3s ease-out;
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.modal-header {
+  display         : flex;
+  justify-content : space-between;
+  align-items     : center;
+  padding         : 24px 28px;
+  border-bottom   : 1px solid var(--border);
+}
+
+.modal-header h2 {
+  font-size      : 20px;
+  font-weight    : 800;
+  color          : var(--text-main);
+  letter-spacing : -0.3px;
+}
+
+.modal-close {
+  background    : transparent;
+  color         : var(--text-muted);
+  font-size     : 28px;
+  width         : 36px;
+  height        : 36px;
+  padding       : 0;
+  display       : flex;
+  align-items   : center;
+  justify-content: center;
+  border-radius : 50%;
+  transition    : var(--transition);
+  box-shadow    : none;
+}
+
+.modal-close:hover {
+  background : #f3f4f6;
+  color      : var(--text-main);
+  transform  : none;
+}
+
+.modal-body {
+  padding        : 20px 28px 28px;
+  display        : flex;
+  flex-direction : column;
+  gap            : 16px;
+  overflow       : hidden;
+}
+
+/* ── Vendor Search Container (filter input row) ── */
+.vendor-search-container {
+  display  : flex;
+  gap      : 8px;
+  position : relative;
+}
+
+.vendor-search-container input {
+  flex   : 1;
+  cursor : pointer;
+}
+
+/* ── Modal search input ── */
+#vendorSearchInput {
+  height        : 44px;
+  padding       : 0 14px;
+  border-radius : var(--radius-sm);
+  border        : 1px solid var(--border);
+  font-size     : 14px;
+  background    : #fff;
+  transition    : var(--transition);
+  width         : 100%;
+}
+
+#vendorSearchInput:focus {
+  outline      : none;
+  border-color : #000;
+  box-shadow   : 0 0 0 3px rgba(0,0,0,0.08);
+}
+
+/* ── Vendor list inside modal ── */
+.vendor-list {
+  max-height    : 400px;
+  overflow-y    : auto;
+  border        : 1px solid var(--border);
+  border-radius : var(--radius-sm);
+  background    : var(--surface-soft);
+}
+
+.vendor-item {
+  padding       : 14px 16px;
+  cursor        : pointer;
+  transition    : var(--transition);
+  border-bottom : 1px solid var(--border);
+  font-size     : 14px;
+  color         : var(--text-main);
+}
+
+.vendor-item:last-child {
+  border-bottom : none;
+}
+
+.vendor-item:hover {
+  background : #e5e7eb;
+}
+
+.vendor-item.no-results {
+  cursor     : default;
+  color      : var(--text-muted);
+  font-style : italic;
+  text-align : center;
+}
+
+.vendor-item.no-results:hover {
+  background : var(--surface-soft);
+}

@@ -1,0 +1,86 @@
+<div rwr="1" size="4" style="font-family:Arial; line-height:1.6;">' +
+        '<table width="1021" border="1" cellpadding="5" style="border-collapse:collapse; width:100%; border:1px solid #ccc;">' +
+            '<tbody>' +
+                '<tr>' +
+                    '<th width="286" rowspan="9" style="text-align:center; vertical-align:top; padding:10px;">' +
+                        '<img src="' + (fullImageUrl || 'NA')+ '" width="277" height="346" alt="' + (displayName || 'NA') + '">' +
+                    '</th>' +
+                    '<th width="703" height="32" style="font-size: 24px; text-align:left; padding:10px; background-color:#f8f8f8; border-bottom:1px solid #ccc;">' +
+                        'PART NO: ' + (partNumber || 'NA')+
+                    '</th>' +
+                '</tr>' +
+                '<tr><td style="font-size: 20px; padding:10px;"><strong>Bolt Pattern:</strong> ' + (boltPattern || "NA") + '</td></tr>' +
+                '<tr><td style="font-size: 20px; padding:10px;"><strong>Bore Diameter:</strong> ' + (boreDiameter || "NA") + 'mm</td></tr>' +
+                '<tr><td style="font-size: 20px; padding:10px;"><strong>Thickness:</strong> ' + (thickness || "NA") + '</td></tr>' +
+                '<tr><td style="font-size: 20px; padding:10px;"><strong>Material:</strong> ' + (material || "NA") + '</td></tr>' +
+                '<tr><td style="font-size: 20px; padding:10px;"><strong>Finish:</strong> ' + (finish || "NA") + '</td></tr>' +
+                '<tr><td style="font-size: 20px; padding:10px;"><strong>Compatibility:</strong> ' + (compatibility || "NA") + '</td></tr>' +
+                '<tr><td style="font-size: 20px; padding:10px;"><strong>Color:</strong> ' + (color || "NA") + '</td></tr>' +
+                '<tr><td style="font-size: 20px; padding:10px;"><strong>Packing Way:</strong> ' + (packingWay || "NA") + '</td></tr>' +
+                '<tr>' +
+                    '<th colspan="2" style="text-align:center; padding:20px; background-color:#eaf8ea; border-top:2px solid #28a745;">' +
+                        '<table width="800" border="0" cellpadding="5" style="margin:auto;">' +
+                            '<tbody>' +
+                                '<tr>' +
+                                    '<th width="514" style="font-size: 36px; text-align:center; color:#28a745; font-weight:bold;">' +
+                                        'SAME DAY PROCESSING' +
+                                    '</th>' +
+                                    '<th width="260" style="text-align:center;">' +
+                                        '<img src="https://i.ebayimg.com/00/s/MzQwWDM0MA==/z/YIMAAOSw2BdjK3nB/$_27.PNG?set_id=8800005007" ' +
+                                        'width="249" height="249" alt="Same Day Processing Icon" ' +
+                                        'style="border:1px solid #ddd; border-radius:4px;">' +
+                                    '</th>' +
+                                '</tr>' +
+                            '</tbody>' +
+                        '</table>' +
+                    '</th>' +
+                '</tr>' +
+            '</tbody>' +
+        '</table>' +
+    
+        '<div style="margin-top:20px; font-size:18px; padding:15px; border:1px solid #ccc; border-radius:4px; background-color:#f9f9f9;">' +
+            '<h2 style="color:#333; text-align:left; font-size:24px;">Enhance Your Ride with Galaxy Hub Centric Spacers</h2>' +
+            '<p style="margin-top:10px; color:#555; text-align:left;">' +
+                'Perfectly crafted to improve the fit and stability of your wheels, the Galaxy Hub Centric Spacer offers superior performance and durability. ' +
+                'Designed for vehicles with a bolt pattern of ' + (boltPattern || "NA") + ' and a bore diameter of ' + (boreDiameter || "NA") + 'mm, ' +
+                'this ' + (thickness || "NA") + 'mm thick spacer ensures precise alignment and a secure fit.' +
+            '</p>' +
+    
+            '<h3 style="color:#333; font-size:20px; margin-top:15px;">Key Features:</h3>' +
+            '<ul style="color:#555; padding-left:20px; line-height:1.8;">' +
+                '<li>Improves wheel stability and fitment.</li>' +
+                '<li>Compatible with a bolt pattern of ' + (boltPattern || "NA") + ' and a bore diameter of ' + (boreDiameter || "NA") + 'mm.</li>' +
+                '<li>Durable, rust-resistant aluminum construction.</li>' +
+                '<li>' + (thickness || "NA") + 'mm thickness for perfect spacing.</li>' +
+                '<li>Easy installation for most vehicle types.</li>' +
+            '</ul>' +
+    
+            '<h3 style="color:#333; font-size:20px; margin-top:15px;">Specifications:</h3>' +
+            '<ul style="color:#555; padding-left:20px; line-height:1.8;">' +
+                '<li><strong>Brand:</strong> Galaxy</li>' +
+                '<li><strong>Thickness:</strong> ' + (thickness || "NA") + 'mm</li>' +
+                '<li><strong>Weight:</strong> ' + (weight || "NA") + '</li>' +
+                '<li><strong>Dimensions:</strong> ' + (dimensions || "NA") + '</li>' +
+            '</ul>' +
+    
+            '<h3 style="color:#333; font-size:20px; margin-top:15px;">What’s Included:</h3>' +
+            '<ul style="color:#555; padding-left:20px; line-height:1.8;">' +
+                '<li>' + (whatsIncluded || "NA") + '</li>' +
+            '</ul>' +
+    
+            '<h3 style="color:#333; font-size:20px; margin-top:15px;">Why Choose Galaxy?</h3>' +
+            '<p style="margin-top:10px; color:#555; text-align:left;">' +
+                'Galaxy specializes in premium automotive accessories that combine innovative engineering with top-tier materials. ' +
+                'Trust Galaxy for products that deliver unmatched quality and performance.' +
+            '</p>' +
+        '</div>' +
+    
+        '<div style="margin-top:30px; padding:15px; border:1px solid #ccc; border-radius:4px; background-color:#f4f4f4;">' +
+            '<h3 style="color:#333; font-size:20px;">Policies</h3>' +
+            '<ul style="color:#555; line-height:1.8; padding-left:20px;">' +
+                '<li><strong>Returns:</strong> Not accepted for this product.</li>' +
+                '<li><strong>Warranty:</strong> Sold as-is with no warranty.</li>' +
+                '<li><strong>Shipping Guarantee:</strong> Ships within 2 business days.</li>' +
+            '</ul>' +
+        '</div>' +
+    '</div>'

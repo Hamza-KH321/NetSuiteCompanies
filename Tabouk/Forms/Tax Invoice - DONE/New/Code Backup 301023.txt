@@ -1,0 +1,147 @@
+<?xml version="1.0"?><!DOCTYPE pdf PUBLIC "-//big.faceless.org//report" "report-1.1.dtd">
+<pdf>
+<head>
+<link name="NotoSansArabic" type="font" subtype="opentype" src="${nsfont.NotoSansArabic_Regular}" src-bold="${nsfont.NotoSansArabic_Bold}" bytes="2" subset="false"/>
+
+	<link name="NotoSans" type="font" subtype="truetype" src="${nsfont.NotoSans_Regular}" src-bold="${nsfont.NotoSans_Bold}" src-italic="${nsfont.NotoSans_Italic}" src-bolditalic="${nsfont.NotoSans_BoldItalic}" bytes="2" />
+	<#if .locale == "zh_CN">
+		<link name="NotoSansCJKsc" type="font" subtype="opentype" src="${nsfont.NotoSansCJKsc_Regular}" src-bold="${nsfont.NotoSansCJKsc_Bold}" bytes="2" />
+	<#elseif .locale == "zh_TW">
+		<link name="NotoSansCJKtc" type="font" subtype="opentype" src="${nsfont.NotoSansCJKtc_Regular}" src-bold="${nsfont.NotoSansCJKtc_Bold}" bytes="2" />
+	<#elseif .locale == "ja_JP">
+		<link name="NotoSansCJKjp" type="font" subtype="opentype" src="${nsfont.NotoSansCJKjp_Regular}" src-bold="${nsfont.NotoSansCJKjp_Bold}" bytes="2" />
+	<#elseif .locale == "ko_KR">
+		<link name="NotoSansCJKkr" type="font" subtype="opentype" src="${nsfont.NotoSansCJKkr_Regular}" src-bold="${nsfont.NotoSansCJKkr_Bold}" bytes="2" />
+	<#elseif .locale == "th_TH">
+		<link name="NotoSansThai" type="font" subtype="opentype" src="${nsfont.NotoSansThai_Regular}" src-bold="${nsfont.NotoSansThai_Bold}" bytes="2" />
+	</#if>
+    <macrolist>
+        <macro id="nlheader">
+            <table style="width:100%;"><tr>
+	<td rowspan="4"><img src="https://9072131.app.netsuite.com/core/media/media.nl?id=437&amp;c=9072131&amp;h=u7VmYyxKdr0nGidP9psP9hgqUywsdwc7sna77qO2x6EYz2s0" /></td>
+	<td>&nbsp;</td>
+	<td colspan="1" rowspan="2"><img src="https://9072131.app.netsuite.com/core/media/media.nl?id=438&amp;c=9072131&amp;h=GiovM1yCANWDa9fkQMcvq5LoxrnPuDm2GSKRiSTioH_o0KwC" style="width:70%; height:70%; align: center;" /></td>
+	<td>&nbsp;</td>
+	<td rowspan="4"><img src="https://9072131.app.netsuite.com/core/media/media.nl?id=436&amp;c=9072131&amp;h=32YkYs2wzLFp-d7h6BbKGIXcAJA_Wmks4YTJLYvTgwBlU9Ws" /></td>
+	</tr>
+	<tr>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	</tr>
+	<tr>
+	<td>&nbsp;</td>
+	<td style="align: center; color: white; background-color: black; font-size: 18px;"><b>Tax Invoice فاتورة ضريبية</b></td>
+	<td>&nbsp;</td>
+	</tr>
+	<tr>
+	<td>&nbsp;</td>
+	<td style="align: center;">VAT Reg. No: <strong>الرقم الضريبي</strong>: 300596264800003</td>
+	<td>&nbsp;</td>
+	</tr></table>
+        </macro>
+        <macro id="nlfooter">
+         <table width = "100%">
+           <tr>
+             <td><hr/></td>
+           </tr>
+           <tr>
+             <td style = "font-size: 10px; align: center;"> ص.ب ٢٦٦٦ تبوك ٧١٤٦١ ، المملكة العربية السعودية | تلفون: ٩٦٦٥٣٠٧٦٢٢٢٢
+<br/>P.O. Box 2666 Tabuk 71461, Kingdom of Saudi Arabia | Tel.: +966 53 0090076<br/>
+Email: info@tabukinvestment.com | tabukinvestment.com</td>
+           </tr>
+          </table>
+        </macro>
+    </macrolist>
+    <style type="text/css">* {
+		<#if .locale == "zh_CN">
+			font-family: NotoSans, NotoSansCJKsc, sans-serif;
+		<#elseif .locale == "zh_TW">
+			font-family: NotoSans, NotoSansCJKtc, sans-serif;
+		<#elseif .locale == "ja_JP">
+			font-family: NotoSans, NotoSansCJKjp, sans-serif;
+		<#elseif .locale == "ko_KR">
+			font-family: NotoSans, NotoSansCJKkr, sans-serif;
+		<#elseif .locale == "th_TH">
+			font-family: NotoSans, NotoSansThai, sans-serif;
+		<#else>
+			font-family: NotoSans, sans-serif;
+		</#if>
+		}
+     * {
+                font-family: NotoSansArabic, NotoSans, sans-serif;
+          }
+</style>
+</head>
+<body header="nlheader" header-height="18%" footer="nlfooter" footer-height="5%" padding="0.5in 0.5in 0.5in 0.5in" size="Letter">
+    <table width="100%"><tr>
+	<td align="left" font-size="13px" style="width: 403px;"><b>Bill to</b></td>
+	<td style="width: 56px;">&nbsp;</td>
+	<td align="right" font-size="13px" style="width: 335px;"><b>فاتورة إلى</b></td>
+	</tr>
+	<tr>
+	<td align="left" style="width: 403px;">Name:</td>
+	<td colspan="1" rowspan="5" style="width: 56px;">&nbsp;</td>
+	<td align="right" style="width: 335px;">:الاسم</td>
+	</tr>
+	<tr>
+	<td colspan="1" rowspan="3" style="width: 403px;">Address: ${record.location}</td>
+	<td align="right" style="width: 335px;">:العنوان</td>
+	</tr>
+	<tr>
+	<td style="width: 335px;">&nbsp;</td>
+	</tr>
+	<tr>
+	<td style="width: 335px;">&nbsp;</td>
+	</tr>
+	<tr>
+	<td style="width: 403px;">VAT Reg. No: ${record.entity.vatregnumber}</td>
+	<td align="right" style="width: 335px;">${record.entity.vatregnumber} :الرقم الضريبي</td>
+	</tr></table>
+<!--_____________________________________________-->
+
+<table style="width:100%;"><tr>
+	<td style="width: 340px;"><b>Dear Sir/s</b></td>
+	<td style="width: 263px; font-size: 14px;">Invoice No.&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;رقم الفاتورة:</td>
+	<td style="width: 191px; font-size: 14px;">${record.tranid}</td>
+	</tr>
+	<tr>
+	<td colspan="1" rowspan="3" style="width: 340px; font-size: 12px;">We have pleasure in submitting the following invoice<br />for favour of an early payment.</td>
+	<td style="width: 263px; font-size: 14px;">Invoice Date&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;تاريخ الفاتورة:</td>
+	<td style="width: 191px; font-size: 14px;">${record.trandate}</td>
+	</tr>
+	<tr>
+	<td style="width: 263px; font-size: 14px;">Currency&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; العملة:</td>
+	<td style="width: 191px; font-size: 14px;">${record.currencysymbol}</td>
+	</tr>
+	<tr>
+	<td style="width: 263px; font-size: 14px;">Customer ID&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;رقم العميل:</td>
+	<td style="width: 191px; font-size: 14px;">${record.entity}</td>
+	</tr></table>
+<!--_____________________________________________-->
+
+<table style="width:100%; border: 1px;"><#list record.item as item><#if item_index==0><tr>
+	<td style="color: white; background-color: black; font-weight: bold; width: 71px; font-size: 12px; align: center; border-right: 1px; border-bottom: 1px;">S.No.<br />الرقم</td>
+	<td style="color: white; background-color: black; font-weight: bold; width: 244px; font-size: 12px; align: center; border-right: 1px; border-bottom: 1px;">Description of Goods/ Services<br />وصف المنتج أو الخدمة</td>
+	<td style="color: white; background-color: black; font-weight: bold; width: 118px; font-size: 12px; align: center; border-right: 1px; border-bottom: 1px;">Taxable Value<br />القيمة الخاضعة للضريبة</td>
+	<td style="color: white; background-color: black; font-weight: bold; width: 111px; font-size: 12px; align: center; border-right: 1px; border-bottom: 1px;">Tax Rate<br />معدل الضريبة</td>
+	<td style="color: white; background-color: black; font-weight: bold; width: 114px; font-size: 12px; align: center; border-right: 1px; border-bottom: 1px;">Tax Amount<br />مبلغ الضريبة</td>
+	<td style="color: white; background-color: black; font-weight: bold; width: 119px; font-size: 12px; align: center; border-bottom: 1px;">Total Include Tax<br />المبلغ شامل الضريبة</td>
+	</tr>
+	</#if>
+	<tr>
+	<td style="width: 71px; font-size: 10px; align: center; border-right: 1px; border-bottom: 1px;">${item?index + 1}</td>
+	<td style="width: 244px; font-size: 10px; align: center; border-right: 1px; border-bottom: 1px;">${item.description}</td>
+	<td style="width: 118px; font-size: 10px; align: center; border-right: 1px; border-bottom: 1px;">${item.rate * item.quantity}</td>
+	<td style="width: 111px; font-size: 10px; align: center; border-right: 1px; border-bottom: 1px;">${item.taxrate1}</td>
+	<td style="width: 114px; font-size: 10px; align: center; border-right: 1px; border-bottom: 1px;">${item.taxamt}</td>
+	<td style="width: 119px; font-size: 10px; align: center; border-bottom: 1px;">${item.Grossamt}</td>
+	</tr>
+	</#list></table>
+<!--_____________________________________________-->
+
+<table style="width: 100%;"><tr>
+	<td style="font-size: 12px; width: 681px; border: 1px;"><b>Total In ${record.total} الإجمالي بالريال السعودي</b></td>
+	<td style="width: 118px; border: 1px;">&nbsp;</td>
+	</tr></table>
+</body>
+</pdf>

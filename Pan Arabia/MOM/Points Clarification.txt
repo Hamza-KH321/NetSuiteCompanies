@@ -1,0 +1,47 @@
+* point 1 - WF on PO and quotation, it will have one level only which is sales manager for each brand,
+  each item may have different brand so if the po have multiple items and each item have different brand,   it will request approval from each sales manager that is responsible for this brand, (and refre to the   record to check the x days). 
+
+in PO , x days must be implemented in brands compare transaction date with x days it will request approval from sales manager and the sales manager will be specified based on brand. if delivery date is less than x date it will be approved directly, may have multiple brands, x days will be on line level. 
+
+* point 2 - add checkbox on po form named acknoweldgment, add draft on po form print pdf and if   acknoweldgment done the file attachment must be mandatory. (we can create client script on field change that if the aknowlegment field change the file attachment will be mandatory)
+
+* point 3 - sample request, add approval cycle based on item lines based on brand that will request   approval from sales manager, create record that will have 3 fields each sales manager can edit the limit   of request and if the amount is zero in these three boxees so it will require approval always and if   999999 hten no approval needed.
+
+* point 4 - Hussam.
+
+* point 5 - add nepco price on item record, when crearting SO on items if the rate is less than nepco show   alert on system and add gits checkbox on lines and if this checkbox is checked then dont do the       validation.
+
+* point 6 - on sales order form, add body field for delivery date (send email weekly) check record.
+
+* point 7 - on sales order file attachment must be mandatory except the cash sale. 
+
+* point 9 - hussam
+
+* point 10 - approval cycle on SO and invoice if the customer exceeded the credit limit it will request     approval and you can procedd with fulfillment once the so is approved  (Finance manager only),
+  if there is a new SO that is created and there is a invocie that is not paid yet the system will block     the user to creating so's.
+
+* point 11 - 2nsa
+
+* point 12 - 2nsa
+
+* point 13 - after 90 days from the last receipt date it will check if there is no item receipt it will   send email to sales rep , finance , supervisor and product line manager, (check record).
+
+* point 14 - if the invoice exceeded the due date and there is no payment receieved it will send email   weekly for  sales rep , finance , supervisor and product line manager, and CEO.
+
+* point 15 - no need
+
+* point 16 - RMA Approval cycyle sales manager - senior accountant.
+
+* point 17 - hussam must add craete virtual wh, item fulfillment record (file attachment must be mandatory).
+
+* point 19 - In Item Fulfillment record when fulfilling items if the lines use SFDA Wh then file attachment must be mandatory, on the Item Receipt record if the Wh is SFDA then item status in inventory details, the status must be hold.
+
+* point 21 - on all sales record add sublist field nepco code  on items level so if you entered the first time it will be saved on the list and user can choose it again. 
+
+
+
+
+
+
+
+

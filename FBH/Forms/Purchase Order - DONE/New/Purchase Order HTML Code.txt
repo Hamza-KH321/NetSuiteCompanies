@@ -1,0 +1,205 @@
+<?xml version="1.0"?><!DOCTYPE pdf PUBLIC "-//big.faceless.org//report" "report-1.1.dtd">
+<pdf>
+<head>
+  <link name="NotoSansArabic" type="font" subtype="opentype" src="${nsfont.NotoSansArabic_Regular}" src-bold="${nsfont.NotoSansArabic_Bold}" bytes="2" subset="false"/>
+	<link name="NotoSans" type="font" subtype="truetype" src="${nsfont.NotoSans_Regular}" src-bold="${nsfont.NotoSans_Bold}" src-italic="${nsfont.NotoSans_Italic}" src-bolditalic="${nsfont.NotoSans_BoldItalic}" bytes="2" />
+	<#if .locale == "zh_CN">
+		<link name="NotoSansCJKsc" type="font" subtype="opentype" src="${nsfont.NotoSansCJKsc_Regular}" src-bold="${nsfont.NotoSansCJKsc_Bold}" bytes="2" />
+	<#elseif .locale == "zh_TW">
+		<link name="NotoSansCJKtc" type="font" subtype="opentype" src="${nsfont.NotoSansCJKtc_Regular}" src-bold="${nsfont.NotoSansCJKtc_Bold}" bytes="2" />
+	<#elseif .locale == "ja_JP">
+		<link name="NotoSansCJKjp" type="font" subtype="opentype" src="${nsfont.NotoSansCJKjp_Regular}" src-bold="${nsfont.NotoSansCJKjp_Bold}" bytes="2" />
+	<#elseif .locale == "ko_KR">
+		<link name="NotoSansCJKkr" type="font" subtype="opentype" src="${nsfont.NotoSansCJKkr_Regular}" src-bold="${nsfont.NotoSansCJKkr_Bold}" bytes="2" />
+	<#elseif .locale == "th_TH">
+		<link name="NotoSansThai" type="font" subtype="opentype" src="${nsfont.NotoSansThai_Regular}" src-bold="${nsfont.NotoSansThai_Bold}" bytes="2" />
+	</#if>
+    <macrolist>
+        <macro id="nlheader">
+            <table border="0" cellpadding="1" cellspacing="0" style="width:100%;"><tr>
+	<td><img height="35%" src="https://8204691-sb1.app.netsuite.com/core/media/media.nl?id=655&amp;c=8204691_SB1&amp;h=bAjid9db4-B68kkgZR-IK0xURDiAhdn1HlNZ2MsqCtqRlhYF" width="35%" /></td>
+	<td>Al Fursan Diamond Trading Est</td>
+	</tr>
+	<tr>
+	<td><strong>Purchase Order</strong></td>
+	<td>&nbsp;</td>
+	</tr>
+	<tr>
+	<td>CHF-PO-${record.trandate}</td>
+	<td>&nbsp;</td>
+	</tr></table>
+
+<hr style="background-color:black;" />
+        </macro>
+        <macro id="nlfooter">
+            <table class="footer" style="width: 100%;"><tr>
+	<td>&nbsp;</td>
+	<td align="right"><pagenumber/> of <totalpages/></td>
+	</tr></table>
+        </macro>
+    </macrolist>
+    <style type="text/css">* {
+		<#if .locale == "zh_CN">
+			font-family: NotoSans, NotoSansCJKsc, sans-serif;
+		<#elseif .locale == "zh_TW">
+			font-family: NotoSans, NotoSansCJKtc, sans-serif;
+		<#elseif .locale == "ja_JP">
+			font-family: NotoSans, NotoSansCJKjp, sans-serif;
+		<#elseif .locale == "ko_KR">
+			font-family: NotoSans, NotoSansCJKkr, sans-serif;
+		<#elseif .locale == "th_TH">
+			font-family: NotoSans, NotoSansThai, sans-serif;
+		<#else>
+			font-family: NotoSans, sans-serif;
+		</#if>
+		}
+		table {
+			font-size: 9pt;
+			table-layout: fixed;
+		}
+        th {
+            font-weight: bold;
+            font-size: 8pt;
+            vertical-align: middle;
+            padding: 5px 6px 3px;
+            background-color: #e3e3e3;
+            color: #333333;
+        }
+        td {
+            padding: 4px 6px;
+        }
+		td p { align:left }
+        b {
+            font-weight: bold;
+            color: #333333;
+        }
+        table.header td {
+            padding: 0;
+            font-size: 10pt;
+        }
+        table.footer td {
+            padding: 0;
+            font-size: 8pt;
+        }
+        table.itemtable th {
+            padding-bottom: 10px;
+            padding-top: 10px;
+        }
+        table.body td {
+            padding-top: 2px;
+        }
+        table.total {
+            page-break-inside: avoid;
+        }
+        tr.totalrow {
+            background-color: #e3e3e3;
+            line-height: 200%;
+        }
+        td.totalboxtop {
+            font-size: 12pt;
+            background-color: #e3e3e3;
+        }
+        td.addressheader {
+            font-size: 8pt;
+            padding-top: 6px;
+            padding-bottom: 2px;
+        }
+        td.address {
+            padding-top: 0;
+        }
+        td.totalboxmid {
+            font-size: 28pt;
+            padding-top: 20px;
+            background-color: #e3e3e3;
+        }
+        td.totalboxbot {
+            background-color: #e3e3e3;
+            font-weight: bold;
+        }
+        span.title {
+            font-size: 28pt;
+        }
+        span.number {
+            font-size: 16pt;
+        }
+        span.itemname {
+            font-weight: bold;
+            line-height: 150%;
+        }
+        hr {
+            width: 100%;
+            color: #d3d3d3;
+            background-color: #d3d3d3;
+            height: 1px;
+        }
+</style>
+</head>
+<body header="nlheader" header-height="10%" footer="nlfooter" footer-height="20pt" padding="0.5in 0.5in 0.5in 0.5in" size="Letter">
+    <p>&nbsp;</p>
+
+<table border="0" cellpadding="2" cellspacing="0" style="width:100%;"><tr>
+	<td><strong>Supplier Name</strong></td>
+	<td><strong>${record.entity}</strong></td>
+	<td><strong>Date</strong></td>
+	<td>${record.trandate}</td>
+	</tr>
+	<tr>
+	<td><strong>VAT Number</strong></td>
+	<td>300015636700002</td>
+	<td><strong>Reqd By Date</strong></td>
+	<td>&nbsp;</td>
+	</tr>
+	<tr>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	<td><strong>Payment Terms</strong></td>
+	<td>${record.terms}</td>
+	</tr></table>
+<br /><!-- __________________________________________________________________________________________________________--><#assign totalQuantity = 0><#list record.item as item>
+<table border="1" cellpadding="1" cellspacing="0" style="width:100%;"><#if item_index==0><tr>
+	<td border-bottom="1" border-right="1" style="width: 85px;"><strong>Sr</strong></td>
+	<td border-bottom="1" border-right="1" style="width: 131px;"><strong>Item Code</strong></td>
+	<td border-bottom="1" border-right="1" style="width: 236px;"><strong>Description</strong></td>
+	<td border-bottom="1" border-right="1" style="width: 81px;"><strong>Quantity</strong></td>
+	<td border-bottom="1" border-right="1" style="width: 69px;"><strong>Rate</strong></td>
+	<td border-bottom="1"><strong>Amount</strong></td>
+	</tr>
+	</#if>
+	<tr>
+	<td border-right="1" style="width: 85px;">${item?index + 1}</td>
+	<td border-right="1" style="width: 131px;">${item.item}</td>
+	<td border-right="1" style="width: 236px;">${item.description}</td>
+    <#assign totalQuantity = totalQuantity + item.quantity>
+	<td border-right="1" style="width: 81px;">${item.quantity?string('0.00')}</td>
+	<td border-right="1" style="width: 69px;">${item.rate?string('0.00')}</td>
+	<td>${item.amount?string('0.00')}</td>
+	</tr></table>
+</#list>
+
+<table border="0" cellpadding="1" cellspacing="2" style="width:100%;"><tr>
+	<td><strong>Total Quantity</strong></td>
+	<td>${totalQuantity}</td>
+	<td><strong>Total</strong></td>
+	<td>SAR&nbsp;${record.subtotal?string('0.00')}</td>
+	</tr>
+	<tr>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	<td><strong>VAT 15%</strong></td>
+	<td>SAR&nbsp;${record.taxtotal?string('0.00')}</td>
+	</tr>
+	<tr>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	<td><strong>Grand Total</strong></td>
+	<td>SAR&nbsp;${record.total?string('0.00')}</td>
+	</tr>
+	<tr>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	<td><strong>In Words</strong></td>
+	<td>${record.custbody_vs_amt_in_words}</td>
+	</tr></table>
+<!-- __________________________________________________________________________________________________________-->
+</body>
+</pdf>

@@ -1,0 +1,192 @@
+F:\الفوترة الإلكترونية\Phase 2 Sample\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Helpers\obj\Debug\EInvoiceKSADemo.NETFramework.Helpers.csproj.AssemblyReference.cache
+F:\الفوترة الإلكترونية\Phase 2 Sample\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Helpers\obj\Debug\EInvoiceKSADemo.NETFramework.Helpers.csproj.CoreCompileInputs.cache
+F:\الفوترة الإلكترونية\Phase 2 Sample\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Helpers\bin\Debug\EInvoiceKSADemo.NETFramework.Helpers.dll.config
+F:\الفوترة الإلكترونية\Phase 2 Sample\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Helpers\bin\Debug\EInvoiceKSADemo.NETFramework.Helpers.dll
+F:\الفوترة الإلكترونية\Phase 2 Sample\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Helpers\bin\Debug\EInvoiceKSADemo.NETFramework.Helpers.pdb
+F:\الفوترة الإلكترونية\Phase 2 Sample\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Helpers\bin\Debug\BouncyCastle.Crypto.dll
+F:\الفوترة الإلكترونية\Phase 2 Sample\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Helpers\bin\Debug\IKVM.OpenJDK.Charsets.dll
+F:\الفوترة الإلكترونية\Phase 2 Sample\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Helpers\bin\Debug\IKVM.OpenJDK.Core.dll
+F:\الفوترة الإلكترونية\Phase 2 Sample\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Helpers\bin\Debug\IKVM.OpenJDK.Localedata.dll
+F:\الفوترة الإلكترونية\Phase 2 Sample\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Helpers\bin\Debug\IKVM.OpenJDK.Text.dll
+F:\الفوترة الإلكترونية\Phase 2 Sample\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Helpers\bin\Debug\IKVM.OpenJDK.Util.dll
+F:\الفوترة الإلكترونية\Phase 2 Sample\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Helpers\bin\Debug\IKVM.OpenJDK.XML.API.dll
+F:\الفوترة الإلكترونية\Phase 2 Sample\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Helpers\bin\Debug\IKVM.Runtime.dll
+F:\الفوترة الإلكترونية\Phase 2 Sample\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Helpers\bin\Debug\Microsoft.Bcl.AsyncInterfaces.dll
+F:\الفوترة الإلكترونية\Phase 2 Sample\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Helpers\bin\Debug\saxon-he-10.8.dll
+F:\الفوترة الإلكترونية\Phase 2 Sample\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Helpers\bin\Debug\saxon-he-api-10.8.dll
+F:\الفوترة الإلكترونية\Phase 2 Sample\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Helpers\bin\Debug\System.Buffers.dll
+F:\الفوترة الإلكترونية\Phase 2 Sample\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Helpers\bin\Debug\System.Memory.dll
+F:\الفوترة الإلكترونية\Phase 2 Sample\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Helpers\bin\Debug\System.Net.Http.Json.dll
+F:\الفوترة الإلكترونية\Phase 2 Sample\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Helpers\bin\Debug\System.Numerics.Vectors.dll
+F:\الفوترة الإلكترونية\Phase 2 Sample\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Helpers\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+F:\الفوترة الإلكترونية\Phase 2 Sample\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Helpers\bin\Debug\System.Security.AccessControl.dll
+F:\الفوترة الإلكترونية\Phase 2 Sample\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Helpers\bin\Debug\System.Security.Cryptography.Xml.dll
+F:\الفوترة الإلكترونية\Phase 2 Sample\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Helpers\bin\Debug\System.Security.Permissions.dll
+F:\الفوترة الإلكترونية\Phase 2 Sample\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Helpers\bin\Debug\System.Security.Principal.Windows.dll
+F:\الفوترة الإلكترونية\Phase 2 Sample\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Helpers\bin\Debug\System.Text.Encodings.Web.dll
+F:\الفوترة الإلكترونية\Phase 2 Sample\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Helpers\bin\Debug\System.Text.Json.dll
+F:\الفوترة الإلكترونية\Phase 2 Sample\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Helpers\bin\Debug\System.Threading.Tasks.Extensions.dll
+F:\الفوترة الإلكترونية\Phase 2 Sample\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Helpers\bin\Debug\System.ValueTuple.dll
+F:\الفوترة الإلكترونية\Phase 2 Sample\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Helpers\bin\Debug\Microsoft.Bcl.AsyncInterfaces.xml
+F:\الفوترة الإلكترونية\Phase 2 Sample\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Helpers\bin\Debug\saxon-he-api-10.8.xml
+F:\الفوترة الإلكترونية\Phase 2 Sample\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Helpers\bin\Debug\System.Buffers.xml
+F:\الفوترة الإلكترونية\Phase 2 Sample\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Helpers\bin\Debug\System.Memory.xml
+F:\الفوترة الإلكترونية\Phase 2 Sample\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Helpers\bin\Debug\System.Net.Http.Json.xml
+F:\الفوترة الإلكترونية\Phase 2 Sample\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Helpers\bin\Debug\System.Numerics.Vectors.xml
+F:\الفوترة الإلكترونية\Phase 2 Sample\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Helpers\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+F:\الفوترة الإلكترونية\Phase 2 Sample\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Helpers\bin\Debug\System.Security.AccessControl.xml
+F:\الفوترة الإلكترونية\Phase 2 Sample\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Helpers\bin\Debug\System.Security.Cryptography.Xml.xml
+F:\الفوترة الإلكترونية\Phase 2 Sample\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Helpers\bin\Debug\System.Security.Permissions.xml
+F:\الفوترة الإلكترونية\Phase 2 Sample\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Helpers\bin\Debug\System.Security.Principal.Windows.xml
+F:\الفوترة الإلكترونية\Phase 2 Sample\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Helpers\bin\Debug\System.Text.Encodings.Web.xml
+F:\الفوترة الإلكترونية\Phase 2 Sample\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Helpers\bin\Debug\System.Text.Json.xml
+F:\الفوترة الإلكترونية\Phase 2 Sample\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Helpers\bin\Debug\System.Threading.Tasks.Extensions.xml
+F:\الفوترة الإلكترونية\Phase 2 Sample\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Helpers\bin\Debug\System.ValueTuple.xml
+F:\الفوترة الإلكترونية\Phase 2 Sample\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Helpers\obj\Debug\EInvoiceKSADemo.NETFramework.Helpers.csproj.CopyComplete
+F:\الفوترة الإلكترونية\Phase 2 Sample\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Helpers\obj\Debug\EInvoiceKSADemo.NETFramework.Helpers.dll
+F:\الفوترة الإلكترونية\Phase 2 Sample\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Helpers\obj\Debug\EInvoiceKSADemo.NETFramework.Helpers.pdb
+F:\الفوترة الإلكترونية\Phase 2 Sample\Demo\v2\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Helpers\bin\Debug\EInvoiceKSADemo.NETFramework.Helpers.dll.config
+F:\الفوترة الإلكترونية\Phase 2 Sample\Demo\v2\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Helpers\bin\Debug\EInvoiceKSADemo.NETFramework.Helpers.dll
+F:\الفوترة الإلكترونية\Phase 2 Sample\Demo\v2\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Helpers\bin\Debug\EInvoiceKSADemo.NETFramework.Helpers.pdb
+F:\الفوترة الإلكترونية\Phase 2 Sample\Demo\v2\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Helpers\bin\Debug\BouncyCastle.Crypto.dll
+F:\الفوترة الإلكترونية\Phase 2 Sample\Demo\v2\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Helpers\bin\Debug\IKVM.OpenJDK.Charsets.dll
+F:\الفوترة الإلكترونية\Phase 2 Sample\Demo\v2\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Helpers\bin\Debug\IKVM.OpenJDK.Core.dll
+F:\الفوترة الإلكترونية\Phase 2 Sample\Demo\v2\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Helpers\bin\Debug\IKVM.OpenJDK.Localedata.dll
+F:\الفوترة الإلكترونية\Phase 2 Sample\Demo\v2\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Helpers\bin\Debug\IKVM.OpenJDK.Text.dll
+F:\الفوترة الإلكترونية\Phase 2 Sample\Demo\v2\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Helpers\bin\Debug\IKVM.OpenJDK.Util.dll
+F:\الفوترة الإلكترونية\Phase 2 Sample\Demo\v2\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Helpers\bin\Debug\IKVM.OpenJDK.XML.API.dll
+F:\الفوترة الإلكترونية\Phase 2 Sample\Demo\v2\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Helpers\bin\Debug\IKVM.Runtime.dll
+F:\الفوترة الإلكترونية\Phase 2 Sample\Demo\v2\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Helpers\bin\Debug\Microsoft.Bcl.AsyncInterfaces.dll
+F:\الفوترة الإلكترونية\Phase 2 Sample\Demo\v2\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Helpers\bin\Debug\saxon-he-10.8.dll
+F:\الفوترة الإلكترونية\Phase 2 Sample\Demo\v2\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Helpers\bin\Debug\saxon-he-api-10.8.dll
+F:\الفوترة الإلكترونية\Phase 2 Sample\Demo\v2\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Helpers\bin\Debug\System.Buffers.dll
+F:\الفوترة الإلكترونية\Phase 2 Sample\Demo\v2\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Helpers\bin\Debug\System.Memory.dll
+F:\الفوترة الإلكترونية\Phase 2 Sample\Demo\v2\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Helpers\bin\Debug\System.Net.Http.Json.dll
+F:\الفوترة الإلكترونية\Phase 2 Sample\Demo\v2\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Helpers\bin\Debug\System.Numerics.Vectors.dll
+F:\الفوترة الإلكترونية\Phase 2 Sample\Demo\v2\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Helpers\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+F:\الفوترة الإلكترونية\Phase 2 Sample\Demo\v2\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Helpers\bin\Debug\System.Security.AccessControl.dll
+F:\الفوترة الإلكترونية\Phase 2 Sample\Demo\v2\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Helpers\bin\Debug\System.Security.Cryptography.Xml.dll
+F:\الفوترة الإلكترونية\Phase 2 Sample\Demo\v2\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Helpers\bin\Debug\System.Security.Permissions.dll
+F:\الفوترة الإلكترونية\Phase 2 Sample\Demo\v2\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Helpers\bin\Debug\System.Security.Principal.Windows.dll
+F:\الفوترة الإلكترونية\Phase 2 Sample\Demo\v2\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Helpers\bin\Debug\System.Text.Encodings.Web.dll
+F:\الفوترة الإلكترونية\Phase 2 Sample\Demo\v2\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Helpers\bin\Debug\System.Text.Json.dll
+F:\الفوترة الإلكترونية\Phase 2 Sample\Demo\v2\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Helpers\bin\Debug\System.Threading.Tasks.Extensions.dll
+F:\الفوترة الإلكترونية\Phase 2 Sample\Demo\v2\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Helpers\bin\Debug\System.ValueTuple.dll
+F:\الفوترة الإلكترونية\Phase 2 Sample\Demo\v2\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Helpers\bin\Debug\Microsoft.Bcl.AsyncInterfaces.xml
+F:\الفوترة الإلكترونية\Phase 2 Sample\Demo\v2\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Helpers\bin\Debug\saxon-he-api-10.8.xml
+F:\الفوترة الإلكترونية\Phase 2 Sample\Demo\v2\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Helpers\bin\Debug\System.Buffers.xml
+F:\الفوترة الإلكترونية\Phase 2 Sample\Demo\v2\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Helpers\bin\Debug\System.Memory.xml
+F:\الفوترة الإلكترونية\Phase 2 Sample\Demo\v2\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Helpers\bin\Debug\System.Net.Http.Json.xml
+F:\الفوترة الإلكترونية\Phase 2 Sample\Demo\v2\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Helpers\bin\Debug\System.Numerics.Vectors.xml
+F:\الفوترة الإلكترونية\Phase 2 Sample\Demo\v2\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Helpers\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+F:\الفوترة الإلكترونية\Phase 2 Sample\Demo\v2\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Helpers\bin\Debug\System.Security.AccessControl.xml
+F:\الفوترة الإلكترونية\Phase 2 Sample\Demo\v2\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Helpers\bin\Debug\System.Security.Cryptography.Xml.xml
+F:\الفوترة الإلكترونية\Phase 2 Sample\Demo\v2\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Helpers\bin\Debug\System.Security.Permissions.xml
+F:\الفوترة الإلكترونية\Phase 2 Sample\Demo\v2\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Helpers\bin\Debug\System.Security.Principal.Windows.xml
+F:\الفوترة الإلكترونية\Phase 2 Sample\Demo\v2\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Helpers\bin\Debug\System.Text.Encodings.Web.xml
+F:\الفوترة الإلكترونية\Phase 2 Sample\Demo\v2\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Helpers\bin\Debug\System.Text.Json.xml
+F:\الفوترة الإلكترونية\Phase 2 Sample\Demo\v2\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Helpers\bin\Debug\System.Threading.Tasks.Extensions.xml
+F:\الفوترة الإلكترونية\Phase 2 Sample\Demo\v2\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Helpers\bin\Debug\System.ValueTuple.xml
+F:\الفوترة الإلكترونية\Phase 2 Sample\Demo\v2\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Helpers\obj\Debug\EInvoiceKSADemo.NETFramework.Helpers.csproj.AssemblyReference.cache
+F:\الفوترة الإلكترونية\Phase 2 Sample\Demo\v2\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Helpers\obj\Debug\EInvoiceKSADemo.NETFramework.Helpers.csproj.CoreCompileInputs.cache
+F:\الفوترة الإلكترونية\Phase 2 Sample\Demo\v2\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Helpers\obj\Debug\EInvoiceKSADemo.NETFramework.Helpers.csproj.CopyComplete
+F:\الفوترة الإلكترونية\Phase 2 Sample\Demo\v2\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Helpers\obj\Debug\EInvoiceKSADemo.NETFramework.Helpers.dll
+F:\الفوترة الإلكترونية\Phase 2 Sample\Demo\v2\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Helpers\obj\Debug\EInvoiceKSADemo.NETFramework.Helpers.pdb
+F:\Integration\الفوترة الإلكترونية\Phase 2 Sample\Demo\v2\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Helpers\bin\Debug\EInvoiceKSADemo.NETFramework.Helpers.dll.config
+F:\Integration\الفوترة الإلكترونية\Phase 2 Sample\Demo\v2\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Helpers\bin\Debug\EInvoiceKSADemo.NETFramework.Helpers.dll
+F:\Integration\الفوترة الإلكترونية\Phase 2 Sample\Demo\v2\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Helpers\bin\Debug\EInvoiceKSADemo.NETFramework.Helpers.pdb
+F:\Integration\الفوترة الإلكترونية\Phase 2 Sample\Demo\v2\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Helpers\bin\Debug\BouncyCastle.Crypto.dll
+F:\Integration\الفوترة الإلكترونية\Phase 2 Sample\Demo\v2\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Helpers\bin\Debug\IKVM.OpenJDK.Charsets.dll
+F:\Integration\الفوترة الإلكترونية\Phase 2 Sample\Demo\v2\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Helpers\bin\Debug\IKVM.OpenJDK.Core.dll
+F:\Integration\الفوترة الإلكترونية\Phase 2 Sample\Demo\v2\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Helpers\bin\Debug\IKVM.OpenJDK.Localedata.dll
+F:\Integration\الفوترة الإلكترونية\Phase 2 Sample\Demo\v2\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Helpers\bin\Debug\IKVM.OpenJDK.Text.dll
+F:\Integration\الفوترة الإلكترونية\Phase 2 Sample\Demo\v2\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Helpers\bin\Debug\IKVM.OpenJDK.Util.dll
+F:\Integration\الفوترة الإلكترونية\Phase 2 Sample\Demo\v2\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Helpers\bin\Debug\IKVM.OpenJDK.XML.API.dll
+F:\Integration\الفوترة الإلكترونية\Phase 2 Sample\Demo\v2\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Helpers\bin\Debug\IKVM.Runtime.dll
+F:\Integration\الفوترة الإلكترونية\Phase 2 Sample\Demo\v2\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Helpers\bin\Debug\Microsoft.Bcl.AsyncInterfaces.dll
+F:\Integration\الفوترة الإلكترونية\Phase 2 Sample\Demo\v2\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Helpers\bin\Debug\saxon-he-10.8.dll
+F:\Integration\الفوترة الإلكترونية\Phase 2 Sample\Demo\v2\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Helpers\bin\Debug\saxon-he-api-10.8.dll
+F:\Integration\الفوترة الإلكترونية\Phase 2 Sample\Demo\v2\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Helpers\bin\Debug\System.Buffers.dll
+F:\Integration\الفوترة الإلكترونية\Phase 2 Sample\Demo\v2\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Helpers\bin\Debug\System.Memory.dll
+F:\Integration\الفوترة الإلكترونية\Phase 2 Sample\Demo\v2\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Helpers\bin\Debug\System.Net.Http.Json.dll
+F:\Integration\الفوترة الإلكترونية\Phase 2 Sample\Demo\v2\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Helpers\bin\Debug\System.Numerics.Vectors.dll
+F:\Integration\الفوترة الإلكترونية\Phase 2 Sample\Demo\v2\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Helpers\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+F:\Integration\الفوترة الإلكترونية\Phase 2 Sample\Demo\v2\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Helpers\bin\Debug\System.Security.AccessControl.dll
+F:\Integration\الفوترة الإلكترونية\Phase 2 Sample\Demo\v2\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Helpers\bin\Debug\System.Security.Cryptography.Xml.dll
+F:\Integration\الفوترة الإلكترونية\Phase 2 Sample\Demo\v2\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Helpers\bin\Debug\System.Security.Permissions.dll
+F:\Integration\الفوترة الإلكترونية\Phase 2 Sample\Demo\v2\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Helpers\bin\Debug\System.Security.Principal.Windows.dll
+F:\Integration\الفوترة الإلكترونية\Phase 2 Sample\Demo\v2\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Helpers\bin\Debug\System.Text.Encodings.Web.dll
+F:\Integration\الفوترة الإلكترونية\Phase 2 Sample\Demo\v2\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Helpers\bin\Debug\System.Text.Json.dll
+F:\Integration\الفوترة الإلكترونية\Phase 2 Sample\Demo\v2\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Helpers\bin\Debug\System.Threading.Tasks.Extensions.dll
+F:\Integration\الفوترة الإلكترونية\Phase 2 Sample\Demo\v2\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Helpers\bin\Debug\System.ValueTuple.dll
+F:\Integration\الفوترة الإلكترونية\Phase 2 Sample\Demo\v2\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Helpers\bin\Debug\Microsoft.Bcl.AsyncInterfaces.xml
+F:\Integration\الفوترة الإلكترونية\Phase 2 Sample\Demo\v2\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Helpers\bin\Debug\saxon-he-api-10.8.xml
+F:\Integration\الفوترة الإلكترونية\Phase 2 Sample\Demo\v2\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Helpers\bin\Debug\System.Buffers.xml
+F:\Integration\الفوترة الإلكترونية\Phase 2 Sample\Demo\v2\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Helpers\bin\Debug\System.Memory.xml
+F:\Integration\الفوترة الإلكترونية\Phase 2 Sample\Demo\v2\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Helpers\bin\Debug\System.Net.Http.Json.xml
+F:\Integration\الفوترة الإلكترونية\Phase 2 Sample\Demo\v2\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Helpers\bin\Debug\System.Numerics.Vectors.xml
+F:\Integration\الفوترة الإلكترونية\Phase 2 Sample\Demo\v2\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Helpers\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+F:\Integration\الفوترة الإلكترونية\Phase 2 Sample\Demo\v2\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Helpers\bin\Debug\System.Security.AccessControl.xml
+F:\Integration\الفوترة الإلكترونية\Phase 2 Sample\Demo\v2\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Helpers\bin\Debug\System.Security.Cryptography.Xml.xml
+F:\Integration\الفوترة الإلكترونية\Phase 2 Sample\Demo\v2\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Helpers\bin\Debug\System.Security.Permissions.xml
+F:\Integration\الفوترة الإلكترونية\Phase 2 Sample\Demo\v2\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Helpers\bin\Debug\System.Security.Principal.Windows.xml
+F:\Integration\الفوترة الإلكترونية\Phase 2 Sample\Demo\v2\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Helpers\bin\Debug\System.Text.Encodings.Web.xml
+F:\Integration\الفوترة الإلكترونية\Phase 2 Sample\Demo\v2\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Helpers\bin\Debug\System.Text.Json.xml
+F:\Integration\الفوترة الإلكترونية\Phase 2 Sample\Demo\v2\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Helpers\bin\Debug\System.Threading.Tasks.Extensions.xml
+F:\Integration\الفوترة الإلكترونية\Phase 2 Sample\Demo\v2\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Helpers\bin\Debug\System.ValueTuple.xml
+F:\Integration\الفوترة الإلكترونية\Phase 2 Sample\Demo\v2\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Helpers\obj\Debug\EInvoiceKSADemo.NETFramework.Helpers.csproj.AssemblyReference.cache
+F:\Integration\الفوترة الإلكترونية\Phase 2 Sample\Demo\v2\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Helpers\obj\Debug\EInvoiceKSADemo.NETFramework.Helpers.csproj.CoreCompileInputs.cache
+F:\Integration\الفوترة الإلكترونية\Phase 2 Sample\Demo\v2\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Helpers\obj\Debug\EInvoiceKSADemo.NETFramework.Helpers.csproj.CopyComplete
+F:\Integration\الفوترة الإلكترونية\Phase 2 Sample\Demo\v2\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Helpers\obj\Debug\EInvoiceKSADemo.NETFramework.Helpers.dll
+F:\Integration\الفوترة الإلكترونية\Phase 2 Sample\Demo\v2\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Helpers\obj\Debug\EInvoiceKSADemo.NETFramework.Helpers.pdb
+F:\Integration\الفوترة الإلكترونية\Phase 2 Sample\Demo\v2\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Helpers\bin\Debug\System.Diagnostics.DiagnosticSource.dll
+F:\Integration\الفوترة الإلكترونية\Phase 2 Sample\Demo\v2\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Helpers\bin\Debug\System.Diagnostics.DiagnosticSource.xml
+C:\Users\Lenovo\Desktop\Vertical solutions\Vertical solutions\EInvoiceKSADemo.NETFramework.Helpers\bin\Debug\EInvoiceKSADemo.NETFramework.Helpers.dll.config
+C:\Users\Lenovo\Desktop\Vertical solutions\Vertical solutions\EInvoiceKSADemo.NETFramework.Helpers\bin\Debug\EInvoiceKSADemo.NETFramework.Helpers.dll
+C:\Users\Lenovo\Desktop\Vertical solutions\Vertical solutions\EInvoiceKSADemo.NETFramework.Helpers\bin\Debug\EInvoiceKSADemo.NETFramework.Helpers.pdb
+C:\Users\Lenovo\Desktop\Vertical solutions\Vertical solutions\EInvoiceKSADemo.NETFramework.Helpers\bin\Debug\BouncyCastle.Crypto.dll
+C:\Users\Lenovo\Desktop\Vertical solutions\Vertical solutions\EInvoiceKSADemo.NETFramework.Helpers\bin\Debug\IKVM.OpenJDK.Charsets.dll
+C:\Users\Lenovo\Desktop\Vertical solutions\Vertical solutions\EInvoiceKSADemo.NETFramework.Helpers\bin\Debug\IKVM.OpenJDK.Core.dll
+C:\Users\Lenovo\Desktop\Vertical solutions\Vertical solutions\EInvoiceKSADemo.NETFramework.Helpers\bin\Debug\IKVM.OpenJDK.Localedata.dll
+C:\Users\Lenovo\Desktop\Vertical solutions\Vertical solutions\EInvoiceKSADemo.NETFramework.Helpers\bin\Debug\IKVM.OpenJDK.Text.dll
+C:\Users\Lenovo\Desktop\Vertical solutions\Vertical solutions\EInvoiceKSADemo.NETFramework.Helpers\bin\Debug\IKVM.OpenJDK.Util.dll
+C:\Users\Lenovo\Desktop\Vertical solutions\Vertical solutions\EInvoiceKSADemo.NETFramework.Helpers\bin\Debug\IKVM.OpenJDK.XML.API.dll
+C:\Users\Lenovo\Desktop\Vertical solutions\Vertical solutions\EInvoiceKSADemo.NETFramework.Helpers\bin\Debug\IKVM.Runtime.dll
+C:\Users\Lenovo\Desktop\Vertical solutions\Vertical solutions\EInvoiceKSADemo.NETFramework.Helpers\bin\Debug\Microsoft.Bcl.AsyncInterfaces.dll
+C:\Users\Lenovo\Desktop\Vertical solutions\Vertical solutions\EInvoiceKSADemo.NETFramework.Helpers\bin\Debug\saxon-he-10.8.dll
+C:\Users\Lenovo\Desktop\Vertical solutions\Vertical solutions\EInvoiceKSADemo.NETFramework.Helpers\bin\Debug\saxon-he-api-10.8.dll
+C:\Users\Lenovo\Desktop\Vertical solutions\Vertical solutions\EInvoiceKSADemo.NETFramework.Helpers\bin\Debug\System.Buffers.dll
+C:\Users\Lenovo\Desktop\Vertical solutions\Vertical solutions\EInvoiceKSADemo.NETFramework.Helpers\bin\Debug\System.Diagnostics.DiagnosticSource.dll
+C:\Users\Lenovo\Desktop\Vertical solutions\Vertical solutions\EInvoiceKSADemo.NETFramework.Helpers\bin\Debug\System.Memory.dll
+C:\Users\Lenovo\Desktop\Vertical solutions\Vertical solutions\EInvoiceKSADemo.NETFramework.Helpers\bin\Debug\System.Net.Http.Json.dll
+C:\Users\Lenovo\Desktop\Vertical solutions\Vertical solutions\EInvoiceKSADemo.NETFramework.Helpers\bin\Debug\System.Numerics.Vectors.dll
+C:\Users\Lenovo\Desktop\Vertical solutions\Vertical solutions\EInvoiceKSADemo.NETFramework.Helpers\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+C:\Users\Lenovo\Desktop\Vertical solutions\Vertical solutions\EInvoiceKSADemo.NETFramework.Helpers\bin\Debug\System.Security.AccessControl.dll
+C:\Users\Lenovo\Desktop\Vertical solutions\Vertical solutions\EInvoiceKSADemo.NETFramework.Helpers\bin\Debug\System.Security.Cryptography.Xml.dll
+C:\Users\Lenovo\Desktop\Vertical solutions\Vertical solutions\EInvoiceKSADemo.NETFramework.Helpers\bin\Debug\System.Security.Permissions.dll
+C:\Users\Lenovo\Desktop\Vertical solutions\Vertical solutions\EInvoiceKSADemo.NETFramework.Helpers\bin\Debug\System.Security.Principal.Windows.dll
+C:\Users\Lenovo\Desktop\Vertical solutions\Vertical solutions\EInvoiceKSADemo.NETFramework.Helpers\bin\Debug\System.Text.Encodings.Web.dll
+C:\Users\Lenovo\Desktop\Vertical solutions\Vertical solutions\EInvoiceKSADemo.NETFramework.Helpers\bin\Debug\System.Text.Json.dll
+C:\Users\Lenovo\Desktop\Vertical solutions\Vertical solutions\EInvoiceKSADemo.NETFramework.Helpers\bin\Debug\System.Threading.Tasks.Extensions.dll
+C:\Users\Lenovo\Desktop\Vertical solutions\Vertical solutions\EInvoiceKSADemo.NETFramework.Helpers\bin\Debug\System.ValueTuple.dll
+C:\Users\Lenovo\Desktop\Vertical solutions\Vertical solutions\EInvoiceKSADemo.NETFramework.Helpers\bin\Debug\Microsoft.Bcl.AsyncInterfaces.xml
+C:\Users\Lenovo\Desktop\Vertical solutions\Vertical solutions\EInvoiceKSADemo.NETFramework.Helpers\bin\Debug\saxon-he-api-10.8.xml
+C:\Users\Lenovo\Desktop\Vertical solutions\Vertical solutions\EInvoiceKSADemo.NETFramework.Helpers\bin\Debug\System.Buffers.xml
+C:\Users\Lenovo\Desktop\Vertical solutions\Vertical solutions\EInvoiceKSADemo.NETFramework.Helpers\bin\Debug\System.Diagnostics.DiagnosticSource.xml
+C:\Users\Lenovo\Desktop\Vertical solutions\Vertical solutions\EInvoiceKSADemo.NETFramework.Helpers\bin\Debug\System.Memory.xml
+C:\Users\Lenovo\Desktop\Vertical solutions\Vertical solutions\EInvoiceKSADemo.NETFramework.Helpers\bin\Debug\System.Net.Http.Json.xml
+C:\Users\Lenovo\Desktop\Vertical solutions\Vertical solutions\EInvoiceKSADemo.NETFramework.Helpers\bin\Debug\System.Numerics.Vectors.xml
+C:\Users\Lenovo\Desktop\Vertical solutions\Vertical solutions\EInvoiceKSADemo.NETFramework.Helpers\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+C:\Users\Lenovo\Desktop\Vertical solutions\Vertical solutions\EInvoiceKSADemo.NETFramework.Helpers\bin\Debug\System.Security.AccessControl.xml
+C:\Users\Lenovo\Desktop\Vertical solutions\Vertical solutions\EInvoiceKSADemo.NETFramework.Helpers\bin\Debug\System.Security.Cryptography.Xml.xml
+C:\Users\Lenovo\Desktop\Vertical solutions\Vertical solutions\EInvoiceKSADemo.NETFramework.Helpers\bin\Debug\System.Security.Permissions.xml
+C:\Users\Lenovo\Desktop\Vertical solutions\Vertical solutions\EInvoiceKSADemo.NETFramework.Helpers\bin\Debug\System.Security.Principal.Windows.xml
+C:\Users\Lenovo\Desktop\Vertical solutions\Vertical solutions\EInvoiceKSADemo.NETFramework.Helpers\bin\Debug\System.Text.Encodings.Web.xml
+C:\Users\Lenovo\Desktop\Vertical solutions\Vertical solutions\EInvoiceKSADemo.NETFramework.Helpers\bin\Debug\System.Text.Json.xml
+C:\Users\Lenovo\Desktop\Vertical solutions\Vertical solutions\EInvoiceKSADemo.NETFramework.Helpers\bin\Debug\System.Threading.Tasks.Extensions.xml
+C:\Users\Lenovo\Desktop\Vertical solutions\Vertical solutions\EInvoiceKSADemo.NETFramework.Helpers\bin\Debug\System.ValueTuple.xml
+C:\Users\Lenovo\Desktop\Vertical solutions\Vertical solutions\EInvoiceKSADemo.NETFramework.Helpers\obj\Debug\EInvoiceKSADemo.NETFramework.Helpers.csproj.AssemblyReference.cache
+C:\Users\Lenovo\Desktop\Vertical solutions\Vertical solutions\EInvoiceKSADemo.NETFramework.Helpers\obj\Debug\EInvoiceKSADemo.NETFramework.Helpers.csproj.CoreCompileInputs.cache
+C:\Users\Lenovo\Desktop\Vertical solutions\Vertical solutions\EInvoiceKSADemo.NETFramework.Helpers\obj\Debug\EInvoice.BA39555F.Up2Date
+C:\Users\Lenovo\Desktop\Vertical solutions\Vertical solutions\EInvoiceKSADemo.NETFramework.Helpers\obj\Debug\EInvoiceKSADemo.NETFramework.Helpers.dll
+C:\Users\Lenovo\Desktop\Vertical solutions\Vertical solutions\EInvoiceKSADemo.NETFramework.Helpers\obj\Debug\EInvoiceKSADemo.NETFramework.Helpers.pdb

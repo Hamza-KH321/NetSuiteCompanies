@@ -1,0 +1,7 @@
+{
+    "success": true,
+    "recordType": "purchaseorder",
+    "internalId": "576214",
+    "tranId": "PO -0889",
+    "warnings": []
+}

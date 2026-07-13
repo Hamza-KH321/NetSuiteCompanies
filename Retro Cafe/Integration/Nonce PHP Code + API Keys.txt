@@ -1,0 +1,36 @@
+vendor_key => "d08183f9052bb9c471d532450afcb288"
+"api_key" => "0716437a218408883ac9c3f54a0572c4",
+"secret_key" => "5c288a071012c5bb"
+location_api_key = cd2249fc3a0576d71918f189973ca85b
+
+Vendor Key 2 => b7d084ec8004ef56aaf5ab41e17a31d3
+
+
+
+
+$secret_key = '2890d932c3bcc1e7';
+$time_stamp = 1708506800;
+$location_key = 'cd2249fc3a0576d71918f189973ca85b';
+$token     = $location_key . $time_stamp;
+$nonce = hash_hmac("sha256", $token, $secret_key);
+echo($nonce);
+
+
+https://www.epochconverter.com/
+
+https://www.writephponline.com/
+
+
+- We must update start date and end date using unix timestamp.
+- also we have to generate a nonce based on the timestamp used.
+
+
+vendor_key : d08183f9052bb9c471d532450afcb288
+secret_key : 2890d932c3bcc1e7
+company_key: 0716437a218408883ac9c3f54a0572c4
+
+
+* New Version Keys (For Production use this)
+vendor_key : d08183f9052bb9c471d532450afcb288
+secret_key : 2890d932c3bcc1e7
+company_key: 0716437a218408883ac9c3f54a0572c4

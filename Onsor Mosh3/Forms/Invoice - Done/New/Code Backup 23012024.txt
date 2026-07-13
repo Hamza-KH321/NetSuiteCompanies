@@ -1,0 +1,272 @@
+<?xml version="1.0"?><!DOCTYPE pdf PUBLIC "-//big.faceless.org//report" "report-1.1.dtd">
+<pdf>
+<head>
+  <link name="NotoSansArabic" type="font" subtype="opentype" src="${nsfont.NotoSansArabic_Regular}" src-bold="${nsfont.NotoSansArabic_Bold}" bytes="2" subset="false"/>
+	<link name="NotoSans" type="font" subtype="truetype" src="${nsfont.NotoSans_Regular}" src-bold="${nsfont.NotoSans_Bold}" src-italic="${nsfont.NotoSans_Italic}" src-bolditalic="${nsfont.NotoSans_BoldItalic}" bytes="2" />
+	<#if .locale == "zh_CN">
+		<link name="NotoSansCJKsc" type="font" subtype="opentype" src="${nsfont.NotoSansCJKsc_Regular}" src-bold="${nsfont.NotoSansCJKsc_Bold}" bytes="2" />
+	<#elseif .locale == "zh_TW">
+		<link name="NotoSansCJKtc" type="font" subtype="opentype" src="${nsfont.NotoSansCJKtc_Regular}" src-bold="${nsfont.NotoSansCJKtc_Bold}" bytes="2" />
+	<#elseif .locale == "ja_JP">
+		<link name="NotoSansCJKjp" type="font" subtype="opentype" src="${nsfont.NotoSansCJKjp_Regular}" src-bold="${nsfont.NotoSansCJKjp_Bold}" bytes="2" />
+	<#elseif .locale == "ko_KR">
+		<link name="NotoSansCJKkr" type="font" subtype="opentype" src="${nsfont.NotoSansCJKkr_Regular}" src-bold="${nsfont.NotoSansCJKkr_Bold}" bytes="2" />
+	<#elseif .locale == "th_TH">
+		<link name="NotoSansThai" type="font" subtype="opentype" src="${nsfont.NotoSansThai_Regular}" src-bold="${nsfont.NotoSansThai_Bold}" bytes="2" />
+	</#if>
+    <macrolist>
+        <macro id="nlheader">
+            <table class="header" style="width: 653px;"><tr>
+	<td rowspan="2" style="font-size: 35; width: 424px; border-top: 5px solid black; padding-top: 10px; border-bottom: 5px solid black;"><b>Tax Invoice</b></td>
+	<td style="width: 31px;">&nbsp;</td>
+	<td style="border-top: 5px solid black; padding-top: 10px; font-size: 14; width: 193px;align:right"><b><span>${record.tranid}</span></b>&nbsp;رقم الفاتورة</td>
+	</tr>
+	<tr>
+	<td style="width: 31px;">&nbsp;</td>
+	<td style="border-bottom: 5px solid black; font-size: 14; width: 193px;align:right"><b>${record.trandate?string('dd — MM — yyyy')}</b></td>
+	</tr>
+	<tr>
+	<td style="width: 424px; height: 1px;">&nbsp;</td>
+	<td style="width: 31px; height: 1px;">&nbsp;</td>
+	<td style="width: 193px; height: 1px;">&nbsp;</td>
+	</tr>
+	<tr>
+	<td style="background-color: rgb(227, 227, 227); padding-top: 10px; font-size: 13; width: 424px; height: 7px;">Total</td>
+	<td style="width: 31px; height: 17px;">&nbsp;</td>
+	<td style="width: 193px; padding-top: 15px; font-size: 12px; height: 2px;align:right"><b>شركة عنصر مشع للدعاية والاعلان</b></td>
+	</tr>
+	<tr>
+	<td colspan="1" rowspan="2" style="background-color: rgb(227, 227, 227); font-size: 21; width: 424px; height: 22px; padding-top: 3px;"><b>${record.total?string['#,##0.00']}</b></td>
+	<td style="width: 31px; height: 2px;">&nbsp;</td>
+	<td style="width: 193px; font-size: 12px; height: 2px;align:right">الرقم الضريبي</td>
+	</tr>
+	<tr>
+	<td style="width: 31px; height: 1px;">&nbsp;</td>
+	<td style="width: 193px; height: 1px; font-size: 12px;align:right;padding-top:4px">301238868700003</td>
+	</tr>
+	<tr>
+	<td style="font-size: 11px; background-color: rgb(227, 227, 227); width: 424px; height: 10;">Due Date <span>${record.duedate?string('dd — MM — yyyy')}</span></td>
+	<td style="width: 31px; height: 12px;">&nbsp;</td>
+	<td style="width: 193px; height: 12px;">&nbsp;</td>
+	</tr></table>
+        </macro>
+        <macro id="nlfooter">
+            <table class="footer" style="width:100%"><tr>
+	<td><img height="60" src="https://7114540-sb1.app.netsuite.com/core/media/media.nl?id=442&amp;c=7114540_SB1&amp;h=0JhaVWY8azqvsCtUkPtk-OUdPVJ-csvW8Iltfm_i5DfZKOCQ" width="130" /></td>
+	<td style="width: 282px;">&nbsp;</td>
+	<td style="width: 112px;">&nbsp;</td>
+	<td style="width: 158px; align:right;"><barcode style="width:80%;height:80%; align:center; horizontal-align:center;" codetype="qrcode" showtext="true" value="${record.custbody_vs_qrcode}"/></td>
+	</tr></table>
+        </macro>
+    </macrolist>
+    <style type="text/css">* {
+		<#if .locale == "zh_CN">
+			font-family: NotoSans, NotoSansCJKsc, sans-serif;
+		<#elseif .locale == "zh_TW">
+			font-family: NotoSans, NotoSansCJKtc, sans-serif;
+		<#elseif .locale == "ja_JP">
+			font-family: NotoSans, NotoSansCJKjp, sans-serif;
+		<#elseif .locale == "ko_KR">
+			font-family: NotoSans, NotoSansCJKkr, sans-serif;
+		<#elseif .locale == "th_TH">
+			font-family: NotoSans, NotoSansThai, sans-serif;
+		<#else>
+			font-family: NotoSansArabic, sans-serif;
+		</#if>
+		}
+		table {
+			font-size: 9pt;
+			table-layout: fixed;
+		}
+        th {
+            font-weight: bold;
+            font-size: 8.5;
+            vertical-align: middle;
+            padding: 5px 6px 3px;
+          border-bottom:3px solid black;
+          border-top:5px solid black
+        }
+        td {
+            padding: 4px 6px;
+        }
+		td p { align:left }
+        b {
+            font-weight: bold;
+            color: #333333;
+        }
+        table.header td {
+            padding: 0px;
+            font-size: 10pt;
+        }
+        table.footer td {
+            padding: 0px;
+            font-size: 8pt;
+        }
+        table.itemtable th {
+            padding-bottom: 10px;
+            padding-top: 10px;
+        }
+        table.body td {
+            padding-top: 2px;
+        }
+        table.total {
+            page-break-inside: avoid;
+        }
+        tr.totalrow {
+            background-color: #e3e3e3;
+            line-height: 200%;
+        }
+        td.totalboxtop {
+            font-size: 12pt;
+            background-color: #e3e3e3;
+        }
+        td.addressheader {
+            font-size: 8pt;
+            padding-top: 6px;
+            padding-bottom: 2px;
+        }
+        td.address {
+            padding-top: 0px;
+        }
+        td.totalboxmid {
+            font-size: 28pt;
+            padding-top: 20px;
+            background-color: #e3e3e3;
+        }
+        td.totalboxbot {
+            background-color: #e3e3e3;
+            font-weight: bold;
+        }
+        span.title {
+            font-size: 28pt;
+        }
+        span.number {
+            font-size: 16pt;
+        }
+        span.itemname {
+            font-weight: bold;
+            line-height: 150%;
+        }
+        hr {
+            width: 100%;
+            color: #d3d3d3;
+            background-color: #d3d3d3;
+            height: 1px;
+        }
+      td.leftcol{
+        font-weight: bold;
+        font-size:10;
+        border-bottom:1px solid black;
+        vertical-align:middle
+      }
+      td.midcol{
+        font-weight: bold;
+        font-size:10;
+        border-bottom:1px solid black;
+        text-align:middle;
+        padding-top:9px;
+        padding-bottom:9px
+      }
+      td.rightcol{
+        font-weight: bold;
+        font-size:10;
+        border-bottom:1px solid black;
+        text-align:right;
+        padding-top:9px;
+        padding-bottom:9px
+      }
+</style>
+</head>
+<body header="nlheader" header-height="19%" footer="nlfooter" footer-height="67pt" padding="0.5in 0.5in 0.5in 0.5in" size="A4">
+    <table style="border-top:5px solid black;width:100%"><tr>
+	<td class="leftcol" style="width: 265px;"><b>Client Name</b></td>
+	<td class="midcol" style="width: 240px;align:center">${record.entity.companyname}</td>
+	<td class="rightcol" style="width: 236px;align:right">اسم العميل</td>
+	</tr>
+	<tr>
+	<td class="leftcol" style="width: 265px;"><b>Address</b></td>
+	<td class="midcol" style=" width: 240px;">${record.entity.billaddress}</td>
+	<td class="rightcol" style="width: 236px;align:right">العنوان</td>
+	</tr>
+	<tr>
+	<td class="leftcol" style="width: 265px;"><b>City</b></td>
+	<td class="midcol" style="width: 240px;">${record.entity.billaddress.city}</td>
+	<td class="rightcol" style="width: 236px;align:right">المدينة</td>
+	</tr>
+	<tr>
+	<td class="leftcol" style="width: 265px;"><b>Country</b></td>
+	<td class="midcol" style="width: 240px;">${record.entity.billaddress.country}</td>
+	<td class="rightcol" style="width: 236px;align:right">الدولة</td>
+	</tr>
+	<tr>
+	<td class="leftcol" style="width: 265px;"><b>Zip code</b></td>
+	<td class="midcol" style="width: 240px;">&nbsp;</td>
+	<td class="rightcol" style="width: 236px;align:right">الرمز البريدي</td>
+	</tr>
+	<tr>
+	<td style="font-weight: bold; font-size: 10; border-bottom: 3px solid black; vertical-align: middle; width: 265px;"><b>Vat NO.</b></td>
+	<td style="font-weight: bold; font-size: 10; border-bottom: 3px solid black; vertical-align: middle; width: 240px;text-align: center;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${record.entity.vatregnumber}</td>
+	<td style="font-weight: bold; font-size: 10; border-bottom: 3px solid black; vertical-align: middle; width: 236px;align:right">الرقم الضريبي</td>
+	</tr>
+	<tr>
+	<td style="width: 265px;">&nbsp;</td>
+	<td style="width: 240px;">&nbsp;</td>
+	<td style="width: 236px;">&nbsp;</td>
+	</tr></table>
+<#if record.item?has_content>
+
+<table style="width:100%;border-bottom:1px"><!-- start items --><#list record.item as item><#if item_index==0>
+<thead>
+	<tr>
+	<th style="width: 211px;">Item</th>
+	<th style="width: 81px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Qty</th>
+	<th style="width: 101px;">&nbsp;&nbsp;&nbsp;&nbsp;Unit Rate</th>
+	<th style="width: 191px;">&nbsp;&nbsp;&nbsp;Amount</th>
+	</tr>
+</thead>
+</#if><tr>
+	<td style="border-bottom: 1px solid black; font-size: 9; width: 211px; height: 23px;">${item.description}</td>
+	<td style="border-bottom: 1px solid black; font-size: 9; width: 81px; height: 23px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${item.quantity}</td>
+	<td style="border-bottom: 1px solid black; font-size: 9; width: 101px; height: 23px;">&nbsp;&nbsp;&nbsp;&nbsp;${record.currencysymbol} ${item.rate?string['#,##0.00']}</td>
+	<td style="border-bottom: 1px solid black; font-size: 9; width: 191px; height: 23px;">&nbsp;&nbsp;&nbsp;${record.currencysymbol} ${item.amount?string['#,##0.00']}</td>
+	</tr>
+	</#list></table>
+</#if>
+
+<table style="width: 100%;"><tr>
+	<td style="font-size: 10; width: 244px;padding-top:13px"><b>Payable To</b></td>
+	<td style="width: 282px;">&nbsp;</td>
+	<td style="border-bottom: 1px solid black; font-size: 10px; width: 112px; vertical-align: middle;align:left"><b>Subtotal</b></td>
+	<td style="border-bottom: 1px solid black; font-size: 10px;width: 158px;vertical-align:middle;align:right">${record.currencysymbol} ${record.subtotal?string['#,##0.00']}</td>
+	</tr>
+	<tr>
+	<td colspan="1" rowspan="2" style="font-size: 10px; width: 244px; height: 53px;line-height:9"><span>شركة عنصر مشع للدعاية والاعلان</span><br />Onsor Mosha Advertising Co.<br />IBAN SA9305000068200582200000<br />Alinma Bank</td>
+	<td style="width: 282px; height: 17px;">&nbsp;</td>
+	<td style="border-bottom: 1px solid black; font-size: 10px; width: 112px; vertical-align: middle; height: 17px;align:left"><b>VAT(15%)</b></td>
+	<td style="border-bottom: 1px solid black; font-size: 10px; width: 158px; vertical-align: middle; height: 17px;align:right">${record.currencysymbol} ${record.taxtotal?string['#,##0.00']}</td>
+	</tr>
+	<tr>
+	<td style="width: 282px; height: 15px;">&nbsp;</td>
+	<td style="border-bottom: 3px solid black; font-size: 10px; width: 112px; vertical-align: middle; height: 14px;align:left"><b>Total</b></td>
+	<td style="border-bottom: 3px solid black; font-size: 10px; width: 158px; vertical-align: middle; height: 14px;align:right">${record.currencysymbol} ${record.total?string['#,##0.00']}</td>
+	</tr>
+	<tr>
+	<td style="height: 29px;">&nbsp;</td>
+	<td style="height: 29px; width: 282px;">&nbsp;</td>
+	<td style="height: 29px; width: 112px;">&nbsp;</td>
+	<td style="height: 29px; width: 158px;">&nbsp;</td>
+	</tr>
+	<tr>
+	<td style="height: 29px;">&nbsp;</td>
+	<td style="height: 29px; width: 282px;">&nbsp;</td>
+	<td style="height: 29px; width: 112px;">&nbsp;</td>
+	<td style="height: 29px; width: 158px;">&nbsp;</td>
+	</tr>
+	<tr>
+	<td>&nbsp;</td>
+	<td style="width: 282px;">&nbsp;</td>
+	<td style="width: 112px;">&nbsp;</td>
+	<td>&nbsp;</td>
+	</tr></table>
+</body>
+</pdf>

@@ -1,0 +1,54 @@
+<!-- @fileName VSP_Home.html -->
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>VS Production</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{HEADER_CSS_URL}}">
+    <link rel="stylesheet" href="{{COMMON_CSS_URL}}">
+</head>
+<body>
+    <div id="sharedHeader"></div>
+    <main class="app-main">
+        <div class="toolbar">
+            <div>
+                <h1>VS Production</h1>
+                <p>Production mobile app placeholder homepage.</p>
+            </div>
+        </div>
+
+        <section class="panel">
+            <h2>Home</h2>
+            <p id="homeMessage">Loading user context...</p>
+            <div class="detail-grid">
+                <div>
+                    <span>Employee</span>
+                    <strong id="employeeName">-</strong>
+                </div>
+                <div>
+                    <span>Subsidiary</span>
+                    <strong id="subsidiaryName">-</strong>
+                </div>
+                <div>
+                    <span>Location</span>
+                    <strong id="locationName">-</strong>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div id="loadingOverlay" class="loading-overlay">
+        <div class="loading-panel">
+            <div class="loading-spinner"></div>
+            <div class="loading-text">Loading</div>
+        </div>
+    </div>
+
+    <script src="{{HEADER_JS_URL}}"></script>
+    <script src="{{PAGE_JS_URL}}"></script>
+</body>
+</html>

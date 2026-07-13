@@ -1,0 +1,153 @@
+<?xml version="1.0"?><!DOCTYPE pdf PUBLIC "-//big.faceless.org//report" "report-1.1.dtd">
+<pdf>
+<head>
+	<link name="NotoSans" type="font" subtype="truetype" src="${nsfont.NotoSans_Regular}" src-bold="${nsfont.NotoSans_Bold}" src-italic="${nsfont.NotoSans_Italic}" src-bolditalic="${nsfont.NotoSans_BoldItalic}" bytes="2" />
+	<#if .locale == "zh_CN">
+		<link name="NotoSansCJKsc" type="font" subtype="opentype" src="${nsfont.NotoSansCJKsc_Regular}" src-bold="${nsfont.NotoSansCJKsc_Bold}" bytes="2" />
+	<#elseif .locale == "zh_TW">
+		<link name="NotoSansCJKtc" type="font" subtype="opentype" src="${nsfont.NotoSansCJKtc_Regular}" src-bold="${nsfont.NotoSansCJKtc_Bold}" bytes="2" />
+	<#elseif .locale == "ja_JP">
+		<link name="NotoSansCJKjp" type="font" subtype="opentype" src="${nsfont.NotoSansCJKjp_Regular}" src-bold="${nsfont.NotoSansCJKjp_Bold}" bytes="2" />
+	<#elseif .locale == "ko_KR">
+		<link name="NotoSansCJKkr" type="font" subtype="opentype" src="${nsfont.NotoSansCJKkr_Regular}" src-bold="${nsfont.NotoSansCJKkr_Bold}" bytes="2" />
+	<#elseif .locale == "th_TH">
+		<link name="NotoSansThai" type="font" subtype="opentype" src="${nsfont.NotoSansThai_Regular}" src-bold="${nsfont.NotoSansThai_Bold}" bytes="2" />
+	</#if>
+    <macrolist>
+        <macro id="nlheader">
+            <table style="width:100%;"><tr>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	<td rowspan="5"><img align="center" src="https://7454786.app.netsuite.com/core/media/media.nl?id=679&amp;c=7454786&amp;h=Eq6APV2fYAMJlk4Q3XhbJ26Sr_gHq6QChtXz87F-xfOb0EsZ" style="width: 140px; height: 120px;" /></td>
+	</tr>
+	<tr>
+	<td colspan="2" rowspan="1" style="color: #D3D3D3;"><b>AMITAF INTERNATIONAL TRADING L.L.C</b></td>
+	</tr>
+	<tr>
+	<td colspan="2" font-size="10px" rowspan="3">Al-Dhannah Street, Abu Dhabi, U.A.E<br />PH: +971-00000000<br />EMAIL: info@amitaf.me</td>
+	</tr></table>
+        </macro>
+        <macro id="nlfooter">
+            <table style=" width: 100%;"><tr>
+	<td align="right">&nbsp;</td>
+	</tr>
+	<tr>
+	<td>&nbsp;</td>
+	</tr>
+	<tr>
+	<td align="center" color="#71797E" style="text-align: center; font-size: 10px;"><b><u>Thank you for choosing SWAGBAG!</u></b><br /><b>For any inquiries, feel free to contact us: +97122554466/ Email: info@swagbag.com</b></td>
+	</tr></table>
+        </macro>
+    </macrolist>
+    <style type="text/css">* {
+		<#if .locale == "zh_CN">
+			font-family: NotoSans, NotoSansCJKsc, sans-serif;
+		<#elseif .locale == "zh_TW">
+			font-family: NotoSans, NotoSansCJKtc, sans-serif;
+		<#elseif .locale == "ja_JP">
+			font-family: NotoSans, NotoSansCJKjp, sans-serif;
+		<#elseif .locale == "ko_KR">
+			font-family: NotoSans, NotoSansCJKkr, sans-serif;
+		<#elseif .locale == "th_TH">
+			font-family: NotoSans, NotoSansThai, sans-serif;
+		<#else>
+			font-family: NotoSans, sans-serif;
+		</#if>
+		}
+</style>
+</head>
+<body header="nlheader" header-height="10%" footer="nlfooter" footer-height="10%" padding="0.1in 0.5in 0.2in 0.5in" size="Letter">
+    &nbsp; <!--___________________________________________________________________-->
+<hr />
+<table border="0" cellspacing="1" style="width:100%;"><tr>
+	<td style="color: #A9A9A9;"><b><u>Buyer Info:</u></b></td>
+	<td>&nbsp;</td>
+	<td style="color: #A9A9A9;"><b>SALES INVOICE</b></td>
+	</tr>
+	<tr>
+	<td font-size="11px"><b>MUMZWORLD.COM</b></td>
+	<td>&nbsp;</td>
+	<td style="color: #A9A9A9;"><b>BARCODE</b></td>
+	</tr>
+	<tr>
+	<td font-size="10px">Street Address, City,<br />State, ZIP Code</td>
+	<td>&nbsp;</td>
+	<td font-size="10px" style="color: #A9A9A9;"><b>DATE: ${record.trandate}</b></td>
+	</tr>
+	<tr>
+	<td colspan="1" font-size="10px" rowspan="3">Phone:<br />Email:<br />TRN:</td>
+	<td>&nbsp;</td>
+	<td colspan="1" rowspan="2">&nbsp;</td>
+	</tr>
+	<tr>
+	<td>&nbsp;</td>
+	</tr>
+	<tr>
+	<td>&nbsp;</td>
+	</tr></table>
+<!--___________________________________________________________________-->
+
+<table border="1" cellpadding="1" style="width:100%;"><tr>
+	<td background-color="#71797E" border-bottom="1" border-right="1" color="white" font-size="12px">PO NUMBER</td>
+	<td background-color="#71797E" border-bottom="1" border-right="1" color="white" font-size="12px">PO DATE</td>
+	<td background-color="#71797E" border-bottom="1" border-right="1" color="white" font-size="12px">CARRIER</td>
+	<td background-color="#71797E" border-bottom="1" border-right="1" color="white" font-size="12px">PAYMENT METHOD</td>
+	</tr>
+	<tr>
+	<td border-right="1" font-size="10px">${record.otherrefnum}</td>
+	<td border-right="1" font-size="10px">${record.trandate}</td>
+	<td border-right="1" font-size="10px">carrier</td>
+	<td border-right="1" font-size="10px">${record.terms}</td>
+	</tr></table>
+<!--___________________________________________________________________--> &nbsp; <#if record.item?has_content>
+
+<table><#list record.item as item><#if item_index==0><tr>
+	<td font-size="10px">SL#</td>
+	<td font-size="10px">Product</td>
+	<td font-size="10px">SKU</td>
+	<td font-size="10px">LINE-ITEM PRICE</td>
+	<td font-size="10px">QTY</td>
+	<td font-size="10px">ITEM PRICE</td>
+	<td font-size="10px">DISCOUNT</td>
+	<td font-size="10px">TOTAL</td>
+	</tr>
+	</#if>
+	<tr>
+	<td font-size="10px">${item?index + 1}</td>
+	<td font-size="10px">${item.description}</td>
+	<td font-size="10px">${item.item}</td>
+	<td font-size="10px">${item.rate}</td>
+	<td font-size="10px">${item.quantity}</td>
+	<td font-size="10px">${item.amount}</td>
+	<td font-size="10px">discount</td>
+	<td font-size="10px">${item.grossamt}</td>
+	</tr>
+	</#list></table>
+</#if> <!--___________________________________________________________________-->&nbsp;
+
+<table cellpadding="1" cellspacing="0" style="width:100%;"><tr>
+	<td style="border-right: 1px solid black; border-left: 1px solid black; border-top: 1px solid black;">Remarks:</td>
+	<td>&nbsp;</td>
+	<td style="font-size: 11px;">SUBTOTAL</td>
+	<td style="font-size: 11px;">${record.subtotal}</td>
+	</tr>
+	<tr>
+	<td style="border-right: 1px solid black; border-left: 1px solid black;">&nbsp;</td>
+	<td>&nbsp;</td>
+	<td style="font-size: 11px;">TAX@5%</td>
+	<td style="font-size: 11px;">${record.taxtotal}</td>
+	</tr>
+	<tr>
+	<td color="white" style="border-right: 1px solid black; border-left: 1px solid black;">Row 3, Column 1Row 3, Column 2</td>
+	<td style="font-size: 11px;">&nbsp;</td>
+	<td style="font-size: 11px;">SHIPPING<br />AND HANDLING</td>
+	</tr>
+	<tr>
+	<td style="border-right: 1px solid black; border-left: 1px solid black; border-bottom: 1px solid black;">&nbsp;</td>
+	<td>&nbsp;</td>
+	<td style="font-size: 11px;"><strong>GRAND TOTAL</strong></td>
+	<td style="font-size: 11px;"><strong>${record.total}</strong></td>
+	</tr></table>
+<!--___________________________________________________________________-->
+</body>
+</pdf>

@@ -1,0 +1,211 @@
+<?xml version="1.0"?>
+<!DOCTYPE pdf PUBLIC "-//big.faceless.org//report" "report-1.1.dtd">
+<pdf>
+    <head>
+        <link name="NotoSansArabic" type="font" subtype="opentype"
+            src="${nsfont.NotoSansArabic_Regular}" src-bold="${nsfont.NotoSansArabic_Bold}"
+            bytes="2" subset="false" />
+        <link name="NotoSans" type="font" subtype="truetype" src="${nsfont.NotoSans_Regular}"
+            src-bold="${nsfont.NotoSans_Bold}" src-italic="${nsfont.NotoSans_Italic}"
+            src-bolditalic="${nsfont.NotoSans_BoldItalic}" bytes="2" />
+
+        <title>${employeeStatementData.employeeInfo.fullname?xml}</title>
+        <meta name="title" value="${employeeStatementData.employeeInfo.entityid?xml} ${employeeStatementData.employeeInfo.fullname?xml}" />
+
+        <macrolist>
+            <macro id="nlheader">
+                <table border="0" cellpadding="0" cellspacing="0" style="width:100%; margin-bottom: 30px;">
+                    <tr>
+                        <td style="width: 250px; vertical-align: middle; padding-right: 30px;">
+                            <img src="${employeeStatementData.subsidiary.logoUrl?xml}" style="height: 100%; width: 100%; display:block;" />
+                        </td>
+                        <td style="vertical-align: middle; text-align: center; align: center; font-size: 28px; font-weight: bold;">
+                            EMPLOYEE STATEMENT
+                        </td>
+                        <td style="width: 250px;"></td>
+                    </tr>
+                </table>
+            </macro>
+
+            <macro id="nlfooter">
+                <table class="footer" style="width: 100%;">
+                    <tr>
+                        <td align="right"><pagenumber /> of <totalpages /></td>
+                    </tr>
+                </table>
+            </macro>
+        </macrolist>
+
+        <style type="text/css">
+            * {
+                <#if .locale == "zh_CN">
+                    font-family: NotoSans, NotoSansCJKsc, sans-serif;
+                <#elseif .locale == "zh_TW">
+                    font-family: NotoSans, NotoSansCJKtc, sans-serif;
+                <#elseif .locale == "ja_JP">
+                    font-family: NotoSans, NotoSansCJKjp, sans-serif;
+                <#elseif .locale == "ko_KR">
+                    font-family: NotoSans, NotoSansCJKkr, sans-serif;
+                <#elseif .locale == "th_TH">
+                    font-family: NotoSans, NotoSansThai, sans-serif;
+                <#else>
+                    font-family: NotoSansArabic, NotoSans, sans-serif;
+                </#if>
+            }
+            span.title { font-size: 28pt; }
+            span.number { font-size: 16pt; }
+            table.main td, th { border-bottom: 1px solid #ddd; }
+            td.empty { border: none; }
+            th {
+                font-weight: bold;
+                vertical-align: middle;
+                padding: 5px 6px 3px;
+                background-color: #e3e3e3;
+                color: #333333;
+            }
+            td { padding: 4px 6px; }
+            td p { align: left; }
+        </style>
+    </head>
+
+    <body header="nlheader" header-height="15%" footer="nlfooter" footer-height="3%"
+        padding="0.5in 0.5in 0.5in 0.5in" size="14in 18in">
+
+        <!-- ===== Company & Employee Info Block ===== -->
+        <table style="width: 100%; border-collapse: collapse;">
+            <tr>
+                <!-- Left: Company / Subsidiary info -->
+                <td style="width: 50%; padding: 10px; vertical-align: top;">
+                    <table style="width: 100%; border-collapse: collapse;">
+                        <tr>
+                            <td style="font-weight: bold; padding: 8px 10px 8px 0; vertical-align: top;">Company Name:</td>
+                            <td style="padding: 8px 0;">${employeeStatementData.subsidiary.name}</td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: bold; padding: 8px 10px 8px 0; vertical-align: top;">Subsidiary:</td>
+                            <td style="padding: 8px 0;">${employeeStatementData.subsidiary.name}</td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: bold; padding: 8px 10px 8px 0; vertical-align: top;">Company TRN:</td>
+                            <td style="padding: 8px 0;">${employeeStatementData.subsidiary.vatregnumber}</td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: bold; padding: 8px 10px 8px 0; vertical-align: top;">Address:</td>
+                            <td style="padding: 8px 0;">${employeeStatementData.subsidiary.mainaddress_text}</td>
+                        </tr>
+                    </table>
+                </td>
+
+                <!-- Right: Employee info -->
+                <td style="width: 50%; padding: 10px; vertical-align: top;">
+                    <table style="width: 100%; border-collapse: collapse;">
+                        <tr>
+                            <td style="font-weight: bold; padding: 8px 10px 8px 0; vertical-align: top;">Employee Name:</td>
+                            <td style="padding: 8px 0;">${employeeStatementData.employeeInfo.fullname}</td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: bold; padding: 8px 10px 8px 0; vertical-align: top;">Employee ID:</td>
+                            <td style="padding: 8px 0;">${employeeStatementData.employeeInfo.entityid}</td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: bold; padding: 8px 10px 8px 0; vertical-align: top;">Department:</td>
+                            <td style="padding: 8px 0;">${employeeStatementData.employeeInfo.department}</td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: bold; padding: 8px 10px 8px 0; vertical-align: top;">Statement Period:</td>
+                            <td style="padding: 8px 0;">from ${employeeStatementData.fromDate} to ${employeeStatementData.toDate}</td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: bold; padding: 8px 10px 8px 0; vertical-align: top;">Generated On:</td>
+                            <td style="padding: 8px 0;">${employeeStatementData.printDate}</td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+
+        <!-- ===== Transactions Table ===== -->
+        <h2 style="font-size: 18px; font-weight: bold; margin: 10px 0 10px 0; letter-spacing: 1px;">Transactions</h2>
+        <table style="width: 100%; border-collapse: collapse; margin-top: 15px; border: 1px solid black; font-size: 10pt;">
+            <thead>
+                <tr>
+                    <th style="padding: 6px 4px; text-align: left; border: 1px solid black;">#</th>
+                    <th style="padding: 6px 4px; text-align: left; border: 1px solid black;">Date</th>
+					<th style="padding: 6px 4px; text-align: left; border: 1px solid black;">Tran ID</th>
+                    <th style="padding: 6px 4px; text-align: left; border: 1px solid black;">Account</th>
+                    <th style="padding: 6px 4px; text-align: left; border: 1px solid black;">Account Type</th>
+                    <th style="padding: 6px 4px; text-align: left; border: 1px solid black;">Memo</th>
+                    <th style="padding: 6px 4px; text-align: right; border: 1px solid black;">Debit</th>
+                    <th style="padding: 6px 4px; text-align: right; border: 1px solid black;">Credit</th>
+                </tr>
+            </thead>
+            <tbody>
+			    <!-- Opening Balance Row -->
+					<tr style="background-color: #f5f5f5; font-weight: bold;">
+						<td style="padding: 5px 4px; text-align: center; border: 1px solid black;"></td>
+						<td style="padding: 5px 4px; text-align: left; border: 1px solid black;">
+							${employeeStatementData.fromDate?xml}
+						</td>
+						<td colspan="4" style="padding: 5px 4px; text-align: left; border: 1px solid black;">
+							<b>Opening Balance</b>
+						</td>
+						<td style="padding: 5px 4px; text-align: right; border: 1px solid black;">
+							${employeeStatementData.openingBalance.debit?number?string["#,##0.00"]}
+						</td>
+						<td style="padding: 5px 4px; text-align: right; border: 1px solid black;">
+							${employeeStatementData.openingBalance.credit?number?string["#,##0.00"]}
+						</td>
+					</tr>
+					
+				<#list employeeStatementData.transactions as transaction>
+                    <tr>
+                        <td style="padding: 5px 4px; text-align: center; border: 1px solid black;">
+                            ${transaction_index + 1}
+                        </td>
+                        <td style="padding: 5px 4px; text-align: left; border: 1px solid black;">
+                            ${transaction.date?xml}
+                        </td>
+						<td style="padding: 5px 4px; text-align: left; border: 1px solid black;">
+							${transaction.documentNumber?xml}
+						</td>
+                        <td style="padding: 5px 4px; text-align: left; border: 1px solid black;">
+                            ${transaction.account?xml}
+                        </td>
+                        <td style="padding: 5px 4px; text-align: left; border: 1px solid black;">
+                            ${transaction.accountType?xml}
+                        </td>
+                        <td style="padding: 5px 4px; text-align: left; border: 1px solid black;">
+                            ${transaction.memo?xml}
+                        </td>
+                        <td style="padding: 5px 4px; text-align: right; border: 1px solid black;">
+                            ${transaction.debit?number?string["#,##0.00"]}
+                        </td>
+                        <td style="padding: 5px 4px; text-align: right; border: 1px solid black;">
+                            ${transaction.credit?number?string["#,##0.00"]}
+                        </td>
+                    </tr>
+                </#list>
+            </tbody>
+			
+            <tfoot>
+				<tr style="background-color: #e3e3e3; font-weight: bold;">
+					<td colspan="6" style="padding: 8px 4px; text-align: right; border: 1px solid black;">Total</td>
+					<td style="padding: 8px 4px; text-align: right; border: 1px solid black;">
+						${(employeeStatementData.openingBalance.debit + employeeStatementData.totalSummary.totalDebits)?number?string["#,##0.00"]}
+					</td>
+					<td style="padding: 8px 4px; text-align: right; border: 1px solid black;">
+						${(employeeStatementData.openingBalance.credit + employeeStatementData.totalSummary.totalCredits)?number?string["#,##0.00"]}
+					</td>
+				</tr>
+				<tr style="font-weight: bold;">
+					<td colspan="6" style="padding: 8px 4px; text-align: right; border: 1px solid black;">Closing Balance</td>
+					<td colspan="2" style="padding: 8px 4px; text-align: right; border: 1px solid black;">
+						${employeeStatementData.totalSummary.closingBalance?number?string["#,##0.00"]}
+					</td>
+				</tr>
+
+            </tfoot>
+        </table>
+
+    </body>
+</pdf>

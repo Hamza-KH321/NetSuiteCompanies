@@ -1,0 +1,248 @@
+<?xml version="1.0"?>
+<!DOCTYPE pdf PUBLIC "-//big.faceless.org//report" "report-1.1.dtd">
+<pdf>
+    <head>
+        <link name="NotoSansArabic" type="font" subtype="opentype"
+            src="${nsfont.NotoSansArabic_Regular}" src-bold="${nsfont.NotoSansArabic_Bold}"
+            bytes="2" subset="false" />
+        <link name="NotoSans" type="font" subtype="truetype" src="${nsfont.NotoSans_Regular}"
+            src-bold="${nsfont.NotoSans_Bold}" src-italic="${nsfont.NotoSans_Italic}"
+            src-bolditalic="${nsfont.NotoSans_BoldItalic}" bytes="2" />
+        <#if .locale == "zh_CN">
+        <link name="NotoSansCJKsc" type="font" subtype="opentype"
+            src="${nsfont.NotoSansCJKsc_Regular}" src-bold="${nsfont.NotoSansCJKsc_Bold}" bytes="2" />
+        <#elseif .locale == "zh_TW">
+        <link name="NotoSansCJKtc" type="font" subtype="opentype"
+            src="${nsfont.NotoSansCJKtc_Regular}" src-bold="${nsfont.NotoSansCJKtc_Bold}" bytes="2" />
+        <#elseif .locale == "ja_JP">
+        <link name="NotoSansCJKjp" type="font" subtype="opentype"
+            src="${nsfont.NotoSansCJKjp_Regular}" src-bold="${nsfont.NotoSansCJKjp_Bold}" bytes="2" />
+        <#elseif .locale == "ko_KR">
+        <link name="NotoSansCJKkr" type="font" subtype="opentype"
+            src="${nsfont.NotoSansCJKkr_Regular}" src-bold="${nsfont.NotoSansCJKkr_Bold}" bytes="2" />
+        <#elseif .locale == "th_TH">
+            <link name="NotoSansThai" type="font" subtype="opentype"
+                src="${nsfont.NotoSansThai_Regular}" src-bold="${nsfont.NotoSansThai_Bold}"
+                bytes="2" />
+        </#if>
+        <macrolist>
+            <macro id="nlfooter">
+                <table class="footer">
+                    <tr>
+                        <td>&nbsp;</td>
+                        <td align="right"><pagenumber /> of <totalpages /></td>
+                    </tr>
+                </table>
+            </macro>
+        </macrolist>
+        <style type="text/css">* { <#if .locale == "zh_CN"> font-family: NotoSans, NotoSansCJKsc, sans-serif; <#elseif .locale == "zh_TW">
+            font-family: NotoSans, NotoSansCJKtc, sans-serif; <#elseif .locale == "ja_JP"> font-family: NotoSans,
+            NotoSansCJKjp, sans-serif; <#elseif .locale == "ko_KR"> font-family: NotoSans, NotoSansCJKkr, sans-serif; <#elseif .locale == "th_TH">
+            font-family: NotoSans, NotoSansThai, sans-serif; <#else>
+                font-family: NotoSans, sans-serif;
+            </#if> } * { font-family:
+            NotoSansArabic, NotoSans, sans-serif; } table { font-size: 9pt; table-layout: fixed; }
+            th { font-weight: bold; font-size: 8pt; vertical-align: middle; padding: 5px 6px 3px;
+            background-color: #e3e3e3; color: #333333; } td { padding: 4px 6px; } td p { align:left
+            } b { font-weight: bold; color: #333333; } table.header td { padding: 0; font-size:
+            10pt; } table.footer td { padding: 0; font-size: 8pt; } table.itemtable th {
+            padding-bottom: 10px; padding-top: 10px; } table.body td { padding-top: 2px; }
+            td.addressheader { font-size: 8pt; font-weight: bold; padding-top: 6px; padding-bottom:
+            2px; } td.address { padding-top: 0; } span.title { font-size: 28pt; } span.number {
+            font-size: 16pt; } span.itemname { font-weight: bold; line-height: 150%; }
+            div.returnform { width: 100%; /* To ensure minimal height of return form */ height:
+            200pt; page-break-inside: avoid; page-break-after: avoid; } hr { border-top: 1px dashed
+            #d3d3d3; width: 100%; color: #ffffff; background-color: #ffffff; height: 1px; }         </style>
+    </head>
+    <body footer="nlfooter" footer-height="20pt" padding="0.5in 0.5in 0.5in 0.5in" size="Letter">
+
+        <#if record.subsidiary == "Asfar Saud">
+        <@filecabinet nstype="image" src="https://8204691.secure.netsuite.com/core/media/media.nl?id=1560&c=8204691&h=1pEct7Jc-Q06wBn3ztCR8CCGngTDh8_GO4wunv-ODxTEn6GK" width="250" height="122" />
+        </#if>
+        <#if record.subsidiary != "Asfar Saud">
+        <@filecabinet nstype="image" src="https://8204691.secure.netsuite.com/core/media/media.nl?id=431&c=8204691&h=dsvMdI6ZRnLy2CPGexZnY1U-zAc0RFD2x_aX2H2XiFPyzgQ1" width="220" height="122" />
+        </#if>
+
+        <table style="width: 100%;" border="0">
+            <tr>
+                <td>
+                    <span style="font-size: 14pt;">
+                        <strong>Customer Payment</strong>
+                    </span>
+                </td>
+
+            </tr>
+
+            <tr>
+                <td>${record.tranid}-${record.trandate}</td>
+
+            </tr>
+            <tr>
+                <td></td>
+
+            </tr>
+
+
+        </table>
+
+
+        <hr style="background-color:black;" />
+
+        <h1 style="text-align:center;align:center"></h1>
+        <table style="width: 100%;" border="0">
+            <tr>
+                <td>
+                    <span style="font-size: 12px;">
+                        <strong>Cusotmer</strong>
+                    </span>
+                </td>
+
+                <td>
+                    <span style="font-size:12px;">
+                        <strong>${record.customer}</strong>
+                    </span>
+                </td>
+
+                <td>
+                    <span style="font-size: 12px;">
+                        <strong>Date</strong>
+                    </span>
+                </td>
+
+                <td>
+                    <span style="font-size12px;">
+                        <strong>${record.trandate}</strong>
+                    </span>
+                </td>
+
+            </tr>
+
+            <tr>
+                <td>
+                    <span style="font-size: 12px;">
+                        <strong>AR Account</strong>
+                    </span>
+                </td>
+
+                <td>
+                    <span style="font-size:12px;">
+                        <strong>${record.aracct}</strong>
+                    </span>
+                </td>
+
+                <td>
+                    <span style="font-size:12px;">
+                        <strong>Currency</strong>
+                    </span>
+                </td>
+
+                <td>
+                    <span style="font-size:12px;">
+                        <strong>${record.currency}</strong>
+                    </span>
+                </td>
+
+            </tr>
+			
+            <tr>
+                <td>
+                    <span style="font-size: 12px;">
+                        <strong>Subsidiary</strong>
+                    </span>
+                </td>
+
+                <td>
+                    <span style="font-size:12px;">
+                        <strong>${record.subsidiary}</strong>
+                    </span>
+                </td>
+
+                <td>
+                    <span style="font-size:12px;">
+                        <strong>Location</strong>
+                    </span>
+                </td>
+
+                <td>
+                    <span style="font-size:12px;">
+                        <strong>${record.location}</strong>
+                    </span>
+                </td>
+
+            </tr>
+			
+			<tr>
+                <td>
+                    <span style="font-size: 12px;">
+                        <strong>&nbsp;</strong>
+                    </span>
+                </td>
+
+                <td>
+                    <span style="font-size:12px;">
+                        <strong>&nbsp;</strong>
+                    </span>
+                </td>
+
+            </tr>
+			
+            <tr>
+                <td>
+                    <span style="font-size: 12px;">
+                        <strong>Payment Amount</strong>
+                    </span>
+                </td>
+
+                <td>
+                    <span style="font-size:12px;">
+                        <strong>${record.payment?string["#,##0.00"]}</strong>
+                    </span>
+                </td>
+
+            </tr>
+
+        </table>
+
+        <div style="margin-top: 10px;"></div>
+        <!--
+        ______________________________________________________________________________________________ -->
+		<#assign sublists = ["paymentevent", "apply"] />
+		
+		<#assign allItems = [] />
+		
+		<!-- Collect all lines from available sublists -->
+		<#list sublists as sublistName>
+			<#if record[sublistName]?has_content>
+				<#assign allItems += record[sublistName] />
+			</#if>
+		</#list>
+		
+		<!-- Display the table only if there are lines -->
+		<#if allItems?has_content>
+			<table border="1" cellpadding="5" cellspacing="0"
+				style="width:100%; border-collapse: collapse; text-align: left;">
+				<thead>
+					<tr>
+						<th style="width:50px; border: 1px solid black; padding: 8px;">Sr</th>
+						<th style="border: 1px solid black; padding: 8px;">Type</th>
+						<th style="border: 1px solid black; padding: 8px;">Amount</th>
+					</tr>
+				</thead>
+				<tbody>
+					<#list allItems as item>
+						<tr>
+							<td style="width:50px; border: 1px solid black; padding: 8px;">${item?index + 1}</td>
+							<td style="border: 1px solid black; padding: 8px;">${item.type}</td>
+							<td style="border: 1px solid black; padding: 8px;">${item.amount?string["#,##0.00"]}</td>
+						</tr>
+					</#list>
+				</tbody>
+			</table>
+		</#if>
+
+
+        &nbsp;
+        <br /><!--
+        ______________________________________________________________________________________________ -->
+    </body>
+</pdf>

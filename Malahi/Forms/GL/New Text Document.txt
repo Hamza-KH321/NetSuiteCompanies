@@ -1,0 +1,210 @@
+<?xml version="1.0"?>
+<!DOCTYPE pdf PUBLIC "-//big.faceless.org//report" "report-1.1.dtd">
+<pdf>
+	<head>
+		<link name="NotoSansArabic" type="font" subtype="opentype"
+			src="${nsfont.NotoSansArabic_Regular}" src-bold="${nsfont.NotoSansArabic_Bold}"
+			bytes="2" subset="false" />
+
+
+		<link name="NotoSans" type="font" subtype="truetype"
+			src="${nsfont.NotoSans_Regular}"
+			src-bold="${nsfont.NotoSans_Bold}"
+			src-italic="${nsfont.NotoSans_Italic}"
+			src-bolditalic="${nsfont.NotoSans_BoldItalic}"
+			bytes="2" />
+
+		<macrolist>
+			<macro id="nlheader">
+
+			</macro>
+			<macro id="nlfooter">
+
+			</macro>
+		</macrolist>
+		<style type="text/css">*
+			{
+			font-family: NotoSansArabic, NotoSans, sans-serif;
+			}
+			table { font-size: 9pt;
+			table-layout: fixed; } th { font-weight: bold; font-size: 8pt; vertical-align: middle;
+			padding: 5px 6px 3px; background-color: #e3e3e3; color: #333333; } td { padding: 4px
+			6px; } td p { align:left } b { font-weight: bold; color: #333333; } table.header td {
+			padding: 0px; font-size: 10pt; } table.footer td { padding: 0px; font-size: 8pt; }
+			table.itemtable th { padding-bottom: 10px; padding-top: 10px; } table.body td {
+			padding-top: 2px; } table.total { page-break-inside: avoid; } tr.totalrow {
+			background-color: #e3e3e3; line-height: 200%; } td.totalboxtop { font-size: 12pt;
+			background-color: #e3e3e3; } td.addressheader { font-size: 8pt; padding-top: 6px;
+			padding-bottom: 2px; } td.address { padding-top: 0px; } td.totalboxmid { font-size:
+			28pt; padding-top: 20px; background-color: #e3e3e3; } td.totalboxbot { background-color:
+			#e3e3e3; font-weight: bold; } span.title { font-size: 28pt; } span.number { font-size:
+			16pt; } span.itemname { font-weight: bold; line-height: 150%; } hr { width: 100%;
+			height: 1px; } </style>
+	</head>
+	<body header="nlheader" header-height="0.5%" footer="nlfooter" footer-height="1%"
+		padding="0.5in 0.5in 0.5in 0.5in" size="A3">
+		<table border="0" cellpadding="0"
+			cellspacing="0" style="width:100%;margin-bottom:15px;">
+			<tr style="padding-bottom: 15px;">
+				<td style="align:left;width:50%;">
+					<!-- <img
+					src="https://8038963-sb1.app.netsuite.com/core/media/media.nl?id=8080&amp;c=8038963_SB1&amp;h=_1zy_q1nh04ZyO-f6maGc2diva1K5qhTSUL2KGtvvWBuuF0H"
+						style="height:70%; width: 70%;" /> -->
+
+					<@filecabinet 
+                nstype="image" 
+                src="${subsidiary.logo}" 
+                style="height: 50%; width: 50%; max-width: 200px; max-height: 100px;" 
+				            />
+
+				</td>
+			</tr>
+
+		</table>
+		<table
+			style="width: 100%; border-collapse: collapse; margin-top: 10px; margin-bottom:10px; font-size: 12px;"
+			cellpadding="5" cellspacing="0">
+			<tr>
+				<td>
+					<b>GL IMPACT</b>
+				</td>
+			</tr>
+			<tr>
+				<td><b>Date:&nbsp;</b>${record.trandate}</td>
+			</tr>
+			<tr>
+				<td><b>Document Number:&nbsp;</b>${record.tranid}</td>
+			</tr>
+			<tr>
+				<td><b>Description:&nbsp;</b>${record.memomain}</td>
+			</tr>
+
+			<!-- Added: Entity & Location -->
+		<#if record.type?lower_case != "journal">
+			<tr>
+				<td>
+					<b>Entity:&nbsp;</b>
+					<#if record.entity?has_content>
+					${record.entity}
+					<#else>
+						N/A
+					</#if>
+				</td>
+			</tr>
+
+			<tr>
+				<td>
+					<b>Location:&nbsp;</b>
+					<#if record.location?has_content>
+					${record.location}
+					<#else>
+						N/A
+					</#if>
+				</td>
+			</tr>
+		</#if>
+			<!-- End of Added Section -->
+
+		</table>
+
+
+		<table
+			style="width: 100%; border-collapse: collapse; margin-top: 10px;margin-bottom:10px; font-size: 12px;"
+			cellpadding="5" cellspacing="0">
+			<thead>
+				<tr>
+					<th scope="col" style="width: 25%;">${record.trandate@label}</th>
+					<th scope="col" style="width: 25%;">${label.postingPeriod}</th>
+					<th scope="col" style="width: 25%;">${label.transactionType}</th>
+					<th scope="col" style="width: 25%;">Currency</th>
+
+				</tr>
+			</thead>
+			<tr>
+				<td style="width: 25%;">${record.trandate}</td>
+				<td style="width: 25%;">${record.postingperiod}</td>
+				<td style="width: 25%;">${record.type}</td>
+				<td style="width: 25%;">${record.currency}</td>
+			</tr>
+		</table>
+
+		<#assign totalDebit = 0>
+		<#assign totalCredit = 0>
+		<table
+			style="width:100%; border-collapse: collapse;    border: 1px solid black; font-size:11px; line-height:20px;">
+			<#list record.line as line>
+			<#if line_index==0>
+				<tr>
+					<th style="border:1px solid black; width:8%;">
+						<b>Row #</b>
+					</th>
+					<th style="border:1px solid black; width:25%;">
+						<b>Account Name</b>
+					</th>
+					<th style="border:1px solid black; width:15%;">
+						<b>Debit</b>
+					</th>
+					<th style="border:1px solid black; width:15%;">
+						<b>Credit</b>
+					</th>
+					<th style="border:1px solid black; width:20%;">
+						<b>Description</b>
+					</th>
+					<#if record.type?lower_case == "journal">
+						<th style="border:1px solid black; width:10%;">
+							<b>Name</b>
+						</th>
+						<th style="border:1px solid black; width:10%;">
+							<b>Department</b>
+						</th>
+						<th style="border:1px solid black; width:10%;">
+							<b>Class</b>
+						</th>
+						<th style="border:1px solid black; width:10%;">
+							<b>Location</b>
+						</th>
+					</#if>
+				</tr>
+			</#if>
+			<tr>
+				<td style="border:1px solid black; width:8%;">${line_index + 1}</td>
+				<td style="border:1px solid black; width:25%;">${line.account}</td>
+				<td style="border:1px solid black; width:15%;">${line.debitamount}</td>
+				<td style="border:1px solid black; width:15%;">${line.creditamount}</td>
+				<td style="border:1px solid black; width:20%;">${line.memo}</td>
+				<#if record.type?lower_case == "journal">
+					<td style="border:1px solid black;">${line.entity}</td>
+					<td style="border:1px solid black;">${line.department}</td>
+					<td style="border:1px solid black;">${line.class}</td>
+					<td style="border:1px solid black;">${line.location}</td>
+				</#if>
+
+			</tr>
+			<#assign totalDebit = totalDebit + (line.debitamount)>
+			<#assign totalCredit = totalCredit + (line.creditamount)>
+			</#list>
+			<tr>
+				<td style="border:1px solid black; width:8%;">
+					<b>Total</b>
+				</td>
+				<td style="border:1px solid black; width:25%;">&nbsp;</td>
+
+				<td style="border:1px solid black; width:15%;">
+					<b>${totalDebit}</b>
+				</td>
+				<td style="border:1px solid black; width:15%;">
+					<b>${totalCredit}</b>
+				</td>
+				<td style="border:1px solid black; width:20%;">&nbsp;</td>
+				<#-- Leave empty placeholders if Journal to keep alignment -->
+				<#if record.type?lower_case == "journal">
+					<td style="border:1px solid black;">&nbsp;</td>
+					<td style="border:1px solid black;">&nbsp;</td>
+					<td style="border:1px solid black;">&nbsp;</td>
+					<td style="border:1px solid black;">&nbsp;</td>
+				</#if>
+			</tr>
+		</table>
+
+	</body>
+</pdf>

@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Pixel Validation Dashboard</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            margin: 20px;
+            background: #f5f7fa;
+        }
+
+        .container {
+            max-width: 1800px;
+            margin: auto;
+        }
+
+        .header {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .filters {
+            display: flex;
+            gap: 15px;
+            align-items: end;
+            flex-wrap: wrap;
+        }
+
+        .field-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .field-group label {
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .field-group input {
+            padding: 8px;
+            min-width: 180px;
+        }
+
+        button {
+            padding: 10px 20px;
+            cursor: pointer;
+            border: none;
+            border-radius: 4px;
+        }
+
+        .btn-primary {
+            background: #0066cc;
+            color: white;
+        }
+
+        .btn-export {
+            background: #28a745;
+            color: white;
+        }
+
+        .summary-container {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .summary-card {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            min-width: 250px;
+            flex: 1;
+            text-align: center;
+        }
+
+        .summary-title {
+            font-size: 16px;
+            color: #666;
+        }
+
+        .summary-value {
+            font-size: 32px;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        .section {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 25px;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .section-title {
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .table-wrapper {
+            overflow-x: auto;
+            max-height: 600px;
+            overflow-y: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        table th {
+            background: #0066cc;
+            color: white;
+            padding: 10px;
+            position: sticky;
+            top: 0;
+        }
+
+        table td {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        table tr:nth-child(even) {
+            background: #f9f9f9;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        #loadingOverlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,.6);
+            z-index: 99999;
+            display: none;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .loading-box {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .error-box {
+            background: #ffdddd;
+            color: #c00000;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 6px;
+            display: none;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<div id="loadingOverlay">
+    <div class="loading-box">
+        Loading, please wait...
+    </div>
+</div>
+
+<div class="container">
+
+    <div class="header">
+
+        <h2>Pixel Validation Dashboard</h2>
+
+        <div id="errorBox" class="error-box"></div>
+
+        <div class="filters">
+
+            <div class="field-group">
+                <label>From Date</label>
+                <input type="date" id="fromDate">
+            </div>
+
+            <div class="field-group">
+                <label>To Date</label>
+                <input type="date" id="toDate">
+            </div>
+
+            <button
+    type="button"
+    class="btn-primary"
+    onclick="validateData()">
+                Validate
+            </button>
+
+        </div>
+
+    </div>
+
+    <div class="summary-container">
+
+        <div class="summary-card">
+            <div class="summary-title">Total API Records</div>
+            <div class="summary-value" id="totalRecords">0</div>
+        </div>
+
+        <div class="summary-card">
+            <div class="summary-title">Missing Items</div>
+            <div class="summary-value" id="missingItemsCount">0</div>
+        </div>
+
+        <div class="summary-card">
+            <div class="summary-title">Missing Customers</div>
+            <div class="summary-value" id="missingCustomersCount">0</div>
+        </div>
+
+        <div class="summary-card">
+            <div class="summary-title">Missing Locations</div>
+            <div class="summary-value" id="missingLocationsCount">0</div>
+        </div>
+
+    </div>
+
+    <div class="section">
+
+        <div class="section-header">
+            <div class="section-title">
+                Missing Items
+            </div>
+
+            <button type="button" class="btn-export" onclick="exportItems()">
+                Export CSV
+            </button>
+        </div>
+
+        <div class="table-wrapper">
+
+            <table id="itemsTable">
+
+                <thead>
+                <tr>
+                    <th>UPC</th>
+                    <th>Product Name</th>
+                    <th>Transaction</th>
+                    <th>Branch</th>
+                    <th>Date</th>
+                </tr>
+                </thead>
+
+                <tbody></tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+    <div class="section">
+
+        <div class="section-header">
+            <div class="section-title">
+                Missing Customers
+            </div>
+
+            <button type="button" class="btn-export" onclick="exportCustomers()">
+                Export CSV
+            </button>
+        </div>
+
+        <div class="table-wrapper">
+
+            <table id="customersTable">
+
+                <thead>
+                <tr>
+                    <th>Payment Method</th>
+                    <th>Branch</th>
+                    <th>Date</th>
+                </tr>
+                </thead>
+
+                <tbody></tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+    <div class="section">
+
+        <div class="section-header">
+            <div class="section-title">
+                Missing Locations
+            </div>
+
+            <button type="button" class="btn-export" onclick="exportLocations()">
+                Export CSV
+            </button>
+        </div>
+
+        <div class="table-wrapper">
+
+            <table id="locationsTable">
+
+                <thead>
+                <tr>
+                    <th>Branch ID</th>
+                    <th>Branch Name</th>
+                    <th>Date</th>
+                </tr>
+                </thead>
+
+                <tbody></tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+
+    var missingItemsData = [];
+    var missingCustomersData = [];
+    var missingLocationsData = [];
+    var SUITELET_URL = '##SUITELET_URL##';
+
+    function showLoading() {
+        document.getElementById('loadingOverlay').style.display = 'flex';
+    }
+
+    function hideLoading() {
+        document.getElementById('loadingOverlay').style.display = 'none';
+    }
+
+    function showError(message) {
+
+        var box = document.getElementById('errorBox');
+
+        box.style.display = 'block';
+        box.innerHTML = message;
+    }
+
+    function hideError() {
+
+        var box = document.getElementById('errorBox');
+
+        box.style.display = 'none';
+        box.innerHTML = '';
+    }
+
+    function validateData() {
+
+        try {
+
+            hideError();
+
+            var fromDate = document.getElementById('fromDate').value;
+            var toDate = document.getElementById('toDate').value;
+
+            if (!fromDate || !toDate) {
+
+                alert('Please select From Date and To Date.');
+                return;
+            }
+
+            showLoading();
+
+            var formattedFrom = convertDate(fromDate);
+            var formattedTo = convertDate(toDate);
+
+            var body =
+                'action=validate' +
+                '&fromDate=' + encodeURIComponent(formattedFrom) +
+                '&toDate=' + encodeURIComponent(formattedTo);
+
+            fetch(SUITELET_URL, {
+
+                method: 'POST',
+
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+
+                body: body
+
+            })
+            .then(function(response) {
+                return response.json();
+            })
+            .then(function(result) {
+
+                hideLoading();
+
+                if (!result.success) {
+
+                    showError(result.message || 'Unknown Error');
+                    return;
+                }
+
+                populateSummary(result.summary);
+
+                missingItemsData = result.missingItems || [];
+                missingCustomersData = result.missingCustomers || [];
+                missingLocationsData = result.missingLocations || [];
+
+                populateItemsTable();
+                populateCustomersTable();
+                populateLocationsTable();
+
+            })
+            .catch(function(error) {
+
+                hideLoading();
+
+                showError(error.message || error);
+            });
+
+        } catch (e) {
+
+            hideLoading();
+            showError(e.message || e);
+        }
+    }
+
+    function populateSummary(summary) {
+
+        document.getElementById('totalRecords').innerHTML =
+            summary.totalRecords || 0;
+
+        document.getElementById('missingItemsCount').innerHTML =
+            summary.missingItems || 0;
+
+        document.getElementById('missingCustomersCount').innerHTML =
+            summary.missingCustomers || 0;
+
+        document.getElementById('missingLocationsCount').innerHTML =
+            summary.missingLocations || 0;
+    }
+
+    function populateItemsTable() {
+
+        var tbody =
+            document.querySelector('#itemsTable tbody');
+
+        tbody.innerHTML = '';
+
+        missingItemsData.forEach(function(item) {
+
+            tbody.innerHTML +=
+                '<tr>' +
+                '<td>' + safe(item.upc) + '</td>' +
+                '<td>' + safe(item.productName) + '</td>' +
+                '<td>' + safe(item.transactionNo) + '</td>' +
+                '<td>' + safe(item.branchName) + '</td>' +
+                '<td>' + safe(item.openDate) + '</td>' +
+                '</tr>';
+        });
+    }
+
+    function populateCustomersTable() {
+
+        var tbody =
+            document.querySelector('#customersTable tbody');
+
+        tbody.innerHTML = '';
+
+        missingCustomersData.forEach(function(item) {
+
+            tbody.innerHTML +=
+                '<tr>' +
+                '<td>' + safe(item.paymentMethod) + '</td>' +
+                '<td>' + safe(item.branchName) + '</td>' +
+                '<td>' + safe(item.openDate) + '</td>' +
+                '</tr>';
+        });
+    }
+
+    function populateLocationsTable() {
+
+        var tbody =
+            document.querySelector('#locationsTable tbody');
+
+        tbody.innerHTML = '';
+
+        missingLocationsData.forEach(function(item) {
+
+            tbody.innerHTML +=
+                '<tr>' +
+                '<td>' + safe(item.branchId) + '</td>' +
+                '<td>' + safe(item.branchName) + '</td>' +
+                '<td>' + safe(item.openDate) + '</td>' +
+                '</tr>';
+        });
+    }
+
+    function exportItems() {
+
+        exportCsv(
+            'Missing_Items.csv',
+            missingItemsData,
+            ['upc','productName','transactionNo','branchName','openDate']
+        );
+    }
+
+    function exportCustomers() {
+
+        exportCsv(
+            'Missing_Customers.csv',
+            missingCustomersData,
+            ['paymentMethod','branchName','openDate']
+        );
+    }
+
+    function exportLocations() {
+
+        exportCsv(
+            'Missing_Locations.csv',
+            missingLocationsData,
+            ['branchId','branchName','openDate']
+        );
+    }
+
+    function exportCsv(fileName, data, columns) {
+
+        var csv = '';
+
+        csv += columns.join(',') + '\n';
+
+        data.forEach(function(row) {
+
+            var values = [];
+
+            columns.forEach(function(col) {
+
+                var value = row[col] || '';
+
+                value = '"' + String(value).replace(/"/g, '""') + '"';
+
+                values.push(value);
+            });
+
+            csv += values.join(',') + '\n';
+        });
+
+        var blob = new Blob(
+            [csv],
+            { type: 'text/csv;charset=utf-8;' }
+        );
+
+        var link = document.createElement('a');
+
+        link.href = URL.createObjectURL(blob);
+        link.download = fileName;
+
+        document.body.appendChild(link);
+
+        link.click();
+
+        document.body.removeChild(link);
+    }
+
+    function convertDate(dateString) {
+
+        var date = new Date(dateString);
+
+        var months = [
+            'JAN','FEB','MAR','APR','MAY','JUN',
+            'JUL','AUG','SEP','OCT','NOV','DEC'
+        ];
+
+        var day = date.getDate();
+
+        if (day < 10) {
+            day = '0' + day;
+        }
+
+        var month = months[date.getMonth()];
+
+        var year =
+            String(date.getFullYear()).substring(2);
+
+        return day + '-' + month + '-' + year;
+    }
+
+    function safe(value) {
+
+        if (value == null) {
+            return '';
+        }
+
+        return String(value);
+    }
+
+</script>
+
+</body>
+</html>

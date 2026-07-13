@@ -1,0 +1,9 @@
+{
+    "success": true,
+    "recordType": "itemreceipt",
+    "internalId": "576221",
+    "tranId": "14619",
+    "vendorBillInternalId": "576222",
+    "vendorBillTranId": "",
+    "warnings": []
+}

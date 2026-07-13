@@ -1,0 +1,227 @@
+<?xml version="1.0"?><!DOCTYPE pdf PUBLIC "-//big.faceless.org//report" "report-1.1.dtd">
+<pdf>
+<head>
+<link name="NotoSansArabic" type="font" subtype="opentype" src="${nsfont.NotoSansArabic_Regular}" src-bold="${nsfont.NotoSansArabic_Bold}" bytes="2" subset="false"/>
+	<link name="NotoSans" type="font" subtype="truetype" src="${nsfont.NotoSans_Regular}" src-bold="${nsfont.NotoSans_Bold}" src-italic="${nsfont.NotoSans_Italic}" src-bolditalic="${nsfont.NotoSans_BoldItalic}" bytes="2" />
+	<#if .locale == "zh_CN">
+		<link name="NotoSansCJKsc" type="font" subtype="opentype" src="${nsfont.NotoSansCJKsc_Regular}" src-bold="${nsfont.NotoSansCJKsc_Bold}" bytes="2" />
+	<#elseif .locale == "zh_TW">
+		<link name="NotoSansCJKtc" type="font" subtype="opentype" src="${nsfont.NotoSansCJKtc_Regular}" src-bold="${nsfont.NotoSansCJKtc_Bold}" bytes="2" />
+	<#elseif .locale == "ja_JP">
+		<link name="NotoSansCJKjp" type="font" subtype="opentype" src="${nsfont.NotoSansCJKjp_Regular}" src-bold="${nsfont.NotoSansCJKjp_Bold}" bytes="2" />
+	<#elseif .locale == "ko_KR">
+		<link name="NotoSansCJKkr" type="font" subtype="opentype" src="${nsfont.NotoSansCJKkr_Regular}" src-bold="${nsfont.NotoSansCJKkr_Bold}" bytes="2" />
+	<#elseif .locale == "th_TH">
+		<link name="NotoSansThai" type="font" subtype="opentype" src="${nsfont.NotoSansThai_Regular}" src-bold="${nsfont.NotoSansThai_Bold}" bytes="2" />
+	</#if>
+    <macrolist>
+<!--Header-->
+<macro id="nlheader">
+<table style="width: 100%; background-color:#39c9bb; padding: 4px;"><tr>
+<td style="font-size: 35px;"><b>Purchase Order</b> <span font-size="14px">(${record.approvalstatus})</span></td>
+<td rowspan="3" style="align: center; text-align: center;">
+<!--Images based on subsidiary-->
+<#if record.subsidiary == "Lasour beach and resort">
+<img src="https://9072131.app.netsuite.com/core/media/media.nl?id=908&amp;c=9072131&amp;h=Se8nlfSaqXoc6A4ENantoQRKe-ehpRjwSEBR7xCwGkqhe0Z6" style="width:34%; height: 29%;"/>
+<#elseif record.subsidiary == "Royal tulip sharma resort">
+<img src="https://9072131.app.netsuite.com/core/media/media.nl?id=825&amp;c=9072131&amp;h=7swBHe9nOYJoxG64jAi6vkUQiIslqVroqagLEgQ7GBthQ5AC" style="width:50%; height: 50%;"/>
+<#elseif record.subsidiary == "Lasour executive resident">
+<img src="https://9072131.app.netsuite.com/core/media/media.nl?id=909&amp;c=9072131&amp;h=eDhAMlK6sUhlW9UMiDhjlEh0ir6sbwzmtNqMqE5Rk4sRIauM" style="width:60%; height: 60%;"/>
+<#elseif record.subsidiary == "Envirol- facility management">
+<img src="https://9072131.app.netsuite.com/core/media/media.nl?id=906&amp;c=9072131&amp;h=kc2BSBn1kURAs9Sapqkn_iMYVMFQjaQZbI80KPUmbcibdFTw" style="width:10%; height: 9%;"/>
+<#elseif record.subsidiary == "Eventti">
+<img src="https://9072131.app.netsuite.com/core/media/media.nl?id=907&amp;c=9072131&amp;h=viVk_MXWSNdy4Ou_XDCTt7GmuzsF1RFUn47pTuBkT2ahUSNC" style="width:70%; height: 70%;"/>
+<#elseif record.subsidiary == "Tabuk investment and tourism (Holding)">
+<img src="https://9072131.app.netsuite.com/core/media/media.nl?id=830&amp;c=9072131&amp;h=C35CfZfzS7NrV4s5k5xGjetHiWDptMCapgiMVeZRwj1-Nn4S" style="width:70%; height: 70%;" />
+</#if>
+    </td>
+	</tr>
+	<tr>
+	<#if record.subsidiary == "Lasour beach and resort">
+	<td style="font-size: 25px; color: white;"><b>L&#39;AZURE BEACH &amp; RESORT</b></td>
+    <#elseif record.subsidiary == "Royal tulip sharma resort">
+    <td style="font-size: 25px; color: white;"><b>Royal Tulip Sharma Resort</b></td>
+    <#elseif record.subsidiary == "Lasour Executive Resident">
+    <td style="font-size: 25px; color: white;"><b>Lasour Executive Resident</b></td>
+    <#elseif record.subsidiary == "Envirol- facility management">
+    <td style="font-size: 25px; color: white;"><b>Envirol- Facility Management</b></td>
+    <#elseif record.subsidiary == "Eventti">
+    <td style="font-size: 25px; color: white;"><b>Eventti</b></td>
+    <#elseif record.subsidiary == "Tabuk investment and tourism (Holding)">
+    <td style="font-size: 25px; color: white;"><b>Tabuk investment and tourism (Holding)</b></td>
+    </#if>
+	</tr>
+	<tr>
+	<td style="align: left; text-align: left;"><barcode codetype="code128" width = "70%" value="${record.tranid}"/></td>
+	</tr>
+</table>
+<!--_______________________________________________________________________________________________________________-->
+
+<table style="width: 100%; padding-top: 4px;"><tr>
+	<td style="background-color:#39c9bb; font-size: 13px; padding: 5px;"><b>Vendor Name</b></td>
+	<td style="background-color:#39c9bb; font-size: 12px; padding: 5px;"><b>${record.entity.companyname}</b></td>
+	<td style="font-size: 13px; padding: 5px;">Type</td>
+	<td style="font-size: 13px; padding: 5px;">: ${record.custbody_vs_po_type}</td>
+	</tr>
+	<tr>
+	<td style="font-size: 13px; padding: 5px;">Vedor Code</td>
+	<td style="font-size: 13px; padding: 5px;">${record.entity.entityid}</td>
+	<td style="font-size: 13px; padding: 5px;">PO Class</td>
+	<td style="font-size: 11px; padding: 5px;">: ${record.class}</td>
+	</tr>
+	<tr>
+	<td style="font-size: 13px; padding: 5px;">Full Address</td>
+	<td style="font-size: 13px; padding: 5px;">${record.entity.defaultaddress}</td>
+	<td style="font-size: 13px; padding: 5px;">Delivery Address</td>
+	<td style="font-size: 13px; padding: 5px;">: ${record.duedate}</td>
+	</tr>
+	<tr>
+	<td style="font-size: 13px; padding: 5px;">Phone</td>
+	<td style="font-size: 13px; padding: 5px;">${record.entity.phone}</td>
+	<td style="font-size: 13px; padding: 5px;">Date</td>
+	<td style="font-size: 13px; padding: 5px;">: ${record.trandate}</td>
+	</tr>
+	<tr>
+	<td style="font-size: 13px; padding: 5px;">Contact</td>
+	<td style="font-size: 13px; padding: 5px;">${record.entity.altphone}</td>
+	<td style="font-size: 13px; padding: 5px; background-color: #39c9bb;"><b>TRN No.</b></td>
+	<td style="font-size: 13px; padding: 5px; background-color: #39c9bb;"><b>: ${record.tranid}</b></td>
+	</tr>
+</table>
+</macro>
+<!--Footer __________________________________________________________________________________-->
+<macro id="nlfooter">
+<table style="width: 100%;"><tr>
+	<td style="border-left: 1px; border-right: 1px; border-top: 1px; border-color: #39c9bb"><b>Purchasing Manager:</b></td>
+	<td style="border-left: 1px; border-right: 1px; border-top: 1px; border-color: #39c9bb"><b>Financial Controler:</b></td>
+	<td style="border-left: 1px; border-right: 1px; border-top: 1px; border-color: #39c9bb"><b>Generral Manager:</b></td>
+	</tr>
+	<tr>
+	<td style="border-left: 1px; border-right: 1px; border-bottom: 1px; border-color: #39c9bb">&nbsp;</td>
+	<td style="border-left: 1px; border-right: 1px; border-bottom: 1px; border-color: #39c9bb">&nbsp;</td>
+	<td style="border-left: 1px; border-right: 1px; border-bottom: 1px; border-color: #39c9bb">&nbsp;</td>
+	</tr>
+</table>
+</macro>
+</macrolist>
+    <style type="text/css">* {
+		<#if .locale == "zh_CN">
+			font-family: NotoSans, NotoSansCJKsc, sans-serif;
+		<#elseif .locale == "zh_TW">
+			font-family: NotoSans, NotoSansCJKtc, sans-serif;
+		<#elseif .locale == "ja_JP">
+			font-family: NotoSans, NotoSansCJKjp, sans-serif;
+		<#elseif .locale == "ko_KR">
+			font-family: NotoSans, NotoSansCJKkr, sans-serif;
+		<#elseif .locale == "th_TH">
+			font-family: NotoSans, NotoSansThai, sans-serif;
+		<#else>
+			font-family: NotoSans, sans-serif;
+		</#if>
+		}
+</style>
+</head>
+<body header="nlheader" header-height="30%" footer="nlfooter" footer-height="10%" padding="0.1in 0.2in 0.1in 0.2in" size="Letter">
+<!--Body ______________________________________________________________________________________-->
+<#list record.item as item>
+<table style="width: 100%;"><#if item_index==0><tr>
+	<td style="align: center; text-align: center; background-color: #808080;"><b>Item</b></td>
+	<td style="align: center; text-align: center; background-color: #808080;"><b>Pack</b></td>
+	<td style="align: center; text-align: center; background-color: #808080;"><b>Description</b></td>
+	<td style="align: center; text-align: center; background-color: #808080;"><b>Unit</b></td>
+	<td style="align: center; text-align: center; background-color: #808080;"><b>Qty.</b></td>
+	<td style="align: center; text-align: center; background-color: #808080;"><b>Rate</b></td>
+	<td style="align: center; text-align: center; background-color: #808080;"><b>VAT 15%</b></td>
+	<td style="align: center; text-align: center; background-color: #808080;"><b>Value</b></td>
+	</tr>
+	</#if>
+	<tr>
+	<td style="align: left; text-align: left; font-size: 10px; border-bottom:1px;">${item.item}</td>
+	<td style="align: center; text-align: center; font-size: 10px; border-bottom:1px;">&nbsp;</td>
+	<td style="align: center; text-align: center; font-size: 10px; border-bottom:1px;">${item.description}</td>
+	<td style="align: center; text-align: center; font-size: 10px; border-bottom:1px;">${item.units}</td>
+	<td style="align: center; text-align: center; font-size: 10px; border-bottom:1px;">${item.quantity}</td>
+	<td style="align: center; text-align: center; font-size: 10px; border-bottom:1px;">${item.rate}</td>
+	<td style="align: center; text-align: center; font-size: 10px; border-bottom:1px;">${item.tax1amt}</td>
+	<td style="align: center; text-align: center; font-size: 10px; border-bottom:1px;">${item.Grossamt}</td>
+	</tr>
+</table>
+</#list>
+<br/>
+<table width="100%"><tr>
+	<td style = "border-right: 3px; border-top: 3px; border-left: 3px; border-bottom:3px; border-color: #39c9bb; font-size: 12px;"><b>Total Before VAT</b><br/><span font-size = "19px">${record.subtotal?string["#,##0.00"]}</span><b></b></td>
+	<td style = "border-right: 3px; border-top: 3px; border-bottom: 3px; border-color: #39c9bb; font-size: 12px;"><b>Tax (15%)</b><br/><span font-size = "19px">${record.taxtotal?string["#,##0.00"]}</span><b></b></td>
+	<td style = "border-right: 3px; border-top: 3px; border-bottom: 3px; border-color: #39c9bb; font-size: 11px; vertical-align:center;"><b>Prepared By</b><br/><b>${record.employee}</b></td>
+	</tr>
+	<tr>
+	<td colspan="3" style = "border-left:3px; border-right:3px; border-bottom:3px; border-color: #39c9bb; font-size: 15px;"><b>Grand Total</b> <span font-size = "19px">${record.total?string["#,##0.00"]}</span><b></b><br/><span font-size = "13px"><b>${record.custbody_vs_amt_in_words}</b></span></td>
+	</tr>
+</table>
+<br/>
+<table width = "100%">
+        <tr>
+            <td style = "font-size: 14px; background-color: #39c9bb; border-color: #39c9bb; border-right: 1px; border-left: 1px; border-top: 1px;"><b>Terms &amp; Conditions</b></td>
+        </tr>
+        <tr>
+<td style = "font-size: 12px; border-color: #39c9bb; border-right: 1px; border-left: 1px; border-bottom: 1px;">
+<!--Terms and conditions based on subsidiary-->
+<#if record.subsidiary == "Lasour beach and resort">
+•	Delivery Location: Lazure Beach Resort.<br/>
+•	Deliveries through the receiving office ONLY.<br/>
+•	Goods Will be accepted from 09:00 - 15:00 Saturday to Thursday.<br/>
+•	In cases of transmission problems, Please contact +966 55 084 0111<br/>
+•	Email - a.sahlah@lazurehospitality.com<br/>
+•	 INVOICES will only be accepted along with a copy of the PO. Delivery notes will not be accepted.<br/>
+•	Frozen food items must be delivered by temperature control vehicle or truck ranging from -12C to -18C.<br/>
+•	Chill food items must be delivered by a temperature control vehicle or truck ranging from 0C to 7C.<br/>
+<#elseif record.subsidiary == "Royal tulip sharma resort">
+•	Delivery Location: Royal Tulip Sharma Resort.<br/>
+•	Deliveries through the receiving office ONLY.<br/>
+•	Goods Will be accepted from 09:00 - 15:00 Saturday to Thursday.<br/>
+•	In cases of transmission problems, Please contact +966 50 629 0026<br/>
+•	Email - a.jamil@lazurehospitality.com<br/>
+•	 INVOICES will only be accepted along with a copy of the PO. Delivery notes will not be accepted.<br/>
+•	Frozen food items must be delivered by temperature control vehicle or truck ranging from -12C to -18C.<br/>
+•	Chill food items must be delivered by a temperature control vehicle or truck ranging from 0C to 7C.<br/>
+<#elseif record.subsidiary == "Lasour executive resident">
+•	Delivery Location: Lazure Beach Resort<br/>
+•	Deliveries through the receiving office ONLY.<br/>
+•	Goods Will be accepted from 09:00 - 15:00 Saturday to Thursday.<br/>
+•	In cases of transmission problems, Please contact +966 55 084 0111<br/>
+•	Email - a.sahlah@lazurehospitality.com<br/>
+•	 INVOICES will only be accepted along with a copy of the PO. Delivery notes will not be accepted.<br/>
+•	Frozen food items must be delivered by temperature control vehicle or truck ranging from -12C to -18C.<br/>
+•	Chill food items must be delivered by a temperature control vehicle or truck ranging from 0C to 7C.<br/>
+<#elseif record.subsidiary == "Envirol- facility management">
+•	Delivery Location: AL Ula.<br/>
+•	Deliveries through the receiving office ONLY.<br/>
+•	Goods Will be accepted from 09:00 - 15:00 Saturday to Thursday.<br/>
+•	In cases of transmission problems, Please contact +966 53 910 2591<br/>
+•	Email - m.shezab@enviro-fm.com<br/>
+•	 INVOICES will only be accepted along with a copy of the PO. Delivery notes will not be accepted.<br/>
+•	Frozen food items must be delivered by temperature control vehicle or truck ranging from -12C to -18C.<br/>
+•	Chill food items must be delivered by a temperature control vehicle or truck ranging from 0C to 7C.<br/>
+<#elseif record.subsidiary == "Eventti">
+•	Delivery Location: To be Announced.<br/>
+•	Deliveries through the receiving office ONLY.<br/>
+•	Goods Will be accepted from 09:00 - 15:00 Saturday to Thursday.<br/>
+•	In cases of transmission problems, Please contact +966 53 910 2591<br/>
+•	Email - m.shezab@enviro-fm.com<br/>
+•	 INVOICES will only be accepted along with a copy of the PO. Delivery notes will not be accepted.<br/>
+•	Frozen food items must be delivered by temperature control vehicle or truck ranging from -12C to -18C.<br/>
+•	Chill food items must be delivered by a temperature control vehicle or truck ranging from 0C to 7C.<br/>
+<#elseif record.subsidiary == "Tabuk investment and tourism (Holding)">
+•	Delivery Location: Royal Tulip Sharma Resort.<br/>
+•	Deliveries through the receiving office ONLY.<br/>
+•	Goods Will be accepted from 09:00 - 15:00 Saturday to Thursday.<br/>
+•	In cases of transmission problems, Please contact +966 50 629 0026<br/>
+•	Email - a.jamil@lazurehospitality.com<br/>
+•	 INVOICES will only be accepted along with a copy of the PO. Delivery notes will not be accepted.<br/>
+•	Frozen food items must be delivered by temperature control vehicle or truck ranging from -12C to -18C.<br/>
+•	Chill food items must be delivered by a temperature control vehicle or truck ranging from 0C to 7C.<br/>
+</#if>
+</td>
+</tr>
+</table>
+</body>
+</pdf>

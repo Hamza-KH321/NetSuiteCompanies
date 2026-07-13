@@ -1,0 +1,310 @@
+<?xml version="1.0"?><!DOCTYPE pdf PUBLIC "-//big.faceless.org//report" "report-1.1.dtd">
+<pdf>
+<head>
+   <link name="NotoSansArabic" type="font" subtype="opentype" src="${nsfont.NotoSansArabic_Regular}" src-bold="${nsfont.NotoSansArabic_Bold}" bytes="2" subset="false"/>subset="false"/>
+	<link name="NotoSans" type="font" subtype="truetype" src="${nsfont.NotoSans_Regular}" src-bold="${nsfont.NotoSans_Bold}" src-italic="${nsfont.NotoSans_Italic}" src-bolditalic="${nsfont.NotoSans_BoldItalic}" bytes="2" />
+	<#if .locale == "zh_CN">
+		<link name="NotoSansCJKsc" type="font" subtype="opentype" src="${nsfont.NotoSansCJKsc_Regular}" src-bold="${nsfont.NotoSansCJKsc_Bold}" bytes="2" />
+	<#elseif .locale == "zh_TW">
+		<link name="NotoSansCJKtc" type="font" subtype="opentype" src="${nsfont.NotoSansCJKtc_Regular}" src-bold="${nsfont.NotoSansCJKtc_Bold}" bytes="2" />
+	<#elseif .locale == "ja_JP">
+		<link name="NotoSansCJKjp" type="font" subtype="opentype" src="${nsfont.NotoSansCJKjp_Regular}" src-bold="${nsfont.NotoSansCJKjp_Bold}" bytes="2" />
+	<#elseif .locale == "ko_KR">
+		<link name="NotoSansCJKkr" type="font" subtype="opentype" src="${nsfont.NotoSansCJKkr_Regular}" src-bold="${nsfont.NotoSansCJKkr_Bold}" bytes="2" />
+	<#elseif .locale == "th_TH">
+		<link name="NotoSansThai" type="font" subtype="opentype" src="${nsfont.NotoSansThai_Regular}" src-bold="${nsfont.NotoSansThai_Bold}" bytes="2" />
+	</#if>
+    <macrolist>
+        <macro id="nlheader">
+          <table class="header" style="width: 100%; margin-bottom:70px;">
+            <tr>
+                <!-- <td style=""><img src="https://7939761-sb1.app.netsuite.com/core/media/media.nl?id=1272&amp;c=7939761_SB1&amp;h=a5ckLxtQuC7yev1A6-6B6xGqFTYdCtHqOnAdyaLQW5Un1NGs" style="height: 100%; width: 100%;" /></td> -->
+              <td>
+                <p style= "font-size: 12px; font-weight:bold">Pan Arabia Medical Company Limited <br/>
+ Ibn Batutah Str. Al Zahra Dist. <br/>
+PO Box 59663 Riyadh 12812<br/>
+ Kingdom of Saudi Arabia<br/>
+ Tel : +966 -1- 2060300 <br/>
+Fax : +966 -1 -2061415<br/>
+ Email : info@pamedco.com</p>
+              </td>  
+              <td style="width: 20%; "><img src="https://7939761-sb1.app.netsuite.com/core/media/media.nl?id=1445&amp;c=7939761_SB1&amp;h=ZB22aUBs_QwJDbcXEdAa3nYtDZWPZIv5E5Zt471Tu6FPF6BC" style="height: 70%; width: 70%" />
+                </td>
+			</tr>
+          </table>
+        </macro>
+       <macro id="nlfooter">
+            <table class="footer" style="width: 100%;">
+              <tr>
+				<td style="width:100%; align:center"><p style="text-align: center;">
+                  <b>تلفون : ٩٦٦۱۱۲۰۶۰۳۰۰ فاكس : ٩٦٦١١۲٠٦١٤١٥+ ص . ب ٥٩٦٦٣ الرياض ۱۱٥٣٥ المملكة العربية السعودية</b>
+				  <br/>Tel: +966 11 206 0300 Fax: +966 11 206 1415 P.O.Box 59663 Riyadh 11535 Saudi Arabia
+				  <br/>www.pamedco.com   |   info@pamedco.com
+                  </p>
+                </td>
+			</tr>
+          </table>
+        </macro>
+    </macrolist>
+    <style type="text/css">* {
+		<#if .locale == "zh_CN">
+			font-family: NotoSans, NotoSansCJKsc, sans-serif;
+		<#elseif .locale == "zh_TW">
+			font-family: NotoSans, NotoSansCJKtc, sans-serif;
+		<#elseif .locale == "ja_JP">
+			font-family: NotoSans, NotoSansCJKjp, sans-serif;
+		<#elseif .locale == "ko_KR">
+			font-family: NotoSans, NotoSansCJKkr, sans-serif;
+		<#elseif .locale == "th_TH">
+			font-family: NotoSans, NotoSansThai, sans-serif;
+		<#else>
+			font-family: NotoSansArabic, sans-serif;
+		</#if>
+		}
+		table {
+			font-size: 9pt;
+			table-layout: fixed;
+		}
+        th {
+            font-weight: bold;
+            font-size: 8pt;
+            vertical-align: middle;
+            padding: 5px 6px 3px;
+            background-color: #e3e3e3;
+            color: #333333;
+        }
+        td {
+            padding: 4px 6px;
+        }
+		td p { align:left }
+        b {
+            font-weight: bold;
+            color: #333333;
+        }
+        table.header td {
+            padding: 0;
+            font-size: 10pt;
+        }
+        table.footer td {
+            padding: 0;
+            font-size: 8pt;
+        }
+        table.itemtable th {
+            padding-bottom: 10px;
+            padding-top: 10px;
+   			background:  #EAEAEA;
+        }
+        table.body td {
+            padding-top: 2px;
+        }
+        table.total {
+            page-break-inside: avoid;
+        }
+        tr.totalrow {
+            background-color:#EAEAEA;
+            line-height: 200%;
+        }
+        td.totalboxtop {
+            font-size: 12pt;
+            background-color:#EAEAEA;
+        }
+        td.addressheader {
+            font-size: 8pt;
+            padding-top: 6px;
+            padding-bottom: 2px;
+        }
+        td.address {
+            padding-top: 0;
+        }
+        td.totalboxmid {
+            font-size: 28pt;
+            padding-top: 20px;
+            background-color:#EAEAEA;
+        }
+        td.totalboxbot {
+            background-color: #EAEAEA;
+            font-weight: bold;
+        }
+        span.title {
+            font-size: 28pt;
+        }
+        span.number {
+            font-size: 16pt;
+        }
+        span.itemname {
+            font-weight: bold;
+            line-height: 150%;
+        }
+        hr {
+            width: 100%;
+            color: #d3d3d3;
+            background-color: #d3d3d3;
+            height: 1px;
+        }
+</style>
+</head>
+<body header="nlheader" header-height="15%" footer="nlfooter" footer-height="20pt" padding="0.5in 0.5in 0.5in 0.5in" size="Letter A4">
+   <table style="width:100%; margin-top:70px;">
+     <tr>
+       <td align="center"><p style=" text-align: center; font-size: 15pt;"><b>Purchase  Order</b></p></td>
+     </tr>
+    <tr>
+    <td align="center">
+        <#if record.custbody_vs_acknowledgement?boolean>
+            acknowledgment
+        <#else>
+            Draft
+        </#if>
+    </td>
+</tr>
+
+  </table>
+
+  <table style="width: 60%; float:left; margin-right:200px; font-size: 13px">
+    <tr>
+      <td >${record.entity}</td>
+    </tr>
+    <tr>
+      <td>${record.entity.address.country}</td>      
+    </tr>
+    <tr>
+      <td>${record.entity.address.city}</td>
+    </tr>
+    <tr>
+      <td>Texas ${record.entity.vatregnumber} ${record.currency}</td>
+    </tr>
+    <tr>
+      <td>Tel: ${record.entity.phone} </td>
+    </tr>
+  </table>
+  
+  <table style="width: 40%; float: right ">
+    <tr>
+      <td>Order Number:</td>
+  	  <td>${record.tranid}</td>
+    </tr>
+    <tr>
+      <td>Date:</td>
+  	  <td>${record.trandate}</td>
+    </tr>
+    <tr>
+      <td>Status:</td>
+  	  <td>${record.status}</td>
+    </tr>
+    <tr>
+      <td>Shipping Method :</td>
+  	  <td>${record.custbody_vs_shipping_method}</td>
+    </tr>
+    <tr>
+      <td>Shipping Terms :</td>
+  	  <td>${record.custbody_vs_shipping_terms}</td>
+    </tr>
+     <!-- <tr>
+      <td>Destination:</td>
+  	  <td>${record.location}</td>
+    </tr> -->
+    <tr>
+      <td>Currency :</td>
+  	  <td>${record.currencyname}</td>
+    </tr>
+    <tr>
+      <td>Payment Terms :</td>
+  	  <td>${record.terms}</td>
+    </tr>
+     <tr>
+      <td>Delivery Date :</td>
+  	  <td>${record.duedate}</td>
+    </tr>
+    <tr>
+      <td>DIstanition:</td>
+  	  <td>Riyad</td>
+    </tr>
+  </table>
+  
+<#if record.item?has_content>
+<table class="itemtable" style="width: 100%; border: 1px; border-bottom: none"><!-- start items -->
+<#list record.item as item>
+<#if item_index==0>
+<thead>
+	<tr style="border-bottom:1px">
+      <th style="width: 30px">No</th>
+      <th colspan="3" style="border-left:1px;font-size: 7pt;" align="left">Item</th>
+      <th colspan="10" align="left" style="border-left:1px; font-size: 7pt;">Description</th>
+      <th colspan="3" align="left" style="border-left:1px; font-size: 7pt;">Unit</th>
+      <th align="left" colspan="3" style="border-left:1px; font-size: 7pt;">${item.quantity@label}</th>
+      <th align="left" colspan="4" style="border-left:1px; font-size: 7pt;" >Price ${record.entity.currency.currency}</th>
+      <th align="left" colspan="4" style="border-left:1px; font-size: 7pt;" >Amont</th>
+      <th align="left" colspan="4" style="border-left:1px; border-bottom: none; font-size: 7pt;">Total Price ${record.entity.currency.currency}</th>
+	</tr>
+</thead>
+</#if>
+  <tr style="border-bottom: 1px">
+  	  <td>${item_index+1}</td>
+  	  <td colspan="3" style="border-left:1px; font-size: 7pt;">${item.custcol_vsitemid}</td>
+  	  <td colspan="10" style="border-left:1px; font-size: 7pt;">${item.description}</td>
+      <td colspan="3" style="border-left:1px; font-size: 7pt;">${item.units}</td>
+      <td align="left" colspan="3" line-height="150%" style="border-left:1px; font-size: 7pt;">${item.quantity}</td>
+      <td align="left" colspan="4" style="border-left:1px; font-size: 7pt;">${item.rate}</td>
+      <td align="left" colspan="4" style="border-left:1px; font-size: 7pt;">${item.amount}</td>
+      <td align="left" colspan="4" style="background: #EAEAEA ;border-left:1px; border-bottom: 1px; font-size: 7pt; ">${item.amount}</td>
+	</tr>
+	</#list><!-- end items --></table>
+</#if>
+
+<#if record.expense?has_content>  
+<table  class="itemtable" style="width: 100%;"><!-- start expenses --><#list record.expense as expense ><#if expense_index==0>
+<thead>
+	<tr>
+	<th colspan="12">${expense.category@label}</th>
+	<th colspan="10">${expense.account@label}</th>
+	<th align="right" colspan="4">${expense.amount@label}</th>
+	</tr>
+</thead>
+</#if><tr>
+	<td colspan="12"  style="font-size: 7pt;">${expense.category}</td>
+	<td colspan="10" style="font-size: 7pt;"><span class="itemname">${expense.account}</span></td>
+	<td align="right" colspan="4" style="font-size: 7pt;">${expense.amount}</td>
+	</tr>
+	</#list><!-- end expenses --></table>
+</#if>
+
+
+<table class="total" style="width: 100%; font-size: 7pt; ">
+  <tr class="totalrow" style="border-top: none">
+	<td align="right" style="background: #fff; border: 1px; border-right: none; font-size: 7pt;"><b>${record.total@label}</b></td>
+	<td align="right" style="width:86px; border: 1px; font-size: 7pt;" >${record.total}</td>
+	</tr>
+	<tr>
+	<td align="right" style="width:86px; border: 1px; font-size: 8pt;">
+	${record.custbody_vs_poamountinwords}
+	</td>
+	</tr>
+  </table>
+
+  <table style= "width:100%; margin-top:30px">
+     <tr>
+    	<td><b>Comments:</b></td>
+    </tr>
+    <tr>
+      <td>${record.custbody_vs_comments}</td>
+    </tr>
+    <!-- <tr>
+    	<td>1/ Please make sure production date max 5 months from date of receiving the shipment.</td>
+    </tr>
+    <tr>
+    	<td>2/ Please prepare Declaration of Confirmity document stamped and signed for SFDA which mention the MDMA numbers for the items and to be sent along with the invoices with the shipment for the customs in Riyadh.</td>
+    </tr>
+    <tr>
+    	<td>3/ Please mention the HS code number on the incoice as usual.</td>
+    </tr>
+    <tr>
+    	<td>4/ Please Consolidate with Order #277/19.</td>
+    </tr> -->
+  </table>
+  
+  <table style="width: 100%; margin-top:100px">
+    <tr><td><b>Authorized Person :-</b> </td></tr>
+    <tr><td> Hussam Mousa - Country Sales Manager</td></tr>
+  </table>
+</body>
+</pdf>

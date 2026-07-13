@@ -1,0 +1,1199 @@
+<?xml version="1.0"?>
+<!DOCTYPE pdf PUBLIC "-//big.faceless.org//report" "report-1.1.dtd">
+<pdfset>
+  <#assign cur = .now?date?long>
+  <#assign expirationDate = "">
+  <#assign difference = "">
+  <#assign itemsList = []>
+  <#assign listSize = 0>
+
+
+  <pdf>
+    <head>
+      <link name="NotoSans" type="font" subtype="truetype" src="${nsfont.NotoSans_Regular}"
+        src-bold="${nsfont.NotoSans_Bold}" src-italic="${nsfont.NotoSans_Italic}"
+        src-bolditalic="${nsfont.NotoSans_BoldItalic}" bytes="2" />
+      <link name="NotoSansArabic" type="font" subtype="opentype"
+        src="${nsfont.NotoSansArabic_Regular}" src-bold="${nsfont.NotoSansArabic_Bold}" bytes="2"
+        subset="false" />
+      <#if .locale == "zh_CN">
+      <link name="NotoSansCJKsc" type="font" subtype="opentype"
+        src="${nsfont.NotoSansCJKsc_Regular}" src-bold="${nsfont.NotoSansCJKsc_Bold}" bytes="2" />
+      <#elseif .locale == "zh_TW">
+      <link name="NotoSansCJKtc" type="font" subtype="opentype"
+        src="${nsfont.NotoSansCJKtc_Regular}" src-bold="${nsfont.NotoSansCJKtc_Bold}" bytes="2" />
+      <#elseif .locale == "ja_JP">
+      <link name="NotoSansCJKjp" type="font" subtype="opentype"
+        src="${nsfont.NotoSansCJKjp_Regular}" src-bold="${nsfont.NotoSansCJKjp_Bold}" bytes="2" />
+      <#elseif .locale == "ko_KR">
+      <link name="NotoSansCJKkr" type="font" subtype="opentype"
+        src="${nsfont.NotoSansCJKkr_Regular}" src-bold="${nsfont.NotoSansCJKkr_Bold}" bytes="2" />
+      <#elseif .locale == "th_TH">
+        <link name="NotoSansThai" type="font" subtype="opentype"
+          src="${nsfont.NotoSansThai_Regular}" src-bold="${nsfont.NotoSansThai_Bold}" bytes="2" />
+      </#if>
+      <macrolist>
+        <macro id="nlheader">
+          <table id="table-head-zero">
+            <tr>
+              <td align="left" colspan="2">
+                <img
+                  src="https://7065838.app.netsuite.com/core/media/media.nl?id=43426&amp;c=7065838&amp;h=CV9isMnosu0sQG4kxXhIW25CgJmIMbtTCI4_dC72dpTZOnMy"
+                  style="width : 75 ; height : 60" />
+              </td>
+              <td align="center" colspan="7">
+                <p align="center" id="cmp-name">Future Pioneer Trading Company - Single Person
+                  Company (Single Person) </p>
+
+                <p align="center" id="cmp-name2"> شركة المستقبل الرائدة التجارية شركة شخص واحد (شخص
+                  واحد) </p>
+
+                <p align="center">Sales Order &nbsp; &nbsp;<br />C.R.
+                  ${record.location.custrecord_vs_location_cr_number}رقم السجل التجاري<br />VAT No.
+                  ${companyInformation.employerid} الرقم الضريبي<br />Page No. | <span align="right">رقم
+                  الصفحه</span><br />&nbsp; &nbsp; &nbsp;<pagenumber /> / <totalpages /></p>
+              </td>
+              <td align="center" colspan="5">
+                <#if record.custbody_vs_zatca_qr_code?length gt 0>
+                  <barcode codetype="qrcode" showtext="true" height="100" width="100"
+                    value="${record.custbody_vs_zatca_qr_code}" />
+                </#if>
+              </td>
+            </tr>
+          </table>
+
+          <table>
+            <tr>
+              <td align="left" colspan="4">
+                <table class="header-tables" id="table-head-one">
+                  <tr class="bold-brd-tr">
+                    <td align="center" colspan="7">${record.otherrefnum}</td>
+                    <td align="center" class="label" colspan="2" style="max-height: 50px">Cust. P.O.
+                      No. | <span align="right">رقم أمر شراء العميل</span></td>
+                  </tr>
+                  <tr class="bold-brd-tr">
+                    <td align="center" colspan="7">${record.custbody_vs_auto_replenishment_orderid}</td>
+                    <td align="center" class="label" colspan="2" style="max-height: 50px"> V.G. P.O.
+                      No. <span align="right"></span></td>
+                  </tr>
+                  <tr class="bold-brd-tr">
+                    <td align="center" colspan="7">${record.salesrep.mobilephone}</td>
+                    <td align="center" class="label" colspan="2" style="max-height: 50px">Salesman
+                      No. | <span align="right">رقم المندوب </span></td>
+                  </tr>
+                  <tr class="bold-brd-tr">
+                    <td align="center" colspan="7">${record.entity.city}</td>
+                    <td align="center" class="label" colspan="2" style="max-height: 50px">Zone | <span
+                        align="right">المنطقة</span></td>
+                  </tr>
+                  <tr class="bold-brd-tr">
+                    <td align="center" colspan="7">${record.custbody_vc_pmt_meth}</td>
+                    <td align="center" class="label" colspan="2" style="max-height: 50px">Payment
+                      Method | <span align="right"> طريقة الدفع</span></td>
+                  </tr>
+                  <tr class="bold-brd-tr">
+                    <td align="center" colspan="7">${record.entity.vatregnumber}</td>
+                    <td align="center" class="label" colspan="2" style="max-height: 50px">Cust. VAT
+                      No | <span align="right"> الرقم الضريبي للعميل </span></td>
+                  </tr>
+                  <tr class="bold-brd-tr">
+                    <td align="center" colspan="7">${record.entity.custentity_customer_cr}</td>
+                    <td align="center" class="label" colspan="2" style="max-height: 50px">Cust CR
+                      No.| <span align="right">رقم السجل التجاري للعميل </span></td>
+                  </tr>
+                </table>
+              </td>
+              <td align="right" colspan="4">
+                <table class="header-tables">
+                  <tr class="bold-brd-tr">
+                    <td align="center" colspan="7">${record.entity}</td>
+                    <td align="center" class="label" colspan="2" style="max-height: 50px">Cust. No | <span
+                        align="right">رقم العميل</span></td>
+                  </tr>
+                  <tr class="bold-brd-tr">
+                    <td align="center" colspan="7">
+                      <#if record.entity.isperson == true>${record.entity.firstname} ${record.entity.lastname}
+                      <#else> ${record.entity.companyname} </#if>
+                    </td>
+                    <td align="center" class="label" colspan="2" style="max-height: 50px">Cust. Name
+                      Ar. | <span align="right">اسم العميل بالعربي</span></td>
+                  </tr>
+                  <tr class="bold-brd-tr">
+                    <td align="center" colspan="7">${record.entity.custentity_vc_ent_ara_name}</td>
+                    <td align="center" class="label" colspan="2" style="max-height: 50px">Cust. Name
+                      En. | <span align="right">اسم العميل بالانجليزي</span></td>
+                  </tr>
+                  <tr class="bold-brd-tr">
+                    <td align="left" colspan="7"> ${record.billingaddress.addr1} <br />
+                      ${record.billingaddress.addr2} <br /> City: ${record.billingaddress.city}<br />
+                      Zip Code: ${record.billingaddress.custrecord178} <br /> Building No:
+                      ${record.billingaddress.custrecord_building_no}<br /> Country:
+                      ${record.billingaddress.country}<br />
+                    </td>
+                    <td align="center" class="label" colspan="2" style="max-height: 50px">Address | <span
+                        align="right">العنوان </span></td>
+                  </tr>
+                </table>
+              </td>
+              <td align="right" colspan="4">
+                <table class="header-tables">
+                  <tr class="bold-brd-tr">
+                    <td align="center" colspan="7">${record.location}</td>
+                    <td align="center" class="label" colspan="2" style="max-height: 50px">Warehouse
+                      | <span align="right"> المستودع </span></td>
+                  </tr>
+                  <tr class="bold-brd-tr">
+                    <td align="center" colspan="7">&nbsp;</td>
+                    <td align="center" class="label" colspan="2" style="max-height: 50px">&nbsp;
+                       <span align="right">&nbsp;</span></td>
+                  </tr>
+                  <tr class="bold-brd-tr">
+                    <td align="center" colspan="7">${record.tranid?replace('INV','INV-01-')}</td>
+                    <td align="center" class="label" colspan="2" style="max-height: 50px">SO
+                      No. | <span align="right">رقم الحركة </span></td>
+                  </tr>
+                  <tr class="bold-brd-tr">
+                    <td align="center" colspan="7">${record.shipdate}</td>
+                    <td align="center" class="label" colspan="2" style="max-height: 50px">Date of
+                      Supply | <span align="right"> تاريخ التوريد</span></td>
+                  </tr>
+                  <tr class="bold-brd-tr">
+                    <td align="center" colspan="7">&nbsp;</td>
+                    <td align="center" class="label" colspan="2" style="max-height: 50px">&nbsp;<span
+                        align="right">&nbsp;  </span></td>
+                  </tr>
+                  <tr class="bold-brd-tr">
+                    <td align="center" colspan="7">
+                      <#if record.createdfrom?has_content>
+
+                      ${record.createdfrom}
+                      <#else>
+                     ${record.custbody_vs_original_createdfrom}
+                     </#if>
+
+                    </td>
+                    <td align="center" class="label" colspan="2" style="max-height: 50px">Order No.
+                      | <span align="right">رقم الطلب </span></td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+          </table>
+        </macro>
+        <macro id="nlfooter"> &nbsp; <table border="1" class="body"
+            style="width: 100%; text-align: center;">
+            <thead>
+              <tr>
+                <th align="center" border-bottom="1" border-right="1" scope="col"
+                  style="height: 22px;" width="10%">Received By</th>
+                <th align="center" border-bottom="1" border-right="1" scope="col" width="20%">&nbsp;</th>
+                <th align="center" border-bottom="1" border-right="1" scope="col"
+                  style="height: 22px;" width="10%">اسم المستلم</th>
+                <th align="center" colspan="3" rowspan="3" scope="col"
+                  style="position: relative; vertical-align: bottom;text-align: center;" width="40%">
+          &nbsp;</th>
+                <th align="center" border-left="1" colspan="1" rowspan="2" scope="col" width="20%">
+          &nbsp;</th>
+              </tr>
+            </thead>
+            <tr>
+              <td align="center" border-bottom="1" border-right="1" scope="col"
+                style="height: 22px;">Signature</td>
+              <td align="center" border-bottom="1" border-right="1">&nbsp;</td>
+              <td align="center" border-bottom="1" border-right="1" style="height: 22px;">التوقيع</td>
+              <td align="center" colspan="3" rowspan="2" style="text-align: center;">${record.memo}</td>
+              <td border-left="1">&nbsp;</td>
+            </tr>
+            <tr>
+              <td align="center" border-bottom="1" border-right="1" scope="col"
+                style="height: 22px;">Date</td>
+              <td border-bottom="1" border-right="1" style="height: 22px;">&nbsp;</td>
+              <td align="center" border-bottom="1" border-right="1" style="height: 22px;">التاريخ</td>
+              <td align="center" border-left="1"
+                style="height: 22px; position: relative; vertical-align: bottom; text-align: center;">ملاحظات
+          | Notes&nbsp;</td>
+            </tr>
+            <tr>
+              <td align="center" border-right="1" scope="col" style="height: 14px;">Stamp</td>
+              <td border-right="1" style="height: 14px;">&nbsp;</td>
+              <td align="center" border-right="1" style="height: 14px;">الختم</td>
+              <td colspan="3" rowspan="1" style="height: 14px;">البضاعة المباعة لاترد و لاتستبدل
+          NORETURN NO EXCHANGE ON GOODS SOLD</td>
+              <td border-left="1" colspan="1" rowspan="1" style="height: 14px;">&nbsp;</td>
+            </tr>
+          </table>
+          &nbsp; <p align="center" id="p-footer"><br /> Future Pioneer Trading Company - Single
+          Person Company (Single Person) ${record.location.custrecord_vs_street} -
+          ${record.location.custrecord_vs_district}, ${record.location.custrecord_vs_postal_code} -
+          ${record.location.custrecord_vs_building_no} , ${record.location.name}- Kingdom Of Saudi
+          Arabia <br /> شركة المستقبل الرائدة التجارية شركة شخص واحد (شخص واحد) &ndash;
+          ${record.location.custrecord_vs_street_ar} - ${record.location.custrecord_vs_district_ar},
+          ${record.location.custrecord_vs_postal_code} -
+          ${record.location.custrecord_vs_building_no},
+          ${record.location.custrecord_vs_location_name_ar}- المملكة العربية السعودية </p>
+
+<table
+            style="width:100%; border-collapse: collapse;">
+            <tr>
+
+              <td style="width: 35px; padding: 0; text-align: center;">
+                <!-- HotLine icon  -->
+                <img
+                  src="https://7065838.app.netsuite.com/core/media/media.nl?id=2717280&amp;c=7065838&amp;h=NK7I89KKYmfKd8dGUj-gMt05ggrqfh_7YuvnV1ko2WIvrS-v"
+                  style="width: 20px; height: 20px;" />
+              </td>
+              <td style="width: 35px; padding: 0; text-align: center;">
+                <!-- whatsapp icon  -->
+
+                <img
+                  src="https://7065838.app.netsuite.com/core/media/media.nl?id=2717281&amp;c=7065838&amp;h=iq__PQ6zN97Pa978m6O-yk-8DAAfAP80_yDwjJkl1w6UKxKY"
+                  style="width: 20px; height: 20px;" />
+              </td>
+              <td style="width: 80px; margin-top:5px;">
+                920033678
+              </td>
+
+              <td style="width: 300px;"></td>
+
+              <!-- Email icon + Email -->
+              <td style="width: 30px;">
+                <img
+                  src="https://7065838.app.netsuite.com/core/media/media.nl?id=2717278&amp;c=7065838&amp;h=Lax30mIcfb7Xg_EWSWN2U7NLAH35kaPlyMpK6v60S7zKpseU"
+                  style="width: 20px; height: 20px;" />
+              </td>
+              <td style="width: 150px;margin-top:6px;">
+                info@vitacareonline.com
+              </td>
+
+
+              <td style="width: 300px;"></td>
+              <!-- Website icon + Website -->
+              <td style="width: 30px;">
+
+                <img
+                  src="https://7065838.app.netsuite.com/core/media/media.nl?id=2717279&amp;c=7065838&amp;h=ClrCeg5ClqjgB8bOR4pwkeOdmh2j99LX5AuZ6MCNcLprpAcN"
+                  style="width: 150px; height: 35px; margin-top:-9px;" />
+
+              </td>
+
+
+            </tr>
+          </table>
+
+
+        </macro>
+      </macrolist>
+      <style type="text/css">* {
+        font-family: NotoSansArabic, NotoSans, sans-serif;
+        font-size: 8;
+        table-layout: fixed;
+        }
+        table {
+        width: 100%;
+        }
+        tr > th {
+        text-align: center;
+        font-weight: bold;
+        padding: 0.5em;
+        }
+        #table-head-zero {
+        margin-bottom: 5px;
+        border-bottom: 1px solid black;
+        }
+        .header-tables {
+        border-top: 1px solid black;
+        border-left: 1px solid black;
+        border-right: 1px solid black;
+        }
+        .bold-brd-tr, #item-table > thead {
+        border-bottom: 1px solid black;
+        }
+        .bold-brd-tr, .bold-brd-tr > * {
+        text-align: center;
+        }
+        img {
+        width: 175px;
+        height: 95px
+        }
+        #item-table {
+        margin: 5px 0 10px 0;
+        border-top: 1px solid black;
+        border-left: 1px solid black;
+        border-right: 1px solid black;
+        }
+        #p-notes {
+        border: 1px solid black;
+        text-align: center;
+        padding: 3px;
+        }
+        #footer-table {
+        border: 1px solid black;
+        }
+        .label {
+        font-weight: bold;
+        border-left: 1px solid black;
+        }
+        #sign-table, #right-brd {
+        border-right: 1px solid black;
+        }
+        .tr-sign-table {
+        border-bottom: 1px solid black;
+        }
+        .td-sign-table {
+        border-left: 1px solid black;
+        text-align: right;
+        }
+        #cmp-name {
+        font-size: 1.2em;
+        font-weight: bold;
+        }
+        #cmp-name2 {
+        font-size: 1em;
+        font-weight: bold;
+        }
+        #p-footer {
+        font-size: 1em;
+        text-align: center;
+        font-weight: bold;
+        }
+        .td-aging {
+        text-align: justify;
+        border-left: 1px solid black;
+        border-bottom: 1px solid black
+        }
+        .td-aging-last {
+        border-right: 1px solid black;
+        }
+        .td-items > * {
+        border-right: 1px solid black;
+        }
+        .table-cell {
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        word-break: break-all;
+        }
+      </style>
+    </head>
+    <body header="nlheader" header-height="32%" footer="nlfooter" footer-height="13%"
+      padding="0.5in 0.5in 0.5in 0.5in" size="B4-LANDSCAPE">
+      <#assign totalDiscount = 0/>
+      <#assign taxCode15 = 0/>
+      <#assign taxCodeZero = 0/>
+      <#assign SumOfAllItemsInvoiced = 0>
+      <table id="item-table">
+        <#list record.item?sort_by("custcol2") as item>
+        <#if item_index==0>
+          <thead class="bold-brd-tr">
+            <tr class="td-items">
+              <th align="center" colspan="2">
+                <p style="text-align:center; margin:0; padding: 0;">Exp.Date</p>
+                <p style="text-align:center; margin:0; padding: 0;">ت. الصلاحية</p>
+              </th>
+              <th align="center" colspan="2">
+                <p style="text-align:center; margin:0; padding: 0;">B. No.</p>
+                <p style="text-align:center; margin:1; padding: 0;">.رقم ت</p>
+              </th>
+              <th align="center" colspan="2">
+                <p style="text-align:center; margin:0; padding: 0;">Total incl. of VAT</p>
+                <p style="text-align:center; margin:0; padding: 0;">الاجمالي بعد الضريبة</p>
+              </th>
+              <th align="center" colspan="4">
+                <p style="text-align:center; margin:0; padding: 0;">VAT Amount</p>
+                <p style="text-align:center; margin:0; padding: 0;">مبلغ الضريبة</p>
+              </th>
+              <th align="center" colspan="2">
+                <p style="text-align:center; margin:0; padding: 0;">VAT %</p>
+                <p style="text-align:center; margin:0; padding: 0;">معدل الضريبة</p>
+              </th>
+              <th align="center" colspan="2">
+                <p style="text-align:center; margin:0; padding: 0;">VAT Category</p>
+                <p style="text-align:center; margin:0; padding: 0;"> فئة الضريبة</p>
+              </th>
+              <th align="center" colspan="2">
+                <p style="text-align:center; margin:0; padding: 0;">Total Exc. VAT</p>
+                <p style="text-align:center; margin:0; padding: 0;"> الإجمالي قبل الضريبة</p>
+              </th>
+              <th align="center" colspan="2">
+                <p style="text-align:center; margin:0; padding: 0;">Net Price</p>
+                <p style="text-align:center; margin:0; padding: 0;">السعر الصافي</p>
+              </th>
+              <th align="center" colspan="2">
+                <p style="text-align:center; margin:0; padding: 0;">Total Discount Amount</p>
+                <p style="text-align:center; margin:0; padding: 0;">إجمالي الخصم</p>
+              </th>
+              <th align="center" colspan="2">
+                <p style="text-align:center; margin:0; padding: 0;">Total Discount%</p>
+                <p style="text-align:center; margin:0; padding: 0;">إجمالي قيمة الخصم</p>
+              </th>
+              <th align="center" colspan="1">
+                <p style="text-align:center; margin:0; padding: 0;">Extra Discount %</p>
+                <p style="text-align:center; margin:0; padding: 0;">نسبة الخصم الإضافي</p>
+              </th>
+              <th align="center" colspan="1">
+                <p style="text-align:center; margin:0; padding: 0;">Second Discount %</p>
+                <p style="text-align:center; margin:0; padding: 0;">نسبة الخصم الثاني</p>
+              </th>
+              <th align="center" colspan="2">
+                <p style="text-align:center; margin:0; padding: 0;">Unit price</p>
+                <p style="text-align:center; margin:0; padding: 0;">سعر الوحدة</p>
+              </th>
+              <th align="center" colspan="2">
+                <p style="text-align:center; margin:0; padding: 0;">MOH Discount %</p>
+                <p style="text-align:center; margin:0; padding: 0;">نسبة الخصم الأول</p>
+              </th>
+              <th align="center" colspan="3">
+                <p style="text-align:center; margin:0; padding: 0;">Price</p>
+                <p style="text-align:center; margin:0; padding: 0;">السعر</p>
+              </th>
+              <th align="center" colspan="1">
+                <p style="text-align:center; margin:0; padding: 0;">Qty</p>
+                <p style="text-align:center; margin:0; padding: 0;">الكمية</p>
+              </th>
+              <th align="center" colspan="4">
+                <p style="text-align:center; margin:0; padding: 0;">Item Name / Description</p>
+                <p style="text-align:center; margin:0; padding: 0;">اسم الصنف / الوصف</p>
+              </th>
+              <th align="center" colspan="1">GTIN<br />
+              </th>
+              <th align="center" colspan="2">Item No.<br />رقم الصنف</th>
+            </tr>
+          </thead>
+        </#if>
+        <#setting number_format=",##0.00">
+        <#setting locale="en_US">
+        <tr class="bold-brd-tr td-items">
+          <!-- Expiry Date -->
+          <td align="center" colspan="2">
+            <#if item.custcol_ns_invdet_data?has_content>
+            <#assign objData = item.custcol_ns_invdet_data?eval />
+            <#if objData?size gt 0>
+              <#list objData as data> ${data.expirationDate}<br /><br />
+              </#list>
+            </#if>
+            <#else>
+              ${item.custcol_ns_expdate}
+            </#if>
+          </td>
+          <!-- Batch Number -->
+          <td align="center" colspan="2">
+            <#if item.custcol_ns_invdet_data?has_content>
+            <#assign objData = item.custcol_ns_invdet_data?eval />
+            <#if objData?size gt 0>
+              <#list objData as data> ${data.lotNumber}<br /><br />
+              </#list>
+            </#if>
+            <#else>
+              ${(item.inventorydetail)?keep_before("(")}
+            </#if>
+          </td>
+
+          <!-- Gross Amount Including VAT -->
+          <#assign adjustedGrossAmt = item.grossamt + (item.grossamt * (record.discounttotal / record.subtotal))>
+          <td align="center" colspan="2"> ${item.grossamt + (item.grossamt * (record.discounttotal /
+            record.subtotal))} </td>
+
+          <!-- VAT Amount -->
+          <td align="center" colspan="4">
+
+            <#assign vatAmount = item.tax1amt />
+            <#assign subtotal = record.subtotal />
+            <#assign extraDisc = 0 />
+            <#assign finalVat = vatAmount />
+
+            <#-- Handle tax categorization -->
+            <#if item.taxrate1 == 0.15>
+            <#assign taxCode15 = taxCode15 + vatAmount />
+            <#else>
+            <#assign taxCodeZero = 25 />
+            </#if>
+
+            <#-- Apply extra discount -->
+            <#if record.discountrate?has_content && subtotal?has_content && subtotal != 0>
+            <#assign dr = record.discountrate />
+
+            <#-- If it's a percentage -->
+            <#if dr?abs lt 1>
+            <#assign extraDisc = dr />
+            <#else>
+            <#assign extraDisc = (dr?abs / subtotal) />
+            <#assign extraDisc = (dr lt 0)?then(extraDisc * -1, extraDisc) />
+            </#if>
+
+            <#assign finalVat = vatAmount * (1 + extraDisc) />
+            </#if>
+
+            ${finalVat?string["0.00"]}
+
+          </td>
+
+          <!-- VAT % -->
+          <td align="center" colspan="2">${(item.taxrate1 * 100)?c}%</td>
+
+          <!-- VAT Category -->
+          <td align="center" colspan="2">
+            <#if item.taxcode == "VAT_SA:S-KSA">
+            S
+            <#elseif item.taxcode == "VAT_SA:Z-KSA">
+            Z
+            <#elseif item.taxcode == "VAT_SA:No_Tax-KSA">
+            Out of Scope
+            <#elseif item.taxcode == "VAT_SA:SRV-KSA">
+            SRV
+            <#else>
+              ${item.taxcode}
+            </#if>
+          </td>
+
+          <!-- Total Excluding VAT -->
+          <td align="center" colspan="2">
+            <#assign amount = item.amount?replace(",", "")?number />
+            <#assign extraDisc = 0 />
+            <#assign subtotal = record.subtotal />
+            <#assign finalAmount = amount />
+
+            <#-- Apply extra discount logic -->
+            <#if record.discountrate?has_content && subtotal?has_content && subtotal != 0>
+            <#assign dr = record.discountrate />
+
+            <#-- If it's a percentage (decimal or whole) -->
+            <#if dr?abs lt 1>
+            <#assign extraDisc = dr />
+            <#else>
+            <#assign extraDisc = (dr?abs / subtotal) />
+            <#assign extraDisc = (dr lt 0)?then(extraDisc * -1, extraDisc) />
+            </#if>
+
+            <#-- Apply to amount -->
+            <#assign finalAmount = amount * (1 + extraDisc) />
+            </#if>
+
+            ${finalAmount?string["0.00"]}
+          </td>
+
+
+          <!-- Net Price (rate) -->
+          <td align="center" colspan="2">
+            <#assign rate = item.rate />
+            <#assign extraDisc = 0 />
+            <#assign subtotal = record.subtotal />
+            <#assign finalRate = rate />
+
+            <#-- Only apply discount if subtotal is valid -->
+            <#if record.discountrate?has_content && subtotal?has_content && subtotal != 0>
+            <#assign dr = record.discountrate />
+
+            <#-- If it's a percentage -->
+            <#if dr?abs lt 1>
+            <#assign extraDisc = dr />
+
+            <#-- If it's a flat amount -->
+            <#else>
+            <#assign extraDisc = (dr?abs / subtotal) />
+            <#-- Flip sign back to match original direction -->
+            <#assign extraDisc = (dr lt 0)?then(extraDisc * -1, extraDisc) />
+            </#if>
+
+            <#-- Apply extra discount or markup -->
+            <#assign finalRate = rate * (1 + extraDisc) />
+            </#if>
+
+            ${finalRate?string["0.000"]}
+          </td>
+
+          <!-- Discount Amount -->
+          <td align="center" colspan="2">
+            <#assign discountAmt = 0 />
+            <#if item.custcol_vs_publicprice?has_content && finalRate?has_content>
+            <#assign discountAmt = (item.custcol_vs_publicprice - finalRate) * item.quantity />
+            </#if>
+            ${discountAmt?string["0.00"]}
+          </td>
+
+          <!-- Total Discount % -->
+          <td align="center" colspan="2">
+            <#assign discountValue = 0/>
+            <#assign totalDiscPerc = 0/>
+            <#if item.custcol_vs_baseprice gt 0 && item.custcol_vs_publicprice gt 0>
+            <#assign discountValue = (item.custcol_vs_publicprice - item.rate) * item.quantity/>
+            <#assign totalDiscPerc = ((item.custcol_vs_publicprice - finalRate) / item.custcol_vs_publicprice) * 100/>
+            <#assign totalDiscount = totalDiscount + discountValue/>
+            <#assign SumOfAllItemsInvoiced = SumOfAllItemsInvoiced + (item.custcol_vs_publicprice * item.quantity)/>
+            </#if>
+            <#if totalDiscPerc?abs gt 0>
+            <#-- Check if the percentage has a decimal part other than .00 -->
+            <#if totalDiscPerc?string("0.##")?contains(".")>
+            ${totalDiscPerc?string("0.##")}%
+            <br /> <!-- Display full value -->
+            <#else> ${totalDiscPerc?c}%<br /> <!-- Display without decimals -->
+            </#if>
+            <#else> 0%<br />
+            </#if>
+          </td>
+
+
+          <!-- Extra Discount % -->
+
+          <td align="center" colspan="1">
+            <#assign displayRate = 0 />
+
+            <#if record.discountrate?has_content>
+            <#assign raw = record.discountrate />
+            <#assign rate = 0 />
+
+            <#-- Extract the numeric value -->
+            <#if raw?is_string && raw?contains("%")>
+            <#assign rate = raw?replace("%", "")?number />
+            <#elseif raw?is_number>
+            <#assign rate = raw * 100 />
+            <#else>
+            <#assign rate = raw?number * 100 />
+            </#if>
+
+            <#-- Flip the sign -->
+            <#assign displayRate = -1 * rate />
+            </#if>
+
+            ${displayRate?string["0.000"]}%
+            <br />
+          </td>
+
+
+          <!-- Second Discount % -->
+          <td align="center" colspan="1">
+            <#assign discountPerc = 0/>
+            <#if item.custcol_vs_baseprice gt 0>
+            <#assign discountPerc = ((((item.rate*100)/item.custcol_vs_baseprice) - 100))/>
+            </#if>
+            <#if discountPerc?abs gt 0>
+            ${discountPerc?abs}%
+            <br /><!--${(discountPerc?abs
+            * item.custcol_vs_baseprice)/100}-->
+            <#else>
+              0.00%
+            </#if>
+          </td>
+
+          <!-- Unit Price (Base Price) -->
+          <td align="center" colspan="2"> ${item.custcol_vs_baseprice}<br />
+            <!--${item.custcol_vs_baseprice
+            * item.quantity} -->
+          </td>
+
+          <!-- MOH Discount % -->
+          <td align="center" colspan="2">
+            <#assign mohPerc = 0>
+            <#if item.custcol_vs_publicprice gt 0>
+            <#assign mohPerc = ((((item.custcol_vs_baseprice*100)/item.custcol_vs_publicprice) - 100))>
+            </#if>
+
+            <#if mohPerc?abs gt 0>
+            ${mohPerc?abs}%
+            <br /> <!--  ${(mohPerc?abs * item.custcol_vs_publicprice)/100}-->
+            <#else> 0.00%<br /> <!--0.00(SAR)-->
+            </#if>
+
+          </td>
+
+          <!-- Public Price -->
+          <!-- <td align="left" colspan="3"><#if item.rate?has_content && item.rate?string?length gt
+          0>${item.rate?substring(3)}<#else>${item.rate}</#if></td> -->
+          <td align="center" colspan="3">${item.custcol_vs_publicprice}</td>
+
+          <!-- Quantity -->
+          <td align="center" colspan="1">
+            <#if item.custcol_ns_invdet_data?has_content>
+            <#assign objData = item.custcol_ns_invdet_data?eval />
+            <#if objData?size gt 0>
+              <#list objData as data> ${data.quantity?split('.')[0]}<br /><br />
+              </#list>
+            </#if>
+            <#else>
+              ${item.quantity?floor}
+            </#if>
+          </td>
+
+          <!-- Item Description -->
+          <td align="center" colspan="4">
+            <p align="center">${item.description}<br />${item.custcol_vc_inv_ar_item}</p>
+          </td>
+
+          <!-- GTIN -->
+          <td align="center" colspan="1">${item.custcol_vs_gtin}</td>
+
+          <!-- Item Number -->
+          <td align="center" colspan="2">${item.item}</td>
+        </tr>
+        <!-- <#if item.custcol_vs_numberofdayesforguarantee?has_content &&
+        item.custcol_ns_expdate?has_content>
+    <#assign curMillis = .now?date?long>
+    <#assign invoiceDate = record.trandate?date?long>
+
+          <#assign expirationDateMillis = item.custcol_ns_expdate?date?long>
+          <#assign differenceInDays = ((expirationDateMillis - invoiceDate) / (24 * 60 * 60 * 1000))>
+
+  <#if item.custcol_vs_numberofdayesforguarantee?number &gt; 0>
+  <#if  differenceInDays &lt; item.custcol_vs_numberofdayesforguarantee >
+      <#assign itemsList = itemsList + [item]>
+      <#assign listSize = itemsList?size>
+    </#if>
+  </#if>
+</#if> -->
+
+        <#if item.custcol_vs_numberofdayesforguarantee?has_content && item.custcol_ns_invdet_data?has_content>
+        <#assign curMillis = .now?date?long>
+        <#assign invoiceDate = record.trandate?date?long>
+
+        <#-- Extract expiration date from lot number data -->
+        <#assign objData = item.custcol_ns_invdet_data?eval />
+        <#assign expirationDateMillis = 0>
+        <#if objData?size gt 0>
+        <#list objData as data>
+        <#-- Assuming `data.expirationDate` is in a compatible date format -->
+          <#if data.expirationDate?has_content>
+            <#assign expirationDateMillis = data.expirationDate?date?long>
+            </#if>
+
+          </#list>
+        </#if>
+
+        <#-- Calculate the difference in days -->
+        <#assign differenceInDays = ((expirationDateMillis - invoiceDate) / (24 * 60 * 60 * 1000))>
+
+        <#-- Ensure numberOfDaysForGuarantee is positive before proceeding -->
+        <#if item.custcol_vs_numberofdayesforguarantee?number &gt; 0>
+          <#if differenceInDays &lt; item.custcol_vs_numberofdayesforguarantee>
+            <#assign itemsList = itemsList + [item]>
+              <#assign listSize = itemsList?size>
+              </#if>
+            </#if>
+          </#if>
+
+
+        </#list>
+      </table>
+
+      <table align="left"
+        style="width:50%; border-collapse: collapse; font-size: 14px; page-break-inside: avoid; margin: 10px 0;">
+        <tr>
+          <td style="padding: 8px; border: 1px; text-align: left;">
+            <b>Total Price Before Discount (SAR)</b>
+          </td>
+          <td style="padding: 8px; border: 1px; text-align: left;">${SumOfAllItemsInvoiced}</td>
+          <td style="padding: 8px; border: 1px; text-align: left;">
+            <b>إجمالي السعر قبل الخصم</b>
+          </td>
+        </tr>
+        <tr>
+          <td style="padding: 8px; border: 1px; text-align: left;">
+            <b>Total Discount (SAR)</b>
+          </td>
+          <td style="padding: 8px; border: 1px; text-align: left;">${(record.discounttotal -
+            totalDiscount)?abs}</td>
+          <td style="padding: 8px; border: 1px; text-align: left;">
+            <b>اجمالي الخصم</b>
+          </td>
+        </tr>
+        <tr>
+          <td style="padding: 8px; border: 1px; text-align: left;">
+            <b>Total Ex. VAT (SAR)</b>
+          </td>
+          <td style="padding: 8px; border: 1px; text-align: left;">${(record.subtotal
+            +record.discounttotal)}</td>
+          <td style="padding: 8px; border: 1px; text-align: left;">
+            <b>الإجمالي قبل الضريبة</b>
+          </td>
+        </tr>
+        <tr>
+          <td style="padding: 8px; border: 1px; text-align: left;">
+            <b>Total VAT (SAR)</b>
+          </td>
+          <td style="padding: 8px; border: 1px; text-align: left;">${record.taxtotal}</td>
+          <td style="padding: 8px; border: 1px; text-align: left;">
+            <b>إجمالي الضريبة</b>
+          </td>
+        </tr>
+        <tr>
+          <td style="padding: 8px; border: 1px; text-align: left;">
+            <b>Total Paid Amount (SAR)</b>
+          </td>
+          <td style="padding: 8px; border: 1px; text-align: left;">${record.amountpaid}</td>
+          <td style="padding: 8px; border: 1px; text-align: left;">
+            <b>اجمالي المدفوع</b>
+          </td>
+        </tr>
+        <tr>
+          <td style="padding: 8px; border: 1px; text-align: left;">
+            <b>Total Inc. VAT (SAR)</b>
+          </td>
+          <td style="padding: 8px; border: 1px; text-align: left;">${record.total}</td>
+          <td style="padding: 8px; border: 1px; text-align: left;">
+            <b>الإجمالي بعد الضريبة</b>
+          </td>
+        </tr>
+        <tr>
+          <td style="padding: 8px; border: 1px; text-align: left;">
+            <b>Total Due Amount (SAR)</b>
+          </td>
+          <td style="padding: 8px; border: 1px; text-align: left;">${record.amountremaining}</td>
+          <td style="padding: 8px; border: 1px; text-align: left;">
+            <b>اجمالي المتبقي</b>
+          </td>
+        </tr>
+        <tr>
+          <td style="padding: 8px; border: 1px; text-align: left;">
+            <b>Applied Promo Code</b>
+          </td>
+          <td style="padding: 8px; border: 1px; text-align: left;">
+            <#if record.custbody_celigo_etail_discount_code?has_content>
+            ${record.custbody_celigo_etail_discount_code}
+            <#else>
+              -
+            </#if>
+          </td>
+          <td style="padding: 8px; border: 1px; text-align: left;">
+            <b>تم إستخدام كود خصم</b>
+          </td>
+        </tr>
+      </table>
+
+      <div>
+        <table align="left"
+          style="width:50%; border-collapse: collapse; font-size: 14px; page-break-inside: avoid; margin: 5px 0 0 0;">
+          <tr>
+            <td style="padding: 8px; border: 1px; text-align: left;">
+              <b>The total value of the invoice</b>
+            </td>
+            <td style="padding: 8px; border: 1px; text-align: left;">
+              <b>${record.custbody_vs_amt_in_words}</b>
+            </td>
+            <td style="padding: 8px; border: 1px; text-align: left;"></td>
+          </tr>
+          <tr>
+            <td style="padding: 8px; border: 1px; text-align: left;"></td>
+            <td style="padding: 8px; border: 1px; text-align: left;">
+              <b>${record.custbody_vs_amt_in_words_ar}</b>
+            </td>
+            <td style="padding: 8px; border: 1px; text-align: left;">
+              <b>إجمالي قيمة الفاتورة</b>
+            </td>
+          </tr>
+ 
+        </table>
+ <p align="center" style="font-size: 8pt; font-weight: bold;margin:4;">
+              ابق على نظامك الحالي وقم بإدارة "وصفتي" من خلال وصفتي فيتاجارديان ستاندالون . جرّب اشتراك مجاني للسنة الأولى حصرياً لعملاء فيتا كير! تواصل معنا عبر الرقم (920033678)
+          </p> 
+              </div>
+
+
+    </body>
+  </pdf>
+  <#if record.custbody_vs_xml_decoded?has_content && 1 == 2>
+    <pdf>
+      <body>
+        <p align="left" style="font-size:8px"> ${record.custbody_vs_xml_decoded}</p>
+      </body>
+    </pdf>
+  </#if>
+  <#if record.custbody_vs_include_gl == true || 1=1>
+    <#if listSize gt 0>
+      <!-- Start English Guarantee Letter Template -->
+      <pdf>
+        <head>
+          <link name="NotoSans" type="font" subtype="truetype" src="${nsfont.NotoSans_Regular}"
+            src-bold="${nsfont.NotoSans_Bold}" src-italic="${nsfont.NotoSans_Italic}"
+            src-bolditalic="${nsfont.NotoSans_BoldItalic}" bytes="2" />
+          <link name="NotoSansArabic" type="font" subtype="opentype"
+            src="${nsfont.NotoSansArabic_Regular}" src-bold="${nsfont.NotoSansArabic_Bold}"
+            bytes="2" subset="false" />
+          <macrolist>
+            <macro id="nlheader">
+              <table cellpadding="1" cellspacing="1" style="width:100%; margin-bottom:20px">
+                <tr>
+
+                  <td align="center" style="text-align: center;">
+                    <img
+                      src="https://7065838.app.netsuite.com/core/media/media.nl?id=43426&amp;c=7065838&amp;h=CV9isMnosu0sQG4kxXhIW25CgJmIMbtTCI4_dC72dpTZOnMy" />
+                  </td>
+
+                </tr>
+              </table>
+<table
+                border="0" cellpadding="1" cellspacing="1" style="width:100%;"><tr>'+ <td
+                    align="right" style="text-align: right;">
+                    <#if record.custbody_vs_gl_gen_time==1>Original
+                    <#else>Copy </#if>
+                  </td>'+ </tr>'+ <tr>'+ <td align="center"
+                    style="text-align: center;">
+                    <span style="font-size:18px;">Guarantee Letter</span>
+                  </td>'+ </tr></table>
+              '+ <table cellpadding="1" cellspacing="1" style="width:100%;">
+                <tr>
+                  <td width="15%">Document #: </td>
+                  <td>${record.custbody_vs_g_letter}</td>
+                </tr>
+                <tr height="50px">
+                  <td>Date:</td>
+                  <td>${record.custbody_vs_g_letter.custrecord_vs_gl_date}</td>
+                </tr>
+                <tr>
+                  <td colspan="4">Dear ${record.entity}<br /><br />We are the Future Pioneer Trading
+              Co. Vita Care undertake to withdraw the item mentioned below<br /></td>
+                  <td>&nbsp;</td>
+                </tr>
+              </table>
+            </macro>
+            <macro id="nlfooter">
+              <span style="margin-top:40px; font-size:10px">This Letter has been generated from the
+              system automatically</span><br />&nbsp; <span style="margin-top:40px; font-size:10px">**
+              It is necessary to bring this original letter for the return or exchange process.</span><br /><br /><span
+                style="margin-top:40px; font-size:10px">Thanks.</span><br />&nbsp; <table border="0"
+                cellpadding="1" cellspacing="1" style="width:100%;">
+                <tr>
+                  <td style="text-align: center;">${companyInformation.mainaddress_text?replace(" ",
+              "")}</td>
+                </tr>
+                <tr>
+                  <td style="text-align: center;">${companyInformation.url}</td>
+                </tr>
+              </table>
+            </macro>
+          </macrolist>
+          <style type="text/css">* { <#if .locale == "zh_CN"> font-family: NotoSans, NotoSansCJKsc, sans-serif; <#elseif .locale == "zh_TW">
+            font-family: NotoSans, NotoSansCJKtc, sans-serif; <#elseif .locale == "ja_JP"> font-family: NotoSans,
+            NotoSansCJKjp, sans-serif; <#elseif .locale == "ko_KR"> font-family: NotoSans, NotoSansCJKkr, sans-serif; <#elseif .locale == "th_TH">
+            font-family: NotoSans, NotoSansThai, sans-serif; <#else>
+              font-family: NotoSansArabic,NotoSans, sans-serif;
+            </#if> } table
+            { font-size: 9pt; table-layout: fixed; } th { font-weight: bold; font-size: 8pt;
+            vertical-align: middle; padding: 5px 6px 3px; background-color: rgb(180,198,231); color:
+            #333333; } td { padding: 3px 7px; } td p { align:left } b { font-weight: bold; color:
+            #333333; } table.header td { padding: 0px; font-size: 10pt; } table.footer td { padding:
+            0px; font-size: 8pt; } table.itemtable th { padding-bottom: 10px; padding-top: 10px; }
+            table.body td { padding-top: 2px; } table.total { page-break-inside: avoid; }
+            tr.totalrow { background-color: #e3e3e3; line-height: 200%; } td.totalboxtop {
+            font-size: 12pt; background-color: #e3e3e3; } td.addressheader { font-size: 8pt;
+            padding-top: 6px; padding-bottom: 2px; } td.address { padding-top: 0px; } td.totalboxmid
+            { font-size: 28pt; padding-top: 20px; background-color: #e3e3e3; } td.totalboxbot {
+            background-color: #e3e3e3; font-weight: bold; } span.title { font-size: 28pt; }
+            span.number { font-size: 16pt; } span.itemname { font-weight: bold; line-height: 150%; }
+            hr { width: 100%; color: #d3d3d3; background-color: #d3d3d3; height: 1px; }          </style>
+        </head>
+        <body header="nlheader" header-height="27%" footer="nlfooter" footer-height="17%"
+          padding="0.1in 0.5in 0.5in 0.5in" size="Letter">
+          <#assign order = 1/>
+          <#assign currentDateMillis = .now?date?long>
+          <table border="0.5" cellpadding="1" cellspacing="0" style="margin-top:10px;width:100%;"><!--
+            start items -->
+            <tr>
+              <th align="center" border="0.5" colspan="1">#</th>
+              <th border="0.5" colspan="5">Invoice Number</th>
+              <th border="0.5" colspan="12">Product Description</th>
+              <th border="0.5" colspan="3">Quantity</th>
+              <th border="0.5" colspan="4">Batch No.</th>
+              <th align="right" border="0.5" colspan="4">Expiry Date</th>
+            </tr>
+            <#list record.item?sort_by('taxrate1'+'description') as item>
+            <#assign currentDateMillis= .now?date?long>
+            <#assign invoiceDate = record.trandate?date?long>
+
+            <#if item.custcol_vs_guarantee == true>
+
+            <#if item.custcol_ns_invdet_data?has_content>
+            <#assign objData = item.custcol_ns_invdet_data?eval />
+              <#if objData?size gt 0>
+                <#list objData as data>
+                  <#if data.expirationDate?has_content>
+
+                    <#assign expirationDateMillis = data.expirationDate?date?long>
+                      <#assign differenceInDays = ((expirationDateMillis - invoiceDate) / (24 * 60 * 60 * 1000))>
+                        <#if  differenceInDays &lt; item.custcol_vs_numberofdayesforguarantee>
+
+                          <tr>
+                            <td align="center" border="0.5" colspan="1" line-height="150%">
+                              ${order?string['0']}<#assign order = order +1/></td>
+                            <td border="0.5" colspan="5">${record.tranid}</td>
+                            <td border="0.5" colspan="12">${item.description}</td>
+                            <td border="0.5" colspan="3">${data.quantity}</td>
+                            <td border="0.5" colspan="4">${data.lotNumber}</td>
+                            <td align="right" border="0.5" colspan="4">${data.expirationDate}</td>
+                          </tr>
+                        </#if>
+                      </#if>
+                    </#list>
+                  </#if>
+                </#if>
+              </#if>
+            </#list>
+            }
+            <!-- end items -->
+          </table>
+          <br />
+          <br />
+          <span style="margin-top:40px; font-size:10px">We must be informed of this one month before
+            the expiration date. </span>
+        </body>
+      </pdf>
+      <!-- Start Arabic Guarantee Letter Template -->
+      <pdf>
+        <head>
+          <link name="NotoSans" type="font" subtype="truetype" src="${nsfont.NotoSans_Regular}"
+            src-bold="${nsfont.NotoSans_Bold}" src-italic="${nsfont.NotoSans_Italic}"
+            src-bolditalic="${nsfont.NotoSans_BoldItalic}" bytes="2" />
+          <link name="NotoSansArabic" type="font" subtype="opentype"
+            src="${nsfont.NotoSansArabic_Regular}" src-bold="${nsfont.NotoSansArabic_Bold}"
+            bytes="2" subset="false" />
+
+          <macrolist>
+            <macro id="nlheader">
+              <table cellpadding="1" cellspacing="1" style="width:100%; margin-bottom:20px">
+                <tr>
+
+                  <td align="center" style="text-align: center;">
+                    <img
+                      src="https://7065838.app.netsuite.com/core/media/media.nl?id=43426&amp;c=7065838&amp;h=CV9isMnosu0sQG4kxXhIW25CgJmIMbtTCI4_dC72dpTZOnMy" />
+                  </td>
+
+                </tr>
+              </table>
+<table
+                border="0" cellpadding="1" cellspacing="1" style="width:100%;"><tr>'+ <td
+                    align="left" style="text-align: left;">
+                    <#if record.custbody_vs_gl_gen_time==1>أصلية
+                    <#else>معدل</#if>
+                  </td>'+ </tr>'+ <tr>'+ <td align="center"
+                    style="text-align: center;">
+                    <span style="font-size:18px;">ﺷﮭﺎدة ﺿﻤﺎن</span>
+                  </td>'+ </tr></table>
+              '+ <table cellpadding="1" cellspacing="1" align="right" style="width:100%;">
+                <tr>
+                  <td style="text-align: right;align:right;width: 4%;"></td>
+                  <td style="text-align: right;align:right;width: 4%;"></td>
+                  <td style="text-align: right;align:right;">${record.custbody_vs_g_letter}</td>
+                  <td style="text-align: right;align:right;width: 10%;">:رﻗم اﻟوﺛﯾﻘﺔ</td>
+                </tr>
+                <tr height="50px">
+                  <td style="text-align: right;align:right;width: 4%;"></td>
+                  <td style="text-align: right;align:right;width: 4%;"></td>
+                  <td style="text-align: right;align:right;">
+              ${record.custbody_vs_g_letter.custrecord_vs_gl_date}</td>
+                  <td style="text-align: right;align:right;width: 10%;">:اﻟﺗﺎرﯾﺦ</td>
+                </tr>
+                <tr>
+                  <td style="text-align: right;align:right;width: 4%;"></td>
+                  <td style="text-align: right;align:right;width: 4%;"></td>
+                  <td style="text-align: right;align:right;">${record.entity}</td>
+                  <td style="text-align: right;align:right;width: 10%;">: اﻟﺳﺎدة</td>
+                </tr>
+                <tr>
+                  <td style="text-align: right;align:right;" colspan="4">نتعهد نحن شركة المستقبل
+              الرائدة التجارية فيتا كير بسحب الأصناف المذكورة أدناه</td>
+                </tr>
+              </table>
+
+            </macro>
+            <macro id="nlfooter">
+              <p style="margin-top:0px; font-size:10px;align:right;text-align:right;">تم إنشاء هذه
+              الرسالة من النظام تلقائيًا</p><br />&nbsp; <p
+                style="margin-top:0px;font-size:10px;align:right;text-align:right;">يرجى الحفاظ على
+              هذه الوثيقة لغاية الإرجاع أو الاستبدال **</p><br /><p
+                style="margin-top:0px; font-size:10px;align:right;text-align:right;">شكرا</p><br />
+              &nbsp; <table border="0" cellpadding="1" cellspacing="1" style="width:100%;">
+                <tr>
+                  <td style="text-align: center;">${companyInformation.mainaddress_text?replace(" ",
+              "")}</td>
+                </tr>
+                <tr>
+                  <td style="text-align: center;">${companyInformation.url}</td>
+                </tr>
+              </table>
+            </macro>
+          </macrolist>
+          <style type="text/css">* { <#if .locale == "zh_CN"> font-family: NotoSans, NotoSansCJKsc, sans-serif; <#elseif .locale == "zh_TW">
+            font-family: NotoSans, NotoSansCJKtc, sans-serif; <#elseif .locale == "ja_JP"> font-family: NotoSans,
+            NotoSansCJKjp, sans-serif; <#elseif .locale == "ko_KR"> font-family: NotoSans, NotoSansCJKkr, sans-serif; <#elseif .locale == "th_TH">
+            font-family: NotoSans, NotoSansThai, sans-serif; <#else>
+              font-family: NotoSansArabic,NotoSans, sans-serif;
+            </#if> } table
+            { font-size: 9pt; table-layout: fixed; } th { font-weight: bold; font-size: 8pt;
+            vertical-align: middle; padding: 5px 6px 3px; background-color: rgb(180,198,231); color:
+            #333333; } td { padding: 3px 7px; } td p { align:left } b { font-weight: bold; color:
+            #333333; } table.header td { padding: 0px; font-size: 10pt; } table.footer td { padding:
+            0px; font-size: 8pt; } table.itemtable th { padding-bottom: 10px; padding-top: 10px; }
+            table.body td { padding-top: 2px; } table.total { page-break-inside: avoid; }
+            tr.totalrow { background-color: #e3e3e3; line-height: 200%; } td.totalboxtop {
+            font-size: 12pt; background-color: #e3e3e3; } td.addressheader { font-size: 8pt;
+            padding-top: 6px; padding-bottom: 2px; } td.address { padding-top: 0px; } td.totalboxmid
+            { font-size: 28pt; padding-top: 20px; background-color: #e3e3e3; } td.totalboxbot {
+            background-color: #e3e3e3; font-weight: bold; } span.title { font-size: 28pt; }
+            span.number { font-size: 16pt; } span.itemname { font-weight: bold; line-height: 150%; }
+            hr { width: 100%; color: #d3d3d3; background-color: #d3d3d3; height: 1px; }          </style>
+        </head>
+        <body header="nlheader" header-height="27%" footer="nlfooter" footer-height="25%"
+          padding="0.1in 0.5in 0.5in 0.5in" size="Letter">
+          <#assign order = 1/>
+          <#assign currentDateMillis = .now?date?long>
+          <#assign invoiceDate = record.trandate?date?long>
+
+
+          <table border="0.5" cellpadding="1" cellspacing="0" style="margin-top:10px;width:100%;"><!--
+            start items -->
+            <tr>
+              <th align="right" border="0.5" colspan="4" style="align:right;">ﺗﺎرﯾﺦ اﻻﻧﺗﮭﺎء </th>
+              <th border="0.5" align="right;" colspan="4" style="align:right;"> رﻗم اﻟﺣزﻣﺔ</th>
+              <th border="0.5" align="right;" colspan="3" style="align:right;">اﻟﻛﻣﯾﺔ</th>
+              <th border="0.5" align="right;" colspan="12" style="align:right;">وﺻف اﻟﻣﺎدة</th>
+              <th border="0.5" align="right;" colspan="5" style="align:right;">رقم الفاتورة</th>
+              <th align="center" border="0.5" colspan="1" style="align:right;">#</th>
+
+
+            </tr>
+            <#list record.item?sort_by('taxrate1'+'description') as item>
+            <#assign currentDateMillis= .now?date?long>
+            <#assign invoiceDate = record.trandate?date?long>
+
+            <#if item.custcol_vs_guarantee == true>
+
+            <#if item.custcol_ns_invdet_data?has_content>
+            <#assign objData = item.custcol_ns_invdet_data?eval />
+              <#if objData?size gt 0>
+                <#list objData as data>
+                  <#if data.expirationDate?has_content>
+
+                    <#assign expirationDateMillis = data.expirationDate?date?long>
+                      <#assign differenceInDays = ((expirationDateMillis - invoiceDate) / (24 * 60 * 60 * 1000))>
+                        <#if  differenceInDays &lt; item.custcol_vs_numberofdayesforguarantee>
+
+                          <tr align="right">
+                            <td align="right" border="0.5" colspan="4" style="align:right;">
+                              ${data.expirationDate}</td>
+                            <td border="0.5" align="right;" colspan="4" style="align:right;">
+                              ${data.lotNumber}</td>
+                            <td border="0.5" align="right;" colspan="3" style="align:right;">
+                              ${data.quantity}</td>
+                            <td border="0.5" align="right;" colspan="12" style="align:right;">
+                              ${item.description}</td>
+                            <td border="0.5" align="right;" colspan="5" style="align:right;">
+                              ${record.tranid}</td>                             
+                            <td align="center" border="0.5" colspan="1" line-height="150%"
+                              style="align:right;">${order?string['0']}<#assign order = order +1/></td>
+
+                          </tr>
+                        </#if>
+                      </#if>
+                    </#list>
+                  </#if>
+                </#if>
+              </#if>
+            </#list>
+            }
+            <!-- end items -->
+          </table>
+          <br />
+          <br />
+          <p style="margin-top:40px; font-size:10px;align:right">ﻋﻠﻰ أن ﯾﺗم إﺑﻼﻏﻧﺎ ﺑذﻟك ﻗﺑل شهر ﻣن
+            ﺗﺎرﯾﺦ إﻧﺗﮭﺎء اﻟﺻﻼﺣﯾﺔ </p>
+        </body>
+      </pdf>
+    </#if>
+  </#if>
+</pdfset>

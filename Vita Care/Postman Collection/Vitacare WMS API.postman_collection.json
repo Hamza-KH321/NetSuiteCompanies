@@ -1,0 +1,38 @@
+{
+	"info": {
+		"_postman_id": "049d52ea-ff94-40a4-9c06-409b210498d2",
+		"name": "Vitacare WMS API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "28321459"
+	},
+	"item": [
+		{
+			"name": "Get Sales Order Status",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://vitacare-wms-service-prod-181839338436.us-central1.run.app/sales-order/status?orderNumber=SO47706",
+					"protocol": "https",
+					"host": [
+						"vitacare-wms-service-prod-181839338436",
+						"us-central1",
+						"run",
+						"app"
+					],
+					"path": [
+						"sales-order",
+						"status"
+					],
+					"query": [
+						{
+							"key": "orderNumber",
+							"value": "SO47706"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

@@ -1,0 +1,9 @@
+{
+  "trxNum": 1212,
+  "memo": "Cash closing for Day 15",
+  "date": "13/10/2025",
+  "type": "Cash Closing",
+  "currency": "SAR",
+  "amount": 1000,
+  "shortage": 200
+}

@@ -1,0 +1,7 @@
+{
+    "success": true,
+    "recordType": "invoice",
+    "internalId": "576086",
+    "tranId": "INV -13309",
+    "warnings": []
+}

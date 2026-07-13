@@ -1,0 +1,449 @@
+{
+	"info": {
+		"_postman_id": "d8ab4305-4199-41bf-b834-457aea2361f0",
+		"name": "GC Shoof Integration",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "28321459"
+	},
+	"item": [
+		{
+			"name": "PO API",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "User-Agent",
+						"value": "Mozilla/5.0",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"entity\": \"CICCARELLI Tooth Paste Factory\",\r\n  \"location\": 24,\r\n  \"custbody_vs_shoof_transaction_id\": \"SHOOF-PO-10045\",\r\n  \"items\": [\r\n    {\r\n      \"item\": 6096,\r\n      \"quantity\": 2,\r\n      \"rate\": 25.5\r\n    },\r\n    {\r\n      \"item\": 6095,\r\n      \"quantity\": 3,\r\n      \"rate\": 10\r\n    }\r\n  ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/app/site/hosting/scriptlet.nl?script=1286&deploy=1&compid=6371802_SB1&ns-at=AAEJ7tMQ4EBDwc7krtjqLQ7eL_UdigCYOM54DwBUWSMnRUfiyzs",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"app",
+						"site",
+						"hosting",
+						"scriptlet.nl"
+					],
+					"query": [
+						{
+							"key": "script",
+							"value": "1286"
+						},
+						{
+							"key": "deploy",
+							"value": "1"
+						},
+						{
+							"key": "compid",
+							"value": "6371802_SB1"
+						},
+						{
+							"key": "ns-at",
+							"value": "AAEJ7tMQ4EBDwc7krtjqLQ7eL_UdigCYOM54DwBUWSMnRUfiyzs"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "IR API",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "User-Agent",
+						"value": "Mozilla/5.0",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"entity\": \"CICCARELLI Tooth Paste Factory\",\r\n  \"createdfrom\": 575962, \r\n  \"items\": [\r\n    {\r\n      \"item\": 6096,\r\n      \"quantity\": 2,\r\n      \"inventoryAssignments\": [\r\n        { \"inventoryNumber\": \"LOT-ABC-005\", \"quantity\": 1 },\r\n        { \"inventoryNumber\": \"LOT-ABC-006\", \"quantity\": 1 }\r\n      ]\r\n    },\r\n    {\r\n      \"item\": 6095,\r\n      \"quantity\": 3,\r\n      \"inventoryAssignments\": [\r\n        { \"inventoryNumber\": \"LOT-XYZ-005\", \"quantity\": 2 },\r\n        { \"inventoryNumber\": \"LOT-XYZ-006\", \"quantity\": 1 }\r\n      ]\r\n    }\r\n  ]\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/app/site/hosting/scriptlet.nl?script=1287&deploy=1&compid=6371802_SB1&ns-at=AAEJ7tMQIK1PUcuDvl5ap9yPhbWFe132m7EKNsIJLgqJRWNGnWw",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"app",
+						"site",
+						"hosting",
+						"scriptlet.nl"
+					],
+					"query": [
+						{
+							"key": "script",
+							"value": "1287"
+						},
+						{
+							"key": "deploy",
+							"value": "1"
+						},
+						{
+							"key": "compid",
+							"value": "6371802_SB1"
+						},
+						{
+							"key": "ns-at",
+							"value": "AAEJ7tMQIK1PUcuDvl5ap9yPhbWFe132m7EKNsIJLgqJRWNGnWw"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Bill API",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "User-Agent",
+						"value": "Mozilla/5.0",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"entity\": \"CICCARELLI Tooth Paste Factory\",\r\n  \"createdfrom\": 575962,\r\n  \"itemreceipts\": [575964]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/app/site/hosting/scriptlet.nl?script=1289&deploy=1&compid=6371802_SB1&ns-at=AAEJ7tMQLdvhb3D-MKcxchGH4q2IsnoR8wQ03qsu6SUmd4s7pu4",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"app",
+						"site",
+						"hosting",
+						"scriptlet.nl"
+					],
+					"query": [
+						{
+							"key": "script",
+							"value": "1289"
+						},
+						{
+							"key": "deploy",
+							"value": "1"
+						},
+						{
+							"key": "compid",
+							"value": "6371802_SB1"
+						},
+						{
+							"key": "ns-at",
+							"value": "AAEJ7tMQLdvhb3D-MKcxchGH4q2IsnoR8wQ03qsu6SUmd4s7pu4"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "BP API",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "User-Agent",
+						"value": "Mozilla/5.0",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"billid\": 575965,\r\n  \"account\": 234\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/app/site/hosting/scriptlet.nl?script=1290&deploy=1&compid=6371802_SB1&ns-at=AAEJ7tMQe02V14xPMeeG6V9JM6ww2Wb7KdGDTKNxq7ZurfSjdtc",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"app",
+						"site",
+						"hosting",
+						"scriptlet.nl"
+					],
+					"query": [
+						{
+							"key": "script",
+							"value": "1290"
+						},
+						{
+							"key": "deploy",
+							"value": "1"
+						},
+						{
+							"key": "compid",
+							"value": "6371802_SB1"
+						},
+						{
+							"key": "ns-at",
+							"value": "AAEJ7tMQe02V14xPMeeG6V9JM6ww2Wb7KdGDTKNxq7ZurfSjdtc"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SO API",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "User-Agent",
+						"value": "Mozilla/5.0",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"entity\": \"Visa\",\r\n  \"location\": 24,\r\n  \"custbody_vs_shoof_transaction_id\": \"SHOOF-SO-20003\",\r\n  \"items\": [\r\n    { \"item\": 6095, \"quantity\": 1, \"rate\": 150.75 },\r\n    { \"item\": 6096, \"quantity\": 1, \"rate\": 300 }\r\n  ],\r\n  \"customerdeposit\": {\r\n    \"payment\": 150\r\n  }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/app/site/hosting/scriptlet.nl?script=1291&deploy=1&compid=6371802_SB1&ns-at=AAEJ7tMQQYvDbfexAKFj1NkTKUfkbEMnPsVTXcUXjQkVVaP9T_Q",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"app",
+						"site",
+						"hosting",
+						"scriptlet.nl"
+					],
+					"query": [
+						{
+							"key": "script",
+							"value": "1291"
+						},
+						{
+							"key": "deploy",
+							"value": "1"
+						},
+						{
+							"key": "compid",
+							"value": "6371802_SB1"
+						},
+						{
+							"key": "ns-at",
+							"value": "AAEJ7tMQQYvDbfexAKFj1NkTKUfkbEMnPsVTXcUXjQkVVaP9T_Q"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "IF API",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "User-Agent",
+						"value": "Mozilla/5.0",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"createdfrom\": 576083,\r\n  \"items\": [\r\n    {\r\n      \"item\": 6095,\r\n      \"inventoryAssignments\": [\r\n        { \"inventoryNumber\": \"LOT-XYZ-069\", \"quantity\": 1 }\r\n      ]\r\n    },\r\n    {\r\n      \"item\": 6096,\r\n      \"inventoryAssignments\": [\r\n        { \"inventoryNumber\": \"LOT-ABC-0069\", \"quantity\": 1 }\r\n      ]\r\n    }\r\n  ]\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/app/site/hosting/scriptlet.nl?script=1292&deploy=1&compid=6371802_SB1&ns-at=AAEJ7tMQcIsdABQIWTxAtLFRMeZEwIGF7JUa93J19If8LG052XA",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"app",
+						"site",
+						"hosting",
+						"scriptlet.nl"
+					],
+					"query": [
+						{
+							"key": "script",
+							"value": "1292"
+						},
+						{
+							"key": "deploy",
+							"value": "1"
+						},
+						{
+							"key": "compid",
+							"value": "6371802_SB1"
+						},
+						{
+							"key": "ns-at",
+							"value": "AAEJ7tMQcIsdABQIWTxAtLFRMeZEwIGF7JUa93J19If8LG052XA"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Invoice API",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "User-Agent",
+						"value": "Mozilla/5.0",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"itemfulfillmentid\": 576085\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://6371802-sb1.extforms.netsuite.com/app/site/hosting/scriptlet.nl?script=1293&deploy=1&compid=6371802_SB1&ns-at=AAEJ7tMQjX-dwnlCjEJYkM7IsZV31VfcQhoMxfQnSZI_isEg-_4",
+					"protocol": "https",
+					"host": [
+						"6371802-sb1",
+						"extforms",
+						"netsuite",
+						"com"
+					],
+					"path": [
+						"app",
+						"site",
+						"hosting",
+						"scriptlet.nl"
+					],
+					"query": [
+						{
+							"key": "script",
+							"value": "1293"
+						},
+						{
+							"key": "deploy",
+							"value": "1"
+						},
+						{
+							"key": "compid",
+							"value": "6371802_SB1"
+						},
+						{
+							"key": "ns-at",
+							"value": "AAEJ7tMQjX-dwnlCjEJYkM7IsZV31VfcQhoMxfQnSZI_isEg-_4"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Payment API",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "User-Agent",
+						"value": "Mozilla/5.0",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"invoiceId\": 576086\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://6371802-sb1.extforms.netsuite.com/app/site/hosting/scriptlet.nl?script=1294&deploy=1&compid=6371802_SB1&ns-at=AAEJ7tMQEpGHU8rv2o07mcNaniXlNgPh6UBYji-G5Oe-bAe12r0",
+					"protocol": "https",
+					"host": [
+						"6371802-sb1",
+						"extforms",
+						"netsuite",
+						"com"
+					],
+					"path": [
+						"app",
+						"site",
+						"hosting",
+						"scriptlet.nl"
+					],
+					"query": [
+						{
+							"key": "script",
+							"value": "1294"
+						},
+						{
+							"key": "deploy",
+							"value": "1"
+						},
+						{
+							"key": "compid",
+							"value": "6371802_SB1"
+						},
+						{
+							"key": "ns-at",
+							"value": "AAEJ7tMQEpGHU8rv2o07mcNaniXlNgPh6UBYji-G5Oe-bAe12r0"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "baseURL",
+			"value": "",
+			"type": "default"
+		}
+	]
+}

@@ -1,0 +1,253 @@
+/** 
+ * @NApiVersion 2.x
+ * @NScriptType MapReduceScript
+ */
+define(['N/crypto','N/encode', 'N/http', 'N/search', 'N/record'], function (crypto,encode,http,search,record) {
+
+    function getInputData() {
+        try {
+
+            var locationKey = 'ff4b850c6681e874a8a26a556ddd5dc2';
+            var secretKey = '5c288a071012c5bb';
+            var timestamp = Math.floor(new Date().getTime() / 1000);
+            var combinedData = locationKey +  timestamp;
+            var nonce = createSecureKeyWithHash(combinedData,secretKey);
+
+            // This code will get the start and end time at 7:00 AM and 12:00 PM once finish we will use it
+
+            /*var startDate = new Date();
+            var endDate = new Date();
+            startDate.setHours(7, 0, 0, 0);
+            endDate.setHours(12, 0, 0, 0);
+            var unixStartDate = Math.floor(startDate.getTime() / 1000);
+            var unixEndDate = Math.floor(endDate.getTime() / 1000);
+            */
+
+            nonce = nonce.toLowerCase();
+
+            log.debug('timestamp is ' , timestamp);
+            log.debug('nonce is ' , nonce);
+
+            // Need to change the start date and end date in the API URL
+            var apiUrl = 'http://api-stage.sapaad.com/erp_sandbox/v4/get_orders?start_time=1693544400&end_time=1693558800&vendor_key=b7d084ec8004ef56aaf5ab41e17a31d3&company_key=8f2063274f12e821add790a5449e78e4&location_key=ff4b850c6681e874a8a26a556ddd5dc2&nonce='+nonce+'&time_stamp='+timestamp+'&f=json';
+            var response = http.get({
+                url: apiUrl,
+                "Headers": {"secret_key": "5c288a071012c5bb"}
+            });
+
+            if (response.code == 200) {
+                var responseBody = JSON.parse(response.body.toString());
+                // log.debug('API responseBody' , responseBody);                
+            }
+            
+
+        } catch (e) {
+            log.error('error is ', e);
+        }
+        return responseBody;
+    }
+    function createSecureKeyWithHash(input, key) {
+        // Secret key generated from NetSuite
+        var secretKey = crypto.createSecretKey({
+            encoding: crypto.Encoding.UTF_8,
+            secret: 'custsecret_vs_sappadintegration'
+        });
+
+        // log.debug({title: "Secret Key Details",details: JSON.stringify(secretKey)});
+
+        var hash = crypto.createHmac({
+            algorithm: crypto.HashAlg.SHA256,
+            key: secretKey
+        });
+        hash.update({
+            input: input
+        });
+        return hash.digest({
+            outputEncoding: crypto.Encoding.HEX
+        });
+    }
+
+    function map(context) {
+        
+    try {
+            var parsedData = JSON.parse(context.value);
+            // log.debug('Data is' , parsedData);
+            var orderNo = parsedData.order_no;
+            var location = parsedData.location_name;
+            var customerID = parsedData.customer_id;
+            var customerName = parsedData.customer_name;
+            var totalAmount = parsedData.total_amount;
+            var notes = parsedData.notes;
+            var totalTax = parsedData.total_tax;
+            var orderPayment = parsedData.orders_payments[0].payment_type;
+            var totalPaid = parsedData.orders_payments[0].amount;
+            var orderItems = parsedData.order_items;
+    
+    
+            // log.debug('orderNo is' , orderNo);
+            // log.debug('location is',location);
+            // log.debug('customerID is',customerID);
+            // log.debug('location is',location);
+            // log.debug('customerName is',customerName);
+            // log.debug('totalAmount is',totalAmount);
+            // log.debug('notes is',notes);
+            // log.debug('totalTax is',totalTax);
+            // log.debug('orderPayment is',orderPayment);
+            // log.debug('totalPaid is',totalPaid);
+            // log.debug('orderItems is',orderItems);
+            // log.debug('length is',orderItems.length);
+
+            var locationSearchObj = search.create({
+                type: "location",
+                filters:
+                [
+                   ["internalid","anyof","8"]
+                ],
+                columns:
+                [
+                   search.createColumn({
+                      name: "name",
+                      sort: search.Sort.ASC,
+                      label: "Name"
+                   }),
+                   search.createColumn({name: "phone", label: "Phone"}),
+                   search.createColumn({name: "city", label: "City"}),
+                   search.createColumn({name: "state", label: "State/Province"}),
+                   search.createColumn({name: "country", label: "Country"}),
+                   search.createColumn({name: "internalid", label: "Internal ID"})
+                ]
+             });
+
+             var locationSearchResults = locationSearchObj.run().getRange({start: 0,end: 1});
+    
+             var locationResult = locationSearchResults;
+             var locationNetsuiteId = locationResult[0].getValue({
+                 name: "internalid"
+             });
+
+            //  log.debug('LOCATION IS' , locationNetsuiteId);
+
+             // Customer Sapaad ID (Must be mapped between NetSuite and Sapaad)
+            var customerSearchObj = search.create({
+                type: "customer",
+                filters:
+                [
+                   ["custentity_vs_sapaadid","is",customerID]
+                ],
+                columns:
+                [
+                   search.createColumn({name: "entityid",sort: search.Sort.ASC,label: "ID"}),
+                   search.createColumn({name: "altname", label: "Name"}),
+                   search.createColumn({name: "custentity_vs_sapaadid", label: "Sapaad ID"}),
+                   search.createColumn({name: "internalid", label: "Internal ID"})
+                ]
+             });
+    
+            var customerSearchResults = customerSearchObj.run().getRange({start: 0,end: 1});
+    
+            var CustomerResult = customerSearchResults;
+            var customerNetsuiteId = customerSearchResults[0].getValue({
+                name: "internalid"
+            });
+    
+            // log.debug("NetSuite Customer ID for result saved search", customerNetsuiteId + " order number is " + orderNo);
+            
+            // Create Sales Order of type Cash Sale
+            var salesOrder_cashSale = record.create({
+                type: record.Type.CASH_SALE,
+                isDynamic: true
+            });
+            salesOrder_cashSale.setValue({fieldId: 'entity', value: customerNetsuiteId});
+            salesOrder_cashSale.setValue({fieldId: 'location', value: locationNetsuiteId});
+            salesOrder_cashSale.setValue({fieldId: 'memo', value: notes});
+
+            for (var i = 0; i < orderItems.length; i++) {
+                var itemID = parsedData.order_items[i].item_id;
+                var itemName = parsedData.order_items[i].item_name;
+                var itemQty = parsedData.order_items[i].quantity;
+                var itemPrice = parsedData.order_items[i].quantity;
+                var itemTax = parsedData.order_items[i].tax;
+                var itemAmount = parsedData.order_items[i].amount;
+    
+                // log.debug('Item ID is' , itemID);
+                // log.debug('itemName is' , itemName);
+                // log.debug('itemQty is' , itemQty);
+                // log.debug('itemPrice is' , itemPrice);
+                // log.debug('itemTax is' , itemTax);
+                // log.debug('itemAmount is' , itemAmount);
+                // log.debug('Break' , '---------------------');
+    
+                // Item sapaad ID (Must be mapped between NetSuite and Sapaad)
+                var itemSearchObj = search.create({
+                    type: "item",
+                    filters:
+                    [["custitem_vs_sappadid","is",itemID]],
+                    columns:
+                    [
+                       search.createColumn({name: "itemid",sort: search.Sort.ASC,label: "Name"}),
+                       search.createColumn({name: "custitem_vs_sappadid", label: "Inv Sapaad ID"}),
+                       search.createColumn({name: "internalid", label: "Internal ID"})
+                    ]
+                 });
+                 
+                var itemSearchResults = itemSearchObj.run().getRange({start: 0,end: 1});
+                if (itemSearchResults < 1 ){
+                    throw new Error('Item was not found item is ' + itemID);
+                }
+                var itemNetSuiteId = itemSearchResults[0].id; //429
+
+                log.debug('Item NetSutie ID is: ' , itemNetSuiteId);
+        
+                salesOrder_cashSale.selectNewLine({
+                    sublistId: 'item'
+                });
+
+                salesOrder_cashSale.setCurrentSublistValue({
+                    sublistId: 'item',
+                    fieldId: 'item',
+                    value: itemNetSuiteId
+                });
+
+                salesOrder_cashSale.setCurrentSublistValue({
+                    sublistId: 'item',
+                    fieldId: 'quantity',
+                    value: itemQty
+                });
+
+                salesOrder_cashSale.setCurrentSublistValue({
+                    sublistId: 'item',
+                    fieldId: 'rate',
+                    value: itemPrice
+                });
+
+                salesOrder_cashSale.commitLine({
+                    sublistId: 'item'
+                });
+                
+            }
+
+            var cashSaleId = salesOrder_cashSale.save();
+            log.debug('NetSuite Sales Order Number is ', cashSaleId);
+    
+
+    } catch (error) {
+        log.error('error is ' , error);
+    }
+        
+    }
+
+    function reduce(context) {
+        // Your reduce logic here
+    }
+
+    function summarize(summary) {
+        // Your summarize logic here
+    }
+
+    return {
+        getInputData: getInputData,
+        map: map,
+        reduce: reduce,
+        summarize: summarize
+    };
+});

@@ -1,0 +1,129 @@
+<?xml version="1.0"?>
+<!DOCTYPE pdf PUBLIC "-//big.faceless.org//report" "report-1.1.dtd">
+<pdf>
+  <head>
+    <link name="NotoSans" type="font" subtype="truetype"
+      src="${nsfont.NotoSans_Regular}"
+      src-bold="${nsfont.NotoSans_Bold}"
+      src-italic="${nsfont.NotoSans_Italic}"
+      src-bolditalic="${nsfont.NotoSans_BoldItalic}"
+      bytes="2" />
+
+    <link name="NotoSansArabic" type="font" subtype="opentype"
+      src="${nsfont.NotoSansArabic_Regular}"
+      src-bold="${nsfont.NotoSansArabic_Bold}"
+      bytes="2" subset="false" />
+
+    <#if .locale == "zh_CN">
+    <link name="NotoSansCJKsc" type="font" subtype="opentype"
+      src="${nsfont.NotoSansCJKsc_Regular}"
+      src-bold="${nsfont.NotoSansCJKsc_Bold}"
+      bytes="2" />
+    <#elseif .locale == "zh_TW">
+    <link name="NotoSansCJKtc" type="font" subtype="opentype"
+      src="${nsfont.NotoSansCJKtc_Regular}"
+      src-bold="${nsfont.NotoSansCJKtc_Bold}"
+      bytes="2" />
+    <#elseif .locale == "ja_JP">
+    <link name="NotoSansCJKjp" type="font" subtype="opentype"
+      src="${nsfont.NotoSansCJKjp_Regular}"
+      src-bold="${nsfont.NotoSansCJKjp_Bold}"
+      bytes="2" />
+    <#elseif .locale == "ko_KR">
+    <link name="NotoSansCJKkr" type="font" subtype="opentype"
+      src="${nsfont.NotoSansCJKkr_Regular}"
+      src-bold="${nsfont.NotoSansCJKkr_Bold}"
+      bytes="2" />
+    <#elseif .locale == "th_TH">
+    <link name="NotoSansThai" type="font" subtype="opentype"
+      src="${nsfont.NotoSansThai_Regular}"
+      src-bold="${nsfont.NotoSansThai_Bold}"
+      bytes="2" />
+    </#if>
+
+    <macrolist>
+
+      <macro id="nlheader">
+
+        <!-- Top bar: logo left, title right -->
+        <table cellpadding="3" cellspacing="0" width="100%" border-bottom="1">
+          <tr>
+            <td style="width: 25%; vertical-align: middle;">
+              <img src="https://11291940.app.netsuite.com/core/media/media.nl?id=1254&amp;c=11291940&amp;h=d1BMOZe9SM8sF5YxS8P4gJQuT6odq-Ar7CRkRjiZgNilfiEx"
+                   style="max-height: 40px;"/>
+            </td>
+            <td style="width: 50%; vertical-align: middle; text-align: right; font-size: 19px; font-weight: bold;">
+              InterCompany Transfer Order
+            </td>
+          </tr>
+        </table>
+
+        <table cellpadding="3" cellspacing="0" width="100%" border-bottom="2">
+          <!-- Row 1: Headers -->
+          <tr style="background-color: #f0f0f0;">
+            <td style="width: 33%; font-size: 8px; font-weight: bold; color: #555555;">SHIPPING ADDRESS</td>
+            <td style="width: 33%; font-size: 8px; font-weight: bold; color: #555555;">FROM LOCATION</td>
+            <td style="width: 30%; font-size: 8px; font-weight: bold; color: #555555;">TO LOCATION</td>
+          </tr>
+          <!-- Row 1: Values -->
+          <tr style="border-bottom: 1px solid #dddddd;">
+            <td style="font-size: 9px;">${record.shipaddress}</td>
+            <td style="font-size: 9px;">${record.location}</td>
+            <td style="font-size: 9px;">${record.transferlocation}</td>
+          </tr>
+          <!-- Row 2: Headers -->
+          <tr style="background-color: #f0f0f0;">
+            <td style="font-size: 8px; font-weight: bold; color: #555555;">SUBSIDIARY</td>
+            <td style="font-size: 8px; font-weight: bold; color: #555555;">ORDER DATE</td>
+            <td style="font-size: 8px; font-weight: bold; color: #555555;">TRANSACTION NUMBER</td>
+            <td style="font-size: 8px; font-weight: bold; color: #555555;">DELIVERY DATE</td>
+          </tr>
+          <!-- Row 2: Values -->
+          <tr>
+            <td style="font-size: 9px;">${record.subsidiary}</td>
+            <td style="font-size: 9px;">${record.trandate}</td>
+            <td style="font-size: 9px;">${record.tranid}</td>
+            <td style="font-size: 9px;">${record.custbody_vs_due_date}</td>
+          </tr>
+        </table>
+
+      </macro>
+
+      <macro id="nlfooter">
+      </macro>
+    </macrolist>
+
+    <style>
+      * {
+        font-family: NotoSansArabic, NotoSans, sans-serif;
+      }
+    </style>
+  </head>
+
+  <!-- header-height reduced from 35% to 22% -->
+  <body header="nlheader" header-height="22%" footer="nlfooter" footer-height="0%"
+    padding="0.2cm 0.5cm 0.2cm 0.5cm" size="A4">
+
+<br/>
+<br/>
+    <table cellpadding="6" cellspacing="0" width="100%" border="1">
+      <tr style="background-color: #003366;">
+        <td style="width: 35%; font-weight: bold; font-size: 10px; color: #ffffff;">Description</td>
+        <td style="width: 5%; font-weight: bold; font-size: 10px; color: #ffffff;">UOM</td>
+        <td style="width: 30%; font-weight: bold; font-size: 10px; color: #ffffff;">Comments</td>
+        <td style="width: 15%; font-weight: bold; font-size: 10px; color: #ffffff; text-align: center;">Ordered Qty</td>
+        <td style="width: 15%; font-weight: bold; font-size: 10px; color: #ffffff; text-align: center;">Delivered Qty</td>
+      </tr>
+      <#list record.item as item>
+      <tr style="background-color: ${(item_index % 2 == 0)?string('#ffffff', '#f7f7f7')};">
+        <td style="font-size: 10px;">${item.item}</td>
+        <td style="font-size: 10px;">${item.units}</td>
+        <td style="font-size: 10px;">${item.description}</td>
+        <td style="font-size: 10px; text-align: center;">${item.quantity}</td>
+        <td style="font-size: 10px; text-align: center;">&nbsp;</td>
+      </tr>
+      </#list>
+    </table>
+
+  </body>
+</pdf>

@@ -1,0 +1,334 @@
+<?xml version="1.0"?><!DOCTYPE pdf PUBLIC "-//big.faceless.org//report" "report-1.1.dtd">
+<pdf>
+<head>
+	<link name="NotoSans" type="font" subtype="truetype" src="${nsfont.NotoSans_Regular}" src-bold="${nsfont.NotoSans_Bold}" src-italic="${nsfont.NotoSans_Italic}" src-bolditalic="${nsfont.NotoSans_BoldItalic}" bytes="2" />
+	<#if .locale == "zh_CN">
+		<link name="NotoSansCJKsc" type="font" subtype="opentype" src="${nsfont.NotoSansCJKsc_Regular}" src-bold="${nsfont.NotoSansCJKsc_Bold}" bytes="2" />
+	<#elseif .locale == "zh_TW">
+		<link name="NotoSansCJKtc" type="font" subtype="opentype" src="${nsfont.NotoSansCJKtc_Regular}" src-bold="${nsfont.NotoSansCJKtc_Bold}" bytes="2" />
+	<#elseif .locale == "ja_JP">
+		<link name="NotoSansCJKjp" type="font" subtype="opentype" src="${nsfont.NotoSansCJKjp_Regular}" src-bold="${nsfont.NotoSansCJKjp_Bold}" bytes="2" />
+	<#elseif .locale == "ko_KR">
+		<link name="NotoSansCJKkr" type="font" subtype="opentype" src="${nsfont.NotoSansCJKkr_Regular}" src-bold="${nsfont.NotoSansCJKkr_Bold}" bytes="2" />
+	<#elseif .locale == "th_TH">
+		<link name="NotoSansThai" type="font" subtype="opentype" src="${nsfont.NotoSansThai_Regular}" src-bold="${nsfont.NotoSansThai_Bold}" bytes="2" />
+	</#if>
+    <style type="text/css">table { font-size: 9pt; table-layout: fixed; width: 100%; }
+th { font-weight: bold; font-size: 8pt; vertical-align: middle; padding: 5px 6px 3px; background-color: #e3e3e3; color: #333333; padding-bottom: 10px; padding-top: 10px; }
+td { padding: 4px 6px; }
+b { font-weight: bold; color: #333333; }
+      .iconResize {
+        width: 20px;
+        height: 20px;
+      }
+      .iconResize2{
+        width: 25px;
+        height: 25px;
+      }
+</style>
+</head>
+<body padding="0.3in 0.3in 0.3in 0.3in" size="Letter">
+    <#list results as result><#if result_index == 0>
+<table border="0" cellpadding="1" cellspacing="1" style="width:100%;"><tr>
+	<td rowspan="3"><img height="30%" src="https://8629816-sb1.app.netsuite.com/core/media/media.nl?id=11&amp;c=8629816_SB1&amp;h=HuEtnQD-2t_yuJfn9lUQbiMal71Wbp39RGbs1q8UAMjpgvTB" width="30%" /></td>
+	<td rowspan="3" style="font-size: 22px; width: 158px;"><span style="color:red;">CREATIVE</span><br />DESIGN BRIEF</td>
+	<td style="width: 138px;">&nbsp;</td>
+	<td>Sales Executive:</td>
+	<td style="background-color:#AEAEAE">${results[0].salesrep}</td>
+	</tr>
+	<tr>
+	<td style="width: 138px;">&nbsp;</td>
+	<td>Designer:</td>
+	<td style="background-color:#AEAEAE">${results[0].custentity_vs_designer}</td>
+	</tr>
+	<tr>
+	<td style="width: 138px;">&nbsp;</td>
+	<td>Date:</td>
+	<td style="background-color:#AEAEAE">${results[0].custentity_vs_date}</td>
+	</tr>
+	<tr>
+	<td>&nbsp;</td>
+	<td style="font-size: 22px; width: 158px;">&nbsp;</td>
+	<td style="width: 138px;">&nbsp;</td>
+	<td>Brief Number:</td>
+	<td style="background-color:#AEAEAE">${results[0].custentity_vs_briefnumber}</td>
+	</tr></table>
+<!-- ___________________________________________________________________________________________________________-->
+
+<p><span style="color:red;">Client Information</span>_______________________________________________________________________________</p>
+
+<table border="0" cellpadding="1" cellspacing="1" style="width:100%;"><tr>
+	<td>Project Name</td>
+	<td style="background-color:#AEAEAE">${results[0].custentity_vs_projectname}</td>
+	<td>Stand Budget</td>
+	<td style="background-color:#AEAEAE">${results[0].custentity_vs_standbudget}</td>
+	</tr>
+	<tr>
+	<td>Client Name</td>
+	<td style="background-color:#AEAEAE">${results[0].custentity_vs_clientname}</td>
+	<td>No.of Options</td>
+	<td style="background-color:#AEAEAE">${results[0].custentity_vs_noofoptions}</td>
+	</tr>
+	<tr>
+	<td>Contact Person</td>
+	<td style="background-color:#AEAEAE">${results[0].custentity_vs_contactperson}</td>
+	<td>Date of Brief</td>
+	<td style="background-color:#AEAEAE">${results[0].custentity_vs_dateofbrief}</td>
+	</tr>
+	<tr>
+	<td>Contact Details</td>
+	<td style="background-color:#AEAEAE">${results[0].custentity_vs_contactdetails}</td>
+	<td>Date of Design Submission</td>
+	<td style="background-color:#AEAEAE">${results[0].custentity_vs_dateofdesignsubmission}</td>
+	</tr>
+	<tr>
+	<td>Website</td>
+	<td style="background-color:#AEAEAE">${results[0].custentity_vs_website}</td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	</tr></table>
+<!-- ___________________________________________________________________________________________________________-->
+
+<p><span style="color:red;">Project Information</span>_______________________________________________________________________________</p>
+
+<table border="0" cellpadding="1" cellspacing="1" style="width:100%;"><tr>
+	<td>Stand Number</td>
+	<td style="background-color:#AEAEAE">${results[0].custentity_vs_standnumber}</td>
+	<td>Dimension</td>
+	<td style="background-color:#AEAEAE">${results[0].custentity_vs_dimension}</td>
+	</tr>
+	<tr>
+	<td>Hall No.</td>
+	<td style="background-color:#AEAEAE">${results[0].custentity_vs_hallno}</td>
+	<td>Sides Open</td>
+	<td style="background-color:#AEAEAE">${results[0].custentity_vs_sidesopen}</td>
+	</tr>
+	<tr>
+	<td>Total Stand Area</td>
+	<td style="background-color:#AEAEAE">${results[0].custentity_vs_totalstandarea}</td>
+	<td>Floor Pan</td>
+	<td style="background-color:#AEAEAE">${results[0].custentity_vs_floorpan}</td>
+	</tr></table>
+<!-- ___________________________________________________________________________________________________________-->
+
+<p><span style="color:red;">Stand Requirement</span>_______________________________________________________________________________</p>
+
+<table border="0" cellpadding="1" cellspacing="1" style="width:100%;"><tr>
+	<td>Style</td>
+	<td style="background-color:#AEAEAE">${results[0].custentity_vs_style}</td>
+	<td>Waiting Area</td>
+	<td style="background-color:#AEAEAE">${results[0].custentity_vs_waitingarea}</td>
+	</tr>
+	<tr>
+	<td>Storey</td>
+	<td style="background-color:#AEAEAE">${results[0].custentity_vs_storey}</td>
+	<td>Workstation Podium</td>
+	<td style="background-color:#AEAEAE">${results[0].custentity_vs_workstationpodium}</td>
+	</tr>
+	<tr>
+	<td>Flooring</td>
+	<td style="background-color:#AEAEAE">${results[0].custentity_vs_flooring}</td>
+	<td>Pantry Area</td>
+	<td style="background-color:#AEAEAE">${results[0].custentity_vs_pantryarea}</td>
+	</tr>
+	<tr>
+	<td>Reception Counter</td>
+	<td style="background-color:#AEAEAE">${results[0].custentity_vs_receptioncounter}</td>
+	<td>Storage Area</td>
+	<td style="background-color:#AEAEAE">${results[0].custentity_vs_storagearea}</td>
+	</tr>
+	<tr>
+	<td>Meeting Area</td>
+	<td style="background-color:#AEAEAE">${results[0].custentity_vs_meetingarea}</td>
+	<td>Hospitality Area</td>
+	<td style="background-color:#AEAEAE">${results[0].custentity_vs_hospitalityarea}</td>
+	</tr></table>
+<!-- ___________________________________________________________________________________________________________-->
+
+<p>_______________________________________ <span style="font-weight: bold;">Activation</span>__________________________________________</p>
+
+<table border="1" style="width:100%; background-color:#D8D8D8;"><tr></tr>
+	<tr>
+	<td style="border-right:1px; border-bottom:1px;"><strong>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Technology</strong></td>
+	<td style="border-right:1px; border-bottom:1px;"><strong>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Activities</strong></td>
+	<td style="border-right:1px; border-bottom:1px;"><strong>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Other</strong></td>
+	</tr>
+	<tr>
+	<td style="border-right:1px;">&nbsp;</td>
+	<td style="border-right:1px;">&nbsp;</td>
+	<td>&nbsp;</td>
+	</tr>
+	<tr>
+	<td style="height: 59px; border-right:1px;">&nbsp;</td>
+	<td style="height: 59px; border-right:1px;">&nbsp;</td>
+	<td style="height: 59px;">&nbsp;</td>
+	</tr></table>
+<!-- ___________________________________________________________________________________________________________-->
+
+<p><span style="color:red;">Product Display</span>_______________________________________________________________________________</p>
+
+<table border="0" cellpadding="1" cellspacing="1" style="width:100%;"><tr>
+	<td>Display Type</td>
+	<td style="background-color:#AEAEAE">${results[0].custentity_vs_productdisplay}</td>
+	<td>Display 3</td>
+	<td style="background-color:#AEAEAE">${results[0].custentity_vs_display3}</td>
+	</tr>
+	<tr>
+	<td>Product Display</td>
+	<td style="background-color:#AEAEAE">${results[0].custentity_vs_productdisplay}</td>
+	<td>Display 1&nbsp;Location in stand</td>
+	<td style="background-color:#AEAEAE">${results[0].custentity_vs_display1location}</td>
+	</tr>
+	<tr>
+	<td>Display 1</td>
+	<td style="background-color:#AEAEAE">${results[0].custentity_vs_display1}</td>
+	<td>Display 2&nbsp;Location in stand</td>
+	<td style="background-color:#AEAEAE">${results[0].custentity_vs_display2location}</td>
+	</tr>
+	<tr>
+	<td>Display 2</td>
+	<td style="background-color:#AEAEAE">${results[0].custentity_vs_display2}</td>
+	<td>Display 3&nbsp;Location in stand</td>
+	<td style="background-color:#AEAEAE">${results[0].custentity_vs_display3location}</td>
+	</tr>
+	<tr>
+	<td>Notes</td>
+	<td colspan="3" rowspan="1" style="background-color:#AEAEAE">${results[0].custentity_vs_productdisplaynotes}<br /><br /><br />&nbsp;</td>
+	</tr></table>
+<!-- ___________________________________________________________________________________________________________-->
+
+<p><span style="color:red;">Computer Workstation</span>___________________________________________________________________________</p>
+
+<table border="0" cellpadding="1" cellspacing="1" style="width:100%;"><tr>
+	<td>Desktop</td>
+	<td style="background-color:#AEAEAE">${results[0].custentity_vs_desktop}</td>
+	<td>Laptop</td>
+	<td style="background-color:#AEAEAE">${results[0].custentity_vs_laptop}</td>
+	</tr>
+	<tr>
+	<td>iPad</td>
+	<td style="background-color:#AEAEAE">${results[0].custentity_vs_ipad}</td>
+	<td>Touch Screen</td>
+	<td style="background-color:#AEAEAE">${results[0].custentity_vs_touchscreen}</td>
+	</tr>
+	<tr>
+	<td>Notes</td>
+	<td colspan="3" rowspan="1" style="background-color:#AEAEAE">${results[0].custentity_vs_computerworkstationnotes}<br />&nbsp;</td>
+	</tr></table>
+<!-- ___________________________________________________________________________________________________________-->
+
+<p><span style="color:red;">Audio Visual</span>________________________________________________________________________________</p>
+
+<table border="0" cellpadding="1" cellspacing="1" style="width:100%; text-align:center;"><tr>
+	<td>&nbsp;</td>
+	<td style="align:center;">LED/LCD Screen</td>
+	<td style="align:center;">Video Wall</td>
+	<td style="align:center;">Sound System</td>
+	</tr>
+	<tr>
+	<td>Quantity</td>
+	<td style="background-color:#AEAEAE; align:center;">${results[0].custentity_vs_ledlcdscreenqty}</td>
+	<td style="background-color:#AEAEAE; align:center;">${results[0].custentity_vs_videowallqty}</td>
+	<td colspan="1" rowspan="3" style="background-color:#AEAEAE; align:center;">${results[0].custentity_vs_soundsystem}</td>
+	</tr>
+	<tr>
+	<td>Size</td>
+	<td style="background-color:#AEAEAE; align:center;">${results[0].custentity_vs_ledlcdscreensize}</td>
+	<td style="background-color:#AEAEAE; align:center;">${results[0].custentity_vs_videowallsize}</td>
+	</tr>
+	<tr>
+	<td>Location</td>
+	<td style="background-color:#AEAEAE; align:center;">${results[0].custentity_vs_ledlcdscreenlocation}</td>
+	<td style="background-color:#AEAEAE; align:center;">${results[0].custentity_vs_videowalllocation}</td>
+	</tr>
+	<tr>
+	<td>Notes</td>
+	<td colspan="3" rowspan="1" style="background-color:#AEAEAE">${results[0].custentity_vs_audiovisualnotes}<br /><br /><br />&nbsp;</td>
+	</tr></table>
+<!-- ___________________________________________________________________________________________________________-->
+
+<p><span style="color:red;">Furniture</span>___________________________________________________________________________________</p>
+
+<table border="0" cellpadding="1" cellspacing="1" style="width:100%;"><tr>
+	<td>Bar Stools</td>
+	<td style="background-color:#AEAEAE">${results[0].custentity_vs_barstools}</td>
+	<td>Bar Stools Location</td>
+	<td style="background-color:#AEAEAE">${results[0].custentity_vs_barstoolslocation}</td>
+	</tr>
+	<tr>
+	<td>Meeting Table</td>
+	<td style="background-color:#AEAEAE">${results[0].custentity_vs_meetingtable}</td>
+	<td>Meeting Table Location</td>
+	<td style="background-color:#AEAEAE">${results[0].custentity_vs_meetingtablelocation}</td>
+	</tr>
+	<tr>
+	<td>Meeting Chair</td>
+	<td style="background-color:#AEAEAE">${results[0].custentity_vs_meetingchair}</td>
+	<td>Meeting Chair Location</td>
+	<td style="background-color:#AEAEAE">${results[0].custentity_vs_meetingchairlocation}</td>
+	</tr>
+	<tr>
+	<td>Coffee Table</td>
+	<td style="background-color:#AEAEAE">${results[0].custentity_vs_coffeetable}</td>
+	<td>Coffee Table Location</td>
+	<td style="background-color:#AEAEAE">${results[0].custentity_vs_coffeetablelocation}</td>
+	</tr>
+	<tr>
+	<td>Meeting Sofa</td>
+	<td style="background-color:#AEAEAE">${results[0].custentity_vs_meetingsofa}</td>
+	<td>Meeting Sofa Location</td>
+	<td style="background-color:#AEAEAE">${results[0].custentity_vs_meetingsofalocation}</td>
+	</tr>
+	<tr>
+	<td>Notes</td>
+	<td colspan="3" rowspan="1" style="background-color:#AEAEAE">${results[0].custentity_vs_furniturenotes}<br /><br /><br />&nbsp;</td>
+	</tr></table>
+<!-- ___________________________________________________________________________________________________________-->
+
+<p><span style="color:red;">Branding / Graphics</span>___________________________________________________________________________</p>
+
+<table border="0" cellpadding="1" cellspacing="1" style="width:100%;"><tr>
+	<td>Header</td>
+	<td style="background-color:#AEAEAE">${results[0].custentity_vs_header}</td>
+	<td>Receptions</td>
+	<td style="background-color:#AEAEAE">${results[0].custentity_vs_receptions}</td>
+	</tr>
+	<tr>
+	<td>Wall</td>
+	<td style="background-color:#AEAEAE">${results[0].custentity_vs_wall}</td>
+	<td>Displayers</td>
+	<td style="background-color:#AEAEAE">${results[0].custentity_vs_header}</td>
+	</tr>
+	<tr>
+	<td>Others</td>
+	<td style="background-color:#AEAEAE">${results[0].custentity_vs_others}</td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	</tr>
+	<tr>
+	<td>Notes</td>
+	<td colspan="3" rowspan="1" style="background-color:#AEAEAE">${results[0].custentity_vs_brandinggraphicsnotes}<br /><br /><br />&nbsp;</td>
+	</tr></table>
+<!-- ___________________________________________________________________________________________________________-->
+
+<p>&nbsp;</p>
+<!-- ___________________________________________________________________________________________________________-->
+
+<p><span style="color:red;">Hanging Structure</span>___________________________________________________________________________</p>
+
+<table border="0" cellpadding="1" cellspacing="0" style="width:100%;"><tr>
+	<td>Beulk Head</td>
+	<td style="background-color:#AEAEAE">${results[0].custentity_vs_bulkhead}</td>
+	<td>Truss/Lightings</td>
+	<td style="background-color:#AEAEAE">${results[0].custentity_vs_trusslightings}</td>
+	</tr></table>
+<!-- ___________________________________________________________________________________________________________-->
+
+<p>___________________________<span style="color:black;">Additional Information / Special Instruction</span>______________________________</p>
+
+<table border="1" cellpadding="1" cellspacing="1" style="width:100%;"><tr>
+	<td>${results[0].custentity_vs_additionalinfo}<br /><br /><br /><br /><br /><br /><br />&nbsp;</td>
+	</tr></table>
+</#if></#list>
+</body>
+</pdf>

@@ -1,0 +1,251 @@
+F:\الفوترة الإلكترونية\Phase 2 Sample\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Test\bin\Debug\EInvoiceKSADemo.NETFramework.Test.exe.config
+F:\الفوترة الإلكترونية\Phase 2 Sample\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Test\bin\Debug\EInvoiceKSADemo.NETFramework.Test.exe
+F:\الفوترة الإلكترونية\Phase 2 Sample\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Test\bin\Debug\EInvoiceKSADemo.NETFramework.Test.pdb
+F:\الفوترة الإلكترونية\Phase 2 Sample\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Test\obj\Debug\EInvoiceKSADemo.NETFramework.Test.csproj.AssemblyReference.cache
+F:\الفوترة الإلكترونية\Phase 2 Sample\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Test\obj\Debug\EInvoiceKSADemo.NETFramework.Test.csproj.SuggestedBindingRedirects.cache
+F:\الفوترة الإلكترونية\Phase 2 Sample\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Test\obj\Debug\EInvoiceKSADemo.NETFramework.Test.Form1.resources
+F:\الفوترة الإلكترونية\Phase 2 Sample\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Test\obj\Debug\EInvoiceKSADemo.NETFramework.Test.Properties.Resources.resources
+F:\الفوترة الإلكترونية\Phase 2 Sample\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Test\obj\Debug\EInvoiceKSADemo.NETFramework.Test.csproj.GenerateResource.cache
+F:\الفوترة الإلكترونية\Phase 2 Sample\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Test\obj\Debug\EInvoiceKSADemo.NETFramework.Test.csproj.CoreCompileInputs.cache
+F:\الفوترة الإلكترونية\Phase 2 Sample\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Test\obj\Debug\EInvoiceKSADemo.NETFramework.Test.exe
+F:\الفوترة الإلكترونية\Phase 2 Sample\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Test\obj\Debug\EInvoiceKSADemo.NETFramework.Test.pdb
+F:\الفوترة الإلكترونية\Phase 2 Sample\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Test\bin\Debug\EInvoiceKSADemo.NETFramework.Helpers.dll
+F:\الفوترة الإلكترونية\Phase 2 Sample\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Test\bin\Debug\BouncyCastle.Crypto.dll
+F:\الفوترة الإلكترونية\Phase 2 Sample\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Test\bin\Debug\saxon-he-api-10.8.dll
+F:\الفوترة الإلكترونية\Phase 2 Sample\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Test\bin\Debug\System.Net.Http.Json.dll
+F:\الفوترة الإلكترونية\Phase 2 Sample\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Test\bin\Debug\System.Text.Json.dll
+F:\الفوترة الإلكترونية\Phase 2 Sample\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Test\bin\Debug\saxon-he-10.8.dll
+F:\الفوترة الإلكترونية\Phase 2 Sample\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Test\bin\Debug\IKVM.OpenJDK.Core.dll
+F:\الفوترة الإلكترونية\Phase 2 Sample\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Test\bin\Debug\IKVM.OpenJDK.XML.API.dll
+F:\الفوترة الإلكترونية\Phase 2 Sample\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Test\bin\Debug\IKVM.Runtime.dll
+F:\الفوترة الإلكترونية\Phase 2 Sample\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Test\bin\Debug\System.Threading.Tasks.Extensions.dll
+F:\الفوترة الإلكترونية\Phase 2 Sample\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Test\bin\Debug\System.Memory.dll
+F:\الفوترة الإلكترونية\Phase 2 Sample\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Test\bin\Debug\System.Buffers.dll
+F:\الفوترة الإلكترونية\Phase 2 Sample\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Test\bin\Debug\System.Text.Encodings.Web.dll
+F:\الفوترة الإلكترونية\Phase 2 Sample\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Test\bin\Debug\System.ValueTuple.dll
+F:\الفوترة الإلكترونية\Phase 2 Sample\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Test\bin\Debug\System.Numerics.Vectors.dll
+F:\الفوترة الإلكترونية\Phase 2 Sample\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Test\bin\Debug\Microsoft.Bcl.AsyncInterfaces.dll
+F:\الفوترة الإلكترونية\Phase 2 Sample\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Test\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+F:\الفوترة الإلكترونية\Phase 2 Sample\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Test\bin\Debug\IKVM.OpenJDK.Text.dll
+F:\الفوترة الإلكترونية\Phase 2 Sample\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Test\bin\Debug\IKVM.OpenJDK.Util.dll
+F:\الفوترة الإلكترونية\Phase 2 Sample\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Test\bin\Debug\EInvoiceKSADemo.NETFramework.Helpers.pdb
+F:\الفوترة الإلكترونية\Phase 2 Sample\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Test\bin\Debug\EInvoiceKSADemo.NETFramework.Helpers.dll.config
+F:\الفوترة الإلكترونية\Phase 2 Sample\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Test\bin\Debug\saxon-he-api-10.8.xml
+F:\الفوترة الإلكترونية\Phase 2 Sample\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Test\bin\Debug\System.Net.Http.Json.xml
+F:\الفوترة الإلكترونية\Phase 2 Sample\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Test\bin\Debug\System.Text.Json.xml
+F:\الفوترة الإلكترونية\Phase 2 Sample\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Test\bin\Debug\System.Threading.Tasks.Extensions.xml
+F:\الفوترة الإلكترونية\Phase 2 Sample\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Test\bin\Debug\System.Memory.xml
+F:\الفوترة الإلكترونية\Phase 2 Sample\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Test\bin\Debug\System.Buffers.xml
+F:\الفوترة الإلكترونية\Phase 2 Sample\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Test\bin\Debug\System.Text.Encodings.Web.xml
+F:\الفوترة الإلكترونية\Phase 2 Sample\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Test\bin\Debug\System.ValueTuple.xml
+F:\الفوترة الإلكترونية\Phase 2 Sample\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Test\bin\Debug\System.Numerics.Vectors.xml
+F:\الفوترة الإلكترونية\Phase 2 Sample\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Test\bin\Debug\Microsoft.Bcl.AsyncInterfaces.xml
+F:\الفوترة الإلكترونية\Phase 2 Sample\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Test\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+F:\الفوترة الإلكترونية\Phase 2 Sample\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Test\obj\Debug\EInvoiceKSADemo.NETFramework.Test.exe.config
+F:\الفوترة الإلكترونية\Phase 2 Sample\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Test\obj\Debug\EInvoiceKSADemo.NETFramework.Test.csproj.CopyComplete
+F:\الفوترة الإلكترونية\Phase 2 Sample\Demo\v2\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Test\bin\Debug\EInvoiceKSADemo.NETFramework.Test.exe.config
+F:\الفوترة الإلكترونية\Phase 2 Sample\Demo\v2\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Test\bin\Debug\EInvoiceKSADemo.NETFramework.Test.exe
+F:\الفوترة الإلكترونية\Phase 2 Sample\Demo\v2\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Test\bin\Debug\EInvoiceKSADemo.NETFramework.Test.pdb
+F:\الفوترة الإلكترونية\Phase 2 Sample\Demo\v2\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Test\bin\Debug\EInvoiceKSADemo.NETFramework.Helpers.dll
+F:\الفوترة الإلكترونية\Phase 2 Sample\Demo\v2\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Test\bin\Debug\BouncyCastle.Crypto.dll
+F:\الفوترة الإلكترونية\Phase 2 Sample\Demo\v2\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Test\bin\Debug\System.Net.Http.Json.dll
+F:\الفوترة الإلكترونية\Phase 2 Sample\Demo\v2\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Test\bin\Debug\System.Text.Json.dll
+F:\الفوترة الإلكترونية\Phase 2 Sample\Demo\v2\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Test\bin\Debug\System.Threading.Tasks.Extensions.dll
+F:\الفوترة الإلكترونية\Phase 2 Sample\Demo\v2\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Test\bin\Debug\System.Memory.dll
+F:\الفوترة الإلكترونية\Phase 2 Sample\Demo\v2\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Test\bin\Debug\System.Buffers.dll
+F:\الفوترة الإلكترونية\Phase 2 Sample\Demo\v2\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Test\bin\Debug\System.Text.Encodings.Web.dll
+F:\الفوترة الإلكترونية\Phase 2 Sample\Demo\v2\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Test\bin\Debug\System.ValueTuple.dll
+F:\الفوترة الإلكترونية\Phase 2 Sample\Demo\v2\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Test\bin\Debug\System.Numerics.Vectors.dll
+F:\الفوترة الإلكترونية\Phase 2 Sample\Demo\v2\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Test\bin\Debug\Microsoft.Bcl.AsyncInterfaces.dll
+F:\الفوترة الإلكترونية\Phase 2 Sample\Demo\v2\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Test\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+F:\الفوترة الإلكترونية\Phase 2 Sample\Demo\v2\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Test\bin\Debug\EInvoiceKSADemo.NETFramework.Helpers.pdb
+F:\الفوترة الإلكترونية\Phase 2 Sample\Demo\v2\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Test\bin\Debug\EInvoiceKSADemo.NETFramework.Helpers.dll.config
+F:\الفوترة الإلكترونية\Phase 2 Sample\Demo\v2\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Test\bin\Debug\System.Net.Http.Json.xml
+F:\الفوترة الإلكترونية\Phase 2 Sample\Demo\v2\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Test\bin\Debug\System.Text.Json.xml
+F:\الفوترة الإلكترونية\Phase 2 Sample\Demo\v2\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Test\bin\Debug\System.Threading.Tasks.Extensions.xml
+F:\الفوترة الإلكترونية\Phase 2 Sample\Demo\v2\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Test\bin\Debug\System.Memory.xml
+F:\الفوترة الإلكترونية\Phase 2 Sample\Demo\v2\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Test\bin\Debug\System.Buffers.xml
+F:\الفوترة الإلكترونية\Phase 2 Sample\Demo\v2\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Test\bin\Debug\System.Text.Encodings.Web.xml
+F:\الفوترة الإلكترونية\Phase 2 Sample\Demo\v2\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Test\bin\Debug\System.ValueTuple.xml
+F:\الفوترة الإلكترونية\Phase 2 Sample\Demo\v2\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Test\bin\Debug\System.Numerics.Vectors.xml
+F:\الفوترة الإلكترونية\Phase 2 Sample\Demo\v2\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Test\bin\Debug\Microsoft.Bcl.AsyncInterfaces.xml
+F:\الفوترة الإلكترونية\Phase 2 Sample\Demo\v2\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Test\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+F:\الفوترة الإلكترونية\Phase 2 Sample\Demo\v2\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Test\obj\Debug\EInvoiceKSADemo.NETFramework.Test.csproj.AssemblyReference.cache
+F:\الفوترة الإلكترونية\Phase 2 Sample\Demo\v2\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Test\obj\Debug\EInvoiceKSADemo.NETFramework.Test.csproj.SuggestedBindingRedirects.cache
+F:\الفوترة الإلكترونية\Phase 2 Sample\Demo\v2\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Test\obj\Debug\EInvoiceKSADemo.NETFramework.Test.Form1.resources
+F:\الفوترة الإلكترونية\Phase 2 Sample\Demo\v2\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Test\obj\Debug\EInvoiceKSADemo.NETFramework.Test.Properties.Resources.resources
+F:\الفوترة الإلكترونية\Phase 2 Sample\Demo\v2\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Test\obj\Debug\EInvoiceKSADemo.NETFramework.Test.csproj.GenerateResource.cache
+F:\الفوترة الإلكترونية\Phase 2 Sample\Demo\v2\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Test\obj\Debug\EInvoiceKSADemo.NETFramework.Test.csproj.CoreCompileInputs.cache
+F:\الفوترة الإلكترونية\Phase 2 Sample\Demo\v2\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Test\obj\Debug\EInvoiceKSADemo.NETFramework.Test.csproj.CopyComplete
+F:\الفوترة الإلكترونية\Phase 2 Sample\Demo\v2\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Test\obj\Debug\EInvoiceKSADemo.NETFramework.Test.exe
+F:\الفوترة الإلكترونية\Phase 2 Sample\Demo\v2\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Test\obj\Debug\EInvoiceKSADemo.NETFramework.Test.pdb
+F:\Integration\الفوترة الإلكترونية\Phase 2 Sample\Demo\v2\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Test\bin\Debug\EInvoiceKSADemo.NETFramework.Test.exe.config
+F:\Integration\الفوترة الإلكترونية\Phase 2 Sample\Demo\v2\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Test\bin\Debug\EInvoiceKSADemo.NETFramework.Test.exe
+F:\Integration\الفوترة الإلكترونية\Phase 2 Sample\Demo\v2\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Test\bin\Debug\EInvoiceKSADemo.NETFramework.Test.pdb
+F:\Integration\الفوترة الإلكترونية\Phase 2 Sample\Demo\v2\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Test\bin\Debug\EInvoiceKSADemo.NETFramework.Helpers.dll
+F:\Integration\الفوترة الإلكترونية\Phase 2 Sample\Demo\v2\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Test\bin\Debug\BouncyCastle.Crypto.dll
+F:\Integration\الفوترة الإلكترونية\Phase 2 Sample\Demo\v2\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Test\bin\Debug\System.Net.Http.Json.dll
+F:\Integration\الفوترة الإلكترونية\Phase 2 Sample\Demo\v2\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Test\bin\Debug\System.Text.Json.dll
+F:\Integration\الفوترة الإلكترونية\Phase 2 Sample\Demo\v2\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Test\bin\Debug\System.Threading.Tasks.Extensions.dll
+F:\Integration\الفوترة الإلكترونية\Phase 2 Sample\Demo\v2\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Test\bin\Debug\System.Memory.dll
+F:\Integration\الفوترة الإلكترونية\Phase 2 Sample\Demo\v2\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Test\bin\Debug\System.Buffers.dll
+F:\Integration\الفوترة الإلكترونية\Phase 2 Sample\Demo\v2\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Test\bin\Debug\System.Text.Encodings.Web.dll
+F:\Integration\الفوترة الإلكترونية\Phase 2 Sample\Demo\v2\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Test\bin\Debug\System.ValueTuple.dll
+F:\Integration\الفوترة الإلكترونية\Phase 2 Sample\Demo\v2\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Test\bin\Debug\System.Numerics.Vectors.dll
+F:\Integration\الفوترة الإلكترونية\Phase 2 Sample\Demo\v2\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Test\bin\Debug\Microsoft.Bcl.AsyncInterfaces.dll
+F:\Integration\الفوترة الإلكترونية\Phase 2 Sample\Demo\v2\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Test\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+F:\Integration\الفوترة الإلكترونية\Phase 2 Sample\Demo\v2\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Test\bin\Debug\EInvoiceKSADemo.NETFramework.Helpers.pdb
+F:\Integration\الفوترة الإلكترونية\Phase 2 Sample\Demo\v2\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Test\bin\Debug\EInvoiceKSADemo.NETFramework.Helpers.dll.config
+F:\Integration\الفوترة الإلكترونية\Phase 2 Sample\Demo\v2\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Test\bin\Debug\System.Net.Http.Json.xml
+F:\Integration\الفوترة الإلكترونية\Phase 2 Sample\Demo\v2\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Test\bin\Debug\System.Text.Json.xml
+F:\Integration\الفوترة الإلكترونية\Phase 2 Sample\Demo\v2\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Test\bin\Debug\System.Threading.Tasks.Extensions.xml
+F:\Integration\الفوترة الإلكترونية\Phase 2 Sample\Demo\v2\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Test\bin\Debug\System.Memory.xml
+F:\Integration\الفوترة الإلكترونية\Phase 2 Sample\Demo\v2\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Test\bin\Debug\System.Buffers.xml
+F:\Integration\الفوترة الإلكترونية\Phase 2 Sample\Demo\v2\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Test\bin\Debug\System.Text.Encodings.Web.xml
+F:\Integration\الفوترة الإلكترونية\Phase 2 Sample\Demo\v2\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Test\bin\Debug\System.ValueTuple.xml
+F:\Integration\الفوترة الإلكترونية\Phase 2 Sample\Demo\v2\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Test\bin\Debug\System.Numerics.Vectors.xml
+F:\Integration\الفوترة الإلكترونية\Phase 2 Sample\Demo\v2\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Test\bin\Debug\Microsoft.Bcl.AsyncInterfaces.xml
+F:\Integration\الفوترة الإلكترونية\Phase 2 Sample\Demo\v2\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Test\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+F:\Integration\الفوترة الإلكترونية\Phase 2 Sample\Demo\v2\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Test\obj\Debug\EInvoiceKSADemo.NETFramework.Test.csproj.AssemblyReference.cache
+F:\Integration\الفوترة الإلكترونية\Phase 2 Sample\Demo\v2\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Test\obj\Debug\EInvoiceKSADemo.NETFramework.Test.csproj.SuggestedBindingRedirects.cache
+F:\Integration\الفوترة الإلكترونية\Phase 2 Sample\Demo\v2\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Test\obj\Debug\EInvoiceKSADemo.NETFramework.Test.Form1.resources
+F:\Integration\الفوترة الإلكترونية\Phase 2 Sample\Demo\v2\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Test\obj\Debug\EInvoiceKSADemo.NETFramework.Test.Properties.Resources.resources
+F:\Integration\الفوترة الإلكترونية\Phase 2 Sample\Demo\v2\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Test\obj\Debug\EInvoiceKSADemo.NETFramework.Test.csproj.GenerateResource.cache
+F:\Integration\الفوترة الإلكترونية\Phase 2 Sample\Demo\v2\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Test\obj\Debug\EInvoiceKSADemo.NETFramework.Test.csproj.CoreCompileInputs.cache
+F:\Integration\الفوترة الإلكترونية\Phase 2 Sample\Demo\v2\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Test\obj\Debug\EInvoiceKSADemo.NETFramework.Test.csproj.CopyComplete
+F:\Integration\الفوترة الإلكترونية\Phase 2 Sample\Demo\v2\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Test\obj\Debug\EInvoiceKSADemo.NETFramework.Test.exe
+F:\Integration\الفوترة الإلكترونية\Phase 2 Sample\Demo\v2\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Test\obj\Debug\EInvoiceKSADemo.NETFramework.Test.pdb
+F:\Integration\الفوترة الإلكترونية\Phase 2 Sample\Demo\v2\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Test\obj\Debug\EInvoiceKSADemo.OnboardingForm.resources
+F:\Integration\الفوترة الإلكترونية\Phase 2 Sample\Demo\v2\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Test\bin\Debug\zxing.dll
+F:\Integration\الفوترة الإلكترونية\Phase 2 Sample\Demo\v2\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Test\bin\Debug\zxing.presentation.dll
+F:\Integration\الفوترة الإلكترونية\Phase 2 Sample\Demo\v2\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Test\bin\Debug\zxing.xml
+F:\Integration\الفوترة الإلكترونية\Phase 2 Sample\Demo\v2\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Test\bin\Debug\zxing.presentation.xml
+F:\Integration\الفوترة الإلكترونية\Phase 2 Sample\Demo\v2\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Test\obj\Debug\EInvoiceKSADemo.GenertorInfoForm.resources
+F:\Integration\الفوترة الإلكترونية\Phase 2 Sample\Demo\v2\EInvoiceKSADemo\EInvoiceKSADemo.NETFramework.Test\obj\Debug\EInvoiceKSADemo.CsrForm.resources
+F:\Integration\الفوترة الإلكترونية\Phase 2 Sample\Vertical solutions\EInvoiceKSADemo.NETFramework.Test\bin\Debug\EInvoiceKSADemo.NETFramework.Test.exe.config
+F:\Integration\الفوترة الإلكترونية\Phase 2 Sample\Vertical solutions\EInvoiceKSADemo.NETFramework.Test\bin\Debug\EInvoiceKSADemo.NETFramework.Test.exe
+F:\Integration\الفوترة الإلكترونية\Phase 2 Sample\Vertical solutions\EInvoiceKSADemo.NETFramework.Test\bin\Debug\EInvoiceKSADemo.NETFramework.Test.pdb
+F:\Integration\الفوترة الإلكترونية\Phase 2 Sample\Vertical solutions\EInvoiceKSADemo.NETFramework.Test\bin\Debug\EInvoiceKSADemo.NETFramework.Helpers.dll
+F:\Integration\الفوترة الإلكترونية\Phase 2 Sample\Vertical solutions\EInvoiceKSADemo.NETFramework.Test\bin\Debug\zxing.dll
+F:\Integration\الفوترة الإلكترونية\Phase 2 Sample\Vertical solutions\EInvoiceKSADemo.NETFramework.Test\bin\Debug\zxing.presentation.dll
+F:\Integration\الفوترة الإلكترونية\Phase 2 Sample\Vertical solutions\EInvoiceKSADemo.NETFramework.Test\bin\Debug\BouncyCastle.Crypto.dll
+F:\Integration\الفوترة الإلكترونية\Phase 2 Sample\Vertical solutions\EInvoiceKSADemo.NETFramework.Test\bin\Debug\System.Net.Http.Json.dll
+F:\Integration\الفوترة الإلكترونية\Phase 2 Sample\Vertical solutions\EInvoiceKSADemo.NETFramework.Test\bin\Debug\System.Text.Json.dll
+F:\Integration\الفوترة الإلكترونية\Phase 2 Sample\Vertical solutions\EInvoiceKSADemo.NETFramework.Test\bin\Debug\System.Threading.Tasks.Extensions.dll
+F:\Integration\الفوترة الإلكترونية\Phase 2 Sample\Vertical solutions\EInvoiceKSADemo.NETFramework.Test\bin\Debug\System.Memory.dll
+F:\Integration\الفوترة الإلكترونية\Phase 2 Sample\Vertical solutions\EInvoiceKSADemo.NETFramework.Test\bin\Debug\System.Buffers.dll
+F:\Integration\الفوترة الإلكترونية\Phase 2 Sample\Vertical solutions\EInvoiceKSADemo.NETFramework.Test\bin\Debug\System.Text.Encodings.Web.dll
+F:\Integration\الفوترة الإلكترونية\Phase 2 Sample\Vertical solutions\EInvoiceKSADemo.NETFramework.Test\bin\Debug\System.ValueTuple.dll
+F:\Integration\الفوترة الإلكترونية\Phase 2 Sample\Vertical solutions\EInvoiceKSADemo.NETFramework.Test\bin\Debug\System.Numerics.Vectors.dll
+F:\Integration\الفوترة الإلكترونية\Phase 2 Sample\Vertical solutions\EInvoiceKSADemo.NETFramework.Test\bin\Debug\Microsoft.Bcl.AsyncInterfaces.dll
+F:\Integration\الفوترة الإلكترونية\Phase 2 Sample\Vertical solutions\EInvoiceKSADemo.NETFramework.Test\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+F:\Integration\الفوترة الإلكترونية\Phase 2 Sample\Vertical solutions\EInvoiceKSADemo.NETFramework.Test\bin\Debug\EInvoiceKSADemo.NETFramework.Helpers.pdb
+F:\Integration\الفوترة الإلكترونية\Phase 2 Sample\Vertical solutions\EInvoiceKSADemo.NETFramework.Test\bin\Debug\EInvoiceKSADemo.NETFramework.Helpers.dll.config
+F:\Integration\الفوترة الإلكترونية\Phase 2 Sample\Vertical solutions\EInvoiceKSADemo.NETFramework.Test\bin\Debug\zxing.xml
+F:\Integration\الفوترة الإلكترونية\Phase 2 Sample\Vertical solutions\EInvoiceKSADemo.NETFramework.Test\bin\Debug\zxing.presentation.xml
+F:\Integration\الفوترة الإلكترونية\Phase 2 Sample\Vertical solutions\EInvoiceKSADemo.NETFramework.Test\bin\Debug\System.Net.Http.Json.xml
+F:\Integration\الفوترة الإلكترونية\Phase 2 Sample\Vertical solutions\EInvoiceKSADemo.NETFramework.Test\bin\Debug\System.Text.Json.xml
+F:\Integration\الفوترة الإلكترونية\Phase 2 Sample\Vertical solutions\EInvoiceKSADemo.NETFramework.Test\bin\Debug\System.Threading.Tasks.Extensions.xml
+F:\Integration\الفوترة الإلكترونية\Phase 2 Sample\Vertical solutions\EInvoiceKSADemo.NETFramework.Test\bin\Debug\System.Memory.xml
+F:\Integration\الفوترة الإلكترونية\Phase 2 Sample\Vertical solutions\EInvoiceKSADemo.NETFramework.Test\bin\Debug\System.Buffers.xml
+F:\Integration\الفوترة الإلكترونية\Phase 2 Sample\Vertical solutions\EInvoiceKSADemo.NETFramework.Test\bin\Debug\System.Text.Encodings.Web.xml
+F:\Integration\الفوترة الإلكترونية\Phase 2 Sample\Vertical solutions\EInvoiceKSADemo.NETFramework.Test\bin\Debug\System.ValueTuple.xml
+F:\Integration\الفوترة الإلكترونية\Phase 2 Sample\Vertical solutions\EInvoiceKSADemo.NETFramework.Test\bin\Debug\System.Numerics.Vectors.xml
+F:\Integration\الفوترة الإلكترونية\Phase 2 Sample\Vertical solutions\EInvoiceKSADemo.NETFramework.Test\bin\Debug\Microsoft.Bcl.AsyncInterfaces.xml
+F:\Integration\الفوترة الإلكترونية\Phase 2 Sample\Vertical solutions\EInvoiceKSADemo.NETFramework.Test\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+F:\Integration\الفوترة الإلكترونية\Phase 2 Sample\Vertical solutions\EInvoiceKSADemo.NETFramework.Test\obj\Debug\EInvoiceKSADemo.NETFramework.Test.csproj.AssemblyReference.cache
+F:\Integration\الفوترة الإلكترونية\Phase 2 Sample\Vertical solutions\EInvoiceKSADemo.NETFramework.Test\obj\Debug\EInvoiceKSADemo.NETFramework.Test.csproj.SuggestedBindingRedirects.cache
+F:\Integration\الفوترة الإلكترونية\Phase 2 Sample\Vertical solutions\EInvoiceKSADemo.NETFramework.Test\obj\Debug\EInvoiceKSADemo.CsrForm.resources
+F:\Integration\الفوترة الإلكترونية\Phase 2 Sample\Vertical solutions\EInvoiceKSADemo.NETFramework.Test\obj\Debug\EInvoiceKSADemo.NETFramework.Test.Form1.resources
+F:\Integration\الفوترة الإلكترونية\Phase 2 Sample\Vertical solutions\EInvoiceKSADemo.NETFramework.Test\obj\Debug\EInvoiceKSADemo.GenertorInfoForm.resources
+F:\Integration\الفوترة الإلكترونية\Phase 2 Sample\Vertical solutions\EInvoiceKSADemo.NETFramework.Test\obj\Debug\EInvoiceKSADemo.OnboardingForm.resources
+F:\Integration\الفوترة الإلكترونية\Phase 2 Sample\Vertical solutions\EInvoiceKSADemo.NETFramework.Test\obj\Debug\EInvoiceKSADemo.NETFramework.Test.Properties.Resources.resources
+F:\Integration\الفوترة الإلكترونية\Phase 2 Sample\Vertical solutions\EInvoiceKSADemo.NETFramework.Test\obj\Debug\EInvoiceKSADemo.NETFramework.Test.csproj.GenerateResource.cache
+F:\Integration\الفوترة الإلكترونية\Phase 2 Sample\Vertical solutions\EInvoiceKSADemo.NETFramework.Test\obj\Debug\EInvoiceKSADemo.NETFramework.Test.csproj.CoreCompileInputs.cache
+F:\Integration\الفوترة الإلكترونية\Phase 2 Sample\Vertical solutions\EInvoiceKSADemo.NETFramework.Test\obj\Debug\EInvoiceKSADemo.NETFramework.Test.csproj.CopyComplete
+F:\Integration\الفوترة الإلكترونية\Phase 2 Sample\Vertical solutions\EInvoiceKSADemo.NETFramework.Test\obj\Debug\EInvoiceKSADemo.NETFramework.Test.exe
+F:\Integration\الفوترة الإلكترونية\Phase 2 Sample\Vertical solutions\EInvoiceKSADemo.NETFramework.Test\obj\Debug\EInvoiceKSADemo.NETFramework.Test.pdb
+C:\Users\Lenovo\Desktop\Vertical solutions\Vertical solutions\EInvoiceKSADemo.NETFramework.Test\bin\Debug\EInvoiceKSADemo.NETFramework.Test.exe.config
+C:\Users\Lenovo\Desktop\Vertical solutions\Vertical solutions\EInvoiceKSADemo.NETFramework.Test\bin\Debug\EInvoiceKSADemo.NETFramework.Test.exe
+C:\Users\Lenovo\Desktop\Vertical solutions\Vertical solutions\EInvoiceKSADemo.NETFramework.Test\bin\Debug\EInvoiceKSADemo.NETFramework.Test.pdb
+C:\Users\Lenovo\Desktop\Vertical solutions\Vertical solutions\EInvoiceKSADemo.NETFramework.Test\bin\Debug\EInvoiceKSADemo.NETFramework.Helpers.dll
+C:\Users\Lenovo\Desktop\Vertical solutions\Vertical solutions\EInvoiceKSADemo.NETFramework.Test\bin\Debug\zxing.dll
+C:\Users\Lenovo\Desktop\Vertical solutions\Vertical solutions\EInvoiceKSADemo.NETFramework.Test\bin\Debug\zxing.presentation.dll
+C:\Users\Lenovo\Desktop\Vertical solutions\Vertical solutions\EInvoiceKSADemo.NETFramework.Test\bin\Debug\BouncyCastle.Crypto.dll
+C:\Users\Lenovo\Desktop\Vertical solutions\Vertical solutions\EInvoiceKSADemo.NETFramework.Test\bin\Debug\System.Net.Http.Json.dll
+C:\Users\Lenovo\Desktop\Vertical solutions\Vertical solutions\EInvoiceKSADemo.NETFramework.Test\bin\Debug\System.Text.Json.dll
+C:\Users\Lenovo\Desktop\Vertical solutions\Vertical solutions\EInvoiceKSADemo.NETFramework.Test\bin\Debug\System.Threading.Tasks.Extensions.dll
+C:\Users\Lenovo\Desktop\Vertical solutions\Vertical solutions\EInvoiceKSADemo.NETFramework.Test\bin\Debug\System.Memory.dll
+C:\Users\Lenovo\Desktop\Vertical solutions\Vertical solutions\EInvoiceKSADemo.NETFramework.Test\bin\Debug\System.Buffers.dll
+C:\Users\Lenovo\Desktop\Vertical solutions\Vertical solutions\EInvoiceKSADemo.NETFramework.Test\bin\Debug\System.Text.Encodings.Web.dll
+C:\Users\Lenovo\Desktop\Vertical solutions\Vertical solutions\EInvoiceKSADemo.NETFramework.Test\bin\Debug\System.ValueTuple.dll
+C:\Users\Lenovo\Desktop\Vertical solutions\Vertical solutions\EInvoiceKSADemo.NETFramework.Test\bin\Debug\System.Numerics.Vectors.dll
+C:\Users\Lenovo\Desktop\Vertical solutions\Vertical solutions\EInvoiceKSADemo.NETFramework.Test\bin\Debug\Microsoft.Bcl.AsyncInterfaces.dll
+C:\Users\Lenovo\Desktop\Vertical solutions\Vertical solutions\EInvoiceKSADemo.NETFramework.Test\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+C:\Users\Lenovo\Desktop\Vertical solutions\Vertical solutions\EInvoiceKSADemo.NETFramework.Test\bin\Debug\EInvoiceKSADemo.NETFramework.Helpers.pdb
+C:\Users\Lenovo\Desktop\Vertical solutions\Vertical solutions\EInvoiceKSADemo.NETFramework.Test\bin\Debug\EInvoiceKSADemo.NETFramework.Helpers.dll.config
+C:\Users\Lenovo\Desktop\Vertical solutions\Vertical solutions\EInvoiceKSADemo.NETFramework.Test\bin\Debug\zxing.xml
+C:\Users\Lenovo\Desktop\Vertical solutions\Vertical solutions\EInvoiceKSADemo.NETFramework.Test\bin\Debug\zxing.presentation.xml
+C:\Users\Lenovo\Desktop\Vertical solutions\Vertical solutions\EInvoiceKSADemo.NETFramework.Test\bin\Debug\System.Net.Http.Json.xml
+C:\Users\Lenovo\Desktop\Vertical solutions\Vertical solutions\EInvoiceKSADemo.NETFramework.Test\bin\Debug\System.Text.Json.xml
+C:\Users\Lenovo\Desktop\Vertical solutions\Vertical solutions\EInvoiceKSADemo.NETFramework.Test\bin\Debug\System.Threading.Tasks.Extensions.xml
+C:\Users\Lenovo\Desktop\Vertical solutions\Vertical solutions\EInvoiceKSADemo.NETFramework.Test\bin\Debug\System.Memory.xml
+C:\Users\Lenovo\Desktop\Vertical solutions\Vertical solutions\EInvoiceKSADemo.NETFramework.Test\bin\Debug\System.Buffers.xml
+C:\Users\Lenovo\Desktop\Vertical solutions\Vertical solutions\EInvoiceKSADemo.NETFramework.Test\bin\Debug\System.Text.Encodings.Web.xml
+C:\Users\Lenovo\Desktop\Vertical solutions\Vertical solutions\EInvoiceKSADemo.NETFramework.Test\bin\Debug\System.ValueTuple.xml
+C:\Users\Lenovo\Desktop\Vertical solutions\Vertical solutions\EInvoiceKSADemo.NETFramework.Test\bin\Debug\System.Numerics.Vectors.xml
+C:\Users\Lenovo\Desktop\Vertical solutions\Vertical solutions\EInvoiceKSADemo.NETFramework.Test\bin\Debug\Microsoft.Bcl.AsyncInterfaces.xml
+C:\Users\Lenovo\Desktop\Vertical solutions\Vertical solutions\EInvoiceKSADemo.NETFramework.Test\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+C:\Users\Lenovo\Desktop\Vertical solutions\Vertical solutions\EInvoiceKSADemo.NETFramework.Test\obj\Debug\EInvoiceKSADemo.NETFramework.Test.csproj.AssemblyReference.cache
+C:\Users\Lenovo\Desktop\Vertical solutions\Vertical solutions\EInvoiceKSADemo.NETFramework.Test\obj\Debug\EInvoiceKSADemo.CsrForm.resources
+C:\Users\Lenovo\Desktop\Vertical solutions\Vertical solutions\EInvoiceKSADemo.NETFramework.Test\obj\Debug\EInvoiceKSADemo.NETFramework.Test.Form1.resources
+C:\Users\Lenovo\Desktop\Vertical solutions\Vertical solutions\EInvoiceKSADemo.NETFramework.Test\obj\Debug\EInvoiceKSADemo.GenertorInfoForm.resources
+C:\Users\Lenovo\Desktop\Vertical solutions\Vertical solutions\EInvoiceKSADemo.NETFramework.Test\obj\Debug\EInvoiceKSADemo.OnboardingForm.resources
+C:\Users\Lenovo\Desktop\Vertical solutions\Vertical solutions\EInvoiceKSADemo.NETFramework.Test\obj\Debug\EInvoiceKSADemo.NETFramework.Test.Properties.Resources.resources
+C:\Users\Lenovo\Desktop\Vertical solutions\Vertical solutions\EInvoiceKSADemo.NETFramework.Test\obj\Debug\EInvoiceKSADemo.NETFramework.Test.csproj.GenerateResource.cache
+C:\Users\Lenovo\Desktop\Vertical solutions\Vertical solutions\EInvoiceKSADemo.NETFramework.Test\obj\Debug\EInvoiceKSADemo.NETFramework.Test.csproj.CoreCompileInputs.cache
+C:\Users\Lenovo\Desktop\Vertical solutions\Vertical solutions\EInvoiceKSADemo.NETFramework.Test\obj\Debug\EInvoice.C5BD3DA3.Up2Date
+C:\Users\Lenovo\Desktop\Vertical solutions\Vertical solutions\EInvoiceKSADemo.NETFramework.Test\obj\Debug\EInvoiceKSADemo.NETFramework.Test.exe
+C:\Users\Lenovo\Desktop\Vertical solutions\Vertical solutions\EInvoiceKSADemo.NETFramework.Test\obj\Debug\EInvoiceKSADemo.NETFramework.Test.pdb
+C:\NetSuiteCompanies\Malahi\Zatca\Vertical solutions\Vertical solutions\EInvoiceKSADemo.NETFramework.Test\bin\Debug\EInvoiceKSADemo.NETFramework.Test.exe.config
+C:\NetSuiteCompanies\Malahi\Zatca\Vertical solutions\Vertical solutions\EInvoiceKSADemo.NETFramework.Test\bin\Debug\EInvoiceKSADemo.NETFramework.Test.exe
+C:\NetSuiteCompanies\Malahi\Zatca\Vertical solutions\Vertical solutions\EInvoiceKSADemo.NETFramework.Test\bin\Debug\EInvoiceKSADemo.NETFramework.Test.pdb
+C:\NetSuiteCompanies\Malahi\Zatca\Vertical solutions\Vertical solutions\EInvoiceKSADemo.NETFramework.Test\bin\Debug\EInvoiceKSADemo.NETFramework.Helpers.dll
+C:\NetSuiteCompanies\Malahi\Zatca\Vertical solutions\Vertical solutions\EInvoiceKSADemo.NETFramework.Test\bin\Debug\zxing.dll
+C:\NetSuiteCompanies\Malahi\Zatca\Vertical solutions\Vertical solutions\EInvoiceKSADemo.NETFramework.Test\bin\Debug\zxing.presentation.dll
+C:\NetSuiteCompanies\Malahi\Zatca\Vertical solutions\Vertical solutions\EInvoiceKSADemo.NETFramework.Test\bin\Debug\BouncyCastle.Crypto.dll
+C:\NetSuiteCompanies\Malahi\Zatca\Vertical solutions\Vertical solutions\EInvoiceKSADemo.NETFramework.Test\bin\Debug\System.Net.Http.Json.dll
+C:\NetSuiteCompanies\Malahi\Zatca\Vertical solutions\Vertical solutions\EInvoiceKSADemo.NETFramework.Test\bin\Debug\System.Text.Json.dll
+C:\NetSuiteCompanies\Malahi\Zatca\Vertical solutions\Vertical solutions\EInvoiceKSADemo.NETFramework.Test\bin\Debug\System.Threading.Tasks.Extensions.dll
+C:\NetSuiteCompanies\Malahi\Zatca\Vertical solutions\Vertical solutions\EInvoiceKSADemo.NETFramework.Test\bin\Debug\System.Memory.dll
+C:\NetSuiteCompanies\Malahi\Zatca\Vertical solutions\Vertical solutions\EInvoiceKSADemo.NETFramework.Test\bin\Debug\System.Buffers.dll
+C:\NetSuiteCompanies\Malahi\Zatca\Vertical solutions\Vertical solutions\EInvoiceKSADemo.NETFramework.Test\bin\Debug\System.Text.Encodings.Web.dll
+C:\NetSuiteCompanies\Malahi\Zatca\Vertical solutions\Vertical solutions\EInvoiceKSADemo.NETFramework.Test\bin\Debug\System.ValueTuple.dll
+C:\NetSuiteCompanies\Malahi\Zatca\Vertical solutions\Vertical solutions\EInvoiceKSADemo.NETFramework.Test\bin\Debug\System.Numerics.Vectors.dll
+C:\NetSuiteCompanies\Malahi\Zatca\Vertical solutions\Vertical solutions\EInvoiceKSADemo.NETFramework.Test\bin\Debug\Microsoft.Bcl.AsyncInterfaces.dll
+C:\NetSuiteCompanies\Malahi\Zatca\Vertical solutions\Vertical solutions\EInvoiceKSADemo.NETFramework.Test\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+C:\NetSuiteCompanies\Malahi\Zatca\Vertical solutions\Vertical solutions\EInvoiceKSADemo.NETFramework.Test\bin\Debug\EInvoiceKSADemo.NETFramework.Helpers.pdb
+C:\NetSuiteCompanies\Malahi\Zatca\Vertical solutions\Vertical solutions\EInvoiceKSADemo.NETFramework.Test\bin\Debug\EInvoiceKSADemo.NETFramework.Helpers.dll.config
+C:\NetSuiteCompanies\Malahi\Zatca\Vertical solutions\Vertical solutions\EInvoiceKSADemo.NETFramework.Test\bin\Debug\zxing.xml
+C:\NetSuiteCompanies\Malahi\Zatca\Vertical solutions\Vertical solutions\EInvoiceKSADemo.NETFramework.Test\bin\Debug\zxing.presentation.xml
+C:\NetSuiteCompanies\Malahi\Zatca\Vertical solutions\Vertical solutions\EInvoiceKSADemo.NETFramework.Test\bin\Debug\System.Net.Http.Json.xml
+C:\NetSuiteCompanies\Malahi\Zatca\Vertical solutions\Vertical solutions\EInvoiceKSADemo.NETFramework.Test\bin\Debug\System.Text.Json.xml
+C:\NetSuiteCompanies\Malahi\Zatca\Vertical solutions\Vertical solutions\EInvoiceKSADemo.NETFramework.Test\bin\Debug\System.Threading.Tasks.Extensions.xml
+C:\NetSuiteCompanies\Malahi\Zatca\Vertical solutions\Vertical solutions\EInvoiceKSADemo.NETFramework.Test\bin\Debug\System.Memory.xml
+C:\NetSuiteCompanies\Malahi\Zatca\Vertical solutions\Vertical solutions\EInvoiceKSADemo.NETFramework.Test\bin\Debug\System.Buffers.xml
+C:\NetSuiteCompanies\Malahi\Zatca\Vertical solutions\Vertical solutions\EInvoiceKSADemo.NETFramework.Test\bin\Debug\System.Text.Encodings.Web.xml
+C:\NetSuiteCompanies\Malahi\Zatca\Vertical solutions\Vertical solutions\EInvoiceKSADemo.NETFramework.Test\bin\Debug\System.ValueTuple.xml
+C:\NetSuiteCompanies\Malahi\Zatca\Vertical solutions\Vertical solutions\EInvoiceKSADemo.NETFramework.Test\bin\Debug\System.Numerics.Vectors.xml
+C:\NetSuiteCompanies\Malahi\Zatca\Vertical solutions\Vertical solutions\EInvoiceKSADemo.NETFramework.Test\bin\Debug\Microsoft.Bcl.AsyncInterfaces.xml
+C:\NetSuiteCompanies\Malahi\Zatca\Vertical solutions\Vertical solutions\EInvoiceKSADemo.NETFramework.Test\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+C:\NetSuiteCompanies\Malahi\Zatca\Vertical solutions\Vertical solutions\EInvoiceKSADemo.NETFramework.Test\obj\Debug\EInvoiceKSADemo.NETFramework.Test.csproj.AssemblyReference.cache
+C:\NetSuiteCompanies\Malahi\Zatca\Vertical solutions\Vertical solutions\EInvoiceKSADemo.NETFramework.Test\obj\Debug\EInvoiceKSADemo.CsrForm.resources
+C:\NetSuiteCompanies\Malahi\Zatca\Vertical solutions\Vertical solutions\EInvoiceKSADemo.NETFramework.Test\obj\Debug\EInvoiceKSADemo.NETFramework.Test.Form1.resources
+C:\NetSuiteCompanies\Malahi\Zatca\Vertical solutions\Vertical solutions\EInvoiceKSADemo.NETFramework.Test\obj\Debug\EInvoiceKSADemo.GenertorInfoForm.resources
+C:\NetSuiteCompanies\Malahi\Zatca\Vertical solutions\Vertical solutions\EInvoiceKSADemo.NETFramework.Test\obj\Debug\EInvoiceKSADemo.OnboardingForm.resources
+C:\NetSuiteCompanies\Malahi\Zatca\Vertical solutions\Vertical solutions\EInvoiceKSADemo.NETFramework.Test\obj\Debug\EInvoiceKSADemo.NETFramework.Test.Properties.Resources.resources
+C:\NetSuiteCompanies\Malahi\Zatca\Vertical solutions\Vertical solutions\EInvoiceKSADemo.NETFramework.Test\obj\Debug\EInvoiceKSADemo.NETFramework.Test.csproj.GenerateResource.cache
+C:\NetSuiteCompanies\Malahi\Zatca\Vertical solutions\Vertical solutions\EInvoiceKSADemo.NETFramework.Test\obj\Debug\EInvoiceKSADemo.NETFramework.Test.csproj.CoreCompileInputs.cache
+C:\NetSuiteCompanies\Malahi\Zatca\Vertical solutions\Vertical solutions\EInvoiceKSADemo.NETFramework.Test\obj\Debug\EInvoice.C5BD3DA3.Up2Date
+C:\NetSuiteCompanies\Malahi\Zatca\Vertical solutions\Vertical solutions\EInvoiceKSADemo.NETFramework.Test\obj\Debug\EInvoiceKSADemo.NETFramework.Test.exe
+C:\NetSuiteCompanies\Malahi\Zatca\Vertical solutions\Vertical solutions\EInvoiceKSADemo.NETFramework.Test\obj\Debug\EInvoiceKSADemo.NETFramework.Test.pdb

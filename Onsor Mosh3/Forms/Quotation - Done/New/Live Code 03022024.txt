@@ -1,0 +1,138 @@
+<?xml version="1.0"?><!DOCTYPE pdf PUBLIC "-//big.faceless.org//report" "report-1.1.dtd">
+<pdf>
+<head>
+	<link name="NotoSans" type="font" subtype="truetype" src="${nsfont.NotoSans_Regular}" src-bold="${nsfont.NotoSans_Bold}" src-italic="${nsfont.NotoSans_Italic}" src-bolditalic="${nsfont.NotoSans_BoldItalic}" bytes="2" />
+	<#if .locale == "zh_CN">
+		<link name="NotoSansCJKsc" type="font" subtype="opentype" src="${nsfont.NotoSansCJKsc_Regular}" src-bold="${nsfont.NotoSansCJKsc_Bold}" bytes="2" />
+	<#elseif .locale == "zh_TW">
+		<link name="NotoSansCJKtc" type="font" subtype="opentype" src="${nsfont.NotoSansCJKtc_Regular}" src-bold="${nsfont.NotoSansCJKtc_Bold}" bytes="2" />
+	<#elseif .locale == "ja_JP">
+		<link name="NotoSansCJKjp" type="font" subtype="opentype" src="${nsfont.NotoSansCJKjp_Regular}" src-bold="${nsfont.NotoSansCJKjp_Bold}" bytes="2" />
+	<#elseif .locale == "ko_KR">
+		<link name="NotoSansCJKkr" type="font" subtype="opentype" src="${nsfont.NotoSansCJKkr_Regular}" src-bold="${nsfont.NotoSansCJKkr_Bold}" bytes="2" />
+	<#elseif .locale == "th_TH">
+		<link name="NotoSansThai" type="font" subtype="opentype" src="${nsfont.NotoSansThai_Regular}" src-bold="${nsfont.NotoSansThai_Bold}" bytes="2" />
+	</#if>
+    <macrolist>
+        <macro id="nlheader">
+            <table style="width:100%;"><tr>
+	<td style="width: 457px;">
+	<hr class="bold-hr" /></td>
+	<td style="width: 343px;">
+	<hr class="bold-hr" /></td>
+	</tr>
+	<tr>
+	<td colspan="1" font-size="24pt" rowspan="2" style="width: 457px;"><strong>&nbsp; &nbsp; &nbsp; Quotation</strong></td>
+	<td align="center" style="width: 343px;"><b>No.</b> ${record.tranid}</td>
+	</tr>
+	<tr>
+	<td align="center" style="width: 343px;"><b>${record.trandate}</b></td>
+	</tr>
+	<tr>
+	<td style="width: 457px;">
+	<hr class="bold-hr" /></td>
+	<td style="width: 343px;">
+	<hr class="bold-hr" /></td>
+	</tr></table>
+        </macro>
+        <macro id="nlfooter">
+            <!--______________________________________________________________-->
+<table style="width:100%;"><tr>
+	<td style="width: 547px;">
+	<hr class="bold-hr" /></td>
+	<td style="width: 252px;">
+	<hr class="bold-hr" /></td>
+	</tr>
+	<tr>
+	<td colspan="1" font-size="9px" rowspan="4" style="width: 547px;"><strong>Terms and Conditions</strong><br />- This quotation is valid for 14 days.<br />- Work will commence only after the Client&rsquo;s signature to this quotation and sharing the PO &amp;<br />processing the advanced payment.<br />- Change orders or briefing updates, amendments, or changes requested by the Client shall not be<br />effective unless accepted in writing by the Agency.<br />- Email is considered an official communication channel and all approvals sent through email are<br />contractually binding.<br />- Neither party shall be liable for any failure or delay in performing its obligations if it is caused by a<br />Force Majeure event.</td>
+	<td style="width: 252px;"><strong>Signature</strong></td>
+	</tr>
+	<tr>
+	<td style="width: 252px;">&nbsp;</td>
+	</tr>
+	<tr>
+	<td style="width: 252px;"><strong>Anas Sufyan</strong><br />Client Servicing Manager<br />Anas@om.sa</td>
+	</tr>
+	<tr>
+	<td style="width: 252px;"><strong>Client Signature</strong></td>
+	</tr></table>
+<!--______________________________________________________________-->
+
+<table style="width:100%;"><tr>
+	<td>&nbsp;</td>
+	<td style="width: 339px;">&nbsp;</td>
+	<td style="width: 253px;">
+	<hr class="bold-hr" /></td>
+	</tr>
+	<tr>
+	<td colspan="2" rowspan="1" style="width: 547px;">&nbsp;</td>
+	<td style="width: 253px;"><strong>Onsor Mosha Advertising LLC</strong><br />C.R. 1010385024<br />OM VAT: 301238868700003<br />7970 King Abdulaziz road<br />Rabie Dist. &mdash; Riyadh 13315-4478<br />T +966 11 234 8092<br />Riyadh</td>
+	</tr>
+	<tr>
+	<td>&nbsp;</td>
+	<td style="width: 339px;">&nbsp;</td>
+	<td style="width: 253px;"><strong>www.om.sa</strong></td>
+	</tr></table>
+        </macro>
+    </macrolist>
+    <style type="text/css">* {
+		<#if .locale == "zh_CN">
+			font-family: NotoSans, NotoSansCJKsc, sans-serif;
+		<#elseif .locale == "zh_TW">
+			font-family: NotoSans, NotoSansCJKtc, sans-serif;
+		<#elseif .locale == "ja_JP">
+			font-family: NotoSans, NotoSansCJKjp, sans-serif;
+		<#elseif .locale == "ko_KR">
+			font-family: NotoSans, NotoSansCJKkr, sans-serif;
+		<#elseif .locale == "th_TH">
+			font-family: NotoSans, NotoSansThai, sans-serif;
+		<#else>
+			font-family: NotoSans, sans-serif;
+		</#if>
+		}
+.bold-hr {
+    border: none;
+    border-top: 5px solid bold;
+}
+</style>
+</head>
+<body header="nlheader" header-height="10%" footer="nlfooter" footer-height="30%" padding="0.5in 0.5in 0.5in 0.5in" size="Letter">
+    <!--______________________________________________________________-->
+<table style="width:100%;"><tr>
+	<td style="width: 484px;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;${record.entity}</td>
+	<td style="width: 315px;">Attention to<br />Mrs. Noora Alissa<br />noora.alissa@hungerstation.com</td>
+	</tr></table>
+<!--______________________________________________________________-->
+
+<table><#list record.item as item><#if item_index==0><tr>
+	<td align="center" border-bottom="1" border-right="1" style="border-top: 5px solid black;"><b>Item</b></td>
+	<td align="center" border-bottom="1" border-right="1" style="border-top: 5px solid black;"><b>Unit</b></td>
+	<td align="center" border-bottom="1" border-right="1" style="border-top: 5px solid black;"><b>Total</b></td>
+	</tr>
+	</#if>
+	<tr>
+	<td align="left" border-bottom="1" border-right="1">${item.description}</td>
+	<td align="center" border-bottom="1" border-right="1">${item.quantity}</td>
+	<td align="center" border-bottom="1" border-right="1">${item.quantity * item.rate}</td>
+	</tr>
+	</#list></table>
+<!--______________________________________________________________-->
+
+<table width="100%"><tr>
+	<td style="width: 428px;">Deliverables:<br />&bull; 3 Main videos (Restaurants - Grocery - Stores)<br />&bull; 10Sec + 6Sec cutdown<br />&bull; Edits and Changed Messaging options (Up to 6)</td>
+	<td border-bottom="1" style="width: 149px; vertical-align: middle;"><strong>Total</strong></td>
+	<td border-bottom="1" style="width: 217px; vertical-align: middle;">${record.subtotal}</td>
+	</tr>
+	<tr>
+	<td style="width: 428px;">&nbsp;</td>
+	<td border-bottom="1" style="width: 149px;"><strong>Vat (15%)</strong></td>
+	<td border-bottom="1" style="width: 217px;">${record.taxtotal}</td>
+	</tr>
+	<tr>
+	<td style="width: 428px;">&nbsp;</td>
+	<td border-bottom="1" style="width: 149px;"><strong>Amount Due</strong></td>
+	<td border-bottom="1" style="width: 217px;">${record.total}</td>
+	</tr></table>
+<!--______________________________________________________________-->
+</body>
+</pdf>

@@ -1,0 +1,31 @@
+oid_section=OIDs
+
+[OIDs]
+# certificateTemplateName removed (ZATCA compliant)
+
+[req]
+emailAddress=sfarag@malahi.com
+prompt=no
+default_md=sha256
+distinguished_name=dn
+req_extensions=req_ext
+
+[dn]
+C=SA
+O=Malahi Leisure Co
+CN=300127479700003
+
+[v3_req]
+basicConstraints=CA:FALSE
+
+[req_ext]
+basicConstraints=CA:FALSE
+keyUsage=digitalSignature
+subjectAltName=dirName:alt_names
+
+[alt_names]
+SN=1-Malahi Leisure Co|2-1100|3-300127479700003
+UID=300127479700003
+title=1100
+registeredAddress=Riyadh
+businessCategory=Entertainment

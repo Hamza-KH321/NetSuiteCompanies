@@ -1,0 +1,349 @@
+/* Create Sales Order - Fancy UI */
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f5f8fa;
+}
+
+.container {
+    max-width: 2000px;
+    margin: 40px auto;
+    padding: 30px;
+    background: #ffffff;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 30px;
+    font-size: 28px;
+    font-weight: 600;
+}
+
+.so-section {
+    margin-bottom: 40px;
+}
+
+.so-section h3 {
+    font-size: 20px;
+    color: #333;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 6px;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    min-width: 150px;
+    font-weight: 500;
+    color: #333;
+    font-size: 14px;
+}
+
+.form-group select,
+.form-group input[type="text"],
+.form-group input[type="date"],
+.form-group input[type="number"] {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 14px;
+    width: 220px;
+    transition: border-color 0.3s ease;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+.form-group select:focus,
+.form-group input:focus {
+    border-color: #4CAF50;
+    outline: none;
+}
+
+.item-table {
+    width: 100%;
+    border-collapse: collapse;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.item-table th {
+    background-color: #4CAF50;
+    color: white;
+    padding: 12px;
+    font-size: 14px;
+    text-align: center;
+}
+
+.item-table td {
+    padding: 12px;
+    text-align: center;
+    font-size: 13px;
+    color: #333;
+}
+
+.item-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.item-table tr:hover {
+    background-color: #eef6ee;
+    transition: background 0.3s ease;
+}
+
+.btn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 16px;
+    font-size: 14px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-top: 12px;
+    margin-right: 6px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+}
+
+.btn:hover {
+    background-color: #45a049;
+    transform: translateY(-1px);
+}
+
+.btn.secondary {
+    background-color: #007bff;
+}
+
+.btn.secondary:hover {
+    background-color: #0069d9;
+}
+
+.btn.gray {
+    background-color: #aaa;
+}
+
+.btn.gray:hover {
+    background-color: #888;
+}
+
+@media (max-width: 768px) {
+    .container {
+        margin: 20px 10px;
+        padding: 20px;
+    }
+
+    .form-group {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .form-group label {
+        margin-bottom: 6px;
+    }
+
+    .form-group select,
+    .form-group input {
+        width: 100%;
+    }
+
+    .btn {
+        width: 100%;
+        margin-right: 0;
+        margin-top: 10px;
+    }
+}
+
+/* Modal styling */
+#multiItemModal {
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    padding: 0;
+    overflow: hidden;
+}
+
+#multiItemModal h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+#multiItemModal table {
+    width: 100%;
+}
+
+#multiItemModal th,
+#multiItemModal td {
+    padding: 12px;
+    font-size: 16px;
+}
+
+/* ✅ ADD THIS here: */
+#multiItemModal .multi-check {
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    accent-color: #4CAF50;
+}
+
+
+/* Loading Overlay */
+.loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.8);
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.loading-spinner {
+    width: 50px;
+    height: 50px;
+    border: 6px solid #ccc;
+    border-top-color: #4CAF50;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-bottom: 12px;
+}
+
+.loading-text {
+    font-size: 16px;
+    color: #333;
+    font-weight: 500;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.filter-row {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+    flex-wrap: wrap;
+}
+
+.form-group {
+    flex: 1;
+    min-width: 250px;
+}
+/* Make Item Lines table inputs look like the filters */
+.item-select {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 14px;
+    width: 100%;
+    min-width: 280px;
+    max-width: 320px;
+    transition: border-color 0.3s ease;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+
+.item-table input[type="number"] {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 14px;
+    width: 150px; /* ⬅️ A bit smaller for Quantity and Rate */
+    transition: border-color 0.3s ease;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+.item-table select:focus,
+.item-table input[type="number"]:focus {
+    border-color: #4CAF50;
+    outline: none;
+}
+/* Improve the inputs and selects inside the item table */
+.item-table td {
+    vertical-align: middle; /* Center items vertically */
+}
+
+.item-table select,
+.item-table input[type="text"],
+.item-table input[type="number"] {
+    width: 100%; /* Full width inside the cell */
+    box-sizing: border-box; /* No overflow outside cell */
+}
+
+.item-table input[type="text"],
+.item-table input[type="number"] {
+    height: 38px; /* Consistent height */
+}
+
+/* Make button inside table consistent */
+.item-table button.btn {
+    padding: 8px 12px;
+    font-size: 12px;
+    height: 38px;
+}
+/* Make Item and Description fields bigger and easier to read */
+.item-table td:first-child select.item-select {
+    min-width: 320px;
+    max-width: 400px;
+    font-size: 15px;
+    padding: 12px;
+}
+
+.item-table td:nth-child(2) input.description {
+    min-width: 350px;
+    max-width: 500px;
+    font-size: 15px;
+    padding: 12px;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* ➡️ Three columns */
+    gap: 20px;
+    margin-bottom: 15px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    min-width: 250px;
+}
+
+
+@media (max-width: 480px) {
+    h2 {
+        font-size: 18px;
+    }
+
+    .filter-group {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+    }
+
+    .filter-group input[type="text"],
+    .filter-group input[type="date"],
+    .styled-select,
+    .filter-group button {
+        width: 100%;
+    }
+
+    .so-table th,
+    .so-table td {
+        font-size: 11px;
+        padding: 8px 6px;
+    }
+}

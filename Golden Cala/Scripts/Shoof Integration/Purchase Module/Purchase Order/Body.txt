@@ -1,0 +1,13 @@
+{
+  "entity": "1238",
+  "location": 24,
+  "custbody_vs_shoof_transaction_id": "SHOOF-PO-10045",
+  "items": [
+    {
+      "id": 12345, // Shoof internal ID
+      "quantity": 2,
+      "rate": 25.5, 
+      "taxable": "No" // can be Yes or No
+    }
+  ]
+}

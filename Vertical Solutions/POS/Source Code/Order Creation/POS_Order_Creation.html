@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Make an Order</title>
+    <link rel="stylesheet" href="POS_Order_Creation.css">
+
+</head>
+
+<body>
+    <div class="header">
+        <h1>Make an Order</h1>
+        <button class="back-btn" onclick="goBack()">← Back to Dashboard</button>
+    </div>
+
+    <div class="main-container">
+        <div class="items-section">
+            <div class="category-bar" id="categoryBar">
+                <!-- Categories will be dynamically loaded here -->
+            </div>
+            <div id="itemsGrid" class="items-grid">
+                <div class="loading">Loading items...</div>
+            </div>
+        </div>
+
+        <div class="order-section">
+            <div class="order-header">Order Details</div>
+            <div class="order-items" id="orderItems">
+                <div class="empty-order">No items added yet</div>
+            </div>
+        </div>
+
+        <div class="checkout-section">
+            <div class="checkout-group">
+                <div class="checkout-group-title">Order Type</div>
+                <div class="order-options">
+                    <div class="radio-group">
+                        <div class="radio-option">
+                            <input type="radio" id="dineIn" name="orderType" value="Dine In" checked
+                                onchange="updateOrderType(this.value)">
+                            <label for="dineIn">Dine In</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="takeAway" name="orderType" value="Take Away"
+                                onchange="updateOrderType(this.value)">
+                            <label for="takeAway">Take Away</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="checkout-group">
+                <div class="checkout-group-title">Payment Method</div>
+                <div class="order-options">
+                    <select id="paymentMethod" class="payment-select" onchange="updatePaymentMethod(this.value)">
+                    </select>
+                    <div id="cashSection" class="cash-section active">
+                        <div class="cash-input-group">
+                            <label class="cash-label" for="amountPaid">Amount Paid</label>
+                            <input type="number" id="amountPaid" class="cash-input" placeholder="0.00" step="0.01"
+                                min="0" oninput="calculateChange()">
+                        </div>
+                        <div class="change-display">
+                            <span class="change-label">Change:</span>
+                            <span id="changeAmount" class="change-amount">$0.00</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="checkout-group">
+                <div class="checkout-group-title">Order Summary</div>
+                <div class="order-summary">
+                    <div class="summary-row">
+                        <span>Subtotal:</span>
+                        <span id="subtotal">$0.00</span>
+                    </div>
+                    <div class="summary-row">
+                        <span>Tax (10%):</span>
+                        <span id="tax">$0.00</span>
+                    </div>
+                    <div class="summary-row total">
+                        <span>Total:</span>
+                        <span id="total">$0.00</span>
+                    </div>
+                    <button class="checkout-btn" id="checkoutBtn" onclick="checkout()" disabled>Checkout</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        console.log('[POS] Script loaded');
+
+        let allItems = [];
+        let filteredItems = [];
+        let orderCart = [];
+        let orderType = 'Dine In';
+        let paymentMethod = 'Cash';
+        let amountPaid = 0;
+        let currentTotal = 0;
+        let currentCategory = 'All';
+        let lineItemCounter = 0; // Counter for unique line IDs
+
+        window.onload = function () {
+            try {
+                console.log('[POS] Window loaded');
+
+                if (!window.POS_ITEMS || !Array.isArray(window.POS_ITEMS)) {
+                    console.error('[POS] POS_ITEMS missing');
+                    document.getElementById('itemsGrid').innerHTML =
+                        '<div class="loading">Failed to load items</div>';
+                    return;
+                }
+
+                if (!window.POS_CATEGORIES || !Array.isArray(window.POS_CATEGORIES)) {
+                    console.error('[POS] POS_CATEGORIES missing');
+                }
+
+                allItems = window.POS_ITEMS;
+                filteredItems = [...allItems];
+
+                console.log('[POS] Items received:', allItems.length);
+                console.log('[POS] Categories received:', window.POS_CATEGORIES);
+
+                // Load dynamic categories
+                loadCategories();
+                loadPaymentMethods();
+
+                // Display items
+                displayItems(filteredItems);
+
+            } catch (e) {
+                console.error('[POS] Init error', e);
+            }
+        };
+
+        /* ===================== LOAD CATEGORIES ===================== */
+        function loadCategories() {
+            const categoryBar = document.getElementById('categoryBar');
+            categoryBar.innerHTML = '';
+
+            // Always add "All" category first
+            const allTab = document.createElement('div');
+            allTab.className = 'category-tab active';
+            allTab.textContent = 'All';
+            allTab.onclick = () => filterByCategory('All');
+            categoryBar.appendChild(allTab);
+
+            // Add dynamic categories from POS_CATEGORIES (remove duplicates)
+            if (window.POS_CATEGORIES && Array.isArray(window.POS_CATEGORIES)) {
+                const uniqueCategories = [...new Set(window.POS_CATEGORIES)];
+                uniqueCategories.forEach(category => {
+                    if (category && category.trim()) { // Check if category is not empty
+                        const tab = document.createElement('div');
+                        tab.className = 'category-tab';
+                        tab.textContent = category;
+                        tab.onclick = () => filterByCategory(category);
+                        categoryBar.appendChild(tab);
+                    }
+                });
+            }
+        }
+
+        function loadPaymentMethods() {
+            try {
+                console.log('[POS] Loading payment methods');
+
+                var select = document.getElementById('paymentMethod');
+                select.innerHTML = '';
+
+                if (!window.POS_PAYMENT_METHODS || !Array.isArray(window.POS_PAYMENT_METHODS)) {
+                    console.error('[POS] POS_PAYMENT_METHODS missing');
+                    return;
+                }
+
+                window.POS_PAYMENT_METHODS.forEach(function (method) {
+                    var option = document.createElement('option');
+                    option.value = method.name;      // ✅ value = name
+                    option.textContent = method.name;
+
+                    select.appendChild(option);
+                });
+
+                // Set default payment method
+                if (select.options.length) {
+                    paymentMethod = select.options[0].value;
+                    updatePaymentMethod(paymentMethod);
+                }
+
+            } catch (e) {
+                console.error('[POS] loadPaymentMethods error', e);
+            }
+        }
+
+        /* ===================== ITEMS ===================== */
+        function filterByCategory(category) {
+            currentCategory = category;
+            console.log('[POS] Filter by category:', category);
+
+            // Update active tab
+            const tabs = document.querySelectorAll('.category-tab');
+            tabs.forEach(tab => {
+                tab.classList.remove('active');
+                if (tab.textContent === category) {
+                    tab.classList.add('active');
+                }
+            });
+
+            // Filter items
+            if (category === 'All') {
+                filteredItems = [...allItems];
+            } else {
+                filteredItems = allItems.filter(item => item.itemCategory === category);
+            }
+
+            displayItems(filteredItems);
+        }
+
+        function displayItems(items) {
+            const grid = document.getElementById('itemsGrid');
+            grid.innerHTML = '';
+
+            if (!items.length) {
+                grid.innerHTML = '<div class="loading">No items found in this category</div>';
+                return;
+            }
+
+            items.forEach(item => {
+                console.log('item', item.displayname);
+                console.log('item image', item.image);
+
+                const card = document.createElement('div');
+                card.className = 'item-card';
+
+                card.innerHTML = `
+                <div class="item-name">${item.displayname || item.itemid}</div>
+                <div class="item-image"><img src="${item.image}" alt="${item.displayname || item.itemid}"></div>
+                <div class="item-description">${item.salesdescription || ''}</div>
+                <div class="item-price">${format(item.baseprice)}</div>
+            `;
+
+                card.onclick = () => addToCart(item.internalid);
+                grid.appendChild(card);
+            });
+        }
+
+        /* ===================== CART ===================== */
+        function addToCart(itemId) {
+            console.log('[POS] Add to cart:', itemId);
+
+            const item = allItems.find(i => i.internalid == itemId);
+            if (!item) return;
+
+            // Always add as a new line item with a unique lineId
+            orderCart.push({
+                lineId: lineItemCounter++, // Unique identifier for this line
+                internalid: item.internalid,
+                name: item.displayname || item.itemid,
+                price: parseFloat(item.baseprice || 0),
+                quantity: 1,
+                memo: ''
+            });
+
+            updateOrderDisplay();
+        }
+
+        function updateQuantity(lineId, delta) {
+            const line = orderCart.find(l => l.lineId == lineId);
+
+            if (!line) return;
+
+            line.quantity += delta;
+            if (line.quantity <= 0) {
+                orderCart = orderCart.filter(l => l.lineId != lineId);
+            }
+
+            updateOrderDisplay();
+        }
+
+        function removeFromOrder(lineId) {
+            try {
+                console.log('[POS] Remove from order lineId:', lineId);
+
+                orderCart = orderCart.filter(function (l) {
+                    return l.lineId != lineId;
+                });
+
+                updateOrderDisplay();
+            } catch (e) {
+                console.error('[POS] removeFromOrder error', e);
+            }
+        }
+
+        function updateMemo(lineId, memo) {
+            try {
+                var line = null;
+
+                console.log('[POS] Update memo lineId:', lineId, 'memo:', memo);
+
+                line = orderCart.find(function (l) {
+                    return l.lineId == lineId;
+                });
+
+                if (!line) {
+                    console.warn('[POS] updateMemo: line not found for lineId:', lineId);
+                    return;
+                }
+
+                line.memo = memo;
+            } catch (e) {
+                console.error('[POS] updateMemo error', e);
+            }
+        }
+
+        function updateOrderType(type) {
+            orderType = type;
+            console.log('[POS] Order type:', orderType);
+        }
+
+        function updatePaymentMethod(method) {
+            paymentMethod = method;
+            console.log('[POS] Payment method:', paymentMethod);
+
+            const cashSection = document.getElementById('cashSection');
+            if (method === 'Cash') {
+                cashSection.classList.add('active');
+                calculateChange();
+            } else {
+                cashSection.classList.remove('active');
+            }
+        }
+
+        function calculateChange() {
+            const amountPaidInput = document.getElementById('amountPaid');
+            amountPaid = parseFloat(amountPaidInput.value) || 0;
+
+            const change = amountPaid - currentTotal;
+            const changeDisplay = document.getElementById('changeAmount');
+
+            changeDisplay.textContent = `${format(Math.abs(change))}`;
+
+            if (change < 0) {
+                changeDisplay.classList.add('negative');
+            } else {
+                changeDisplay.classList.remove('negative');
+            }
+        }
+
+        function updateOrderDisplay() {
+            const container = document.getElementById('orderItems');
+            container.innerHTML = '';
+
+            if (!orderCart.length) {
+                container.innerHTML =
+                    '<div class="empty-order">No items added yet</div>';
+                document.getElementById('checkoutBtn').disabled = true;
+                updateTotals();
+                return;
+            }
+
+            orderCart.forEach(item => {
+                const lineTotal = item.quantity * item.price;
+
+                container.innerHTML += `
+                <div class="order-item">
+                    <div class="order-item-header">
+                        <span class="order-item-name">${item.name}</span>
+                        <button class="remove-btn"
+                            onclick="removeFromOrder(${item.lineId})">×</button>
+                    </div>
+                    <div class="order-item-controls">
+                        <div class="quantity-controls">
+                            <button class="qty-btn"
+                                onclick="updateQuantity(${item.lineId}, -1)">−</button>
+                            <span class="quantity">${item.quantity}</span>
+                            <button class="qty-btn"
+                                onclick="updateQuantity(${item.lineId}, 1)">+</button>
+                        </div>
+                        <span class="item-total">${format(lineTotal)}</span>
+                    </div>
+                    <div class="memo-section">
+                        <label class="memo-label">Kitchen Memo</label>
+                        <textarea class="memo-input" 
+                            placeholder="Add special instructions..."
+                            oninput="updateMemo(${item.lineId}, this.value)">${item.memo || ''}</textarea>
+                    </div>
+                </div>
+            `;
+            });
+
+            document.getElementById('checkoutBtn').disabled = false;
+            updateTotals();
+        }
+
+        /* ===================== TOTALS ===================== */
+        function updateTotals() {
+            const subtotal = orderCart.reduce(
+                (sum, i) => sum + (i.quantity * i.price), 0
+            );
+            const tax = subtotal * 0.10;
+            const total = subtotal + tax;
+
+            currentTotal = total;
+
+            document.getElementById('subtotal').textContent = `${format(subtotal)}`;
+            document.getElementById('tax').textContent = `${format(tax)}`;
+            document.getElementById('total').textContent = `${format(total)}`;
+
+            // Recalculate change if cash payment
+            if (paymentMethod === 'Cash') {
+                calculateChange();
+            }
+        }
+
+        function format(val) {
+            return parseFloat(val || 0).toFixed(2);
+        }
+
+        function goBack() {
+            // Add your back navigation logic here
+            window.history.back();
+        }
+
+        function checkout() {
+            try {
+                console.log('[POS] Checkout started');
+
+                if (!orderCart.length) {
+                    alert('No items in order');
+                    return;
+                }
+
+                var subtotal = orderCart.reduce(function (sum, i) {
+                    return sum + (i.quantity * i.price);
+                }, 0);
+
+                var tax = subtotal * 0.10;
+                var total = subtotal + tax;
+                var remainingAmount = total - amountPaid;
+
+                var payload = {
+                    header: {
+                        orderType: orderType,
+                        paymentMethod: paymentMethod,
+                        amountPaid: amountPaid,
+                        remainingAmount: remainingAmount,
+                        subtotal: subtotal,
+                        tax: tax,
+                        total: total
+                    },
+                    lines: []
+                };
+
+                orderCart.forEach(function (line) {
+                    payload.lines.push({
+                        itemId: line.internalid,
+                        itemName: line.name,
+                        quantity: line.quantity,
+                        rate: line.price,
+                        lineTotal: line.quantity * line.price,
+                        memo: line.memo || ''
+                    });
+                });
+
+                console.log('[POS] Checkout payload', payload);
+
+                var xhr = new XMLHttpRequest();
+                xhr.open('POST', window.location.href, true);
+                xhr.setRequestHeader('Content-Type', 'application/json');
+
+                xhr.onreadystatechange = function () {
+                    try {
+                        if (xhr.readyState === 4) {
+                            var res = JSON.parse(xhr.responseText || '{}');
+                            console.log('[POS] Checkout response', res);
+
+                            if (res.success) {
+                                showSuccessModal();
+                            } else {
+                                showErrorModal(res.message || 'Failed to create order');
+                            }
+                        }
+                    } catch (e) {
+                        console.error('[POS] Checkout response error', e);
+                        alert('Unexpected checkout error');
+                    }
+                };
+
+                xhr.send(JSON.stringify(payload));
+
+            } catch (e) {
+                console.error('[POS] Checkout error', e);
+                alert('Checkout failed');
+            }
+        }
+
+        function showSuccessModal() {
+            const modal = document.createElement('div');
+            modal.className = 'success-modal';
+            modal.innerHTML = `
+        <div class="success-content">
+            <div class="success-checkmark">
+                <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+                    <circle class="checkmark-circle" cx="26" cy="26" r="25" fill="none"/>
+                    <path class="checkmark-check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
+                </svg>
+            </div>
+            <h2 class="success-title">Order Created!</h2>
+            <p class="success-message">Your order has been successfully processed</p>
+            <button class="success-btn" onclick="this.closest('.success-modal').remove(); window.location.reload();">
+                Continue
+            </button>
+        </div>
+    `;
+            document.body.appendChild(modal);
+            setTimeout(() => modal.classList.add('show'), 10);
+        }
+
+        function showErrorModal(message) {
+            const modal = document.createElement('div');
+            modal.className = 'error-modal';
+            modal.innerHTML = `
+        <div class="error-content">
+            <div class="error-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+                    <circle cx="26" cy="26" r="25" fill="#ff4757"/>
+                    <path fill="none" stroke="#fff" stroke-width="3" d="M16 16l20 20M36 16L16 36"/>
+                </svg>
+            </div>
+            <h2 class="error-title">Order Failed</h2>
+            <p class="error-message">${message}</p>
+            <button class="error-btn" onclick="this.closest('.error-modal').remove();">
+                Try Again
+            </button>
+        </div>
+    `;
+            document.body.appendChild(modal);
+            setTimeout(() => modal.classList.add('show'), 10);
+        }
+
+    </script>
+
+</body>
+
+</html>

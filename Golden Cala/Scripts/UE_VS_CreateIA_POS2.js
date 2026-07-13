@@ -1,0 +1,128 @@
+/**
+ * @NApiVersion 2.x
+ * @NScriptType UserEventScript
+ */
+define(['N/record', 'N/search', 'N/runtime', 'N/log'], function (record, search, runtime, log) {
+
+  function afterSubmit(context) {
+    try {
+      if (context.type !== context.UserEventType.CREATE && context.type !== context.UserEventType.EDIT) {
+        return;
+      }
+
+      var newRecord = context.newRecord;
+      var rectype = newRecord.type;
+      var recid = newRecord.id;
+
+      var loadedRecord = record.load({ type: rectype, id: recid });
+
+      var internalID = loadedRecord.getValue({ fieldId: "tranid" });
+      var subsidiary = loadedRecord.getValue({ fieldId: "subsidiary" });
+      var isCheckboxChecked = loadedRecord.getValue({ fieldId: "custbody_vs_cia_pos" });
+      var adjustmentAccount = 834;
+      var location = loadedRecord.getValue({ fieldId: "location" });
+      var date = loadedRecord.getValue({ fieldId: "trandate" });
+      var recordID = loadedRecord.id;
+      var itemCount = loadedRecord.getLineCount({ sublistId: "item" });
+      var invCreated = loadedRecord.getValue({ fieldId: "custbody_vs_inventoryadjustmentcreated" });
+
+      log.debug('Header Data', {
+        internalID: internalID,
+        subsidiary: subsidiary,
+        isCheckboxChecked: isCheckboxChecked,
+        adjustmentAccount: adjustmentAccount,
+        location: location,
+        date: date,
+        recordID: recordID,
+        itemCount: itemCount,
+        invCreated: invCreated
+      });
+
+      if (!invCreated) {
+        log.debug({ title: "CheckBox Condition", details: isCheckboxChecked });
+
+        var inventoryAdjustment = record.create({ type: record.Type.INVENTORY_ADJUSTMENT, isDynamic: true });
+
+        inventoryAdjustment.setValue({ fieldId: "subsidiary", value: subsidiary });
+        inventoryAdjustment.setValue({ fieldId: "custbody_vs_source", value: "POS - " + internalID });
+        inventoryAdjustment.setValue({ fieldId: "account", value: adjustmentAccount });
+        inventoryAdjustment.setValue({ fieldId: "trandate", value: date });
+        inventoryAdjustment.setValue({ fieldId: "adjlocation", value: location });
+
+        for (var i = 0; i < itemCount; i++) {
+          var itemId = loadedRecord.getSublistValue({ sublistId: "item", fieldId: "item", line: i });
+          var itemQty = loadedRecord.getSublistValue({ sublistId: "item", fieldId: "quantity", line: i });
+          var inventoryDetailSubrecord = loadedRecord.getSublistSubrecord({ sublistId: 'item', fieldId: 'inventorydetail', line: i });
+          var inventoryDetailCount = inventoryDetailSubrecord.getLineCount({ sublistId: 'inventoryassignment' });
+
+          var itemSearchObj = search.create({
+            type: "item",
+            filters: ["internalid", "anyof", itemId],
+            columns: [
+              search.createColumn({ name: "type", label: "Type" }),
+              search.createColumn({ name: "internalid", label: "Internal ID" }),
+              search.createColumn({ name: "salesdescription", label: "Description" }),
+              search.createColumn({ name: "islotitem", label: "Is Lot Numbered Item" }),
+              search.createColumn({ name: "isserialitem", label: "Is Serialized Item" })
+            ]
+          });
+
+          var itemSearchResult = itemSearchObj.run().getRange({ start: 0, end: 1 });
+          var itemResult = itemSearchResult[0];
+          var itemType = itemResult.getValue({ name: "type" });
+          var isLotItem = itemResult.getValue({ name: "islotitem" });
+          var isSerialItem = itemResult.getValue({ name: "isserialitem" });
+
+          // log.debug('Item Type is:', itemType);
+          // log.debug('isLotItem:', isLotItem);
+          // log.debug('isSerialItem:', isSerialItem);
+
+          inventoryAdjustment.selectNewLine({ sublistId: "inventory" });
+
+          inventoryAdjustment.setCurrentSublistValue({ sublistId: "inventory", fieldId: "item", value: itemId });
+          inventoryAdjustment.setCurrentSublistValue({ sublistId: "inventory", fieldId: "adjustqtyby", value: -itemQty });
+          inventoryAdjustment.setCurrentSublistValue({ sublistId: "inventory", fieldId: "location", value: location });
+
+          if ((itemType === "InvtPart" && (isLotItem === true || isSerialItem === true))) {
+            var inventoryDetail = inventoryAdjustment.getCurrentSublistSubrecord({ sublistId: 'inventory', fieldId: 'inventorydetail' });
+
+            for (var j = 0; j < inventoryDetailCount; j++) {
+              inventoryDetail.selectNewLine({ sublistId: 'inventoryassignment' });
+
+              var quantity = inventoryDetailSubrecord.getSublistValue({ sublistId: 'inventoryassignment', fieldId: 'quantity', line: j });
+              var status = inventoryDetailSubrecord.getSublistValue({ sublistId: 'inventoryassignment', fieldId: 'status', line: j });
+              var issueInventoryNumber = inventoryDetailSubrecord.getSublistValue({ sublistId: 'inventoryassignment', fieldId: 'issueinventorynumber', line: j });
+              var expirationDate = inventoryDetailSubrecord.getSublistValue({ sublistId: 'inventoryassignment', fieldId: 'expirationdate', line: j });
+
+              inventoryDetail.setCurrentSublistValue({ sublistId: 'inventoryassignment', fieldId: 'quantity', value: -quantity });
+              inventoryDetail.setCurrentSublistValue({ sublistId: 'inventoryassignment', fieldId: 'status', value: status });
+              inventoryDetail.setCurrentSublistValue({ sublistId: 'inventoryassignment', fieldId: 'issueinventorynumber', value: issueInventoryNumber });
+              inventoryDetail.setCurrentSublistValue({ sublistId: 'inventoryassignment', fieldId: 'expirationdate', value: expirationDate });
+
+              inventoryDetail.commitLine({ sublistId: 'inventoryassignment' });
+            }
+          }
+
+          inventoryAdjustment.commitLine({ sublistId: "inventory" });
+        }
+
+        var adjustmentId = inventoryAdjustment.save();
+
+        if (adjustmentId) {
+          loadedRecord.setValue({ fieldId: 'custbody_vs_inventoryadjustmentcreated', value: true });
+          loadedRecord.save();
+        }
+
+        log.debug({ title: "Inventory Adjustment Created", details: "Adjustment ID: " + adjustmentId });
+      }
+
+    } catch (error) {
+      log.error({ title: 'ERROR!!!!', details: error });
+    }
+  }
+
+  return {
+    afterSubmit: afterSubmit
+  };
+
+});

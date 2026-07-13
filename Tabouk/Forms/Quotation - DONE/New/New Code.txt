@@ -1,0 +1,452 @@
+<?xml version="1.0"?><!DOCTYPE pdf PUBLIC "-//big.faceless.org//report" "report-1.1.dtd">
+<pdf>
+<head>
+	<link name="NotoSans" type="font" subtype="truetype" src="${nsfont.NotoSans_Regular}" src-bold="${nsfont.NotoSans_Bold}" src-italic="${nsfont.NotoSans_Italic}" src-bolditalic="${nsfont.NotoSans_BoldItalic}" bytes="2" />
+	<#if .locale == "zh_CN">
+		<link name="NotoSansCJKsc" type="font" subtype="opentype" src="${nsfont.NotoSansCJKsc_Regular}" src-bold="${nsfont.NotoSansCJKsc_Bold}" bytes="2" />
+	<#elseif .locale == "zh_TW">
+		<link name="NotoSansCJKtc" type="font" subtype="opentype" src="${nsfont.NotoSansCJKtc_Regular}" src-bold="${nsfont.NotoSansCJKtc_Bold}" bytes="2" />
+	<#elseif .locale == "ja_JP">
+		<link name="NotoSansCJKjp" type="font" subtype="opentype" src="${nsfont.NotoSansCJKjp_Regular}" src-bold="${nsfont.NotoSansCJKjp_Bold}" bytes="2" />
+	<#elseif .locale == "ko_KR">
+		<link name="NotoSansCJKkr" type="font" subtype="opentype" src="${nsfont.NotoSansCJKkr_Regular}" src-bold="${nsfont.NotoSansCJKkr_Bold}" bytes="2" />
+	<#elseif .locale == "th_TH">
+		<link name="NotoSansThai" type="font" subtype="opentype" src="${nsfont.NotoSansThai_Regular}" src-bold="${nsfont.NotoSansThai_Bold}" bytes="2" />
+	</#if>
+    <macrolist>
+        <macro id="nlheader">
+                      <table style="width:100%;">
+              <tr>
+   <#if record.subsidiary == "Tabuk investment and tourism (Holding)">
+	<td rowspan="4"><img src="https://9072131.app.netsuite.com/core/media/media.nl?id=437&amp;c=9072131&amp;h=u7VmYyxKdr0nGidP9psP9hgqUywsdwc7sna77qO2x6EYz2s0" /></td>
+      <#else>
+        	<td rowspan="4"></td>
+              </#if>
+                	<td>&nbsp;</td>
+              <#if record.subsidiary == "Eco Clean">
+  	<td colspan="1" rowspan="2"><img src="https://9072131.app.netsuite.com/core/media/media.nl?id=820&amp;c=9072131&amp;h=y4vS7JEl6jB48anw7UF6QGDgErz2m8K3VkuWdKq0Qe3e8qTy" style="width:30%; height:30%; align: center;" /></td>
+                
+     <#elseif record.subsidiary == "Eventti Catering">
+  	<td colspan="1" rowspan="2"><img src="https://9072131.app.netsuite.com/core/media/media.nl?id=907&amp;c=9072131&amp;h=viVk_MXWSNdy4Ou_XDCTt7GmuzsF1RFUn47pTuBkT2ahUSNC" style="width:70%; height: 70%; align: center;" /></td>
+                
+     <#elseif record.subsidiary == "Lazure executive residences">
+  	<td colspan="1" rowspan="2"><img src="https://9072131.app.netsuite.com/core/media/media.nl?id=909&amp;c=9072131&amp;h=eDhAMlK6sUhlW9UMiDhjlEh0ir6sbwzmtNqMqE5Rk4sRIauM" style="width:60%; height: 60%; align: center;" /></td>
+                
+     <#elseif record.subsidiary == "Royal Lazure">
+  	<td colspan="1" rowspan="2"><img src="https://9072131.app.netsuite.com/core/media/media.nl?id=825&amp;c=9072131&amp;h=7swBHe9nOYJoxG64jAi6vkUQiIslqVroqagLEgQ7GBthQ5AC" style="width:40%; height: 30%; align: center;" /></td>
+                
+    <#elseif record.subsidiary == "Lazure beach and resort">
+  	<td colspan="1" rowspan="2"><img src="https://9072131.app.netsuite.com/core/media/media.nl?id=908&amp;c=9072131&amp;h=Se8nlfSaqXoc6A4ENantoQRKe-ehpRjwSEBR7xCwGkqhe0Z6" style="width:34%; height: 29%; align: center;" /></td>
+                
+     <#elseif record.subsidiary == "Enviro- facility management">
+  	<td colspan="1" rowspan="2"><img src="https://9072131.app.netsuite.com/core/media/media.nl?id=906&amp;c=9072131&amp;h=kc2BSBn1kURAs9Sapqkn_iMYVMFQjaQZbI80KPUmbcibdFTw" style="width:10%; height: 9%; align: center;" /></td>
+ 
+<#elseif record.subsidiary == "Tabuk investment and tourism (Holding)">
+  	<td colspan="1" rowspan="2" style = "align:center"><img src="https://9072131.app.netsuite.com/core/media/media.nl?id=830&amp;c=9072131&amp;h=C35CfZfzS7NrV4s5k5xGjetHiWDptMCapgiMVeZRwj1-Nn4S" style="width:70%; height:70%; align: center;" /></td>
+</#if>
+
+	<td>&nbsp;</td>
+           <#if record.subsidiary == "Tabuk investment and tourism (Holding)">
+	<td rowspan="4"><img src="https://9072131.app.netsuite.com/core/media/media.nl?id=436&amp;c=9072131&amp;h=32YkYs2wzLFp-d7h6BbKGIXcAJA_Wmks4YTJLYvTgwBlU9Ws" /></td>
+             <#else>
+               	<td rowspan="4"></td>
+             </#if>
+	</tr>
+</table>
+            <table cellspacing="1" width="100%"><tr>
+	<td font-size="30px" style="height: 15px;"><b>QUOTATION</b></td>
+	<td style="height: 15px;">&nbsp;</td>
+	<td style="height: 15px;">&nbsp;</td>
+	</tr>
+	<tr>
+	<#if record.subsidiary == "Lazure beach and resort">
+	<td style="font-size: 15px; color: white;" class = "bgColorLazureBeachResort"><b>L&#39;AZURE BEACH &amp; RESORT</b></td>
+    <#elseif record.subsidiary == "Royal Lazure">
+    <td style="font-size: 15px; color: white;" class = "bgColorRoyalLazure"><b>Royal Lazure</b></td>
+    <#elseif record.subsidiary == "Lasour Executive Resident">
+    <td style="font-size: 15px; color: white;" class = "bgColorLazureResidance"><b>Lasour Executive Resident</b></td>
+    <#elseif record.subsidiary == "Enviro- facility management">
+    <td style="font-size: 15px; color: white;" class = "bgColorEnviro"><b>Enviro- facility management</b></td>
+    <#elseif record.subsidiary == "Eventti Catering">
+    <td style="font-size: 15px; color: white;" class = "bgColorEventi"><b>Eventti Catering</b></td>
+    <#elseif record.subsidiary == "Tabuk investment and tourism (Holding)">
+    <td style="font-size: 15px; color: white;" class = "bgColorTabouk"><b>Tabuk investment and tourism (Holding)</b></td>
+    </#if>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	</tr>
+	<tr>
+	<td>VAT Reg No # 3005962800003<br />CR No # 3550022261<br />Al Ula Kingdom of Saudi Arabia</td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	</tr></table>
+
+<hr  width = "100%"/><!--___________________________________________________________________-->
+        </macro>
+<macro id="nlfooter">
+&nbsp;
+<!--___________________________________________________________________________________-->
+<!--___________________________________________________________________________________-->
+        </macro>
+    </macrolist>
+    <style type="text/css">* {
+		<#if .locale == "zh_CN">
+			font-family: NotoSans, NotoSansCJKsc, sans-serif;
+		<#elseif .locale == "zh_TW">
+			font-family: NotoSans, NotoSansCJKtc, sans-serif;
+		<#elseif .locale == "ja_JP">
+			font-family: NotoSans, NotoSansCJKjp, sans-serif;
+		<#elseif .locale == "ko_KR">
+			font-family: NotoSans, NotoSansCJKkr, sans-serif;
+		<#elseif .locale == "th_TH">
+			font-family: NotoSans, NotoSansThai, sans-serif;
+		<#else>
+			font-family: NotoSans, sans-serif;
+		</#if>
+		}
+        table {
+            font-size: 9pt;
+            table-layout: fixed;
+        }
+        th {
+            font-weight: bold;
+            font-size: 8pt;
+            vertical-align: middle;
+            padding: 5px 6px 3px;
+            background-color: #e3e3e3;
+            color: #333333;
+        }
+        td {
+            padding: 4px 6px;
+        }
+		td p { align:left }
+        b {
+            font-weight: bold;
+            color: #333333;
+        }
+        table.header td {
+            padding: 0;
+            font-size: 10pt;
+        }
+        table.footer td {
+            padding: 0;
+            font-size: 8pt;
+        }
+        table.itemtable th {
+            padding-bottom: 10px;
+            padding-top: 10px;
+        }
+        table.body td {
+            padding-top: 2px;
+        }
+        table.total {
+            page-break-inside: avoid;
+        }
+        tr.totalrow {
+            background-color: #e3e3e3;
+            line-height: 200%;
+        }
+        td.totalboxtop {
+            font-size: 12pt;
+            background-color: #e3e3e3;
+        }
+        td.addressheader {
+            font-size: 8pt;
+            padding-top: 6px;
+            padding-bottom: 2px;
+        }
+        td.address {
+            padding-top: 0;
+        }
+        td.totalboxmid {
+            font-size: 28pt;
+            padding-top: 20px;
+            background-color: #e3e3e3;
+        }
+        td.totalboxbot {
+            background-color: #e3e3e3;
+            font-weight: bold;
+        }
+        span.title {
+            font-size: 28pt;
+        }
+        span.number {
+            font-size: 16pt;
+        }
+        span.itemname {
+            font-weight: bold;
+            line-height: 150%;
+        }
+.bgColorTabouk {
+background-color:'#adadb0';
+}
+.bgColorRoyalLazure {
+background-color:'#c2b59b';
+}
+.bgColorLazureBeachResort {
+background-color:'#0098A7';
+}
+.bgColorLazureResidance {
+background-color:'#889094';
+}
+.bgColorEnviro {
+background-color:'#52b280';
+}
+.bgColorEventi {
+background-color:'#1F839C';
+}
+.borderColorTabouk {
+border-color:'#adadb0';
+}
+.borderColorRoyalLazure {
+border-color:'#c2b59b';
+}
+.borderColorLazureBeachResort {
+border-color:'#0098A7';
+}
+.borderColorLazureResidance {
+border-color:'#889094';
+}
+.borderColorEnviro {
+border-color:'#52b280';
+}
+.borderColorEventi {
+border-color:'#1F839C';
+}
+.mixColorTabouk {
+background-color:'#adadb0';
+border-color:'#1F839C';
+}
+.mixColorRoyalLazure {
+background-color:'#c2b59b';
+border-color:'#c2b59b';
+}
+.mixColorLazureBeachResort {
+background-color:'#0098A7';
+border-color:'#0098A7';
+}
+.mixColorLazureResidance {
+background-color:'#889094';
+border-color:'#889094';
+}
+.mixColorEnviro {
+background-color:'#52b280';
+border-color:'#52b280';
+}
+.mixColorEventi {
+background-color:'#1F839C';
+border-color:'#1F839C';
+}
+</style>
+</head>
+<body header="nlheader" header-height="30%" footer="nlfooter" footer-height="5%" padding="0.1in 0.2in 0.1in 0.2in" size="Letter">
+    <!--___________________________________________________________________-->
+<table cellspacing="1"><tr>
+<#if record.subsidiary == "Lazure beach and resort">
+	<td style="color: white; width: 387px;" class = "bgColorLazureBeachResort">Quotation No # ${record.tranid}</td>
+	<td style="width: 415px; color: white;" class = "bgColorLazureBeachResort">${record.title}</td>
+    <#elseif record.subsidiary == "Royal Lazure">
+	<td style="color: white; width: 387px;" class = "bgColorRoyalLazure">Quotation No # ${record.tranid}</td>
+	<td style="width: 415px; color: white;" class = "bgColorRoyalLazure">${record.title}</td>
+    <#elseif record.subsidiary == "Lasour Executive Resident">
+	<td style="color: white; width: 387px;" class = "bgColorLazureResidance">Quotation No # ${record.tranid}</td>
+	<td style="width: 415px; color: white;" class = "bgColorLazureResidance">${record.title}</td>
+    <#elseif record.subsidiary == "Enviro- facility management">
+	<td style="color: white; width: 387px;" class = "bgColorEnviro">Quotation No # ${record.tranid}</td>
+	<td style="width: 415px; color: white;" class = "bgColorEnviro">${record.title}</td>
+    <#elseif record.subsidiary == "Eventti Catering">
+	<td style="color: white; width: 387px;" class = "bgColorEventi">Quotation No # ${record.tranid}</td>
+	<td style="width: 415px; color: white;" class = "bgColorEventi">${record.title}</td>
+    <#elseif record.subsidiary == "Tabuk investment and tourism (Holding)">
+	<td style="color: white; width: 387px;" class = "bgColorTabouk">Quotation No # ${record.tranid}</td>
+	<td style="width: 415px; color: white;" class = "bgColorTabouk">${record.title}</td>
+</#if>
+	</tr></table>
+<!--___________________________________________________________________-->
+
+<table width="100%"><tr>
+	<td style="width: 398px;"><b>Customer Name: ${record.entity}</b></td>
+	<td rowspan="4" style="width: 401px;"><span align="right" text-align="right"><barcode align="right" text-align="right" width = "100%" height = "20%" codetype="code128" showtext="true" value="${record.entity}"/></span></td>
+	</tr>
+	<tr>
+	<td style="width: 398px;">Al Ula</td>
+	</tr>
+	<tr>
+	<td style="width: 398px;">Kingdom of Saudi Arabia</td>
+	</tr>
+	<tr>
+	<td style="width: 398px;">&nbsp;</td>
+	</tr></table>
+&nbsp; <!--___________________________________________________________________-->
+<#if record.subsidiary == "Lazure beach and resort">
+<table width="100%" cellspacing = "2" class = "bgColorLazureBeachResort">
+<#elseif record.subsidiary == "Royal Lazure">
+<table width="100%" cellspacing = "2" class = "bgColorRoyalLazure">
+<#elseif record.subsidiary == "Lasour Executive Resident">
+<table width="100%" cellspacing = "2" class = "bgColorLazureResidance">
+<#elseif record.subsidiary == "Enviro- facility management">
+<table width="100%" cellspacing = "2" class = "bgColorEnviro">
+<#elseif record.subsidiary == "Eventti Catering">
+<table width="100%" cellspacing = "2" class = "bgColorEventi">
+<#elseif record.subsidiary == "Tabuk investment and tourism (Holding)">
+<table width="100%" cellspacing = "2" class = "bgColorTabouk">
+</#if>
+	<tr>
+	<td font-size="14px"><b>Dear/Sir Madam,</b></td>
+	</tr>
+	<tr>
+	<td font-size="11px">We are pleased to submit the following quotation details for the favor of final approval to server you better.</td>
+	</tr>
+</table>
+&nbsp; <!--___________________________________________________________________--> <#list record.item as item>
+<#if record.subsidiary == "Lazure beach and resort">
+<table style="border-top: 1px; border-bottom: 1px; width: 100%; align: center; text-align: center;" class = "borderColorLazureBeachResort">
+<#elseif record.subsidiary == "Royal Lazure">
+<table style="border-top: 1px; border-bottom: 1px; width: 100%; align: center; text-align: center;" class = "borderColorRoyalLazure">
+<#elseif record.subsidiary == "Lasour Executive Resident">
+<table style="border-top: 1px; border-bottom: 1px; width: 100%; align: center; text-align: center;" class = "borderColorLazureResidance">
+<#elseif record.subsidiary == "Enviro- facility management">
+<table style="border-top: 1px; border-bottom: 1px; width: 100%; align: center; text-align: center;" class = "borderColorEnviro">
+<#elseif record.subsidiary == "Eventti Catering">
+<table style="border-top: 1px; border-bottom: 1px; width: 100%; align: center; text-align: center;" class = "borderColorEventi">
+<#elseif record.subsidiary == "Tabuk investment and tourism (Holding)">
+<table style="border-top: 1px; border-bottom: 1px; width: 100%; align: center; text-align: center;" class = "borderColorTabouk">
+</#if>
+  <#if item_index==0><tr>
+	<td align="left" style="font-size: 13px; align: left; text-align: left; width: 40%;"><b>Description</b></td>
+	<td style="font-size: 13px; text-align: center; vertical-align: middle; align: center; width: 15%;"><b>Qty.</b></td>
+	<td style="font-size: 13px; text-align: center; vertical-align: middle; align: center; width: 15%;"><b>Rate</b></td>
+	<td style="font-size: 13px; text-align: center; vertical-align: middle; align: center; width: 15%;"><b>VAT 15%</b></td>
+	<td style="font-size: 13px; text-align: center; vertical-align: middle; align: center; width: 15%;"><b>Total Cost</b></td>
+	</tr>
+	</#if>
+	<tr>
+	<td align="left" style="font-size: 10px; align: left; text-align: left; width: 40%">${item.description}</td>
+	<td align="left" style="font-size: 10px; align: center; text-align: center; width: 15%;">${item.quantity?string["#,##0.00"]}</td>
+	<td align="left" style="font-size: 10px; align: center; text-align: center; width: 15%;">${item.rate?string["#,##0.00"]}</td>
+	<td align="left" style="font-size: 10px; align: center; text-align: center; width: 15%;">${item.tax1amt?string["#,##0.00"]}</td>
+	<td align="left" style="font-size: 10px; align: center; text-align: center; width: 15%;">${item.Grossamt?string["#,##0.00"]}</td>
+	</tr></table>
+</#list> <!--___________________________________________________________________-->
+
+<#if record.subsidiary == "Lazure beach and resort">
+<table border="1" style="float: left;" float = "left" width="50%" class = "borderColorLazureBeachResort">
+<#elseif record.subsidiary == "Royal Lazure">
+<table border="1" style="float: left;" float = "left" width="50%" class = "borderColorRoyalLazure">
+<#elseif record.subsidiary == "Lasour Executive Resident">
+<table border="1" style="float: left;" float = "left" width="50%" class = "borderColorLazureResidance">
+<#elseif record.subsidiary == "Enviro- facility management">
+<table border="1" style="float: left;" float = "left" width="50%" class = "borderColorEnviro">
+<#elseif record.subsidiary == "Eventti Catering">
+<table border="1" style="float: left;" float = "left" width="50%" class = "borderColorEventi">
+<#elseif record.subsidiary == "Tabuk investment and tourism (Holding)">
+<table border="1" style="float: left;" float = "left" width="50%" class = "borderColorTabouk">
+</#if>
+	<tr>
+<#if record.subsidiary == "Lazure beach and resort">
+<td style="font-size: 14px;" class = "bgColorLazureBeachResort"><b>Quotation Terms &amp; Conditions:&nbsp;</b></td>
+<#elseif record.subsidiary == "Royal Lazure">
+<td style="font-size: 14px;" class = "bgColorRoyalLazure"><b>Quotation Terms &amp; Conditions:&nbsp;</b></td>
+<#elseif record.subsidiary == "Lasour Executive Resident">
+<td style="font-size: 14px;" class = "bgColorLazureResidance"><b>Quotation Terms &amp; Conditions:&nbsp;</b></td>
+<#elseif record.subsidiary == "Enviro- facility management">
+<td style="font-size: 14px;" class = "bgColorEnviro"><b>Quotation Terms &amp; Conditions:&nbsp;</b></td>
+<#elseif record.subsidiary == "Eventti Catering">
+<td style="font-size: 14px;" class = "bgColorEventi"><b>Quotation Terms &amp; Conditions:&nbsp;</b></td>
+<#elseif record.subsidiary == "Tabuk investment and tourism (Holding)">
+<td style="font-size: 14px;" class = "bgColorTabouk"><b>Quotation Terms &amp; Conditions:&nbsp;</b></td>
+</#if>
+	</tr>
+	<tr>
+	<td style="font-size: 10px;">- Payment Term: 100 % Advance<br />- Payment Bank info:<br />&bull; Beneficiary: TABUK INVESTMENT &amp; TOURISM CO<br />&bull; Bank: ARAB NATIONAL BANK<br />&bull; IBAN: SA 3430400108095245060071<br />&bull; Branch: CORPORATE BRANCH NO.177<br />&bull; Bank Address:&nbsp;RIYADH&nbsp;-&nbsp;KSA</td>
+	</tr>
+</table>
+<!--___________________________________________________________________________________-->
+<#if record.subsidiary == "Lazure beach and resort">
+<table style="cellspacing: 1;" float = "right" width="50%" class = "borderColorLazureBeachResort">
+<#elseif record.subsidiary == "Royal Lazure">
+<table style="cellspacing: 1;" float = "right" width="50%" class = "borderColorRoyalLazure">
+<#elseif record.subsidiary == "Lasour Executive Resident">
+<table style="cellspacing: 1;" float = "right" width="50%" class = "borderColorLazureResidance">
+<#elseif record.subsidiary == "Enviro- facility management">
+<table style="cellspacing: 1;" float = "right" width="50%" class = "borderColorEnviro">
+<#elseif record.subsidiary == "Eventti Catering">
+<table style="cellspacing: 1;" float = "right" width="50%" class = "borderColorEventi">
+<#elseif record.subsidiary == "Tabuk investment and tourism (Holding)">
+<table style="cellspacing: 1;" float = "right" width="50%" class = "borderColorTabouk">
+</#if>
+<#if record.subsidiary == "Lazure beach and resort">
+	<tr>
+	<td style="border-right: 1px; border-left: 1px; border-top: 1px; border-bottom: 1px;" class = "borderColorLazureBeachResort"><b>Total Before VAT<br />${record.subtotal?string["#,##0.00"]}</b></td>
+	<td style="border-right: 1px; border-left: 1px; border-top: 1px; border-bottom: 1px;" class = "borderColorLazureBeachResort"><b>VAT (15%)<br />${record.taxtotal?string["#,##0.00"]}</b></td>
+	</tr>
+	<tr>
+	<td colspan="2" style="border-right: 1px; border-left: 1px; border-top: 1px; border-bottom: 1px;" class = "borderColorLazureBeachResort"><b>Grand Total<br />${record.total?string["#,##0.00"]}<br />${record.custbody_vs_amt_in_words}</b></td>
+	</tr>
+	<tr>
+	<td colspan="2" style="border-right: 1px; border-left: 1px; border-top: 1px; border-bottom: 1px;" class = "borderColorLazureBeachResort"><b>Prepared By:</b></td>
+	</tr>
+<#elseif record.subsidiary == "Royal Lazure">
+	<tr>
+	<td style="border-right: 1px; border-left: 1px; border-top: 1px; border-bottom: 1px;" class = "borderColorRoyalLazure"><b>Total Before VAT<br />${record.subtotal?string["#,##0.00"]}</b></td>
+	<td style="border-right: 1px; border-left: 1px; border-top: 1px; border-bottom: 1px;" class = "borderColorRoyalLazure"><b>VAT (15%)<br />${record.taxtotal?string["#,##0.00"]}</b></td>
+	</tr>
+	<tr>
+	<td colspan="2" style="border-right: 1px; border-left: 1px; border-top: 1px; border-bottom: 1px;" class = "borderColorRoyalLazure"><b>Grand Total<br />${record.total?string["#,##0.00"]}<br />${record.custbody_vs_amt_in_words}</b></td>
+	</tr>
+	<tr>
+	<td colspan="2" style="border-right: 1px; border-left: 1px; border-top: 1px; border-bottom: 1px;" class = "borderColorRoyalLazure"><b>Prepared By:</b></td>
+	</tr>
+<#elseif record.subsidiary == "Lasour Executive Resident">
+	<tr>
+	<td style="border-right: 1px; border-left: 1px; border-top: 1px; border-bottom: 1px;" class = "borderColorLazureResidance"><b>Total Before VAT<br />${record.subtotal?string["#,##0.00"]}</b></td>
+	<td style="border-right: 1px; border-left: 1px; border-top: 1px; border-bottom: 1px;" class = "borderColorLazureResidance"><b>VAT (15%)<br />${record.taxtotal?string["#,##0.00"]}</b></td>
+	</tr>
+	<tr>
+	<td colspan="2" style="border-right: 1px; border-left: 1px; border-top: 1px; border-bottom: 1px;" class = "borderColorLazureResidance"><b>Grand Total<br />${record.total?string["#,##0.00"]}<br />${record.custbody_vs_amt_in_words}</b></td>
+	</tr>
+	<tr>
+	<td colspan="2" style="border-right: 1px; border-left: 1px; border-top: 1px; border-bottom: 1px;" class = "borderColorLazureResidance"><b>Prepared By:</b></td>
+	</tr>
+<#elseif record.subsidiary == "Enviro- facility management">
+	<tr>
+	<td style="border-right: 1px; border-left: 1px; border-top: 1px; border-bottom: 1px;" class = "borderColorEnviro"><b>Total Before VAT<br />${record.subtotal?string["#,##0.00"]}</b></td>
+	<td style="border-right: 1px; border-left: 1px; border-top: 1px; border-bottom: 1px;" class = "borderColorEnviro"><b>VAT (15%)<br />${record.taxtotal?string["#,##0.00"]}</b></td>
+	</tr>
+	<tr>
+	<td colspan="2" style="border-right: 1px; border-left: 1px; border-top: 1px; border-bottom: 1px;" class = "borderColorEnviro"><b>Grand Total<br />${record.total?string["#,##0.00"]}<br />${record.custbody_vs_amt_in_words}</b></td>
+	</tr>
+	<tr>
+	<td colspan="2" style="border-right: 1px; border-left: 1px; border-top: 1px; border-bottom: 1px;" class = "borderColorEnviro"><b>Prepared By:</b></td>
+	</tr>
+<#elseif record.subsidiary == "Eventti Catering">
+	<tr>
+	<td style="border-right: 1px; border-left: 1px; border-top: 1px; border-bottom: 1px;" class = "borderColorEventi"><b>Total Before VAT<br />${record.subtotal?string["#,##0.00"]}</b></td>
+	<td style="border-right: 1px; border-left: 1px; border-top: 1px; border-bottom: 1px;" class = "borderColorEventi"><b>VAT (15%)<br />${record.taxtotal?string["#,##0.00"]}</b></td>
+	</tr>
+	<tr>
+	<td colspan="2" style="border-right: 1px; border-left: 1px; border-top: 1px; border-bottom: 1px;" class = "borderColorEventi"><b>Grand Total<br />${record.total?string["#,##0.00"]}<br />${record.custbody_vs_amt_in_words}</b></td>
+	</tr>
+	<tr>
+	<td colspan="2" style="border-right: 1px; border-left: 1px; border-top: 1px; border-bottom: 1px;" class = "borderColorEventi"><b>Prepared By:</b></td>
+	</tr>
+<#elseif record.subsidiary == "Tabuk investment and tourism (Holding)">
+	<tr>
+	<td style="border-right: 1px; border-left: 1px; border-top: 1px; border-bottom: 1px;" class = "borderColorTabouk"><b>Total Before VAT<br />${record.subtotal?string["#,##0.00"]}</b></td>
+	<td style="border-right: 1px; border-left: 1px; border-top: 1px; border-bottom: 1px;" class = "borderColorTabouk"><b>VAT (15%)<br />${record.taxtotal?string["#,##0.00"]}</b></td>
+	</tr>
+	<tr>
+	<td colspan="2" style="border-right: 1px; border-left: 1px; border-top: 1px; border-bottom: 1px;" class = "borderColorTabouk"><b>Grand Total<br />${record.total?string["#,##0.00"]}<br />${record.custbody_vs_amt_in_words}</b></td>
+	</tr>
+	<tr>
+	<td colspan="2" style="border-right: 1px; border-left: 1px; border-top: 1px; border-bottom: 1px;" class = "borderColorTabouk"><b>Prepared By:</b></td>
+	</tr>
+</#if>
+</table>
+<table style="cellspacing: 1; width: 100%; padding-top: 10;"><tr>
+	<td style="border-right: 1px; border-left: 1px; border-top: 1px; border-bottom: 1px;" text-align = "center" align = "center"><b>Credit Manager:</b></td>
+	<td style="border-right: 1px; border-left: 1px; border-top: 1px; border-bottom: 1px;" text-align = "center" align = "center"><b>Sales Manager:</b></td>
+	</tr>
+</table>
+</body>
+</pdf>

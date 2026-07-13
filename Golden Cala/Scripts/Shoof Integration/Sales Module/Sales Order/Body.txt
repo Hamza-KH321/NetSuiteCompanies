@@ -1,0 +1,25 @@
+{
+  "location": 24,
+  "custbody_vs_shoof_transaction_id": "SHOOF-SO-20003",
+  "custbody_vs_shoof_customer": "John Doe",
+  "custbody_vs_shoof_sales_rep": "Jane Smith",
+  "items": [
+    { "sku": "12345", "quantity": 1, "rate": 150.75, "taxable": "No",  "DiscountType": "6103", "DiscountAmount": "10"},
+    { "sku": "12345", "quantity": 2, "rate": 300, "taxable": "No" }
+  ],
+  "customerdeposit": {
+    "payment": 150
+  },
+  "paymentmethod": [
+    {
+      "custrecord_vs_method": "Visa",
+      "custrecord_vs_payment_amount": 150.75,
+      "custrecord_vs_machine_id": "MCH-01"
+    },
+    {
+      "custrecord_vs_method": "Cash",
+      "custrecord_vs_payment_amount": 300,
+      "custrecord_vs_machine_id": "MCH-02"
+    }
+  ]
+}

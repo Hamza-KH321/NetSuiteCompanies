@@ -1,0 +1,130 @@
+<?xml version="1.0"?><!DOCTYPE pdf PUBLIC "-//big.faceless.org//report" "report-1.1.dtd">
+<pdf>
+<head>
+	<link name="NotoSans" type="font" subtype="truetype" src="${nsfont.NotoSans_Regular}" src-bold="${nsfont.NotoSans_Bold}" src-italic="${nsfont.NotoSans_Italic}" src-bolditalic="${nsfont.NotoSans_BoldItalic}" bytes="2" />
+	<#if .locale == "zh_CN">
+		<link name="NotoSansCJKsc" type="font" subtype="opentype" src="${nsfont.NotoSansCJKsc_Regular}" src-bold="${nsfont.NotoSansCJKsc_Bold}" bytes="2" />
+	<#elseif .locale == "zh_TW">
+		<link name="NotoSansCJKtc" type="font" subtype="opentype" src="${nsfont.NotoSansCJKtc_Regular}" src-bold="${nsfont.NotoSansCJKtc_Bold}" bytes="2" />
+	<#elseif .locale == "ja_JP">
+		<link name="NotoSansCJKjp" type="font" subtype="opentype" src="${nsfont.NotoSansCJKjp_Regular}" src-bold="${nsfont.NotoSansCJKjp_Bold}" bytes="2" />
+	<#elseif .locale == "ko_KR">
+		<link name="NotoSansCJKkr" type="font" subtype="opentype" src="${nsfont.NotoSansCJKkr_Regular}" src-bold="${nsfont.NotoSansCJKkr_Bold}" bytes="2" />
+	<#elseif .locale == "th_TH">
+		<link name="NotoSansThai" type="font" subtype="opentype" src="${nsfont.NotoSansThai_Regular}" src-bold="${nsfont.NotoSansThai_Bold}" bytes="2" />
+	</#if>
+    <macrolist>
+        <macro id="nlheader">
+            <table><tr>
+	<td><img src="https://8204691-sb1.app.netsuite.com/core/media/media.nl?id=680&amp;c=8204691_SB1&amp;h=Pw47ITxX-XXsuaMGv0XxDNc0pNvLV1aHtE9Gb9iJxUMTS0Dg" /></td>
+	</tr></table>
+
+<table style="text-align:cnter; align:center;"><tr>
+	<td style="text-align:cnter; align:center; font-size:14px;">الحلول العاموديه للاستشارات والكمبيوتر</td>
+	</tr>
+	<tr>
+	<td style="text-align:cnter; align:center; font-size:14px;"><b>Vertical Solutions for consulting &amp; IT</b></td>
+	</tr>
+	<tr>
+	<td style="text-align:cnter; align:center; font-size:14px;"><b>Estimate Number - ${record.tranid}</b></td>
+	</tr></table>
+        </macro>
+        <macro id="nlfooter">
+            <hr />
+<table style="text-align:cnter; align:center;"><tr>
+	<td style="text-align:cnter; align:center;">11 Siqilliyah ST. Office No. 5, Amman, Jordan │ Tel: +962-6-554755 │ info@ver-solutions.com</td>
+	</tr>
+	<tr>
+	<td style="text-align:cnter; align:center;">Sales1@ver-solutions.com │ www.ver-solutions.com</td>
+	</tr></table>
+        </macro>
+    </macrolist>
+    <style type="text/css">* {
+		<#if .locale == "zh_CN">
+			font-family: NotoSans, NotoSansCJKsc, sans-serif;
+		<#elseif .locale == "zh_TW">
+			font-family: NotoSans, NotoSansCJKtc, sans-serif;
+		<#elseif .locale == "ja_JP">
+			font-family: NotoSans, NotoSansCJKjp, sans-serif;
+		<#elseif .locale == "ko_KR">
+			font-family: NotoSans, NotoSansCJKkr, sans-serif;
+		<#elseif .locale == "th_TH">
+			font-family: NotoSans, NotoSansThai, sans-serif;
+		<#else>
+			font-family: NotoSans, sans-serif;
+		</#if>
+		}
+		table {
+			font-size: 9pt;
+			table-layout: fixed;
+		}
+      .border{
+		border-right:1px;
+        border-top:1px;
+      }
+      * {
+         font-family: NotoSansArabic, NotoSans, sans-serif;
+       }
+      hr {
+            border: none;
+            border-top: 3px solid darkblue;
+            font-weight: bold;
+        }
+</style>
+</head>
+<body header="nlheader" header-height="10%" footer="nlfooter" footer-height="20pt" padding="0.5in 0.5in 0.5in 0.5in" size="Letter">
+    <br /><br /><!-- __________________________________________________________________________ -->
+<table><tr>
+	<td><b>Customer: ${record.entity}</b></td>
+	</tr>
+	<tr>
+	<td><b>Date: ${record.trandate}</b></td>
+	</tr>
+	<tr>
+	<td><b>Tax registration No: 050122770</b></td>
+	</tr></table>
+<!-- __________________________________________________________________________ -->
+
+<hr /><br /><!-- __________________________________________________________________________ --><#list record.item as item>
+<table border="1" style="text-align:center; width:90%; align:center;"><#if item_index==0><tr>
+	<td style="background-color: rgb(0, 0, 139); color: white; text-align: center; width: 238px; align:center;"><b>Description</b></td>
+	<td style="background-color: rgb(0, 0, 139); color: white; text-align: center; width: 128px; align:center;"><b>Qty</b></td>
+	<td style="background-color: rgb(0, 0, 139); color: white; text-align: center; width: 104px; align:center;"><b>Unit Price/day</b></td>
+	<td style="background-color: rgb(0, 0, 139); color: white; text-align: center; width: 111px; align:center;"><b>Total Price ${record.currencysymbol}</b></td>
+	</tr>
+	</#if>
+	<tr>
+	<td align="center" class="border" style="width: 238px;">${item.item} ${item.description}</td>
+	<td align="center" class="border" style="width: 128px;">${item.quantity}</td>
+	<td align="center" class="border" style="width: 104px;">${item.rate}</td>
+	<td align="center" class="border" style="width: 111px;">${item.quantity * item.rate} ${record.currencysymbol}</td>
+	</tr>
+	<tr>
+	<td class="border" style="width: 238px;">&nbsp;</td>
+	<td align="center" class="border" colspan="2" rowspan="1" style="width: 298px;"><b>Additional Discount</b></td>
+	<td align="center" class="border" style="width: 111px;">${record.discounttotal}</td>
+	</tr>
+	<tr>
+	<td align="right" class="border" colspan="3" rowspan="1" style="width: 136px;"><b>Tax Total</b></td>
+	<td align="center" class="border" style="width: 111px;"><b>${record.taxtotal}</b></td>
+	</tr>
+	<tr>
+	<td align="right" class="border" colspan="3" rowspan="1" style="width: 136px;"><b>Total After Discount</b></td>
+	<td align="center" class="border" style="width: 111px;"><b>${record.total}</b></td>
+	</tr></table>
+</#list><!-- __________________________________________________________________________ --><br /><br /><br />&nbsp;
+<table align="center" border="1" style="width:80%; text-align:center; align:center;"><tr>
+	<td border-right="1px" style="height: 24px; text-align:center; align:center;">Vertical Solutions for Consulting &amp; IT</td>
+	<td border-bottom="1px" style="height: 24px; text-align:center; align:center;">Customer</td>
+	</tr>
+	<tr>
+	<td class="border" style="height: 23px;">Faris Fleifel</td>
+	<td border-bottom="1px" style="height: 23px;">&nbsp;</td>
+	</tr>
+	<tr>
+	<td class="border" style="height: 22px;">&nbsp;</td>
+	<td style="height: 22px;">&nbsp;</td>
+	</tr></table>
+<!-- __________________________________________________________________________ -->
+</body>
+</pdf>

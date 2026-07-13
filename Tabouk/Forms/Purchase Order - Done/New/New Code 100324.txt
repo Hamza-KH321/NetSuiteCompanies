@@ -1,0 +1,1554 @@
+<?xml version="1.0"?><!DOCTYPE pdf PUBLIC "-//big.faceless.org//report" "report-1.1.dtd">
+<pdf>
+<head>
+<link name="NotoSansArabic" type="font" subtype="opentype" src="${nsfont.NotoSansArabic_Regular}" src-bold="${nsfont.NotoSansArabic_Bold}" bytes="2" subset="false"/>
+	<link name="NotoSans" type="font" subtype="truetype" src="${nsfont.NotoSans_Regular}" src-bold="${nsfont.NotoSans_Bold}" src-italic="${nsfont.NotoSans_Italic}" src-bolditalic="${nsfont.NotoSans_BoldItalic}" bytes="2" />
+	<#if .locale == "zh_CN">
+		<link name="NotoSansCJKsc" type="font" subtype="opentype" src="${nsfont.NotoSansCJKsc_Regular}" src-bold="${nsfont.NotoSansCJKsc_Bold}" bytes="2" />
+	<#elseif .locale == "zh_TW">
+		<link name="NotoSansCJKtc" type="font" subtype="opentype" src="${nsfont.NotoSansCJKtc_Regular}" src-bold="${nsfont.NotoSansCJKtc_Bold}" bytes="2" />
+	<#elseif .locale == "ja_JP">
+		<link name="NotoSansCJKjp" type="font" subtype="opentype" src="${nsfont.NotoSansCJKjp_Regular}" src-bold="${nsfont.NotoSansCJKjp_Bold}" bytes="2" />
+	<#elseif .locale == "ko_KR">
+		<link name="NotoSansCJKkr" type="font" subtype="opentype" src="${nsfont.NotoSansCJKkr_Regular}" src-bold="${nsfont.NotoSansCJKkr_Bold}" bytes="2" />
+	<#elseif .locale == "th_TH">
+		<link name="NotoSansThai" type="font" subtype="opentype" src="${nsfont.NotoSansThai_Regular}" src-bold="${nsfont.NotoSansThai_Bold}" bytes="2" />
+	</#if>
+    <macrolist>
+        <macro id="nlheader">
+<#if record.subsidiary == "12 Lazure beach and resort">
+<table style="width: 100%; padding: 4px;" class = "bgColorLazureBeachResort">
+<#elseif record.subsidiary == "11 Royal Lazure">
+<table style="width: 100%; padding: 4px;" class = "bgColorRoyalLazure">
+<#elseif record.subsidiary == "13 Lazure executive residences">
+<table style="width: 100%; padding: 4px;" class = "bgColorLazureResidance">
+<#elseif record.subsidiary == "21 Enviro- facility management- Alula">
+<table style="width: 100%; padding: 4px;" class = "bgColorEnviro">
+<#elseif record.subsidiary == "22 Enviro Facility Management - Neom">
+<table style="width: 100%; padding: 4px;" class = "bgColorEnviro">
+<#elseif record.subsidiary == "31 Eventti Catering">
+<table style="width: 100%; padding: 4px;" class = "bgColorEventi">
+<#elseif record.subsidiary == "00 Tabuk investment and tourism (Holding)">
+<table style="width: 100%; padding: 4px;" class = "bgColorTabouk">
+</#if>
+<tr>
+	<td style="font-size: 30px;"><b>Purchase Order</b><span font-size="12px">(${record.approvalstatus})</span></td>
+	<#if record.subsidiary == "Eco Clean">
+  	<td colspan="1" rowspan="2" align ="right" text-align = "center"><img src="https://9072131.app.netsuite.com/core/media/media.nl?id=820&amp;c=9072131&amp;h=y4vS7JEl6jB48anw7UF6QGDgErz2m8K3VkuWdKq0Qe3e8qTy" style="width:30%; height:30%;" /></td>
+     <#elseif record.subsidiary == "31 Eventti Catering">
+  	<td colspan="1" rowspan="2" align ="right" text-align = "center"><img src="https://9072131.app.netsuite.com/core/media/media.nl?id=4310&amp;c=9072131&amp;h=Sze5L87RUBs6XDoPPnbs7uG535AGAhw3VpAhuo7H-KODuUTD" style="width:15%; height:15%;" /></td>
+     <#elseif record.subsidiary == "13 Lazure executive residences">
+  	<td colspan="1" rowspan="2" align ="right" text-align = "center"><img src="https://9072131.app.netsuite.com/core/media/media.nl?id=4312&amp;c=9072131&amp;h=RQG-D1w5a8lTD58DcpLM6b9S5Mh4kHoBKhi6OdmxOfiC92HI" style="width:30%; height:30%;" /></td>
+     <#elseif record.subsidiary == "11 Royal Lazure">
+  	<td colspan="1" rowspan="2" align ="right" text-align = "center"><img src="https://9072131.app.netsuite.com/core/media/media.nl?id=4313&amp;c=9072131&amp;h=iY3d3BwgHCBfjkApg4Dvidrae-STBNPALL6vj073_tXSXRpr" style="width:30%; height:30%;" /></td>
+    <#elseif record.subsidiary == "12 Lazure beach and resort">
+  	<td colspan="1" rowspan="2" align ="right" text-align = "center"><img src="https://9072131.app.netsuite.com/core/media/media.nl?id=4311&amp;c=9072131&amp;h=Rp8HfqT-lAwViKU9gEjSOTJXevFiZvBTus4-xQCrDBK37JK9" style="width:30%; height:30%;" /></td>
+     <#elseif record.subsidiary == "21 Enviro- facility management- Alula">
+  	<td colspan="1" rowspan="2" align ="right" text-align = "center"><img src="https://9072131.app.netsuite.com/core/media/media.nl?id=4309&amp;c=9072131&amp;h=2rEROyot6awqyBa0J1Ji___IPooCrgIEPpNow4PqEl7OFUcR" style="width:30%; height:30%;" /></td>
+     <#elseif record.subsidiary == "22 Enviro Facility Management - Neom">
+  	<td colspan="1" rowspan="2" align ="right" text-align = "center"><img src="https://9072131.app.netsuite.com/core/media/media.nl?id=4309&amp;c=9072131&amp;h=2rEROyot6awqyBa0J1Ji___IPooCrgIEPpNow4PqEl7OFUcR" style="width:30%; height:30%;" /></td>
+    <#elseif record.subsidiary == "00 Tabuk investment and tourism (Holding)">
+  	<td colspan="1" rowspan="2" align ="right" text-align = "center"><img src="https://9072131-sb1.app.netsuite.com/core/media/media.nl?id=438&amp;c=&amp;h=GiovM1yCANWDa9fkQMcvq5LoxrnPuDm2GSKRiSTioH_o0KwC" style="width:70%; height:70%;" /></td>
+</#if>
+</tr>
+	<tr>
+	<#if record.subsidiary == "12 Lazure beach and resort">
+	<td style="font-size: 25px; color: white;"><b>L&#39;AZURE BEACH &amp; RESORT</b></td>
+    <#elseif record.subsidiary == "11 Royal Lazure">
+    <td style="font-size: 25px; color: white;"><b>Royal Lazure</b></td>
+    <#elseif record.subsidiary == "13 Lazure executive residences">
+    <td style="font-size: 25px; color: white;"><b>13 Lazure executive residences</b></td>
+    <#elseif record.subsidiary == "21 Enviro- facility management- Alula">
+    <td style="font-size: 25px; color: white;"><b>21 Enviro- facility management- Alula</b></td>
+    <#elseif record.subsidiary == "22 Enviro Facility Management - Neom">
+    <td style="font-size: 25px; color: white;"><b>21 Enviro- facility management- Alula</b></td>
+    <#elseif record.subsidiary == "31 Eventti Catering">
+    <td style="font-size: 25px; color: white;"><b>31 Eventti Catering</b></td>
+    <#elseif record.subsidiary == "00 Tabuk investment and tourism (Holding)">
+    <td style="font-size: 25px; color: white;"><b>00 Tabuk investment and tourism (Holding)</b></td>
+    </#if>
+    </tr>
+	<tr>
+	<td style="align: left; text-align: left;"><barcode codetype="code128" width = "70%" value="${record.tranid}"/></td>
+	</tr>
+</table>
+<table style="width: 100%; padding-top: 4px;">
+<#if record.subsidiary == "00 Tabuk investment and tourism (Holding)">
+    <tr>
+	<td style="font-size: 13px; padding: 5px;" class = "bgColorTabouk"><b>Vendor Name</b></td>
+	<td style="font-size: 12px; padding: 5px;" class = "bgColorTabouk"><b>${record.entity.companyname}</b></td>
+	<td style="font-size: 13px; padding: 5px;">Type</td>
+	<td style="font-size: 13px; padding: 5px;">: ${record.custbody_vs_po_type}</td>
+	</tr>
+<#elseif record.subsidiary == "11 Royal Lazure">
+    <tr>
+	<td style="font-size: 13px; padding: 5px;" class = "bgColorRoyalLazure"><b>Vendor Name</b></td>
+	<td style="font-size: 12px; padding: 5px;" class = "bgColorRoyalLazure"><b>${record.entity.companyname}</b></td>
+	<td style="font-size: 13px; padding: 5px;">Type</td>
+	<td style="font-size: 13px; padding: 5px;">: ${record.custbody_vs_po_type}</td>
+	</tr>
+<#elseif record.subsidiary == "13 Lazure executive residences">
+    <tr>
+	<td style="font-size: 13px; padding: 5px;" class = "bgColorLazureResidance"><b>Vendor Name</b></td>
+	<td style="font-size: 12px; padding: 5px;" class = "bgColorLazureResidance"><b>${record.entity.companyname}</b></td>
+	<td style="font-size: 13px; padding: 5px;">Type</td>
+	<td style="font-size: 13px; padding: 5px;">: ${record.custbody_vs_po_type}</td>
+	</tr>
+<#elseif record.subsidiary == "21 Enviro- facility management- Alula">
+    <tr>
+	<td style="font-size: 13px; padding: 5px;" class = "bgColorEnviro"><b>Vendor Name</b></td>
+	<td style="font-size: 12px; padding: 5px;" class = "bgColorEnviro"><b>${record.entity.companyname}</b></td>
+	<td style="font-size: 13px; padding: 5px;">Type</td>
+	<td style="font-size: 13px; padding: 5px;">: ${record.custbody_vs_po_type}</td>
+	</tr>
+<#elseif record.subsidiary == "22 Enviro Facility Management - Neom">
+    <tr>
+	<td style="font-size: 13px; padding: 5px;" class = "bgColorEnviro"><b>Vendor Name</b></td>
+	<td style="font-size: 12px; padding: 5px;" class = "bgColorEnviro"><b>${record.entity.companyname}</b></td>
+	<td style="font-size: 13px; padding: 5px;">Type</td>
+	<td style="font-size: 13px; padding: 5px;">: ${record.custbody_vs_po_type}</td>
+	</tr>
+<#elseif record.subsidiary == "31 Eventti Catering">
+    <tr>
+	<td style="font-size: 13px; padding: 5px;" class = "bgColorEventi"><b>Vendor Name</b></td>
+	<td style="font-size: 12px; padding: 5px;" class = "bgColorEventi"><b>${record.entity.companyname}</b></td>
+	<td style="font-size: 13px; padding: 5px;">Type</td>
+	<td style="font-size: 13px; padding: 5px;">: ${record.custbody_vs_po_type}</td>
+  </tr>
+<#elseif record.subsidiary == "12 Lazure beach and resort">
+    <tr>
+	<td style="font-size: 13px; padding: 5px;" class = "bgColorLazureBeachResort"><b>Vendor Name</b></td>
+	<td style="font-size: 12px; padding: 5px;" class = "bgColorLazureBeachResort"><b>${record.entity.companyname}</b></td>
+	<td style="font-size: 13px; padding: 5px;">Type</td>
+	<td style="font-size: 13px; padding: 5px;">: ${record.custbody_vs_po_type}</td>
+  </tr>
+</#if>
+	<tr>
+	<td style="font-size: 13px; padding: 5px;">Vedor Code</td>
+	<td style="font-size: 13px; padding: 5px;">${record.entity.entityid}</td>
+	<td style="font-size: 13px; padding: 5px;">PO Class</td>
+	<td style="font-size: 11px; padding: 5px;">: ${record.class}</td>
+	</tr>
+	<tr>
+	<td style="font-size: 13px; padding: 5px;">Currency</td>
+	<td style="font-size: 13px; padding: 5px;">${record.currencysymbol}</td>
+	<td style="font-size: 13px; padding: 5px;">Delivery Address</td>
+	<td style="font-size: 13px; padding: 5px;">: ${record.duedate}</td>
+	</tr>
+	<tr>
+	<td style="font-size: 13px; padding: 5px;">Phone</td>
+	<td style="font-size: 13px; padding: 5px;">${record.entity.phone}</td>
+	<td style="font-size: 13px; padding: 5px;">Date</td>
+	<td style="font-size: 13px; padding: 5px;">: ${record.trandate}</td>
+	</tr>
+<#if record.subsidiary == "00 Tabuk investment and tourism (Holding)">
+	<tr>
+	<td style="font-size: 13px; padding: 5px;">&nbsp;</td>
+	<td style="font-size: 13px; padding: 5px;">&nbsp;</td>
+	<td style="font-size: 13px; padding: 5px;" class = "bgColorTabouk"><b>TRN No.</b></td>
+	<td style="font-size: 13px; padding: 5px;" class = "bgColorTabouk"><b>: ${record.tranid}</b></td>
+	</tr>
+<#elseif record.subsidiary == "11 Royal Lazure">
+	<tr>
+	<td style="font-size: 13px; padding: 5px;">&nbsp;</td>
+	<td style="font-size: 13px; padding: 5px;">&nbsp;</td>
+	<td style="font-size: 13px; padding: 5px;" class = "bgColorRoyalLazure"><b>TRN No.</b></td>
+	<td style="font-size: 13px; padding: 5px;" class = "bgColorRoyalLazure"><b>: ${record.tranid}</b></td>
+	</tr>
+<#elseif record.subsidiary == "13 Lazure executive residences">
+	<tr>
+	<td style="font-size: 13px; padding: 5px;">&nbsp;</td>
+	<td style="font-size: 13px; padding: 5px;">&nbsp;</td>
+	<td style="font-size: 13px; padding: 5px;" class = "bgColorLazureResidance"><b>TRN No.</b></td>
+	<td style="font-size: 13px; padding: 5px;" class = "bgColorLazureResidance"><b>: ${record.tranid}</b></td>
+	</tr>
+<#elseif record.subsidiary == "21 Enviro- facility management- Alula">
+	<tr>
+	<td style="font-size: 13px; padding: 5px;">&nbsp;</td>
+	<td style="font-size: 13px; padding: 5px;">&nbsp;</td>
+	<td style="font-size: 13px; padding: 5px;" class = "bgColorEnviro"><b>TRN No.</b></td>
+	<td style="font-size: 13px; padding: 5px;" class = "bgColorEnviro"><b>: ${record.tranid}</b></td>
+	</tr>
+<#elseif record.subsidiary == "22 Enviro Facility Management - Neom">
+	<tr>
+	<td style="font-size: 13px; padding: 5px;">&nbsp;</td>
+	<td style="font-size: 13px; padding: 5px;">&nbsp;</td>
+	<td style="font-size: 13px; padding: 5px;" class = "bgColorEnviro"><b>TRN No.</b></td>
+	<td style="font-size: 13px; padding: 5px;" class = "bgColorEnviro"><b>: ${record.tranid}</b></td>
+	</tr>
+<#elseif record.subsidiary == "31 Eventti Catering">
+	<tr>
+	<td style="font-size: 13px; padding: 5px;">&nbsp;</td>
+	<td style="font-size: 13px; padding: 5px;">&nbsp;</td>
+	<td style="font-size: 13px; padding: 5px;" class = "bgColorEventi"><b>TRN No.</b></td>
+	<td style="font-size: 13px; padding: 5px;" class = "bgColorEventi"><b>: ${record.tranid}</b></td>
+	</tr>
+<#elseif record.subsidiary == "12 Lazure beach and resort">
+	<tr>
+	<td style="font-size: 13px; padding: 5px;">&nbsp;</td>
+	<td style="font-size: 13px; padding: 5px;">&nbsp;</td>
+	<td style="font-size: 13px; padding: 5px;" class = "bgColorLazureBeachResort"><b>TRN No.</b></td>
+	<td style="font-size: 13px; padding: 5px;" class = "bgColorLazureBeachResort"><b>: ${record.tranid}</b></td>
+	</tr>
+</#if>
+</table>
+</macro>
+
+<macro id="nlfooter">
+<#if record.approvalstatus == "Approved">
+<p align = "right" text-align = "right"><img src = "https://9072131.app.netsuite.com/core/media/media.nl?id=1483&amp;c=9072131&amp;h=WpMIQPgI8mvY565TUhJ4_TfKP87RTHjhJqrkQFRTjfZxHuQv" width = "50%" height = "50%"/></p>
+</#if>
+<table width = "100%">
+<#if record.subsidiary == "00 Tabuk investment and tourism (Holding)">
+<#if record.custbody_vs_po_type == "Regular">
+  	<tr>
+	<td style="border-left: 1px; border-right: 1px; border-top: 1px;" class = "borderColorTabouk"><b>Purchasing Manager</b></td>
+	<td style="border-left: 1px; border-right: 1px; border-top: 1px;" class = "borderColorTabouk"><b>Chief Financial Officer</b></td>
+  	<td style="border-left: 1px; border-right: 1px; border-top: 1px;" class = "borderColorTabouk"><b>Chief Executive Officer</b></td>
+    </tr>
+  <tr>
+
+<#if record.custbody_vs_purchasingmanagerapproval == true>
+  <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorTabouk"><img width = "60%" height = "60%" src = "https://9072131.app.netsuite.com/core/media/media.nl?id=1482&amp;c=9072131&amp;h=oRdJU-o0WW-XPm8vVtMQnfdaClkG_nGKN-6tBkO1Tk2NH2Me"/></td>
+<#else/>
+  <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorTabouk">&nbsp;</td>
+</#if>
+
+<#if record.custbody_vs_financialcontrollerapprova == true>
+  <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorTabouk"><img width = "40%" height = "40%" src = "https://9072131.app.netsuite.com/core/media/media.nl?id=1475&amp;c=9072131&amp;h=R2ZhsJwyX4A2pKthQrWBTqMkzB6l56tLAhFNIbbStTUGEjKz"/></td>
+<#else/>
+  <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorTabouk">&nbsp;</td>
+</#if>
+
+<#if record.custbody_vs_generalmanagerapproval == true>
+    <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorTabouk"><img width = "30%" height = "30%" src = "https://9072131.app.netsuite.com/core/media/media.nl?id=1481&amp;c=9072131&amp;h=qCa3u48f0VyNb4bPJENHsatQBHzSE7b6ax_uLYZsxJ5eSRVa"/></td>
+<#else/>
+    <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorTabouk">&nbsp;</td>
+</#if>
+
+  </tr>
+
+<#elseif record.custbody_vs_po_type == "Direct Purchase">
+  	<tr>
+	<td style="border-left: 1px; border-right: 1px; border-top: 1px;" class = "borderColorTabouk"><b>Purchasing Manager</b></td>
+	<td style="border-left: 1px; border-right: 1px; border-top: 1px;" class = "borderColorTabouk"><b>Chief Financial Officer</b></td>
+  	<td style="border-left: 1px; border-right: 1px; border-top: 1px;" class = "borderColorTabouk"><b>Chief Executive Officer</b></td>
+    </tr>
+  <tr>
+
+  <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorTabouk"><img width = "60%" height = "60%" src = "https://9072131.app.netsuite.com/core/media/media.nl?id=1482&amp;c=9072131&amp;h=oRdJU-o0WW-XPm8vVtMQnfdaClkG_nGKN-6tBkO1Tk2NH2Me"/></td>
+
+<#if record.custbody_vs_financialcontrollerapprova == true>
+  <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorTabouk"><img width = "40%" height = "40%" src = "https://9072131.app.netsuite.com/core/media/media.nl?id=1475&amp;c=9072131&amp;h=R2ZhsJwyX4A2pKthQrWBTqMkzB6l56tLAhFNIbbStTUGEjKz"/></td>
+    <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorTabouk"><img width = "40%" height = "40%" src = "https://9072131.app.netsuite.com/core/media/media.nl?id=1481&amp;c=9072131&amp;h=qCa3u48f0VyNb4bPJENHsatQBHzSE7b6ax_uLYZsxJ5eSRVa"/></td>
+<#else/>
+  <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorTabouk">&nbsp;</td>
+  <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorTabouk">&nbsp;</td>
+</#if>
+
+</tr>
+
+
+<#elseif record.custbody_vs_po_type == "Food & Beverage">
+  	<tr>
+	<td style="border-left: 1px; border-right: 1px; border-top: 1px;" class = "borderColorTabouk"><b>Purchasing Manager</b></td>
+	<td style="border-left: 1px; border-right: 1px; border-top: 1px;" class = "borderColorTabouk"><b>Chief Financial Officer</b></td>
+  	<td style="border-left: 1px; border-right: 1px; border-top: 1px;" class = "borderColorTabouk"><b>Chief Executive Officer</b></td>
+    </tr>
+  <tr>
+
+<#if record.custbody_vs_purchasingmanagerapproval == true>
+  <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorTabouk"><img width = "60%" height = "60%" src = "https://9072131.app.netsuite.com/core/media/media.nl?id=1482&amp;c=9072131&amp;h=oRdJU-o0WW-XPm8vVtMQnfdaClkG_nGKN-6tBkO1Tk2NH2Me"/></td>
+<#else/>
+  <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorTabouk">&nbsp;</td>
+</#if>
+
+<#if record.custbody_vs_financialcontrollerapprova == true>
+  <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorTabouk"><img width = "40%" height = "40%" src = "https://9072131.app.netsuite.com/core/media/media.nl?id=1475&amp;c=9072131&amp;h=R2ZhsJwyX4A2pKthQrWBTqMkzB6l56tLAhFNIbbStTUGEjKz"/></td>
+    <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorTabouk"><img width = "40%" height = "40%" src = "https://9072131.app.netsuite.com/core/media/media.nl?id=1481&amp;c=9072131&amp;h=qCa3u48f0VyNb4bPJENHsatQBHzSE7b6ax_uLYZsxJ5eSRVa"/></td>
+<#else/>
+  <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorTabouk">&nbsp;</td>
+  <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorTabouk">&nbsp;</td>
+</#if>
+</tr>
+
+
+<#elseif record.custbody_vs_po_type == "Fixed Asset">
+  	<tr>
+	<td style="border-left: 1px; border-right: 1px; border-top: 1px;" class = "borderColorTabouk"><b>Purchasing Manager</b></td>
+	<td style="border-left: 1px; border-right: 1px; border-top: 1px;" class = "borderColorTabouk"><b>Chief Financial Officer</b></td>
+  	<td style="border-left: 1px; border-right: 1px; border-top: 1px;" class = "borderColorTabouk"><b>Chief Executive Officer</b></td>
+    </tr>
+  <tr>
+
+<#if record.custbody_vs_purchasingmanagerapproval == true>
+  <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorTabouk"><img width = "60%" height = "60%" src = "https://9072131.app.netsuite.com/core/media/media.nl?id=1482&amp;c=9072131&amp;h=oRdJU-o0WW-XPm8vVtMQnfdaClkG_nGKN-6tBkO1Tk2NH2Me"/></td>
+<#else/>
+  <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorTabouk">&nbsp;</td>
+</#if>
+
+<#if record.custbody_vs_financialcontrollerapprova == true>
+  <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorTabouk"><img width = "40%" height = "40%" src = "https://9072131.app.netsuite.com/core/media/media.nl?id=1475&amp;c=9072131&amp;h=R2ZhsJwyX4A2pKthQrWBTqMkzB6l56tLAhFNIbbStTUGEjKz"/></td>
+<#else/>
+  <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorTabouk">&nbsp;</td>
+</#if>
+
+<#if record.custbody_vs_generalmanagerapproval == true>
+    <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorTabouk"><img width = "40%" height = "40%" src = "https://9072131.app.netsuite.com/core/media/media.nl?id=1481&amp;c=9072131&amp;h=qCa3u48f0VyNb4bPJENHsatQBHzSE7b6ax_uLYZsxJ5eSRVa"/></td>
+<#else/>
+    <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorTabouk">&nbsp;</td>
+</#if>
+
+  </tr>
+
+<#elseif record.custbody_vs_po_type == "Engineering">
+  	<tr>
+	<td style="border-left: 1px; border-right: 1px; border-top: 1px;" class = "borderColorTabouk"><b>Purchasing Manager</b></td>
+	<td style="border-left: 1px; border-right: 1px; border-top: 1px;" class = "borderColorTabouk"><b>Corporate Chief Engineer</b></td>
+  	<td style="border-left: 1px; border-right: 1px; border-top: 1px;" class = "borderColorTabouk"><b>Director of Finance</b></td>
+    <td style="border-left: 1px; border-right: 1px; border-top: 1px;" class = "borderColorTabouk"><b>Chief Executive Officer</b></td>
+    </tr>
+  <tr>
+
+<#if record.custbody_vs_purchasingmanagerapproval == true>
+  <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorTabouk"><img width = "60%" height = "60%" src = "https://9072131.app.netsuite.com/core/media/media.nl?id=1482&amp;c=9072131&amp;h=oRdJU-o0WW-XPm8vVtMQnfdaClkG_nGKN-6tBkO1Tk2NH2Me"/></td>
+<#else/>
+  <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorTabouk">&nbsp;</td>
+</#if>
+
+<#if record.total gt 25000>
+    <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorTabouk"><img width = "40%" height = "40%" src = "https://9072131.app.netsuite.com/core/media/media.nl?id=11332&amp;c=9072131&amp;h=57ZKQFIeBUmCH78mNtsn3V4u_EP-db0cl05IcxMqagw5keC_"/></td>
+<#elseif record.custbody_vs_generalmanagerapproval == true/>
+    <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorTabouk"><img width = "40%" height = "40%" src = "https://9072131.app.netsuite.com/core/media/media.nl?id=11332&amp;c=9072131&amp;h=57ZKQFIeBUmCH78mNtsn3V4u_EP-db0cl05IcxMqagw5keC_"/></td>
+<#else/>
+    <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorTabouk">&nbsp;</td>
+</#if>
+
+<#if record.custbody_vs_financialcontrollerapprova == true>
+  <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorTabouk"><img width = "40%" height = "40%" src = "https://9072131.app.netsuite.com/core/media/media.nl?id=1475&amp;c=9072131&amp;h=R2ZhsJwyX4A2pKthQrWBTqMkzB6l56tLAhFNIbbStTUGEjKz"/></td>
+<#else/>
+  <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorTabouk">&nbsp;</td>
+</#if>
+</tr>
+
+
+</#if>
+
+
+<#elseif record.subsidiary == "11 Royal Lazure">
+<#if record.custbody_vs_po_type == "Regular">
+  	<tr>
+	<td style="border-left: 1px; border-right: 1px; border-top: 1px;" class = "borderColorRoyalLazure"><b>Purchasing Manager</b></td>
+	<td style="border-left: 1px; border-right: 1px; border-top: 1px;" class = "borderColorRoyalLazure"><b>Financial Controller</b></td>
+  	<td style="border-left: 1px; border-right: 1px; border-top: 1px;" class = "borderColorRoyalLazure"><b>General Manager</b></td>
+    </tr>
+  <tr>
+
+<#if record.custbody_vs_purchasingmanagerapproval == true>
+  <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorRoyalLazure"><img width = "60%" height = "60%" src = "https://9072131.app.netsuite.com/core/media/media.nl?id=1482&amp;c=9072131&amp;h=oRdJU-o0WW-XPm8vVtMQnfdaClkG_nGKN-6tBkO1Tk2NH2Me"/></td>
+<#else/>
+  <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorRoyalLazure">&nbsp;</td>
+</#if>
+
+<#if record.custbody_vs_financialcontrollerapprova == true>
+  <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorRoyalLazure"><img width = "40%" height = "40%" src = "https://9072131.app.netsuite.com/core/media/media.nl?id=1475&amp;c=9072131&amp;h=R2ZhsJwyX4A2pKthQrWBTqMkzB6l56tLAhFNIbbStTUGEjKz"/></td>
+<#else/>
+  <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorRoyalLazure">&nbsp;</td>
+</#if>
+
+<#if record.custbody_vs_generalmanagerapproval == true>
+    <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorRoyalLazure"><img width = "30%" height = "30%" src = "https://9072131.app.netsuite.com/core/media/media.nl?id=1480&amp;c=9072131&amp;h=ISTJMBdpFR2ztTVnYj1I7MxcVaDwYupFBmF2Gr0lUoQNlgsI"/></td>
+<#else/>
+    <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorLazureResidance">&nbsp;</td>
+</#if>
+</tr>
+
+<#elseif record.custbody_vs_po_type == "Direct Purchase">
+  	<tr>
+	<td style="border-left: 1px; border-right: 1px; border-top: 1px;" class = "borderColorRoyalLazure"><b>Purchasing Manager</b></td>
+	<td style="border-left: 1px; border-right: 1px; border-top: 1px;" class = "borderColorRoyalLazure"><b>Financial Controller</b></td>
+  	<td style="border-left: 1px; border-right: 1px; border-top: 1px;" class = "borderColorRoyalLazure"><b>General Manager</b></td>
+    </tr>
+  <tr>
+
+  <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorRoyalLazure"><img width = "60%" height = "60%" src = "https://9072131.app.netsuite.com/core/media/media.nl?id=1482&amp;c=9072131&amp;h=oRdJU-o0WW-XPm8vVtMQnfdaClkG_nGKN-6tBkO1Tk2NH2Me"/></td>
+
+<#if record.custbody_vs_financialcontrollerapprova == true>
+  <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorRoyalLazure"><img width = "40%" height = "40%" src = "https://9072131.app.netsuite.com/core/media/media.nl?id=1475&amp;c=9072131&amp;h=R2ZhsJwyX4A2pKthQrWBTqMkzB6l56tLAhFNIbbStTUGEjKz"/></td>
+    <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorRoyalLazure"><img width = "40%" height = "40%" src = "https://9072131.app.netsuite.com/core/media/media.nl?id=1480&amp;c=9072131&amp;h=ISTJMBdpFR2ztTVnYj1I7MxcVaDwYupFBmF2Gr0lUoQNlgsI"/></td>
+<#else/>
+  <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorRoyalLazure">&nbsp;</td>
+  <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorRoyalLazure">&nbsp;</td>
+</#if>
+
+</tr>
+
+
+<#elseif record.custbody_vs_po_type == "Food & Beverage">
+  	<tr>
+	<td style="border-left: 1px; border-right: 1px; border-top: 1px;" class = "borderColorRoyalLazure"><b>Purchasing Manager</b></td>
+	<td style="border-left: 1px; border-right: 1px; border-top: 1px;" class = "borderColorRoyalLazure"><b>Financial Controller</b></td>
+  	<td style="border-left: 1px; border-right: 1px; border-top: 1px;" class = "borderColorRoyalLazure"><b>General Manager</b></td>
+    </tr>
+  <tr>
+
+<#if record.custbody_vs_purchasingmanagerapproval == true>
+  <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorRoyalLazure"><img width = "60%" height = "60%" src = "https://9072131.app.netsuite.com/core/media/media.nl?id=1482&amp;c=9072131&amp;h=oRdJU-o0WW-XPm8vVtMQnfdaClkG_nGKN-6tBkO1Tk2NH2Me"/></td>
+<#else/>
+  <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorRoyalLazure">&nbsp;</td>
+</#if>
+
+<#if record.custbody_vs_financialcontrollerapprova == true>
+  <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorRoyalLazure"><img width = "40%" height = "40%" src = "https://9072131.app.netsuite.com/core/media/media.nl?id=1475&amp;c=9072131&amp;h=R2ZhsJwyX4A2pKthQrWBTqMkzB6l56tLAhFNIbbStTUGEjKz"/></td>
+    <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorRoyalLazure"><img width = "40%" height = "40%" src = "hthttps://9072131.app.netsuite.com/core/media/media.nl?id=1480&amp;c=9072131&amp;h=ISTJMBdpFR2ztTVnYj1I7MxcVaDwYupFBmF2Gr0lUoQNlgsI"/></td>
+<#else/>
+  <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorRoyalLazure">&nbsp;</td>
+  <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorRoyalLazure">&nbsp;</td>
+</#if>
+</tr>
+
+<#elseif record.custbody_vs_po_type == "Fixed Asset">
+  	<tr>
+	<td style="border-left: 1px; border-right: 1px; border-top: 1px;" class = "borderColorRoyalLazure"><b>Purchasing Manager</b></td>
+	<td style="border-left: 1px; border-right: 1px; border-top: 1px;" class = "borderColorRoyalLazure"><b>Directorf of Finance</b></td>
+  	<td style="border-left: 1px; border-right: 1px; border-top: 1px;" class = "borderColorRoyalLazure"><b>Chief Executive Officer</b></td>
+    </tr>
+  <tr>
+
+<#if record.custbody_vs_purchasingmanagerapproval == true>
+  <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorRoyalLazure"><img width = "60%" height = "60%" src = "https://9072131.app.netsuite.com/core/media/media.nl?id=1482&amp;c=9072131&amp;h=oRdJU-o0WW-XPm8vVtMQnfdaClkG_nGKN-6tBkO1Tk2NH2Me"/></td>
+<#else/>
+  <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorRoyalLazure">&nbsp;</td>
+</#if>
+
+<#if record.custbody_vs_financialcontrollerapprova == true>
+  <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorRoyalLazure"><img width = "40%" height = "40%" src = "https://9072131.app.netsuite.com/core/media/media.nl?id=1475&amp;c=9072131&amp;h=R2ZhsJwyX4A2pKthQrWBTqMkzB6l56tLAhFNIbbStTUGEjKz"/></td>
+<#else/>
+  <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorRoyalLazure">&nbsp;</td>
+</#if>
+
+<#if record.custbody_vs_generalmanagerapproval == true>
+    <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorRoyalLazure"><img width = "40%" height = "40%" src = "https://9072131.app.netsuite.com/core/media/media.nl?id=1480&amp;c=9072131&amp;h=ISTJMBdpFR2ztTVnYj1I7MxcVaDwYupFBmF2Gr0lUoQNlgsI"/></td>
+<#else/>
+    <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorRoyalLazure">&nbsp;</td>
+</#if>
+</tr>
+
+<#elseif record.custbody_vs_po_type == "Engineering">
+  	<tr>
+	<td style="border-left: 1px; border-right: 1px; border-top: 1px;" class = "borderColorRoyalLazure"><b>Purchasing Manager</b></td>
+	<td style="border-left: 1px; border-right: 1px; border-top: 1px;" class = "borderColorRoyalLazure"><b>Corporate Chief Engineer</b></td>
+  	<td style="border-left: 1px; border-right: 1px; border-top: 1px;" class = "borderColorRoyalLazure"><b>Director of Finance</b></td>
+    <td style="border-left: 1px; border-right: 1px; border-top: 1px;" class = "borderColorRoyalLazure"><b>General Manager</b></td>
+    </tr>
+  <tr>
+
+<#if record.custbody_vs_purchasingmanagerapproval == true>
+  <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorRoyalLazure"><img width = "60%" height = "60%" src = "https://9072131.app.netsuite.com/core/media/media.nl?id=1482&amp;c=9072131&amp;h=oRdJU-o0WW-XPm8vVtMQnfdaClkG_nGKN-6tBkO1Tk2NH2Me"/></td>
+<#else/>
+  <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorRoyalLazure">&nbsp;</td>
+</#if>
+
+<#if record.total gt 25000>
+    <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorRoyalLazure"><img width = "40%" height = "40%" src = "https://9072131.app.netsuite.com/core/media/media.nl?id=1481&amp;c=9072131&amp;h=qCa3u48f0VyNb4bPJENHsatQBHzSE7b6ax_uLYZsxJ5eSRVa"/></td>
+<#elseif record.custbody_vs_generalmanagerapproval == true/>
+    <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorRoyalLazure"><img width = "40%" height = "40%" src = "https://9072131.app.netsuite.com/core/media/media.nl?id=1481&amp;c=9072131&amp;h=qCa3u48f0VyNb4bPJENHsatQBHzSE7b6ax_uLYZsxJ5eSRVa"/></td>
+<#else/>
+    <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorRoyalLazure">&nbsp;</td>
+</#if>
+
+<#if record.custbody_vs_financialcontrollerapprova == true>
+  <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorRoyalLazure"><img width = "40%" height = "40%" src = "https://9072131.app.netsuite.com/core/media/media.nl?id=1475&amp;c=9072131&amp;h=R2ZhsJwyX4A2pKthQrWBTqMkzB6l56tLAhFNIbbStTUGEjKz"/></td>
+<#else/>
+  <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorRoyalLazure">&nbsp;</td>
+</#if>
+</tr>
+
+</#if>
+
+<#elseif record.subsidiary == "13 Lazure executive residences">
+<#if record.custbody_vs_po_type == "Regular">
+  	<tr>
+	<td style="border-left: 1px; border-right: 1px; border-top: 1px;" class = "borderColorLazureResidance"><b>Purchasing Manager</b></td>
+	<td style="border-left: 1px; border-right: 1px; border-top: 1px;" class = "borderColorLazureResidance"><b>Financial Controller</b></td>
+  	<td style="border-left: 1px; border-right: 1px; border-top: 1px;" class = "borderColorLazureResidance"><b>General Manager</b></td>
+    </tr>
+  <tr>
+
+<#if record.custbody_vs_purchasingmanagerapproval == true>
+  <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorLazureResidance"><img width = "60%" height = "60%" src = "https://9072131.app.netsuite.com/core/media/media.nl?id=1482&amp;c=9072131&amp;h=oRdJU-o0WW-XPm8vVtMQnfdaClkG_nGKN-6tBkO1Tk2NH2Me"/></td>
+<#else/>
+  <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorLazureResidance">&nbsp;</td>
+</#if>
+
+<#if record.custbody_vs_financialcontrollerapprova == true>
+  <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorLazureResidance"><img width = "40%" height = "40%" src = "https://9072131.app.netsuite.com/core/media/media.nl?id=1475&amp;c=9072131&amp;h=R2ZhsJwyX4A2pKthQrWBTqMkzB6l56tLAhFNIbbStTUGEjKz"/></td>
+<#else/>
+  <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorLazureResidance">&nbsp;</td>
+</#if>
+
+<#if record.custbody_vs_generalmanagerapproval == true>
+    <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorLazureResidance"><img width = "30%" height = "30%" src = "https://9072131.app.netsuite.com/core/media/media.nl?id=1480&amp;c=9072131&amp;h=ISTJMBdpFR2ztTVnYj1I7MxcVaDwYupFBmF2Gr0lUoQNlgsI"/></td>
+<#else/>
+    <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorLazureResidance">&nbsp;</td>
+</#if>
+</tr>
+
+<#elseif record.custbody_vs_po_type == "Direct Purchase">
+  	<tr>
+	<td style="border-left: 1px; border-right: 1px; border-top: 1px;" class = "borderColorLazureResidance"><b>Purchasing Manager</b></td>
+	<td style="border-left: 1px; border-right: 1px; border-top: 1px;" class = "borderColorLazureResidance"><b>Financial Controller</b></td>
+  	<td style="border-left: 1px; border-right: 1px; border-top: 1px;" class = "borderColorLazureResidance"><b>General Manager</b></td>
+    </tr>
+  <tr>
+
+  <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorLazureResidance"><img width = "60%" height = "60%" src = "https://9072131.app.netsuite.com/core/media/media.nl?id=1482&amp;c=9072131&amp;h=oRdJU-o0WW-XPm8vVtMQnfdaClkG_nGKN-6tBkO1Tk2NH2Me"/></td>
+
+<#if record.custbody_vs_financialcontrollerapprova == true>
+  <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorLazureResidance"><img width = "40%" height = "40%" src = "https://9072131.app.netsuite.com/core/media/media.nl?id=1475&amp;c=9072131&amp;h=R2ZhsJwyX4A2pKthQrWBTqMkzB6l56tLAhFNIbbStTUGEjKz"/></td>
+    <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorLazureResidance"><img width = "40%" height = "40%" src = "https://9072131.app.netsuite.com/core/media/media.nl?id=1481&amp;c=9072131&amp;h=qCa3u48f0VyNb4bPJENHsatQBHzSE7b6ax_uLYZsxJ5eSRVa"/></td>
+<#else/>
+  <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorLazureResidance">&nbsp;</td>
+  <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorLazureResidance">&nbsp;</td>
+</#if>
+</tr>
+
+<#elseif record.custbody_vs_po_type == "Food & Beverage">
+  	<tr>
+	<td style="border-left: 1px; border-right: 1px; border-top: 1px;" class = "borderColorLazureResidance"><b>Purchasing Manager</b></td>
+	<td style="border-left: 1px; border-right: 1px; border-top: 1px;" class = "borderColorLazureResidance"><b>Financial Controller</b></td>
+  	<td style="border-left: 1px; border-right: 1px; border-top: 1px;" class = "borderColorLazureResidance"><b>General Manager</b></td>
+    </tr>
+  <tr>
+
+<#if record.custbody_vs_purchasingmanagerapproval == true>
+  <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorLazureResidance"><img width = "60%" height = "60%" src = "https://9072131.app.netsuite.com/core/media/media.nl?id=1482&amp;c=9072131&amp;h=oRdJU-o0WW-XPm8vVtMQnfdaClkG_nGKN-6tBkO1Tk2NH2Me"/></td>
+<#else/>
+  <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorLazureResidance">&nbsp;</td>
+</#if>
+
+<#if record.custbody_vs_financialcontrollerapprova == true>
+  <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorLazureResidance"><img width = "40%" height = "40%" src = "https://9072131.app.netsuite.com/core/media/media.nl?id=1475&amp;c=9072131&amp;h=R2ZhsJwyX4A2pKthQrWBTqMkzB6l56tLAhFNIbbStTUGEjKz"/></td>
+    <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorLazureResidance"><img width = "40%" height = "40%" src = "https://9072131.app.netsuite.com/core/media/media.nl?id=1481&amp;c=9072131&amp;h=qCa3u48f0VyNb4bPJENHsatQBHzSE7b6ax_uLYZsxJ5eSRVa"/></td>
+<#else/>
+  <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorLazureResidance">&nbsp;</td>
+  <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorLazureResidance">&nbsp;</td>
+</#if>
+</tr>
+
+<#elseif record.custbody_vs_po_type == "Fixed Asset">
+  	<tr>
+	<td style="border-left: 1px; border-right: 1px; border-top: 1px;" class = "borderColorLazureResidance"><b>Purchasing Manager</b></td>
+	<td style="border-left: 1px; border-right: 1px; border-top: 1px;" class = "borderColorLazureResidance"><b>Directorf of Finance</b></td>
+  	<td style="border-left: 1px; border-right: 1px; border-top: 1px;" class = "borderColorLazureResidance"><b>Chief Executive Officer</b></td>
+    </tr>
+  <tr>
+
+<#if record.custbody_vs_purchasingmanagerapproval == true>
+  <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorLazureResidance"><img width = "60%" height = "60%" src = "https://9072131.app.netsuite.com/core/media/media.nl?id=1482&amp;c=9072131&amp;h=oRdJU-o0WW-XPm8vVtMQnfdaClkG_nGKN-6tBkO1Tk2NH2Me"/></td>
+<#else/>
+  <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorLazureResidance">&nbsp;</td>
+</#if>
+
+<#if record.custbody_vs_financialcontrollerapprova == true>
+  <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorLazureResidance"><img width = "40%" height = "40%" src = "https://9072131.app.netsuite.com/core/media/media.nl?id=1475&amp;c=9072131&amp;h=R2ZhsJwyX4A2pKthQrWBTqMkzB6l56tLAhFNIbbStTUGEjKz"/></td>
+<#else/>
+  <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorLazureResidance">&nbsp;</td>
+</#if>
+
+<#if record.custbody_vs_generalmanagerapproval == true>
+    <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorLazureResidance"><img width = "40%" height = "40%" src = "https://9072131.app.netsuite.com/core/media/media.nl?id=1481&amp;c=9072131&amp;h=qCa3u48f0VyNb4bPJENHsatQBHzSE7b6ax_uLYZsxJ5eSRVa"/></td>
+<#else/>
+    <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorLazureResidance">&nbsp;</td>
+</#if>
+</tr>
+
+<#elseif record.custbody_vs_po_type == "Engineering">
+  	<tr>
+	<td style="border-left: 1px; border-right: 1px; border-top: 1px;" class = "borderColorLazureResidance"><b>Purchasing Manager</b></td>
+	<td style="border-left: 1px; border-right: 1px; border-top: 1px;" class = "borderColorLazureResidance"><b>Corporate Chief Engineer</b></td>
+  	<td style="border-left: 1px; border-right: 1px; border-top: 1px;" class = "borderColorLazureResidance"><b>Director of Finance</b></td>
+    <td style="border-left: 1px; border-right: 1px; border-top: 1px;" class = "borderColorLazureResidance"><b>General Manager</b></td>
+    </tr>
+  <tr>
+
+<#if record.custbody_vs_purchasingmanagerapproval == true>
+  <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorLazureResidance"><img width = "60%" height = "60%" src = "https://9072131.app.netsuite.com/core/media/media.nl?id=1482&amp;c=9072131&amp;h=oRdJU-o0WW-XPm8vVtMQnfdaClkG_nGKN-6tBkO1Tk2NH2Me"/></td>
+<#else/>
+  <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorLazureResidance">&nbsp;</td>
+</#if>
+
+<#if record.total gt 25000>
+    <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorLazureResidance"><img width = "40%" height = "40%" src = "https://9072131.app.netsuite.com/core/media/media.nl?id=1481&amp;c=9072131&amp;h=qCa3u48f0VyNb4bPJENHsatQBHzSE7b6ax_uLYZsxJ5eSRVa"/></td>
+<#elseif record.custbody_vs_generalmanagerapproval == true/>
+    <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorLazureResidance"><img width = "40%" height = "40%" src = "https://9072131.app.netsuite.com/core/media/media.nl?id=1481&amp;c=9072131&amp;h=qCa3u48f0VyNb4bPJENHsatQBHzSE7b6ax_uLYZsxJ5eSRVa"/></td>
+<#else/>
+    <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorLazureResidance">&nbsp;</td>
+</#if>
+
+<#if record.custbody_vs_financialcontrollerapprova == true>
+  <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorLazureResidance"><img width = "40%" height = "40%" src = "https://9072131.app.netsuite.com/core/media/media.nl?id=1475&amp;c=9072131&amp;h=R2ZhsJwyX4A2pKthQrWBTqMkzB6l56tLAhFNIbbStTUGEjKz"/></td>
+<#else/>
+  <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorLazureResidance">&nbsp;</td>
+</#if>
+</tr>
+</#if>
+
+
+<#elseif record.subsidiary == "21 Enviro- facility management- Alula">
+<#if record.custbody_vs_po_type == "Regular">
+  	<tr>
+	<td style="border-left: 1px; border-right: 1px; border-top: 1px;" class = "borderColorEnviro"><b>Purchasing Manager</b></td>
+	<td style="border-left: 1px; border-right: 1px; border-top: 1px;" class = "borderColorEnviro"><b>Financial Controller</b></td>
+  	<td style="border-left: 1px; border-right: 1px; border-top: 1px;" class = "borderColorEnviro"><b>General Manager</b></td>
+    </tr>
+  <tr>
+
+<#if record.custbody_vs_purchasingmanagerapproval == true>
+  <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorEnviro"><img width = "60%" height = "60%" src = "https://9072131.app.netsuite.com/core/media/media.nl?id=1482&amp;c=9072131&amp;h=oRdJU-o0WW-XPm8vVtMQnfdaClkG_nGKN-6tBkO1Tk2NH2Me"/></td>
+<#else/>
+  <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorEnviro">&nbsp;</td>
+</#if>
+
+<#if record.custbody_vs_financialcontrollerapprova == true>
+  <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorEnviro"><img width = "40%" height = "40%" src = "https://9072131.app.netsuite.com/core/media/media.nl?id=1477&amp;c=9072131&amp;h=7USVOsYp7tNV5giJpYLgat2EMWXshmbftzgxSJT12uBq8rif"/></td>
+<#else/>
+  <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorEnviro">&nbsp;</td>
+</#if>
+
+<#if record.custbody_vs_generalmanagerapproval == true>
+    <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorEnviro"><img width = "30%" height = "30%" src = "https://9072131.app.netsuite.com/core/media/media.nl?id=1478&amp;c=9072131&amp;h=e1PZgCKzJS3rLxaxuiLaXyES33MMxECbKvFzuOge9aMMhJpJ"/></td>
+<#else/>
+    <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorEnviro">&nbsp;</td>
+</#if>
+</tr>
+
+<#elseif record.custbody_vs_po_type == "Direct Purchase">
+  	<tr>
+	<td style="border-left: 1px; border-right: 1px; border-top: 1px;" class = "borderColorEnviro"><b>Purchasing Manager</b></td>
+	<td style="border-left: 1px; border-right: 1px; border-top: 1px;" class = "borderColorEnviro"><b>Financial Controller</b></td>
+  	<td style="border-left: 1px; border-right: 1px; border-top: 1px;" class = "borderColorEnviro"><b>General Manager</b></td>
+    </tr>
+  <tr>
+
+  <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorEnviro"><img width = "60%" height = "60%" src = "https://9072131.app.netsuite.com/core/media/media.nl?id=1482&amp;c=9072131&amp;h=oRdJU-o0WW-XPm8vVtMQnfdaClkG_nGKN-6tBkO1Tk2NH2Me"/></td>
+
+<#if record.custbody_vs_financialcontrollerapprova == true>
+  <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorEnviro"><img width = "40%" height = "40%" src = "https://9072131.app.netsuite.com/core/media/media.nl?id=1475&amp;c=9072131&amp;h=R2ZhsJwyX4A2pKthQrWBTqMkzB6l56tLAhFNIbbStTUGEjKz"/></td>
+    <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorEnviro"><img width = "40%" height = "40%" src = "https://9072131.app.netsuite.com/core/media/media.nl?id=1481&amp;c=9072131&amp;h=qCa3u48f0VyNb4bPJENHsatQBHzSE7b6ax_uLYZsxJ5eSRVa"/></td>
+<#else/>
+  <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorEnviro">&nbsp;</td>
+  <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorEnviro">&nbsp;</td>
+</#if>
+
+</tr>
+
+<#elseif record.custbody_vs_po_type == "Food & Beverage">
+  	<tr>
+	<td style="border-left: 1px; border-right: 1px; border-top: 1px;" class = "borderColorEnviro"><b>Purchasing Manager</b></td>
+	<td style="border-left: 1px; border-right: 1px; border-top: 1px;" class = "borderColorEnviro"><b>Financial Controller</b></td>
+  	<td style="border-left: 1px; border-right: 1px; border-top: 1px;" class = "borderColorEnviro"><b>General Manager</b></td>
+    </tr>
+  <tr>
+
+<#if record.custbody_vs_purchasingmanagerapproval == true>
+  <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorEnviro"><img width = "60%" height = "60%" src = "https://9072131.app.netsuite.com/core/media/media.nl?id=1482&amp;c=9072131&amp;h=oRdJU-o0WW-XPm8vVtMQnfdaClkG_nGKN-6tBkO1Tk2NH2Me"/></td>
+<#else/>
+  <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorEnviro">&nbsp;</td>
+</#if>
+
+<#if record.custbody_vs_financialcontrollerapprova == true>
+  <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorEnviro"><img width = "40%" height = "40%" src = "https://9072131.app.netsuite.com/core/media/media.nl?id=1475&amp;c=9072131&amp;h=R2ZhsJwyX4A2pKthQrWBTqMkzB6l56tLAhFNIbbStTUGEjKz"/></td>
+    <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorEnviro"><img width = "40%" height = "40%" src = "https://9072131.app.netsuite.com/core/media/media.nl?id=1481&amp;c=9072131&amp;h=qCa3u48f0VyNb4bPJENHsatQBHzSE7b6ax_uLYZsxJ5eSRVa"/></td>
+<#else/>
+  <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorEnviro">&nbsp;</td>
+  <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorEnviro">&nbsp;</td>
+</#if>
+</tr>
+
+<#elseif record.custbody_vs_po_type == "Fixed Asset">
+  	<tr>
+	<td style="border-left: 1px; border-right: 1px; border-top: 1px;" class = "borderColorEnviro"><b>Purchasing Manager</b></td>
+	<td style="border-left: 1px; border-right: 1px; border-top: 1px;" class = "borderColorEnviro"><b>Directorf of Finance</b></td>
+  	<td style="border-left: 1px; border-right: 1px; border-top: 1px;" class = "borderColorEnviro"><b>Chief Executive Officer</b></td>
+    </tr>
+  <tr>
+
+<#if record.custbody_vs_purchasingmanagerapproval == true>
+  <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorEnviro"><img width = "60%" height = "60%" src = "https://9072131.app.netsuite.com/core/media/media.nl?id=1482&amp;c=9072131&amp;h=oRdJU-o0WW-XPm8vVtMQnfdaClkG_nGKN-6tBkO1Tk2NH2Me"/></td>
+<#else/>
+  <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorEnviro">&nbsp;</td>
+</#if>
+
+<#if record.custbody_vs_financialcontrollerapprova == true>
+  <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorEnviro"><img width = "40%" height = "40%" src = "https://9072131.app.netsuite.com/core/media/media.nl?id=1475&amp;c=9072131&amp;h=R2ZhsJwyX4A2pKthQrWBTqMkzB6l56tLAhFNIbbStTUGEjKz"/></td>
+<#else/>
+  <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorEnviro">&nbsp;</td>
+</#if>
+
+<#if record.custbody_vs_generalmanagerapproval == true>
+    <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorEnviro"><img width = "40%" height = "40%" src = "https://9072131.app.netsuite.com/core/media/media.nl?id=1481&amp;c=9072131&amp;h=qCa3u48f0VyNb4bPJENHsatQBHzSE7b6ax_uLYZsxJ5eSRVa"/></td>
+<#else/>
+    <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorEnviro">&nbsp;</td>
+</#if>
+</tr>
+
+<#elseif record.custbody_vs_po_type == "Engineering">
+  	<tr>
+	<td style="border-left: 1px; border-right: 1px; border-top: 1px;" class = "borderColorEnviro"><b>Purchasing Manager</b></td>
+	<td style="border-left: 1px; border-right: 1px; border-top: 1px;" class = "borderColorEnviro"><b>Corporate Chief Engineer</b></td>
+  	<td style="border-left: 1px; border-right: 1px; border-top: 1px;" class = "borderColorEnviro"><b>Director of Finance</b></td>
+    <td style="border-left: 1px; border-right: 1px; border-top: 1px;" class = "borderColorEnviro"><b>General Manager</b></td>
+    </tr>
+  <tr>
+
+<#if record.custbody_vs_purchasingmanagerapproval == true>
+  <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorEnviro"><img width = "60%" height = "60%" src = "https://9072131.app.netsuite.com/core/media/media.nl?id=1482&amp;c=9072131&amp;h=oRdJU-o0WW-XPm8vVtMQnfdaClkG_nGKN-6tBkO1Tk2NH2Me"/></td>
+<#else/>
+  <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorEnviro">&nbsp;</td>
+</#if>
+
+<#if record.total gt 25000>
+    <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorEnviro"><img width = "40%" height = "40%" src = "https://9072131.app.netsuite.com/core/media/media.nl?id=1481&amp;c=9072131&amp;h=qCa3u48f0VyNb4bPJENHsatQBHzSE7b6ax_uLYZsxJ5eSRVa"/></td>
+<#elseif record.custbody_vs_generalmanagerapproval == true/>
+    <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorEnviro"><img width = "40%" height = "40%" src = "https://9072131.app.netsuite.com/core/media/media.nl?id=1481&amp;c=9072131&amp;h=qCa3u48f0VyNb4bPJENHsatQBHzSE7b6ax_uLYZsxJ5eSRVa"/></td>
+<#else/>
+    <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorEnviro">&nbsp;</td>
+</#if>
+
+<#if record.custbody_vs_financialcontrollerapprova == true>
+  <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorEnviro"><img width = "40%" height = "40%" src = "https://9072131.app.netsuite.com/core/media/media.nl?id=1475&amp;c=9072131&amp;h=R2ZhsJwyX4A2pKthQrWBTqMkzB6l56tLAhFNIbbStTUGEjKz"/></td>
+<#else/>
+  <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorEnviro">&nbsp;</td>
+</#if>
+</tr>
+
+
+
+</#if>
+
+
+<#elseif record.subsidiary == "22 Enviro Facility Management - Neom">
+<#if record.custbody_vs_po_type == "Regular">
+  	<tr>
+	<td style="border-left: 1px; border-right: 1px; border-top: 1px;" class = "borderColorEnviro"><b>Purchasing Manager</b></td>
+	<td style="border-left: 1px; border-right: 1px; border-top: 1px;" class = "borderColorEnviro"><b>Financial Controller</b></td>
+  	<td style="border-left: 1px; border-right: 1px; border-top: 1px;" class = "borderColorEnviro"><b>General Manager</b></td>
+    </tr>
+  <tr>
+
+<#if record.custbody_vs_purchasingmanagerapproval == true>
+  <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorEnviro"><img width = "60%" height = "60%" src = "https://9072131.app.netsuite.com/core/media/media.nl?id=1482&amp;c=9072131&amp;h=oRdJU-o0WW-XPm8vVtMQnfdaClkG_nGKN-6tBkO1Tk2NH2Me"/></td>
+<#else/>
+  <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorEnviro">&nbsp;</td>
+</#if>
+
+<#if record.custbody_vs_financialcontrollerapprova == true>
+  <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorEnviro"><img width = "40%" height = "40%" src = "https://9072131.app.netsuite.com/core/media/media.nl?id=1477&amp;c=9072131&amp;h=7USVOsYp7tNV5giJpYLgat2EMWXshmbftzgxSJT12uBq8rif"/></td>
+<#else/>
+  <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorEnviro">&nbsp;</td>
+</#if>
+
+<#if record.custbody_vs_generalmanagerapproval == true>
+    <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorEnviro"><img width = "30%" height = "30%" src = "https://9072131.app.netsuite.com/core/media/media.nl?id=1478&amp;c=9072131&amp;h=e1PZgCKzJS3rLxaxuiLaXyES33MMxECbKvFzuOge9aMMhJpJ"/></td>
+<#else/>
+    <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorEnviro">&nbsp;</td>
+</#if>
+</tr>
+
+<#elseif record.custbody_vs_po_type == "Direct Purchase">
+  	<tr>
+	<td style="border-left: 1px; border-right: 1px; border-top: 1px;" class = "borderColorEnviro"><b>Purchasing Manager</b></td>
+	<td style="border-left: 1px; border-right: 1px; border-top: 1px;" class = "borderColorEnviro"><b>Financial Controller</b></td>
+  	<td style="border-left: 1px; border-right: 1px; border-top: 1px;" class = "borderColorEnviro"><b>General Manager</b></td>
+    </tr>
+  <tr>
+
+  <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorEnviro"><img width = "60%" height = "60%" src = "https://9072131.app.netsuite.com/core/media/media.nl?id=1482&amp;c=9072131&amp;h=oRdJU-o0WW-XPm8vVtMQnfdaClkG_nGKN-6tBkO1Tk2NH2Me"/></td>
+
+<#if record.custbody_vs_financialcontrollerapprova == true>
+  <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorEnviro"><img width = "40%" height = "40%" src = "https://9072131.app.netsuite.com/core/media/media.nl?id=1475&amp;c=9072131&amp;h=R2ZhsJwyX4A2pKthQrWBTqMkzB6l56tLAhFNIbbStTUGEjKz"/></td>
+    <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorEnviro"><img width = "40%" height = "40%" src = "https://9072131.app.netsuite.com/core/media/media.nl?id=1481&amp;c=9072131&amp;h=qCa3u48f0VyNb4bPJENHsatQBHzSE7b6ax_uLYZsxJ5eSRVa"/></td>
+<#else/>
+  <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorEnviro">&nbsp;</td>
+  <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorEnviro">&nbsp;</td>
+</#if>
+
+</tr>
+
+<#elseif record.custbody_vs_po_type == "Food & Beverage">
+  	<tr>
+	<td style="border-left: 1px; border-right: 1px; border-top: 1px;" class = "borderColorEnviro"><b>Purchasing Manager</b></td>
+	<td style="border-left: 1px; border-right: 1px; border-top: 1px;" class = "borderColorEnviro"><b>Financial Controller</b></td>
+  	<td style="border-left: 1px; border-right: 1px; border-top: 1px;" class = "borderColorEnviro"><b>General Manager</b></td>
+    </tr>
+  <tr>
+
+<#if record.custbody_vs_purchasingmanagerapproval == true>
+  <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorEnviro"><img width = "60%" height = "60%" src = "https://9072131.app.netsuite.com/core/media/media.nl?id=1482&amp;c=9072131&amp;h=oRdJU-o0WW-XPm8vVtMQnfdaClkG_nGKN-6tBkO1Tk2NH2Me"/></td>
+<#else/>
+  <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorEnviro">&nbsp;</td>
+</#if>
+
+<#if record.custbody_vs_financialcontrollerapprova == true>
+  <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorEnviro"><img width = "40%" height = "40%" src = "https://9072131.app.netsuite.com/core/media/media.nl?id=1475&amp;c=9072131&amp;h=R2ZhsJwyX4A2pKthQrWBTqMkzB6l56tLAhFNIbbStTUGEjKz"/></td>
+    <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorEnviro"><img width = "40%" height = "40%" src = "https://9072131.app.netsuite.com/core/media/media.nl?id=1481&amp;c=9072131&amp;h=qCa3u48f0VyNb4bPJENHsatQBHzSE7b6ax_uLYZsxJ5eSRVa"/></td>
+<#else/>
+  <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorEnviro">&nbsp;</td>
+  <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorEnviro">&nbsp;</td>
+</#if>
+</tr>
+
+<#elseif record.custbody_vs_po_type == "Fixed Asset">
+  	<tr>
+	<td style="border-left: 1px; border-right: 1px; border-top: 1px;" class = "borderColorEnviro"><b>Purchasing Manager</b></td>
+	<td style="border-left: 1px; border-right: 1px; border-top: 1px;" class = "borderColorEnviro"><b>Directorf of Finance</b></td>
+  	<td style="border-left: 1px; border-right: 1px; border-top: 1px;" class = "borderColorEnviro"><b>Chief Executive Officer</b></td>
+    </tr>
+  <tr>
+
+<#if record.custbody_vs_purchasingmanagerapproval == true>
+  <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorEnviro"><img width = "60%" height = "60%" src = "https://9072131.app.netsuite.com/core/media/media.nl?id=1482&amp;c=9072131&amp;h=oRdJU-o0WW-XPm8vVtMQnfdaClkG_nGKN-6tBkO1Tk2NH2Me"/></td>
+<#else/>
+  <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorEnviro">&nbsp;</td>
+</#if>
+
+<#if record.custbody_vs_financialcontrollerapprova == true>
+  <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorEnviro"><img width = "40%" height = "40%" src = "https://9072131.app.netsuite.com/core/media/media.nl?id=1475&amp;c=9072131&amp;h=R2ZhsJwyX4A2pKthQrWBTqMkzB6l56tLAhFNIbbStTUGEjKz"/></td>
+<#else/>
+  <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorEnviro">&nbsp;</td>
+</#if>
+
+<#if record.custbody_vs_generalmanagerapproval == true>
+    <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorEnviro"><img width = "40%" height = "40%" src = "https://9072131.app.netsuite.com/core/media/media.nl?id=1481&amp;c=9072131&amp;h=qCa3u48f0VyNb4bPJENHsatQBHzSE7b6ax_uLYZsxJ5eSRVa"/></td>
+<#else/>
+    <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorEnviro">&nbsp;</td>
+</#if>
+</tr>
+
+<#elseif record.custbody_vs_po_type == "Engineering">
+  	<tr>
+	<td style="border-left: 1px; border-right: 1px; border-top: 1px;" class = "borderColorEnviro"><b>Purchasing Manager</b></td>
+	<td style="border-left: 1px; border-right: 1px; border-top: 1px;" class = "borderColorEnviro"><b>Corporate Chief Engineer</b></td>
+  	<td style="border-left: 1px; border-right: 1px; border-top: 1px;" class = "borderColorEnviro"><b>Director of Finance</b></td>
+    <td style="border-left: 1px; border-right: 1px; border-top: 1px;" class = "borderColorEnviro"><b>General Manager</b></td>
+    </tr>
+  <tr>
+
+<#if record.custbody_vs_purchasingmanagerapproval == true>
+  <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorEnviro"><img width = "60%" height = "60%" src = "https://9072131.app.netsuite.com/core/media/media.nl?id=1482&amp;c=9072131&amp;h=oRdJU-o0WW-XPm8vVtMQnfdaClkG_nGKN-6tBkO1Tk2NH2Me"/></td>
+<#else/>
+  <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorEnviro">&nbsp;</td>
+</#if>
+
+<#if record.total gt 25000>
+    <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorEnviro"><img width = "40%" height = "40%" src = "https://9072131.app.netsuite.com/core/media/media.nl?id=1481&amp;c=9072131&amp;h=qCa3u48f0VyNb4bPJENHsatQBHzSE7b6ax_uLYZsxJ5eSRVa"/></td>
+<#elseif record.custbody_vs_generalmanagerapproval == true/>
+    <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorEnviro"><img width = "40%" height = "40%" src = "https://9072131.app.netsuite.com/core/media/media.nl?id=1481&amp;c=9072131&amp;h=qCa3u48f0VyNb4bPJENHsatQBHzSE7b6ax_uLYZsxJ5eSRVa"/></td>
+<#else/>
+    <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorEnviro">&nbsp;</td>
+</#if>
+
+<#if record.custbody_vs_financialcontrollerapprova == true>
+  <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorEnviro"><img width = "40%" height = "40%" src = "https://9072131.app.netsuite.com/core/media/media.nl?id=1475&amp;c=9072131&amp;h=R2ZhsJwyX4A2pKthQrWBTqMkzB6l56tLAhFNIbbStTUGEjKz"/></td>
+<#else/>
+  <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorEnviro">&nbsp;</td>
+</#if>
+</tr>
+
+
+
+</#if>
+
+
+<#elseif record.subsidiary == "31 Eventti Catering">
+<#if record.custbody_vs_po_type == "Regular">
+  	<tr>
+	<td style="border-left: 1px; border-right: 1px; border-top: 1px;" class = "borderColorEventi"><b>Purchasing Manager</b></td>
+	<td style="border-left: 1px; border-right: 1px; border-top: 1px;" class = "borderColorEventi"><b>Financial Controller</b></td>
+  	<td style="border-left: 1px; border-right: 1px; border-top: 1px;" class = "borderColorEventi"><b>General Manager</b></td>
+    </tr>
+  <tr>
+
+<#if record.custbody_vs_purchasingmanagerapproval == true>
+  <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorEventi"><img width = "60%" height = "60%" src = "https://9072131.app.netsuite.com/core/media/media.nl?id=1482&amp;c=9072131&amp;h=oRdJU-o0WW-XPm8vVtMQnfdaClkG_nGKN-6tBkO1Tk2NH2Me"/></td>
+<#else/>
+  <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorEventi">&nbsp;</td>
+</#if>
+
+<#if record.custbody_vs_financialcontrollerapprova == true>
+  <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorEventi"><img width = "40%" height = "40%" src = "https://9072131.app.netsuite.com/core/media/media.nl?id=1476&amp;c=9072131&amp;h=Qo5B88bha73ZF6Y4LNil-CuPbVnJVL8LVa4aHoT8vsxFZ8_o"/></td>
+<#else/>
+  <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorEventi">&nbsp;</td>
+</#if>
+
+<#if record.custbody_vs_generalmanagerapproval == true>
+    <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorEventi"><img width = "30%" height = "30%" src = "https://9072131.app.netsuite.com/core/media/media.nl?id=1479&amp;c=9072131&amp;h=FdeWXAJWW4LosFaldQ8ZMblV55EWGKl105SkOlefqW19QQV9"/></td>
+<#else/>
+    <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorEventi">&nbsp;</td>
+</#if>
+</tr>
+
+<#elseif record.custbody_vs_po_type == "Direct Purchase">
+  	<tr>
+	<td style="border-left: 1px; border-right: 1px; border-top: 1px;" class = "borderColorEventi"><b>Purchasing Manager</b></td>
+	<td style="border-left: 1px; border-right: 1px; border-top: 1px;" class = "borderColorEventi"><b>Financial Controller</b></td>
+  	<td style="border-left: 1px; border-right: 1px; border-top: 1px;" class = "borderColorEventi"><b>General Manager</b></td>
+    </tr>
+  <tr>
+
+  <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorEventi"><img width = "60%" height = "60%" src = "https://9072131.app.netsuite.com/core/media/media.nl?id=1482&amp;c=9072131&amp;h=oRdJU-o0WW-XPm8vVtMQnfdaClkG_nGKN-6tBkO1Tk2NH2Me"/></td>
+
+<#if record.custbody_vs_financialcontrollerapprova == true>
+  <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorEventi"><img width = "40%" height = "40%" src = "https://9072131.app.netsuite.com/core/media/media.nl?id=1475&amp;c=9072131&amp;h=R2ZhsJwyX4A2pKthQrWBTqMkzB6l56tLAhFNIbbStTUGEjKz"/></td>
+    <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorEventi"><img width = "40%" height = "40%" src = "https://9072131.app.netsuite.com/core/media/media.nl?id=1481&amp;c=9072131&amp;h=qCa3u48f0VyNb4bPJENHsatQBHzSE7b6ax_uLYZsxJ5eSRVa"/></td>
+<#else/>
+  <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorEventi">&nbsp;</td>
+  <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorEventi">&nbsp;</td>
+</#if>
+
+</tr>
+
+<#elseif record.custbody_vs_po_type == "Food & Beverage">
+  	<tr>
+	<td style="border-left: 1px; border-right: 1px; border-top: 1px;" class = "borderColorEventi"><b>Purchasing Manager</b></td>
+	<td style="border-left: 1px; border-right: 1px; border-top: 1px;" class = "borderColorEventi"><b>Financial Controller</b></td>
+  	<td style="border-left: 1px; border-right: 1px; border-top: 1px;" class = "borderColorEventi"><b>General Manager</b></td>
+    </tr>
+  <tr>
+
+<#if record.custbody_vs_purchasingmanagerapproval == true>
+  <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorEventi"><img width = "60%" height = "60%" src = "https://9072131.app.netsuite.com/core/media/media.nl?id=1482&amp;c=9072131&amp;h=oRdJU-o0WW-XPm8vVtMQnfdaClkG_nGKN-6tBkO1Tk2NH2Me"/></td>
+<#else/>
+  <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorEventi">&nbsp;</td>
+</#if>
+
+<#if record.custbody_vs_financialcontrollerapprova == true>
+  <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorEventi"><img width = "40%" height = "40%" src = "https://9072131.app.netsuite.com/core/media/media.nl?id=1475&amp;c=9072131&amp;h=R2ZhsJwyX4A2pKthQrWBTqMkzB6l56tLAhFNIbbStTUGEjKz"/></td>
+    <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorEventi"><img width = "40%" height = "40%" src = "https://9072131.app.netsuite.com/core/media/media.nl?id=1481&amp;c=9072131&amp;h=qCa3u48f0VyNb4bPJENHsatQBHzSE7b6ax_uLYZsxJ5eSRVa"/></td>
+<#else/>
+  <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorEventi">&nbsp;</td>
+  <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorEventi">&nbsp;</td>
+</#if>
+</tr>
+
+<#elseif record.custbody_vs_po_type == "Fixed Asset">
+  	<tr>
+	<td style="border-left: 1px; border-right: 1px; border-top: 1px;" class = "borderColorEventi"><b>Purchasing Manager</b></td>
+	<td style="border-left: 1px; border-right: 1px; border-top: 1px;" class = "borderColorEventi"><b>Directorf of Finance</b></td>
+  	<td style="border-left: 1px; border-right: 1px; border-top: 1px;" class = "borderColorEventi"><b>Chief Executive Officer</b></td>
+    </tr>
+  <tr>
+
+<#if record.custbody_vs_purchasingmanagerapproval == true>
+  <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorEventi"><img width = "60%" height = "60%" src = "https://9072131.app.netsuite.com/core/media/media.nl?id=1482&amp;c=9072131&amp;h=oRdJU-o0WW-XPm8vVtMQnfdaClkG_nGKN-6tBkO1Tk2NH2Me"/></td>
+<#else/>
+  <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorEventi">&nbsp;</td>
+</#if>
+
+<#if record.custbody_vs_financialcontrollerapprova == true>
+  <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorEventi"><img width = "40%" height = "40%" src = "https://9072131.app.netsuite.com/core/media/media.nl?id=1475&amp;c=9072131&amp;h=R2ZhsJwyX4A2pKthQrWBTqMkzB6l56tLAhFNIbbStTUGEjKz"/></td>
+<#else/>
+  <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorEventi">&nbsp;</td>
+</#if>
+
+<#if record.custbody_vs_generalmanagerapproval == true>
+    <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorEventi"><img width = "40%" height = "40%" src = "https://9072131.app.netsuite.com/core/media/media.nl?id=1481&amp;c=9072131&amp;h=qCa3u48f0VyNb4bPJENHsatQBHzSE7b6ax_uLYZsxJ5eSRVa"/></td>
+<#else/>
+    <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorEventi">&nbsp;</td>
+</#if>
+</tr>
+
+<#elseif record.custbody_vs_po_type == "Engineering">
+  	<tr>
+	<td style="border-left: 1px; border-right: 1px; border-top: 1px;" class = "borderColorEventi"><b>Purchasing Manager</b></td>
+	<td style="border-left: 1px; border-right: 1px; border-top: 1px;" class = "borderColorEventi"><b>Corporate Chief Engineer</b></td>
+  	<td style="border-left: 1px; border-right: 1px; border-top: 1px;" class = "borderColorEventi"><b>Director of Finance</b></td>
+    <td style="border-left: 1px; border-right: 1px; border-top: 1px;" class = "borderColorEventi"><b>General Manager</b></td>
+    </tr>
+  <tr>
+
+<#if record.custbody_vs_purchasingmanagerapproval == true>
+  <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorEventi"><img width = "60%" height = "60%" src = "https://9072131.app.netsuite.com/core/media/media.nl?id=1482&amp;c=9072131&amp;h=oRdJU-o0WW-XPm8vVtMQnfdaClkG_nGKN-6tBkO1Tk2NH2Me"/></td>
+<#else/>
+  <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorEventi">&nbsp;</td>
+</#if>
+
+<#if record.total gt 25000>
+    <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorEventi"><img width = "40%" height = "40%" src = "https://9072131.app.netsuite.com/core/media/media.nl?id=1481&amp;c=9072131&amp;h=qCa3u48f0VyNb4bPJENHsatQBHzSE7b6ax_uLYZsxJ5eSRVa"/></td>
+<#elseif record.custbody_vs_generalmanagerapproval == true/>
+    <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorEventi"><img width = "40%" height = "40%" src = "https://9072131.app.netsuite.com/core/media/media.nl?id=1481&amp;c=9072131&amp;h=qCa3u48f0VyNb4bPJENHsatQBHzSE7b6ax_uLYZsxJ5eSRVa"/></td>
+<#else/>
+    <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorEventi">&nbsp;</td>
+</#if>
+
+<#if record.custbody_vs_financialcontrollerapprova == true>
+  <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorEventi"><img width = "40%" height = "40%" src = "https://9072131.app.netsuite.com/core/media/media.nl?id=1475&amp;c=9072131&amp;h=R2ZhsJwyX4A2pKthQrWBTqMkzB6l56tLAhFNIbbStTUGEjKz"/></td>
+<#else/>
+  <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorEventi">&nbsp;</td>
+</#if>
+</tr>
+
+</#if>
+
+
+<#elseif record.subsidiary == "12 Lazure beach and resort">
+<#if record.custbody_vs_po_type == "Regular">
+  	<tr>
+	<td style="border-left: 1px; border-right: 1px; border-top: 1px;" class = "borderColorLazureBeachResort"><b>Purchasing Manager</b></td>
+	<td style="border-left: 1px; border-right: 1px; border-top: 1px;" class = "borderColorLazureBeachResort"><b>Financial Controller</b></td>
+  	<td style="border-left: 1px; border-right: 1px; border-top: 1px;" class = "borderColorLazureBeachResort"><b>General Manager</b></td>
+    </tr>
+  <tr>
+
+<#if record.custbody_vs_purchasingmanagerapproval == true>
+  <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorLazureBeachResort"><img width = "60%" height = "60%" src = "https://9072131.app.netsuite.com/core/media/media.nl?id=1482&amp;c=9072131&amp;h=oRdJU-o0WW-XPm8vVtMQnfdaClkG_nGKN-6tBkO1Tk2NH2Me"/></td>
+<#else/>
+  <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorLazureBeachResort">&nbsp;</td>
+</#if>
+
+<#if record.custbody_vs_financialcontrollerapprova == true>
+  <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorLazureBeachResort"><img width = "40%" height = "40%" src = "https://9072131.app.netsuite.com/core/media/media.nl?id=1475&amp;c=9072131&amp;h=R2ZhsJwyX4A2pKthQrWBTqMkzB6l56tLAhFNIbbStTUGEjKz"/></td>
+<#else/>
+  <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorLazureBeachResort">&nbsp;</td>
+</#if>
+
+<#if record.custbody_vs_generalmanagerapproval == true>
+    <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorLazureBeachResort"><img width = "30%" height = "30%" src = "https://9072131.app.netsuite.com/core/media/media.nl?id=1480&amp;c=9072131&amp;h=ISTJMBdpFR2ztTVnYj1I7MxcVaDwYupFBmF2Gr0lUoQNlgsI"/></td>
+<#else/>
+    <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorLazureBeachResort">&nbsp;</td>
+</#if>
+</tr>
+
+<#elseif record.custbody_vs_po_type == "Direct Purchase">
+  	<tr>
+	<td style="border-left: 1px; border-right: 1px; border-top: 1px;" class = "borderColorLazureBeachResort"><b>Purchasing Manager</b></td>
+	<td style="border-left: 1px; border-right: 1px; border-top: 1px;" class = "borderColorLazureBeachResort"><b>Financial Controller</b></td>
+  	<td style="border-left: 1px; border-right: 1px; border-top: 1px;" class = "borderColorLazureBeachResort"><b>General Manager</b></td>
+    </tr>
+  <tr>
+
+  <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorLazureBeachResort"><img width = "60%" height = "60%" src = "https://9072131.app.netsuite.com/core/media/media.nl?id=1482&amp;c=9072131&amp;h=oRdJU-o0WW-XPm8vVtMQnfdaClkG_nGKN-6tBkO1Tk2NH2Me"/></td>
+
+<#if record.custbody_vs_financialcontrollerapprova == true>
+  <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorLazureBeachResort"><img width = "40%" height = "40%" src = "https://9072131.app.netsuite.com/core/media/media.nl?id=1475&amp;c=9072131&amp;h=R2ZhsJwyX4A2pKthQrWBTqMkzB6l56tLAhFNIbbStTUGEjKz"/></td>
+    <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorLazureBeachResort"><img width = "40%" height = "40%" src = "https://9072131.app.netsuite.com/core/media/media.nl?id=1480&amp;c=9072131&amp;h=ISTJMBdpFR2ztTVnYj1I7MxcVaDwYupFBmF2Gr0lUoQNlgsI"/></td>
+<#else/>
+  <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorLazureBeachResort">&nbsp;</td>
+  <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorLazureBeachResort">&nbsp;</td>
+</#if>
+
+</tr>
+
+<#elseif record.custbody_vs_po_type == "Food & Beverage">
+  	<tr>
+	<td style="border-left: 1px; border-right: 1px; border-top: 1px;" class = "borderColorLazureBeachResort"><b>Purchasing Manager</b></td>
+	<td style="border-left: 1px; border-right: 1px; border-top: 1px;" class = "borderColorLazureBeachResort"><b>Financial Controller</b></td>
+  	<td style="border-left: 1px; border-right: 1px; border-top: 1px;" class = "borderColorLazureBeachResort"><b>General Manager</b></td>
+    </tr>
+  <tr>
+
+<#if record.custbody_vs_purchasingmanagerapproval == true>
+  <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorLazureBeachResort"><img width = "60%" height = "60%" src = "https://9072131.app.netsuite.com/core/media/media.nl?id=1482&amp;c=9072131&amp;h=oRdJU-o0WW-XPm8vVtMQnfdaClkG_nGKN-6tBkO1Tk2NH2Me"/></td>
+<#else/>
+  <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorLazureBeachResort">&nbsp;</td>
+</#if>
+
+<#if record.custbody_vs_financialcontrollerapprova == true>
+  <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorLazureBeachResort"><img width = "40%" height = "40%" src = "https://9072131.app.netsuite.com/core/media/media.nl?id=1475&amp;c=9072131&amp;h=R2ZhsJwyX4A2pKthQrWBTqMkzB6l56tLAhFNIbbStTUGEjKz"/></td>
+    <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorLazureBeachResort"><img width = "40%" height = "40%" src = "https://9072131.app.netsuite.com/core/media/media.nl?id=1480&amp;c=9072131&amp;h=ISTJMBdpFR2ztTVnYj1I7MxcVaDwYupFBmF2Gr0lUoQNlgsI"/></td>
+<#else/>
+  <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorLazureBeachResort">&nbsp;</td>
+  <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorLazureBeachResort">&nbsp;</td>
+</#if>
+</tr>
+
+<#elseif record.custbody_vs_po_type == "Fixed Asset">
+  	<tr>
+	<td style="border-left: 1px; border-right: 1px; border-top: 1px;" class = "borderColorLazureBeachResort"><b>Purchasing Manager</b></td>
+	<td style="border-left: 1px; border-right: 1px; border-top: 1px;" class = "borderColorLazureBeachResort"><b>Directorf of Finance</b></td>
+  	<td style="border-left: 1px; border-right: 1px; border-top: 1px;" class = "borderColorLazureBeachResort"><b>Chief Executive Officer</b></td>
+    </tr>
+  <tr>
+
+<#if record.custbody_vs_purchasingmanagerapproval == true>
+  <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorLazureBeachResort"><img width = "60%" height = "60%" src = "https://9072131.app.netsuite.com/core/media/media.nl?id=1482&amp;c=9072131&amp;h=oRdJU-o0WW-XPm8vVtMQnfdaClkG_nGKN-6tBkO1Tk2NH2Me"/></td>
+<#else/>
+  <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorLazureBeachResort">&nbsp;</td>
+</#if>
+
+<#if record.custbody_vs_financialcontrollerapprova == true>
+  <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorLazureBeachResort"><img width = "40%" height = "40%" src = "https://9072131.app.netsuite.com/core/media/media.nl?id=1475&amp;c=9072131&amp;h=R2ZhsJwyX4A2pKthQrWBTqMkzB6l56tLAhFNIbbStTUGEjKz"/></td>
+<#else/>
+  <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorLazureBeachResort">&nbsp;</td>
+</#if>
+
+<#if record.custbody_vs_generalmanagerapproval == true>
+    <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorLazureBeachResort"><img width = "40%" height = "40%" src = "https://9072131.app.netsuite.com/core/media/media.nl?id=1480&amp;c=9072131&amp;h=ISTJMBdpFR2ztTVnYj1I7MxcVaDwYupFBmF2Gr0lUoQNlgsI"/></td>
+<#else/>
+    <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorLazureBeachResort">&nbsp;</td>
+</#if>
+</tr>
+
+<#elseif record.custbody_vs_po_type == "Engineering">
+  	<tr>
+	<td style="border-left: 1px; border-right: 1px; border-top: 1px;" class = "borderColorLazureBeachResort"><b>Purchasing Manager</b></td>
+	<td style="border-left: 1px; border-right: 1px; border-top: 1px;" class = "borderColorLazureBeachResort"><b>Corporate Chief Engineer</b></td>
+  	<td style="border-left: 1px; border-right: 1px; border-top: 1px;" class = "borderColorLazureBeachResort"><b>Director of Finance</b></td>
+    <td style="border-left: 1px; border-right: 1px; border-top: 1px;" class = "borderColorLazureBeachResort"><b>General Manager</b></td>
+    </tr>
+  <tr>
+
+<#if record.custbody_vs_purchasingmanagerapproval == true>
+  <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorLazureBeachResort"><img width = "60%" height = "60%" src = "https://9072131.app.netsuite.com/core/media/media.nl?id=1482&amp;c=9072131&amp;h=oRdJU-o0WW-XPm8vVtMQnfdaClkG_nGKN-6tBkO1Tk2NH2Me"/></td>
+<#else/>
+  <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorLazureBeachResort">&nbsp;</td>
+</#if>
+
+<#if record.total gt 25000>
+    <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorLazureBeachResort"><img width = "40%" height = "40%" src = "https://9072131.app.netsuite.com/core/media/media.nl?id=1475&amp;c=9072131&amp;h=R2ZhsJwyX4A2pKthQrWBTqMkzB6l56tLAhFNIbbStTUGEjKz"/></td>
+<#elseif record.custbody_vs_generalmanagerapproval == true/>
+    <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorLazureBeachResort"><img width = "40%" height = "40%" src = "https://9072131.app.netsuite.com/core/media/media.nl?id=1480&amp;c=9072131&amp;h=ISTJMBdpFR2ztTVnYj1I7MxcVaDwYupFBmF2Gr0lUoQNlgsI"/></td>
+<#else/>
+    <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorLazureBeachResort">&nbsp;</td>
+</#if>
+
+<#if record.custbody_vs_financialcontrollerapprova == true>
+  <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorLazureBeachResort"><img width = "40%" height = "40%" src = "https://9072131.app.netsuite.com/core/media/media.nl?id=1475&amp;c=9072131&amp;h=R2ZhsJwyX4A2pKthQrWBTqMkzB6l56tLAhFNIbbStTUGEjKz"/></td>
+<#else/>
+  <td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorLazureBeachResort">&nbsp;</td>
+</#if>
+</tr>
+
+</#if>
+
+
+ </#if>
+</table>
+        </macro>
+    </macrolist>
+    <style type="text/css">* {
+		<#if .locale == "zh_CN">
+			font-family: NotoSans, NotoSansCJKsc, sans-serif;
+		<#elseif .locale == "zh_TW">
+			font-family: NotoSans, NotoSansCJKtc, sans-serif;
+		<#elseif .locale == "ja_JP">
+			font-family: NotoSans, NotoSansCJKjp, sans-serif;
+		<#elseif .locale == "ko_KR">
+			font-family: NotoSans, NotoSansCJKkr, sans-serif;
+		<#elseif .locale == "th_TH">
+			font-family: NotoSans, NotoSansThai, sans-serif;
+		<#else>
+			font-family: NotoSans, sans-serif;
+		</#if>
+		}
+		table {
+			font-size: 9pt;
+			table-layout: fixed;
+		}
+        th {
+            font-weight: bold;
+            font-size: 8pt;
+            vertical-align: middle;
+            padding: 5px 6px 3px;
+            background-color: #e3e3e3;
+            color: #333333;
+        }
+        td {
+            padding: 4px 6px;
+        }
+		td p { align:left }
+        b {
+            font-weight: bold;
+            color: #333333;
+        }
+        table.header td {
+            padding: 0;
+            font-size: 10pt;
+        }
+        table.footer td {
+            padding: 0;
+            font-size: 8pt;
+        }
+        table.itemtable th {
+            padding-bottom: 10px;
+            padding-top: 10px;
+        }
+        table.body td {
+            padding-top: 2px;
+        }
+        table.total {
+            page-break-inside: avoid;
+        }
+        tr.totalrow {
+            background-color: #e3e3e3;
+            line-height: 200%;
+        }
+        td.totalboxtop {
+            font-size: 12pt;
+            background-color: #e3e3e3;
+        }
+        td.addressheader {
+            font-size: 8pt;
+            padding-top: 6px;
+            padding-bottom: 2px;
+        }
+        td.address {
+            padding-top: 0;
+        }
+        td.totalboxmid {
+            font-size: 28pt;
+            padding-top: 20px;
+            background-color: #e3e3e3;
+        }
+        td.totalboxbot {
+            background-color: #e3e3e3;
+            font-weight: bold;
+        }
+        span.title {
+            font-size: 28pt;
+        }
+        span.number {
+            font-size: 16pt;
+        }
+        span.itemname {
+            font-weight: bold;
+            line-height: 150%;
+        }
+.bgColorTabouk {
+background-color:'#adadb0';
+}
+.bgColorRoyalLazure {
+background-color:'#c2b59b';
+}
+.bgColorLazureBeachResort {
+background-color:'#0098A7';
+}
+.bgColorLazureResidance {
+background-color:'#889094';
+}
+.bgColorEnviro {
+background-color:'#52b280';
+}
+.bgColorEventi {
+background-color:'#1F839C';
+}
+.borderColorTabouk {
+border-color:'#adadb0';
+}
+.borderColorRoyalLazure {
+border-color:'#c2b59b';
+}
+.borderColorLazureBeachResort {
+border-color:'#0098A7';
+}
+.borderColorLazureResidance {
+border-color:'#889094';
+}
+.borderColorEnviro {
+border-color:'#52b280';
+}
+.borderColorEventi {
+border-color:'#1F839C';
+}
+.mixColorTabouk {
+background-color:'#adadb0';
+border-color:'#1F839C';
+}
+.mixColorRoyalLazure {
+background-color:'#c2b59b';
+border-color:'#c2b59b';
+}
+.mixColorLazureBeachResort {
+background-color:'#0098A7';
+border-color:'#0098A7';
+}
+.mixColorLazureResidance {
+background-color:'#889094';
+border-color:'#889094';
+}
+.mixColorEnviro {
+background-color:'#52b280';
+border-color:'#52b280';
+}
+.mixColorEventi {
+background-color:'#1F839C';
+border-color:'#1F839C';
+}
+</style>
+</head>
+<body header="nlheader" header-height="32%" footer="nlfooter" footer-height="21%" padding="0.1in 0.2in 0.1in 0.2in" size="Letter">
+<#list record.item as item>
+<table style="width: 100%;padding:7px;">
+<#if item_index==0>
+<#if record.subsidiary == "00 Tabuk investment and tourism (Holding)">
+    <tr>
+	<td style="align: left; text-align: left; font-size: 13px;" class = "bgColorTabouk" width = "30%"><b>Item</b></td>
+	<td style="align: center; text-align: center; font-size: 13px;" class = "bgColorTabouk" width = "20%"><b>Description</b></td>
+	<td style="align: center; text-align: center; font-size: 13px;" class = "bgColorTabouk" width = "10%"><b>Unit</b></td>
+	<td style="align: center; text-align: center; font-size: 13px;" class = "bgColorTabouk" width = "10%"><b>Qty.</b></td>
+	<td style="align: center; text-align: center; font-size: 13px;" class = "bgColorTabouk" width = "10%"><b>Rate</b></td>
+	<td style="align: center; text-align: center; font-size: 13px;" class = "bgColorTabouk" width = "10%"><b>VAT 15%</b></td>
+	<td style="align: center; text-align: center; font-size: 13px;" class = "bgColorTabouk" width = "10%"><b>Value</b></td>
+	</tr>
+<#elseif record.subsidiary == "12 Lazure beach and resort">
+    <tr>
+	<td style="align: left; text-align: left; font-size: 13px;" class = "bgColorLazureBeachResort" width = "30%"><b>Item</b></td>
+	<td style="align: center; text-align: center; font-size: 13px;" class = "bgColorLazureBeachResort" width = "20%"><b>Description</b></td>
+	<td style="align: center; text-align: center; font-size: 13px;" class = "bgColorLazureBeachResort" width = "10%"><b>Unit</b></td>
+	<td style="align: center; text-align: center; font-size: 13px;" class = "bgColorLazureBeachResort" width = "10%"><b>Qty.</b></td>
+	<td style="align: center; text-align: center; font-size: 13px;" class = "bgColorLazureBeachResort" width = "10%"><b>Rate</b></td>
+	<td style="align: center; text-align: center; font-size: 13px;" class = "bgColorLazureBeachResort" width = "10%"><b>VAT 15%</b></td>
+	<td style="align: center; text-align: center; font-size: 13px;" class = "bgColorLazureBeachResort" width = "10%"><b>Value</b></td>
+	</tr>
+<#elseif record.subsidiary == "11 Royal Lazure">
+    <tr>
+	<td style="align: left; text-align: left; font-size: 13px;" class = "bgColorRoyalLazure" width = "30%"><b>Item</b></td>
+	<td style="align: center; text-align: center; font-size: 13px;" class = "bgColorRoyalLazure" width = "20%"><b>Description</b></td>
+	<td style="align: center; text-align: center; font-size: 13px;" class = "bgColorRoyalLazure" width = "10%"><b>Unit</b></td>
+	<td style="align: center; text-align: center; font-size: 13px;" class = "bgColorRoyalLazure" width = "10%"><b>Qty.</b></td>
+	<td style="align: center; text-align: center; font-size: 13px;" class = "bgColorRoyalLazure" width = "10%"><b>Rate</b></td>
+	<td style="align: center; text-align: center; font-size: 13px;" class = "bgColorRoyalLazure" width = "10%"><b>VAT 15%</b></td>
+	<td style="align: center; text-align: center; font-size: 13px;" class = "bgColorRoyalLazure" width = "10%"><b>Value</b></td>
+	</tr>
+<#elseif record.subsidiary == "13 Lazure executive residences">
+    <tr>
+	<td style="align: left; text-align: left; font-size: 13px;" class = "bgColorLazureResidance" width = "30%"><b>Item</b></td>
+	<td style="align: center; text-align: center; font-size: 13px;" class = "bgColorLazureResidance" width = "20%"><b>Description</b></td>
+	<td style="align: center; text-align: center; font-size: 13px;" class = "bgColorLazureResidance" width = "10%"><b>Unit</b></td>
+	<td style="align: center; text-align: center; font-size: 13px;" class = "bgColorLazureResidance" width = "10%"><b>Qty.</b></td>
+	<td style="align: center; text-align: center; font-size: 13px;" class = "bgColorLazureResidance" width = "10%"><b>Rate</b></td>
+	<td style="align: center; text-align: center; font-size: 13px;" class = "bgColorLazureResidance" width = "10%"><b>VAT 15%</b></td>
+	<td style="align: center; text-align: center; font-size: 13px;" class = "bgColorLazureResidance" width = "10%"><b>Value</b></td>
+	</tr>
+<#elseif record.subsidiary == "21 Enviro- facility management- Alula">
+    <tr>
+	<td style="align: left; text-align: left; font-size: 13px;" class = "bgColorEnviro" width = "30%"><b>Item</b></td>
+	<td style="align: center; text-align: center; font-size: 13px;" class = "bgColorEnviro" width = "20%"><b>Description</b></td>
+	<td style="align: center; text-align: center; font-size: 13px;" class = "bgColorEnviro" width = "10%"><b>Unit</b></td>
+	<td style="align: center; text-align: center; font-size: 13px;" class = "bgColorEnviro" width = "10%"><b>Qty.</b></td>
+	<td style="align: center; text-align: center; font-size: 13px;" class = "bgColorEnviro" width = "10%"><b>Rate</b></td>
+	<td style="align: center; text-align: center; font-size: 13px;" class = "bgColorEnviro" width = "10%"><b>VAT 15%</b></td>
+	<td style="align: center; text-align: center; font-size: 13px;" class = "bgColorEnviro" width = "10%"><b>Value</b></td>
+	</tr>
+<#elseif record.subsidiary == "22 Enviro Facility Management - Neom">
+    <tr>
+	<td style="align: left; text-align: left; font-size: 13px;" class = "bgColorEnviro" width = "30%"><b>Item</b></td>
+	<td style="align: center; text-align: center; font-size: 13px;" class = "bgColorEnviro" width = "20%"><b>Description</b></td>
+	<td style="align: center; text-align: center; font-size: 13px;" class = "bgColorEnviro" width = "10%"><b>Unit</b></td>
+	<td style="align: center; text-align: center; font-size: 13px;" class = "bgColorEnviro" width = "10%"><b>Qty.</b></td>
+	<td style="align: center; text-align: center; font-size: 13px;" class = "bgColorEnviro" width = "10%"><b>Rate</b></td>
+	<td style="align: center; text-align: center; font-size: 13px;" class = "bgColorEnviro" width = "10%"><b>VAT 15%</b></td>
+	<td style="align: center; text-align: center; font-size: 13px;" class = "bgColorEnviro" width = "10%"><b>Value</b></td>
+	</tr>
+<#elseif record.subsidiary == "31 Eventti Catering">
+    <thead style="display: table-header-group;">
+      <tr style="display: table-header-group;">
+	<th style="align: left; text-align: left; font-size: 13px;" class = "bgColorEventi" width = "25%"><b>Item</b></th>
+	<th style="align: center; text-align: center; font-size: 13px;" class = "bgColorEventi" width = "30%"><b>Description</b></th>
+	<th style="align: center; text-align: center; font-size: 13px;" class = "bgColorEventi" width = "5%"><b>Unit</b></th>
+	<th style="align: center; text-align: center; font-size: 13px;" class = "bgColorEventi" width = "10%"><b>Qty.</b></th>
+	<th style="align: center; text-align: center; font-size: 13px;" class = "bgColorEventi" width = "10%"><b>Rate</b></th>
+	<th style="align: center; text-align: center; font-size: 13px;" class = "bgColorEventi" width = "10%"><b>VAT 15%</b></th>
+	<th style="align: center; text-align: center; font-size: 13px;" class = "bgColorEventi" width = "10%"><b>Value</b></th>
+      </tr>	
+  </thead>
+ 	</#if>
+	</#if>
+	<tr style = "margin-top:3px;">
+	<td style="align: left; text-align: left; font-size: 8px; border-bottom:1px; height: 30px;" width = "30%" text-wrap = "wrap">${item.item}</td>
+	<td style="align: center; text-align: center; font-size: 8px; border-bottom:1px; height: 30px;" width = "20%" text-wrap = "wrap">${item.description}</td>
+	<td align="center" style="align: center; text-align: center; font-size: 9px; border-bottom:1px; height: 30px;" width = "10%" text-wrap = "wrap">${item.units}</td>
+	<td style="align: center; text-align: center; font-size: 9px; border-bottom:1px; height: 30px;" width = "10%" text-wrap = "wrap">${item.quantity}</td>
+	<td style="align: center; text-align: center; font-size: 9px; border-bottom:1px; height: 30px;" width = "10%" text-wrap = "wrap">${item.rate?string["#,##0.00"]}</td>
+	<td style="align: center; text-align: center; font-size: 9px; border-bottom:1px; height: 30px;" width = "10%" text-wrap = "wrap">${item.tax1amt?string["#,##0.00"]}</td>
+	<td style="align: center; text-align: center; font-size: 9px; border-bottom:1px; height: 30px;" width = "10%" text-wrap = "wrap">${item.Grossamt?string["#,##0.00"]}</td>
+	</tr>
+
+</table>
+</#list>
+<br/>
+<table width="100%">
+<#if record.subsidiary == "12 Lazure beach and resort">
+<tr>
+	<td style = "border-right: 3px; border-top: 3px; border-left: 3px; border-bottom:3px; font-size: 12px;" class  = "borderColorLazureBeachResort"><b>Total Before VAT</b><br/><span font-size = "19px">${record.subtotal?string["#,##0.00"]} ${record.currencysymbol}</span><b></b></td>
+	<td style = "border-right: 3px; border-top: 3px; border-bottom: 3px; font-size: 12px;"  class  = "borderColorLazureBeachResort"><b>Tax (15%)</b><br/><span font-size = "19px">${record.currencysymbol} ${record.taxtotal?string["#,##0.00"]}</span><b></b></td>
+	<td style = "border-right: 3px; border-top: 3px; border-bottom: 3px; font-size: 11px; vertical-align:center;"  class  = "borderColorLazureBeachResort"><b>Prepared By</b><br/><b>${record.employee}</b></td>
+</tr>
+<tr>
+	<td colspan="3" style = "border-left:3px; border-right:3px; border-bottom:3px; font-size: 15px;" class  = "borderColorLazureBeachResort"><b>Grand Total</b> <span font-size = "19px">${record.currencysymbol} ${record.total?string["#,##0.00"]}</span><b></b><br/><span font-size = "13px"><b>${record.custbody_vs_amt_in_words}</b></span></td>
+</tr>
+<#elseif record.subsidiary == "11 Royal Lazure">
+<tr>
+	<td style = "border-right: 3px; border-top: 3px; border-left: 3px; border-bottom:3px; font-size: 12px;" class  = "borderColorRoyalLazure"><b>Total Before VAT</b><br/><span font-size = "19px">${record.subtotal?string["#,##0.00"]} ${record.currencysymbol}</span><b></b></td>
+	<td style = "border-right: 3px; border-top: 3px; border-bottom: 3px; font-size: 12px;"  class  = "borderColorRoyalLazure"><b>Tax (15%)</b><br/><span font-size = "19px">${record.currencysymbol} ${record.taxtotal?string["#,##0.00"]}</span><b></b></td>
+	<td style = "border-right: 3px; border-top: 3px; border-bottom: 3px; font-size: 11px; vertical-align:center;"  class  = "borderColorRoyalLazure"><b>Prepared By</b><br/><b>${record.employee}</b></td>
+</tr>
+<tr>
+	<td colspan="3" style = "border-left:3px; border-right:3px; border-bottom:3px; font-size: 15px;" class  = "borderColorRoyalLazure"><b>Grand Total</b> <span font-size = "19px">${record.currencysymbol} ${record.total?string["#,##0.00"]}</span><b></b><br/><span font-size = "13px"><b>${record.custbody_vs_amt_in_words}</b></span></td>
+</tr>
+<#elseif record.subsidiary == "00 Tabuk investment and tourism (Holding)">
+<tr>
+	<td style = "border-right: 3px; border-top: 3px; border-left: 3px; border-bottom:3px; font-size: 12px;" class  = "borderColorTabouk"><b>Total Before VAT</b><br/><span font-size = "19px">${record.currencysymbol} ${record.subtotal?string["#,##0.00"]}</span><b></b></td>
+	<td style = "border-right: 3px; border-top: 3px; border-bottom: 3px; font-size: 12px;"  class  = "borderColorTabouk"><b>Tax (15%)</b><br/><span font-size = "19px">${record.currencysymbol} ${record.taxtotal?string["#,##0.00"]}</span><b></b></td>
+	<td style = "border-right: 3px; border-top: 3px; border-bottom: 3px; font-size: 11px; vertical-align:center;"  class  = "borderColorTabouk"><b>Prepared By</b><br/><b>${record.employee}</b></td>
+</tr>
+<tr>
+	<td colspan="3" style = "border-left:3px; border-right:3px; border-bottom:3px; font-size: 15px;" class  = "borderColorTabouk"><b>Grand Total</b> <span font-size = "19px">${record.currencysymbol} ${record.total?string["#,##0.00"]}</span><b></b><br/><span font-size = "13px"><b>${record.custbody_vs_amt_in_words}</b></span></td>
+</tr>
+<#elseif record.subsidiary == "13 Lazure executive residences">
+<tr>
+	<td style = "border-right: 3px; border-top: 3px; border-left: 3px; border-bottom:3px; font-size: 12px;" class  = "borderColorLazureResidance"><b>Total Before VAT</b><br/><span font-size = "19px">${record.subtotal?string["#,##0.00"]} ${record.currencysymbol}</span><b></b></td>
+	<td style = "border-right: 3px; border-top: 3px; border-bottom: 3px; font-size: 12px;"  class  = "borderColorLazureResidance"><b>Tax (15%)</b><br/><span font-size = "19px">${record.currencysymbol} ${record.taxtotal?string["#,##0.00"]}</span><b></b></td>
+	<td style = "border-right: 3px; border-top: 3px; border-bottom: 3px; font-size: 11px; vertical-align:center;"  class  = "borderColorLazureResidance"><b>Prepared By</b><br/><b>${record.employee}</b></td>
+</tr>
+<tr>
+	<td colspan="3" style = "border-left:3px; border-right:3px; border-bottom:3px; font-size: 15px;" class  = "borderColorLazureResidance"><b>Grand Total</b> <span font-size = "19px">${record.currencysymbol} ${record.total?string["#,##0.00"]}</span><b></b><br/><span font-size = "13px"><b>${record.custbody_vs_amt_in_words}</b></span></td>
+</tr>
+<#elseif record.subsidiary == "21 Enviro- facility management- Alula">
+<tr>
+	<td style = "border-right: 3px; border-top: 3px; border-left: 3px; border-bottom:3px; font-size: 12px;" class  = "borderColorEnviro"><b>Total Before VAT</b><br/><span font-size = "19px">${record.currencysymbol} ${record.subtotal?string["#,##0.00"]}</span><b></b></td>
+	<td style = "border-right: 3px; border-top: 3px; border-bottom: 3px; font-size: 12px;"  class  = "borderColorEnviro"><b>Tax (15%)</b><br/><span font-size = "19px">${record.currencysymbol} ${record.taxtotal?string["#,##0.00"]}</span><b></b></td>
+	<td style = "border-right: 3px; border-top: 3px; border-bottom: 3px; font-size: 11px; vertical-align:center;"  class  = "borderColorEnviro"><b>Prepared By</b><br/><b>${record.employee}</b></td>
+</tr>
+<tr>
+	<td colspan="3" style = "border-left:3px; border-right:3px; border-bottom:3px; font-size: 15px;" class  = "borderColorEnviro"><b>Grand Total</b> <span font-size = "19px">${record.currencysymbol} ${record.total?string["#,##0.00"]}</span><b></b><br/><span font-size = "13px"><b>${record.custbody_vs_amt_in_words}</b></span></td>
+</tr>
+<#elseif record.subsidiary == "22 Enviro Facility Management - Neom">
+<tr>
+	<td style = "border-right: 3px; border-top: 3px; border-left: 3px; border-bottom:3px; font-size: 12px;" class  = "borderColorEnviro"><b>Total Before VAT</b><br/><span font-size = "19px">${record.currencysymbol} ${record.subtotal?string["#,##0.00"]}</span><b></b></td>
+	<td style = "border-right: 3px; border-top: 3px; border-bottom: 3px; font-size: 12px;"  class  = "borderColorEnviro"><b>Tax (15%)</b><br/><span font-size = "19px">${record.currencysymbol} ${record.taxtotal?string["#,##0.00"]}</span><b></b></td>
+	<td style = "border-right: 3px; border-top: 3px; border-bottom: 3px; font-size: 11px; vertical-align:center;"  class  = "borderColorEnviro"><b>Prepared By</b><br/><b>${record.employee}</b></td>
+</tr>
+<tr>
+	<td colspan="3" style = "border-left:3px; border-right:3px; border-bottom:3px; font-size: 15px;" class  = "borderColorEnviro"><b>Grand Total</b> <span font-size = "19px">${record.currencysymbol} ${record.total?string["#,##0.00"]}</span><b></b><br/><span font-size = "13px"><b>${record.custbody_vs_amt_in_words}</b></span></td>
+</tr>
+<#elseif record.subsidiary == "31 Eventti Catering">
+<tr>
+	<td style = "border-right: 3px; border-top: 3px; border-left: 3px; border-bottom:3px; font-size: 12px;" class  = "borderColorEventi"><b>Total Before VAT</b><br/><span font-size = "19px">${record.currencysymbol} ${record.subtotal?string["#,##0.00"]}</span><b></b></td>
+	<td style = "border-right: 3px; border-top: 3px; border-bottom: 3px; font-size: 12px;"  class  = "borderColorEventi"><b>Tax (15%)</b><br/><span font-size = "19px">${record.currencysymbol} ${record.taxtotal?string["#,##0.00"]}</span><b></b></td>
+	<td style = "border-right: 3px; border-top: 3px; border-bottom: 3px; font-size: 11px; vertical-align:center;"  class  = "borderColorEventi"><b>Prepared By</b><br/><b>${record.employee}</b></td>
+</tr>
+<tr>
+	<td colspan="3" style = "border-left:3px; border-right:3px; border-bottom:3px; font-size: 15px;" class  = "borderColorEventi"><b>Grand Total</b> <span font-size = "19px">${record.currencysymbol} ${record.total?string["#,##0.00"]}</span><b></b><br/><span font-size = "13px"><b>${record.custbody_vs_amt_in_words}</b></span></td>
+</tr>
+</#if>
+</table>
+<br/>
+<table width = "100%">
+<#if record.subsidiary == "12 Lazure beach and resort">
+        <tr>
+            <td style = "font-size: 14px; border-right: 1px; border-left: 1px; border-top: 1px;" class = "mixColorLazureBeachResort"><b>Terms &amp; Conditions</b></td>
+        </tr>
+        <tr>
+<td style = "font-size: 12px; border-right: 1px; border-left: 1px; border-bottom: 1px;" class = "borderColorLazureBeachResort">
+•	Delivery Location: Lazure Beach Resort.<br/>
+•	Deliveries through the receiving office ONLY.<br/>
+•	Goods Will be accepted from 09:00 - 15:00 Saturday to Thursday.<br/>
+•	In cases of transmission problems, Please contact +966 55 084 0111<br/>
+•	Email - a.sahlah@lazurehospitality.com<br/>
+•	INVOICES will only be accepted along with a copy of the PO. Delivery notes will not be accepted.<br/>
+•	Frozen food items must be delivered by temperature control vehicle or truck ranging from -12C to -18C.<br/>
+•	Chill food items must be delivered by a temperature control vehicle or truck ranging from 0C to 7C.<br/>
+</td>
+</tr>
+<#elseif record.subsidiary == "00 Tabuk investment and tourism (Holding)">
+        <tr>
+            <td style = "font-size: 14px; border-right: 1px; border-left: 1px; border-top: 1px;" class = "mixColorTabouk"><b>Terms &amp; Conditions</b></td>
+        </tr>
+        <tr>
+<td style = "font-size: 12px; border-right: 1px; border-left: 1px; border-bottom: 1px;" class = "borderColorTabouk">
+•	Delivery Location: Royal L'azure Resort, Sharma Tabuk KSA.<br/>
+•	Deliveries through the receiving office ONLY.<br/>
+•	Goods Will be accepted from 09:00 - 15:00 Saturday to Thursday.<br/>
+•	In cases of transmission problems, Please contact +966 54 537 7675<br/>
+•	Email - purchasing@tabukinvestment.com<br/>
+•	INVOICES will only be accepted along with a copy of the PO. Delivery notes will not be accepted.<br/>
+•	Frozen food items must be delivered by temperature control vehicle or truck ranging from -12C to -18C.<br/>
+•	Chill food items must be delivered by a temperature control vehicle or truck ranging from 0C to 7C.<br/>
+</td>
+</tr>
+<#elseif record.subsidiary == "11 Royal Lazure">
+        <tr>
+            <td style = "font-size: 14px; border-right: 1px; border-left: 1px; border-top: 1px;" class = "mixColorRoyalLazure"><b>Terms &amp; Conditions</b></td>
+        </tr>
+        <tr>
+<td style = "font-size: 12px; border-right: 1px; border-left: 1px; border-bottom: 1px;" class = "borderColorRoyalLazure">
+•	Delivery Location: Royal Lazure.<br/>
+•	Deliveries through the receiving office ONLY.<br/>
+•	Goods Will be accepted from 09:00 - 15:00 Saturday to Thursday.<br/>
+•	In cases of transmission problems, Please contact +966 50 629 0026<br/>
+•	Email - a.jamil@lazurehospitality.com<br/>
+•	INVOICES will only be accepted along with a copy of the PO. Delivery notes will not be accepted.<br/>
+•	Frozen food items must be delivered by temperature control vehicle or truck ranging from -12C to -18C.<br/>
+•	Chill food items must be delivered by a temperature control vehicle or truck ranging from 0C to 7C.<br/>
+</td>
+</tr>
+<#elseif record.subsidiary == "13 Lazure executive residences">
+        <tr>
+            <td style = "font-size: 14px; border-right: 1px; border-left: 1px; border-top: 1px;" class = "mixColorLazureResidance"><b>Terms &amp; Conditions</b></td>
+        </tr>
+        <tr>
+<td style = "font-size: 12px; border-right: 1px; border-left: 1px; border-bottom: 1px;" class = "borderColorLazureResidance">
+•	Delivery Location: Lazure Beach Resort<br/>
+•	Deliveries through the receiving office ONLY.<br/>
+•	Goods Will be accepted from 09:00 - 15:00 Saturday to Thursday.<br/>
+•	In cases of transmission problems, Please contact +966 55 084 0111<br/>
+•	Email - a.sahlah@lazurehospitality.com<br/>
+•	INVOICES will only be accepted along with a copy of the PO. Delivery notes will not be accepted.<br/>
+•	Frozen food items must be delivered by temperature control vehicle or truck ranging from -12C to -18C.<br/>
+•	Chill food items must be delivered by a temperature control vehicle or truck ranging from 0C to 7C.<br/>
+</td>
+</tr>
+<#elseif record.subsidiary == "21 Enviro- facility management- Alula">
+        <tr>
+            <td style = "font-size: 14px; border-right: 1px; border-left: 1px; border-top: 1px;" class = "mixColorEnviro"><b>Terms &amp; Conditions</b></td>
+        </tr>
+        <tr>
+<td style = "font-size: 12px; border-right: 1px; border-left: 1px; border-bottom: 1px;" class = "borderColorEnviro">
+•	Delivery Location: AL Ula.<br/>
+•	Deliveries through the receiving office ONLY.<br/>
+•	Goods Will be accepted from 09:00 - 15:00 Saturday to Thursday.<br/>
+•	In cases of transmission problems, Please contact +966 53 910 2591<br/>
+•	Email - m.shezab@enviro-fm.com<br/>
+•	INVOICES will only be accepted along with a copy of the PO. Delivery notes will not be accepted.<br/>
+•	Frozen food items must be delivered by temperature control vehicle or truck ranging from -12C to -18C.<br/>
+•	Chill food items must be delivered by a temperature control vehicle or truck ranging from 0C to 7C.<br/>
+</td>
+</tr>
+<#elseif record.subsidiary == "22 Enviro Facility Management - Neom">
+        <tr>
+            <td style = "font-size: 14px; border-right: 1px; border-left: 1px; border-top: 1px;" class = "mixColorEnviro"><b>Terms &amp; Conditions</b></td>
+        </tr>
+        <tr>
+<td style = "font-size: 12px; border-right: 1px; border-left: 1px; border-bottom: 1px;" class = "borderColorEnviro">
+•	Delivery Location: AL Ula.<br/>
+•	Deliveries through the receiving office ONLY.<br/>
+•	Goods Will be accepted from 09:00 - 15:00 Saturday to Thursday.<br/>
+•	In cases of transmission problems, Please contact +966 53 910 2591<br/>
+•	Email - m.shezab@enviro-fm.com<br/>
+•	INVOICES will only be accepted along with a copy of the PO. Delivery notes will not be accepted.<br/>
+•	Frozen food items must be delivered by temperature control vehicle or truck ranging from -12C to -18C.<br/>
+•	Chill food items must be delivered by a temperature control vehicle or truck ranging from 0C to 7C.<br/>
+</td>
+</tr>
+<#elseif record.subsidiary == "31 Eventti Catering">
+        <tr>
+            <td style = "font-size: 14px; border-right: 1px; border-left: 1px; border-top: 1px;" class = "mixColorEventi"><b>Terms &amp; Conditions</b></td>
+        </tr>
+        <tr>
+<td style = "font-size: 12px; border-right: 1px; border-left: 1px; border-bottom: 1px;" class = "borderColorEventi">
+•	Delivery Location: To be Announced.<br/>
+•	Deliveries through the receiving office ONLY.<br/>
+•	Goods Will be accepted from 09:00 - 15:00 Saturday to Thursday.<br/>
+•	In cases of transmission problems, Please contact +966 53 910 2591<br/>
+•	Email - m.shezab@enviro-fm.com<br/>
+•	INVOICES will only be accepted along with a copy of the PO. Delivery notes will not be accepted.<br/>
+•	Frozen food items must be delivered by temperature control vehicle or truck ranging from -12C to -18C.<br/>
+•	Chill food items must be delivered by a temperature control vehicle or truck ranging from 0C to 7C.<br/>
+</td>
+</tr>
+</#if>
+</table>
+</body>
+</pdf>

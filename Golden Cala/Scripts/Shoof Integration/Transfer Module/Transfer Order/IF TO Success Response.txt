@@ -1,0 +1,5 @@
+{
+    "success": true,
+    "message": "Item Fulfillment created successfully.",
+    "id": 576268
+}

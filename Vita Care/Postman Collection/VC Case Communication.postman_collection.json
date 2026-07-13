@@ -1,0 +1,72 @@
+{
+	"info": {
+		"_postman_id": "0777d914-3e22-4285-885e-28b05a57c606",
+		"name": "VC Case Communication",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "28321459"
+	},
+	"item": [
+		{
+			"name": "Case Com Post",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "User-Agent",
+						"value": "Mozilla/5.0",
+						"type": "text"
+					},
+					{
+						"key": "token",
+						"value": "gnj34ufhasjdbf9i32r54dfasacfewf",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Message\" : \"TEST MESSAGE3\",\r\n    \"CaseID\": \"51\",\r\n    \"Attachment\": \"https://7065838-sb1.app.netsuite.com/core/media/media.nl?id=43426&c=&h=CV9isMnosu0sQG4kxXhIW25CgJmIMbtTCI4_dC72dpTZOnMy\",\r\n    \"status\": \"1\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://7065838-sb1.extforms.netsuite.com/app/site/hosting/scriptlet.nl?script=3472&deploy=2&compid=7065838_SB1&ns-at=AAEJ7tMQY-PKd5cKjJreYS2G4o5BEUSRALWBdFBs4BvUXHh3KVo",
+					"protocol": "https",
+					"host": [
+						"7065838-sb1",
+						"extforms",
+						"netsuite",
+						"com"
+					],
+					"path": [
+						"app",
+						"site",
+						"hosting",
+						"scriptlet.nl"
+					],
+					"query": [
+						{
+							"key": "script",
+							"value": "3472"
+						},
+						{
+							"key": "deploy",
+							"value": "2"
+						},
+						{
+							"key": "compid",
+							"value": "7065838_SB1"
+						},
+						{
+							"key": "ns-at",
+							"value": "AAEJ7tMQY-PKd5cKjJreYS2G4o5BEUSRALWBdFBs4BvUXHh3KVo"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

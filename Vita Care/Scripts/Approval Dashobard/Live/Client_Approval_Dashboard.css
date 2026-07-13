@@ -1,0 +1,241 @@
+/* =====================================================
+   client_approval.css — Client Approval Dashboard
+   ===================================================== */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Segoe UI', Arial, sans-serif;
+  background: #f4f6f9;
+  color: #333;
+  min-height: 100vh;
+}
+
+/* ── Container ─────────────────────────────────────── */
+.container {
+  max-width: 1100px;
+  margin: 32px auto;
+  padding: 0 20px 40px;
+}
+
+/* ── Page Title ────────────────────────────────────── */
+.title {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #1a2e4a;
+  margin-bottom: 24px;
+  padding-bottom: 12px;
+  border-bottom: 3px solid #0069d9;
+}
+
+/* ── Action Section ────────────────────────────────── */
+.action-section {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+#selection_count {
+  font-size: 0.9rem;
+  color: #555;
+  font-weight: 500;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+/* ── Buttons ───────────────────────────────────────── */
+.search-btn {
+  padding: 8px 20px;
+  border: none;
+  border-radius: 5px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s;
+}
+
+.search-btn:active {
+  transform: scale(0.97);
+}
+
+.approve-btn {
+  background: #28a745;
+  color: #fff;
+}
+
+.approve-btn:hover {
+  background: #218838;
+}
+
+.reject-btn {
+  background: #dc3545;
+  color: #fff;
+}
+
+.reject-btn:hover {
+  background: #c82333;
+}
+
+/* ── Table ─────────────────────────────────────────── */
+.transaction-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.transaction-table thead {
+  background: #1a2e4a;
+  color: #fff;
+}
+
+.transaction-table thead th {
+  padding: 12px 14px;
+  text-align: left;
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+.transaction-table thead th:first-child {
+  width: 40px;
+  text-align: center;
+}
+
+.transaction-table thead th:last-child {
+  width: 70px;
+  text-align: center;
+}
+
+.transaction-table tbody tr {
+  border-bottom: 1px solid #edf0f5;
+  transition: background 0.15s;
+}
+
+.transaction-table tbody tr:last-child {
+  border-bottom: none;
+}
+
+.transaction-table tbody tr:hover {
+  background: #f0f5ff;
+}
+
+.transaction-table tbody td {
+  padding: 11px 14px;
+  font-size: 0.88rem;
+  color: #333;
+  vertical-align: middle;
+}
+
+.transaction-table tbody td:first-child {
+  text-align: center;
+}
+
+.transaction-table tbody td:last-child {
+  text-align: center;
+}
+
+/* ── No-data row ───────────────────────────────────── */
+.no-data {
+  text-align: center;
+  color: #999;
+  padding: 30px !important;
+  font-style: italic;
+}
+
+/* ── Checkboxes ────────────────────────────────────── */
+input[type="checkbox"] {
+  width: 15px;
+  height: 15px;
+  cursor: pointer;
+  accent-color: #0069d9;
+}
+
+/* ── View Button ───────────────────────────────────── */
+.view-btn {
+  background: none;
+  border: 1px solid #cdd5e0;
+  border-radius: 4px;
+  padding: 4px 8px;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.view-btn:hover {
+  background: #e8f0fe;
+  border-color: #0069d9;
+}
+
+/* ── Loading Overlay ───────────────────────────────── */
+.loading-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  z-index: 9999;
+  align-items: center;
+  justify-content: center;
+}
+
+.loading-box {
+  background: #fff;
+  border-radius: 10px;
+  padding: 30px 40px;
+  text-align: center;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+  min-width: 220px;
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid #e0e7ef;
+  border-top-color: #0069d9;
+  border-radius: 50%;
+  animation: spin 0.75s linear infinite;
+  margin: 0 auto 14px;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+#loadingTitle {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #1a2e4a;
+}
+
+#loadingStatus {
+  font-size: 0.82rem;
+  color: #888;
+  margin-top: 4px;
+}
+
+/* ── Responsive ────────────────────────────────────── */
+@media (max-width: 640px) {
+  .action-section {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .transaction-table thead th,
+  .transaction-table tbody td {
+    padding: 9px 8px;
+    font-size: 0.8rem;
+  }
+}

@@ -1,0 +1,195 @@
+<LgfData>
+	<Header>
+		<DocumentVersion>25D</DocumentVersion>
+		<OriginSystem>LogFire</OriginSystem>
+		<ClientEnvCode>tamer2_test</ClientEnvCode>
+		<ParentCompanyCode>TAMER_LOGISTICS</ParentCompanyCode>
+		<Entity>shipped_load</Entity>
+		<TimeStamp>2026-02-19T14:20:58</TimeStamp>
+		<MessageId>SLSHGNVITACAREVCJED0000292475</MessageId>
+	</Header>
+	<ListOfShippedLoads>
+		<shipped_load>
+			<load>
+				<facility_code>VCJED</facility_code>
+				<company_code>VITACARE</company_code>
+				<action_code>CREATE</action_code>
+				<load_type>LTL/TL</load_type>
+				<load_manifest_nbr>OSVITACAREVCJED00004266</load_manifest_nbr>
+				<trailer_nbr />
+				<trailer_type />
+				<driver />
+				<seal_nbr />
+				<pro_nbr />
+				<route_nbr>SO66886</route_nbr>
+				<freight_class />
+				<hdr_bol_nbr />
+				<total_nbr_of_oblpns>1</total_nbr_of_oblpns>
+				<total_weight>0.01</total_weight>
+				<total_volume>864</total_volume>
+				<total_shipping_charge>0</total_shipping_charge>
+				<ship_date>2026-02-19</ship_date>
+				<sched_delivery_date />
+				<carrier_code />
+			</load>
+			<ob_stop>
+				<line_nbr>1</line_nbr>
+				<seq_nbr>1</seq_nbr>
+				<stop_shipment_nbr />
+				<stop_bol_nbr />
+				<stop_nbr_of_oblpns>1</stop_nbr_of_oblpns>
+				<stop_weight>0.01</stop_weight>
+				<stop_volume>864</stop_volume>
+				<stop_shipping_charge>0</stop_shipping_charge>
+				<shipto_facility_code />
+				<shipto_name>SO66886</shipto_name>
+				<shipto_addr>SO66886</shipto_addr>
+				<shipto_addr2 />
+				<shipto_addr3>SO66886</shipto_addr3>
+				<shipto_city />
+				<shipto_state />
+				<shipto_zip />
+				<shipto_country />
+				<shipto_phone_nbr />
+				<shipto_email />
+				<shipto_contact />
+				<dest_facility_code />
+				<cust_name>C-1042</cust_name>
+				<cust_addr>Branch 1Prince Sultan Bin Abdulaziz St70392427Hafar Al Batin</cust_addr>
+				<cust_addr2 />
+				<cust_addr3 />
+				<cust_city>Hafar Al Batin</cust_city>
+				<cust_state />
+				<cust_zip />
+				<cust_country />
+				<cust_phone_nbr />
+				<cust_email />
+				<cust_contact>صيدلية شلاش عليوي محيسن المطيري الطبية</cust_contact>
+				<cust_nbr>SO66886</cust_nbr>
+				<order_nbr>SO66886</order_nbr>
+				<ord_date>2026-02-19</ord_date>
+				<exp_date />
+				<req_ship_date />
+				<start_ship_date />
+				<stop_ship_date />
+				<host_allocation_nbr />
+				<customer_po_nbr />
+				<sales_order_nbr />
+				<sales_channel />
+				<dest_dept_nbr />
+				<order_hdr_cust_field_1>4566870</order_hdr_cust_field_1>
+				<order_hdr_cust_field_2 />
+				<order_hdr_cust_field_3 />
+				<order_hdr_cust_field_4 />
+				<order_hdr_cust_field_5 />
+				<order_seq_nbr>1</order_seq_nbr>
+				<order_dtl_cust_field_1>7</order_dtl_cust_field_1>
+				<order_dtl_cust_field_2>4121</order_dtl_cust_field_2>
+				<order_dtl_cust_field_3>0</order_dtl_cust_field_3>
+				<order_dtl_cust_field_4 />
+				<order_dtl_cust_field_5>37700464</order_dtl_cust_field_5>
+				<ob_lpn_nbr>OV0000267138</ob_lpn_nbr>
+				<item_alternate_code>4121</item_alternate_code>
+				<item_part_a>101011001264</item_part_a>
+				<item_part_b />
+				<item_part_c />
+				<item_part_d />
+				<item_part_e />
+				<item_part_f />
+				<pre_pack_code />
+				<pre_pack_ratio>0</pre_pack_ratio>
+				<pre_pack_ratio_seq>0</pre_pack_ratio_seq>
+				<pre_pack_total_units>0</pre_pack_total_units>
+				<invn_attr_a>C</invn_attr_a>
+				<invn_attr_b />
+				<invn_attr_c />
+				<hazmat>false</hazmat>
+				<shipped_uom>UNITS</shipped_uom>
+				<shipped_qty>10</shipped_qty>
+				<pallet_nbr />
+				<dest_company_code />
+				<batch_nbr>2008147</batch_nbr>
+				<expiry_date>2028-03-31</expiry_date>
+				<tracking_nbr />
+				<master_tracking_nbr />
+				<package_type />
+				<payment_method />
+				<carrier_account_nbr />
+				<ship_via_code />
+				<ob_lpn_weight>0.01</ob_lpn_weight>
+				<ob_lpn_volume>864</ob_lpn_volume>
+				<ob_lpn_shipping_charge>0</ob_lpn_shipping_charge>
+				<ob_lpn_type>SMALL</ob_lpn_type>
+				<ob_lpn_asset_nbr />
+				<ob_lpn_asset_seal_nbr />
+				<serial_nbr />
+				<customer_po_type />
+				<customer_vendor_code />
+				<order_hdr_cust_date_1>2026-02-19</order_hdr_cust_date_1>
+				<order_hdr_cust_date_2 />
+				<order_hdr_cust_date_3 />
+				<order_hdr_cust_date_4 />
+				<order_hdr_cust_date_5 />
+				<order_hdr_cust_number_1>0</order_hdr_cust_number_1>
+				<order_hdr_cust_number_2>0</order_hdr_cust_number_2>
+				<order_hdr_cust_number_3>111</order_hdr_cust_number_3>
+				<order_hdr_cust_number_4>123</order_hdr_cust_number_4>
+				<order_hdr_cust_number_5>123</order_hdr_cust_number_5>
+				<order_hdr_cust_decimal_1>0</order_hdr_cust_decimal_1>
+				<order_hdr_cust_decimal_2>0</order_hdr_cust_decimal_2>
+				<order_hdr_cust_decimal_3>0</order_hdr_cust_decimal_3>
+				<order_hdr_cust_decimal_4>0</order_hdr_cust_decimal_4>
+				<order_hdr_cust_decimal_5>0</order_hdr_cust_decimal_5>
+				<order_hdr_cust_short_text_1 />
+				<order_hdr_cust_short_text_2 />
+				<order_hdr_cust_short_text_3 />
+				<order_hdr_cust_short_text_4 />
+				<order_hdr_cust_short_text_5 />
+				<order_hdr_cust_short_text_6>6826342300001</order_hdr_cust_short_text_6>
+				<order_hdr_cust_short_text_7 />
+				<order_hdr_cust_short_text_8 />
+				<order_hdr_cust_short_text_9 />
+				<order_hdr_cust_short_text_10 />
+				<order_hdr_cust_short_text_11 />
+				<order_hdr_cust_short_text_12 />
+				<order_hdr_cust_long_text_1 />
+				<order_hdr_cust_long_text_2 />
+				<order_hdr_cust_long_text_3 />
+				<order_dtl_cust_date_1>2026-02-19</order_dtl_cust_date_1>
+				<order_dtl_cust_date_2 />
+				<order_dtl_cust_date_3 />
+				<order_dtl_cust_date_4 />
+				<order_dtl_cust_date_5 />
+				<order_dtl_cust_number_1>4566870</order_dtl_cust_number_1>
+				<order_dtl_cust_number_2>0</order_dtl_cust_number_2>
+				<order_dtl_cust_number_3>111</order_dtl_cust_number_3>
+				<order_dtl_cust_number_4>123</order_dtl_cust_number_4>
+				<order_dtl_cust_number_5>123</order_dtl_cust_number_5>
+				<order_dtl_cust_decimal_1 />
+				<order_dtl_cust_decimal_2 />
+				<order_dtl_cust_decimal_3 />
+				<order_dtl_cust_decimal_4 />
+				<order_dtl_cust_decimal_5 />
+				<order_dtl_cust_short_text_1>1</order_dtl_cust_short_text_1>
+				<order_dtl_cust_short_text_2>1</order_dtl_cust_short_text_2>
+				<order_dtl_cust_short_text_3>1</order_dtl_cust_short_text_3>
+				<order_dtl_cust_short_text_4>123</order_dtl_cust_short_text_4>
+				<order_dtl_cust_short_text_5>123</order_dtl_cust_short_text_5>
+				<order_dtl_cust_short_text_6 />
+				<order_dtl_cust_short_text_7 />
+				<order_dtl_cust_short_text_8 />
+				<order_dtl_cust_short_text_9 />
+				<order_dtl_cust_short_text_10 />
+				<order_dtl_cust_short_text_11 />
+				<order_dtl_cust_short_text_12 />
+				<order_dtl_cust_long_text_1 />
+				<order_dtl_cust_long_text_2 />
+				<order_dtl_cust_long_text_3 />
+				<invn_attr_d />
+				<invn_attr_e />
+				<invn_attr_f />
+				<invn_attr_g />
+			</ob_stop>
+		</shipped_load>
+	</ListOfShippedLoads>
+</LgfData>

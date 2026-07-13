@@ -1,0 +1,56 @@
+{
+	"info": {
+		"_postman_id": "551f7b26-7a17-4a69-8014-cd121d6bb5f8",
+		"name": "VC Case Status",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "28321459"
+	},
+	"item": [
+		{
+			"name": "Case Status",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://7065838.extforms.netsuite.com/app/site/hosting/scriptlet.nl?script=2003&deploy=1&compid=7065838&ns-at=AAEJ7tMQmMEOQUkFzNCOvpOtA3cLiiUMCdoPcdFoX__1i5InMBA&ticket_number=2",
+					"protocol": "https",
+					"host": [
+						"7065838",
+						"extforms",
+						"netsuite",
+						"com"
+					],
+					"path": [
+						"app",
+						"site",
+						"hosting",
+						"scriptlet.nl"
+					],
+					"query": [
+						{
+							"key": "script",
+							"value": "2003"
+						},
+						{
+							"key": "deploy",
+							"value": "1"
+						},
+						{
+							"key": "compid",
+							"value": "7065838"
+						},
+						{
+							"key": "ns-at",
+							"value": "AAEJ7tMQmMEOQUkFzNCOvpOtA3cLiiUMCdoPcdFoX__1i5InMBA"
+						},
+						{
+							"key": "ticket_number",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

@@ -1,0 +1,247 @@
+<?xml version="1.0"?><!DOCTYPE pdf PUBLIC "-//big.faceless.org//report" "report-1.1.dtd">
+<pdf>
+<head>
+  <link name="NotoSansArabic" type="font" subtype="opentype" src="${nsfont.NotoSansArabic_Regular}" src-bold="${nsfont.NotoSansArabic_Bold}" bytes="2" subset="false"/>subset="false"/>
+	<link name="NotoSans" type="font" subtype="truetype" src="${nsfont.NotoSans_Regular}" src-bold="${nsfont.NotoSans_Bold}" src-italic="${nsfont.NotoSans_Italic}" src-bolditalic="${nsfont.NotoSans_BoldItalic}" bytes="2" />
+	<#if .locale == "zh_CN">
+		<link name="NotoSansCJKsc" type="font" subtype="opentype" src="${nsfont.NotoSansCJKsc_Regular}" src-bold="${nsfont.NotoSansCJKsc_Bold}" bytes="2" />
+	<#elseif .locale == "zh_TW">
+		<link name="NotoSansCJKtc" type="font" subtype="opentype" src="${nsfont.NotoSansCJKtc_Regular}" src-bold="${nsfont.NotoSansCJKtc_Bold}" bytes="2" />
+	<#elseif .locale == "ja_JP">
+		<link name="NotoSansCJKjp" type="font" subtype="opentype" src="${nsfont.NotoSansCJKjp_Regular}" src-bold="${nsfont.NotoSansCJKjp_Bold}" bytes="2" />
+	<#elseif .locale == "ko_KR">
+		<link name="NotoSansCJKkr" type="font" subtype="opentype" src="${nsfont.NotoSansCJKkr_Regular}" src-bold="${nsfont.NotoSansCJKkr_Bold}" bytes="2" />
+	<#elseif .locale == "th_TH">
+		<link name="NotoSansThai" type="font" subtype="opentype" src="${nsfont.NotoSansThai_Regular}" src-bold="${nsfont.NotoSansThai_Bold}" bytes="2" />
+	</#if>
+    <macrolist>
+        <macro id="nlheader">
+            <table class="header" style="width: 100%;">
+              <tr>
+                <td style=""><img src="https://td2903304.app.netsuite.com/core/media/media.nl?id=9088&amp;c=TD2903304&amp;h=N5yTsaeZ1LjmQE5FyaiPgd78ejqD-oIc6nSFBfJhwWFcyiwk" style="height: 100%; width: 100%;" /></td>
+                <td style="width: 15%; "><img src="https://td2903304.app.netsuite.com/core/media/media.nl?id=9086&amp;c=TD2903304&amp;h=-gYJa9Y9VzUGgD8QzncAArexHMFGO_lyjcAhlVKW9m9vxP8V" style="height: 100%; width: 100%" />
+                </td>
+                <td style="align: right" ><img src="https://td2903304.app.netsuite.com/core/media/media.nl?id=9087&amp;c=TD2903304&amp;h=99vpNQBV-MAaNXP1racJlOR1hn9Rco2pwL6DQxvwpdLGwokw" style="height: 100%; width: 100%" /></td>
+			</tr>
+          </table>
+        </macro>
+        <macro id="nlfooter">
+            <table class="footer" style="width: 100%;">
+              <tr>
+				<td style="width:100%; align:center"><p style="text-align: center;">
+                  <b>تلفون : ٩٦٦۱۱۲۰۶۰۳۰۰ فاكس : ٩٦٦١١۲٠٦١٤١٥+ ص . ب ٥٩٦٦٣ الرياض ۱۱٥٣٥ المملكة العربية السعودية</b>
+				  <br/>Tel: +966 11 206 0300 Fax: +966 11 206 1415 P.O.Box 59663 Riyadh 11535 Saudi Arabia
+				  <br/>www.pamedco.com   |   info@pamedco.com
+                  </p>
+                </td>
+			</tr>
+          </table>
+        </macro>
+    </macrolist>
+    <style type="text/css">* {
+		<#if .locale == "zh_CN">
+			font-family: NotoSans, NotoSansCJKsc, sans-serif;
+		<#elseif .locale == "zh_TW">
+			font-family: NotoSans, NotoSansCJKtc, sans-serif;
+		<#elseif .locale == "ja_JP">
+			font-family: NotoSans, NotoSansCJKjp, sans-serif;
+		<#elseif .locale == "ko_KR">
+			font-family: NotoSans, NotoSansCJKkr, sans-serif;
+		<#elseif .locale == "th_TH">
+			font-family: NotoSans, NotoSansThai, sans-serif;
+		<#else>
+			font-family: NotoSansArabic, sans-serif;
+		</#if>
+		}
+		table {
+			font-size: 9pt;
+			table-layout: fixed;
+		}
+        th {
+            font-weight: bold;
+            font-size: 8pt;
+            vertical-align: middle;
+            padding: 5px 6px 3px;
+            color: #000;
+        }
+        td {
+            padding: 4px 6px;
+        }
+		td p { align:left }
+</style>
+</head>
+<body header="nlheader" header-height="15%" footer="nlfooter" footer-height="20pt" padding="0.5in 0.5in 0.5in 0.5in" size="Letter">
+  <table style="width:100%; margin-top:70px;">
+     <tr>
+       <td align="center"><p style=" text-align: center; font-size: 15pt;"><b>Delivery Note</b></p></td>
+     </tr>
+  </table>
+  
+  
+  <table style="width:100%; padding-top:10px;">
+    <tr>
+      <td style="width: 50%;  align:center; border: 1px;  margin-right: 15px">Clint Information / معلومات العميل</td>
+      <td style="width: 48.5%;  align:center; border: 1px;">Seller Information / معلومات المورد</td> 
+    </tr>
+  </table>
+
+  <table style="width:50%; align: right; border: 1px; float:left; height: 200px;">
+    <tr>
+      <td style="align: right; " colspan = "2">${record.entity.custentity14}</td>
+      <td style="align: right; " colspan = "1"> :اسم العميل</td>
+    </tr>
+    <tr>
+      <td style="align: left; " colspan = "1">Customer Name:</td>
+      <td colspan = "2" style="">${record.entity}</td>
+    </tr>
+    <tr>
+      <td colspan = "1">VAT Number:</td>
+      <td colspan = "1" style="align: center; ">${record.entity.vatregnumber} </td>
+      <td colspan = "1" style="align: right; ">:الرقم الضريبي</td>
+    </tr>
+     <tr>
+      <td colspan = "1" style="">CR Number:</td>
+      <td colspan = "1" style="align: center; ">${record.entity.custentity1}</td>
+      <td colspan = "1" style="align: right; ">:رقم السجل التجاري</td>
+    </tr>
+    <tr>
+      <td colspan = "2" style="">Customer Address:</td>
+      <td colspan = "1" style="align: right; ">:عنوان العميل</td>
+    </tr>
+    <tr>
+      <td colspan = "3" style=""  align= "center"> <p style="text-align: center;">
+          ${record.entity.shipaddressee}  -  ${record.entity.shipzip} - ${record.entity.billcity}
+        </p>
+      </td>
+    </tr>
+  </table>
+
+  <table style="width:48.5%; border: 1px; float:right; height: 200px; margin-left: 30px ">
+    <tr>
+      <td style="align: right; " colspan = "2">شركة عبر الطبية المحدودة</td>
+      <td style="align: right; " colspan = "1"> :اسم المورد</td>
+    </tr>
+    <tr>
+      <td style="align: left; " colspan = "1">Supplier Name:</td>
+      <td colspan = "2" style="">${companyInformation.companyName} </td>
+    </tr>
+    <tr>
+      <td colspan = "1" style="">VAT Number:</td>
+      <td colspan = "1" style="align: center; ">${companyInformation.employerid}</td>
+      <td colspan = "1" style="align: right; ">:الرقم الضريبي</td>
+    </tr>
+     <tr>
+      <td colspan = "1" style="">CR Number:</td>
+      <td colspan = "1" style="align: center;">${companyInformation.custrecord_ksa_seller_id}</td>
+      <td colspan = "1" style="align: right; ">:رقم السجل التجاري</td>
+    </tr>
+    <tr>
+      <td colspan = "2" style="">Supplier Address:</td>
+      <td colspan = "1" style="align: right; ">:عنوان المورد</td>
+    </tr>
+    <tr>
+      <td colspan = "3" style="" align= "center"> <p style="text-align: center;">
+        ${companyInformation.country} - ${companyInformation.zip} - ${companyInformation.city}
+        </p>
+      </td>
+    </tr>
+  </table>
+  
+  <table style="width: 50%; float: left; border: 1px; margin-right: 100px;  margin-top: 50px">
+    <tr>
+      <td style="border:1px; margin: 2px; margin-right: 0; ">Client</td>
+      <td style="border:1px; margin: 2px">${record.entity}</td>
+    </tr>
+    <tr>
+      <td style="border:1px; margin: 2px; margin-right: 0;  margin-top: 0">Order</td>
+      <td style="border:1px; margin: 2px;  margin-top: 0">${record.tranid}</td>
+    </tr>
+    <tr>
+      <td style="border:1px; margin: 2px; margin-right: 0;  margin-top: 0">Recipient</td>
+      <td style="border:1px; margin: 2px;  margin-top: 0">   </td>
+    </tr>
+    <tr>
+      <td style="border:1px; margin: 2px; margin-right: 0;  margin-top: 0">Date</td>
+      <td style="border:1px; margin: 2px;  margin-top: 0">${record.trandate}</td>
+    </tr>
+    <tr>
+      <td style="border:1px; margin: 2px; margin-right: 0;  margin-top: 0">Department</td>
+      <td style="border:1px; margin: 2px;  margin-top: 0">  </td>
+    </tr>
+  </table>
+  
+  <table style="width: 50%; float: right; border: 1px; margin-left: 100px;  margin-top: 50px">
+    <tr>
+      <td style="border:1px; margin: 2px; margin-right: 0">Reference</td>
+      <td style="border:1px; margin: 2px">${record.entity}</td>
+    </tr>
+    <tr>
+      <td style="border:1px; margin: 2px; margin-right: 0;  margin-top: 0">Dispatched By</td>
+      <td style="border:1px; margin: 2px;  margin-top: 0">  </td>
+    </tr>
+    <tr>
+      <td style="border:1px; margin: 2px; margin-right: 0;  margin-top: 0">Approved By</td>
+      <td style="border:1px; margin: 2px;  margin-top: 0">  </td>
+    </tr>
+    <tr>
+      <td style="border:1px; margin: 2px; margin-right: 0;  margin-top: 0">Project</td>
+      <td style="border:1px; margin: 2px;  margin-top: 0">${record.custbody_esc_created_date}</td>
+    </tr>
+    <tr>
+      <td style="border:1px; margin: 2px; margin-right: 0;  margin-top: 0">Value</td>
+      <td style="border:1px; margin: 2px;  margin-top: 0"> </td>
+    </tr>
+  </table>
+  
+  <#if record.item?has_content>
+    <table class="itemtable" style="width: 100%; border: 1px; margin-top: 50px"><!-- start items --><#list record.item as item><#if item_index==0>
+    <thead style="background:#fff">
+        <tr>
+          <th style="border:1px; margin: 2px; margin-right: 0">line</th>
+          <th align="" style="border:1px; margin: 2px; margin-right: 0; width: 20%">Product Description</th>
+		  <th align="" style="border:1px; margin: 2px; margin-right: 0;"><p style="text-align: center; font-size: 6pt"> NUPCO Code</p></th>
+		  <th align="" style="border:1px; margin: 2px; margin-right: 0;"><p style="text-align: center; font-size: 6pt"> NUPCO Price</p></th>
+		  <th align="" style="border:1px; margin: 2px; margin-right: 0;"><p style="text-align: center; font-size: 6pt"> NUPCO Description</p></th>
+		  <th align="" style="border:1px; margin: 2px; margin-right: 0;"><p style="text-align: center; font-size: 6pt">Customer Reference</p></th>
+		  <th align="" style="border:1px; margin: 2px; margin-right: 0;"><p style="text-align: center; font-size: 6pt"> MOH Code</p></th>
+		  <th align="" style="border:1px; margin: 2px; margin-right: 0;"><p style="text-align: center; font-size: 6pt"> MOD Code</p></th>
+          <th align="center" style="border:1px; margin: 2px; margin-right: 0; ">Unit</th>
+          <th align="center" style="border:1px; margin: 2px; margin-right: 0; ">${item.quantity@label}</th>
+          <th align="right" style="border:1px; margin: 2px; margin-right: 0; ">Price</th>
+          <th align="right" style="border:1px; margin: 2px; margin-right: 0; ">Total</th>
+        </tr>
+    </thead>
+    </#if><tr>
+          <td style="border:1px; margin: 2px; margin-right: 0;  margin-top: 0">${ item_index + 1}</td>
+          <td style="border:1px; margin: 2px; margin-right: 0; margin-top: 0; width: 20%">${item.description}</td>
+		  <td style="border:1px; margin: 2px; margin-right: 0; margin-top: 0">${item.custcol_vs_nupcocode}</td>
+		  <td style="border:1px; margin: 2px; margin-right: 0; margin-top: 0">${item.custcol_vs_nupcoprice}</td>
+		  <td style="border:1px; margin: 2px; margin-right: 0; margin-top: 0">${item.custcol_vs_nupcodescription}</td>
+		  <td style="border:1px; margin: 2px; margin-right: 0; margin-top: 0">${item.custcol_vs_customerreference}</td>
+		  <td style="border:1px; margin: 2px; margin-right: 0; margin-top: 0">${item.custcol_vs_mohcode}</td>
+		  <td style="border:1px; margin: 2px; margin-right: 0; margin-top: 0">${item.custcol_vs_modcode}</td>
+          <td style="border:1px; margin: 2px; margin-right: 0; margin-top: 0">${item.units}</td>
+          <td align="center" line-height="150%" style="border:1px; margin: 2px; margin-right: 0; margin-top: 0">${item.quantity}</td>
+          <td align="right" style="border:1px; margin: 2px; margin-right: 0; margin-top: 0">${item.rate}</td>
+          <td align="right" style="border:1px; margin: 2px; margin-right: 0; margin-top: 0">${item.amount}</td>
+        </tr>
+     </#list><!-- end items --></table>
+  </#if>
+
+  <table style="width: 100%; margin-top: 100px">
+    <tr>
+      <td style="width: 40%; margin-right: 100px"><b>Recipient’s Signature:</b> </td>
+      <td style="width: 60%; align: center"><b>Stamp:</b></td>
+    </tr>
+    <tr>
+      <td style="align: left; margin-top: 20px;"><hr /></td>
+    </tr>
+    <tr>
+      <td style="align: left; margin-top: 20px;"><b>Date Of Delivery:</b></td>
+    </tr>
+    <tr>
+      <td style="align: left; margin-top: 20px;"><hr /></td>
+    </tr>
+  </table>
+</body>
+</pdf>

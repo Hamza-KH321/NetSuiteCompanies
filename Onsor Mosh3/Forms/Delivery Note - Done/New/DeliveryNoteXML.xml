@@ -1,0 +1,121 @@
+<?xml version="1.0"?><!DOCTYPE pdf PUBLIC "-//big.faceless.org//report" "report-1.1.dtd">
+<pdf>
+<head>
+<link name="NotoSansArabic" type="font" subtype="opentype" src="${nsfont.NotoSansArabic_Regular}" src-bold="${nsfont.NotoSansArabic_Bold}" bytes="2" subset="false"/>
+	<link name="NotoSans" type="font" subtype="truetype" src="${nsfont.NotoSans_Regular}" src-bold="${nsfont.NotoSans_Bold}" src-italic="${nsfont.NotoSans_Italic}" src-bolditalic="${nsfont.NotoSans_BoldItalic}" bytes="2" />
+	<#if .locale == "zh_CN">
+		<link name="NotoSansCJKsc" type="font" subtype="opentype" src="${nsfont.NotoSansCJKsc_Regular}" src-bold="${nsfont.NotoSansCJKsc_Bold}" bytes="2" />
+	<#elseif .locale == "zh_TW">
+		<link name="NotoSansCJKtc" type="font" subtype="opentype" src="${nsfont.NotoSansCJKtc_Regular}" src-bold="${nsfont.NotoSansCJKtc_Bold}" bytes="2" />
+	<#elseif .locale == "ja_JP">
+		<link name="NotoSansCJKjp" type="font" subtype="opentype" src="${nsfont.NotoSansCJKjp_Regular}" src-bold="${nsfont.NotoSansCJKjp_Bold}" bytes="2" />
+	<#elseif .locale == "ko_KR">
+		<link name="NotoSansCJKkr" type="font" subtype="opentype" src="${nsfont.NotoSansCJKkr_Regular}" src-bold="${nsfont.NotoSansCJKkr_Bold}" bytes="2" />
+	<#elseif .locale == "th_TH">
+		<link name="NotoSansThai" type="font" subtype="opentype" src="${nsfont.NotoSansThai_Regular}" src-bold="${nsfont.NotoSansThai_Bold}" bytes="2" />
+	</#if>
+    <macrolist>
+        <macro id="nlheader">
+            <table width="100%"><tr>
+	<td colspan="2" rowspan="1" style="width: 689px; padding-right: 20px;">
+	<hr class="bold-hr" /></td>
+	<td style="width: 350px;">
+	<hr class="bold-hr" /></td>
+	</tr>
+	<tr>
+	<td style="font-size: 30px; padding-top: -2px;"><strong>Delivery Note</strong></td>
+	<td style="width: 273px;">&nbsp;</td>
+	<td style="width: 350px; font-size: 12px; padding-top: -2px;"><strong>Delivery Note Number</strong><br />${record.tranid}</td>
+	</tr>
+	<tr>
+	<td>&nbsp;</td>
+	<td style="width: 273px;">&nbsp;</td>
+	<td style="width: 350px; font-size: 12px; padding-top: 3px;"><strong>Delivery Note Date</strong><br />${record.trandate}</td>
+	</tr>
+	<tr>
+	<td>&nbsp;</td>
+	<td style="width: 273px;">&nbsp;</td>
+	<td style="width: 350px; font-size: 12px; padding-top: 3px;"><strong>Client</strong><br />${record.entity}</td>
+	</tr>
+	<tr>
+	<td>&nbsp;</td>
+	<td style="width: 273px;">&nbsp;</td>
+	<td style="width: 350px; font-size: 12px; padding-top: 3px;"><strong>Attention to</strong><br />Name</td>
+	</tr>
+	<tr>
+	<td colspan="2" rowspan="1" style = "padding-right: 20px;">
+	<hr class="bold-hr" style = "border-spacing: 10px;" /></td>
+	<td style="width: 350px;">
+	<hr class="bold-hr" /></td>
+	</tr></table>
+        </macro>
+        <macro id="nlfooter">
+            <table width="100%"><tr>
+	<td style = "padding-right: 20px;">
+	<hr class="bold-hr"/></td>
+	<td style = "padding-right: 20px;">
+	<hr class="bold-hr"/></td>
+	<td style = "padding-right: 20px;">
+	<hr class="bold-hr"/></td>
+	</tr>
+	<tr>
+	<td><b>Received by</b><br />Bader Aljeraisi</td>
+	<td><b>Signature</b></td>
+	<td><b>Date of Receipt</b></td>
+	</tr></table>
+&nbsp;
+&nbsp;
+<br/>
+<table padding-top="2px"><tr>
+	<td align="left" text-align="left"><img style="align: left; height: 57.2; width:116.162;" src="https://7114540-sb1.app.netsuite.com/core/media/media.nl?id=442&amp;c=7114540_SB1&amp;h=0JhaVWY8azqvsCtUkPtk-OUdPVJ-csvW8Iltfm_i5DfZKOCQ"/></td>
+	</tr></table>
+        </macro>
+    </macrolist>
+    <style type="text/css">* {
+		<#if .locale == "zh_CN">
+			font-family: NotoSans, NotoSansCJKsc, sans-serif;
+		<#elseif .locale == "zh_TW">
+			font-family: NotoSans, NotoSansCJKtc, sans-serif;
+		<#elseif .locale == "ja_JP">
+			font-family: NotoSans, NotoSansCJKjp, sans-serif;
+		<#elseif .locale == "ko_KR">
+			font-family: NotoSans, NotoSansCJKkr, sans-serif;
+		<#elseif .locale == "th_TH">
+			font-family: NotoSans, NotoSansThai, sans-serif;
+		<#else>
+			font-family: NotoSans, sans-serif;
+		</#if>
+		}
+.bold-hr {
+    border: none;
+    border-top: 5px solid bold;
+  	width: 100%;
+}
+     * {
+                font-family: NotoSansArabic, NotoSans, sans-serif;
+          }
+</style>
+</head>
+<body header="nlheader" header-height="28%" footer="nlfooter" footer-height="30%" padding="0.4in 0.4in 0.4in 0.4in" size="Letter-LANDSCAPE">
+    <table style="width: 100%; padding-top: -9px;"><#list record.item as item><#if item_index==0><tr>
+	<td style="font-size: 12px; width: 248px;"><b>Item</b></td>
+	<td style="font-size: 12px; width: 77px;"><b>Quantity</b></td>
+	<td style="font-size: 12px;"><b>Delivered to </b></td>
+	<td style="font-size: 12px;"><b>Delivered by</b></td>
+	<td style="font-size: 12px;"><b><b>Delivered through</b></b></td>
+	</tr>
+	<tr>
+	<td colspan="5">
+	<hr class="bold-hr" /></td>
+	</tr>
+	</#if>
+	<tr>
+	<td style="font-size: 12px; border-bottom: 1px; width: 248px;">${item.item}</td>
+	<td style="font-size: 12px; border-bottom: 1px; width: 77px;">${item.quantity}</td>
+	<td style="font-size: 12px; border-bottom: 1px;">${item.location}</td>
+	<td style="font-size: 12px; border-bottom: 1px;">&nbsp;</td>
+	<td style="font-size: 12px; border-bottom: 1px;">&nbsp;</td>
+	</tr>
+	</#list></table>
+</body>
+</pdf>

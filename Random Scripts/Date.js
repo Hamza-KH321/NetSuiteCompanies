@@ -1,0 +1,30 @@
+var todayName = daysOfWeek[dayOfWeek];
+            var currentMonth = todaysDate.getMonth();
+            var monthName = monthNames[currentMonth];
+            var day = todaysDate.getDate();
+            var year = todaysDate.getFullYear();
+            var hours = todaysDate.getHours();
+            var minutes = todaysDate.getMinutes();
+            var seconds = todaysDate.getSeconds();
+            var period = hours >= 12 ? "PM" : "AM";
+            var formattedDate = todayName.concat(', ', monthName, ' ', day, ', ', year, ', ', hours, ':', minutes, ':', seconds, ' ', period, ' ', 'UTC');
+            var dateObject = new Date(formattedDate);
+            var unixDate = dateObject.getTime() / 1000;
+
+            var combinedData = locationKey.concat(unixDate);
+            var nonce = toHmacSHA256Base64(combinedData, secretKey);
+
+            log.debug('locationKey', locationKey);
+            log.debug('secretKey', secretKey);
+            log.debug('todaysDate', todaysDate);
+            log.debug('todayName', todayName);
+            log.debug('currentMonth', currentMonth);
+            log.debug('monthName', monthName);
+            log.debug('day', day);
+            log.debug('year', year);
+            log.debug('minutes', minutes);
+            log.debug('seconds', seconds);
+            log.debug('period', period);
+            log.debug('unixDate', unixDate);
+            log.debug('combinedData', combinedData);
+            log.debug('nonce', nonce);

@@ -1,0 +1,58 @@
+{
+	"info": {
+		"_postman_id": "30472011-00dd-40f2-8f14-ec2572184b6f",
+		"name": "VC Stock Availability Test",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "28321459"
+	},
+	"item": [
+		{
+			"name": "Stock Availability API Test",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "token",
+						"value": "jg6546v16vfr4t98dr4t6h",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://7065838-sb1.extforms.netsuite.com/app/site/hosting/scriptlet.nl?script=3595&deploy=1&compid=7065838_SB1&ns-at=AAEJ7tMQJMkLOFK7EDjtJMABomP_f84CzxJVok9535-uwH7LwdE",
+					"protocol": "https",
+					"host": [
+						"7065838-sb1",
+						"extforms",
+						"netsuite",
+						"com"
+					],
+					"path": [
+						"app",
+						"site",
+						"hosting",
+						"scriptlet.nl"
+					],
+					"query": [
+						{
+							"key": "script",
+							"value": "3595"
+						},
+						{
+							"key": "deploy",
+							"value": "1"
+						},
+						{
+							"key": "compid",
+							"value": "7065838_SB1"
+						},
+						{
+							"key": "ns-at",
+							"value": "AAEJ7tMQJMkLOFK7EDjtJMABomP_f84CzxJVok9535-uwH7LwdE"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

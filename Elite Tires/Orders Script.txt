@@ -1,0 +1,9 @@
+Map/Reduce for eBay Saled Order 
+
+- for undefined items, must create item record and name it with unmapped item, and use the title as   description.
+
+- in the getinput we will call the get order api, then in map stage we will check/create queue, if the queue is  already there then we must increase the attempts, else we will create the queue and make context.write, then in reduce stage we load the queue adn create the sales order 
+
+- we will create eBay customer. 
+
+

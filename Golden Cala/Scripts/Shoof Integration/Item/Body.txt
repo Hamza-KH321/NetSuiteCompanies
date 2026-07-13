@@ -1,0 +1,10 @@
+{
+  "itemid": "SHF-Item-1008",
+  "custitem_vs_sku": "5",
+  "unitstype": "PCS",
+  "class": "Lensme",
+  "custitem_vs_product_color": "Test Color",
+  "custitem_vs_product_type": "Test Product Type",
+  "custitem39": "-14",
+  "taxschedule": "Yes"
+}

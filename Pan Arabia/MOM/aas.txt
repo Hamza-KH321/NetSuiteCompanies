@@ -1,0 +1,45 @@
+- Estimate Form:
+* Need from pan team to reply about quotaiotn discount if it is on header level or line level.
+* Add Discount item field on estimate record, and the discount will be added by user manually also it will be   displayed in estimate form. (Done)
+
+- Sample Request Form:
+* On sample request record, regard the cost center we may create customization to filter the cost center based on     item brand and the sample request will have items with one brand, (This point will be applied later based on pan     request).
+* In sample req, unit must be filled based on the contact. (DONE) 
+* Replace Total Sample Request  with Total Sample Request  value in sample req. (DONE) 
+
+- SO, Estimate Entry Form:
+* Remove PROJECT * from customer field name. (DONE) 
+
+- SO Blanket Form: 
+* Release number must be so number - RELEASE SEQUANCE in SO balnket. (DONE)
+* RELEASE PERCENTAGE SO in so blanket: the percantage must be base on item rate not item qty. (DONE)
+
+- SO Cash Form: 
+* Replace Total Sales Order with Total Sales Order  value in so cash. (DONE)
+* Remove Bank Transfer in so cash. (DONE)
+
+* File attachment on all sales order form must be mandatory. (DONE)
+
+- SO Standard:
+* Replace Total Sales Order with Total Sales Order value in so standard. (DONE)
+
+- Invoice Form: 
+* On invoice, add moh data check box so if checked then will show the moh code in the item list anyways it will not.   (DONE) 
+* Add mod checkbox on invoice, if checked then will show the mod code in the item list. (DONE)
+* Add so number in the invoice form. (DONE)
+* Add custom field called customer reference number filled by the user on invoce record. (DONE)
+* Add packaging info field instead of unit this field in the item record. (DONE)
+* In invoice form, nupco code, moh code, and mod code beside item id. (DONE)
+
+- Open case with Oracle about the auto lot number ,expiration date, and production date auto filled bundle. (Functional)
+
+- Delivery Note: 
+* On delivery note we will add the same fields from invoice record to item fulfillment and the usert will fill them. (DONE) 
+
+- Regard the item fulfillment creation without sales order, after internal discution we found that this option is   not avaiable in NetSuite, if you want we can make a qucik meeting to discuss this point.
+
+- UOM Data:
+* On UOM uodate uom name to be 6 / box. (Functional)
+
+
+

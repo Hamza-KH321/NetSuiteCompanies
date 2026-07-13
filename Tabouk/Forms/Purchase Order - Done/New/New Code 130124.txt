@@ -1,0 +1,625 @@
+<?xml version="1.0"?><!DOCTYPE pdf PUBLIC "-//big.faceless.org//report" "report-1.1.dtd">
+<pdf>
+<head>
+<link name="NotoSansArabic" type="font" subtype="opentype" src="${nsfont.NotoSansArabic_Regular}" src-bold="${nsfont.NotoSansArabic_Bold}" bytes="2" subset="false"/>
+	<link name="NotoSans" type="font" subtype="truetype" src="${nsfont.NotoSans_Regular}" src-bold="${nsfont.NotoSans_Bold}" src-italic="${nsfont.NotoSans_Italic}" src-bolditalic="${nsfont.NotoSans_BoldItalic}" bytes="2" />
+	<#if .locale == "zh_CN">
+		<link name="NotoSansCJKsc" type="font" subtype="opentype" src="${nsfont.NotoSansCJKsc_Regular}" src-bold="${nsfont.NotoSansCJKsc_Bold}" bytes="2" />
+	<#elseif .locale == "zh_TW">
+		<link name="NotoSansCJKtc" type="font" subtype="opentype" src="${nsfont.NotoSansCJKtc_Regular}" src-bold="${nsfont.NotoSansCJKtc_Bold}" bytes="2" />
+	<#elseif .locale == "ja_JP">
+		<link name="NotoSansCJKjp" type="font" subtype="opentype" src="${nsfont.NotoSansCJKjp_Regular}" src-bold="${nsfont.NotoSansCJKjp_Bold}" bytes="2" />
+	<#elseif .locale == "ko_KR">
+		<link name="NotoSansCJKkr" type="font" subtype="opentype" src="${nsfont.NotoSansCJKkr_Regular}" src-bold="${nsfont.NotoSansCJKkr_Bold}" bytes="2" />
+	<#elseif .locale == "th_TH">
+		<link name="NotoSansThai" type="font" subtype="opentype" src="${nsfont.NotoSansThai_Regular}" src-bold="${nsfont.NotoSansThai_Bold}" bytes="2" />
+	</#if>
+    <macrolist>
+        <macro id="nlheader">
+<#if record.subsidiary == "Lazure beach and resort">
+<table style="width: 100%; padding: 4px;" class = "bgColorLazureBeachResort">
+<#elseif record.subsidiary == "Royal Lazure">
+<table style="width: 100%; padding: 4px;" class = "bgColorRoyalLazure">
+<#elseif record.subsidiary == "Lazure executive residences">
+<table style="width: 100%; padding: 4px;" class = "bgColorLazureResidance">
+<#elseif record.subsidiary == "Enviro- facility management">
+<table style="width: 100%; padding: 4px;" class = "bgColorEnviro">
+<#elseif record.subsidiary == "Eventti Catering">
+<table style="width: 100%; padding: 4px;" class = "bgColorEventi">
+<#elseif record.subsidiary == "Tabuk investment and tourism (Holding)">
+<table style="width: 100%; padding: 4px;" class = "bgColorTabouk">
+</#if>
+<tr>
+	<td style="font-size: 35px;"><b>Purchase Order</b> <span font-size="14px">(${record.approvalstatus})</span></td>
+<td>
+<#if record.subsidiary == "Lazure beach and resort">
+<img src="https://9072131.app.netsuite.com/core/media/media.nl?id=908&amp;c=9072131&amp;h=Se8nlfSaqXoc6A4ENantoQRKe-ehpRjwSEBR7xCwGkqhe0Z6" style="width:34%; height: 29%;"/>
+<#elseif record.subsidiary == "Royal Lazure">
+<img src="https://9072131.app.netsuite.com/core/media/media.nl?id=825&amp;c=9072131&amp;h=7swBHe9nOYJoxG64jAi6vkUQiIslqVroqagLEgQ7GBthQ5AC" style="width:40%; height: 30%;"/>
+<#elseif record.subsidiary == "Lazure executive residences">
+<img src="https://9072131.app.netsuite.com/core/media/media.nl?id=909&amp;c=9072131&amp;h=eDhAMlK6sUhlW9UMiDhjlEh0ir6sbwzmtNqMqE5Rk4sRIauM" style="width:60%; height: 60%;"/>
+<#elseif record.subsidiary == "Enviro- facility management">
+<img src="https://9072131.app.netsuite.com/core/media/media.nl?id=906&amp;c=9072131&amp;h=kc2BSBn1kURAs9Sapqkn_iMYVMFQjaQZbI80KPUmbcibdFTw" style="width:10%; height: 9%;"/>
+<#elseif record.subsidiary == "Eventti Catering">
+<img src="https://9072131.app.netsuite.com/core/media/media.nl?id=907&amp;c=9072131&amp;h=viVk_MXWSNdy4Ou_XDCTt7GmuzsF1RFUn47pTuBkT2ahUSNC" style="width:70%; height: 70%;"/>
+<#elseif record.subsidiary == "Tabuk investment and tourism (Holding)">
+<img src="https://9072131.app.netsuite.com/core/media/media.nl?id=830&amp;c=9072131&amp;h=C35CfZfzS7NrV4s5k5xGjetHiWDptMCapgiMVeZRwj1-Nn4S" style="width:70%; height: 70%;"/>
+</#if>
+</td>
+</tr>
+	<tr>
+	<#if record.subsidiary == "Lazure beach and resort">
+	<td style="font-size: 25px; color: white;"><b>L&#39;AZURE BEACH &amp; RESORT</b></td>
+    <#elseif record.subsidiary == "Royal Lazure">
+    <td style="font-size: 25px; color: white;"><b>Royal Lazure</b></td>
+    <#elseif record.subsidiary == "Lasour Executive Resident">
+    <td style="font-size: 25px; color: white;"><b>Lasour Executive Resident</b></td>
+    <#elseif record.subsidiary == "Enviro- facility management">
+    <td style="font-size: 25px; color: white;"><b>Enviro- facility management</b></td>
+    <#elseif record.subsidiary == "Eventti Catering">
+    <td style="font-size: 25px; color: white;"><b>Eventti Catering</b></td>
+    <#elseif record.subsidiary == "Tabuk investment and tourism (Holding)">
+    <td style="font-size: 25px; color: white;"><b>Tabuk investment and tourism (Holding)</b></td>
+    </#if>
+    </tr>
+	<tr>
+	<td style="align: left; text-align: left;"><barcode codetype="code128" width = "70%" value="${record.tranid}"/></td>
+	</tr>
+</table>
+<table style="width: 100%; padding-top: 4px;">
+<#if record.subsidiary == "Tabuk investment and tourism (Holding)">
+    <tr>
+	<td style="font-size: 13px; padding: 5px;" class = "bgColorTabouk"><b>Vendor Name</b></td>
+	<td style="font-size: 12px; padding: 5px;" class = "bgColorTabouk"><b>${record.entity.companyname}</b></td>
+	<td style="font-size: 13px; padding: 5px;">Type</td>
+	<td style="font-size: 13px; padding: 5px;">: ${record.custbody_vs_po_type}</td>
+	</tr>
+<#elseif record.subsidiary == "Royal Lazure">
+    <tr>
+	<td style="font-size: 13px; padding: 5px;" class = "bgColorRoyalLazure"><b>Vendor Name</b></td>
+	<td style="font-size: 12px; padding: 5px;" class = "bgColorRoyalLazure"><b>${record.entity.companyname}</b></td>
+	<td style="font-size: 13px; padding: 5px;">Type</td>
+	<td style="font-size: 13px; padding: 5px;">: ${record.custbody_vs_po_type}</td>
+	</tr>
+<#elseif record.subsidiary == "Lasour Executive Resident">
+    <tr>
+	<td style="font-size: 13px; padding: 5px;" class = "bgColorLazureResidance"><b>Vendor Name</b></td>
+	<td style="font-size: 12px; padding: 5px;" class = "bgColorLazureResidance"><b>${record.entity.companyname}</b></td>
+	<td style="font-size: 13px; padding: 5px;">Type</td>
+	<td style="font-size: 13px; padding: 5px;">: ${record.custbody_vs_po_type}</td>
+	</tr>
+<#elseif record.subsidiary == "Enviro- facility management">
+    <tr>
+	<td style="font-size: 13px; padding: 5px;" class = "bgColorEnviro"><b>Vendor Name</b></td>
+	<td style="font-size: 12px; padding: 5px;" class = "bgColorEnviro"><b>${record.entity.companyname}</b></td>
+	<td style="font-size: 13px; padding: 5px;">Type</td>
+	<td style="font-size: 13px; padding: 5px;">: ${record.custbody_vs_po_type}</td>
+	</tr>
+<#elseif record.subsidiary == "Eventti Catering">
+    <tr>
+	<td style="font-size: 13px; padding: 5px;" class = "bgColorEventi"><b>Vendor Name</b></td>
+	<td style="font-size: 12px; padding: 5px;" class = "bgColorEventi"><b>${record.entity.companyname}</b></td>
+	<td style="font-size: 13px; padding: 5px;">Type</td>
+	<td style="font-size: 13px; padding: 5px;">: ${record.custbody_vs_po_type}</td>
+  </tr>
+<#elseif record.subsidiary == "Lazure beach and resort">
+    <tr>
+	<td style="font-size: 13px; padding: 5px;" class = "bgColorLazureBeachResort"><b>Vendor Name</b></td>
+	<td style="font-size: 12px; padding: 5px;" class = "bgColorLazureBeachResort"><b>${record.entity.companyname}</b></td>
+	<td style="font-size: 13px; padding: 5px;">Type</td>
+	<td style="font-size: 13px; padding: 5px;">: ${record.custbody_vs_po_type}</td>
+  </tr>
+</#if>
+	<tr>
+	<td style="font-size: 13px; padding: 5px;">Vedor Code</td>
+	<td style="font-size: 13px; padding: 5px;">${record.entity.entityid}</td>
+	<td style="font-size: 13px; padding: 5px;">PO Class</td>
+	<td style="font-size: 11px; padding: 5px;">: ${record.class}</td>
+	</tr>
+	<tr>
+	<td style="font-size: 13px; padding: 5px;">Currency</td>
+	<td style="font-size: 13px; padding: 5px;">${record.currencysymbol}</td>
+	<td style="font-size: 13px; padding: 5px;">Delivery Address</td>
+	<td style="font-size: 13px; padding: 5px;">: ${record.duedate}</td>
+	</tr>
+	<tr>
+	<td style="font-size: 13px; padding: 5px;">Phone</td>
+	<td style="font-size: 13px; padding: 5px;">${record.entity.phone}</td>
+	<td style="font-size: 13px; padding: 5px;">Date</td>
+	<td style="font-size: 13px; padding: 5px;">: ${record.trandate}</td>
+	</tr>
+<#if record.subsidiary == "Tabuk investment and tourism (Holding)">
+	<tr>
+	<td style="font-size: 13px; padding: 5px;">Contact</td>
+	<td style="font-size: 13px; padding: 5px;">${record.entity.altphone}</td>
+	<td style="font-size: 13px; padding: 5px;" class = "bgColorTabouk"><b>TRN No.</b></td>
+	<td style="font-size: 13px; padding: 5px;" class = "bgColorTabouk"><b>: ${record.tranid}</b></td>
+	</tr>
+<#elseif record.subsidiary == "Royal Lazure">
+	<tr>
+	<td style="font-size: 13px; padding: 5px;">Contact</td>
+	<td style="font-size: 13px; padding: 5px;">${record.entity.altphone}</td>
+	<td style="font-size: 13px; padding: 5px;" class = "bgColorRoyalLazure"><b>TRN No.</b></td>
+	<td style="font-size: 13px; padding: 5px;" class = "bgColorRoyalLazure"><b>: ${record.tranid}</b></td>
+	</tr>
+<#elseif record.subsidiary == "Lasour Executive Resident">
+	<tr>
+	<td style="font-size: 13px; padding: 5px;">Contact</td>
+	<td style="font-size: 13px; padding: 5px;">${record.entity.altphone}</td>
+	<td style="font-size: 13px; padding: 5px;" class = "bgColorLazureResidance"><b>TRN No.</b></td>
+	<td style="font-size: 13px; padding: 5px;" class = "bgColorLazureResidance"><b>: ${record.tranid}</b></td>
+	</tr>
+<#elseif record.subsidiary == "Enviro- facility management">
+	<tr>
+	<td style="font-size: 13px; padding: 5px;">Contact</td>
+	<td style="font-size: 13px; padding: 5px;">${record.entity.altphone}</td>
+	<td style="font-size: 13px; padding: 5px;" class = "bgColorEnviro"><b>TRN No.</b></td>
+	<td style="font-size: 13px; padding: 5px;" class = "bgColorEnviro"><b>: ${record.tranid}</b></td>
+	</tr>
+<#elseif record.subsidiary == "Eventti Catering">
+	<tr>
+	<td style="font-size: 13px; padding: 5px;">Contact</td>
+	<td style="font-size: 13px; padding: 5px;">${record.entity.altphone}</td>
+	<td style="font-size: 13px; padding: 5px;" class = "bgColorEventi"><b>TRN No.</b></td>
+	<td style="font-size: 13px; padding: 5px;" class = "bgColorEventi"><b>: ${record.tranid}</b></td>
+	</tr>
+<#elseif record.subsidiary == "Lazure beach and resort">
+	<tr>
+	<td style="font-size: 13px; padding: 5px;">Contact</td>
+	<td style="font-size: 13px; padding: 5px;">${record.entity.altphone}</td>
+	<td style="font-size: 13px; padding: 5px;" class = "bgColorLazureBeachResort"><b>TRN No.</b></td>
+	<td style="font-size: 13px; padding: 5px;" class = "bgColorLazureBeachResort"><b>: ${record.tranid}</b></td>
+	</tr>
+</#if>
+</table>
+</macro>
+<macro id="nlfooter">
+<table style="width: 100%;">
+<#if record.subsidiary == "Tabuk investment and tourism (Holding)">
+  	<tr>
+	<td style="border-left: 1px; border-right: 1px; border-top: 1px;" class = "borderColorTabouk"><b>Purchasing Manager:</b></td>
+	<td style="border-left: 1px; border-right: 1px; border-top: 1px;" class = "borderColorTabouk"><b>Financial Controler:</b></td>
+	<td style="border-left: 1px; border-right: 1px; border-top: 1px;" class = "borderColorTabouk"><b>General Manager:</b></td>
+	</tr>
+	<tr>
+<#if record.custbody_vs_purchasingmanagerapproval == true>
+<td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorTabouk"><img width = "50%" height = "50%" src = "https://9072131.app.netsuite.com/core/media/media.nl?id=1482&amp;c=9072131&amp;h=oRdJU-o0WW-XPm8vVtMQnfdaClkG_nGKN-6tBkO1Tk2NH2Me"/></td>
+<#elseif record.custbody_vs_purchasingmanagerapproval == false>
+<td style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorTabouk">&nbsp;</td>
+</#if>
+<#if record.custbody_vs_financialcontrollerapprova == true>
+<td align = "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorTabouk"><img width = "30%" height = "30%" src = "https://9072131.app.netsuite.com/core/media/media.nl?id=1475&amp;c=9072131&amp;h=R2ZhsJwyX4A2pKthQrWBTqMkzB6l56tLAhFNIbbStTUGEjKz"/></td>
+<#elseif record.custbody_vs_financialcontrollerapprova == false>
+<td style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorTabouk">&nbsp;</td>
+</#if>
+<#if record.custbody_vs_generalmanagerapproval == true>
+<td align = "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorTabouk"><img width = "30%" height = "30%" src = "https://9072131.app.netsuite.com/core/media/media.nl?id=1480&c=9072131&h=ISTJMBdpFR2ztTVnYj1I7MxcVaDwYupFBmF2Gr0lUoQNlgsI"/></td>
+<#elseif record.custbody_vs_generalmanagerapproval == false>
+<td style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorTabouk">&nbsp;</td>
+</#if>
+	</tr>
+<#elseif record.subsidiary == "Royal Lazure">
+  	<tr>
+	<td style="border-left: 1px; border-right: 1px; border-top: 1px;" class = "borderColorRoyalLazure"><b>Purchasing Manager:</b></td>
+	<td style="border-left: 1px; border-right: 1px; border-top: 1px;" class = "borderColorRoyalLazure"><b>Financial Controler:</b></td>
+	<td style="border-left: 1px; border-right: 1px; border-top: 1px;" class = "borderColorRoyalLazure"><b>General Manager:</b></td>
+	</tr>
+	<tr>
+<#if record.custbody_vs_purchasingmanagerapproval == true>
+<td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorRoyalLazure"><img width = "50%" height = "50%" src = "https://9072131.app.netsuite.com/core/media/media.nl?id=1482&amp;c=9072131&amp;h=oRdJU-o0WW-XPm8vVtMQnfdaClkG_nGKN-6tBkO1Tk2NH2Me"/></td>
+<#elseif record.custbody_vs_purchasingmanagerapproval == false>
+<td style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorRoyalLazure">&nbsp;</td>
+</#if>
+<#if record.custbody_vs_financialcontrollerapprova == true>
+<td style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorRoyalLazure"><img width = "40%" height = "35%" src = "https://9072131.app.netsuite.com/core/media/media.nl?id=1475&amp;c=9072131&amp;h=R2ZhsJwyX4A2pKthQrWBTqMkzB6l56tLAhFNIbbStTUGEjKz"/></td>
+<#elseif record.custbody_vs_financialcontrollerapprova == false>
+<td style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorRoyalLazure">&nbsp;</td>
+</#if>
+<#if record.custbody_vs_generalmanagerapproval == true>
+<td align = "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorRoyalLazure"><img width = "30%" height = "30%" src = "https://9072131.app.netsuite.com/core/media/media.nl?id=1480&c=9072131&h=ISTJMBdpFR2ztTVnYj1I7MxcVaDwYupFBmF2Gr0lUoQNlgsI"/></td>
+<#elseif record.custbody_vs_generalmanagerapproval == false>
+<td style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorRoyalLazure">&nbsp;</td>
+</#if>
+	</tr>
+<#elseif record.subsidiary == "Lasour Executive Resident">
+  	<tr>
+	<td style="border-left: 1px; border-right: 1px; border-top: 1px;" class = "borderColorLazureResidance"><b>Purchasing Manager:</b></td>
+	<td style="border-left: 1px; border-right: 1px; border-top: 1px;" class = "borderColorLazureResidance"><b>Financial Controler:</b></td>
+	<td style="border-left: 1px; border-right: 1px; border-top: 1px;" class = "borderColorLazureResidance"><b>General Manager:</b></td>
+	</tr>
+	<tr>
+<#if record.custbody_vs_purchasingmanagerapproval == true>
+<td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorLazureResidance"><img width = "50%" height = "50%" src = "https://9072131.app.netsuite.com/core/media/media.nl?id=1482&amp;c=9072131&amp;h=oRdJU-o0WW-XPm8vVtMQnfdaClkG_nGKN-6tBkO1Tk2NH2Me"/></td>
+<#elseif record.custbody_vs_purchasingmanagerapproval == false>
+<td style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorLazureResidance">&nbsp;</td>
+</#if>
+<#if record.custbody_vs_financialcontrollerapprova == true>
+<td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorLazureResidance"><img width = "40%" height = "35%" src = "https://9072131.app.netsuite.com/core/media/media.nl?id=1475&amp;c=9072131&amp;h=R2ZhsJwyX4A2pKthQrWBTqMkzB6l56tLAhFNIbbStTUGEjKz"/></td>
+<#elseif record.custbody_vs_financialcontrollerapprova == false>
+<td style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorLazureResidance">&nbsp;</td>
+</#if>
+<#if record.custbody_vs_generalmanagerapproval == true>
+<td align = "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorLazureResidance"><img width = "30%" height = "30%" src = "https://9072131.app.netsuite.com/core/media/media.nl?id=1480&c=9072131&h=ISTJMBdpFR2ztTVnYj1I7MxcVaDwYupFBmF2Gr0lUoQNlgsI"/></td>
+<#elseif record.custbody_vs_generalmanagerapproval == false>
+<td style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorLazureResidance">&nbsp;</td>
+</#if>
+	</tr>
+<#elseif record.subsidiary == "Enviro- facility management">
+  	<tr>
+	<td style="border-left: 1px; border-right: 1px; border-top: 1px;" class = "borderColorEnviro"><b>Purchasing Manager:</b></td>
+	<td style="border-left: 1px; border-right: 1px; border-top: 1px;" class = "borderColorEnviro"><b>Financial Controler:</b></td>
+	<td style="border-left: 1px; border-right: 1px; border-top: 1px;" class = "borderColorEnviro"><b>General Manager:</b></td>
+	</tr>
+	<tr>
+<#if record.custbody_vs_purchasingmanagerapproval == true>
+<td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorEnviro"><img width = "50%" height = "50%" src = "https://9072131.app.netsuite.com/core/media/media.nl?id=1482&amp;c=9072131&amp;h=oRdJU-o0WW-XPm8vVtMQnfdaClkG_nGKN-6tBkO1Tk2NH2Me"/></td>
+<#elseif record.custbody_vs_purchasingmanagerapproval == false>
+<td style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorEnviro">&nbsp;</td>
+</#if>
+<#if record.custbody_vs_financialcontrollerapprova == true>
+<td align = "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorEnviro"><img width = "60%" height = "50%" src = "https://9072131.app.netsuite.com/core/media/media.nl?id=1477&amp;c=9072131&amp;h=7USVOsYp7tNV5giJpYLgat2EMWXshmbftzgxSJT12uBq8rif"/></td>
+<#elseif record.custbody_vs_financialcontrollerapprova == false>
+<td style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorEnviro">&nbsp;</td>
+</#if>
+<#if record.custbody_vs_generalmanagerapproval == true>
+<td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorEnviro"><img width = "30%" height = "30%" src = "https://9072131.app.netsuite.com/core/media/media.nl?id=1478&c=9072131&h=e1PZgCKzJS3rLxaxuiLaXyES33MMxECbKvFzuOge9aMMhJpJ"/></td>
+<#elseif record.custbody_vs_generalmanagerapproval == false>
+<td style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorEnviro">&nbsp;</td>
+</#if>
+	</tr>
+<#elseif record.subsidiary == "Eventti Catering">
+  	<tr>
+	<td style="border-left: 1px; border-right: 1px; border-top: 1px;" class = "borderColorEventi"><b>Purchasing Manager:</b></td>
+	<td style="border-left: 1px; border-right: 1px; border-top: 1px;" class = "borderColorEventi"><b>Financial Controler:</b></td>
+	<td style="border-left: 1px; border-right: 1px; border-top: 1px;" class = "borderColorEventi"><b>General Manager:</b></td>
+	</tr>
+	<tr>
+<#if record.custbody_vs_purchasingmanagerapproval == true>
+<td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorEventi"><img width = "50%" height = "50%" src = "https://9072131.app.netsuite.com/core/media/media.nl?id=1482&amp;c=9072131&amp;h=oRdJU-o0WW-XPm8vVtMQnfdaClkG_nGKN-6tBkO1Tk2NH2Me"/></td>
+<#elseif record.custbody_vs_purchasingmanagerapproval == false>
+<td style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorEventi">&nbsp;</td>
+</#if>
+<#if record.custbody_vs_financialcontrollerapprova == true>
+<td align = "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorEventi"><img width = "60%" height = "50%" src = "https://9072131.app.netsuite.com/core/media/media.nl?id=1476&amp;c=9072131&amp;h=Qo5B88bha73ZF6Y4LNil-CuPbVnJVL8LVa4aHoT8vsxFZ8_o"/></td>
+<#elseif record.custbody_vs_financialcontrollerapprova == false>
+<td style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorEventi">&nbsp;</td>
+</#if>
+<#if record.custbody_vs_generalmanagerapproval == true>
+<td align = "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorEventi"><img width = "30%" height = "30%" src = "https://9072131.app.netsuite.com/core/media/media.nl?id=1479&c=9072131&h=FdeWXAJWW4LosFaldQ8ZMblV55EWGKl105SkOlefqW19QQV9"/></td>
+<#elseif record.custbody_vs_generalmanagerapproval == false>
+<td style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorEventi">&nbsp;</td>
+</#if>
+	</tr>
+<#elseif record.subsidiary == "Lazure beach and resort">
+  	<tr>
+	<td style="border-left: 1px; border-right: 1px; border-top: 1px;" class = "borderColorLazureBeachResort"><b>Purchasing Manager:</b></td>
+	<td style="border-left: 1px; border-right: 1px; border-top: 1px;" class = "borderColorLazureBeachResort"><b>Financial Controler:</b></td>
+	<td style="border-left: 1px; border-right: 1px; border-top: 1px;" class = "borderColorLazureBeachResort"><b>General Manager:</b></td>
+	</tr>
+	<tr>
+<#if record.custbody_vs_purchasingmanagerapproval == true>
+<td align= "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorLazureBeachResort"><img width = "50%" height = "50%" src = "https://9072131.app.netsuite.com/core/media/media.nl?id=1482&amp;c=9072131&amp;h=oRdJU-o0WW-XPm8vVtMQnfdaClkG_nGKN-6tBkO1Tk2NH2Me"/></td>
+<#elseif record.custbody_vs_purchasingmanagerapproval == false>
+<td style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorLazureBeachResort">&nbsp;</td>
+</#if>
+<#if record.custbody_vs_financialcontrollerapprova == true>
+<td align = "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorLazureBeachResort"><img width = "40%" height = "35%" src = "https://9072131.app.netsuite.com/core/media/media.nl?id=1476&amp;c=9072131&amp;h=Qo5B88bha73ZF6Y4LNil-CuPbVnJVL8LVa4aHoT8vsxFZ8_o"/></td>
+<#elseif record.custbody_vs_financialcontrollerapprova == false>
+<td style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorLazureBeachResort">&nbsp;</td>
+</#if>
+<#if record.custbody_vs_generalmanagerapproval == true>
+<td align = "center" text-align = "center" style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorLazureBeachResort"><img width = "30%" height = "30%" src = "https://9072131.app.netsuite.com/core/media/media.nl?id=1480&c=9072131&h=ISTJMBdpFR2ztTVnYj1I7MxcVaDwYupFBmF2Gr0lUoQNlgsI"/></td>
+<#elseif record.custbody_vs_generalmanagerapproval == false>
+<td style="border-left: 1px; border-right: 1px; border-bottom: 1px;" class = "borderColorLazureBeachResort">&nbsp;</td>
+</#if>
+	</tr>
+</#if>
+</table>
+        </macro>
+    </macrolist>
+    <style type="text/css">* {
+		<#if .locale == "zh_CN">
+			font-family: NotoSans, NotoSansCJKsc, sans-serif;
+		<#elseif .locale == "zh_TW">
+			font-family: NotoSans, NotoSansCJKtc, sans-serif;
+		<#elseif .locale == "ja_JP">
+			font-family: NotoSans, NotoSansCJKjp, sans-serif;
+		<#elseif .locale == "ko_KR">
+			font-family: NotoSans, NotoSansCJKkr, sans-serif;
+		<#elseif .locale == "th_TH">
+			font-family: NotoSans, NotoSansThai, sans-serif;
+		<#else>
+			font-family: NotoSans, sans-serif;
+		</#if>
+		}
+.bgColorTabouk {
+background-color:'#adadb0';
+}
+.bgColorRoyalLazure {
+background-color:'#c2b59b';
+}
+.bgColorLazureBeachResort {
+background-color:'#0098A7';
+}
+.bgColorLazureResidance {
+background-color:'#889094';
+}
+.bgColorEnviro {
+background-color:'#52b280';
+}
+.bgColorEventi {
+background-color:'#1F839C';
+}
+.borderColorTabouk {
+border-color:'#adadb0';
+}
+.borderColorRoyalLazure {
+border-color:'#c2b59b';
+}
+.borderColorLazureBeachResort {
+border-color:'#0098A7';
+}
+.borderColorLazureResidance {
+border-color:'#889094';
+}
+.borderColorEnviro {
+border-color:'#52b280';
+}
+.borderColorEventi {
+border-color:'#1F839C';
+}
+.mixColorTabouk {
+background-color:'#adadb0';
+border-color:'#1F839C';
+}
+.mixColorRoyalLazure {
+background-color:'#c2b59b';
+border-color:'#c2b59b';
+}
+.mixColorLazureBeachResort {
+background-color:'#0098A7';
+border-color:'#0098A7';
+}
+.mixColorLazureResidance {
+background-color:'#889094';
+border-color:'#889094';
+}
+.mixColorEnviro {
+background-color:'#52b280';
+border-color:'#52b280';
+}
+.mixColorEventi {
+background-color:'#1F839C';
+border-color:'#1F839C';
+}
+</style>
+</head>
+<body header="nlheader" header-height="35%" footer="nlfooter" footer-height="15%" padding="0.1in 0.2in 0.1in 0.2in" size="Letter">
+<#list record.item as item>
+<table style="width: 100%;padding:7px;">
+<#if item_index==0>
+<#if record.subsidiary == "Tabuk investment and tourism (Holding)">
+    <tr>
+	<td style="align: center; text-align: center;" class = "bgColorTabouk"><b>Item</b></td>
+	<td style="align: center; text-align: center;" class = "bgColorTabouk"><b>Pack</b></td>
+	<td style="align: center; text-align: center;" class = "bgColorTabouk"><b>Description</b></td>
+	<td style="align: center; text-align: center;" class = "bgColorTabouk"><b>Unit</b></td>
+	<td style="align: center; text-align: center;" class = "bgColorTabouk"><b>Qty.</b></td>
+	<td style="align: center; text-align: center;" class = "bgColorTabouk"><b>Rate</b></td>
+	<td style="align: center; text-align: center;" class = "bgColorTabouk"><b>VAT 15%</b></td>
+	<td style="align: center; text-align: center;" class = "bgColorTabouk"><b>Value</b></td>
+	</tr>
+<#elseif record.subsidiary == "Lazure beach and resort">
+    <tr>
+	<td style="align: center; text-align: center;" class = "bgColorLazureBeachResort"><b>Item</b></td>
+	<td style="align: center; text-align: center;" class = "bgColorLazureBeachResort"><b>Pack</b></td>
+	<td style="align: center; text-align: center;" class = "bgColorLazureBeachResort"><b>Description</b></td>
+	<td style="align: center; text-align: center;" class = "bgColorLazureBeachResort"><b>Unit</b></td>
+	<td style="align: center; text-align: center;" class = "bgColorLazureBeachResort"><b>Qty.</b></td>
+	<td style="align: center; text-align: center;" class = "bgColorLazureBeachResort"><b>Rate</b></td>
+	<td style="align: center; text-align: center;" class = "bgColorLazureBeachResort"><b>VAT 15%</b></td>
+	<td style="align: center; text-align: center;" class = "bgColorLazureBeachResort"><b>Value</b></td>
+	</tr>
+<#elseif record.subsidiary == "Royal Lazure">
+    <tr>
+	<td style="align: center; text-align: center;" class = "bgColorRoyalLazure"><b>Item</b></td>
+	<td style="align: center; text-align: center;" class = "bgColorRoyalLazure"><b>Pack</b></td>
+	<td style="align: center; text-align: center;" class = "bgColorRoyalLazure"><b>Description</b></td>
+	<td style="align: center; text-align: center;" class = "bgColorRoyalLazure"><b>Unit</b></td>
+	<td style="align: center; text-align: center;" class = "bgColorRoyalLazure"><b>Qty.</b></td>
+	<td style="align: center; text-align: center;" class = "bgColorRoyalLazure"><b>Rate</b></td>
+	<td style="align: center; text-align: center;" class = "bgColorRoyalLazure"><b>VAT 15%</b></td>
+	<td style="align: center; text-align: center;" class = "bgColorRoyalLazure"><b>Value</b></td>
+	</tr>
+<#elseif record.subsidiary == "Lasour Executive Resident">
+    <tr>
+	<td style="align: center; text-align: center;" class = "bgColorLazureResidance"><b>Item</b></td>
+	<td style="align: center; text-align: center;" class = "bgColorLazureResidance"><b>Pack</b></td>
+	<td style="align: center; text-align: center;" class = "bgColorLazureResidance"><b>Description</b></td>
+	<td style="align: center; text-align: center;" class = "bgColorLazureResidance"><b>Unit</b></td>
+	<td style="align: center; text-align: center;" class = "bgColorLazureResidance"><b>Qty.</b></td>
+	<td style="align: center; text-align: center;" class = "bgColorLazureResidance"><b>Rate</b></td>
+	<td style="align: center; text-align: center;" class = "bgColorLazureResidance"><b>VAT 15%</b></td>
+	<td style="align: center; text-align: center;" class = "bgColorLazureResidance"><b>Value</b></td>
+	</tr>
+<#elseif record.subsidiary == "Enviro- facility management">
+    <tr>
+	<td style="align: center; text-align: center;" class = "bgColorEnviro"><b>Item</b></td>
+	<td style="align: center; text-align: center;" class = "bgColorEnviro"><b>Pack</b></td>
+	<td style="align: center; text-align: center;" class = "bgColorEnviro"><b>Description</b></td>
+	<td style="align: center; text-align: center;" class = "bgColorEnviro"><b>Unit</b></td>
+	<td style="align: center; text-align: center;" class = "bgColorEnviro"><b>Qty.</b></td>
+	<td style="align: center; text-align: center;" class = "bgColorEnviro"><b>Rate</b></td>
+	<td style="align: center; text-align: center;" class = "bgColorEnviro"><b>VAT 15%</b></td>
+	<td style="align: center; text-align: center;" class = "bgColorEnviro"><b>Value</b></td>
+	</tr>
+<#elseif record.subsidiary == "Eventti Catering">
+    <tr>
+	<td style="align: center; text-align: center;" class = "bgColorEventi"><b>Item</b></td>
+	<td style="align: center; text-align: center;" class = "bgColorEventi"><b>Pack</b></td>
+	<td style="align: center; text-align: center;" class = "bgColorEventi"><b>Description</b></td>
+	<td style="align: center; text-align: center;" class = "bgColorEventi"><b>Unit</b></td>
+	<td style="align: center; text-align: center;" class = "bgColorEventi"><b>Qty.</b></td>
+	<td style="align: center; text-align: center;" class = "bgColorEventi"><b>Rate</b></td>
+	<td style="align: center; text-align: center;" class = "bgColorEventi"><b>VAT 15%</b></td>
+	<td style="align: center; text-align: center;" class = "bgColorEventi"><b>Value</b></td>
+	</tr>
+ 	</#if>
+	</#if>
+	<tr style = "margin-top:3px;">
+	<td style="align: left; text-align: left; font-size: 10px; border-bottom:1px;">${item.item}</td>
+	<td style="align: center; text-align: center; font-size: 10px; border-bottom:1px;">&nbsp;</td>
+	<td style="align: center; text-align: center; font-size: 10px; border-bottom:1px;">${item.description}</td>
+	<td style="align: center; text-align: center; font-size: 10px; border-bottom:1px;">${item.units}</td>
+	<td style="align: center; text-align: center; font-size: 10px; border-bottom:1px;">${item.quantity}</td>
+	<td style="align: center; text-align: center; font-size: 10px; border-bottom:1px;">${item.rate}</td>
+	<td style="align: center; text-align: center; font-size: 10px; border-bottom:1px;">${item.tax1amt}</td>
+	<td style="align: center; text-align: center; font-size: 10px; border-bottom:1px;">${item.Grossamt}</td>
+	</tr>
+
+</table>
+</#list>
+<br/>
+<table width="100%">
+<#if record.subsidiary == "Lazure beach and resort">
+<tr>
+	<td style = "border-right: 3px; border-top: 3px; border-left: 3px; border-bottom:3px; font-size: 12px;" class  = "borderColorLazureBeachResort"><b>Total Before VAT</b><br/><span font-size = "19px">${record.subtotal?string["#,##0.00"]} ${record.currencysymbol}</span><b></b></td>
+	<td style = "border-right: 3px; border-top: 3px; border-bottom: 3px; font-size: 12px;"  class  = "borderColorLazureBeachResort"><b>Tax (15%)</b><br/><span font-size = "19px">${record.taxtotal?string["#,##0.00"]} ${record.currencysymbol}</span><b></b></td>
+	<td style = "border-right: 3px; border-top: 3px; border-bottom: 3px; font-size: 11px; vertical-align:center;"  class  = "borderColorLazureBeachResort"><b>Prepared By</b><br/><b>${record.employee}</b></td>
+</tr>
+<tr>
+	<td colspan="3" style = "border-left:3px; border-right:3px; border-bottom:3px; font-size: 15px;" class  = "borderColorLazureBeachResort"><b>Grand Total</b> <span font-size = "19px">${record.total?string["#,##0.00"]} ${record.currencysymbol}</span><b></b><br/><span font-size = "13px"><b>${record.custbody_vs_amt_in_words}</b></span></td>
+</tr>
+<#elseif record.subsidiary == "Royal Lazure">
+<tr>
+	<td style = "border-right: 3px; border-top: 3px; border-left: 3px; border-bottom:3px; font-size: 12px;" class  = "borderColorRoyalLazure"><b>Total Before VAT</b><br/><span font-size = "19px">${record.subtotal?string["#,##0.00"]} ${record.currencysymbol}</span><b></b></td>
+	<td style = "border-right: 3px; border-top: 3px; border-bottom: 3px; font-size: 12px;"  class  = "borderColorRoyalLazure"><b>Tax (15%)</b><br/><span font-size = "19px">${record.taxtotal?string["#,##0.00"]} ${record.currencysymbol}</span><b></b></td>
+	<td style = "border-right: 3px; border-top: 3px; border-bottom: 3px; font-size: 11px; vertical-align:center;"  class  = "borderColorRoyalLazure"><b>Prepared By</b><br/><b>${record.employee}</b></td>
+</tr>
+<tr>
+	<td colspan="3" style = "border-left:3px; border-right:3px; border-bottom:3px; font-size: 15px;" class  = "borderColorRoyalLazure"><b>Grand Total</b> <span font-size = "19px">${record.total?string["#,##0.00"]} ${record.currencysymbol}</span><b></b><br/><span font-size = "13px"><b>${record.custbody_vs_amt_in_words}</b></span></td>
+</tr>
+<#elseif record.subsidiary == "Tabuk investment and tourism (Holding)">
+<tr>
+	<td style = "border-right: 3px; border-top: 3px; border-left: 3px; border-bottom:3px; font-size: 12px;" class  = "borderColorTabouk"><b>Total Before VAT</b><br/><span font-size = "19px">${record.subtotal?string["#,##0.00"]} ${record.currencysymbol}</span><b></b></td>
+	<td style = "border-right: 3px; border-top: 3px; border-bottom: 3px; font-size: 12px;"  class  = "borderColorTabouk"><b>Tax (15%)</b><br/><span font-size = "19px">${record.taxtotal?string["#,##0.00"]} ${record.currencysymbol}</span><b></b></td>
+	<td style = "border-right: 3px; border-top: 3px; border-bottom: 3px; font-size: 11px; vertical-align:center;"  class  = "borderColorTabouk"><b>Prepared By</b><br/><b>${record.employee}</b></td>
+</tr>
+<tr>
+	<td colspan="3" style = "border-left:3px; border-right:3px; border-bottom:3px; font-size: 15px;" class  = "borderColorTabouk"><b>Grand Total</b> <span font-size = "19px">${record.total?string["#,##0.00"]} ${record.currencysymbol}</span><b></b><br/><span font-size = "13px"><b>${record.custbody_vs_amt_in_words}</b></span></td>
+</tr>
+<#elseif record.subsidiary == "Lasour Executive Resident">
+<tr>
+	<td style = "border-right: 3px; border-top: 3px; border-left: 3px; border-bottom:3px; font-size: 12px;" class  = "borderColorLazureResidance"><b>Total Before VAT</b><br/><span font-size = "19px">${record.subtotal?string["#,##0.00"]} ${record.currencysymbol}</span><b></b></td>
+	<td style = "border-right: 3px; border-top: 3px; border-bottom: 3px; font-size: 12px;"  class  = "borderColorLazureResidance"><b>Tax (15%)</b><br/><span font-size = "19px">${record.taxtotal?string["#,##0.00"]} ${record.currencysymbol}</span><b></b></td>
+	<td style = "border-right: 3px; border-top: 3px; border-bottom: 3px; font-size: 11px; vertical-align:center;"  class  = "borderColorLazureResidance"><b>Prepared By</b><br/><b>${record.employee}</b></td>
+</tr>
+<tr>
+	<td colspan="3" style = "border-left:3px; border-right:3px; border-bottom:3px; font-size: 15px;" class  = "borderColorLazureResidance"><b>Grand Total</b> <span font-size = "19px">${record.total?string["#,##0.00"]} ${record.currencysymbol}</span><b></b><br/><span font-size = "13px"><b>${record.custbody_vs_amt_in_words}</b></span></td>
+</tr>
+<#elseif record.subsidiary == "Enviro- facility management">
+<tr>
+	<td style = "border-right: 3px; border-top: 3px; border-left: 3px; border-bottom:3px; font-size: 12px;" class  = "borderColorEnviro"><b>Total Before VAT</b><br/><span font-size = "19px">${record.subtotal?string["#,##0.00"]} ${record.currencysymbol}</span><b></b></td>
+	<td style = "border-right: 3px; border-top: 3px; border-bottom: 3px; font-size: 12px;"  class  = "borderColorEnviro"><b>Tax (15%)</b><br/><span font-size = "19px">${record.taxtotal?string["#,##0.00"]} ${record.currencysymbol}</span><b></b></td>
+	<td style = "border-right: 3px; border-top: 3px; border-bottom: 3px; font-size: 11px; vertical-align:center;"  class  = "borderColorEnviro"><b>Prepared By</b><br/><b>${record.employee}</b></td>
+</tr>
+<tr>
+	<td colspan="3" style = "border-left:3px; border-right:3px; border-bottom:3px; font-size: 15px;" class  = "borderColorEnviro"><b>Grand Total</b> <span font-size = "19px">${record.total?string["#,##0.00"]} ${record.currencysymbol}</span><b></b><br/><span font-size = "13px"><b>${record.custbody_vs_amt_in_words}</b></span></td>
+</tr>
+<#elseif record.subsidiary == "Eventti Catering">
+<tr>
+	<td style = "border-right: 3px; border-top: 3px; border-left: 3px; border-bottom:3px; font-size: 12px;" class  = "borderColorEventi"><b>Total Before VAT</b><br/><span font-size = "19px">${record.subtotal?string["#,##0.00"]} ${record.currencysymbol}</span><b></b></td>
+	<td style = "border-right: 3px; border-top: 3px; border-bottom: 3px; font-size: 12px;"  class  = "borderColorEventi"><b>Tax (15%)</b><br/><span font-size = "19px">${record.taxtotal?string["#,##0.00"]} ${record.currencysymbol}</span><b></b></td>
+	<td style = "border-right: 3px; border-top: 3px; border-bottom: 3px; font-size: 11px; vertical-align:center;"  class  = "borderColorEventi"><b>Prepared By</b><br/><b>${record.employee}</b></td>
+</tr>
+<tr>
+	<td colspan="3" style = "border-left:3px; border-right:3px; border-bottom:3px; font-size: 15px;" class  = "borderColorEventi"><b>Grand Total</b> <span font-size = "19px">${record.total?string["#,##0.00"]} ${record.currencysymbol}</span><b></b><br/><span font-size = "13px"><b>${record.custbody_vs_amt_in_words}</b></span></td>
+</tr>
+</#if>
+</table>
+<br/>
+<table width = "100%">
+<#if record.subsidiary == "Lazure beach and resort">
+        <tr>
+            <td style = "font-size: 14px; border-right: 1px; border-left: 1px; border-top: 1px;" class = "mixColorLazureBeachResort"><b>Terms &amp; Conditions</b></td>
+        </tr>
+        <tr>
+<td style = "font-size: 12px; border-right: 1px; border-left: 1px; border-bottom: 1px;" class = "borderColorLazureBeachResort">
+•	Delivery Location: Lazure Beach Resort.<br/>
+•	Deliveries through the receiving office ONLY.<br/>
+•	Goods Will be accepted from 09:00 - 15:00 Saturday to Thursday.<br/>
+•	In cases of transmission problems, Please contact +966 55 084 0111<br/>
+•	Email - a.sahlah@lazurehospitality.com<br/>
+•	INVOICES will only be accepted along with a copy of the PO. Delivery notes will not be accepted.<br/>
+•	Frozen food items must be delivered by temperature control vehicle or truck ranging from -12C to -18C.<br/>
+•	Chill food items must be delivered by a temperature control vehicle or truck ranging from 0C to 7C.<br/>
+</td>
+</tr>
+<#elseif record.subsidiary == "Royal Lazure">
+        <tr>
+            <td style = "font-size: 14px; border-right: 1px; border-left: 1px; border-top: 1px;" class = "mixColorRoyalLazure"><b>Terms &amp; Conditions</b></td>
+        </tr>
+        <tr>
+<td style = "font-size: 12px; border-right: 1px; border-left: 1px; border-bottom: 1px;" class = "borderColorRoyalLazure">
+•	Delivery Location: Royal Lazure.<br/>
+•	Deliveries through the receiving office ONLY.<br/>
+•	Goods Will be accepted from 09:00 - 15:00 Saturday to Thursday.<br/>
+•	In cases of transmission problems, Please contact +966 50 629 0026<br/>
+•	Email - a.jamil@lazurehospitality.com<br/>
+•	INVOICES will only be accepted along with a copy of the PO. Delivery notes will not be accepted.<br/>
+•	Frozen food items must be delivered by temperature control vehicle or truck ranging from -12C to -18C.<br/>
+•	Chill food items must be delivered by a temperature control vehicle or truck ranging from 0C to 7C.<br/>
+</td>
+</tr>
+<#elseif record.subsidiary == "Lazure executive residences">
+        <tr>
+            <td style = "font-size: 14px; border-right: 1px; border-left: 1px; border-top: 1px;" class = "mixColorLazureResidance"><b>Terms &amp; Conditions</b></td>
+        </tr>
+        <tr>
+<td style = "font-size: 12px; border-right: 1px; border-left: 1px; border-bottom: 1px;" class = "borderColorLazureResidance">
+•	Delivery Location: Lazure Beach Resort<br/>
+•	Deliveries through the receiving office ONLY.<br/>
+•	Goods Will be accepted from 09:00 - 15:00 Saturday to Thursday.<br/>
+•	In cases of transmission problems, Please contact +966 55 084 0111<br/>
+•	Email - a.sahlah@lazurehospitality.com<br/>
+•	INVOICES will only be accepted along with a copy of the PO. Delivery notes will not be accepted.<br/>
+•	Frozen food items must be delivered by temperature control vehicle or truck ranging from -12C to -18C.<br/>
+•	Chill food items must be delivered by a temperature control vehicle or truck ranging from 0C to 7C.<br/>
+</td>
+</tr>
+<#elseif record.subsidiary == "Enviro- facility management">
+        <tr>
+            <td style = "font-size: 14px; border-right: 1px; border-left: 1px; border-top: 1px;" class = "mixColorEnviro"><b>Terms &amp; Conditions</b></td>
+        </tr>
+        <tr>
+<td style = "font-size: 12px; border-right: 1px; border-left: 1px; border-bottom: 1px;" class = "borderColorEnviro">
+•	Delivery Location: AL Ula.<br/>
+•	Deliveries through the receiving office ONLY.<br/>
+•	Goods Will be accepted from 09:00 - 15:00 Saturday to Thursday.<br/>
+•	In cases of transmission problems, Please contact +966 53 910 2591<br/>
+•	Email - m.shezab@enviro-fm.com<br/>
+•	INVOICES will only be accepted along with a copy of the PO. Delivery notes will not be accepted.<br/>
+•	Frozen food items must be delivered by temperature control vehicle or truck ranging from -12C to -18C.<br/>
+•	Chill food items must be delivered by a temperature control vehicle or truck ranging from 0C to 7C.<br/>
+</td>
+</tr>
+<#elseif record.subsidiary == "Eventti Catering">
+        <tr>
+            <td style = "font-size: 14px; border-right: 1px; border-left: 1px; border-top: 1px;" class = "mixColorEventi"><b>Terms &amp; Conditions</b></td>
+        </tr>
+        <tr>
+<td style = "font-size: 12px; border-right: 1px; border-left: 1px; border-bottom: 1px;" class = "borderColorEventi">
+•	Delivery Location: To be Announced.<br/>
+•	Deliveries through the receiving office ONLY.<br/>
+•	Goods Will be accepted from 09:00 - 15:00 Saturday to Thursday.<br/>
+•	In cases of transmission problems, Please contact +966 53 910 2591<br/>
+•	Email - m.shezab@enviro-fm.com<br/>
+•	INVOICES will only be accepted along with a copy of the PO. Delivery notes will not be accepted.<br/>
+•	Frozen food items must be delivered by temperature control vehicle or truck ranging from -12C to -18C.<br/>
+•	Chill food items must be delivered by a temperature control vehicle or truck ranging from 0C to 7C.<br/>
+</td>
+</tr>
+</#if>
+</table>
+</body>
+</pdf>

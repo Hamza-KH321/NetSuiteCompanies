@@ -1,0 +1,222 @@
+<?xml version="1.0"?><!DOCTYPE pdf PUBLIC "-//big.faceless.org//report" "report-1.1.dtd">
+<pdf>
+<head>
+  <link name="NotoSansArabic" type="font" subtype="opentype" src="${nsfont.NotoSansArabic_Regular}" src-bold="${nsfont.NotoSansArabic_Bold}" bytes="2" subset="false"/>
+	<link name="NotoSans" type="font" subtype="truetype" src="${nsfont.NotoSans_Regular}" src-bold="${nsfont.NotoSans_Bold}" src-italic="${nsfont.NotoSans_Italic}" src-bolditalic="${nsfont.NotoSans_BoldItalic}" bytes="2" />
+	<#if .locale == "zh_CN">
+		<link name="NotoSansCJKsc" type="font" subtype="opentype" src="${nsfont.NotoSansCJKsc_Regular}" src-bold="${nsfont.NotoSansCJKsc_Bold}" bytes="2" />
+	<#elseif .locale == "zh_TW">
+		<link name="NotoSansCJKtc" type="font" subtype="opentype" src="${nsfont.NotoSansCJKtc_Regular}" src-bold="${nsfont.NotoSansCJKtc_Bold}" bytes="2" />
+	<#elseif .locale == "ja_JP">
+		<link name="NotoSansCJKjp" type="font" subtype="opentype" src="${nsfont.NotoSansCJKjp_Regular}" src-bold="${nsfont.NotoSansCJKjp_Bold}" bytes="2" />
+	<#elseif .locale == "ko_KR">
+		<link name="NotoSansCJKkr" type="font" subtype="opentype" src="${nsfont.NotoSansCJKkr_Regular}" src-bold="${nsfont.NotoSansCJKkr_Bold}" bytes="2" />
+	<#elseif .locale == "th_TH">
+		<link name="NotoSansThai" type="font" subtype="opentype" src="${nsfont.NotoSansThai_Regular}" src-bold="${nsfont.NotoSansThai_Bold}" bytes="2" />
+	</#if>
+    <macrolist>
+<macro id="nlheader">
+<table border="0" cellpadding="0" cellspacing="0" style="width:100%;">
+    
+	<tr style="padding-bottom: 25px;">
+
+	<td style="align:left; ">
+       <@filecabinet nstype="image" style="float: left;" src="https://8446237-sb1.app.netsuite.com/core/media/media.nl?id=799&c=8446237_SB1&h=oRqhhK9vP5kA3eHhALX1KqNGDB3yjL_lOiF8tiuO-n2n3K2o" width="2.3%" height="1.3%" />
+    </td>
+
+    </tr>
+	<tr style="padding-bottom: 10px;">
+	<td style="align:left; "><strong style="font-size:25px;">Transfer Order</strong></td>
+	</tr>
+
+	<tr style="padding-bottom: 10px;">
+	<td style="align:left; "><strong style="font-size:15px;">Transfer Order - ${record.tranID}</strong></td>
+	</tr>
+   
+    </table>
+</macro>
+
+<macro id="nlfooter">
+<table class="footer" style="width: 100%;">
+	<tr>
+	<td align="right"><pagenumber/> of <totalpages/></td>
+	</tr>
+</table>
+</macro>
+		
+    </macrolist>
+    <style type="text/css">* {
+		<#if .locale == "zh_CN">
+			font-family: NotoSans, NotoSansCJKsc, sans-serif;
+		<#elseif .locale == "zh_TW">
+			font-family: NotoSans, NotoSansCJKtc, sans-serif;
+		<#elseif .locale == "ja_JP">
+			font-family: NotoSans, NotoSansCJKjp, sans-serif;
+		<#elseif .locale == "ko_KR">
+			font-family: NotoSans, NotoSansCJKkr, sans-serif;
+		<#elseif .locale == "th_TH">
+			font-family: NotoSans, NotoSansThai, sans-serif;
+		<#else>
+			font-family: NotoSansArabic, Montserrat, sans-serif;
+		</#if>
+		}
+		table {
+			font-size: 9pt;
+			table-layout: fixed;
+		}
+        th {
+            font-weight: bold;
+            font-size: 8pt;
+            vertical-align: middle;
+            padding: 5px 6px 3px;
+            background-color: #e3e3e3;
+            color: #333333;
+        }
+        td {
+            padding: 4px 6px;
+        }
+		
+        b {
+            font-weight: bold;
+            color: #333333;
+        }
+        table.header td {
+            padding: 0;
+            font-size: 10pt;
+        }
+        table.footer td {
+            padding: 0;
+            font-size: 8pt;
+        }
+        table.itemtable th {
+            padding-bottom: 10px;
+            padding-top: 10px;
+        }
+        table.body td {
+            padding-top: 2px;
+        }
+        table.total {
+            page-break-inside: avoid;
+        }
+        tr.totalrow {
+            background-color: #e3e3e3;
+            line-height: 200%;
+        }
+        td.totalboxtop {
+            font-size: 12pt;
+            background-color: #e3e3e3;
+        }
+        td.addressheader {
+            font-size: 8pt;
+            padding-top: 6px;
+            padding-bottom: 2px;
+        }
+        td.address {
+            padding-top: 0;
+        }
+        td.totalboxmid {
+            font-size: 28pt;
+            padding-top: 20px;
+            background-color: #e3e3e3;
+        }
+        td.totalboxbot {
+            background-color: #e3e3e3;
+            font-weight: bold;
+        }
+        span.title {
+            font-size: 28pt;
+        }
+        span.number {
+            font-size: 16pt;
+        }
+        span.itemname {
+            font-weight: bold;
+            line-height: 150%;
+        }
+        hr {
+            width: 100%;
+            color: #d3d3d3;
+            background-color: #d3d3d3;
+            height: 1px;
+        }
+</style>
+</head>
+
+<body header="nlheader" header-height="22%" footer="nlfooter" footer-height="20pt" padding="0.5in 0.5in 0.5in 0.5in" size="A3">
+
+<hr style="border: none; background-color: black;" />
+
+<table style="width:100%">
+    <tr style = "padding-bottom: 20px;">
+        <td style="font-size:12px;align:left; "><b>Date</b></td>
+        <td style="font-size:12px;align:left; "><b>${record.trandate}</b></td>
+		<td style="font-size:12px;align:left;"><b>From Branch</b></td>
+		<td style="font-size:12px;align:left; "><b>${record.location}</b></td>
+	</tr>
+
+    <tr style = "padding-bottom: 20px;">
+       <td style="font-size:12px;align:left; "><b>TO Branch</b></td>
+       <td style="font-size:12px;align:left; "><b>${record.transferlocation}</b></td>
+	   <td style="font-size:12px;align:left;"><b>Subsidiary</b></td>
+       <td style="font-size:12px;align:left;"><b>${record.subsidiary}</b></td>
+	</tr>
+	
+    <tr style = "padding-bottom: 10px;">
+	   <td  style="font-size:12px;align:left;"><b>Brand</b></td>
+	   <td  style="font-size:12px;align:left;"><b>${record.class}</b></td>
+	   <td  style="font-size:12px;align:left;"><b>Department</b></td>
+	   <td  style="font-size:12px;align:left;"><b>${record.department}</b></td>
+	</tr>
+		
+</table>
+
+<#if record.item?has_content>
+<table  style="width: 100%;"><!-- start items --><#list record.item as item><#if item_index==0>
+<thead>
+<tr style = "background-color: #cbb7a0;">
+  <td style="line-height: 11; width:15%;"><b>Line#</b></td>
+  <td style="line-height: 11; width:15%;"><b>ﻛﻮد اﻟﺼﻨﻒ<br/>ITEM CODE</b></td>
+  <td style="line-height: 11; width:35%;"><b>اﻟﻮﺻﻒ<br/>DESCRIPTION</b></td>
+  <td style="line-height: 11; width:15%;"><b>اﻟﻜﻤﻴﺔ<br/>QTY</b></td>
+</tr>
+</thead>
+</#if><tr>
+	<td style="padding-top: 15px; width:15%;" >${item_index + 1}</td>
+	<td style="padding-top: 15px; width:15%;" >${item.item.internalid}</td>
+	<td style="padding-top: 15px; width:35%;">${item.item}</td>
+    <td style="padding-top: 15px; width:35%;">${item.quantity}</td>
+	
+	</tr>
+	</#list>
+  <!-- end items -->
+</table>
+</#if>
+
+<#if record.expense?has_content>
+<table  style="width: 100%;"><!-- start expenses -->
+  <#list record.expense as expense>
+  <#if expense_index==0>
+  <thead>
+  
+  <tr>
+    <th style="line-height: 11;width:9%">ﻛﻮد اﻟﺼﻨﻒ<br/>ITEM CODE</th>
+    <th style="line-height: 11;width:20%">اﻟﻮﺻﻒ<br/>DESCRIPTION</th>
+  </tr>
+  
+  </thead>
+  </#if>
+  
+  <tr>
+    <td style="padding-top: 15px;width:9%" >${expense?index + 1}</td>
+    <td style="padding-top: 15px;width:20%">${expense.account}</td>
+  </tr>
+  <#assign subtotal = subtotal + expense.amount>
+    </#list>
+    <!-- end expenses -->
+  </table>
+</#if>
+
+<hr />
+
+</body>
+</pdf>

@@ -1,0 +1,206 @@
+/**
+ * @NApiVersion 2.x
+ * @NScriptType ScheduledScript
+ * @NModuleScope SameAccount
+ */
+define(['N/record', 'N/search','N/runtime'],
+/**
+ * @param {record} record
+ * @param {search} search
+ */
+function(record, search, runtime) {
+   
+    /**
+     * Definition of the Scheduled script trigger point.
+     *
+     * @param {Object} scriptContext
+     * @param {string} scriptContext.type - The context in which the script is executed. It is one of the values from the scriptContext.InvocationType enum.
+     * @Since 2015.2
+     */
+    function execute(scriptContext) {
+
+        try {
+	
+          var scriptObj = runtime.getCurrentScript();
+          
+var rectype = scriptObj.getParameter({name: 'custscript_vs_transtype'});
+  var recid = scriptObj.getParameter({name: 'custscript_vs_transid'});
+
+            // Get data from Transaction Record POS
+            var newRecord = record.load({type:rectype,id:recid}); //context.newRecord;
+
+
+
+
+            var subsidiary = newRecord.getValue({
+              fieldId: "subsidiary"
+            });
+            var isCheckboxChecked = newRecord.getValue({
+              fieldId: "custbody_vs_cia_pos",
+            });
+            var adjustmentAccount = newRecord.getValue({
+              fieldId: "account"
+            });
+            var customer = newRecord.getValue({
+              fieldId: "entity"
+            });
+            var location = newRecord.getValue({
+              fieldId: "location"
+            });
+            var date = newRecord.getValue({ 
+              fieldId: "trandate" 
+            });
+            var recordID = newRecord.id;
+            var itemCount = newRecord.getLineCount({
+              sublistId: "item",
+            });
+    
+          // Check if Data is correct or not
+          //   log.debug({title: 'subsidiary is:' , details: subsidiary});
+          //   log.debug({title: 'isCheckboxChecked is:' , details: isCheckboxChecked});
+          //   log.debug({title: 'adjustmentAccount is:' , details: adjustmentAccount});
+          //   log.debug({title: 'customer is:' , details: customer});
+          //   log.debug({title: 'location is:' , details: location});
+          //   log.debug({title: 'date is:' , details: date});
+          //   log.debug({title: 'recordID is:' , details: recordID});
+          //   log.debug({title: 'itemCount is:' , details: itemCount});
+    
+          // If the checkbox is checked then it will enter this loop and create Inventory Adjustment
+          if (isCheckboxChecked) {
+              log.debug({ title: "CheckBox Condition", details: isCheckboxChecked });
+    
+              var inventoryAdjustment = record.create({
+                  type: record.Type.INVENTORY_ADJUSTMENT,
+                  isDynamic: true,
+                });
+        
+                // Adding Inventory Adjustment Body Fields
+                inventoryAdjustment.setValue({
+                  fieldId: "subsidiary",
+                  value: subsidiary,
+                });
+        
+                inventoryAdjustment.setValue({
+                  fieldId: "custbody_vs_source",
+                  value: "POS",
+                });
+        
+                inventoryAdjustment.setValue({
+                  fieldId: "account",
+                  value: adjustmentAccount,
+                });
+        
+                inventoryAdjustment.setValue({
+                  fieldId: "trandate",
+                  value: date,
+                });
+    
+                inventoryAdjustment.setValue({
+                  fieldId: "adjlocation",
+                  value: location,
+                });
+    
+                // Adding Inventory Adjustment lines
+                for (var i = 0; i < itemCount; i++) {
+    
+                  var itemId = newRecord.getSublistValue({
+                      sublistId: "item",
+                      fieldId: "item",
+                      line: i,
+                    });
+                    var itemLocation = newRecord.getSublistValue({
+                      sublistId: "item",
+                      fieldId: "location",
+                      line: i,
+                    });
+                    var itemQty = newRecord.getSublistValue({
+                      sublistId: "item",
+                      fieldId: "quantity",
+                      line: i,
+                    });
+                    var invDetails = newRecord.getSublistValue({
+                      sublistId: 'item',
+                      fieldId: 'inventorydetail',
+                      line: i
+                  });
+                  //   log.debug({title: 'itemId is:' , details: itemId});
+                  //   log.debug({title: 'itemLocation is:' , details: itemLocation});
+                  //   log.debug({title: 'itemQty is:' , details: itemQty});
+                  //   log.debug({title: 'i is:' , details: i});
+    
+                  // This Saved search is used just to check the item type if it's Lot numbered item or not 
+                  var itemSearchObj = search.create({
+                      type: "item",
+                      filters:["internalid", "anyof", itemId],
+                      columns:
+                      [
+                         search.createColumn({name: "type", label: "Type"}),
+                         search.createColumn({name: "internalid", label: "Internal ID"}),
+                         search.createColumn({name: "salesdescription", label: "Description"}),
+                         search.createColumn({name: "islotitem", label: "Is Lot Numbered Item"})
+                      ]
+                   });
+          
+                    var itemSearchResult = itemSearchObj.run().getRange({ start: 0, end: 1 });
+                    var itemResult = itemSearchResult;
+                    var itemType = itemResult[0].getValue({ name: "type" });
+                    var isLotItem = itemResult[0].getValue({ name: "islotitem" });
+    
+                    log.debug('Item Type is:' , itemType);
+                    log.debug('isLotItem:' , isLotItem);
+    
+                    inventoryAdjustment.selectNewLine({
+                      sublistId: "inventory",
+                    });
+          
+                    inventoryAdjustment.setCurrentSublistValue({
+                      sublistId: "inventory",
+                      fieldId: "item",
+                      value: itemId,
+                    });
+          
+                    inventoryAdjustment.setCurrentSublistValue({
+                      sublistId: "inventory",
+                      fieldId: "adjustqtyby",
+                      value: itemQty,
+                    });
+          
+                    inventoryAdjustment.setCurrentSublistValue({
+                      sublistId: "inventory",
+                      fieldId: "location",
+                      value: itemLocation,
+                    });
+                    
+                    // If the item type is inventory and lot numbered there will be a inventory details sub record added to the IA
+                    if (itemType == "InvtPart" && isLotItem == true && invDetails != "F") {
+                    log.debug('Inventory Details is: ' , invDetails);
+                    inventoryAdjustment.setCurrentSublistValue({
+                      sublistId: "inventory",
+                      fieldId: "inventorydetail",
+                      value: invDetails,
+                    });
+                    }
+                    
+                    // Save the Inventory Adjustment
+                    inventoryAdjustment.commitLine({
+                      sublistId: "inventory",
+                    });
+                }
+                
+                // Inventory Adjustment ID
+                var adjustmentId = inventoryAdjustment.save();
+                log.debug({title: "Inventory Adjustment Created" , details: "Adjustment ID: " + adjustmentId});
+          }
+      
+    } catch (error) {
+      log.error({title: 'ERROR!!!!' , details: error});
+      
+    }
+
+    }
+
+    return {
+        execute: execute
+    };
+    
+});

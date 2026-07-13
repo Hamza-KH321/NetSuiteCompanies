@@ -1,0 +1,239 @@
+<!--Client_Approval_Dashboard.html-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Client Approval</title>
+  <link rel="stylesheet" href="client_approval.css">
+</head>
+
+<body>
+
+  <!-- ================= LOADING OVERLAY ================= -->
+  <div class="loading-overlay" id="loadingOverlay">
+    <div class="loading-box">
+      <div class="spinner"></div>
+      <div id="loadingTitle">Processing...</div>
+      <div id="loadingStatus"></div>
+    </div>
+  </div>
+
+  <!-- ================= CONTAINER ================= -->
+  <div class="container">
+
+    <h1 class="title">Client Approval</h1>
+
+    <!-- ================= ACTION BUTTONS SECTION ================= -->
+    <div class="action-section">
+      <div id="selection_count">
+        Selected: 0 / 100
+      </div>
+
+      <div class="action-buttons">
+        <button class="search-btn approve-btn" onclick="approveSelected()">Approve Selected</button>
+        <button class="search-btn reject-btn"  onclick="rejectSelected()">Reject Selected</button>
+      </div>
+    </div>
+
+    <!-- ================= TABLE ================= -->
+    <table class="transaction-table">
+      <thead>
+        <tr>
+          <th><input type="checkbox" id="check_all" onclick="toggleCheckAll(this)"></th>
+          <th>Internal ID</th>
+          <th>Client Name</th>
+          <th>Current Approval Level</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody id="client_table_body">
+        <tr>
+          <td colspan="5" class="no-data">No clients pending approval</td>
+        </tr>
+      </tbody>
+    </table>
+
+  </div>
+
+  <!-- ================= SCRIPT ================= -->
+  <script>
+    let allClients      = [];
+    let selectedClients = new Set();
+
+    /* ─── INITIAL LOAD ─────────────────────────────── */
+    fetchClients();
+
+    /* ─── FETCH CLIENTS ────────────────────────────── */
+    function fetchClients() {
+      showOverlay('Loading Clients...');
+
+      fetch(window.location.href, {
+        method:  'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body:    JSON.stringify({ action: 'getData' })
+      })
+        .then(res => res.json())
+        .then(data => {
+          allClients = data.data || [];
+          selectedClients.clear();
+          renderTable();
+        })
+        .catch(err => {
+          console.error(err);
+          alert('Failed to load clients');
+        })
+        .finally(hideOverlay);
+    }
+
+    /* ─── RENDER TABLE ─────────────────────────────── */
+    function renderTable() {
+      const tbody = document.getElementById('client_table_body');
+
+      if (!allClients.length) {
+        tbody.innerHTML = `<tr><td colspan="5" class="no-data">No clients pending approval</td></tr>`;
+        updateSelectionCount();
+        return;
+      }
+
+      tbody.innerHTML = allClients.map(c => `
+        <tr>
+          <td>
+            <input type="checkbox" class="row-checkbox"
+              data-id="${c.id}"
+              onchange="handleCheckboxChange(this)">
+          </td>
+          <td>${escapeHtml(String(c.id))}</td>
+          <td>${escapeHtml(c.name || '')}</td>
+          <td>${escapeHtml(c.currentLevel || '')}</td>
+          <td>
+            <button class="view-btn" onclick="viewRecord(${c.id})">&#128065;</button>
+          </td>
+        </tr>
+      `).join('');
+
+      updateSelectionCount();
+    }
+
+    /* ─── VIEW RECORD ──────────────────────────────── */
+    function viewRecord(id) {
+      fetch(window.location.href, {
+        method:  'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body:    JSON.stringify({ action: 'view_record', id: id })
+      })
+        .then(res => res.json())
+        .then(data => {
+          if (data.url) {
+            window.open(data.url, '_blank');
+          } else {
+            alert('Could not resolve record URL.');
+          }
+        })
+        .catch(err => {
+          console.error('Error opening record:', err);
+          alert('Error opening record.');
+        });
+    }
+
+    /* ─── CHECKBOX HANDLING ────────────────────────── */
+    function handleCheckboxChange(cb) {
+      const id = cb.dataset.id;
+
+      if (cb.checked) {
+        if (selectedClients.size >= 100) {
+          alert('Maximum 100 records allowed.');
+          cb.checked = false;
+          return;
+        }
+        selectedClients.add(id);
+      } else {
+        selectedClients.delete(id);
+      }
+
+      syncCheckAll();
+      updateSelectionCount();
+    }
+
+    function toggleCheckAll(source) {
+      const checkboxes = document.querySelectorAll('.row-checkbox');
+
+      if (source.checked) {
+        for (let cb of checkboxes) {
+          if (selectedClients.size >= 100) break;
+          cb.checked = true;
+          selectedClients.add(cb.dataset.id);
+        }
+      } else {
+        checkboxes.forEach(cb => {
+          cb.checked = false;
+        });
+        selectedClients.clear();
+      }
+
+      updateSelectionCount();
+    }
+
+    function syncCheckAll() {
+      const checkboxes = document.querySelectorAll('.row-checkbox');
+      const allChecked = checkboxes.length > 0 && [...checkboxes].every(cb => cb.checked);
+      document.getElementById('check_all').checked = allChecked;
+    }
+
+    function updateSelectionCount() {
+      document.getElementById('selection_count').textContent =
+        `Selected: ${selectedClients.size} / 100`;
+    }
+
+    /* ─── APPROVE / REJECT ─────────────────────────── */
+    function processAction(action, title) {
+      if (selectedClients.size === 0) {
+        alert('Please select at least one record.');
+        return;
+      }
+
+      showOverlay(title);
+
+      fetch(window.location.href, {
+        method:  'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body:    JSON.stringify({
+          action: action,
+          ids:    Array.from(selectedClients)
+        })
+      })
+        .then(res => res.json())
+        .then(res => {
+          if (!res.success) throw new Error(res.message);
+          fetchClients();
+        })
+        .catch(err => {
+          alert(err.message || 'Processing failed');
+        })
+        .finally(hideOverlay);
+    }
+
+    function approveSelected() { processAction('approve', 'Approving Clients...'); }
+    function rejectSelected()  { processAction('reject',  'Rejecting Clients...');  }
+
+    /* ─── OVERLAY HELPERS ──────────────────────────── */
+    function showOverlay(title) {
+      document.getElementById('loadingTitle').textContent = title;
+      document.getElementById('loadingOverlay').style.display = 'flex';
+    }
+
+    function hideOverlay() {
+      document.getElementById('loadingOverlay').style.display = 'none';
+    }
+
+    /* ─── UTILITY ──────────────────────────────────── */
+    function escapeHtml(text) {
+      const div = document.createElement('div');
+      div.textContent = text;
+      return div.innerHTML;
+    }
+  </script>
+
+</body>
+</html>

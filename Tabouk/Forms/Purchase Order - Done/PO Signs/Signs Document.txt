@@ -1,0 +1,19 @@
+* Regular PO:
+- Tabuk: Purchasing Manager - Chief Financial Officer - Chief Executive Officer
+- Other: Purchasing Manager - Financial Controller - General Manager
+
+* Direct PO: GM/CEO signature & Stamp will be automatically added once the FC/DOF approved
+- Tabuk: Purchasing Manager - Chief Financial Officer - Chief Executive Officer
+- Other: Purchasing Manager - Financial Controller - General Manager
+
+* Food & Beverage PO: (GM/CEO signature & Stamp will be automatically added once the FC/DOF approved)
+- Tabuk: Purchasing Manager - Chief Financial Officer - Chief Executive Officer
+- Other: Purchasing Manager - Financial Controller - General Manager
+
+* Fixed Asset PO:
+- Tabuk: Purchasing Manager - Chief Financial Officer - Chief Executive Officer
+- Other: Purchasing Manager - Directorf of Finance - Chief Executive Officer
+
+* Engineering PO: (CCE signature will be automatically added if the amount is less than 25,000)
+- Tabuk: Purchasing Manager - Corporate Chief Engineer - Director of Finance - Chief Executive Officer
+- Other: Purchasing Manager - Corporate Chief Engineer - Financial Controller- General Manager

@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <title>Customer Sales Orders</title>
+    <link rel="stylesheet" type="text/css"
+        href="https://6371802.app.netsuite.com/core/media/media.nl?id=39175&c=6371802&h=OiY67wAmXdo3u7q9jJ-lYuooepM7bnpj9tcjwBKHbQrd_8Ye&_xt=.css">
+
+</head>
+
+<body>
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-spinner"></div>
+        <div class="loading-text">Loading, please wait...</div>
+    </div>
+
+    <div class="container">
+        <div class="header-bar"
+            style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+            <div style="display: flex; align-items: center; gap: 20px;">
+                <img src="https://6371802-sb1.app.netsuite.com/core/media/media.nl?id=12&c=&h=yE6kgGe_2QrefIFBJO4xc9ksRT7UhJpAMWcYjvFGXZyCW84X"
+                    alt="Company Logo" style="width:15%;height:15%;margin-right: 40px;">
+                <div>
+                    <h2 style="margin: 0; font-size: 24px;">
+                        📦 Customer Sales Orders <span id="customerName" style="font-weight: 500;"></span>
+                    </h2>
+                    <p style="margin: 4px 0 0; font-size: 14px; color: #555;">👤 <span id="userName">User</span> |
+                        📍 <span id="userLocation">Location</span> |
+                        🏢 <span id="userBranch">Branch</span></p>
+                </div>
+            </div>
+            <button id="createSoBtn" class="primary-btn">➕ Create Sales Order</button>
+            <button class="primary-btn" style="background-color:#dc3545;" onclick="logout()">🚪 Change User</button>
+
+        </div>
+
+        <form id="filter-form" class="filter-group" style="margin-bottom: 20px; flex-wrap: wrap;">
+            <label>📄 Document #:
+                <input type="text" id="docNumber" name="docNumber" placeholder="Enter Document #" autocomplete="off">
+            </label>
+            <label>📄 PO Number:
+                <input type="text" id="poNumber" name="poNumber" placeholder="Enter PO Number" autocomplete="off">
+            </label>
+            <label>📌 Status:
+                <select id="status" name="status" class="styled-select">
+                    <option value="">-- All --</option>
+                    <option value="SalesOrd:A">Pending Approval</option>
+                    <option value="SalesOrd:B">Pending Fulfillment</option>
+                    <option value="SalesOrd:C">Cancelled</option>
+                    <option value="SalesOrd:D">Partially Fulfilled</option>
+                    <option value="SalesOrd:E">Pending Billing/Partially Fulfilled</option>
+                    <option value="SalesOrd:F">Billing</option>
+                    <option value="SalesOrd:G">Billed</option>
+                    <option value="SalesOrd:H">Closed</option>
+                </select>
+            </label>
+
+            <label>📅 From:
+                <input type="date" id="dateFrom" name="dateFrom">
+            </label>
+            <label>📅 To:
+                <input type="date" id="dateTo" name="dateTo">
+            </label>
+
+            <button type="submit" class="primary-btn">🔍 Filter</button>
+        </form>
+
+        <div style="display: flex; justify-content: flex-end; align-items: center; margin-bottom: 1px;">
+            <label style="margin-right: 8px;">Rows Per Page:</label>
+            <select id="rowsPerPage" class="styled-select">
+                <option value="5">5</option>
+                <option value="10" selected>10</option>
+                <option value="25">25</option>
+                <option value="50">50</option>
+                <option value="100">100</option>
+            </select>
+        </div>
+
+        <div class="so-table-wrapper">
+            <table class="so-table">
+                <thead>
+                    <tr>
+                        <th>Document #</th>
+                        <th>Date</th>
+                        <th>Memo</th>
+                        <th>Location</th>
+                        <th>Sales Rep</th>
+                        <th>Status</th>
+                        <th>PO Number</th>
+                        <th>Before Tax</th>
+                        <th>Tax</th>
+                        <th>Total</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="so-body">
+                    <tr>
+                        <td colspan="11" style="text-align: center;">No results</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div style="margin-top: 20px;">
+            <div id="pagination" style="text-align: center;"></div>
+            <div id="entries_info" style="text-align: center; font-size: 14px; color: #555;"></div>
+        </div>
+    </div>
+    <script>
+        let salesOrders = [];
+        let currentPage = 1;
+        let rowsPerPage = 10;
+
+        document.getElementById('rowsPerPage').addEventListener('change', function () {
+            rowsPerPage = parseInt(this.value);
+            currentPage = 1;
+            renderTable();
+        });
+
+        document.getElementById('filter-form').addEventListener('submit', function (e) {
+            e.preventDefault();
+            fetchSalesOrders();
+        });
+
+        document.getElementById('createSoBtn').addEventListener('click', function () {
+            if (window.customerContext?.createSalesOrderUrl) {
+                window.location.href = window.customerContext.createSalesOrderUrl;
+            } else {
+                alert('Create Sales Order URL not available.');
+            }
+        });
+
+
+        function fetchSalesOrders() {
+            document.getElementById("loadingOverlay").style.display = "flex";
+
+            const docNumber = document.getElementById('docNumber').value;
+            const dateFrom = document.getElementById('dateFrom').value;
+            const dateTo = document.getElementById('dateTo').value;
+            const poNumber = document.getElementById('poNumber').value;
+            const status = document.getElementById('status').value;
+
+
+            fetch(window.location.href, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    action: 'search',
+                    docNumber: docNumber,
+                    poNumber: poNumber,
+                    status: status,
+                    dateFrom: dateFrom,
+                    dateTo: dateTo
+                })
+            })
+                .then(res => res.json())
+                .then(data => {
+                    salesOrders = data.results || [];
+                    updateUserContext(data.context || {});
+                    currentPage = 1;
+                    renderTable();
+                })
+                .catch(err => console.error("Error loading data", err))
+                .finally(() => {
+                    document.getElementById("loadingOverlay").style.display = "none";
+                });
+        }
+        function viewSalesOrder(internalId) {
+            if (window.customerContext?.viewSalesOrderUrlBase) {
+                const url = `${window.customerContext.viewSalesOrderUrlBase}&soid=${internalId}`;
+                window.open(url, '_blank');
+            } else {
+                alert('View Sales Order URL is not available.');
+            }
+        }
+        function printSalesOrder(internalId) {
+            document.getElementById("loadingOverlay").style.display = "flex";
+
+            fetch(window.location.href, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    action: "print",
+                    transactionId: internalId
+                })
+            })
+                .then(response => response.blob())
+                .then(blob => {
+                    const url = URL.createObjectURL(blob);
+                    window.open(url, '_blank'); // open PDF in new tab
+                })
+                .catch(err => console.error("Print error:", err))
+                .finally(() => {
+                    document.getElementById("loadingOverlay").style.display = "none";
+                });
+        }
+
+
+
+        function renderTable() {
+            const tbody = document.getElementById('so-body');
+            tbody.innerHTML = '';
+
+            const start = (currentPage - 1) * rowsPerPage;
+            const end = start + rowsPerPage;
+            const pageItems = salesOrders.slice(start, end);
+
+            if (pageItems.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="11" style="text-align:center;">No results found</td></tr>`;
+                updatePagination(0);
+                updateEntryInfo(0, 0, 0);
+                return;
+            }
+
+            pageItems.forEach(order => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                <td>${order.tranid}</td>
+                <td>${order.trandate}</td>
+                <td>${order.memo}</td>
+                <td>${order.location}</td>
+                <td>${order.salesrep}</td>
+                <td>${order.status}</td>
+                <td>${order.poNumber}</td>
+                <td>${formatCurrency(order.beforeTax)}</td>
+                <td>${formatCurrency(order.tax)}</td>
+                <td>${formatCurrency(order.total)}</td>
+                <td>
+                    <button class="action-btn view-btn" onclick="viewSalesOrder('${order.internalId}')">👁️ View</button>
+                    <button class="action-btn print-btn" onclick="printSalesOrder('${order.internalId}')">🖨️ Print</button>
+                </td>
+
+               
+
+            `;
+
+                tbody.appendChild(row);
+            });
+
+            updatePagination(Math.ceil(salesOrders.length / rowsPerPage));
+            updateEntryInfo(start + 1, Math.min(end, salesOrders.length), salesOrders.length);
+        }
+
+        function updatePagination(totalPages) {
+            const container = document.getElementById('pagination');
+            container.innerHTML = '';
+
+            if (totalPages <= 1) return;
+
+            const prevBtn = `<button onclick="changePage(-1)" ${currentPage === 1 ? 'disabled' : ''}>Prev</button>`;
+            const nextBtn = `<button onclick="changePage(1)" ${currentPage === totalPages ? 'disabled' : ''}>Next</button>`;
+
+            let pages = '';
+            for (let i = 1; i <= totalPages; i++) {
+                pages += `<button onclick="goToPage(${i})" ${i === currentPage ? 'style="font-weight:bold;background:#ccc;"' : ''}>${i}</button> `;
+            }
+
+            container.innerHTML = `${prevBtn} ${pages} ${nextBtn}`;
+        }
+
+        function goToPage(page) {
+            const totalPages = Math.ceil(salesOrders.length / rowsPerPage);
+            if (page >= 1 && page <= totalPages) {
+                currentPage = page;
+                renderTable();
+            }
+        }
+
+        function changePage(offset) {
+            goToPage(currentPage + offset);
+        }
+
+        function updateEntryInfo(start, end, total) {
+            document.getElementById('entries_info').textContent = `Showing ${start} to ${end} of ${total} entries`;
+        }
+
+        function formatCurrency(value) {
+            const num = parseFloat(value);
+            return isNaN(num) ? '' : num.toLocaleString(undefined, {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
+            });
+        }
+
+        function updateUserContext(ctx) {
+            if (!ctx) return;
+            document.getElementById('userName').textContent = ctx.userName || '';
+            document.getElementById('userLocation').textContent = ctx.userLocation || '';
+            document.getElementById('userBranch').textContent = ctx.userBranch || '';
+            document.getElementById('customerName').textContent = ctx.customerName ? `- ${ctx.customerName}` : '';
+
+            window.customerContext = ctx;
+        }
+
+        // Initial load
+        fetchSalesOrders();
+
+        function logout() {
+            document.getElementById("loadingOverlay").style.display = "flex";
+
+            fetch(window.location.href, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ action: 'logout' })
+            })
+                .then(res => res.text())
+                .then(html => {
+                    // You could also check for a redirect or refresh
+                    document.open();
+                    document.write(html);
+                    document.close();
+                })
+                .catch(err => {
+                    console.error(err);
+                    alert("Logout failed.");
+                })
+                .finally(() => {
+                    document.getElementById("loadingOverlay").style.display = "none";
+                });
+        }
+
+
+    </script>
+</body>
+
+</html>

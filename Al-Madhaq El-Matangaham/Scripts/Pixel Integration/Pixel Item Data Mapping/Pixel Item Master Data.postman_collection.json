@@ -1,0 +1,67 @@
+{
+	"info": {
+		"_postman_id": "26e8fc09-4755-438b-b31f-27bf98680702",
+		"name": "Pixel Item Master Data",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "28321459"
+	},
+	"item": [
+		{
+			"name": "Item Creation",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "User-Agent",
+						"value": "Mozilla/5.0",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"itemid\": \"API Test Item\", // item name here\r\n  \"upccode\": \"1234\", // item id in pixel which will be used in sales transaction report\r\n  \"assetaccount\": 169,\r\n  \"incomeaccount\": 172\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://8446237-sb1.extforms.netsuite.com/app/site/hosting/scriptlet.nl?script=620&deploy=1&compid=8446237_SB1&ns-at=AAEJ7tMQi09H4bb7QqyGqMsGNWYv6c2T7GMo6O4M9j7V0Bmkv6A",
+					"protocol": "https",
+					"host": [
+						"8446237-sb1",
+						"extforms",
+						"netsuite",
+						"com"
+					],
+					"path": [
+						"app",
+						"site",
+						"hosting",
+						"scriptlet.nl"
+					],
+					"query": [
+						{
+							"key": "script",
+							"value": "620"
+						},
+						{
+							"key": "deploy",
+							"value": "1"
+						},
+						{
+							"key": "compid",
+							"value": "8446237_SB1"
+						},
+						{
+							"key": "ns-at",
+							"value": "AAEJ7tMQi09H4bb7QqyGqMsGNWYv6c2T7GMo6O4M9j7V0Bmkv6A"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

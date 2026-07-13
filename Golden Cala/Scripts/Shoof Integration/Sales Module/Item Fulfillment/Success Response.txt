@@ -1,0 +1,6 @@
+{
+    "success": true,
+    "recordType": "itemfulfillment",
+    "internalId": "576085",
+    "warnings": []
+}

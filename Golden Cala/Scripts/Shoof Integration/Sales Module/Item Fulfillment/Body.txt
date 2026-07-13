@@ -1,0 +1,17 @@
+{
+  "createdfrom": 576083,
+  "items": [
+    {
+      "item": 6095,
+      "inventoryAssignments": [
+        { "inventoryNumber": "LOT-XYZ-069", "quantity": 1 }
+      ]
+    },
+    {
+      "item": 6096,
+      "inventoryAssignments": [
+        { "inventoryNumber": "LOT-ABC-0069", "quantity": 1 }
+      ]
+    }
+  ]
+}

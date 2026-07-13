@@ -1,0 +1,287 @@
+<?xml version="1.0"?><!DOCTYPE pdf PUBLIC "-//big.faceless.org//report" "report-1.1.dtd">
+<pdf>
+<head>
+<link name="NotoSansArabic" type="font" subtype="opentype" src="${nsfont.NotoSansArabic_Regular}" src-bold="${nsfont.NotoSansArabic_Bold}" bytes="2" subset="false"/>
+	<link name="NotoSans" type="font" subtype="truetype" src="${nsfont.NotoSans_Regular}" src-bold="${nsfont.NotoSans_Bold}" src-italic="${nsfont.NotoSans_Italic}" src-bolditalic="${nsfont.NotoSans_BoldItalic}" bytes="2" />
+	<#if .locale == "zh_CN">
+		<link name="NotoSansCJKsc" type="font" subtype="opentype" src="${nsfont.NotoSansCJKsc_Regular}" src-bold="${nsfont.NotoSansCJKsc_Bold}" bytes="2" />
+	<#elseif .locale == "zh_TW">
+		<link name="NotoSansCJKtc" type="font" subtype="opentype" src="${nsfont.NotoSansCJKtc_Regular}" src-bold="${nsfont.NotoSansCJKtc_Bold}" bytes="2" />
+	<#elseif .locale == "ja_JP">
+		<link name="NotoSansCJKjp" type="font" subtype="opentype" src="${nsfont.NotoSansCJKjp_Regular}" src-bold="${nsfont.NotoSansCJKjp_Bold}" bytes="2" />
+	<#elseif .locale == "ko_KR">
+		<link name="NotoSansCJKkr" type="font" subtype="opentype" src="${nsfont.NotoSansCJKkr_Regular}" src-bold="${nsfont.NotoSansCJKkr_Bold}" bytes="2" />
+	<#elseif .locale == "th_TH">
+		<link name="NotoSansThai" type="font" subtype="opentype" src="${nsfont.NotoSansThai_Regular}" src-bold="${nsfont.NotoSansThai_Bold}" bytes="2" />
+	</#if>
+<macrolist>
+<macro id="nlheader">
+<table>
+<tr>
+	<#if record.subsidiary == "Lazure beach and resort">
+	<td font-size = "20px"><b>L&#39;AZURE BEACH &amp; RESORT</b></td>
+    <#elseif record.subsidiary == "Royal Lazure">
+    <td font-size = "20px"><b>Royal Lazure</b></td>
+    <#elseif record.subsidiary == "Lazure executive residences">
+    <td font-size = "20px"><b>Lasour Executive Resident</b></td>
+    <#elseif record.subsidiary == "Enviro- facility management">
+    <td font-size = "20px"><b>Enviro- facility management</b></td>
+    <#elseif record.subsidiary == "Eventti Catering">
+    <td font-size = "20px"><b>Eventti Catering</b></td>
+    <#elseif record.subsidiary == "Tabuk investment and tourism (Holding)">
+    <td font-size = "20px"><b>Receipt Voucher<br/>Tabuk Investment Co. (Al Ula).</b></td>
+    </#if>
+</tr>
+</table>
+</macro>
+<macro id="nlfooter">
+<table width = "100%">
+<tr>
+<td><hr/></td>
+<td><hr/></td>
+<td><hr/></td>
+</tr>
+<tr>
+<td align = "center" text-align = "center"><b>Storekeeper</b></td>
+<td align = "center" text-align = "center"><b>Cost Controller</b></td>
+<td align = "center" text-align = "center"><b>Financial Controller</b></td>
+</tr>
+</table>
+</macro>
+</macrolist>
+    <style type="text/css">* {
+			<#if .locale == "zh_CN">
+				font-family: NotoSans, NotoSansCJKsc, sans-serif;
+			<#elseif .locale == "zh_TW">
+				font-family: NotoSans, NotoSansCJKtc, sans-serif;
+			<#elseif .locale == "ja_JP">
+				font-family: NotoSans, NotoSansCJKjp, sans-serif;
+			<#elseif .locale == "ko_KR">
+				font-family: NotoSans, NotoSansCJKkr, sans-serif;
+			<#elseif .locale == "th_TH">
+				font-family: NotoSans, NotoSansThai, sans-serif;
+			<#else>
+				font-family: NotoSans, sans-serif;
+			</#if>
+			}
+                           table {
+
+                                                font-size: 9pt;
+
+                                                table-layout: fixed;
+
+                                }
+
+        th {
+
+            font-weight: bold;
+
+            font-size: 8pt;
+
+            vertical-align: middle;
+
+            padding: 5px 6px 3px;
+
+            background-color: #e3e3e3;
+
+            color: #333333;
+
+        }
+
+        td {
+
+            padding: 4px 6px;
+
+        }
+
+                               
+
+        b {
+
+            font-weight: bold;
+
+            color: #333333;
+
+        }
+
+        table.header td {
+
+            padding: 0;
+
+            font-size: 10pt;
+
+        }
+
+        table.footer td {
+
+            padding: 0;
+
+            font-size: 8pt;
+
+        }
+
+        table.itemtable th {
+
+            padding-bottom: 10px;
+
+            padding-top: 10px;
+
+        }
+
+        table.body td {
+
+            padding-top: 2px;
+
+        }
+
+        table.total {
+
+            page-break-inside: avoid;
+
+        }
+
+        tr.totalrow {
+
+            background-color: #e3e3e3;
+
+            line-height: 200%;
+
+        }
+
+        td.totalboxtop {
+
+            font-size: 12pt;
+
+            background-color: #e3e3e3;
+
+        }
+
+        td.addressheader {
+
+            font-size: 8pt;
+
+            padding-top: 6px;
+
+            padding-bottom: 2px;
+
+        }
+
+        td.address {
+
+            padding-top: 0;
+
+        }
+
+        td.totalboxmid {
+
+            font-size: 28pt;
+
+            padding-top: 20px;
+
+            background-color: #e3e3e3;
+
+        }
+
+        td.totalboxbot {
+
+            background-color: #e3e3e3;
+
+            font-weight: bold;
+
+        }
+
+        span.title {
+
+            font-size: 28pt;
+
+        }
+
+        span.number {
+
+            font-size: 16pt;
+
+        }
+
+        span.itemname {
+
+            font-weight: bold;
+
+            line-height: 150%;
+
+        }
+</style>
+</head>
+<body padding="0.5in 0.5in 0.5in 0.5in" header = "nlheader" header-height = "8%" footer = "nlfooter" footer-height = "10%" size="Letter-LANDSCAPE">
+    <table width = "100%" border = "1" cellspacing = "2">
+            <tr>
+                <td font-size = "13px"><b>RV Type</b></td>
+                <td font-size = "11px">RV Type data</td>
+                <td>&nbsp;</td>
+                <td font-size = "13px"><b>Currency</b></td>
+                <td font-size = "11px">${record.currencysymbol}</td>
+            </tr>
+            <tr>
+                <td font-size = "13px"><b>Number/Date</b></td>
+                <td font-size = "11px">${record.tranid}  ${record.trandate}</td>
+                <td>&nbsp;</td>
+                <td font-size = "13px"><b>Gross Amount</b></td>
+                <td font-size = "11px"><b>${record.custbody_vs_totalitemreceipt?string["#,##0.00"]}</b></td>
+            </tr>
+            <tr>
+                <td font-size = "13px"><b>PO Number/Date</b></td>
+                <td font-size = "11px">${record.createdfrom}</td>
+                <td>&nbsp;</td>
+                <td font-size = "13px"><B>Created By/On</B></td>
+                <td font-size = "11px">${record.custbody_vs_creatorir}</td>
+            </tr>
+            <tr>
+                <td font-size = "13px"><b>Vendor Name</b></td>
+                <td font-size = "11px">${record.entity}</td>
+                <td>&nbsp;</td>
+                <td font-size = "13px"><b>Remarks</b></td>
+                <td font-size = "11px">${record.memo}</td>
+            </tr>
+            <tr>
+                <td font-size = "13px"><b>Vendor</b></td>
+                <td font-size = "11px">${record.entity}</td>
+                <td>&nbsp;</td>
+                <td font-size = "13px">&nbsp;</td>
+                <td font-size = "11px">&nbsp;</td>
+            </tr>
+    </table>
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+<#list record.item as item>
+<table width = "100%">
+        <thead>
+<#if item_index == 0>
+            <tr>
+                <th border-top = "1px" border-bottom = "1" width = "4%"><b>SI#</b></th>
+                <th border-top = "1px" border-bottom = "1" width = "20%"><b>Item ID</b></th>
+                <th border-top = "1px" border-bottom = "1" width = "20%"><B>Description</B></th>
+                <th border-top = "1px" border-bottom = "1" width = "7%"><b>Unit</b></th>
+                <th border-top = "1px" border-bottom = "1" width = "8%"><B>Qty</B></th>
+                <th border-top = "1px" border-bottom = "1" width = "11%"><b>Item Rate</b></th>
+                <th border-top = "1px" border-bottom = "1" width = "25%"><b>To Location</b></th>
+            </tr>
+</#if>
+        </thead>
+            <tr>
+                <td width = "4%">${item?index + 1}</td>
+                <td width = "20%">${item.item}</td>
+                <td width = "20%">${item.description}</td>
+				<#if item.units?has_content>
+                <td width = "7%">${item.unitsdisplay}</td>
+                <#else>
+				<td width = "5%">&nbsp;</td>
+				</#if>
+                <td width = "8%">${item.quantity}</td>
+                <td width = "11%">${item.rate?string("#.##")}</td>
+                <td width = "25%">${item.location}</td>
+            </tr>
+    </table>
+</#list>
+</body>
+</pdf>

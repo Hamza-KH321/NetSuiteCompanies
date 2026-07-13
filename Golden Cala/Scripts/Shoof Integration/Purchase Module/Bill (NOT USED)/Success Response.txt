@@ -1,0 +1,14 @@
+{
+    "success": true,
+    "recordType": "vendorbill",
+    "internalId": "575960",
+    "tranId": "",
+    "warnings": []
+}
+
+OR 
+
+{
+  "entity": "CICCARELLI Tooth Paste Factory",
+  "createdfrom": 575949
+}

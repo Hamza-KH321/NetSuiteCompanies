@@ -1,0 +1,32 @@
+Please note that we need to create a workflow to cover the approval process for the customer creation. After filling in the information and saving the customer record into NetSuite
+1.	Submit the customer record for approval 
+
+2.	The sales manager (according to the area) (in client record the sales rep open the record have suprivosr this is the sales manager)
+
+3.	AR team (according to the area) (hussam)
+
+4.	E-16 Oday Tayseer Othman 
+5.	E-30 Muhannad Mahmoud Musleh
+6.	E-9 Waleed Mansour Sayed Ahmed
+
+After the final approval, the “Validated by Finance team” should be checked. 
+
+In case of rejection for any of the steps above, a reason field should be filled 
+
+And the flow should go to the sales manager (the second step)
+
+
+Regions :
+Northern 1
+Eastern 2
+Western 3 
+Central 5 
+Northeast 6
+Northwest 7
+Southern 8
+
+
+For the  western and Northwest the AR team member is Email "mamdouh.alsayid@vitacareonline.com" employee (E-38 Mamdouh Abdeen Alsayid) internal id 66004
+For the  central, Northeast and eastern  the AR team member is Email "nafea.alsalamah@vitacareonline.com" employee (E-62 Nafea Alsalamah) internal id (187285)
+For the  southern the AR team member is Email "abdullah.dalbouh@vitacareonline.com  Employee is (E-226 Abdullah Dalbouh) internal id (450826)
+

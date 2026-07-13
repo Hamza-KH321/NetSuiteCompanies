@@ -1,0 +1,146 @@
+<?xml version="1.0"?><!DOCTYPE pdf PUBLIC "-//big.faceless.org//report" "report-1.1.dtd">
+<pdf>
+<head>
+	<link name="NotoSans" type="font" subtype="truetype" src="${nsfont.NotoSans_Regular}" src-bold="${nsfont.NotoSans_Bold}" src-italic="${nsfont.NotoSans_Italic}" src-bolditalic="${nsfont.NotoSans_BoldItalic}" bytes="2" />
+	<#if .locale == "zh_CN">
+		<link name="NotoSansCJKsc" type="font" subtype="opentype" src="${nsfont.NotoSansCJKsc_Regular}" src-bold="${nsfont.NotoSansCJKsc_Bold}" bytes="2" />
+	<#elseif .locale == "zh_TW">
+		<link name="NotoSansCJKtc" type="font" subtype="opentype" src="${nsfont.NotoSansCJKtc_Regular}" src-bold="${nsfont.NotoSansCJKtc_Bold}" bytes="2" />
+	<#elseif .locale == "ja_JP">
+		<link name="NotoSansCJKjp" type="font" subtype="opentype" src="${nsfont.NotoSansCJKjp_Regular}" src-bold="${nsfont.NotoSansCJKjp_Bold}" bytes="2" />
+	<#elseif .locale == "ko_KR">
+		<link name="NotoSansCJKkr" type="font" subtype="opentype" src="${nsfont.NotoSansCJKkr_Regular}" src-bold="${nsfont.NotoSansCJKkr_Bold}" bytes="2" />
+	<#elseif .locale == "th_TH">
+		<link name="NotoSansThai" type="font" subtype="opentype" src="${nsfont.NotoSansThai_Regular}" src-bold="${nsfont.NotoSansThai_Bold}" bytes="2" />
+	</#if>
+    <macrolist>
+        <macro id="nlheader">
+            <table border="0" cellpadding="0" cellspacing="0" style="width:100%;" widthe="100%"><tr>
+	<td colspan="2" rowspan="1" style="color: A9A9A9;"><b>SWAGBAG GENERAL TRADING L.L.C</b></td>
+	<td>&nbsp;</td>
+	<td rowspan="4"><img align="center" src="https://7454786.app.netsuite.com/core/media/media.nl?id=679&amp;c=7454786&amp;h=Eq6APV2fYAMJlk4Q3XhbJ26Sr_gHq6QChtXz87F-xfOb0EsZ" style="width: 140px; height: 120px;" /></td>
+	</tr>
+	<tr>
+	<td colspan="2" rowspan="1">AL-Dhannah Street, Abu Dubai, U.A.E</td>
+	<td>&nbsp;</td>
+	</tr>
+	<tr>
+	<td colspan="2" rowspan="1">PH: +971-xxxxxxx</td>
+	<td>&nbsp;</td>
+	</tr>
+	<tr>
+	<td colspan="2" rowspan="1">Email: info@swagbag.me</td>
+	<td>&nbsp;</td>
+	</tr></table>
+        </macro>
+        <macro id="nlfooter">
+            <p font-size = "10px" align = "center" style = "text-aligen: center;">
+              <b>For any inquiries, feel free to contact us:</b> <span color = "#D3D3D3">+971-000000/</span> <b>Email: <u>info@swagbag.com</u></b>
+          </p>
+        </macro>
+    </macrolist>
+    <style type="text/css">* {
+		<#if .locale == "zh_CN">
+			font-family: NotoSans, NotoSansCJKsc, sans-serif;
+		<#elseif .locale == "zh_TW">
+			font-family: NotoSans, NotoSansCJKtc, sans-serif;
+		<#elseif .locale == "ja_JP">
+			font-family: NotoSans, NotoSansCJKjp, sans-serif;
+		<#elseif .locale == "ko_KR">
+			font-family: NotoSans, NotoSansCJKkr, sans-serif;
+		<#elseif .locale == "th_TH">
+			font-family: NotoSans, NotoSansThai, sans-serif;
+		<#else>
+			font-family: NotoSans, sans-serif;
+		</#if>
+		}
+</style>
+</head>
+<body header="nlheader" header-height="10%" footer="nlfooter" footer-height="20pt" padding="0.1in 0.5in 0.5in 0.5in" size="Letter">
+    &nbsp;
+<table style="width: 706.2px; margin-bottom:-20px;" width="100%"><tr>
+	<td style="width: 281px;">&nbsp;</td>
+	<td style="width: 18px;">&nbsp;</td>
+	<td style="width: 115px;">&nbsp;</td>
+	<td color="#A9A9A9" font-size="22pt" font-type="Century Gothic" font-weight="bold" style="padding-top: 10px; width: 230px;"><span style="font-size:24px;">PURCHASE ORDER</span></td>
+	</tr>
+	<tr>
+	<td align="left" color="#577D8A" font-size="12pt" font-type="Century Gothic" font-weight="bold" style="width: 281px; height: 12px;">${record.tranid}</td>
+	<td rowspan="3" style="width: 18px; height: 138px;">&nbsp;</td>
+	<td rowspan="2" style="width: 115px; height: 138px;">&nbsp;</td>
+	<td colspan="2" rowspan="1" style="width: 280px; height: 12px; color: A9A9A9;"><span style="font-size: 11px; color=#A9A9A9;"><strong><span id="cke_bm_5778S" style="display: none; color=#A9A9A9;">&nbsp;</span>PO</strong>:&nbsp;<span style="font-size: 11px;">${record.tranid}</span><br /><strong><span id="cke_bm_6710S" style="display: none; color: A9A9A9;">&nbsp;</span>CREATED DATE:</strong>&nbsp;<span style="font-size: 11px;">${record.trandate}</span> </span></td>
+	</tr>
+	<tr>
+	<td style="width: 281px; height: 88px;">&nbsp;</td>
+	<td colspan="2" rowspan="1" style="width: 280px; height: 88px;"><barcode codetype="code128" showtext="true" value="${record.tranid}"/></td>
+	</tr></table>
+
+<table border="1" cellpadding="1" cellspacing="0" style="width:100%; text-align: center;"><tr align="center" style="text-align: center;">
+	<td border-right="1" color="#A9A9A9" style="text-align: center; align: center;"><b><u>VENDOR</u></b></td>
+	<td color="#A9A9A9" style="text-align: center; align: center;"><b><u>SHIP TO</u></b></td>
+	</tr>
+	<tr>
+	<td border-right="1" style="font-size: 11px;">Company:&nbsp;</td>
+	<td style="font-size: 11px;">Address:</td>
+	</tr>
+	<tr>
+	<td border-right="1" style="font-size: 11px;">Sector:</td>
+	<td style="font-size: 11px;">Email:</td>
+	</tr>
+	<tr>
+	<td border-right="1" style="font-size: 11px;">Email:</td>
+	<td style="font-size: 11px;">Assign To:</td>
+	</tr>
+	<tr>
+	<td border-right="1" style="font-size: 11px;">Phone:</td>
+	<td style="font-size: 11px;">Type:</td>
+	</tr>
+	<tr>
+	<td border-right="1" style="font-size: 11px;">TRN:</td>
+	<td style="font-size: 11px;">&nbsp;</td>
+	</tr>
+	<tr>
+	<td border-right="1" style="font-size: 11px;">Shipment Method:</td>
+	<td>&nbsp;</td>
+	</tr></table>
+<#if record.item?has_content>&nbsp;
+
+<table border="0" cellpadding="1" cellspacing="2" style="width:100%;"><#list record.item as item><#if item_index==0><tr>
+	<td color="#D3D3D3" style="font-size: 11px;"><b>SKU</b></td>
+	<td color="#D3D3D3" style="font-size: 11px;"><b>UPC</b></td>
+	<td color="#D3D3D3" style="font-size: 11px;"><b>VENDOR SKU</b></td>
+	<td color="#D3D3D3" style="font-size: 11px;"><b>QTY</b></td>
+	<td color="#D3D3D3" style="font-size: 11px;"><b>BASE COST</b></td>
+	<td color="#D3D3D3" style="font-size: 11px;"><b>AMOUNT</b></td>
+	</tr>
+	</#if>
+	<tr>
+	<td style="font-size: 11px;">${item.item}</td>
+	<td style="font-size: 11px;">${record.upccode}</td>
+	<td style="font-size: 11px;">${record.entity}</td>
+	<td style="font-size: 11px;">${item.quantity}</td>
+	<td style="font-size: 11px;">${item.rate}</td>
+	<td style="font-size: 11px;">${item.amount}</td>
+	</tr>
+	</#list></table>
+</#if> &nbsp;
+
+<table cellpadding="1" cellspacing="1" style="width:100%;"><tr>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	<td style="font-size: 11px;">SUBTOTAL</td>
+	<td style="font-size: 11px;">${record.subtotal}</td>
+	</tr>
+	<tr>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	<td style="font-size: 11px;">TAX</td>
+	<td style="font-size: 11px;">${record.taxtotal}</td>
+	</tr>
+	<tr>
+	<td colspan="2" rowspan="1" color = "white">Row 3, Column 1Row 3, Column 2</td>
+	<td style="font-size: 11px;">GRAND TOTAL</td>
+	<td style="font-size: 11px;">${record.total}</td>
+	</tr></table>
+</body>
+</pdf>

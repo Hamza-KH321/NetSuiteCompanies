@@ -1,0 +1,257 @@
+<?xml version="1.0"?><!DOCTYPE pdf PUBLIC "-//big.faceless.org//report" "report-1.1.dtd">
+<pdf>
+<head>
+<link name="NotoSansArabic" type="font" subtype="opentype" src="${nsfont.NotoSansArabic_Regular}" src-bold="${nsfont.NotoSansArabic_Bold}" bytes="2" subset="false"/>
+	<link name="NotoSans" type="font" subtype="truetype" src="${nsfont.NotoSans_Regular}" src-bold="${nsfont.NotoSans_Bold}" src-italic="${nsfont.NotoSans_Italic}" src-bolditalic="${nsfont.NotoSans_BoldItalic}" bytes="2" />
+	<#if .locale == "zh_CN">
+		<link name="NotoSansCJKsc" type="font" subtype="opentype" src="${nsfont.NotoSansCJKsc_Regular}" src-bold="${nsfont.NotoSansCJKsc_Bold}" bytes="2" />
+	<#elseif .locale == "zh_TW">
+		<link name="NotoSansCJKtc" type="font" subtype="opentype" src="${nsfont.NotoSansCJKtc_Regular}" src-bold="${nsfont.NotoSansCJKtc_Bold}" bytes="2" />
+	<#elseif .locale == "ja_JP">
+		<link name="NotoSansCJKjp" type="font" subtype="opentype" src="${nsfont.NotoSansCJKjp_Regular}" src-bold="${nsfont.NotoSansCJKjp_Bold}" bytes="2" />
+	<#elseif .locale == "ko_KR">
+		<link name="NotoSansCJKkr" type="font" subtype="opentype" src="${nsfont.NotoSansCJKkr_Regular}" src-bold="${nsfont.NotoSansCJKkr_Bold}" bytes="2" />
+	<#elseif .locale == "th_TH">
+		<link name="NotoSansThai" type="font" subtype="opentype" src="${nsfont.NotoSansThai_Regular}" src-bold="${nsfont.NotoSansThai_Bold}" bytes="2" />
+	</#if>
+    <macrolist>
+<macro id="nlheader">
+<table width="100%">
+  <tr>
+	<td font-size="20px" align = "left" text-align = "left"><b>Lily Hotel Suite</b></td>
+	<td rowspan="3"><barcode style="width:70%;height:70%; align:center;" codetype="qrcode" showtext="true" value="${record.custbody_vs_qrcode}"/></td>
+	<td rowspan="3" align = "right" text-align = "right"><img width = "30%" height = "30%" src = "https://9541209-sb1.app.netsuite.com/core/media/media.nl?id=844&amp;c=9541209_SB1&amp;h=KOslQglxyq82U0i5Dd9BGIk64Jynp3iTfnG3lZ8GH38OlP4J"/></td>
+	</tr>
+	<tr>
+	<td align = "left" text-align = "left"><b>Country Saudi Arabia</b></td>
+	</tr>
+	<tr>
+	<td align = "left" text-align = "left"><b>City Al - Ahsa -Mubarraz</b></td>
+	</tr>
+</table>
+
+<table width = "100%">
+<tr border-top = "1" border-bottom = "1">
+<td align = "center" text-align = "center" font-size = "16px"><b>Simplified VAT Invoice  فاتورة ضريبة القيمة المضافة المبسطة</b></td>
+</tr>
+<tr>
+<td align = "center" text-align = "center" font-size = "13px"><b>Simplified Tax Invoice ${record.tranid}</b></td>
+</tr>
+</table>
+</macro>
+<macro id="nlfooter">
+
+<table width = "100%" border = "1">
+<tr>
+<td align = "center" width = "25%"><b>Total: ${record.subtotal}</b></td>
+<td align = "center" width = "25%"><b>Tax: ${record.taxtotal}</b></td>
+<td align = "center" width = "25%"><b>Grand Total: ${record.total}</b></td>
+<td align = "center" width = "25%"><b>Folio: ${record.custbody_vs_folio}</b></td>
+</tr>
+</table>
+
+<table width = "100%">
+<tr>
+<td align = "left" text-align = "left"><b>Thank you for choosing us to server you... Lily Hotel Suites Co. AH GROUP</b></td>
+</tr>
+<tr>
+<td align = "right" text-align = "right"><b>Guest Signature</b></td>
+</tr>
+</table>
+
+<table width = "100%" padding-top = "30px">
+<tr>
+<td>
+<b align = "left" text-align = "left"><u>Al-Hasa - Lily Mubarraz - Dahran RD, Tel: 0135821621 Fax: 0135869888, Email: mubbarz@staylily.com Web: www.staylily.com</u></b>
+</td>
+</tr>
+</table>
+</macro>
+    </macrolist>
+    <style type="text/css">* {
+		<#if .locale == "zh_CN">
+			font-family: NotoSans, NotoSansCJKsc, sans-serif;
+		<#elseif .locale == "zh_TW">
+			font-family: NotoSans, NotoSansCJKtc, sans-serif;
+		<#elseif .locale == "ja_JP">
+			font-family: NotoSans, NotoSansCJKjp, sans-serif;
+		<#elseif .locale == "ko_KR">
+			font-family: NotoSans, NotoSansCJKkr, sans-serif;
+		<#elseif .locale == "th_TH">
+			font-family: NotoSans, NotoSansThai, sans-serif;
+		<#else>
+			font-family: NotoSans, sans-serif;
+		</#if>
+		}
+     * {
+                font-family: NotoSansArabic, NotoSans, sans-serif;
+          }
+		table {
+			font-size: 9pt;
+			table-layout: fixed;
+		}
+        th {
+            font-weight: bold;
+            font-size: 8pt;
+            vertical-align: middle;
+            padding: 5px 6px 3px;
+            background-color: #e3e3e3;
+            color: #333333;
+        }
+        td {
+            padding: 4px 6px;
+        }
+		td p { align:left }
+        b {
+            font-weight: bold;
+            color: #333333;
+        }
+        table.header td {
+            padding: 0px;
+            font-size: 10pt;
+        }
+        table.footer td {
+            padding: 0px;
+            font-size: 8pt;
+        }
+        table.itemtable th {
+            padding-bottom: 10px;
+            padding-top: 10px;
+        }
+        table.body td {
+            padding-top: 2px;
+        }
+        table.total {
+            page-break-inside: avoid;
+        }
+        tr.totalrow {
+            background-color: #e3e3e3;
+            line-height: 200%;
+        }
+        td.totalboxtop {
+            font-size: 12pt;
+            background-color: #e3e3e3;
+        }
+        td.addressheader {
+            font-size: 8pt;
+            padding-top: 6px;
+            padding-bottom: 2px;
+        }
+        td.address {
+            padding-top: 0px;
+        }
+        td.totalboxmid {
+            font-size: 28pt;
+            padding-top: 20px;
+            background-color: #e3e3e3;
+        }
+        td.totalboxbot {
+            background-color: #e3e3e3;
+            font-weight: bold;
+        }
+        span.title {
+            font-size: 28pt;
+        }
+        span.number {
+            font-size: 16pt;
+        }
+        span.itemname {
+            font-weight: bold;
+            line-height: 150%;
+        }
+        hr {
+            width: 100%;
+            color: #d3d3d3;
+            background-color: #d3d3d3;
+            height: 1px;
+        }
+</style>
+</head>
+<body header="nlheader" header-height="17%" footer="nlfooter" footer-height="10%" padding="0.2in 0.2in 0.2in 0.2in" size="Letter">
+<table width = "100%" padding-top = "15px">
+    <tr>
+      <td><b>Res ID</b></td>
+      <td>: ${record.custbody_vs_resid}</td>
+      <td><b>Pax</b></td>
+      <td>: ${record.custbody_vs_pax}</td>
+    </tr>
+    <tr>
+      <td><b>Name</b></td>
+      <td>: ${record.entity}</td>
+      <td><b>Cashier</b></td>
+      <td>: ${record.custbody_vs_cashier}</td>
+    </tr>
+    <tr>
+      <td><b>Guest:</b></td>
+      <td>: ${record.entity}</td>
+      <td><b>Room Number</b></td>
+      <td>: ${record.custbody_vs_roomnumber}</td>
+    </tr>
+    <tr>
+      <td><b>Source</b></td>
+      <td>: ${record.custbody_vs_source}</td>
+      <td><b>No. Of Nights</b></td>
+      <td>: ${record.custbody_vs_noofnights}</td>
+    </tr>
+    <tr>
+      <td><b>Arrival</b></td>
+      <td>: ${record.custbody_vs_roomnumber}</td>
+      <td><b>Rate</b></td>
+      <td>: ${record.custbody_vs_rate}</td>
+    </tr>
+    <tr>
+      <td><b>Departure</b></td>
+      <td>: ${record.custbody_vs_departure}</td>
+      <td><b>VAT #  الرقم الضريبي</b></td>
+      <td>301035892200003</td>
+    </tr>
+    <tr>
+      <td><b>Payment Method</b></td>
+      <td>:Row 7, Cell 2</td>
+      <td><b>&nbsp;</b></td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td><b>Folio</b></td>
+      <td>: ${record.custbody_vs_folio}</td>
+      <td><b>&nbsp;</b></td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td><B>Issue Date</B></td>
+      <td>: ${record.trandate}</td>
+      <td><b>&nbsp;</b></td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td><B>Company Vat Number</B></td>
+      <td>: ${record.entity.vatregnumber}</td>
+      <td><b>&nbsp;</b></td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td><B>Company Address</B></td>
+      <td>&nbsp;</td>
+      <td><b>&nbsp;</b></td>
+      <td>&nbsp;</td>
+    </tr>
+</table>
+
+<table width = "100%" padding-top = "15px"><#list record.item as item><#if item_index==0>
+  <tr>
+    <td border-top = "1" border-bottom = "1"><b>Item</b></td>
+    <td border-top = "1" border-bottom = "1"><b>Description</b></td>
+    <td border-top = "1" border-bottom = "1"><b>Qty</b></td>
+    <td border-top = "1" border-bottom = "1"><b>Rate SR</b></td>
+    <td border-top = "1" border-bottom = "1"><b>Total SR</b></td>
+  </tr></#if>
+  <tr>
+    <td>${item.item}</td>
+    <td>${item.description}</td>
+    <td>${item.quantity}</td>
+    <td>${item.rate}</td>
+    <td>${item.grossamt}</td>
+  </tr>
+</#list></table>
+</body>
+</pdf>

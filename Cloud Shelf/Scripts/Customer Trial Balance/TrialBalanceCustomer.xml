@@ -1,0 +1,129 @@
+<?xml version="1.0"?>
+<!DOCTYPE pdf PUBLIC "-//big.faceless.org//report" "report-1.1.dtd">
+<pdf>
+    <head>
+        <link name="NotoSansArabic" type="font" subtype="opentype"
+            src="${nsfont.NotoSansArabic_Regular}" src-bold="${nsfont.NotoSansArabic_Bold}"
+            bytes="2" subset="false" />
+        <link name="NotoSans" type="font" subtype="truetype" src="${nsfont.NotoSans_Regular}"
+            src-bold="${nsfont.NotoSans_Bold}" src-italic="${nsfont.NotoSans_Italic}"
+            src-bolditalic="${nsfont.NotoSans_BoldItalic}" bytes="2" />
+        <#if .locale == "zh_CN">
+        <link name="NotoSansCJKsc" type="font" subtype="opentype"
+            src="${nsfont.NotoSansCJKsc_Regular}" src-bold="${nsfont.NotoSansCJKsc_Bold}" bytes="2" />
+        <#elseif .locale == "zh_TW">
+        <link name="NotoSansCJKtc" type="font" subtype="opentype"
+            src="${nsfont.NotoSansCJKtc_Regular}" src-bold="${nsfont.NotoSansCJKtc_Bold}" bytes="2" />
+        <#elseif .locale == "ja_JP">
+        <link name="NotoSansCJKjp" type="font" subtype="opentype"
+            src="${nsfont.NotoSansCJKjp_Regular}" src-bold="${nsfont.NotoSansCJKjp_Bold}" bytes="2" />
+        <#elseif .locale == "ko_KR">
+        <link name="NotoSansCJKkr" type="font" subtype="opentype"
+            src="${nsfont.NotoSansCJKkr_Regular}" src-bold="${nsfont.NotoSansCJKkr_Bold}" bytes="2" />
+        <#elseif .locale == "th_TH">
+            <link name="NotoSansThai" type="font" subtype="opentype"
+                src="${nsfont.NotoSansThai_Regular}" src-bold="${nsfont.NotoSansThai_Bold}"
+                bytes="2" />
+        </#if>
+        <macrolist>
+            <macro id="nlheader">
+                <table style="width:100%; border-bottom:1px solid #000;">
+                    <tr>
+                        <td align="left" style="padding:4px;">
+                            <img src="https://8997213.app.netsuite.com/core/media/media.nl?id=807&amp;c=8997213&amp;h=4K7F7wM9iHu49rn7uNEqEnAVXVlmWn5qS48VRZdEZa82tYw5" style="width:120px; height:auto;"/>
+                        </td>
+                        <td align="center" style="font-size:14px; font-weight:bold;">
+                            Customer Trial Balance Report
+                        </td>
+                        <td align="right" style="font-size:10px;">
+                           <p color = "white"> Customer Trial Balance Report </p>
+
+                        </td>
+                    </tr>
+                </table>
+            </macro>
+            <macro id="nlfooter">
+                <table class="footer" style="width: 100%;">
+                    <tr>
+                        <td align="right"><pagenumber /> of <totalpages /></td>
+                    </tr>
+                </table>
+            </macro>
+        </macrolist>
+        <style type="text/css">
+            * {
+                <#if .locale == "zh_CN">
+                    font-family: NotoSans, NotoSansCJKsc, sans-serif;
+                <#elseif .locale == "zh_TW">
+                    font-family: NotoSans, NotoSansCJKtc, sans-serif;
+                <#elseif .locale == "ja_JP">
+                    font-family: NotoSans, NotoSansCJKjp, sans-serif;
+                <#elseif .locale == "ko_KR">
+                    font-family: NotoSans, NotoSansCJKkr, sans-serif;
+                <#elseif .locale == "th_TH">
+                    font-family: NotoSans, NotoSansThai, sans-serif;
+                <#else>
+                    font-family: NotoSansArabic, NotoSans, sans-serif;
+                </#if>
+            }
+            span.title { font-size:28pt; }
+            span.number { font-size:16pt; }
+            table.main td, th { border-bottom: 1px solid #ddd; }
+            td.empty { border: none; }
+            th { font-weight: bold; vertical-align: middle; padding: 5px 6px 3px; background-color: #e3e3e3; color: #333333; }
+            td { padding: 4px 6px; }
+            td p { align:left }
+        </style>
+    </head>
+
+	<body header="nlheader" header-height="13%" footer="nlfooter" footer-height="3%"
+		padding="0.5in 0.5in 0.5in 0.5in" size="A3-LANDSCAPE">
+
+    <table align="center"
+       style="width: 100%; margin: 0 auto; background-color: #f2f3f4; border: 2px solid #000; border-collapse: collapse;">
+
+    <tr>
+        <td style="padding: 4px;">
+            <h4 align="center" style="margin: 0; font-size: 14px; font-weight: normal;">
+                From <strong>${trialBalance.fromDate}</strong> To <strong>${trialBalance.toDate}</strong>
+            </h4>
+        </td>
+    </tr>
+
+
+</table>
+
+    <#list trialBalance.rows as group>
+        <h2 style="margin-top: 20px;">${group.account}</h2>
+
+        <table style="width: 100%; border-collapse: collapse; font-size: 10pt; margin-bottom: 20px;">
+            <thead>
+                <tr>
+                    <th style="border: 1px solid #000; padding: 4px;">#</th>
+                    <th style="border: 1px solid #000; padding: 4px;">customer</th>
+                    <th style="border: 1px solid #000; padding: 4px;">Initial Balance</th>
+                    <th style="border: 1px solid #000; padding: 4px;">Debit</th>
+                    <th style="border: 1px solid #000; padding: 4px;">Credit</th>
+                    <th style="border: 1px solid #000; padding: 4px;">Period Balance</th>
+                    <th style="border: 1px solid #000; padding: 4px;">Ending Balance</th>
+                </tr>
+            </thead>
+            <tbody>
+                <#list group.customers as customer>
+                    <tr>
+                        <td style="border: 1px solid #000; padding: 4px;" align="center">${customer_index + 1}</td>
+                        <td style="border: 1px solid #000; padding: 4px;">${customer.customer?xml}</td>
+                        <td style="border: 1px solid #000; padding: 4px;" align="right">${customer.initialBalance?number?string["#,##0.00"]}</td>
+                        <td style="border: 1px solid #000; padding: 4px;" align="right">${customer.debit?number?string["#,##0.00"]}</td>
+                        <td style="border: 1px solid #000; padding: 4px;" align="right">${customer.credit?number?string["#,##0.00"]}</td>
+                        <td style="border: 1px solid #000; padding: 4px;" align="right">${customer.periodBalance?number?string["#,##0.00"]}</td>
+                        <td style="border: 1px solid #000; padding: 4px;" align="right">${customer.endingBalance?number?string["#,##0.00"]}</td>
+                    </tr>
+                </#list>
+            </tbody>
+        </table>
+    </#list>
+
+</body>
+
+</pdf>

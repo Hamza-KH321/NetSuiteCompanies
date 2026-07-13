@@ -1,0 +1,20 @@
+{
+  "transferOrderId": 576267,
+  "lines": [
+    {
+      "sku": "1",
+      "quantity": 2,
+      "lots": [
+        { "lotNumber": "LOT-Shoof-10", "quantity": 2 }
+    ]
+    },
+    {
+      "sku": "12345",
+      "quantity": 5,
+      "lots": [
+        { "lotNumber": "LOT-Shoof-1", "quantity": 3 },
+        { "lotNumber": "LOT-Shoof-2", "quantity": 2 }
+      ]
+    }
+  ]
+}

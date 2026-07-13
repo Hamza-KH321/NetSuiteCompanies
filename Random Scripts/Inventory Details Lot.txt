@@ -1,0 +1,32 @@
+                var subrec = irRec.getCurrentSublistSubrecord({
+                sublistId: 'item',
+                fieldId: 'inventorydetail'
+                });
+
+                                    subrec.selectNewLine({
+                                        sublistId: 'inventoryassignment', 
+                                    });
+
+                                    log.debug({title: "quantity inside", details: Math.min(quantity-curr_quantity, obj.quantity)});
+                                    
+            
+                                    subrec.setCurrentSublistValue({
+                                        sublistId: 'inventoryassignment', 
+                                        fieldId: 'receiptinventorynumber',
+                                        value: obj.lot
+                                    });
+
+                                    subrec.setCurrentSublistValue({
+                                        sublistId: 'inventoryassignment', 
+                                        fieldId: 'quantity',
+                                        value: Math.min(quantity-curr_quantity, obj.quantity)
+                                    });
+            
+                                    subrec.setCurrentSublistText({
+                                        sublistId: 'inventoryassignment', 
+                                        fieldId: 'inventorystatus',
+                                        text: obj.status
+                                    });
+
+
+    subrec.commitLine({sublistId: "inventoryassignment"});

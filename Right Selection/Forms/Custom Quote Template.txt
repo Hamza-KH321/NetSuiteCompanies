@@ -1,0 +1,205 @@
+<?xml version="1.0"?><!DOCTYPE pdf PUBLIC "-//big.faceless.org//report" "report-1.1.dtd">
+<pdf>
+<head>
+	<link name="NotoSans" type="font" subtype="truetype" src="${nsfont.NotoSans_Regular}" src-bold="${nsfont.NotoSans_Bold}" src-italic="${nsfont.NotoSans_Italic}" src-bolditalic="${nsfont.NotoSans_BoldItalic}" bytes="2" />
+	<#if .locale == "zh_CN">
+		<link name="NotoSansCJKsc" type="font" subtype="opentype" src="${nsfont.NotoSansCJKsc_Regular}" src-bold="${nsfont.NotoSansCJKsc_Bold}" bytes="2" />
+	<#elseif .locale == "zh_TW">
+		<link name="NotoSansCJKtc" type="font" subtype="opentype" src="${nsfont.NotoSansCJKtc_Regular}" src-bold="${nsfont.NotoSansCJKtc_Bold}" bytes="2" />
+	<#elseif .locale == "ja_JP">
+		<link name="NotoSansCJKjp" type="font" subtype="opentype" src="${nsfont.NotoSansCJKjp_Regular}" src-bold="${nsfont.NotoSansCJKjp_Bold}" bytes="2" />
+	<#elseif .locale == "ko_KR">
+		<link name="NotoSansCJKkr" type="font" subtype="opentype" src="${nsfont.NotoSansCJKkr_Regular}" src-bold="${nsfont.NotoSansCJKkr_Bold}" bytes="2" />
+	<#elseif .locale == "th_TH">
+		<link name="NotoSansThai" type="font" subtype="opentype" src="${nsfont.NotoSansThai_Regular}" src-bold="${nsfont.NotoSansThai_Bold}" bytes="2" />
+	</#if>
+    <style type="text/css">* {
+		<#if .locale == "zh_CN">
+			font-family: NotoSans, NotoSansCJKsc, sans-serif;
+		<#elseif .locale == "zh_TW">
+			font-family: NotoSans, NotoSansCJKtc, sans-serif;
+		<#elseif .locale == "ja_JP">
+			font-family: NotoSans, NotoSansCJKjp, sans-serif;
+		<#elseif .locale == "ko_KR">
+			font-family: NotoSans, NotoSansCJKkr, sans-serif;
+		<#elseif .locale == "th_TH">
+			font-family: NotoSans, NotoSansThai, sans-serif;
+		<#else>
+			font-family: NotoSans, sans-serif;
+		</#if>
+		}
+        table {
+            font-size: 9pt;
+            table-layout: fixed;
+        }
+        th {
+            font-weight: bold;
+            font-size: 8pt;
+            vertical-align: middle;
+            padding: 5px 6px 3px;
+            background-color: #e3e3e3;
+            color: #333333;
+        }
+        td {
+            padding: 4px 6px;
+        }
+		td p { align:left }
+        b {
+            font-weight: bold;
+            color: #333333;
+        }
+        table.header td {
+            padding: 0;
+            font-size: 10pt;
+        }
+        table.footer td {
+            padding: 0;
+            font-size: 8pt;
+        }
+        table.itemtable th {
+            padding-bottom: 10px;
+            padding-top: 10px;
+        }
+        table.body td {
+            padding-top: 2px;
+        }
+        table.total {
+            page-break-inside: avoid;
+        }
+        tr.totalrow {
+            background-color: #e3e3e3;
+            line-height: 200%;
+        }
+        td.totalboxtop {
+            font-size: 12pt;
+            background-color: #e3e3e3;
+        }
+        td.addressheader {
+            font-size: 8pt;
+            padding-top: 6px;
+            padding-bottom: 2px;
+        }
+        td.address {
+            padding-top: 0;
+        }
+        td.totalboxmid {
+            font-size: 28pt;
+            padding-top: 20px;
+            background-color: #e3e3e3;
+        }
+        td.totalboxbot {
+            background-color: #e3e3e3;
+            font-weight: bold;
+        }
+        span.title {
+            font-size: 28pt;
+        }
+        span.number {
+            font-size: 16pt;
+        }
+        span.itemname {
+            font-weight: bold;
+            line-height: 150%;
+        }
+        hr {
+            width: 100%;
+            color: #d3d3d3;
+            background-color: #d3d3d3;
+            height: 1px;
+        }
+</style>
+</head>
+<body padding="0.5in 0.5in 0.5in 0.5in" size="Letter">
+    <table border="0" cellpadding="1" cellspacing="0" style="width:100%; text-align: right;"><tr>
+	<td>&nbsp;</td>
+	<td><strong><span style="color: #8AC7DB; align: right; margin-left:127px;font-size:29px;">Quotation</span><br /><b><span style="font-size:12px; margin-left:110px;">&nbsp; Quotation Number : ${record.tranid}</span></b></strong></td>
+	</tr>
+	<tr>
+	<td>Dubai United Arab Emirates</td>
+	<td>&nbsp;</td>
+	</tr>
+	<tr>
+	<td>Tel :</td>
+	<td>&nbsp;</td>
+	</tr>
+	<tr>
+	<td>M :</td>
+	<td>&nbsp;</td>
+	</tr>
+	<tr>
+	<td>www.</td>
+	<td>&nbsp;</td>
+	</tr>
+	<tr>
+	<td>TRN : 100532793500003</td>
+	<td>&nbsp;</td>
+	</tr></table>
+&nbsp;
+
+<table border="0" cellpadding="2" cellspacing="2" style="width:100%;"><tr>
+	<td>&nbsp;</td>
+	<td style="width: 183px;">&nbsp;</td>
+	<td style="width: 331px;">Quotation Date: ${record.trandate}</td>
+	</tr>
+	<tr>
+	<td>Bill To: ${record.billaddress}</td>
+	<td style="width: 183px;">&nbsp;</td>
+	<td style="width: 331px;">Expiry Date: ${record.duedate}</td>
+	</tr>
+	<tr>
+	<td>&nbsp;</td>
+	<td style="width: 183px;">&nbsp;</td>
+	<td style="width: 331px;">Sales Person: ${record.salesrep}</td>
+	</tr>
+	<tr>
+	<td>United Arab Emirates</td>
+	<td style="width: 183px;">&nbsp;</td>
+	<td style="width: 331px;">Lead Time:</td>
+	</tr>
+	<tr>
+	<td>&nbsp;</td>
+	<td style="width: 183px;">&nbsp;</td>
+	<td style="width: 331px;">Delivery Terms: ${record.custbody_delivery_terms}</td>
+	</tr>
+	<tr>
+	<td>&nbsp;</td>
+	<td style="width: 183px;">&nbsp;</td>
+	<td style="width: 331px;">Payment Terms:</td>
+	</tr></table>
+&nbsp; <!-- __________________________________________________________________________________________________ -->
+
+<table border="0" cellpadding="1" cellspacing="0" style="width:100%;"><#assign count = 1><#assign totalSum = 0><#list record.item as item><#if item_index==0><tr>
+	<td style="background-color:#43A6C6; color: white;">SN</td>
+	<td style="background-color:#43A6C6; color: white;">Item &amp; Description</td>
+	<td style="background-color:#43A6C6; color: white;">Qty</td>
+	<td style="background-color:#43A6C6; color: white;">UP</td>
+	<td style="background-color:#43A6C6; color: white;">Tax</td>
+	<td style="background-color:#43A6C6; color: white;">Amount</td>
+	</tr>
+	</#if><#if item.description?has_content>
+	<tr>
+	<td style="border-bottom: 1px;">${count}</td>
+	<td style="border-bottom: 1px;">${item.description}</td>
+	<td style="border-bottom: 1px;">${item.quantity}</td>
+	<td style="border-bottom: 1px;">&nbsp;</td>
+	<td style="border-bottom: 1px;">${item.taxamt}</td>
+	<td style="border-bottom: 1px;">${item.amount}</td>
+	</tr>
+	<#assign count = count + 1><#assign totalSum = totalSum + item.quantity></#if></#list></table>
+<!-- __________________________________________________________________________________________________ -->
+
+<table border="0" cellpadding="1" cellspacing="0" style="width:100%;"><tr>
+	<td style="border-bottom: 1px;">&nbsp;</td>
+	<td style="border-bottom: 1px;"><strong>Sub Total&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;${record.taxtotal}&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${record.subtotal}</strong></td>
+	</tr>
+	<tr>
+	<td>Items in Total ${totalSum}</td>
+	<td>Total Taxable Amount&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;${record.taxtotal}</td>
+	</tr>
+	<tr>
+	<td>&nbsp;</td>
+	<td style="background-color:#ADD8E6;"><strong>Total</strong>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;${record.total}</td>
+	</tr></table>
+<!-- __________________________________________________________________________________________________ -->
+</body>
+</pdf>

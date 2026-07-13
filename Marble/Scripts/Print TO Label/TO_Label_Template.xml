@@ -1,0 +1,204 @@
+<?xml version="1.0"?>
+<!DOCTYPE pdf PUBLIC "-//big.faceless.org//report" "report-1.1.dtd">
+<pdf>
+  <head>
+    <link name="NotoSans" type="font" subtype="truetype"
+      src="${nsfont.NotoSans_Regular}"
+      src-bold="${nsfont.NotoSans_Bold}"
+      src-italic="${nsfont.NotoSans_Italic}"
+      src-bolditalic="${nsfont.NotoSans_BoldItalic}"
+      bytes="2" />
+
+    <link name="NotoSansArabic" type="font" subtype="opentype"
+      src="${nsfont.NotoSansArabic_Regular}"
+      src-bold="${nsfont.NotoSansArabic_Bold}"
+      bytes="2" subset="false" />
+
+    <#if .locale == "zh_CN">
+    <link name="NotoSansCJKsc" type="font" subtype="opentype"
+      src="${nsfont.NotoSansCJKsc_Regular}"
+      src-bold="${nsfont.NotoSansCJKsc_Bold}"
+      bytes="2" />
+    <#elseif .locale == "zh_TW">
+    <link name="NotoSansCJKtc" type="font" subtype="opentype"
+      src="${nsfont.NotoSansCJKtc_Regular}"
+      src-bold="${nsfont.NotoSansCJKtc_Bold}"
+      bytes="2" />
+    <#elseif .locale == "ja_JP">
+    <link name="NotoSansCJKjp" type="font" subtype="opentype"
+      src="${nsfont.NotoSansCJKjp_Regular}"
+      src-bold="${nsfont.NotoSansCJKjp_Bold}"
+      bytes="2" />
+    <#elseif .locale == "ko_KR">
+    <link name="NotoSansCJKkr" type="font" subtype="opentype"
+      src="${nsfont.NotoSansCJKkr_Regular}"
+      src-bold="${nsfont.NotoSansCJKkr_Bold}"
+      bytes="2" />
+    <#elseif .locale == "th_TH">
+      <link name="NotoSansThai" type="font" subtype="opentype"
+        src="${nsfont.NotoSansThai_Regular}"
+        src-bold="${nsfont.NotoSansThai_Bold}"
+        bytes="2" />
+    </#if>
+
+    <macrolist>
+      <macro id="nlheader">
+      </macro>
+      <macro id="nlfooter">
+      </macro>
+    </macrolist>
+
+    <style>
+      * {
+        font-family: NotoSansArabic, NotoSans, sans-serif;
+      }
+      table {
+        font-size: 6pt;
+        table-layout: fixed;
+      }
+      td {
+        padding: 2px 3px;
+        vertical-align: top;
+        line-height: 1.2;
+      }
+      b {
+        font-weight: bold;
+        color: #333333;
+        font-size: 6pt;
+      }
+    </style>
+  </head>
+
+  <body header="nlheader" header-height="0%" footer="nlfooter" footer-height="0%"
+    padding="0.2cm 0.2cm 0.2cm 0.2cm" size="10cm 15cm">
+
+    <!-- Loop through each item to create separate pages -->
+    <#list record.item as item>
+      <#if item?index gt 0>
+        <pbr/>
+      </#if>
+
+      <!-- Main Container Table with Border -->
+      <table style="width: 100%; border: 2px solid #000; border-collapse: collapse; margin: 0; height: 14.6cm;">
+        
+        <!-- Header Row with Logo, Title and Barcode -->
+        <tr style="height: 3cm;">
+          <td colspan="6" style="border-bottom: 2px solid #000; padding: 3px; height: 3cm;">
+            <table style="width: 100%; border: none; margin: 0; height: 100%;">
+              <tr>
+                <td style="width: 20%; text-align: center; vertical-align: middle; padding: 2px; border: none;">
+                  <img src="https://9698421.app.netsuite.com/core/media/media.nl?id=9632&amp;c=9698421&amp;h=z2YfeEAWW_8EInRlwuQCGgINdGrKPm-17YXSZ2E9puX4smWH" 
+                       style="height: 80px; width: 80px;" />
+                </td>
+                <td style="width: 60%; text-align: center; vertical-align: middle; padding: 2px; border: none;">
+                  <table style="width: 100%; border: none; margin: 0;">
+                    <tr>
+                      <td style="font-size: 9pt; font-weight: bold; padding: 0 0 2px 0; line-height: 1; text-align: center; border: none;">Transfer Order</td>
+                    </tr>
+                    <!-- Barcode -->
+                    <#if record.id?has_content>
+                    <tr>
+                      <td style="padding: 0; text-align: center; border: none;">
+                        <barcode codetype="code128" showtext="false" height="40" width="170" 
+                                 value="https://9698421.app.netsuite.com/app/accounting/transactions/trnfrord.nl?id=${record.id}&amp;whence=" />
+                      </td>
+                    </tr>
+                    <tr>
+                      <td style="font-size: 10pt; padding: 6px 0 0 0; line-height: 1; text-align: center; border: none;">${record.tranid}</td>
+                    </tr>
+                    </#if>
+                  </table>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+
+        <!-- Information Section Row -->
+        <tr style="height: 1.2cm;">
+          <td colspan="3" style="border-right: 2px solid #000; border-bottom: 2px solid #000; padding: 5px; font-size: 6pt; height: 1.2cm;">
+            <b>Destination:</b> &nbsp;
+          </td>
+          <td colspan="3" style="border-bottom: 2px solid #000; padding: 5px; font-size: 6pt; height: 1.2cm;">
+            <table style="width: 100%; border: none; border-collapse: collapse; margin: 0; padding: 0;">
+              <tr>
+                <td style="border: none; font-size: 6pt; padding: 3px 0 2px 0;"><b>Date:</b> ${record.trandate}</td>
+              </tr>
+              <tr>
+                <td style="border: none; font-size: 6pt; padding: 3px 0 2px 0;"><b>Foreign Ref:</b></td>
+              </tr>
+              <tr>
+                <td style="border: none; font-size: 6pt; padding: 3px 0 2px 0;"><b>Ref:</b> ${record.tranid}</td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+
+        <!-- Empty Row with 3 cells -->
+        <tr style="height: 1cm;">
+          <td colspan="2" style="border-right: 2px solid #000; border-bottom: 2px solid #000; padding: 5px; font-size: 6pt; height: 1cm;">
+            &nbsp;
+          </td>
+          <td colspan="2" style="border-right: 2px solid #000; border-bottom: 2px solid #000; padding: 5px; font-size: 6pt; height: 1cm;">
+            &nbsp;
+          </td>
+          <td colspan="2" style="border-bottom: 2px solid #000; padding: 5px; font-size: 6pt; height: 1cm;">
+            &nbsp;
+          </td>
+        </tr>
+
+        <!-- Item Details Section -->
+        <tr style="height: 3cm;">
+          <td colspan="2" style="border-right: 2px solid #000; border-bottom: 2px solid #000; padding: 0; font-size: 6pt; width: 35%; height: 3cm;">
+            <table style="width: 100%; border: none; border-collapse: collapse; margin: 0; padding: 0;">
+              <tr>
+                <td style="border: none; font-size: 6pt; padding: 4px;"><b>Weight:</b> &nbsp;</td>
+              </tr>
+              <tr>
+                <td style="border: none; font-size: 6pt; padding: 4px;"><b>Chargeable:</b> &nbsp;</td>
+              </tr>
+              <tr>
+                <td style="border: none; font-size: 6pt; padding: 4px;"><b>Services:</b> &nbsp;</td>
+              </tr>
+              <tr>
+                <td style="border: none; font-size: 6pt; padding: 4px;"><b>Pieces:</b> ${item.quantity}</td>
+              </tr>
+            </table>
+          </td>
+          <td colspan="4" style="border-bottom: 2px solid #000; padding: 5px; vertical-align: top; font-size: 6pt; width: 65%; height: 3cm;">
+            <b>Description: </b>${item.item}
+          </td>
+        </tr>
+
+        <!-- Account Section -->
+        <tr style="height: 3.5cm;">
+          <td colspan="6" style="border-bottom: 2px solid #000; padding: 5px; height: 3.5cm; vertical-align: top; font-size: 6pt;">
+            <table style="width: 100%; border: none; border-collapse: collapse; margin: 0; padding: 0;">
+              <tr>
+                <td style="border: none; font-size: 6pt; padding: 0 0 4px 0;"><b>Account:</b></td>
+              </tr>
+              <tr>
+                <td style="border: none; font-size: 6pt; padding: 0 0 4px 0;"><b>From Location:</b> ${record.location}</td>
+              </tr>
+              <tr>
+                <td style="border: none; font-size: 6pt; padding: 0;"><b>To Location:</b> ${record.transferlocation}</td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+
+        <!-- Footer Section -->
+        <tr style="height: 1.2cm;">
+          <td colspan="3" style="padding: 3px; border-right: 2px solid #000; border-bottom: 2px solid #000; font-size: 6pt; height: 1.2cm; vertical-align: middle;">
+            <b>Shipper:</b> &nbsp;
+          </td>
+          <td colspan="3" style="padding: 3px; text-align: right; font-size: 6pt; border-bottom: 2px solid #000; height: 1.2cm; vertical-align: middle;">
+            <b>Consignee Ref: Order ID: ${record.tranid}</b> &nbsp;
+          </td>
+        </tr>
+      </table>
+
+    </#list>
+
+  </body>
+</pdf>

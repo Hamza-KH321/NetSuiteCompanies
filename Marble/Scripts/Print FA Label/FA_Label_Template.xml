@@ -1,0 +1,149 @@
+<?xml version="1.0"?>
+<!DOCTYPE pdf PUBLIC "-//big.faceless.org//report" "report-1.1.dtd">
+<pdf>
+<head>
+<link name="NotoSansArabic" type="font" subtype="opentype" src="${nsfont.NotoSansArabic_Regular}" src-bold="${nsfont.NotoSansArabic_Bold}" bytes="2" subset="false"/>
+    <link name="NotoSans" type="font" subtype="truetype" src="${nsfont.NotoSans_Regular}" src-bold="${nsfont.NotoSans_Bold}" src-italic="${nsfont.NotoSans_Italic}" src-bolditalic="${nsfont.NotoSans_BoldItalic}" bytes="2" />
+    <#if .locale == "zh_CN">
+        <link name="NotoSansCJKsc" type="font" subtype="opentype" src="${nsfont.NotoSansCJKsc_Regular}" src-bold="${nsfont.NotoSansCJKsc_Bold}" bytes="2" />
+    <#elseif .locale == "zh_TW">
+        <link name="NotoSansCJKtc" type="font" subtype="opentype" src="${nsfont.NotoSansCJKtc_Regular}" src-bold="${nsfont.NotoSansCJKtc_Bold}" bytes="2" />
+    <#elseif .locale == "ja_JP">
+        <link name="NotoSansCJKjp" type="font" subtype="opentype" src="${nsfont.NotoSansCJKjp_Regular}" src-bold="${nsfont.NotoSansCJKjp_Bold}" bytes="2" />
+    <#elseif .locale == "ko_KR">
+        <link name="NotoSansCJKkr" type="font" subtype="opentype" src="${nsfont.NotoSansCJKkr_Regular}" src-bold="${nsfont.NotoSansCJKkr_Bold}" bytes="2" />
+    <#elseif .locale == "th_TH">
+        <link name="NotoSansThai" type="font" subtype="opentype" src="${nsfont.NotoSansThai_Regular}" src-bold="${nsfont.NotoSansThai_Bold}" bytes="2" />
+    </#if>
+    <style>
+        * {
+        <#if .locale == "zh_CN">
+            font-family: NotoSans, NotoSansCJKsc, sans-serif;
+        <#elseif .locale == "zh_TW">
+            font-family: NotoSans, NotoSansCJKtc, sans-serif;
+        <#elseif .locale == "ja_JP">
+            font-family: NotoSans, NotoSansCJKjp, sans-serif;
+        <#elseif .locale == "ko_KR">
+            font-family: NotoSans, NotoSansCJKkr, sans-serif;
+        <#elseif .locale == "th_TH">
+            font-family: NotoSans, NotoSansThai, sans-serif;
+        <#else>
+            font-family: NotoSansArabic, NotoSans, sans-serif;
+        </#if>
+        }
+
+        body {
+            margin: 0;
+            padding: 1mm 2mm;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        td {
+            border: none;
+            vertical-align: middle;
+            padding: 0;
+        }
+
+        .logo-cell {
+            text-align: left;
+            vertical-align: middle;
+        }
+
+        .qr-cell {
+            text-align: right;
+            vertical-align: middle;
+        }
+
+        .field-name {
+            font-size: 11pt;
+            font-weight: bold;
+            text-align: left;
+            margin: 0;
+            padding: 0.3mm 0;
+        }
+
+        .field-altname {
+            font-size: 8pt;
+            text-align: left;
+            margin: 0;
+            padding: 0.3mm 0;
+        }
+
+        .field-assettype {
+            font-size: 8pt;
+            text-align: left;
+            margin: 0;
+            padding: 0.3mm 0;
+        }
+
+        .field-warning {
+            font-size: 6pt;
+            font-style: italic;
+            color: #888888;
+            text-align: left;
+            margin: 0;
+            padding: 0.3mm 0;
+        }        
+		.field-warning-arabic {
+            font-size: 6pt;
+            text-align: left;
+            margin: 0;
+            padding: 0.3mm 0;
+        }
+
+        .info-cell {
+            text-align: left;
+            vertical-align: middle;
+            padding-left: 1mm;
+        }
+		
+* {font-family: NotoSansArabic, NotoSans, sans-serif;}
+    </style>
+</head>
+<body size="80mm 40mm">
+    <table>
+        <!-- Row 1: Logo left, QR right -->
+        <tr>
+            <td class="logo-cell" width="55%">
+                <img height="15mm" width="60mm" src="https://9698421.app.netsuite.com/core/media/media.nl?id=9719&amp;c=9698421&amp;h=3OdwFQzfBhMp_AIU4ufRyNV_xWS-y7AIdzYjLRiAYzuAjWuN" />
+            </td>
+            <td class="qr-cell" width="45%">
+                <barcode codetype="qrcode" width="17mm" height="17mm" quietzone="0" value="https://9698421.app.netsuite.com/app/common/custom/custrecordentry.nl?rectype=43&amp;id=${record.id}" />
+            </td>
+        </tr>
+        <!-- Row 2: Name -->
+        <tr>
+            <td class="info-cell" colspan="2">
+                <p class="field-name">${record.name}</p>
+            </td>
+        </tr>
+        <!-- Row 3: Alt Name -->
+        <tr>
+            <td class="info-cell" colspan="2">
+                <p class="field-altname">${record.altname}</p>
+            </td>
+        </tr>
+        <!-- Row 4: Asset Type -->
+        <tr>
+            <td class="info-cell" colspan="2">
+                <p class="field-assettype">Type: ${record.custrecord_assettype}</p>
+            </td>
+        </tr>
+        <!-- Row 5: Warning text -->
+        <tr>
+            <td class="info-cell" colspan="2">
+                <p class="field-warning">Please Don't Remove the Sticker</p>
+            </td>
+        </tr>
+		<tr>
+            <td class="info-cell" colspan="2">
+                <p class = "field-warning-arabic">الرجاء عدم ازالة الملصق</p>
+            </td>
+        </tr>
+    </table>
+</body>
+</pdf>

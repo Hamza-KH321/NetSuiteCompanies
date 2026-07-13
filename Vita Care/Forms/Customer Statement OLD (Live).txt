@@ -1,0 +1,219 @@
+<?xml version="1.0"?>
+<!DOCTYPE pdf PUBLIC "-//big.faceless.org//report" "report-1.1.dtd">
+<pdfset>
+  <#if statements?has_content>
+    <#list statements as statement>
+      <pdf>
+      <head>
+        <link name="NotoSans" type="font" subtype="truetype" src="${nsfont.NotoSans_Regular}" src-bold="${nsfont.NotoSans_Bold}" src-italic="${nsfont.NotoSans_Italic}" src-bolditalic="${nsfont.NotoSans_BoldItalic}" bytes="2" />
+        <link name="NotoSansArabic" type="font" subtype="opentype" src="${nsfont.NotoSansArabic_Regular}" src-bold="${nsfont.NotoSansArabic_Bold}" bytes="2" subset="false"/>
+   		 <macrolist>
+        	<macro id="nlheader">
+            	<table class="header" style="width: 100%;">
+                  <tr>
+					<td rowspan="2">
+                      <#if companyInformation.logoUrl?length != 0>
+                       <img src="https://7065838.app.netsuite.com/core/media/media.nl?id=43426&amp;c=7065838&amp;h=CV9isMnosu0sQG4kxXhIW25CgJmIMbtTCI4_dC72dpTZOnMy" />
+                     </#if>
+                      <span class="nameandaddress" id="cmp-name">Future Pioneer Trading LLC</span><br />
+                      <span id="cmp-name2"> شركة المستقبل الرائدة التجارية شركة شخص واحد </span><br/><br/>
+                      <span class="nameandaddress">${companyInformation.addressText}</span>
+                    </td>
+					<td align="right"><span class="title">Customer Statement</span></td>
+				</tr>
+				<tr>
+					<td align="right"><b>Date</b> ${statement.trandate}</td>
+				</tr>
+              </table>
+        	</macro>
+        <macro id="nlfooter">
+            <table class="footer" style="width: 100%;">
+              <tr>
+				<td align="right"><pagenumber/> of <totalpages/></td>
+				</tr>
+          </table>
+        </macro>
+    </macrolist>
+    <style type="text/css">
+          * {
+                font-family: NotoSansArabic, NotoSans, sans-serif;
+            	font-size: 8;
+            	table-layout: fixed;
+          }
+            img {
+                width: 150px;
+                height: 70px
+            }
+		table {
+			font-size: 9pt;
+			table-layout: fixed;
+		}
+         th {
+             font-weight: bold;
+             font-size: 8pt;
+             vertical-align: middle;
+             padding: 5px 6px 3px;
+             background-color: #99e6ff;
+             color: #333333;
+         }
+         td {
+             padding: 4px 6px;
+         }
+		 td p { align:left }
+         b {
+             font-weight: bold;
+             color: #333333;
+         }
+         table.header td {
+             padding: 0;
+             font-size: 10pt;
+         }
+         table.footer td {
+             padding: 0;
+             font-size: 8pt;
+         }
+         table.itemtable th {
+             padding-bottom: 10px;
+             padding-top: 10px;
+         }
+         table.body td {
+             padding-top: 2px;
+         }
+         td.addressheader {
+             font-weight: bold;
+             font-size: 8pt;
+             padding-top: 6px;
+             padding-bottom: 2px;
+         }
+         td.address {
+             padding-top: 0;
+         }
+         span.title {
+             font-size: 22pt;
+         }
+         span.number {
+             font-size: 16pt;
+         }
+         div.remittanceSlip {
+             width: 100%;
+             /* To ensure minimal height of remittance slip */
+             height: 200pt;
+             page-break-inside: avoid;
+             page-break-after: avoid;
+         }
+         hr {
+             border-top: 1px dashed #d3d3d3;
+             width: 100%;
+             color: #ffffff;
+             background-color: #ffffff;
+             height: 1px;
+         }
+		#cmp-name {
+           	 font-size: 1.5em;
+             font-weight: bold;
+        }
+            #cmp-name2 {
+                  font-size: 1.1em;
+                  font-weight: bold;
+            }
+</style>
+</head>
+<body header="nlheader" header-height="20%" footer="nlfooter" footer-height="20pt" padding="0.5in 0.5in 0.5in 0.5in" size="Letter">
+    <table style="width: 100%; margin-top: 10px;"><tr>
+	<td class="addressheader" colspan="3">Bill To:</td>
+	</tr>
+	<tr>
+	<td class="address" colspan="3">${statement.entity}<br/>${statement.billaddress}</td>
+	</tr></table>
+
+	<table class="body" style="width: 100%;">
+      <tr>
+      	<th align="center">${statement.amountDue@label} | Currency SAR</th>
+      </tr>
+      <tr>
+      	<td align="center">${statement.amountDue?substring(3)}</td>
+		</tr>
+  	</table>
+  
+<#if statement.lines?has_content>
+
+<table class="itemtable" style="width: 100%; margin-top: 10px; border:1px solid black">
+  <!-- start items -->
+  <#list statement.lines as line>
+    <#if line_index==0>
+    <thead>
+        <tr style="border-bottom:1px solid black">
+        <th  style="border-right:1px solid black" align="center" colspan="3">${line.datecol@label}</th>
+        <th  style="border-right:1px solid black" align="left" colspan="12">${line.description@label}</th>
+        <th  style="border-right:1px solid black" align="center" colspan="3">Debit</th>
+        <th  style="border-right:1px solid black" align="center" colspan="4">Credit</th>
+        <th align="center" colspan="4">${line.balance@label}</th>
+        </tr>
+    </thead>
+    </#if>
+    <tr>
+	<td  style="border-right:1px solid black" align="center" colspan="3">${line.datecol}</td>
+	<td  style="border-right:1px solid black" align="left" colspan="12">${line.description}</td>
+	<td  style="border-right:1px solid black" align="center" colspan="3">${line.charge}</td>
+	<td  style="border-right:1px solid black" align="center" colspan="4">${line.payment}</td>
+	<td  align="center" colspan="4">${line.balance?substring(3)}</td>
+	</tr>
+	</#list>
+  <!-- end items -->
+  </table>
+
+<table class="aging" style="width: 100%; margin-top: 10px;border:1px solid black">
+  <tr style="border-bottom:1px solid black">
+	<th style="border-right:1px solid black" align="center" >${statement.aging1@label}</th>
+	<th style="border-right:1px solid black" align="center" >${statement.aging2@label}</th>
+	<th style="border-right:1px solid black" align="center" >${statement.aging3@label}</th>
+	<th style="border-right:1px solid black" align="center" >${statement.aging4@label}</th>
+	<th style="border-right:1px solid black" align="center" >${statement.aging5@label}</th>
+	<th align="center" >${statement.agingbal@label}</th>
+	</tr>
+	<tr>
+	<td style="border-right:1px solid black" align="center" >${statement.aging1?substring(3)}</td>
+	<td style="border-right:1px solid black" align="center" >${statement.aging2?substring(3)}</td>
+	<td style="border-right:1px solid black" align="center" >${statement.aging3?substring(3)}</td>
+	<td style="border-right:1px solid black" align="center" >${statement.aging4?substring(3)}</td>
+	<td style="border-right:1px solid black" align="center" >${statement.aging5?substring(3)}</td>
+	<td align="center" >${statement.agingbal?substring(3)}</td>
+	</tr></table>
+</#if>
+  <!--
+  <#if preferences.RETURNFORM && remittanceSlip??>
+<hr />
+ <div class="remittanceSlip">
+<table style="width: 100%; margin-top: 10px;"><tr>
+	<td><span class="nameandaddress">${companyInformation.companyName}</span></td>
+	<td align="right"><span class="number">${remittanceSlip@title}</span></td>
+	</tr></table>
+
+<table style="width: 100%; margin-top: 10px;"><tr>
+	<th>${remittanceSlip.customername@label}</th>
+	<th>${statement.trandate@label}</th>
+	<th>${statement.amountDue@label}</th>
+	<th>${remittanceSlip.amountPaid@label}</th>
+	</tr>
+	<tr>
+	<td>${companyInformation.addressText}</td>
+	<td>${statement.trandate}</td>
+	<td align="right">${statement.amountDue}</td>
+	<td>&nbsp;</td>
+	</tr></table>
+
+<table style="width: 100%;"><tr>
+	<th>${remittanceSlip.ccinfo@label}</th>
+	<th>${remittanceSlip.companyaddress@label}</th>
+	</tr>
+	<tr>
+	<td>${remittanceSlip.ccinfo}</td>
+	<td>${companyInformation.addressText}</td>
+	</tr></table>
+</div>  
+</#if>-->
+        </body></pdf></#list><#else><pdf><head></head><body>
+
+<p>Please use Single Currency Advanced Printing Template</p>
+</body>
+</pdf></#if></pdfset>

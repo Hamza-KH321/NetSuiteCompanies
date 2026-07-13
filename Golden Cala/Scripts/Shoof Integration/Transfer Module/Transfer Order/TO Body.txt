@@ -1,0 +1,14 @@
+{
+  "fromLocation": 24,
+  "toLocation": 25,
+  "lines": [
+    {
+      "sku": "1",
+      "quantity": 2
+    },
+    {
+      "sku": "12345",
+      "quantity": 5
+    }
+  ]
+}

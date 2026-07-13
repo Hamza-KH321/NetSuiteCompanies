@@ -1,0 +1,509 @@
+<?xml version="1.0"?>
+<!DOCTYPE pdf PUBLIC "-//big.faceless.org//report" "report-1.1.dtd">
+<pdf>
+	<head>
+		<link name="NotoSansArabic" type="font" subtype="opentype"
+			src="${nsfont.NotoSansArabic_Regular}" src-bold="${nsfont.NotoSansArabic_Bold}"
+			bytes="2" subset="false" />
+
+
+		<link name="NotoSans" type="font" subtype="truetype"
+			src="${nsfont.NotoSans_Regular}"
+			src-bold="${nsfont.NotoSans_Bold}"
+			src-italic="${nsfont.NotoSans_Italic}"
+			src-bolditalic="${nsfont.NotoSans_BoldItalic}"
+			bytes="2" />
+
+		<macrolist>
+			<macro id="nlheader">
+
+			</macro>
+			<macro id="nlfooter">
+
+			</macro>
+		</macrolist>
+		<style type="text/css">*
+			{
+			font-family: NotoSansArabic, NotoSans, sans-serif;
+			}
+			table { font-size: 9pt;
+			table-layout: fixed; } th { font-weight: bold; font-size: 8pt; vertical-align: middle;
+			padding: 5px 6px 3px; background-color: #e3e3e3; color: #333333; } td { padding: 4px
+			6px; } td p { align:left } b { font-weight: bold; color: #333333; } table.header td {
+			padding: 0px; font-size: 10pt; } table.footer td { padding: 0px; font-size: 8pt; }
+			table.itemtable th { padding-bottom: 10px; padding-top: 10px; } table.body td {
+			padding-top: 2px; } table.total { page-break-inside: avoid; } tr.totalrow {
+			background-color: #e3e3e3; line-height: 200%; } td.totalboxtop { font-size: 12pt;
+			background-color: #e3e3e3; } td.addressheader { font-size: 8pt; padding-top: 6px;
+			padding-bottom: 2px; } td.address { padding-top: 0px; } td.totalboxmid { font-size:
+			28pt; padding-top: 20px; background-color: #e3e3e3; } td.totalboxbot { background-color:
+			#e3e3e3; font-weight: bold; } span.title { font-size: 28pt; } span.number { font-size:
+			16pt; } span.itemname { font-weight: bold; line-height: 150%; } hr { width: 100%;
+			height: 1px; } </style>
+	</head>
+	<body header="nlheader" header-height="0.5%" footer="nlfooter" footer-height="1%"
+		padding="0.5in 0.5in 0.5in 0.5in" size="A3">
+
+		<table border="0" cellpadding="0" cellspacing="0" style="width:100%;margin-bottom:15px;">
+			<tr style="padding-bottom: 15px;">
+				<td style="align:left;width:50%;">
+					<!-- <img
+					src="https://8038963-sb1.app.netsuite.com/core/media/media.nl?id=8080&amp;c=8038963_SB1&amp;h=_1zy_q1nh04ZyO-f6maGc2diva1K5qhTSUL2KGtvvWBuuF0H"
+						style="height:70%; width: 70%;" /> -->
+
+					<@filecabinet 
+                nstype="image" 
+                src="${subsidiary.logo}" 
+                style="height: 50%; width: 50%; max-width: 200px; max-height: 100px;" 
+				            />
+
+				</td>
+
+				<td style="align:centerwidth:10%;">
+
+					<p align="center"
+						style="font-size:15px;padding-bottom: 10px;"
+						text-align="center">
+						فاتورة ضريبية
+					</p>
+					<p align="center" style="font-size:15px;padding-bottom: 10px;"
+						text-align="center">
+						Tax Invoice</p>
+
+
+				</td>
+			</tr>
+
+		</table>
+
+
+		<table style="width: 100%;">
+			<tr>
+				<!-- Left side: Invoice Details Table -->
+				<td style="width: 60%; vertical-align: middle;">
+					<table style="width: 100%; border: 1px solid #000;" cellpadding="3">
+						<tr>
+							<td style="width: 25%; border: 1px solid #000;">Invoice Reference
+								Number:</td>
+							<td style="width: 25%; border: 1px solid #000;">${record.tranid}</td>
+							<td
+								style="width: 25%; border: 1px solid #000; text-align: right; direction: rtl;align:right;">الرقم
+								التسلسلي
+							</td>
+						</tr>
+						<tr>
+							<td style="border: 1px solid #000;">Invoice Issue Date:</td>
+							<td style="border: 1px solid #000;">${record.trandate}</td>
+							<td
+								style="border: 1px solid #000; text-align: right; direction: rtl;align:right;">:تاريخ
+								إصدار الفاتورة</td>
+						</tr>
+						<tr>
+							<td style="border: 1px solid #000;">Due Date:</td>
+							<td style="border: 1px solid #000;">${record.duedate}</td>
+							<td
+								style="border: 1px solid #000; text-align: right; direction: rtl;align:right;">:تاريخ
+								الاستحقاق</td>
+						</tr>
+
+					</table>
+				</td>
+
+				<!-- Right side: QR Code -->
+				<td style="width: 40%; align: right;">
+					<#if record.custbody_psg_ei_qr_string?has_content>
+					<barcode codetype="qrcode" showtext="false" height="70%" width="80%"
+						value="${record.custbody_psg_ei_qr_string}" />
+					<#elseif record.custbody_vs_base64?has_content>
+						<barcode codetype="qrcode" showtext="false" height="65%" width="70%"
+							value="${record.custbody_vs_base64}" />
+					</#if>
+				</td>
+
+
+			</tr>
+		</table>
+
+
+		<!-- Vendor & Client Table -->
+		<table
+			style="width: 100%; border-collapse: collapse; margin-top: 10px;margin-bottom:10px; font-size: 10px;"
+			cellpadding="5" cellspacing="0">
+			<tr style="background-color: #d3d3d3;">
+				<td colspan="8" style="border: 1px solid #000;">
+					<table width="100%">
+						<tr>
+							<td style="text-align: left;">Vendor</td>
+							<td style="text-align: right; direction: rtl;align:right;">المورد</td>
+						</tr>
+					</table>
+				</td>
+				<td colspan="8" style="border: 1px solid #000;">
+					<table width="100%">
+						<tr>
+							<td style="text-align: left;">Client</td>
+							<td style="text-align: right; direction: rtl;align:right;">العميل</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+
+
+			<tr>
+				<td colspan="2" style="border: 1px solid #000;">Name:</td>
+				<td colspan="2" style="border: 1px solid #000;">${subsidiary.name}</td>
+				<td colspan="2" style="border: 1px solid #000;">
+					${subsidiary.custrecord_ksa_arabic_legalname} </td>
+				<td colspan="2"
+					style="text-align: right; direction: rtl; border: 1px solid #000;align:right;">
+					:الاسم</td>
+
+				<td colspan="2" style="border: 1px solid #000;">Name:</td>
+				<td colspan="2" style="border: 1px solid #000;">${record.entity}</td>
+				<td colspan="2" style="border: 1px solid #000;">
+				</td>
+				<td colspan="2"
+					style="text-align: right; direction: rtl; border: 1px solid #000;align:right;">
+					:الاسم</td>
+			</tr>
+
+			<tr>
+				<td colspan="2" style="border: 1px solid #000;">Building Number:</td>
+				<td colspan="2" style="border: 1px solid #000;">
+					${subsidiary.mainaddress.attention}</td>
+				<td colspan="2" style="border: 1px solid #000;">
+					${subsidiary.mainaddress.attention}</td>
+				<td colspan="2"
+					style="text-align: right; direction: rtl; border: 1px solid #000;align:right;">:رقم
+					المبنى</td>
+
+				<td colspan="2" style="border: 1px solid #000;">Building Number:</td>
+				<td colspan="2" style="border: 1px solid #000;">
+					${record.billingaddress.attention}</td>
+				<td colspan="2" style="border: 1px solid #000;">
+					${record.billingaddress.attention}</td>
+				<td colspan="2"
+					style="text-align: right; direction: rtl; border: 1px solid #000;align:right;">:رقم
+					المبنى</td>
+			</tr>
+
+			<tr>
+				<td colspan="2" style="border: 1px solid #000;">Street:</td>
+				<td colspan="2" style="border: 1px solid #000;">${subsidiary.mainaddress.addr1}</td>
+				<td colspan="2" style="border: 1px solid #000;">
+					${subsidiary.mainaddress.custrecord_vs_street_arabic_name}</td>
+				<td colspan="2"
+					style="text-align: right; direction: rtl; border: 1px solid #000;align:right;">
+					:الشارع</td>
+
+				<td colspan="2" style="border: 1px solid #000;">Street:</td>
+				<td colspan="2" style="border: 1px solid #000;">${record.billingaddress.addr2}</td>
+				<td colspan="2" style="border: 1px solid #000;">
+					${record.billingaddress.custrecord_vs_street_arabic_name}</td>
+				<td colspan="2"
+					style="text-align: right; direction: rtl; border: 1px solid #000;align:right;">
+					:الشارع</td>
+			</tr>
+
+
+			<tr>
+				<td colspan="2" style="border: 1px solid #000;">District:</td>
+				<td colspan="2" style="border: 1px solid #000;">
+					${subsidiary.mainaddress.addr2}</td>
+				<td colspan="2" style="border: 1px solid #000;">
+					${subsidiary.mainaddress.addr2}</td>
+				<td colspan="2"
+					style="text-align: right; direction: rtl; border: 1px solid #000;align:right;">
+					:الحي</td>
+
+				<td colspan="2" style="border: 1px solid #000;">District:</td>
+				<td colspan="2" style="border: 1px solid #000;">
+					${record.billingaddress.addr2}</td>
+				<td colspan="2" style="border: 1px solid #000;">
+					${record.billingaddress.addr2}</td>
+				<td colspan="2"
+					style="text-align: right; direction: rtl; border: 1px solid #000;align:right;">
+					:الحي</td>
+			</tr>
+
+			<tr>
+				<td colspan="2" style="border: 1px solid #000;">City:</td>
+				<td colspan="2" style="border: 1px solid #000;">${subsidiary.mainaddress.city}</td>
+				<td colspan="2" style="border: 1px solid #000;">
+					${subsidiary.mainaddress.city}</td>
+				<td colspan="2"
+					style="text-align: right; direction: rtl; border: 1px solid #000;align:right;">
+					:مدينة</td>
+
+				<td colspan="2" style="border: 1px solid #000;">City:</td>
+				<td colspan="2" style="border: 1px solid #000;">${record.billingaddress.city}</td>
+				<td colspan="2" style="border: 1px solid #000;">
+					${record.billingaddress.city}</td>
+				<td colspan="2"
+					style="text-align: right; direction: rtl; border: 1px solid #000;align:right;">
+					:مدينة</td>
+			</tr>
+
+			<tr>
+				<td colspan="2" style="border: 1px solid #000;">Country:</td>
+				<td colspan="2" style="border: 1px solid #000;">Saudi Arabia</td>
+				<td colspan="2" style="border: 1px solid #000;">المملكة العربية السعودية</td>
+				<td colspan="2"
+					style="text-align: right; direction: rtl; border: 1px solid #000;align:right;">
+					:دولة</td>
+
+				<td colspan="2" style="border: 1px solid #000;">Country:</td>
+				<td colspan="2" style="border: 1px solid #000;">${record.billingaddress.country}</td>
+				<td colspan="2" style="border: 1px solid #000;">
+					${record.billingaddress.custrecord_vs_country_arabic_name}</td>
+				<td colspan="2"
+					style="text-align: right; direction: rtl; border: 1px solid #000;align:right;">
+					:دولة</td>
+			</tr>
+
+			<tr>
+				<td colspan="2" style="border: 1px solid #000;">ZIP/Postal Code:</td>
+				<td colspan="2" style="border: 1px solid #000;">${subsidiary.mainaddress.zip}</td>
+				<td colspan="2" style="border: 1px solid #000;">${subsidiary.mainaddress.zip}</td>
+				<td colspan="2"
+					style="text-align: right; direction: rtl; border: 1px solid #000;align:right;">:الرمز
+					البريدي</td>
+
+				<td colspan="2" style="border: 1px solid #000;">ZIP/Postal Code:</td>
+				<td colspan="2" style="border: 1px solid #000;">${record.billingaddress.zip}</td>
+				<td colspan="2" style="border: 1px solid #000;">${record.billingaddress.zip}</td>
+				<td colspan="2"
+					style="text-align: right; direction: rtl; border: 1px solid #000;align:right;">:الرمز
+					البريدي</td>
+			</tr>
+
+
+			<tr>
+				<td colspan="2" style="border: 1px solid #000;">VAT Number:</td>
+				<td colspan="2" style="border: 1px solid #000;">${subsidiary.federalidnumber}</td>
+				<td colspan="2" style="border: 1px solid #000;">${subsidiary.federalidnumber}</td>
+				<td colspan="2"
+					style="text-align: right; direction: rtl; border: 1px solid #000;align:right;">:الرقم
+					الضريبي</td>
+
+				<td colspan="2" style="border: 1px solid #000;">VAT Number:</td>
+				<td colspan="2" style="border: 1px solid #000;">${record.entity.vatregnumber}</td>
+				<td colspan="2" style="border: 1px solid #000;">${record.entity.vatregnumber}</td>
+				<td colspan="2"
+					style="text-align: right; direction: rtl; border: 1px solid #000;align:right;">:الرقم
+					الضريبي</td>
+			</tr>
+
+
+		</table>
+
+
+		<!-- Line Items Table -->
+		<#if record.item?has_content>
+			<table
+				style="width: 100%; border-collapse: collapse; margin-top: 50px; font-size: 10px;"
+				cellpadding="5" cellspacing="0">
+				<#list record.item as item>
+				<#if item_index == 0>
+					<thead>
+						<!-- Header Row -->
+						<tr
+							style="background-color:#f2f2f2; font-weight:bold;border:1px solid #000;">
+							<td colspan="4"
+								style=" font-size:12px; padding:8px; text-align:left;">
+								Line Items
+							</td>
+							<td colspan="4"
+								style=" font-size:12px; padding:8px; text-align:right; align:right;">
+								بيانات السلعة
+							</td>
+						</tr>
+
+						<tr>
+
+							<th style="width: 10%; line-height: 15; border: 1px solid #000;"> المادة<br />
+								Item</th>
+							<th style="width: 24%; line-height: 15; border: 1px solid #000;"> اﻟﻮﺻﻒ<br />
+								DESCRIPTION</th>
+							<th style="width: 8%; line-height: 15; border: 1px solid #000;"> اﻟﻜﻤﻴﺔ<br />
+								QTY</th>
+							<th style="width: 12%; line-height: 15; border: 1px solid #000;">ﺳﻌﺮ
+								الوحدة<br />UNIT PRICE</th>
+							<th style="width: 14%; line-height: 15; border: 1px solid #000;">اﻹﺟﻤﺎﻟﻲ
+								قبل الضريبة<br />TOTAL BEFORE VAT</th>
+							<th style="width: 8%; line-height: 15; border: 1px solid #000;">ﻧﺴﺒﺔ
+								اﻟﻀﺮﻳﺒﺔ<br />VAT RATE</th>
+							<th style="width: 10%; line-height: 15; border: 1px solid #000;">مبلغ
+								الضريبة<br />VAT AMOUNT</th>
+							<th style="width: 10%; line-height: 15; border: 1px solid #000;">المبلغ
+								الصافي<br />NET AMOUNT</th>
+						</tr>
+					</thead>
+				</#if>
+
+				<tr>
+					<td style="border: 1px solid #000;">${item.item}</td>
+					<td style="border: 1px solid #000;">${item.description}</td>
+					<td style="border: 1px solid #000;">${item.quantity}</td>
+					<td style="border: 1px solid #000;">
+						${record.currencysymbol}&nbsp;${item.rate?string["#,##0.00"]}</td>
+					<td style="border: 1px solid #000;">
+						${record.currencysymbol}&nbsp;${item.amount?string["#,##0.00"]}</td>
+					<td style="border: 1px solid #000;">${item.taxrate1}</td>
+					<td style="border: 1px solid #000;">
+						${record.currencysymbol}&nbsp;${item.tax1amt?string["#,##0.00"]}</td>
+					<td style="border: 1px solid #000;">
+						${record.currencysymbol}&nbsp;${item.Grossamt?string["#,##0.00"]}</td>
+				</tr>
+				<#assign is15PercentVat = false>
+				<#list record.item as item>
+				<#if item.taxrate1?trim == "15%">
+					<#assign is15PercentVat = true>
+						<#break>
+						</#if>
+					</#list>
+				</#list>
+			</table>
+
+		</#if>
+
+
+		<hr />
+		<!-- Summary Totals Table with Borders -->
+		<!-- Totals Table-->
+		<table border="1" cellspacing="0" cellpadding="5"
+			style="width:100%; border-collapse:collapse; font-size:14px; border:1px solid #000; margin-bottom:10px;">
+
+			<!-- Header Row -->
+			<tr style="background-color:#f2f2f2; font-weight:bold; text-align:center;">
+				<td colspan="3" style="border:1px solid #000; font-size:12px; padding:8px;">
+					Total Amounts
+				</td>
+			</tr>
+
+			<tr>
+				<td style="border:1px solid #000; line-height:15px;">
+					Total Excl VAT
+				</td>
+				<td style="border:1px solid #000; line-height:15px;">
+					${record.currencysymbol}&nbsp;${record.subtotal?string["#,##0.00"]}
+				</td>
+				<td style="border:1px solid #000; text-align:right; align:right; line-height:15px;">
+					الاجمالي قبل الضريبة
+				</td>
+			</tr>
+
+			<tr>
+				<td style="border:1px solid #000; line-height:15px;">
+					Total Discount
+				</td>
+				<td style="border:1px solid #000; line-height:15px;">
+					${record.currencysymbol}&nbsp;${record.discounttotal?string["#,##0.00"]}
+				</td>
+				<td style="border:1px solid #000; text-align:right; align:right; line-height:15px;">
+					اجمالي الخصم
+				</td>
+			</tr>
+
+			<tr>
+				<td style="border:1px solid #000; line-height:15px;">
+					Total VAT
+				</td>
+				<td style="border:1px solid #000; line-height:15px;">
+					${record.currencysymbol}&nbsp;${record.taxtotal?string["#,##0.00"]}
+				</td>
+				<td style="border:1px solid #000; text-align:right; align:right; line-height:15px;">
+					اجمالي الضريبة
+				</td>
+			</tr>
+
+			<tr>
+				<td style="border:1px solid #000; line-height:15px;">
+					Total Incl VAT
+				</td>
+				<td style="border:1px solid #000; line-height:15px;">
+					${record.currencysymbol}&nbsp;${record.total?string["#,##0.00"]}
+				</td>
+				<td style="border:1px solid #000; text-align:right; align:right; line-height:15px;">
+					اجمالي شامل الضريبة
+				</td>
+			</tr>
+			<tr>
+				<td style="border:1px solid #000; line-height:15px;">
+					Amount Due
+				</td>
+				<td style="border:1px solid #000; line-height:15px;">
+					${record.amountremaining}
+				</td>
+				<td style="border:1px solid #000; text-align:right; align:right; line-height:15px;">
+					المبلغ المستحق
+				</td>
+			</tr>
+		</table>
+
+		<!-- Amount in Words Table -->
+		<table border="1" cellspacing="0" cellpadding="5"
+			style="width:100%; border-collapse:collapse; font-size:14px; border:1px solid #000; margin-bottom:10px;">
+
+			<!-- Header Row -->
+			<tr style="background-color:#f2f2f2; font-weight:bold; text-align:center;">
+				<td style="border:1px solid #000; font-size:12px; padding:8px;">
+					Amount in Words
+				</td>
+			</tr>
+
+			<tr>
+				<td style="border:1px solid #000; line-height:18px;">
+					<p>${record.custbody_vs_amt_in_words}</p>
+					<p>${record.custbody_vs_amt_in_words_ar}</p>
+				</td>
+
+			</tr>
+		</table>
+
+
+		<table border="1" cellspacing="0" cellpadding="5"
+			style="width:100%; border-collapse:collapse; font-size:12px; border:2px solid #000; margin-top:0; margin-bottom:10px;">
+
+			<!-- Centered Header Row -->
+			<tr style="background-color:#0000ff; font-weight:bold; text-align:center;">
+				<td colspan="2" style="padding:8px; font-size:13px; text-align:center;" color="#fffefd">
+					Bank Details
+				</td>
+			</tr>
+
+			<tr>
+				<td style="width:20%; padding:5px; line-height:15px;">Bank Name :</td>
+				<td style="width:80%; padding:5px; line-height:15px;">
+					${subsidiary.custrecord_vs_bank_name}
+				</td>
+			</tr>
+			<tr>
+				<td style="width:20%; padding:5px; line-height:15px;">Bank Account Number :</td>
+				<td style="width:80%; padding:5px; line-height:15px;">
+					${subsidiary.custrecord_vs_bank_account_number}
+				</td>
+			</tr>
+			<tr>
+				<td style="width:20%; padding:5px; line-height:15px;">IBAN :</td>
+				<td style="width:80%; padding:5px; line-height:15px;">
+					${subsidiary.custrecord_vs_subsidiary_iban}
+				</td>
+			</tr>
+			<tr>
+				<td style="width:20%; padding:5px; line-height:15px;">Swift Code :</td>
+				<td style="width:80%; padding:5px; line-height:15px;">
+					${subsidiary.custrecord_vs_swift_code}
+				</td>
+			</tr>
+			<tr>
+				<td style="width:20%; padding:5px; line-height:15px;">Account Name :</td>
+				<td style="width:80%; padding:5px; line-height:15px;">
+					${subsidiary.legalname}
+				</td>
+			</tr>
+		</table>
+
+
+	</body>
+</pdf>

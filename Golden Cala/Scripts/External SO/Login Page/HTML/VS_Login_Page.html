@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Login</title>
+    <link rel="stylesheet" type="text/css"
+        href="https://6371802.app.netsuite.com/core/media/media.nl?id=39176&c=6371802&h=-XgVRlu-Cf5xXYrZa5kjQilOtamtDb_p-p_H3agiRdiyApHy&_xt=.css">
+</head>
+
+<body>
+    <div class="login-container">
+        <img src="https://6371802-sb1.app.netsuite.com/core/media/media.nl?id=12&amp;c=&amp;h=yE6kgGe_2QrefIFBJO4xc9ksRT7UhJpAMWcYjvFGXZyCW84X"
+            alt="Company Logo" style="width:15%;height:15%;margin-right: 40px;">
+
+        <h2>Login</h2>
+        <form method="POST" onsubmit="return validateCaptcha();">
+            <label for="username">👤 Username</label><br />
+            <input type="text" id="username" name="username" placeholder="Enter your username" required /><br /><br />
+
+            <label for="password">🔒 Password</label><br />
+            <input type="password" id="password" name="password" placeholder="Enter your password"
+                required /><br /><br />
+
+            <!-- Google reCAPTCHA -->
+            <div class="g-recaptcha" data-sitekey="6LduT0srAAAAALW730M7EcWu4k0-98bwNrIovL8t"style="margin-bottom: 15px;"></div>
+
+            <button type="submit">Log In</button>
+        </form>
+    </div>
+
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
+</body>
+
+</html>

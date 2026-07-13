@@ -1,0 +1,230 @@
+<!--Vendor_Approval_Dashboard.html-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vendor Approval</title>
+  <link rel="stylesheet" href="Vendor_Approval_Dashboard.css">
+</head>
+
+<body>
+
+  <!-- ================= LOADING OVERLAY ================= -->
+  <div class="loading-overlay" id="loadingOverlay">
+    <div class="loading-box">
+      <div class="spinner"></div>
+      <div id="loadingTitle">Processing...</div>
+      <div id="loadingStatus"></div>
+    </div>
+  </div>
+
+  <!-- ================= CONTAINER ================= -->
+  <div class="container">
+
+    <h1 class="title">Vendor Approval</h1>
+
+    <!-- ================= ACTION BUTTONS SECTION ================= -->
+    <div class="action-section">
+      <div id="selection_count">Selected: 0 / 100</div>
+      <div class="action-buttons">
+        <button class="search-btn approve-btn" onclick="approveSelected()">Approve Selected</button>
+        <button class="search-btn reject-btn"  onclick="rejectSelected()">Reject Selected</button>
+      </div>
+    </div>
+
+    <!-- ================= TABLE ================= -->
+    <table class="transaction-table">
+      <thead>
+        <tr>
+          <th><input type="checkbox" id="check_all" onclick="toggleCheckAll(this)"></th>
+          <th>Internal ID</th>
+          <th>Vendor Name</th>
+          <th>Type</th>
+          <th>Current Approval Level</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody id="vendor_table_body">
+        <tr>
+          <td colspan="6" class="no-data">No vendors pending approval</td>
+        </tr>
+      </tbody>
+    </table>
+
+  </div>
+
+  <script>
+    let allVendors      = [];
+    let selectedVendors = new Set();
+
+    /* ─── INITIAL LOAD ─────────────────────────────── */
+    fetchVendors();
+
+    /* ─── FETCH VENDORS ────────────────────────────── */
+    function fetchVendors() {
+      showOverlay('Loading Vendors...');
+
+      fetch(window.location.href, {
+        method:  'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body:    JSON.stringify({ action: 'getData' })
+      })
+        .then(res => res.json())
+        .then(data => {
+          allVendors = data.data || [];
+          selectedVendors.clear();
+          renderTable();
+        })
+        .catch(err => {
+          console.error(err);
+          alert('Failed to load vendors');
+        })
+        .finally(hideOverlay);
+    }
+
+    /* ─── RENDER TABLE ─────────────────────────────── */
+    function renderTable() {
+      const tbody = document.getElementById('vendor_table_body');
+
+      if (!allVendors.length) {
+        tbody.innerHTML = `<tr><td colspan="6" class="no-data">No vendors pending approval</td></tr>`;
+        updateSelectionCount();
+        return;
+      }
+
+      tbody.innerHTML = allVendors.map(v => `
+        <tr>
+          <td>
+            <input type="checkbox" class="row-checkbox"
+              data-id="${v.id}"
+              onchange="handleCheckboxChange(this)">
+          </td>
+          <td>${escapeHtml(String(v.id))}</td>
+          <td>${escapeHtml(v.name || '')}</td>
+          <td>${escapeHtml(v.type || '')}</td>
+          <td>${escapeHtml(v.currentLevel || '')}</td>
+          <td>
+            <button class="view-btn" onclick="viewRecord(${v.id})">&#128065;</button>
+          </td>
+        </tr>
+      `).join('');
+
+      updateSelectionCount();
+    }
+
+    /* ─── VIEW RECORD ──────────────────────────────── */
+    function viewRecord(id) {
+      fetch(window.location.href, {
+        method:  'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body:    JSON.stringify({ action: 'view_record', id: id })
+      })
+        .then(res => res.json())
+        .then(data => {
+          if (data.url) {
+            window.open(data.url, '_blank');
+          } else {
+            alert('Could not resolve record URL.');
+          }
+        })
+        .catch(() => alert('Error opening record.'));
+    }
+
+    /* ─── CHECKBOX HANDLING ────────────────────────── */
+    function handleCheckboxChange(cb) {
+      const id = cb.dataset.id;
+
+      if (cb.checked) {
+        if (selectedVendors.size >= 100) {
+          alert('Maximum 100 records allowed.');
+          cb.checked = false;
+          return;
+        }
+        selectedVendors.add(id);
+      } else {
+        selectedVendors.delete(id);
+      }
+
+      syncCheckAll();
+      updateSelectionCount();
+    }
+
+    function toggleCheckAll(source) {
+      const checkboxes = document.querySelectorAll('.row-checkbox');
+
+      if (source.checked) {
+        for (const cb of checkboxes) {
+          if (selectedVendors.size >= 100) break;
+          cb.checked = true;
+          selectedVendors.add(cb.dataset.id);
+        }
+      } else {
+        checkboxes.forEach(cb => { cb.checked = false; });
+        selectedVendors.clear();
+      }
+
+      updateSelectionCount();
+    }
+
+    function syncCheckAll() {
+      const checkboxes = document.querySelectorAll('.row-checkbox');
+      const allChecked = checkboxes.length > 0 && [...checkboxes].every(cb => cb.checked);
+      document.getElementById('check_all').checked = allChecked;
+    }
+
+    function updateSelectionCount() {
+      document.getElementById('selection_count').textContent =
+        `Selected: ${selectedVendors.size} / 100`;
+    }
+
+    /* ─── APPROVE / REJECT ─────────────────────────── */
+    function processAction(action, title) {
+      if (selectedVendors.size === 0) {
+        alert('Please select at least one record.');
+        return;
+      }
+
+      showOverlay(title);
+
+      fetch(window.location.href, {
+        method:  'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body:    JSON.stringify({
+          action: action,
+          ids:    Array.from(selectedVendors)
+        })
+      })
+        .then(res => res.json())
+        .then(res => {
+          if (!res.success) throw new Error(res.message);
+          fetchVendors();
+        })
+        .catch(err => alert(err.message || 'Processing failed'))
+        .finally(hideOverlay);
+    }
+
+    function approveSelected() { processAction('approve', 'Approving Vendors...'); }
+    function rejectSelected()  { processAction('reject',  'Rejecting Vendors...');  }
+
+    /* ─── OVERLAY HELPERS ──────────────────────────── */
+    function showOverlay(title) {
+      document.getElementById('loadingTitle').textContent  = title;
+      document.getElementById('loadingOverlay').style.display = 'flex';
+    }
+
+    function hideOverlay() {
+      document.getElementById('loadingOverlay').style.display = 'none';
+    }
+
+    /* ─── UTILITY ──────────────────────────────────── */
+    function escapeHtml(text) {
+      const div = document.createElement('div');
+      div.textContent = text;
+      return div.innerHTML;
+    }
+  </script>
+
+</body>
+</html>

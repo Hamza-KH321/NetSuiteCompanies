@@ -1,0 +1,1 @@
+IF ({GL_06_23.TYP}) <> '/'THEN {GL_06_23.amount} ELSE 0 

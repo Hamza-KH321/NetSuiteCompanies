@@ -1,0 +1,11 @@
+{
+  "success": true,
+  "message": "Item created successfully",
+  "internalId": "4567"
+}
+
+
+{
+  "success": false,
+  "message": "Item with custitem_vs_sku '12345' already exists (internalid: 6789)."
+}

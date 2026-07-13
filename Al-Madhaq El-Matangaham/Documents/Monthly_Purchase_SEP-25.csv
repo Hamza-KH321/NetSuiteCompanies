@@ -1,0 +1,3 @@
+Date,Payment_Method,Transaction_Number,Product_Name,,Product_ID,Cashier_Name (if avaiable),POS_number (if avaiable),Qty,Unit_Price,Total_Excluding_Tax,Discount,Tax_Amount,Total_Including_Tax,Branch
+1-Aug-25,Cash,20250801_100562,Fazaa - Get Tired Playing,,40801,Amal,POS2,1,1000,1000,0,150,1150,Riyadh
+1-Aug-25,Credit,20250801_100564,Fazaa - Get Tired Playing,,40801,Fatima,POS6,1,100,100,0,15,115,Jeddah

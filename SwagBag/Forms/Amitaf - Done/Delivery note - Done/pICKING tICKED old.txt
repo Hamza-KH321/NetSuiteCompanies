@@ -1,0 +1,179 @@
+<?xml version="1.0"?><!DOCTYPE pdf PUBLIC "-//big.faceless.org//report" "report-1.1.dtd">
+<pdf>
+<head>
+	<link name="NotoSans" type="font" subtype="truetype" src="${nsfont.NotoSans_Regular}" src-bold="${nsfont.NotoSans_Bold}" src-italic="${nsfont.NotoSans_Italic}" src-bolditalic="${nsfont.NotoSans_BoldItalic}" bytes="2" />
+	<#if .locale == "zh_CN">
+		<link name="NotoSansCJKsc" type="font" subtype="opentype" src="${nsfont.NotoSansCJKsc_Regular}" src-bold="${nsfont.NotoSansCJKsc_Bold}" bytes="2" />
+	<#elseif .locale == "zh_TW">
+		<link name="NotoSansCJKtc" type="font" subtype="opentype" src="${nsfont.NotoSansCJKtc_Regular}" src-bold="${nsfont.NotoSansCJKtc_Bold}" bytes="2" />
+	<#elseif .locale == "ja_JP">
+		<link name="NotoSansCJKjp" type="font" subtype="opentype" src="${nsfont.NotoSansCJKjp_Regular}" src-bold="${nsfont.NotoSansCJKjp_Bold}" bytes="2" />
+	<#elseif .locale == "ko_KR">
+		<link name="NotoSansCJKkr" type="font" subtype="opentype" src="${nsfont.NotoSansCJKkr_Regular}" src-bold="${nsfont.NotoSansCJKkr_Bold}" bytes="2" />
+	<#elseif .locale == "th_TH">
+		<link name="NotoSansThai" type="font" subtype="opentype" src="${nsfont.NotoSansThai_Regular}" src-bold="${nsfont.NotoSansThai_Bold}" bytes="2" />
+	</#if>
+    <macrolist>
+        <macro id="nlheader">
+            <table border="0" class="header" style=" width: 100%;"><tr>
+	<td border="0">www.amitaf.me<br /><br /><br /><br /><strong>AMITAF INTERNATIONAL TRADING L.L.C</strong><br /><br />Al Dhannah Street,<br />Rabdan Area (Officers City),<br />Abu Dhabi, UAE, 43522<br />+971 255 88838<br />+971 255 899937<br />info@amitaf.me</td>
+	<td border="0" style="width: 10%;">&nbsp;</td>
+	<td border="0" style="width: 33%;"><img align="center" src="https://7454786.app.netsuite.com/core/media/media.nl?id=1281&amp;c=7454786&amp;h=ghq35EdHfs1WL9UcwfZmxfmq7qaashNhYZU1kkhBBU-keLjj" style="width: 90%; height: 100%;" />
+	</td>
+	</tr></table>
+        </macro>
+        <macro id="nlfooter">
+            <table style=" width: 100%;"><tr>
+	<td colspan="2" style="height: 36px;"><b>If you have any questions concerning this invoice, contact: info@amitaf.me | +971 65952556</b></td>
+	</tr></table>
+        </macro>
+    </macrolist>
+    <style type="text/css">* {
+		<#if .locale == "zh_CN">
+			font-family: NotoSans, NotoSansCJKsc, sans-serif;
+		<#elseif .locale == "zh_TW">
+			font-family: NotoSans, NotoSansCJKtc, sans-serif;
+		<#elseif .locale == "ja_JP">
+			font-family: NotoSans, NotoSansCJKjp, sans-serif;
+		<#elseif .locale == "ko_KR">
+			font-family: NotoSans, NotoSansCJKkr, sans-serif;
+		<#elseif .locale == "th_TH">
+			font-family: NotoSans, NotoSansThai, sans-serif;
+		<#else>
+			font-family: NotoSans, sans-serif;
+		</#if>
+		}
+		table {
+			font-size: 9pt;
+			table-layout: fixed;
+		}
+        th {
+            font-weight: bold;
+            font-size: 8pt;
+            vertical-align: middle;
+            padding: 5px 6px 3px;
+            background-color: #e3e3e3;
+            color: #333333;
+        }
+        td {
+            padding: 4px 6px;
+        }
+		td p { align:left }
+        b {
+            font-weight: bold;
+            color: #333333;
+        }
+        table.header td {
+            padding: 0px;
+            font-size: 10pt;
+        }
+        table.footer td {
+            padding: 0px;
+            font-size: 8pt;
+        }
+        table.itemtable th {
+            padding-bottom: 10px;
+            padding-top: 10px;
+        }
+        table.body td {
+            padding-top: 2px;
+        }
+        table.total {
+            page-break-inside: avoid;
+        }
+        tr.totalrow {
+            background-color: #e3e3e3;
+            line-height: 200%;
+        }
+        td.totalboxtop {
+            font-size: 12pt;
+            background-color: #e3e3e3;
+        }
+        td.addressheader {
+            font-size: 8pt;
+            padding-top: 6px;
+            padding-bottom: 2px;
+        }
+        td.address {
+            padding-top: 0px;
+        }
+        td.totalboxmid {
+            font-size: 28pt;
+            padding-top: 20px;
+            background-color: #e3e3e3;
+        }
+        td.totalboxbot {
+            background-color: #e3e3e3;
+            font-weight: bold;
+        }
+        span.title {
+            font-size: 28pt;
+        }
+        span.number {
+            font-size: 16pt;
+        }
+        span.itemname {
+            font-weight: bold;
+            line-height: 150%;
+        }
+        hr {
+            width: 100%;
+            color: #d3d3d3;
+            background-color: #5C83B4;
+            height: 1px;
+        }
+</style>
+</head>
+<body header="nlheader" header-height="16%" footer="nlfooter" footer-height="20pt" padding="0.1in 0.5in 0.5in 0.5in" size="Letter">
+    &nbsp;
+<table border="0" cellpadding="1" cellspacing="1" style="height:100%;width:100%;"><tr>
+	<td align="center" style="background-color: #0E2554;"><span style="color:#ffffff;"><span style="font-size:24px;">DELIVERY ORDER</span></span></td>
+	</tr></table>
+
+<table border="0" cellpadding="1" cellspacing="1" style="width:100%;"><tr>
+	<td>No.</td>
+	<td>&nbsp;</td>
+	<td>Date: ${record.trandate}</td>
+	</tr>
+	<tr>
+	<td>L.P.O. No.</td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	</tr>
+	<tr>
+	<td>Mr./M/s.</td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	</tr></table>
+<#if record.item?has_content>
+
+<table class="itemtable" style="width: 100%; margin-top: 10px;"><!-- start items --><#list record.item as item><#if item_index==0>
+<thead>
+	<tr>
+	<th align="center" background-color="#D2DCF2" border-bottom="1" border-left="1" border-right="1" border-top="1" style="color: black; width: 34px;">SL#</th>
+	<th align="center" background-color="#D2DCF2" border-bottom="1" border-right="1" border-top="1" colspan="4" style="color: black; width: 111px;">SKU</th>
+	<th align="center" background-color="#D2DCF2" border-bottom="1" border-right="1" border-top="1" colspan="10" style="color:black;">DESCRIPTION</th>
+	<th align="center" background-color="#D2DCF2" border-bottom="1" border-right="1" border-top="1" colspan="3" style="color:black;">QUANTITY</th>
+	<th align="center" background-color="#D2DCF2" border-bottom="1" border-right="1" border-top="1" colspan="6" style="color:black;">UNIT PRICE</th>
+	</tr>
+</thead>
+</#if><tr>
+	<td align="center" border-bottom="1" border-left="1" border-right="1" style="width: 34px;">${item_index+1}</td>
+	<td border-bottom="1" border-right="1" colspan="4" style="width: 111px;">${item.custitem_sku}</td>
+	<td border-bottom="1" border-right="1" colspan="10">${item.description}</td>
+	<td align="center" border-bottom="1" border-right="1" colspan="3">${item.quantity}</td>
+	<td align="right" border-bottom="1" border-right="1" colspan="6">${item.rate}</td>
+	</tr>
+	</#list><!-- end items --></table>
+&nbsp; &nbsp;
+
+<table style=" width: 100%;"><tr>
+	<td align="left" colspan="2" style="height: 38px;">Received goods in good condition</td>
+	</tr>
+	<tr>
+	<td style="width: 464px; height: 41px;">Receiver sign. ..............................................</td>
+	<td style="width: 248px; height: 41px;">Signature ..........................................</td>
+	</tr></table>
+</#if>
+</body>
+</pdf>

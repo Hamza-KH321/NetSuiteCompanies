@@ -1,0 +1,67 @@
+{
+  "info": {
+    "_postman_id": "43a6f3fa-525b-49f0-b6be-06fdc32763c0",
+    "name": "Consignment Return",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "28321459"
+  },
+  "item": [
+    {
+      "name": "Return Items",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "User-Agent",
+            "value": "Mozilla/5.0",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"salesOrder\": \"SO66886\",\r\n  \"beforeSales\": false,\r\n  \"items\": [\r\n    {\r\n      \"item\": 101011001264,\r\n      \"batches\": [\r\n        { \"lot\": \"2008147\", \"quantity\": 2 }\r\n      ]\r\n    }\r\n  ]\r\n} ",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://7065838-sb1.extforms.netsuite.com/app/site/hosting/scriptlet.nl?script=2802&deploy=1&compid=7065838_SB1&ns-at=AAEJ7tMQUVGaKBS1lXzbWFgLPcVD4MHISQU_xWzEH8WUFasgZ60",
+          "protocol": "https",
+          "host": [
+            "7065838-sb1",
+            "extforms",
+            "netsuite",
+            "com"
+          ],
+          "path": [
+            "app",
+            "site",
+            "hosting",
+            "scriptlet.nl"
+          ],
+          "query": [
+            {
+              "key": "script",
+              "value": "2802"
+            },
+            {
+              "key": "deploy",
+              "value": "1"
+            },
+            {
+              "key": "compid",
+              "value": "7065838_SB1"
+            },
+            {
+              "key": "ns-at",
+              "value": "AAEJ7tMQUVGaKBS1lXzbWFgLPcVD4MHISQU_xWzEH8WUFasgZ60"
+            }
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}

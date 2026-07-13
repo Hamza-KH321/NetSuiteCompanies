@@ -1,0 +1,888 @@
+<?xml version="1.0"?><!DOCTYPE pdf PUBLIC "-//big.faceless.org//report" "report-1.1.dtd">
+<pdf>
+                 <!-- _________________________________________Start Link Creative SubSidiary__________________________________________________________________________________________________  -->
+
+        <#if record.subsidiary == "Link Creative Co">
+  <head>
+  <link name="Montserrat" type="font" subtype="truetype" src="https://9240888.app.netsuite.com/core/media/media.nl?id=439&amp;c=9240888&amp;h=gFsOYP0KZGJnSg4jZFPBhdjUm6_dZPQ2L5uevJK7DvF8au8Y&amp;_xt=.ttf" src-bold="https://9240888.app.netsuite.com/core/media/media.nl?id=440&amp;c=9240888&amp;h=I9hmISBFR9xnkATCaz-wdi95TxqZeWGMM0LPEHXlgOJVwj3G&amp;_xt=.ttf" bytes="2" />
+              <link name="NotoSansArabic" type="font" subtype="opentype" src="${nsfont.NotoSansArabic_Regular}" src-bold="${nsfont.NotoSansArabic_Bold}" bytes="2" subset="false"/>
+	<link name="NotoSans" type="font" subtype="truetype" src="${nsfont.NotoSans_Regular}" src-bold="${nsfont.NotoSans_Bold}" src-italic="${nsfont.NotoSans_Italic}" src-bolditalic="${nsfont.NotoSans_BoldItalic}" bytes="2" />
+	<#if .locale == "zh_CN">
+		<link name="NotoSansCJKsc" type="font" subtype="opentype" src="${nsfont.NotoSansCJKsc_Regular}" src-bold="${nsfont.NotoSansCJKsc_Bold}" bytes="2" />
+	<#elseif .locale == "zh_TW">
+		<link name="NotoSansCJKtc" type="font" subtype="opentype" src="${nsfont.NotoSansCJKtc_Regular}" src-bold="${nsfont.NotoSansCJKtc_Bold}" bytes="2" />
+	<#elseif .locale == "ja_JP">
+		<link name="NotoSansCJKjp" type="font" subtype="opentype" src="${nsfont.NotoSansCJKjp_Regular}" src-bold="${nsfont.NotoSansCJKjp_Bold}" bytes="2" />
+	<#elseif .locale == "ko_KR">
+		<link name="NotoSansCJKkr" type="font" subtype="opentype" src="${nsfont.NotoSansCJKkr_Regular}" src-bold="${nsfont.NotoSansCJKkr_Bold}" bytes="2" />
+	<#elseif .locale == "th_TH">
+		<link name="NotoSansThai" type="font" subtype="opentype" src="${nsfont.NotoSansThai_Regular}" src-bold="${nsfont.NotoSansThai_Bold}" bytes="2" />
+	</#if>
+    <macrolist>
+             
+          <#if record.subsidiary == "Link Creative Co">
+                <macro id="nlheader">
+
+            <table class="header" style="width: 100%;">
+              <tr>
+	<td align="left" rowspan="3" colspan="3"><img src="https://9240888.app.netsuite.com/core/media/media.nl?id=448&amp;c=9240888&amp;h=1Yqk-6OZRJsNH72f2BZd3Z-JuCr1pN-mJI4iMQSrNrUB9dbb" style="width:68%;height:70%" /><br/><p style ="margin:0;margin-left:30px">
+      
+     ${record.subsidiary} </p></td>
+              </tr>
+	<tr >
+     <td >Journal Entry.: ${record.tranid}</td> 
+    </tr>
+              	<tr >
+    <td > ISSUE DATE:  ${record.trandate}</td> 
+    </tr>
+
+        </table>
+
+        </macro>
+        <macro id="nlfooter">
+            <table class="footer" style="width: 100%;"><tr>
+	<td>&nbsp;</td>
+	<td align="right"><pagenumber/> of <totalpages/></td>
+	</tr></table>
+
+<table>
+                <tr>
+	<!--<td align="center"><img src="https://9240888.app.netsuite.com/core/media/media.nl?id=447&amp;c=9240888&amp;h=-4S2MKSGi3MHXtdTEMtXYIxi4FryPQaelFAYti31WECiEXrq" style="width:80%;height:70%" /></td>-->
+              </tr>
+
+          </table>
+          
+        </macro>
+        </#if>
+    </macrolist>
+    <style type="text/css">* {
+		<#if .locale == "zh_CN">
+			font-family: NotoSans, NotoSansCJKsc, sans-serif;
+		<#elseif .locale == "zh_TW">
+			font-family: NotoSans, NotoSansCJKtc, sans-serif;
+		<#elseif .locale == "ja_JP">
+			font-family: NotoSans, NotoSansCJKjp, sans-serif;
+		<#elseif .locale == "ko_KR">
+			font-family: NotoSans, NotoSansCJKkr, sans-serif;
+		<#elseif .locale == "th_TH">
+			font-family: NotoSans, NotoSansThai, sans-serif;
+		<#else>
+			font-family: NotoSansArabic, Montserrat, sans-serif;
+		</#if>
+		}
+		table {
+			font-size: 9pt;
+			table-layout: fixed;
+		}
+        th {
+            font-weight: bold;
+            font-size: 8pt;
+            vertical-align: middle;
+            padding: 5px 6px 3px;
+            background-color: #e3e3e3;
+            color: #333333;
+        }
+        td {
+            padding: 4px 6px;
+        }
+		
+        b {
+            font-weight: bold;
+            color: #333333;
+        }
+        table.header td {
+            padding: 0;
+            font-size: 10pt;
+        }
+        table.footer td {
+            padding: 0;
+            font-size: 8pt;
+        }
+        table.itemtable th {
+            padding-bottom: 10px;
+            padding-top: 10px;
+        }
+        table.body td {
+            padding-top: 2px;
+        }
+        table.total {
+            page-break-inside: avoid;
+        }
+        tr.totalrow {
+            background-color: #e3e3e3;
+            line-height: 200%;
+        }
+        td.totalboxtop {
+            font-size: 12pt;
+            background-color: #e3e3e3;
+        }
+        td.addressheader {
+            font-size: 8pt;
+            padding-top: 6px;
+            padding-bottom: 2px;
+        }
+        td.address {
+            padding-top: 0;
+        }
+        td.totalboxmid {
+            font-size: 28pt;
+            padding-top: 20px;
+            background-color: #e3e3e3;
+        }
+        td.totalboxbot {
+            background-color: #e3e3e3;
+            font-weight: bold;
+        }
+        span.title {
+            font-size: 28pt;
+        }
+        span.number {
+            font-size: 16pt;
+        }
+        span.itemname {
+            font-weight: bold;
+            line-height: 150%;
+        }
+        hr {
+            width: 100%;
+            color: #d3d3d3;
+            background-color: #d3d3d3;
+            height: 1px;
+        }
+</style>
+</head>
+<body header="nlheader" header-height="12%" footer="nlfooter" footer-height="0%" padding="0.5in 0.5in 0.5in 0.5in" size="B4">
+   
+<br /><#assign show_subsidiary = record.subsidiary@label?has_content>
+  <#-- Initialize total variables -->
+  <#assign totalDebit = 0>
+  <#assign totalCredit = 0>
+  <#assign totalTax = 0>
+  
+  <table style="width: 100%;">
+<thead>
+	<tr>
+	<th scope="col" style="width: 25%;">${record.trandate@label}</th>
+	<th scope="col" style="width: 25%;">Posting Period</th>
+	<th scope="col" style="width: 25%;">Transaction type</th>
+	<th scope="col" style="width: 25%;">${record.tranid@label}</th>
+	</tr>
+</thead><tr>
+	<td style="width: 25%;">${record.trandate}</td>
+	<td style="width: 25%;">${record.postingperiod}</td>
+	<td style="width: 25%;">${record.type}</td>
+	<td style="width: 25%;">${record.tranid}</td>
+	</tr></table>
+  <div style ="padding-top:15px"><p style ="font-size:12px">Memo : ${record.memo}   </p></div>
+<table style="width:100%; font-size:10px; line-height:20px;"><#list record.line as line><#if line_index==0>
+  <tr style="">
+    <th style="width:25%;border:1px solid black;"><b>Account Name</b></th>
+    <th style="width:15%;border:1px solid black;"><b>Debit</b></th>
+    <th style="width:15%;border:1px solid black;"><b>Credit</b></th>
+    <th style="width:10%;border:1px solid black;"><b>Tax</b></th>
+    <th style="width:15%;border:1px solid black;"><b>Total</b></th>
+    <th style="width:20%;border:1px solid black;"><b>Memo</b></th>
+    <th style="width:18%;border:1px solid black;"><b>Project</b></th>
+	</tr>
+	</#if>
+	<tr style="">
+      <td style="border:1px solid black;">${line.account}</td>
+      <td style="border:1px solid black;">${line.debit?default("")}</td>
+      <td style="border:1px solid black;">${line.credit?default("")}</td>
+      <td style="border:1px solid black;">${line.tax1amt?default("")}</td>
+      <td style="border:1px solid black;">${record.currency.symbol} ${((line.debit!0)+(line.credit!0)+(line.tax1amt!0))?string["#,##0.00"]}</td>
+      <td style="border:1px solid black;">${line.memo?html}</td>
+      <td style="border:1px solid black;">${line.class?html}</td>
+	</tr>
+       <#-- Calculate line total for debit lines only, including tax if present -->
+      <#if line.debit?has_content>
+        <#assign lineTotal = (line.debit!0) + (line.tax1amt!0)>
+        <#assign totalDebit = totalDebit + line.debit!0>
+        <#assign totalTax = totalTax + (line.tax1amt!0)>
+      <#else>
+        <#assign lineTotal = line.credit!0>
+        <#assign totalCredit = totalCredit + line.credit!0>
+      </#if>
+</#list>
+<tr>
+    <td style="border:1px solid black;"><b>Total</b></td>
+    <td style="border:1px solid black; text-align:center;"><b></b></td>
+    <td style="border:1px solid black; text-align:center;"><b></b></td>
+    <td style="border:1px solid black; text-align:center;"><b></b></td>
+    <td style="border:1px solid black; text-align:center;"><b>${record.currency.symbol} ${record.custbody_total_debit}</b></td>
+    <td colspan="2" style="border:1px solid black;"></td>
+
+</tr>
+  </table>
+                <div style="margin-top:20px">  &nbsp;</div>
+      
+              <!-- Approvals Tables E-signature -->
+<table style="width: 100%; border-collapse: collapse; table-layout: fixed;">
+    <tr>
+        <td style="padding: 8px; border: 1px solid ;">Mohamed Sayied </td>
+        <td style=" padding: 8px; border: 1px solid ;">Malek Elbadry</td>
+        <td style=" padding: 8px; border: 1px solid ;">Mahmoud E Gharieb</td>
+        <td style=" padding: 8px; border: 1px solid ;">Ahmed Hammad</td>
+      
+    </tr>
+    <tr>
+
+        <td style="text-align: center; vertical-align: middle; border: 1px solid ; padding: 8px;">
+            <#if record.custbody_vs_mohammadsayedapproval == true>
+   <img src="https://9240888.app.netsuite.com/core/media/media.nl?id=799&amp;c=9240888&amp;h=9OgkiMvEeBNAdbMMY5T_ssN_854x3_X9VYOb9AjJKCqvaVjY" style="width: 150px; height: 50px; object-fit: contain;" />
+
+            </#if>
+        </td>
+        <td style="text-align: center; vertical-align: middle; border: 1px solid ; padding: 8px;">
+            <#if record.custbody_vs_malikalbadryapproval == true>
+    <img src="https://9240888.app.netsuite.com/core/media/media.nl?id=798&amp;c=9240888&amp;h=4myNIcHTRjQ6uCzUb67a7TkrQXZFXCQSe35vC9hyXuZb-cd7" style="width: 100px; height: 50px; object-fit: contain;" />
+
+            </#if>
+        </td>
+              <td style="text-align: center; vertical-align: middle; border: 1px solid ; padding: 8px;">
+            <#if record.custbody_vs_mahmoudalghraib == true>
+    <img src="https://9240888.app.netsuite.com/core/media/media.nl?id=800&amp;c=9240888&amp;h=FY-NIlkXVGJx8JXpuKUEISj435C2BiOe7MUgmwp1LOLklTF2" style="width: 100px; height: 50px; object-fit: contain;" />
+            </#if>
+        </td>
+                    <td style="text-align: center; vertical-align: middle; border: 1px solid ; padding: 8px;">
+            <#if record.custbody_vs_ahmadhammadapproval == true>
+    <img src="https://9240888.app.netsuite.com/core/media/media.nl?id=801&amp;c=9240888&amp;h=-4kRCag7HLBnLN1bWd_83qFI96GmeYhj7QeJRWCsqX8C6exb" style="width: 100px; height: 50px; object-fit: contain;" />
+            </#if>
+        </td>
+    </tr>
+</table>
+</body>
+       </#if>
+
+                    <!-- _________________________________________End Link Creative SubSidiary__________________________________________________________________________________________________  -->
+                    <!-- _________________________________________Start Professional conference__________________________________________________________________________________________________  -->
+      <#if record.subsidiary == "Professional passion for organising exhibition and conference">
+<head>
+  
+  <link name="Montserrat" type="font" subtype="truetype" src="https://9240888.app.netsuite.com/core/media/media.nl?id=439&amp;c=9240888&amp;h=gFsOYP0KZGJnSg4jZFPBhdjUm6_dZPQ2L5uevJK7DvF8au8Y&amp;_xt=.ttf" src-bold="https://9240888.app.netsuite.com/core/media/media.nl?id=440&amp;c=9240888&amp;h=I9hmISBFR9xnkATCaz-wdi95TxqZeWGMM0LPEHXlgOJVwj3G&amp;_xt=.ttf" bytes="2" />
+              <link name="NotoSansArabic" type="font" subtype="opentype" src="${nsfont.NotoSansArabic_Regular}" src-bold="${nsfont.NotoSansArabic_Bold}" bytes="2" subset="false"/>
+	<link name="NotoSans" type="font" subtype="truetype" src="${nsfont.NotoSans_Regular}" src-bold="${nsfont.NotoSans_Bold}" src-italic="${nsfont.NotoSans_Italic}" src-bolditalic="${nsfont.NotoSans_BoldItalic}" bytes="2" />
+	<#if .locale == "zh_CN">
+		<link name="NotoSansCJKsc" type="font" subtype="opentype" src="${nsfont.NotoSansCJKsc_Regular}" src-bold="${nsfont.NotoSansCJKsc_Bold}" bytes="2" />
+	<#elseif .locale == "zh_TW">
+		<link name="NotoSansCJKtc" type="font" subtype="opentype" src="${nsfont.NotoSansCJKtc_Regular}" src-bold="${nsfont.NotoSansCJKtc_Bold}" bytes="2" />
+	<#elseif .locale == "ja_JP">
+		<link name="NotoSansCJKjp" type="font" subtype="opentype" src="${nsfont.NotoSansCJKjp_Regular}" src-bold="${nsfont.NotoSansCJKjp_Bold}" bytes="2" />
+	<#elseif .locale == "ko_KR">
+		<link name="NotoSansCJKkr" type="font" subtype="opentype" src="${nsfont.NotoSansCJKkr_Regular}" src-bold="${nsfont.NotoSansCJKkr_Bold}" bytes="2" />
+	<#elseif .locale == "th_TH">
+		<link name="NotoSansThai" type="font" subtype="opentype" src="${nsfont.NotoSansThai_Regular}" src-bold="${nsfont.NotoSansThai_Bold}" bytes="2" />
+	</#if>
+    <macrolist>
+      <!-- _________________________________________Z SubSidiary__________________________________________________________________________________________________  -->
+        <#if record.subsidiary == "Professional passion for organising exhibition and conference">
+        <macro id="nlheader">
+        
+            <table class="header" style="width: 100%;"><tr>
+              <td style="width:48%;font-size:11px"><b style="color:#4A79B8">PROFESSIONAL PASSION ESTABLISHMENT FOR ORGANIZING EXHIBITIONS AND CONFERENCES</b></td>
+	<td align="right" rowspan="7"><img src="https://9240888.app.netsuite.com/core/media/media.nl?id=438&amp;c=9240888&amp;h=3RagbXq1K4NTB1YqDeXP9N1JUMBcy5sMZwyFsxynGWazWXZ4" /></td>
+	</tr>
+	<tr>
+	<td style="color:#808080;padding-top:20px;font-size:11px">2870 Tariq Bin Ziad - Qurtubah Dist.</td>
+	</tr>
+	<tr>
+	<td style="color:#808080;padding-top:2px;font-size:11px">Unit No 117</td>
+	</tr>
+	<tr>
+	<td style="color:#808080;padding-top:2px;font-size:11px">Al Khobar 34234 - 7097</td>
+	</tr>
+	<tr>
+	<td style="color:#808080;padding-top:2px;font-size:11px">Kingdom of Saudi Arabia</td>
+	</tr>
+	<tr>
+	<td style="color:#808080;padding-top:2px;font-size:11px">C.R No.: 2051222432</td>
+	</tr>
+	<tr>
+	<td style="color:#808080;padding-top:2px;font-size:11px">VAT No.:310008791800003</td>
+	</tr></table>
+             
+        </macro>
+        <macro id="nlfooter">
+            <table class="footer" style="width: 100%;"><tr>
+	<td>&nbsp;</td>
+	<td align="right"><pagenumber/> of <totalpages/></td>
+	</tr></table>
+
+<table><tr>
+	<td style="font-size:9px; align:center;">س.ت 2051222432 info@z-entertain.com :مؤسسة الشغف الاحترافي، حي قرطبة، شارع طارق بن زياد، الخبر 34429، المملكة العربية السعودية ت : +966138641919 ب</td>
+	</tr>
+	<tr>
+	<td style="font-size:9px; align:center;">Professional Passion Est. Al Khobar , Tariq Bin Ziyad Street, Al Khobar 34429, KSA., T:+966 13 864 1919 E: info@z-entertain.com C.R. 2051222432</td>
+	</tr></table>
+          
+        </macro>
+          </#if>
+     
+        
+    </macrolist>
+    <style type="text/css">* {
+		<#if .locale == "zh_CN">
+			font-family: NotoSans, NotoSansCJKsc, sans-serif;
+		<#elseif .locale == "zh_TW">
+			font-family: NotoSans, NotoSansCJKtc, sans-serif;
+		<#elseif .locale == "ja_JP">
+			font-family: NotoSans, NotoSansCJKjp, sans-serif;
+		<#elseif .locale == "ko_KR">
+			font-family: NotoSans, NotoSansCJKkr, sans-serif;
+		<#elseif .locale == "th_TH">
+			font-family: NotoSans, NotoSansThai, sans-serif;
+		<#else>
+			font-family: NotoSansArabic, Montserrat, sans-serif;
+		</#if>
+		}
+		table {
+			font-size: 9pt;
+			table-layout: fixed;
+		}
+        th {
+            font-weight: bold;
+            font-size: 8pt;
+            vertical-align: middle;
+            padding: 5px 6px 3px;
+            background-color: #e3e3e3;
+            color: #333333;
+        }
+        td {
+            padding: 4px 6px;
+        }
+		td p { align:left }
+        b {
+            font-weight: bold;
+            color: #333333;
+        }
+        table.header td {
+            padding: 0;
+            font-size: 10pt;
+        }
+        table.footer td {
+            padding: 0;
+            font-size: 8pt;
+        }
+        table.itemtable th {
+            padding-bottom: 10px;
+            padding-top: 10px;
+        }
+        table.body td {
+            padding-top: 2px;
+        }
+        table.total {
+            page-break-inside: avoid;
+        }
+        tr.totalrow {
+            background-color: #e3e3e3;
+            line-height: 200%;
+        }
+        td.totalboxtop {
+            font-size: 12pt;
+            background-color: #e3e3e3;
+        }
+        td.addressheader {
+            font-size: 8pt;
+            padding-top: 6px;
+            padding-bottom: 2px;
+        }
+        td.address {
+            padding-top: 0;
+        }
+        td.totalboxmid {
+            font-size: 28pt;
+            padding-top: 20px;
+            background-color: #e3e3e3;
+        }
+        td.totalboxbot {
+            background-color: #e3e3e3;
+            font-weight: bold;
+        }
+        span.title {
+            font-size: 28pt;
+        }
+        span.number {
+            font-size: 16pt;
+        }
+        span.itemname {
+            font-weight: bold;
+            line-height: 150%;
+        }
+        hr {
+            width: 100%;
+            color: #d3d3d3;
+            background-color: #d3d3d3;
+            height: 1px;
+        }
+</style>
+</head>
+      <body footer="footer" footer-height="0.5in" padding="0.5in 0.5in 0.5in 0.5in" size="Letter">
+    <table style="width: 100%;"><tr>
+	<td>${companyInformation.companyName}<br />${companyInformation.addressText}</td>
+	<td align="right"><span class="title">${record@title}</span><br /><span class="number">#${record.tranid}</span><br />${record.trandate}</td>
+	</tr></table>
+<br /><#assign show_subsidiary = record.subsidiary@label?has_content>
+<table class="main" style="width: 100%;"><tr>
+	<th>${record.postingperiod@label}</th>
+	<#if show_subsidiary>
+	<th>&nbsp;</th>
+	</#if>
+	<th colspan="2">${record.id@label}</th>
+	<th>${record.currency@label}</th>
+	</tr>
+	<tr>
+	<td>${record.postingperiod}</td>
+	<#if show_subsidiary>
+	<td>&nbsp;</td>
+	</#if>
+	<td colspan="2">${record.id}</td>
+	<td>${record.currency}</td>
+	</tr>
+	<tr>
+	<td class="empty">&nbsp;</td>
+	</tr>
+	<#assign credit_sum=0 debit_sum=0><#list record.line as line><#if line_index==0>
+	<tr><#if show_subsidiary><#if line.linesubsidiary?has_content>
+	<th>${line.linesubsidiary@label}</th>
+	<#else>
+	<th>${record.subsidiary@label}</th>
+	</#if></#if>
+	<th>${line.account@label}</th>
+	<th>${line.debit@label}</th>
+	<th>${line.credit@label}</th>
+	<th>${line.memo@label}</th>
+	</tr>
+	</#if>
+	<tr><#if show_subsidiary><#if line.linesubsidiary?has_content>
+	<td>${line.linesubsidiary}</td>
+	<#else>
+	<td>${record.subsidiary}</td>
+	</#if></#if>
+	<td>${line.account}</td>
+	<td>${line.debit}</td>
+	<td>${line.credit}</td>
+	<td>${line.memo}</td>
+	</tr>
+	<#assign debit_sum = debit_sum + line.debit><#assign credit_sum = credit_sum + line.credit></#list>
+	<tr><#if show_subsidiary>
+	<th>&nbsp;</th>
+	</#if>
+	<th>&nbsp;</th>
+	<th>${debit_sum}</th>
+	<th>${credit_sum}</th>
+	<th>&nbsp;</th>
+	</tr></table>
+</body>
+       	</#if>
+             <!-- _________________________________________End Professional__________________________________________________________________________________________________  -->
+             <!-- _________________________________________Start Chingo Legendary Taste __________________________________________________________________________________________________  -->
+  
+      <#if record.subsidiary == "Legendary Taste Est">
+
+<head>
+  
+  <link name="Montserrat" type="font" subtype="truetype" src="https://9240888.app.netsuite.com/core/media/media.nl?id=439&amp;c=9240888&amp;h=gFsOYP0KZGJnSg4jZFPBhdjUm6_dZPQ2L5uevJK7DvF8au8Y&amp;_xt=.ttf" src-bold="https://9240888.app.netsuite.com/core/media/media.nl?id=440&amp;c=9240888&amp;h=I9hmISBFR9xnkATCaz-wdi95TxqZeWGMM0LPEHXlgOJVwj3G&amp;_xt=.ttf" bytes="2" />
+              <link name="NotoSansArabic" type="font" subtype="opentype" src="${nsfont.NotoSansArabic_Regular}" src-bold="${nsfont.NotoSansArabic_Bold}" bytes="2" subset="false"/>
+	<link name="NotoSans" type="font" subtype="truetype" src="${nsfont.NotoSans_Regular}" src-bold="${nsfont.NotoSans_Bold}" src-italic="${nsfont.NotoSans_Italic}" src-bolditalic="${nsfont.NotoSans_BoldItalic}" bytes="2" />
+	<#if .locale == "zh_CN">
+		<link name="NotoSansCJKsc" type="font" subtype="opentype" src="${nsfont.NotoSansCJKsc_Regular}" src-bold="${nsfont.NotoSansCJKsc_Bold}" bytes="2" />
+	<#elseif .locale == "zh_TW">
+		<link name="NotoSansCJKtc" type="font" subtype="opentype" src="${nsfont.NotoSansCJKtc_Regular}" src-bold="${nsfont.NotoSansCJKtc_Bold}" bytes="2" />
+	<#elseif .locale == "ja_JP">
+		<link name="NotoSansCJKjp" type="font" subtype="opentype" src="${nsfont.NotoSansCJKjp_Regular}" src-bold="${nsfont.NotoSansCJKjp_Bold}" bytes="2" />
+	<#elseif .locale == "ko_KR">
+		<link name="NotoSansCJKkr" type="font" subtype="opentype" src="${nsfont.NotoSansCJKkr_Regular}" src-bold="${nsfont.NotoSansCJKkr_Bold}" bytes="2" />
+	<#elseif .locale == "th_TH">
+		<link name="NotoSansThai" type="font" subtype="opentype" src="${nsfont.NotoSansThai_Regular}" src-bold="${nsfont.NotoSansThai_Bold}" bytes="2" />
+	</#if>
+    <macrolist>
+     
+       <!-- _________________________________________Chingo SubSidiary__________________________________________________________________________________________________  -->
+      <#if record.subsidiary == "Legendary Taste Est">
+                <macro id="nlheader">
+
+            <table class="header" style="width: 100%;">
+              <tr>
+	<td align="center"><img src="https://9240888.app.netsuite.com/core/media/media.nl?id=444&amp;c=9240888&amp;h=oT11LYOnl-jYLCroZJXOjkmOeHOIqAhi_35utdCIm-gqth_8" style="width:68%;height:70%" /></td>
+              </tr>
+
+        </table>
+
+        </macro>
+        <macro id="nlfooter">
+            <table class="footer" style="width: 100%;"><tr>
+	<td>&nbsp;</td>
+	<td align="right"><pagenumber/> of <totalpages/></td>
+	</tr></table>
+
+<table>
+                <tr>
+	<td align="center"><img src="https://9240888.app.netsuite.com/core/media/media.nl?id=443&amp;c=9240888&amp;h=abvJ1KcPBGmlnd-9_epQtSVPAqxpuA_x0Cj9m-ANDVbfURGw" style="width:68%;height:68%" /></td>
+              </tr>
+
+          </table>
+          
+        </macro>
+        </#if>
+     
+     
+    </macrolist>
+    <style type="text/css">* {
+		<#if .locale == "zh_CN">
+			font-family: NotoSans, NotoSansCJKsc, sans-serif;
+		<#elseif .locale == "zh_TW">
+			font-family: NotoSans, NotoSansCJKtc, sans-serif;
+		<#elseif .locale == "ja_JP">
+			font-family: NotoSans, NotoSansCJKjp, sans-serif;
+		<#elseif .locale == "ko_KR">
+			font-family: NotoSans, NotoSansCJKkr, sans-serif;
+		<#elseif .locale == "th_TH">
+			font-family: NotoSans, NotoSansThai, sans-serif;
+		<#else>
+			font-family: NotoSansArabic, Montserrat, sans-serif;
+		</#if>
+		}
+		table {
+			font-size: 9pt;
+			table-layout: fixed;
+		}
+        th {
+            font-weight: bold;
+            font-size: 8pt;
+            vertical-align: middle;
+            padding: 5px 6px 3px;
+            background-color: #e3e3e3;
+            color: #333333;
+        }
+        td {
+            padding: 4px 6px;
+        }
+		td p { align:left }
+        b {
+            font-weight: bold;
+            color: #333333;
+        }
+        table.header td {
+            padding: 0;
+            font-size: 10pt;
+        }
+        table.footer td {
+            padding: 0;
+            font-size: 8pt;
+        }
+        table.itemtable th {
+            padding-bottom: 10px;
+            padding-top: 10px;
+        }
+        table.body td {
+            padding-top: 2px;
+        }
+        table.total {
+            page-break-inside: avoid;
+        }
+        tr.totalrow {
+            background-color: #e3e3e3;
+            line-height: 200%;
+        }
+        td.totalboxtop {
+            font-size: 12pt;
+            background-color: #e3e3e3;
+        }
+        td.addressheader {
+            font-size: 8pt;
+            padding-top: 6px;
+            padding-bottom: 2px;
+        }
+        td.address {
+            padding-top: 0;
+        }
+        td.totalboxmid {
+            font-size: 28pt;
+            padding-top: 20px;
+            background-color: #e3e3e3;
+        }
+        td.totalboxbot {
+            background-color: #e3e3e3;
+            font-weight: bold;
+        }
+        span.title {
+            font-size: 28pt;
+        }
+        span.number {
+            font-size: 16pt;
+        }
+        span.itemname {
+            font-weight: bold;
+            line-height: 150%;
+        }
+        hr {
+            width: 100%;
+            color: #d3d3d3;
+            background-color: #d3d3d3;
+            height: 1px;
+        }
+</style>
+</head>
+      <body footer="footer" footer-height="0.5in" padding="0.5in 0.5in 0.5in 0.5in" size="Letter">
+    <table style="width: 100%;"><tr>
+	<td>${companyInformation.companyName}<br />${companyInformation.addressText}</td>
+	<td align="right"><span class="title">${record@title}</span><br /><span class="number">#${record.tranid}</span><br />${record.trandate}</td>
+	</tr></table>
+<br /><#assign show_subsidiary = record.subsidiary@label?has_content>
+<table class="main" style="width: 100%;"><tr>
+	<th>${record.postingperiod@label}</th>
+	<#if show_subsidiary>
+	<th>&nbsp;</th>
+	</#if>
+	<th colspan="2">${record.id@label}</th>
+	<th>${record.currency@label}</th>
+	</tr>
+	<tr>
+	<td>${record.postingperiod}</td>
+	<#if show_subsidiary>
+	<td>&nbsp;</td>
+	</#if>
+	<td colspan="2">${record.id}</td>
+	<td>${record.currency}</td>
+	</tr>
+	<tr>
+	<td class="empty">&nbsp;</td>
+	</tr>
+	<#assign credit_sum=0 debit_sum=0><#list record.line as line><#if line_index==0>
+	<tr><#if show_subsidiary><#if line.linesubsidiary?has_content>
+	<th>${line.linesubsidiary@label}</th>
+	<#else>
+	<th>${record.subsidiary@label}</th>
+	</#if></#if>
+	<th>${line.account@label}</th>
+	<th>${line.debit@label}</th>
+	<th>${line.credit@label}</th>
+	<th>${line.memo@label}</th>
+	</tr>
+	</#if>
+	<tr><#if show_subsidiary><#if line.linesubsidiary?has_content>
+	<td>${line.linesubsidiary}</td>
+	<#else>
+	<td>${record.subsidiary}</td>
+	</#if></#if>
+	<td>${line.account}</td>
+	<td>${line.debit}</td>
+	<td>${line.credit}</td>
+	<td>${line.memo}</td>
+	</tr>
+	<#assign debit_sum = debit_sum + line.debit><#assign credit_sum = credit_sum + line.credit></#list>
+	<tr><#if show_subsidiary>
+	<th>&nbsp;</th>
+	</#if>
+	<th>&nbsp;</th>
+	<th>${debit_sum}</th>
+	<th>${credit_sum}</th>
+	<th>&nbsp;</th>
+	</tr></table>
+</body>
+      	</#if>
+                  <!-- _________________________________________End Chingo __________________________________________________________________________________________________  -->
+                   <!-- _________________________________________Start the best (its water) __________________________________________________________________________________________________  -->
+   <#if record.subsidiary == "The Best Choice EST">
+<head>
+  
+  <link name="Montserrat" type="font" subtype="truetype" src="https://9240888.app.netsuite.com/core/media/media.nl?id=439&amp;c=9240888&amp;h=gFsOYP0KZGJnSg4jZFPBhdjUm6_dZPQ2L5uevJK7DvF8au8Y&amp;_xt=.ttf" src-bold="https://9240888.app.netsuite.com/core/media/media.nl?id=440&amp;c=9240888&amp;h=I9hmISBFR9xnkATCaz-wdi95TxqZeWGMM0LPEHXlgOJVwj3G&amp;_xt=.ttf" bytes="2" />
+              <link name="NotoSansArabic" type="font" subtype="opentype" src="${nsfont.NotoSansArabic_Regular}" src-bold="${nsfont.NotoSansArabic_Bold}" bytes="2" subset="false"/>
+	<link name="NotoSans" type="font" subtype="truetype" src="${nsfont.NotoSans_Regular}" src-bold="${nsfont.NotoSans_Bold}" src-italic="${nsfont.NotoSans_Italic}" src-bolditalic="${nsfont.NotoSans_BoldItalic}" bytes="2" />
+	<#if .locale == "zh_CN">
+		<link name="NotoSansCJKsc" type="font" subtype="opentype" src="${nsfont.NotoSansCJKsc_Regular}" src-bold="${nsfont.NotoSansCJKsc_Bold}" bytes="2" />
+	<#elseif .locale == "zh_TW">
+		<link name="NotoSansCJKtc" type="font" subtype="opentype" src="${nsfont.NotoSansCJKtc_Regular}" src-bold="${nsfont.NotoSansCJKtc_Bold}" bytes="2" />
+	<#elseif .locale == "ja_JP">
+		<link name="NotoSansCJKjp" type="font" subtype="opentype" src="${nsfont.NotoSansCJKjp_Regular}" src-bold="${nsfont.NotoSansCJKjp_Bold}" bytes="2" />
+	<#elseif .locale == "ko_KR">
+		<link name="NotoSansCJKkr" type="font" subtype="opentype" src="${nsfont.NotoSansCJKkr_Regular}" src-bold="${nsfont.NotoSansCJKkr_Bold}" bytes="2" />
+	<#elseif .locale == "th_TH">
+		<link name="NotoSansThai" type="font" subtype="opentype" src="${nsfont.NotoSansThai_Regular}" src-bold="${nsfont.NotoSansThai_Bold}" bytes="2" />
+	</#if>
+    <macrolist>
+   
+         <!-- _________________________________________the best (its water) SubSidiary__________________________________________________________________________________________________  -->
+      <#if record.subsidiary == "The Best Choice EST">
+                <macro id="nlheader">
+
+            <table class="header" style="width: 100%;">
+              <tr>
+	<td align="center"><img src="https://9240888.app.netsuite.com/core/media/media.nl?id=446&amp;c=9240888&amp;h=TYmSNEhje7-FNVQPiWilEdV8pwRJSqXirK8aBvk2XgmhhIuU" style="width:68%;height:60%" /></td>
+              </tr>
+
+        </table>
+
+        </macro>
+        <macro id="nlfooter">
+            <table class="footer" style="width: 100%;"><tr>
+	<td>&nbsp;</td>
+	<td align="right"><pagenumber/> of <totalpages/></td>
+	</tr></table>
+
+<table>
+                <tr>
+	<td align="center"><img src="https://9240888.app.netsuite.com/core/media/media.nl?id=445&amp;c=9240888&amp;h=g3Sbhi9HKpAqx01lw9kmmYJ-vsrtvA9jxolKjHhyJTgXMcCl" style="width:68%;height:68%" /></td>
+              </tr>
+
+          </table>
+          
+        </macro>
+        </#if>
+        
+    </macrolist>
+    <style type="text/css">* {
+		<#if .locale == "zh_CN">
+			font-family: NotoSans, NotoSansCJKsc, sans-serif;
+		<#elseif .locale == "zh_TW">
+			font-family: NotoSans, NotoSansCJKtc, sans-serif;
+		<#elseif .locale == "ja_JP">
+			font-family: NotoSans, NotoSansCJKjp, sans-serif;
+		<#elseif .locale == "ko_KR">
+			font-family: NotoSans, NotoSansCJKkr, sans-serif;
+		<#elseif .locale == "th_TH">
+			font-family: NotoSans, NotoSansThai, sans-serif;
+		<#else>
+			font-family: NotoSansArabic, Montserrat, sans-serif;
+		</#if>
+		}
+		table {
+			font-size: 9pt;
+			table-layout: fixed;
+		}
+        th {
+            font-weight: bold;
+            font-size: 8pt;
+            vertical-align: middle;
+            padding: 5px 6px 3px;
+            background-color: #e3e3e3;
+            color: #333333;
+        }
+        td {
+            padding: 4px 6px;
+        }
+		td p { align:left }
+        b {
+            font-weight: bold;
+            color: #333333;
+        }
+        table.header td {
+            padding: 0;
+            font-size: 10pt;
+        }
+        table.footer td {
+            padding: 0;
+            font-size: 8pt;
+        }
+        table.itemtable th {
+            padding-bottom: 10px;
+            padding-top: 10px;
+        }
+        table.body td {
+            padding-top: 2px;
+        }
+        table.total {
+            page-break-inside: avoid;
+        }
+        tr.totalrow {
+            background-color: #e3e3e3;
+            line-height: 200%;
+        }
+        td.totalboxtop {
+            font-size: 12pt;
+            background-color: #e3e3e3;
+        }
+        td.addressheader {
+            font-size: 8pt;
+            padding-top: 6px;
+            padding-bottom: 2px;
+        }
+        td.address {
+            padding-top: 0;
+        }
+        td.totalboxmid {
+            font-size: 28pt;
+            padding-top: 20px;
+            background-color: #e3e3e3;
+        }
+        td.totalboxbot {
+            background-color: #e3e3e3;
+            font-weight: bold;
+        }
+        span.title {
+            font-size: 28pt;
+        }
+        span.number {
+            font-size: 16pt;
+        }
+        span.itemname {
+            font-weight: bold;
+            line-height: 150%;
+        }
+        hr {
+            width: 100%;
+            color: #d3d3d3;
+            background-color: #d3d3d3;
+            height: 1px;
+        }
+</style>
+</head>
+      <body footer="footer" footer-height="0.5in" padding="0.5in 0.5in 0.5in 0.5in" size="Letter">
+    <table style="width: 100%;"><tr>
+	<td>${companyInformation.companyName}<br />${companyInformation.addressText}</td>
+	<td align="right"><span class="title">${record@title}</span><br /><span class="number">#${record.tranid}</span><br />${record.trandate}</td>
+	</tr></table>
+<br /><#assign show_subsidiary = record.subsidiary@label?has_content>
+<table class="main" style="width: 100%;"><tr>
+	<th>${record.postingperiod@label}</th>
+	<#if show_subsidiary>
+	<th>&nbsp;</th>
+	</#if>
+	<th colspan="2">${record.id@label}</th>
+	<th>${record.currency@label}</th>
+	</tr>
+	<tr>
+	<td>${record.postingperiod}</td>
+	<#if show_subsidiary>
+	<td>&nbsp;</td>
+	</#if>
+	<td colspan="2">${record.id}</td>
+	<td>${record.currency}</td>
+	</tr>
+	<tr>
+	<td class="empty">&nbsp;</td>
+	</tr>
+	<#assign credit_sum=0 debit_sum=0><#list record.line as line><#if line_index==0>
+	<tr><#if show_subsidiary><#if line.linesubsidiary?has_content>
+	<th>${line.linesubsidiary@label}</th>
+	<#else>
+	<th>${record.subsidiary@label}</th>
+	</#if></#if>
+	<th>${line.account@label}</th>
+	<th>${line.debit@label}</th>
+	<th>${line.credit@label}</th>
+	<th>${line.memo@label}</th>
+	</tr>
+	</#if>
+	<tr><#if show_subsidiary><#if line.linesubsidiary?has_content>
+	<td>${line.linesubsidiary}</td>
+	<#else>
+	<td>${record.subsidiary}</td>
+	</#if></#if>
+	<td>${line.account}</td>
+	<td>${line.debit}</td>
+	<td>${line.credit}</td>
+	<td>${line.memo}</td>
+	</tr>
+	<#assign debit_sum = debit_sum + line.debit><#assign credit_sum = credit_sum + line.credit></#list>
+	<tr><#if show_subsidiary>
+	<th>&nbsp;</th>
+	</#if>
+	<th>&nbsp;</th>
+	<th>${debit_sum}</th>
+	<th>${credit_sum}</th>
+	<th>&nbsp;</th>
+	</tr></table>
+</body>
+       	</#if>
+</pdf>

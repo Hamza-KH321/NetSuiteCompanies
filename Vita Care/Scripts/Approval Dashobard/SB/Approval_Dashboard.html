@@ -1,0 +1,517 @@
+<!--Approval_Dashboard.html-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Approval Dashboard</title>
+    <link rel="stylesheet"
+        href="https://7065838-sb1.app.netsuite.com/core/media/media.nl?id=3026277&c=7065838_SB1&h=v7vxAVzLrAxAZ92jW7Obynz0jCmm6fvfSnmn2FNm51PJHEIR&_xt=.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+</head>
+
+<body>
+    <div class="loading-overlay" id="loadingOverlay">
+        Loading, please wait...
+    </div>
+
+    <div class="container">
+        <h1 class="title">Approval Portal</h1>
+        <!-- Action Buttons -->
+        <div id="filterSection" class="filter-section">
+
+            <!-- View Buttons -->
+            <div id="viewButtons">
+                <button id="rmabtn" class="search-btn" onclick="toggleRMADashboard()">View RMAs</button>
+                <button id="sobtn" class="search-btn" onclick="toggleSalesOrders()">View Sales Orders</button>
+                <button id="vendorbtn" class="search-btn" onclick="toggleVendors()">View Vendors</button>
+                <button id="clientbtn" class="search-btn" onclick="toggleClients()">View Clients</button>
+                <button id="s2wmsbtn" class="search-btn" onclick="togglePostSOWMS()">Post SO to WMS</button>
+            </div>
+        </div>
+
+        <!-- Transactions Table -->
+        <!-- RMA Table Container -->
+        <div id="rmaContainer">
+            <h2 id="rmaSubTitle" class="section-title">Approve RMA</h2>
+
+            <!-- Fixed table header -->
+            <table class="transaction-table" style="width: 100%; border-collapse: collapse;">
+                <thead>
+                    <tr>
+                        <th>Approve</th>
+                        <th>Transaction Type</th>
+                        <th>Document Number</th>
+                        <th>Customer</th>
+                        <th>Transaction Date</th>
+                        <th>Amount</th>
+                    </tr>
+                </thead>
+            </table>
+
+            <!-- Scrollable table body -->
+            <div style="max-height: 400px; overflow-y: auto; border: 1px solid #ccc; border-radius: 6px;">
+                <table class="transaction-table" style="width: 100%; border-collapse: collapse;">
+                    <tbody id="transaction_table_body">
+                        <!-- <tr><td>✔</td><td>Return</td><td>RA123</td><td>Customer A</td><td>2025-07-01</td><td>$100</td></tr>
+        <tr><td>✔</td><td>Return</td><td>RA124</td><td>Customer B</td><td>2025-07-02</td><td>$150</td></tr> -->
+                        <!-- Add many rows -->
+                        <tr>
+                            <td colspan="6" class="no-data" style="text-align: center;">No Transactions for Approval
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Approve/Reject Buttons -->
+            <div id="rmaApproveContainer" style="margin-top: 15px; display: none;">
+                <div style="display: flex; justify-content: center; gap: 10px;">
+                    <button class="approve-btn" onclick="approveSelected()">Approve Selected</button>
+                    <button class="reject-btn" onclick="rejectSelected()">Reject Selected</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sales Orders View Container -->
+        <div id="salesOrderFrameContainer" style="display: none; margin-top: 20px;">
+            <iframe id="salesOrderFrame" width="100%" height="500px" style="border:none;"></iframe>
+        </div>
+
+        <!-- Vendors View Container -->
+        <div id="vendorFrameContainer" style="display: none; margin-top: 20px;">
+            <iframe id="vendorFrame" width="100%" height="500px" style="border:none;"></iframe>
+        </div>
+
+        <!-- Clients View Container -->
+        <div id="clientFrameContainer" style="display:none; margin-top:20px;">
+            <iframe id="clientFrame" width="100%" height="500px" style="border:none;"></iframe>
+        </div>
+
+        <!-- Post SO to WMS View Container -->
+        <div id="postSOWMSFrameContainer" style="display: none; margin-top: 20px;">
+            <iframe id="postSOWMSFrame" width="100%" height="500px" style="border:none;"></iframe>
+        </div>
+
+    </div>
+
+    <script>
+        let allTransactions = [];
+        let currentPage = 1;
+        let selectedMap = {}; // Track selections across pages
+        let activeTransactionType = "";
+        let activeDocumentNumber = "";
+        let activeEntity = "";
+
+        window.onload = function () {
+            toggleRMADashboard();
+
+            // Highlight the View RMAs button and disable others
+            setActiveViewButton('toggleRMADashboard()');
+            document.querySelector('button[onclick="toggleRMADashboard()"]').classList.add('active-view-button');
+            document.querySelector('button[onclick="toggleRMADashboard()"]').setAttribute('aria-disabled', 'true');
+            document.querySelector('button[onclick="toggleSalesOrders()"]').disabled = false;
+            document.querySelector('button[onclick="toggleVendors()"]').disabled = false;
+            document.querySelector('button[onclick="togglePostSOWMS()"]').disabled = false;
+
+            // Show filter controls by default
+            document.getElementById('filterControls').style.display = 'block';
+        };
+
+        function fetchTransactions() {
+            document.getElementById("loadingOverlay").style.display = "flex";
+
+            fetch(window.location.href, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    action: "search"
+                })
+            })
+                .then(response => response.json())
+                .then(data => {
+                    allTransactions = data.results || [];
+                    currentPage = 1;
+                    displayTransactions();
+                })
+                .catch(error => console.error("Error fetching data:", error))
+                .finally(() => {
+                    document.getElementById("loadingOverlay").style.display = "none";
+                });
+        }
+
+        function displayTransactions() {
+            let rowsPerPage = 10000;
+
+            // Apply filter first
+            let filtered = allTransactions.filter(t => {
+                const matchDoc = !activeDocumentNumber || (t.transaction_number && t.transaction_number.toLowerCase().includes(activeDocumentNumber));
+                const matchEntity = !activeEntity || (t.entity && t.entity.toLowerCase().includes(activeEntity));
+                return matchDoc && matchEntity;
+            });
+
+            let startRow = (currentPage - 1) * rowsPerPage;
+            let endRow = startRow + rowsPerPage;
+            let paginated = filtered.slice(startRow, endRow);
+
+            let table = document.getElementById("transaction_table_body");
+            table.innerHTML = "";
+
+            if (paginated.length > 0) {
+                paginated.forEach(row => {
+                    let checked = selectedMap[row.transaction_id] ? 'checked' : '';
+                    table.innerHTML += `
+                    <tr data-current-state="${row.current_state}" data-workflow-id="${row.workflow_id}">
+                        <td><input type="checkbox" class="approval-checkbox" data-id="${row.transaction_id}" ${checked}></td>
+                        <td>${row.transaction_type}</td>
+                        <td><a href="/app/accounting/transactions/rtnauth.nl?id=${row.transaction_id}&whence=" target="_blank" style="color: #1e90ff; text-decoration: none; font-weight: 500;">${row.transaction_number}</a></td>
+                        <td>${row.entity}</td>
+                        <td>${row.date}</td>
+                        <td>${new Intl.NumberFormat('en-US', { style: 'currency', currency: 'SAR' }).format(Math.abs(Number(row.total)))}</td>
+                    </tr>`;
+
+                });
+
+                // Rebind change listeners
+                setTimeout(() => {
+                    document.querySelectorAll('.approval-checkbox').forEach(cb => {
+                        cb.addEventListener('change', () => {
+                            selectedMap[cb.dataset.id] = cb.checked;
+                        });
+                    });
+                }, 0);
+            } else {
+                table.innerHTML = `<tr><td colspan="6" class="no-data" style="text-align: center;">No Transactions for Approval</td></tr>`;
+            }
+
+            updatePaginationControls(Math.ceil(filtered.length / rowsPerPage));
+            showEntriesInfo(startRow, endRow, filtered.length);
+        }
+
+        function showEntriesInfo(start, end, total) {
+            const infoText = document.getElementById("entries_info");
+            if (total === 0) {
+                infoText.textContent = "Showing 0 of 0 entries";
+            } else {
+                infoText.textContent = `Showing ${start + 1} to ${Math.min(end, total)} of ${total} entries`;
+            }
+        }
+
+        function updatePaginationControls(totalPages) {
+            let container = document.getElementById("pagination");
+            container.innerHTML = "";
+
+            if (totalPages <= 1) return;
+
+            for (let i = 1; i <= totalPages; i++) {
+                container.innerHTML += `<button class="page-btn ${i === currentPage ? 'active' : ''}" onclick="goToPage(${i})">${i}</button>`;
+            }
+        }
+
+        function goToPage(page) {
+            currentPage = page;
+            displayTransactions();
+        }
+
+        function approveSelected() {
+            handleWorkflowAction("approve");
+        }
+
+        function rejectSelected() {
+            handleWorkflowAction("reject");
+        }
+
+        function getSelectedIds() {
+            return Object.keys(selectedMap).filter(id => selectedMap[id]);
+        }
+
+        function markAll() {
+            allTransactions.forEach(t => {
+                selectedMap[t.transaction_id] = true;
+            });
+            displayTransactions();
+        }
+
+        function unmarkAll() {
+            allTransactions.forEach(t => {
+                selectedMap[t.transaction_id] = false;
+            });
+            displayTransactions();
+        }
+        function applyTransactionFilter() {
+            // Remove transaction type line
+            activeDocumentNumber = document.getElementById("document_number_filter").value.toLowerCase().trim();
+            activeEntity = document.getElementById("entity_filter").value.toLowerCase().trim();
+            currentPage = 1;
+            displayTransactions();
+        }
+
+        function viewTransaction(internalId) {
+            const baseUrl = window.location.origin;
+            const fullUrl = `${baseUrl}/app/accounting/transactions/rtnauth.nl?id=${internalId}&whence=`;
+            window.open(fullUrl, '_blank');
+        }
+        function handleWorkflowAction(actionType) {
+            const checkboxes = document.querySelectorAll('.approval-checkbox:checked');
+
+            if (checkboxes.length === 0) {
+                alert(`Please select at least one record to ${actionType}.`);
+                return;
+            }
+
+            const records = [];
+
+            checkboxes.forEach(cb => {
+                const row = cb.closest('tr');
+                const recordId = cb.dataset.id;
+                const currentState = row.dataset.currentState;
+                let workflowId = row.dataset.workflowId;
+
+                records.push({ recordId, currentState, workflowId });
+
+            });
+
+            const payload = {
+                action: actionType,
+                records: records
+            };
+
+            document.getElementById("loadingOverlay").style.display = "flex";
+
+            fetch('/app/site/hosting/scriptlet.nl?script=2638&deploy=1', {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(payload)
+            })
+                .then(response => response.json())
+                .then(data => {
+                    console.log("Workflow Response:", data);
+                    alert(`Successfully processed ${records.length} record(s).`);
+                    fetchTransactions(); // reload
+                })
+                .catch(error => {
+                    console.error("Error triggering workflow:", error);
+                    alert("Workflow execution failed. Check console.");
+                })
+                .finally(() => {
+                    document.getElementById("loadingOverlay").style.display = "none";
+                });
+        }
+
+        function toggleSalesOrders() {
+            const container = document.getElementById("salesOrderFrameContainer");
+            const frame = document.getElementById("salesOrderFrame");
+            const rmaContainer = document.getElementById("rmaContainer");
+            const postSOWMSFrameContainer = document.getElementById("postSOWMSFrameContainer");
+            const loading = document.getElementById("loadingOverlay");
+            const vendorFrameContainer = document.getElementById("vendorFrameContainer");
+            document.getElementById("rmaApproveContainer").style.display = "none";
+
+
+            //highlight
+            document.getElementById('sobtn').classList.add('highlight');
+            document.getElementById('rmabtn').classList.remove('highlight');
+            document.getElementById('s2wmsbtn').classList.remove('highlight');
+            //end highlight
+
+            // Always hide other views
+            rmaContainer.style.display = "none";
+            postSOWMSFrameContainer.style.display = "none";
+            vendorFrameContainer.style.display = "none";
+
+            if (container.style.display === "none") {
+                loading.style.display = "flex";
+                frame.onload = () => { loading.style.display = "none"; };
+                frame.src = "https://7065838-sb1.app.netsuite.com/app/site/hosting/scriptlet.nl?script=2409&deploy=1"; // SO Approve HTML
+                container.style.display = "block";
+            } else {
+                frame.src = "";
+                container.style.display = "none";
+            }
+
+            // Disable Sales Orders button, enable others
+            document.querySelector('button[onclick="toggleSalesOrders()"]').disabled = true;
+            document.querySelector('button[onclick="toggleRMADashboard()"]').disabled = false;
+            document.querySelector('button[onclick="togglePostSOWMS()"]').disabled = false;
+
+            // Hide filters
+            document.getElementById('filterControls').style.display = 'none';
+
+            setActiveViewButton('toggleSalesOrders()');
+        }
+
+        function togglePostSOWMS() {
+            const container = document.getElementById("postSOWMSFrameContainer");
+            const frame = document.getElementById("postSOWMSFrame");
+            const rmaContainer = document.getElementById("rmaContainer");
+            const salesOrderFrameContainer = document.getElementById("salesOrderFrameContainer");
+            const loading = document.getElementById("loadingOverlay");
+            const vendorFrameContainer = document.getElementById("vendorFrameContainer");
+            document.getElementById("rmaApproveContainer").style.display = "none";
+
+
+            //highlight
+            document.getElementById('sobtn').classList.remove('highlight');
+            document.getElementById('rmabtn').classList.remove('highlight');
+            document.getElementById('vendorbtn').classList.remove('highlight');
+            document.getElementById('vendorbtn').classList.remove('highlight');
+            document.getElementById('s2wmsbtn').classList.add('highlight');
+            //end highlight
+
+
+            // Always hide other views
+            rmaContainer.style.display = "none";
+            salesOrderFrameContainer.style.display = "none";
+            vendorFrameContainer.style.display = "none";
+
+            if (container.style.display === "none") {
+                loading.style.display = "flex";
+                frame.onload = () => { loading.style.display = "none"; };
+                frame.src = "https://7065838-sb1.app.netsuite.com/app/site/hosting/scriptlet.nl?script=2639&deploy=1"; // SL Send SO to WMS HTML
+                container.style.display = "block";
+            } else {
+                frame.src = "";
+                container.style.display = "none";
+            }
+
+            // Disable Post SO to WMS button, enable others
+            document.querySelector('button[onclick="toggleSalesOrders()"]').disabled = true;
+            document.querySelector('button[onclick="toggleRMADashboard()"]').disabled = false;
+            document.querySelector('button[onclick="toggleVendors()"]').disabled = false;
+            document.querySelector('button[onclick="togglePostSOWMS()"]').disabled = false;
+
+            // Hide filters
+            document.getElementById('filterControls').style.display = 'none';
+
+            setActiveViewButton('togglePostSOWMS()');
+        }
+
+        function toggleRMADashboard() {
+            const table = document.getElementById("transaction_table_body");
+            const loading = document.getElementById("loadingOverlay");
+            const rmaContainer = document.getElementById("rmaContainer");
+            const salesOrderFrameContainer = document.getElementById("salesOrderFrameContainer");
+            const postSOWMSFrameContainer = document.getElementById("postSOWMSFrameContainer");
+            const vendorFrameContainer = document.getElementById("vendorFrameContainer");
+            document.getElementById("rmaApproveContainer").style.display = "block";
+
+
+            //highlight
+            document.getElementById('sobtn').classList.remove('highlight');
+            document.getElementById('rmabtn').classList.add('highlight');
+            document.getElementById('vendorbtn').classList.remove('highlight');
+            document.getElementById('s2wmsbtn').classList.remove('highlight');
+            //end highlight
+
+
+            // Hide other views
+            salesOrderFrameContainer.style.display = "none";
+            postSOWMSFrameContainer.style.display = "none";
+            vendorFrameContainer.style.display = "none";
+
+            // Show RMA table
+            rmaContainer.style.display = "block";
+
+            table.innerHTML = `<tr><td colspan="6" class="no-data" style="text-align: center;">Loading RMA data...</td></tr>`;
+            loading.style.display = "flex";
+
+            fetchTransactions();
+
+            // Disable RMA button, enable others
+            document.querySelector('button[onclick="toggleRMADashboard()"]').disabled = true;
+            document.querySelector('button[onclick="toggleSalesOrders()"]').disabled = false;
+            document.querySelector('button[onclick="toggleVendors()"]').disabled = false;
+            document.querySelector('button[onclick="togglePostSOWMS()"]').disabled = false;
+
+            // Show filters
+            document.getElementById('filterControls').style.display = 'block';
+
+            // Highlight active button
+            setActiveViewButton('toggleRMADashboard()');
+        }
+
+        function setActiveViewButton(activeButtonSelector) {
+            const viewButtons = [
+                document.querySelector('button[onclick="toggleRMADashboard()"]'),
+                document.querySelector('button[onclick="toggleSalesOrders()"]'),
+                document.querySelector('button[onclick="toggleVendors()"]'),
+                document.querySelector('button[onclick="togglePostSOWMS()"]')
+            ];
+
+            viewButtons.forEach(btn => {
+                if (btn && btn.getAttribute('onclick') === activeButtonSelector) {
+                    btn.classList.add('active-view-button');
+                } else {
+                    btn.classList.remove('active-view-button');
+                }
+            });
+        }
+
+        function toggleVendors() {
+            const container = document.getElementById("vendorFrameContainer");
+            const frame = document.getElementById("vendorFrame");
+            const rmaContainer = document.getElementById("rmaContainer");
+            const salesOrderFrameContainer = document.getElementById("salesOrderFrameContainer");
+            const postSOWMSFrameContainer = document.getElementById("postSOWMSFrameContainer");
+            const loading = document.getElementById("loadingOverlay");
+            document.getElementById("rmaApproveContainer").style.display = "none";
+
+            document.getElementById('sobtn').classList.remove('highlight');
+            document.getElementById('rmabtn').classList.remove('highlight');
+            document.getElementById('vendorbtn').classList.add('highlight');
+            document.getElementById('s2wmsbtn').classList.remove('highlight');
+
+            rmaContainer.style.display = "none";
+            salesOrderFrameContainer.style.display = "none";
+            postSOWMSFrameContainer.style.display = "none";
+
+            if (container.style.display === "none") {
+                loading.style.display = "flex";
+                frame.onload = function () {
+                    loading.style.display = "none";
+                };
+                frame.src = "https://7065838-sb1.app.netsuite.com/app/site/hosting/scriptlet.nl?script=3236&deploy=1";
+                container.style.display = "block";
+            } else {
+                frame.src = "";
+                container.style.display = "none";
+            }
+
+            document.querySelector('button[onclick="toggleVendors()"]').disabled = true;
+            document.querySelector('button[onclick="toggleRMADashboard()"]').disabled = false;
+            document.querySelector('button[onclick="toggleSalesOrders()"]').disabled = false;
+            document.querySelector('button[onclick="togglePostSOWMS()"]').disabled = false;
+
+            document.getElementById('filterControls').style.display = 'none';
+
+            setActiveViewButton('toggleVendors()');
+        }
+
+        function toggleClients() {
+
+            const container = document.getElementById("clientFrameContainer");
+            const frame = document.getElementById("clientFrame");
+
+            const rmaContainer = document.getElementById("rmaContainer");
+            const salesOrderFrameContainer = document.getElementById("salesOrderFrameContainer");
+            const vendorFrameContainer = document.getElementById("vendorFrameContainer");
+            const postSOWMSFrameContainer = document.getElementById("postSOWMSFrameContainer");
+
+            rmaContainer.style.display = "none";
+            salesOrderFrameContainer.style.display = "none";
+            vendorFrameContainer.style.display = "none";
+            postSOWMSFrameContainer.style.display = "none";
+
+            frame.src = "https://7065838-sb1.app.netsuite.com/app/site/hosting/scriptlet.nl?script=3239&deploy=1";
+
+            container.style.display = "block";
+        }
+
+    </script>
+
+
+</body>
+
+</html>

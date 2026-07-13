@@ -1,0 +1,23 @@
+{
+  "lines": [
+    {
+      "sku": "12347",
+      "location": 24,
+      "quantity": 100,
+      "unitcost": 12.5,
+      "lots": [
+        { "lotNumber": "LOT-Shoof-5", "quantity": 50 },
+        { "lotNumber": "LOT-Shoof-6", "quantity": 50 }
+      ]
+    },
+    {
+      "sku": "12345",
+      "location": 24,
+      "quantity": -1,
+      "unitcost": 12.5,
+      "lots": [
+        { "lotNumber": "LOT-Shoof-3", "quantity": -1 }
+      ]
+    }
+  ]
+}

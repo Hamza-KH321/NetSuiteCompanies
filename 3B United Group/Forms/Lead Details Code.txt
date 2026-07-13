@@ -1,0 +1,270 @@
+<?xml version="1.0"?><!DOCTYPE pdf PUBLIC "-//big.faceless.org//report" "report-1.1.dtd">
+<pdf>
+<head>
+	<link name="NotoSans" type="font" subtype="truetype" src="${nsfont.NotoSans_Regular}" src-bold="${nsfont.NotoSans_Bold}" src-italic="${nsfont.NotoSans_Italic}" src-bolditalic="${nsfont.NotoSans_BoldItalic}" bytes="2" />
+	<#if .locale == "zh_CN">
+		<link name="NotoSansCJKsc" type="font" subtype="opentype" src="${nsfont.NotoSansCJKsc_Regular}" src-bold="${nsfont.NotoSansCJKsc_Bold}" bytes="2" />
+	<#elseif .locale == "zh_TW">
+		<link name="NotoSansCJKtc" type="font" subtype="opentype" src="${nsfont.NotoSansCJKtc_Regular}" src-bold="${nsfont.NotoSansCJKtc_Bold}" bytes="2" />
+	<#elseif .locale == "ja_JP">
+		<link name="NotoSansCJKjp" type="font" subtype="opentype" src="${nsfont.NotoSansCJKjp_Regular}" src-bold="${nsfont.NotoSansCJKjp_Bold}" bytes="2" />
+	<#elseif .locale == "ko_KR">
+		<link name="NotoSansCJKkr" type="font" subtype="opentype" src="${nsfont.NotoSansCJKkr_Regular}" src-bold="${nsfont.NotoSansCJKkr_Bold}" bytes="2" />
+	<#elseif .locale == "th_TH">
+		<link name="NotoSansThai" type="font" subtype="opentype" src="${nsfont.NotoSansThai_Regular}" src-bold="${nsfont.NotoSansThai_Bold}" bytes="2" />
+	</#if>
+    <style type="text/css">table { font-size: 9pt; table-layout: fixed; width: 100%; }
+th { font-weight: bold; font-size: 8pt; vertical-align: middle; padding: 5px 6px 3px; background-color: #e3e3e3; color: #333333; padding-bottom: 10px; padding-top: 10px; }
+td { padding: 4px 6px; }
+b { font-weight: bold; color: #333333; }
+</style>
+</head>
+<body padding="0.4in 0.4in 0.4in 0.4in" size="Letter">
+    <img height="50%" src="https://8629816-sb1.app.netsuite.com/core/media/media.nl?id=11&amp;c=&amp;h=HuEtnQD-2t_yuJfn9lUQbiMal71Wbp39RGbs1q8UAMjpgvTB" style="align: right;" width="60%" />
+<table style="width: 745px;"><tr>
+	<td rowspan="3" style="font-size: 20px; font-weight: normal; width: 257px;">&nbsp; &nbsp; FOR DESIGNERS&nbsp; ONLY</td>
+	<td style="width: 106px;">&nbsp;</td>
+	<td style="width: 330px;">&nbsp;</td>
+	</tr>
+	<tr>
+	<td style="color: red; font-size: 12px; width: 106px;">Date Start: <span style="color:black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></td>
+	<td style="width: 330px;"><span style="color:black;">&nbsp;.........................................................</span></td>
+	</tr>
+	<tr>
+	<td style="color: red; font-size: 12px; width: 106px;">Date Finish: <span style="color:black;">&nbsp; &nbsp; </span></td>
+	<td style="width: 330px;">&nbsp;</td>
+	</tr>
+	<tr>
+	<td style="width: 257px;">&nbsp;</td>
+	<td style="color: red; font-size: 12px; width: 106px;">Name &amp; Signature: <span style="color:black;">&nbsp;&nbsp;&nbsp;</span></td>
+	<td style="width: 330px;"><span style="color:black;">&nbsp;..........................................................</span></td>
+	</tr></table>
+
+<hr />
+<table style="width: 745px;"><tr>
+	<td style="width: 9px;">&nbsp;</td>
+	<td style="width: 113px;">Client Name:</td>
+	<td style="width: 162px;">.........................................</td>
+	<td style="width: 30px;">&nbsp;</td>
+	<td style="width: 133px;">Exhibition Name:</td>
+	<td style="width: 183px;">..........................................</td>
+	</tr>
+	<tr>
+	<td style="width: 9px;">&nbsp;</td>
+	<td style="width: 113px;">Stand Story:</td>
+	<td style="width: 162px;">.........................................</td>
+	<td style="width: 30px;">&nbsp;</td>
+	<td style="width: 133px;">Stand Size:</td>
+	<td style="width: 183px;">..........................................</td>
+	</tr>
+	<tr>
+	<td style="width: 9px;">&nbsp;</td>
+	<td style="width: 113px;">Sales Person:</td>
+	<td style="width: 162px;">.........................................</td>
+	<td style="width: 30px;">&nbsp;</td>
+	<td style="width: 133px;">Exhibition Date:</td>
+	<td style="width: 183px;">..........................................</td>
+	</tr>
+	<tr>
+	<td style="width: 9px;">&nbsp;</td>
+	<td style="width: 113px;">Date Of Order:</td>
+	<td style="width: 162px;">.........................................</td>
+	<td style="width: 30px;">&nbsp;</td>
+	<td style="width: 133px;">Stand Budget:</td>
+	<td style="width: 183px;">..........................................</td>
+	</tr></table>
+
+<hr />
+<table style="width: 748px;"><tr>
+	<td style="font-size: 15px; font-weight: bold; text-align: center; width: 13px;">&nbsp;</td>
+	<td style="font-size: 15px; font-weight: bold; text-align: center; width: 143px;">Job Type</td>
+	<td rowspan="5" style="width: 44px;">&nbsp;</td>
+	<td style="font-size: 15px; font-weight: bold; text-align: center; width: 19px;">&nbsp;</td>
+	<td style="font-size: 15px; font-weight: bold; text-align: center; width: 141px;">Client Type</td>
+	<td rowspan="5" style="width: 26px;">&nbsp;</td>
+	<td style="font-size: 15px; font-weight: bold; text-align: center; width: 15px;">&nbsp;</td>
+	<td style="font-size: 15px; font-weight: bold; text-align: center; width: 213px;">Deadline</td>
+	</tr>
+	<tr>
+	<td style="width: 13px;"><label><input checked="checked" name="myCheckbox1" readonly="readonly" type="checkbox" value="true" /></label></td>
+	<td style="width: 143px; color:red;">Design Modification</td>
+	<td style="width: 19px;"><label><input name="myCheckbox4" readonly="readonly" type="checkbox" value="true" /></label></td>
+	<td style="width: 141px; color:red;">Government</td>
+	<td style="width: 15px;"><label><input name="myCheckbox5" readonly="readonly" type="checkbox" value="true" /></label></td>
+	<td style="width: 213px; color: red;">ASAP</td>
+	</tr>
+	<tr>
+	<td style="width: 13px;"><label><input checked="checked" name="myCheckbox2" readonly="readonly" type="checkbox" value="true" /></label></td>
+	<td style="width: 143px; color:red;">New Design</td>
+	<td style="width: 19px;"><label><input checked="checked" name="myCheckbox6" readonly="readonly" type="checkbox" value="true" /></label></td>
+	<td style="width: 141px; color:red;">Semi-Government</td>
+	<td style="width: 15px;"><label><input checked="checked" name="myCheckbox11" readonly="readonly" type="checkbox" value="true" /></label></td>
+	<td style="width: 213px; color: red;">AFTER 1 WEEK</td>
+	</tr>
+	<tr>
+	<td style="width: 13px;"><lable><input checked="checked" name="myCheckbox3" readonly="readonly" type="checkbox" value="true" /></lable></td>
+	<td style="width: 143px; color:red;">Tender</td>
+	<td style="width: 19px;"><label><input checked="checked" name="myCheckbox7" readonly="readonly" type="checkbox" value="true" /></label></td>
+	<td style="width: 141px; color:red;">Sub Contractor</td>
+	<td style="width: 15px;"><label><input checked="checked" name="myCheckbox8" readonly="readonly" type="checkbox" value="true" /></label></td>
+	<td style="width: 213px; color:red;">Other</td>
+	</tr>
+	<tr>
+	<td style="width: 13px;">&nbsp;</td>
+	<td style="width: 143px;">&nbsp;</td>
+	<td style="width: 19px;"><label><input checked="checked" name="myCheckbox9" readonly="readonly" type="checkbox" value="true" /></label></td>
+	<td style="width: 141px; color:red;">Private</td>
+	<td style="width: 15px;">&nbsp;</td>
+	<td style="width: 213px;">&nbsp;</td>
+	</tr></table>
+
+<hr /> <dev style="font-weight:bold;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;ORDER SPECIFICATION</dev>
+
+<table><tr>
+	<th><img src="https://8629816-sb1.app.netsuite.com/core/media/media.nl?id=434&amp;c=8629816_SB1&amp;h=x9b_uDDr_d0GdZUx_SXu_prjAylArM6PCGjDi_W7YwNDrkAZ" /></th>
+	<th>Column 2</th>
+	<th>Column 3</th>
+	<th>Column 4</th>
+	<th>Column 5</th>
+	<th>Column 6</th>
+	<th>Column 7</th>
+	<th>Column 8</th>
+	<th>Column 9</th>
+	<th>Column 10</th>
+	<th>Column 11</th>
+	</tr>
+	<tr>
+	<td>Row 2, Cell 1</td>
+	<td>Row 2, Cell 1</td>
+	<td>Row 2, Cell 2</td>
+	<td>Row 2, Cell 2</td>
+	<td>Row 2, Cell 3</td>
+	<td>Row 2, Cell 3</td>
+	<td>Row 2, Cell 4</td>
+	<td>Row 2, Cell 4</td>
+	<td>Row 2, Cell 5</td>
+	<td>Row 2, Cell 5</td>
+	<td>Row 2, Cell 6</td>
+	</tr></table>
+
+<hr />
+<table><tr>
+	<th>&nbsp;</th>
+	<th>Column 2</th>
+	<th>Column 3</th>
+	<th>Column 4</th>
+	<th>Column 5</th>
+	<th>Column 6</th>
+	<th>Column 7</th>
+	<th>Column 8</th>
+	<th>Column 9</th>
+	<th>Column 10</th>
+	<th>Column 11</th>
+	</tr>
+	<tr>
+	<td>Row 2, Cell 1</td>
+	<td>Row 2, Cell 1</td>
+	<td>Row 2, Cell 2</td>
+	<td>Row 2, Cell 2</td>
+	<td>Row 2, Cell 3</td>
+	<td>Row 2, Cell 3</td>
+	<td>Row 2, Cell 4</td>
+	<td>Row 2, Cell 4</td>
+	<td>Row 2, Cell 5</td>
+	<td>Row 2, Cell 5</td>
+	<td>Row 2, Cell 6</td>
+	</tr></table>
+
+<hr />
+<p><span style="font-weight: bold;">Note: </span><br />Please attach the floor plan and other related files, if any. All logos and graphics to be used in the design must be clearly explained to the designer. All products or machine to be displayed must have the exact dimension.</p>
+
+<table><tr>
+	<td>Column 1</td>
+	<td>Column 2</td>
+	<td>Column 3</td>
+	</tr>
+	<tr>
+	<td>Row 1, Cell 1</td>
+	<td>Row 1, Cell 2</td>
+	<td>Row 1, Cell 3</td>
+	</tr>
+	<tr>
+	<td>Row 2, Cell 1</td>
+	<td>Row 2, Cell 2</td>
+	<td>Row 2, Cell 3</td>
+	</tr></table>
+<!--   <table><#list results as result><#if result_index == 0>
+<thead> 
+	<tr>
+	<th>${result.internalId@label}</th>
+	<th>${result.entityid@label}</th>
+	<th>${result.altname@label}</th>
+	<th>${result.type@label}</th>
+	<th>${result.email@label}</th>
+	<th>${result.phone@label}</th>
+	<th>${result.altphone@label}</th>
+	<th>${result.fax@label}</th>
+	<th>${result.altemail@label}</th>
+	<th>${result.custentity_vs_datestart@label}</th>
+	<th>${result.custentity_vs_datefinish@label}</th>
+	<th>${result.custentity_vs_namesignature@label}</th>
+	<th>${result.custentity_vs_exhibitionname@label}</th>
+	<th>${result.custentity_vs_standstorey@label}</th>
+	<th>${result.custentity_vs_standsize@label}</th>
+	<th>${result.custentity_vs_exhibitiondate@label}</th>
+	<th>${result.custentity_vs_dateoforder@label}</th>
+	<th>${result.custentity_vs_standbudget@label}</th>
+	<th>${result.custentity_vs_jobtype@label}</th>
+	<th>${result.custentity_vs_deadline@label}</th>
+	<th>${result.custentity_vs_flooring@label}</th>
+	<th>${result.custentity_vs_logo@label}</th>
+	<th>${result.custentity_vs_standcolors@label}</th>
+	<th>${result.custentity_vs_furniture@label}</th>
+	<th>${result.custentity_vs_receptionbarcounter@label}</th>
+	<th>${result.custentity_vs_audiovisual@label}</th>
+	<th>${result.custentity_vs_miscellaneous@label}</th>
+	<th>${result.custentity_vs_displayarea@label}</th>
+	<th>${result.custentity_vs_meetingarea@label}</th>
+	<th>${result.custentity_vs_storagearea@label}</th>
+	<th>${result.custentity_vs_othersplsspecify@label}</th>
+	<th>${result.custentity_vs_graphicsposter@label}</th>
+	</tr>
+</thead>
+</#if><tr>
+	<td>${result.internalId}</td>
+	<td>${result.entityid}</td>
+	<td>${result.altname}</td>
+	<td>${result.type}</td>
+	<td>${result.email}</td>
+	<td>${result.phone}</td>
+	<td>${result.altphone}</td>
+	<td>${result.fax}</td>
+	<td>${result.altemail}</td>
+	<td>${result.custentity_vs_datestart}</td>
+	<td>${result.custentity_vs_datefinish}</td>
+	<td>${result.custentity_vs_namesignature}</td>
+	<td>${result.custentity_vs_exhibitionname}</td>
+	<td>${result.custentity_vs_standstorey}</td>
+	<td>${result.custentity_vs_standsize}</td>
+	<td>${result.custentity_vs_exhibitiondate}</td>
+	<td>${result.custentity_vs_dateoforder}</td>
+	<td>${result.custentity_vs_standbudget}</td>
+	<td>${result.custentity_vs_jobtype}</td>
+	<td>${result.custentity_vs_deadline}</td>
+	<td>${result.custentity_vs_flooring}</td>
+	<td>${result.custentity_vs_logo}</td>
+	<td>${result.custentity_vs_standcolors}</td>
+	<td>${result.custentity_vs_furniture}</td>
+	<td>${result.custentity_vs_receptionbarcounter}</td>
+	<td>${result.custentity_vs_audiovisual}</td>
+	<td>${result.custentity_vs_miscellaneous}</td>
+	<td>${result.custentity_vs_displayarea}</td>
+	<td>${result.custentity_vs_meetingarea}</td>
+	<td>${result.custentity_vs_storagearea}</td>
+	<td>${result.custentity_vs_othersplsspecify}</td>
+	<td>${result.custentity_vs_graphicsposter}</td>
+	</tr>
+	</#list></table>
+-->
+</body>
+</pdf>

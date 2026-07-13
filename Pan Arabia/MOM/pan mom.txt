@@ -1,0 +1,79 @@
+- Quotation Form:
+* Image alignment in center. (DONE)
+* Designation is the quot ID. (DONE)
+* check Shelf Life spelling. (DONE)
+* remove customer number from cust name. (Pending Functional)
+* reference number must be field in estimate record and filled by user. (DONE)
+* Cost/each  replace with price/each. (DONE)
+* Add arabic description for item below product description. (DONE)
+* Each page must have one item. (DONE)
+* Add total tax and total value in the last page. (DONE)
+* In item table in form must add discount field. (Discount can be implemented in estimate level not on   line level, will discuss that with Mr. Mohammad) (Add Discount item field on estimate record, add the discount by user and reflected on the form)
+* Add total discount in header table. (DONE)
+* Remove the middle column border in header table. (DONE)
+
+- Sample Request Form: 
+* Dispensed to: is custom field list of contacts and filled by user. (DONE)
+* To get Cost Center List from pan team and add it as custom field. (Pan Team) (DONE, functional team     need to import data)
+* Cost/Unit replace it with price/unit. (DONE)
+* Request for and unit columns will be in the header table not item table. (DONE)
+* Item reference must be replaced by item ID. (DONE)
+* Add Purpose drop down list custom field and the list must be provided by pan team. (Pan Team) (DONE,   functional team   need to import data)
+* Replace Total Release Value with total sample. (DONE)
+
+
+- SO Blanket Form: 
+* Item Ref replace it with Item ID. (DONE)
+* Replace type Cash with Planned/Blanket. (DONE)
+* release number must generate a sequance number based on number of fulfillments (Need to check with omar)   (DONE).
+* release sequance (number of the last item fulfillment) (Need to check with omar) (DONE).
+
+- SO Cash Form: 
+* Remove status row in header table. (DONE)
+* Replace item ref with item id. (DONE)
+* Replace Total Release Value with total SO. (DONE)
+* Bank Transfer must be document attached as source link. (Need to check with Omar)
+
+- SO Standard Form: 
+* Change type value to standard. (DONE)
+* Buyer must be contact Field. (DONE)
+* Replace Total Release Value  with total so. (DONE)
+* Check Unit Price Field. (DONE)
+* Replace Item Ref with Item ID. (DONE)
+
+- PO Form: (Alaa)
+* Add Amount in words for total.
+* Replace red color in item table with gray color.
+* Replace order type with order status.
+* Change Item ID to Reference number.
+
+- Tax Invoice Form: (Alaa)
+* Add discount per item in item table and add total discount. 
+* Add nupco data checkbox, so if it is checked in the item list will show nupco code and nupco description   ,MOH, and client referenc, if it is not checked it will show item description only without nupco data,     (fields are Nupco Description , Nupco   code , MOH Code , Customer reference). 
+* Add UOM in line level.
+* (will receive invoice form from pan arabia team and merge data with old one) check with functional     team about the production date and expiration date and lot number if it can be generated automatically.
+* Fix customer address in arabic. (Pan Team)
+
+- Delivery Note Form: (Alaa)
+* Check delivery note if we can generate delivery note without SO and then attach SO with it later.
+* Remove unused data fields.
+
+- Sample request Approval Workflow: 
+* Remove sales rep approval keep only sales manager. (DONE)
+
+- nupco price workflow on SO and Quotation line level: 
+* Remove Gift column in so and estimate. (DONE)
+* If rate is 0 then igonre the nupco price. (DONE)
+
+- Notifications for pending fulfillment and partialy receipt po: 
+* Replace PO with SO so emaisl will be sent based on the SO not PO. (DONE)
+
+- Add below fields for SO and Quotation: 
+* Nupco Description. (DONE)
+* Nupco Code. (DONE)
+* MOH Code. (DONE)
+* Customer Reference. (DONE)
+
+
+
+

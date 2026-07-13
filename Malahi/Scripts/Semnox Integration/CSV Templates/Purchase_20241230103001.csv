@@ -1,0 +1,263 @@
+Date,Payment_Method,Trx_id,Account_Product_Level,Product_Name,Sub_Account_Channel_POS_Level,Employee_No,Cashier_Name,POS_number,Total_Excluding_Tax,Tax_Amount,Total_Including_Tax
+29-Dec-2024,Credit Card,20241229_80188,57321,Discovery Pass + 1 Redemption ,40801,,Mohamed,POS3,431.43,21.57,453
+29-Dec-2024,Credit Card,20241229_80189,51305,Shoe Rent,40801,,Shatha,POS2,42.86,2.14,45
+29-Dec-2024,Credit Card,20241229_80190,51305,Socks,40801,,Shatha,POS2,9.52,0.48,10
+29-Dec-2024,Credit Card,20241229_80190,57321,Toddler Pass,40801,,Shatha,POS2,99,4.95,103.95
+29-Dec-2024,Credit Card,20241229_80191,57321,Adventure Pass,40801,,Mohamed,POS3,358.1,17.9,376
+29-Dec-2024,Credit Card,20241229_80191,57321,Toddler Pass,40801,,Mohamed,POS3,198,9.9,207.9
+29-Dec-2024,Credit Card,20241229_80192,57321,Discovery Pass + 1 Redemption ,40801,,Shatha,POS2,143.81,7.19,151
+29-Dec-2024,Credit Card,20241229_80193,57052,Card Deposit,40801,,Hajii,POS9,4.76,0.24,5
+29-Dec-2024,Credit Card,20241229_80193,57162,50 AED Top Up - Redemption,40801,,Hajii,POS9,47.62,2.38,50
+29-Dec-2024,Credit Card,20241229_80194,57322,Multiplex Karting - ADULTS,40801,,Shatha,POS2,480,24,504
+29-Dec-2024,Credit Card,20241229_80195,57321,Discovery Pass + 1 Redemption ,40801,,Shatha,POS2,287.62,14.38,302
+29-Dec-2024,Credit Card,20241229_80196,57052,Card Deposit,40801,,Zinelabidine,POS4,4.76,0.24,5
+29-Dec-2024,Credit Card,20241229_80196,57322,Multiplex Karting - JUNIOR,40801,,Zinelabidine,POS4,80,4,84
+29-Dec-2024,Credit Card,20241229_80197,57321,Get Tired Playing ,40801,,Shatha,POS2,299.05,14.95,314
+29-Dec-2024,,20241229_80198,57321,Fazaa - Get Tired Playing,40801,,Zinelabidine,POS4,0,0,0
+29-Dec-2024,Credit Card,20241229_80199,57323,Lockers ,40801,,Zinelabidine,POS4,9.52,0.48,10
+29-Dec-2024,,20241229_80200,57321,Fazaa - Get Tired Playing,40801,,Mohamed,POS3,0,0,0
+29-Dec-2024,Credit Card,20241229_80201,57052,Card Deposit,40801,,Shatha,POS2,4.76,0.24,5
+29-Dec-2024,Credit Card,20241229_80201,57322,Multiplex Karting - ADULTS,40801,,Shatha,POS2,120,6,126
+29-Dec-2024,Credit Card,20241229_80201,57322,Multiplex Karting - JUNIOR,40801,,Shatha,POS2,80,4,84
+29-Dec-2024,Credit Card,20241229_80202,51305,Shoe Rent,40801,,Omnia,POS5,14.29,0.71,15
+29-Dec-2024,Credit Card,20241229_80202,57052,Card Deposit,40801,,Omnia,POS5,4.76,0.24,5
+29-Dec-2024,Credit Card,20241229_80202,57322,Multiplex Karting - ADULTS,40801,,Omnia,POS5,120,6,126
+29-Dec-2024,,20241229_80203,57321,Mazaya++ [2] - Get Tired Playi,40801,,Shatha,POS2,0,0,0
+29-Dec-2024,,20241229_80204,57321,Fazaa - Get Tired Playing,40801,,Zinelabidine,POS4,0,0,0
+29-Dec-2024,Credit Card,20241229_80205,57052,Card Deposit,40801,,Omnia,POS5,4.76,0.24,5
+29-Dec-2024,Credit Card,20241229_80205,57321,Adventure Pass,40801,,Omnia,POS5,358.1,17.9,376
+29-Dec-2024,Credit Card,20241229_80205,57322,Multiplex Karting - ADULTS,40801,,Omnia,POS5,120,6,126
+29-Dec-2024,Credit Card,20241229_80206,57052,Card Deposit,40801,,Omnia,POS5,4.76,0.24,5
+29-Dec-2024,Credit Card,20241229_80206,57321,Adventure Pass,40801,,Omnia,POS5,537.14,26.86,564
+29-Dec-2024,Credit Card,20241229_80206,57322,Multiplex Karting - ADULTS,40801,,Omnia,POS5,120,6,126
+29-Dec-2024,Credit Card,20241229_80207,57052,Card Deposit,40801,,Omnia,POS5,4.76,0.24,5
+29-Dec-2024,Credit Card,20241229_80207,57322,Multiplex Karting - ADULTS,40801,,Omnia,POS5,240,12,252
+29-Dec-2024,Credit Card,20241229_80207,57323,Lockers ,40801,,Omnia,POS5,9.52,0.48,10
+29-Dec-2024,,20241229_80208,57321,Mazaya++ [2] - Get Tired Playi,40801,,Zinelabidine,POS4,0,0,0
+29-Dec-2024,Credit Card,20241229_80209,57321,POD - Discovery Pass - 70.50 A,40801,,Omnia,POS5,67.14,3.36,70.5
+29-Dec-2024,Credit Card,20241229_80210,57052,Card Deposit,40801,,Zinelabidine,POS4,4.76,0.24,5
+29-Dec-2024,Credit Card,20241229_80210,57322,Multiplex Karting - ADULTS,40801,,Zinelabidine,POS4,240,12,252
+29-Dec-2024,Credit Card,20241229_80211,51305,Shoe Rent,40801,,Zinelabidine,POS4,14.29,0.71,15
+29-Dec-2024,Credit Card,20241229_80211,57052,Card Deposit,40801,,Zinelabidine,POS4,4.76,0.24,5
+29-Dec-2024,Credit Card,20241229_80211,57322,Multiplex Karting - ADULTS,40801,,Zinelabidine,POS4,240,12,252
+29-Dec-2024,,20241229_80212,57321,Fazaa - Get Tired Playing,40801,,Omnia,POS5,0,0,0
+29-Dec-2024,Credit Card,20241229_80213,57321,POD - Discovery Pass - 70.50 A,40801,,Omnia,POS5,67.14,3.36,70.5
+29-Dec-2024,Credit Card,20241229_80214,57052,Card Deposit,40801,,Omnia,POS5,4.76,0.24,5
+29-Dec-2024,Credit Card,20241229_80214,57322,Multiplex Karting - JUNIOR,40801,,Omnia,POS5,240,12,252
+29-Dec-2024,,20241229_80215,57321,Fazaa - Get Tired Playing,40801,,Sirjana,POS6,0,0,0
+29-Dec-2024,,20241229_80216,57321,Fazaa - Get Tired Playing,40801,,Sirjana,POS6,0,0,0
+29-Dec-2024,Credit Card,20241229_80217,57322,Multiplex Karting - ADULTS,40801,,Omnia,POS5,120,6,126
+29-Dec-2024,Credit Card,20241229_80217,57322,Multiplex Karting - JUNIOR,40801,,Omnia,POS5,80,4,84
+29-Dec-2024,Credit Card,20241229_80217,57324,Climbing Wall Session - 15minu,40801,,Omnia,POS5,102.86,5.14,108
+29-Dec-2024,,20241229_80218,57321,Fazaa - Get Tired Playing,40801,,Omnia,POS5,0,0,0
+29-Dec-2024,,20241229_80219,57321,Mazaya++ [2] - Get Tired Playi,40801,,Shatha,POS2,0,0,0
+29-Dec-2024,Credit Card,20241229_80220,57052,Card Deposit,40801,,Omnia,POS5,4.76,0.24,5
+29-Dec-2024,Credit Card,20241229_80220,57321,Discovery Pass + 1 Redemption ,40801,,Omnia,POS5,575.24,28.76,604
+29-Dec-2024,Credit Card,20241229_80220,57322,Multiplex Karting - ADULTS,40801,,Omnia,POS5,600,30,630
+29-Dec-2024,,20241229_80221,57321,Mazaya++ [2] - Get Tired Playi,40801,,Shatha,POS2,0,0,0
+29-Dec-2024,,20241229_80222,57321,Mazaya++ [2] - Get Tired Playi,40801,,Omnia,POS5,0,0,0
+29-Dec-2024,Credit Card,20241229_80223,57321,Fazaa - Get Tired Playing,40801,,Shatha,POS2,0,0,0
+29-Dec-2024,Credit Card,20241229_80223,57321,Toddler Pass,40801,,Shatha,POS2,99,4.95,103.95
+29-Dec-2024,,20241229_80224,57321,Mazaya++ [2] - Get Tired Playi,40801,,Shatha,POS2,0,0,0
+29-Dec-2024,,20241229_80225,57321,Mazaya++ [2] - Get Tired Playi,40801,,Shatha,POS2,0,0,0
+29-Dec-2024,Credit Card,20241229_80226,57321,Discovery Pass + 1 Redemption ,40801,,Shatha,POS2,143.81,7.19,151
+29-Dec-2024,,20241229_80227,57321,Fazaa - Get Tired Playing,40801,,Zinelabidine,POS4,0,0,0
+29-Dec-2024,Credit Card,20241229_80228,51305,Socks,40801,,Shatha,POS2,9.52,0.48,10
+29-Dec-2024,,20241229_80229,57321,Mazaya++ [2] - Get Tired Playi,40801,,Mohamed,POS3,0,0,0
+29-Dec-2024,,20241229_80230,57321,Fazaa - Get Tired Playing,40801,,Zinelabidine,POS4,0,0,0
+29-Dec-2024,,20241229_80231,57321,Fazaa - Get Tired Playing,40801,,Shatha,POS2,0,0,0
+29-Dec-2024,,20241229_80232,57321,Fazaa - Get Tired Playing,40801,,Mohamed,POS3,0,0,0
+29-Dec-2024,Credit Card,20241229_80233,51605,Fluid Art - Large Fluid Bear -,40801,,Manisha,POS7,269.52,13.48,283
+29-Dec-2024,Credit Card,20241229_80234,57052,Card Deposit,40801,,Mohamed,POS3,4.76,0.24,5
+29-Dec-2024,Credit Card,20241229_80234,57321,Get Tired Playing + Karting,40801,,Mohamed,POS3,380,19,399
+29-Dec-2024,Credit Card,20241229_80234,57322,Multiplex Karting - ADULTS,40801,,Mohamed,POS3,480,24,504
+29-Dec-2024,Credit Card,20241229_80235,57321,Fazaa - Get Tired Playing,40801,,Shatha,POS2,0,0,0
+29-Dec-2024,Credit Card,20241229_80235,57321,POD - Discovery Pass - 70.50 A,40801,,Shatha,POS2,67.14,3.36,70.5
+29-Dec-2024,,20241229_80236,57321,Fazaa - Get Tired Playing,40801,,Shatha,POS2,0,0,0
+29-Dec-2024,,20241229_80237,57321,Fazaa - Get Tired Playing,40801,,Zinelabidine,POS4,0,0,0
+29-Dec-2024,,20241229_80238,57321,Fazaa - Get Tired Playing,40801,,Omnia,POS5,0,0,0
+29-Dec-2024,,20241229_80239,57321,Fazaa - Get Tired Playing,40801,,Mohamed,POS3,0,0,0
+29-Dec-2024,Credit Card,20241229_80240,57321,Adventure Pass,40801,,Mohamed,POS3,358.1,17.9,376
+29-Dec-2024,Credit Card,20241229_80241,57052,Card Deposit,40801,,Hajii,POS9,4.76,0.24,5
+29-Dec-2024,Credit Card,20241229_80241,57162,50 AED Top Up - Redemption,40801,,Hajii,POS9,47.62,2.38,50
+29-Dec-2024,Credit Card,20241229_80242,57052,Card Deposit,40801,,Shatha,POS2,4.76,0.24,5
+29-Dec-2024,Credit Card,20241229_80242,57162,50 AED Top Up - Redemption,40801,,Shatha,POS2,47.62,2.38,50
+29-Dec-2024,Credit Card,20241229_80243,57321,Adventure Pass,40801,,Shatha,POS2,179.05,8.95,188
+29-Dec-2024,Credit Card,20241229_80244,57162,100 Credit Top Up - Redemption,40801,,Hajii,POS9,95.24,4.76,100
+29-Dec-2024,Credit Card,20241229_80245,57052,Card Deposit,40801,,Hajii,POS9,4.76,0.24,5
+29-Dec-2024,Credit Card,20241229_80245,57162,100 Credit Top Up - Redemption,40801,,Hajii,POS9,95.24,4.76,100
+29-Dec-2024,Credit Card,20241229_80246,57321,Mazaya++ [2] - Get Tired Playi,40801,,Shatha,POS2,0,0,0
+29-Dec-2024,Credit Card,20241229_80246,57323,Lockers ,40801,,Shatha,POS2,9.52,0.48,10
+29-Dec-2024,Credit Card,20241229_80247,57321,Get Tired Playing ,40801,,Mohamed,POS3,598.1,29.9,628
+29-Dec-2024,Cash,20241229_80248,57321,Adventure Pass,40801,,Shatha,POS2,179.05,8.95,188
+29-Dec-2024,Credit Card,20241229_80249,57052,Card Deposit,40801,,Shatha,POS2,4.76,0.24,5
+29-Dec-2024,Credit Card,20241229_80249,57322,Multiplex Karting - ADULTS,40801,,Shatha,POS2,120,6,126
+29-Dec-2024,Credit Card,20241229_80249,57322,Multiplex Karting - JUNIOR,40801,,Shatha,POS2,160,8,168
+29-Dec-2024,Credit Card,20241229_80250,51605,Face Art - Full Size,40801,,Manisha,POS7,72.38,3.62,76
+29-Dec-2024,,20241229_80251,57321,Mazaya++ [2] - Get Tired Playi,40801,,Shatha,POS2,0,0,0
+29-Dec-2024,Credit Card,20241229_80252,57052,Card Deposit,40801,,Shatha,POS2,4.76,0.24,5
+29-Dec-2024,Credit Card,20241229_80252,57322,Multiplex Karting - ADULTS,40801,,Shatha,POS2,120,6,126
+29-Dec-2024,,20241229_80253,57321,Mazaya++ [2] - Get Tired Playi,40801,,Mohamed,POS3,0,0,0
+29-Dec-2024,Cash,20241229_80254,57162,50 AED Top Up - Redemption,40801,,Hajii,POS9,47.62,2.38,50
+29-Dec-2024,Credit Card,20241229_80255,57321,Adventure Pass,40801,,Mohamed,POS3,358.1,17.9,376
+29-Dec-2024,Credit Card,20241229_80256,57321,Fazaa - Get Tired Playing,40801,,Shatha,POS2,0,0,0
+29-Dec-2024,Credit Card,20241229_80256,57321,Toddler Pass,40801,,Shatha,POS2,99,4.95,103.95
+29-Dec-2024,,20241229_80257,57321,Fazaa - Get Tired Playing,40801,,Mohamed,POS3,0,0,0
+29-Dec-2024,Credit Card,20241229_80258,57322,Multiplex Karting - ADULTS,40801,,Shatha,POS2,240,12,252
+29-Dec-2024,Credit Card,20241229_80259,57162,50 AED Top Up - Redemption,40801,,Hajii,POS9,47.62,2.38,50
+29-Dec-2024,Credit Card,20241229_80260,57323,Cave Explorer,40801,,Shatha,POS2,20,1,21
+29-Dec-2024,Credit Card,20241229_80261,57321,Discovery Pass + 1 Redemption ,40801,,Mohamed,POS3,431.43,21.57,453
+29-Dec-2024,Credit Card,20241229_80262,57052,Card Deposit,40801,,Omnia,POS5,4.76,0.24,5
+29-Dec-2024,Credit Card,20241229_80262,57322,Multiplex Karting - ADULTS,40801,,Omnia,POS5,480,24,504
+29-Dec-2024,Credit Card,20241229_80263,57052,Card Deposit,40801,,Shatha,POS2,4.76,0.24,5
+29-Dec-2024,Credit Card,20241229_80263,57322,Multiplex Karting - JUNIOR,40801,,Shatha,POS2,80,4,84
+29-Dec-2024,Credit Card,20241229_80264,57052,Card Deposit,40801,,Shatha,POS2,4.76,0.24,5
+29-Dec-2024,Credit Card,20241229_80264,57322,Multiplex Karting - ADULTS,40801,,Shatha,POS2,240,12,252
+29-Dec-2024,Credit Card,20241229_80265,57322,Multiplex Karting - JUNIOR,40801,,Shatha,POS2,80,4,84
+29-Dec-2024,Cash;Credit Card,20241229_80266,57052,Card Deposit,40801,,Mohamed,POS3,4.76,0.24,5
+29-Dec-2024,Cash;Credit Card,20241229_80266,57322,Multiplex Karting - ADULTS,40801,,Mohamed,POS3,120,6,126
+29-Dec-2024,Credit Card,20241229_80267,57162,50 AED Top Up - Redemption,40801,,Hajii,POS9,47.62,2.38,50
+29-Dec-2024,Credit Card,20241229_80268,57321,Toddler Pass,40801,,Mohamed,POS3,99,4.95,103.95
+29-Dec-2024,Credit Card,20241229_80268,57323,Toddler Playland Unlimited,40801,,Mohamed,POS3,94.29,4.71,99
+29-Dec-2024,Credit Card,20241229_80269,57321,Discovery Pass + 1 Redemption ,40801,,Omnia,POS5,143.81,7.19,151
+29-Dec-2024,Credit Card,20241229_80270,57052,Card Deposit,40801,,Shatha,POS2,4.76,0.24,5
+29-Dec-2024,Credit Card,20241229_80270,57162,100 Credit Top Up - Redemption,40801,,Shatha,POS2,95.24,4.76,100
+29-Dec-2024,Credit Card,20241229_80270,57321,Thriller Pass,40801,,Shatha,POS2,687,34.35,721.35
+29-Dec-2024,Credit Card,20241229_80271,57321,Discovery Pass + 1 Redemption ,40801,,Mohamed,POS3,862.86,43.14,906
+29-Dec-2024,Credit Card,20241229_80272,57162,50 AED Top Up - Redemption,40801,,Hajii,POS9,47.62,2.38,50
+29-Dec-2024,,20241229_80273,57321,Mazaya++ [2] - Get Tired Playi,40801,,Shatha,POS2,0,0,0
+29-Dec-2024,Credit Card,20241229_80274,57052,Card Deposit,40801,,Hajii,POS9,4.76,0.24,5
+29-Dec-2024,Credit Card,20241229_80274,57162,50 AED Top Up - Redemption,40801,,Hajii,POS9,47.62,2.38,50
+29-Dec-2024,Credit Card,20241229_80275,57162,50 AED Top Up - Redemption,40801,,Hajii,POS9,47.62,2.38,50
+29-Dec-2024,Credit Card,20241229_80276,57162,100 Credit Top Up - Redemption,40801,,Hajii,POS9,95.24,4.76,100
+29-Dec-2024,Credit Card,20241229_80277,57321,Adventure Pass - 50% Staff Dis,40801,,Zinelabidine,POS4,358.1,17.9,376
+29-Dec-2024,Credit Card,20241229_80278,57052,Card Deposit,40801,,Shatha,POS2,4.76,0.24,5
+29-Dec-2024,Credit Card,20241229_80278,57321,Discovery Pass + 1 Redemption ,40801,,Shatha,POS2,719.05,35.95,755
+29-Dec-2024,Credit Card,20241229_80278,57322,Multiplex Karting - ADULTS,40801,,Shatha,POS2,120,6,126
+29-Dec-2024,Credit Card,20241229_80279,57052,Card Deposit,40801,,Zinelabidine,POS4,4.76,0.24,5
+29-Dec-2024,Credit Card,20241229_80279,57322,Multiplex Karting - ADULTS,40801,,Zinelabidine,POS4,240,12,252
+29-Dec-2024,Credit Card,20241229_80280,51305,Socks,40801,,Mohamed,POS3,9.52,0.48,10
+29-Dec-2024,Credit Card,20241229_80280,57321,Get Tired Playing ,40801,,Mohamed,POS3,299.05,14.95,314
+29-Dec-2024,Credit Card,20241229_80281,57321,POD - Discovery Pass - 70.50 A,40801,,Mohamed,POS3,67.14,3.36,70.5
+29-Dec-2024,,20241229_80282,57321,Mazaya++ [2] - Get Tired Playi,40801,,Shatha,POS2,0,0,0
+29-Dec-2024,,20241229_80283,57321,Mazaya++ [2] - Get Tired Playi,40801,,Zinelabidine,POS4,0,0,0
+29-Dec-2024,,20241229_80284,57321,Mazaya++ [2] - Get Tired Playi,40801,,Mohamed,POS3,0,0,0
+29-Dec-2024,Credit Card,20241229_80285,51305,Shoe Rent,40801,,Shatha,POS2,28.57,1.43,30
+29-Dec-2024,Credit Card,20241229_80285,51305,Socks,40801,,Shatha,POS2,28.57,1.43,30
+29-Dec-2024,Credit Card,20241229_80285,57052,Card Deposit,40801,,Shatha,POS2,4.76,0.24,5
+29-Dec-2024,Credit Card,20241229_80285,57321,Discovery Pass + 1 Redemption ,40801,,Shatha,POS2,719.05,35.95,755
+29-Dec-2024,Credit Card,20241229_80285,57322,Multiplex Karting - ADULTS,40801,,Shatha,POS2,120,6,126
+29-Dec-2024,Credit Card,20241229_80285,57322,Multiplex Karting - JUNIOR,40801,,Shatha,POS2,160,8,168
+29-Dec-2024,,20241229_80286,57321,Fazaa - Get Tired Playing,40801,,Mohamed,POS3,0,0,0
+29-Dec-2024,,20241229_80287,57321,Mazaya++ - Get Tired Playing ,40801,,Mohamed,POS3,0,0,0
+29-Dec-2024,Credit Card,20241229_80288,57322,Multiplex Karting - ADULTS,40801,,Mohamed,POS3,240,12,252
+29-Dec-2024,Credit Card,20241229_80289,57323,Add Ons - Bungee Blast - Out D,40801,,Maurene ,POS8,27.62,1.38,29
+29-Dec-2024,Credit Card,20241229_80290,57321,Toddler Pass,40801,,Zinelabidine,POS4,99,4.95,103.95
+29-Dec-2024,Credit Card,20241229_80291,57322,Multiplex Karting - ADULTS,40801,,Mohamed,POS3,120,6,126
+29-Dec-2024,Cash,20241229_80292,51305,Socks,40801,,Zinelabidine,POS4,9.52,0.48,10
+29-Dec-2024,Credit Card,20241229_80293,57321,POD - Discovery Pass - 70.50 A,40801,,Mohamed,POS3,67.14,3.36,70.5
+29-Dec-2024,,20241229_80294,57321,Mazaya++ [2] - Get Tired Playi,40801,,Zinelabidine,POS4,0,0,0
+29-Dec-2024,,20241229_80295,57321,Mazaya++ [2] - Get Tired Playi,40801,,Mohamed,POS3,0,0,0
+29-Dec-2024,Credit Card,20241229_80296,51305,Shoe Rent,40801,,Shatha,POS2,14.29,0.71,15
+29-Dec-2024,Credit Card,20241229_80296,51305,Socks,40801,,Shatha,POS2,9.52,0.48,10
+29-Dec-2024,Credit Card,20241229_80296,57052,Card Deposit,40801,,Shatha,POS2,4.76,0.24,5
+29-Dec-2024,Credit Card,20241229_80296,57322,Multiplex Karting - ADULTS,40801,,Shatha,POS2,360,18,378
+29-Dec-2024,Credit Card,20241229_80297,57323,Add Ons - Bungee Blast - Out D,40801,,Maurene ,POS8,27.62,1.38,29
+29-Dec-2024,Credit Card,20241229_80298,57323,Bungee Blast - Out Door,40801,,Maurene ,POS8,74.29,3.71,78
+29-Dec-2024,Credit Card,20241229_80299,57323,Add Ons - Bungee Blast - Out D,40801,,Maurene ,POS8,27.62,1.38,29
+29-Dec-2024,Credit Card,20241229_80300,57322,Multiplex Karting - ADULTS,40801,,Omnia,POS5,240,12,252
+29-Dec-2024,Cash;Credit Card,20241229_80301,57321,Discovery Pass + 1 Redemption ,40801,,Shatha,POS2,431.43,21.57,453
+29-Dec-2024,,20241229_80302,57321,Fazaa - Get Tired Playing,40801,,Omnia,POS5,0,0,0
+29-Dec-2024,Credit Card,20241229_80303,57321,Discovery Pass + 1 Redemption ,40801,,Shatha,POS2,287.62,14.38,302
+29-Dec-2024,Credit Card,20241229_80304,51605,Add Ons - Spider Man 20 cms,40801,,Manisha,POS7,83.81,4.19,88
+29-Dec-2024,Credit Card,20241229_80305,57323,Bungee Blast - Out Door,40801,,Maurene ,POS8,37.14,1.86,39
+29-Dec-2024,Credit Card,20241229_80306,57323,Bungee Blast - Out Door,40801,,Maurene ,POS8,74.29,3.71,78
+29-Dec-2024,Credit Card,20241229_80307,57323,Carousel - RO,40801,,Maurene ,POS8,40,2,42
+29-Dec-2024,Credit Card,20241229_80308,57323,Bungee Blast - Out Door,40801,,Maurene ,POS8,37.14,1.86,39
+29-Dec-2024,Credit Card,20241229_80309,57323,Add Ons - Bungee Blast - Out D,40801,,Maurene ,POS8,27.62,1.38,29
+29-Dec-2024,Credit Card,20241229_80310,57321,Toddler Pass,40801,,Shatha,POS2,99,4.95,103.95
+29-Dec-2024,Credit Card,20241229_80311,57323,Carousel - RO,40801,,Maurene ,POS8,20,1,21
+29-Dec-2024,Credit Card,20241229_80312,57321,Get Tired Playing + Karting,40801,,Mohamed,POS3,380,19,399
+29-Dec-2024,Credit Card,20241229_80313,57322,Multiplex Karting - ADULTS,40801,,Omnia,POS5,120,6,126
+29-Dec-2024,Credit Card,20241229_80314,57321,Toddler Pass,40801,,Shatha,POS2,99,4.95,103.95
+29-Dec-2024,Credit Card,20241229_80315,57323,Carousel - RO,40801,,Maurene ,POS8,20,1,21
+29-Dec-2024,Credit Card,20241229_80316,57321,Discovery Pass + 1 Redemption ,40801,,Shatha,POS2,431.43,21.57,453
+29-Dec-2024,Credit Card,20241229_80317,57321,Discovery Pass + 1 Redemption ,40801,,Omnia,POS5,287.62,14.38,302
+29-Dec-2024,,20241229_80318,57321,Mazaya++ [2] - Get Tired Playi,40801,,Mohamed,POS3,0,0,0
+29-Dec-2024,Credit Card,20241229_80319,51305,Socks,40801,,Omnia,POS5,9.52,0.48,10
+29-Dec-2024,Credit Card,20241229_80319,57052,Card Deposit,40801,,Omnia,POS5,4.76,0.24,5
+29-Dec-2024,Credit Card,20241229_80319,57322,Multiplex Karting - ADULTS,40801,,Omnia,POS5,120,6,126
+29-Dec-2024,Credit Card,20241229_80319,57322,Multiplex Karting - JUNIOR,40801,,Omnia,POS5,80,4,84
+29-Dec-2024,,20241229_80320,57321,Mazaya++ [2] - Get Tired Playi,40801,,Mohamed,POS3,0,0,0
+29-Dec-2024,Credit Card,20241229_80321,57321,Discovery Pass + 1 Redemption ,40801,,Omnia,POS5,143.81,7.19,151
+29-Dec-2024,,20241229_80322,57321,Fazaa - Get Tired Playing,40801,,Shatha,POS2,0,0,0
+29-Dec-2024,,20241229_80323,57321,Fazaa - Get Tired Playing,40801,,Mohamed,POS3,0,0,0
+29-Dec-2024,Credit Card,20241229_80324,51305,Socks,40801,,Mohamed,POS3,19.05,0.95,20
+29-Dec-2024,,20241229_80325,57321,Mazaya++ [2] - Get Tired Playi,40801,,Omnia,POS5,0,0,0
+29-Dec-2024,Cash,20241229_80326,57321,Discovery Pass + 1 Redemption ,40801,,Omnia,POS5,143.81,7.19,151
+29-Dec-2024,Credit Card,20241229_80327,57052,Card Deposit,40801,,Amal,POS2,4.76,0.24,5
+29-Dec-2024,Credit Card,20241229_80327,57322,Multiplex Karting - ADULTS,40801,,Amal,POS2,120,6,126
+29-Dec-2024,Credit Card,20241229_80327,57322,Multiplex Karting - Dual Drive,40801,,Amal,POS2,149.52,7.48,157
+29-Dec-2024,Cash,20241229_80328,57162,50 AED Top Up - Redemption,40801, ,Amr,POS9,47.62,2.38,50
+29-Dec-2024,Credit Card,20241229_80329,51305,Socks,40801,,Omnia,POS5,9.52,0.48,10
+29-Dec-2024,Credit Card,20241229_80329,57052,Card Deposit,40801,,Omnia,POS5,4.76,0.24,5
+29-Dec-2024,Credit Card,20241229_80329,57322,Multiplex Karting - ADULTS,40801,,Omnia,POS5,360,18,378
+29-Dec-2024,Credit Card,20241229_80330,57321,Get Tired Playing ,40801,,Amal,POS2,897.14,44.86,942
+29-Dec-2024,Credit Card,20241229_80331,51305,Socks,40801,,Amal,POS2,9.52,0.48,10
+29-Dec-2024,Credit Card,20241229_80332,57052,Card Deposit,40801,,Omnia,POS5,4.76,0.24,5
+29-Dec-2024,Credit Card,20241229_80332,57322,Multiplex Karting - ADULTS,40801,,Omnia,POS5,120,6,126
+29-Dec-2024,Credit Card,20241229_80333,57321,Toddler Pass,40801,,Amal,POS2,99,4.95,103.95
+29-Dec-2024,Credit Card,20241229_80334,57162,50 AED Top Up - Redemption,40801, ,Amr,POS9,47.62,2.38,50
+29-Dec-2024,Cash,20241229_80335,57323,Bungee Blast - Out Door,40801,,Maurene ,POS8,37.14,1.86,39
+29-Dec-2024,Credit Card,20241229_80336,57162,50 AED Top Up - Redemption,40801, ,Amr,POS9,47.62,2.38,50
+29-Dec-2024,Credit Card,20241229_80337,57052,Card Deposit,40801, ,Amr,POS9,4.76,0.24,5
+29-Dec-2024,Credit Card,20241229_80337,57162,50 AED Top Up - Redemption,40801, ,Amr,POS9,47.62,2.38,50
+29-Dec-2024,,20241229_80338,57321,Mazaya++ [2] - Get Tired Playi,40801,,Amal,POS2,0,0,0
+29-Dec-2024,Credit Card,20241229_80339,57323,Through the Roof,40801,,Omnia,POS5,147.62,7.38,155
+29-Dec-2024,,20241229_80340,57321,Mazaya++ [2] - Get Tired Playi,40801,,Amal,POS2,0,0,0
+29-Dec-2024,Credit Card,20241229_80341,57321,Discovery Pass + 1 Redemption ,40801,,Omnia,POS5,287.62,14.38,302
+29-Dec-2024,Credit Card,20241229_80342,57323,Carousel - RO,40801,,Maurene ,POS8,20,1,21
+29-Dec-2024,Cash;Credit Card,20241229_80343,57052,Card Deposit,40801,,Amal,POS2,4.76,0.24,5
+29-Dec-2024,Cash;Credit Card,20241229_80343,57321,Discovery Pass + 1 Redemption ,40801,,Amal,POS2,431.43,21.57,453
+29-Dec-2024,Cash;Credit Card,20241229_80343,57322,Multiplex Karting - ADULTS,40801,,Amal,POS2,360,18,378
+29-Dec-2024,,20241229_80344,57321,Fazaa - Get Tired Playing,40801,,Omnia,POS5,0,0,0
+29-Dec-2024,Credit Card,20241229_80345,57321,Discovery Pass + 1 Redemption ,40801,,Amal,POS2,143.81,7.19,151
+29-Dec-2024,Credit Card,20241229_80346,57321,Toddler Pass,40801,,Omnia,POS5,99,4.95,103.95
+29-Dec-2024,,20241229_80347,57321,Fazaa - Get Tired Playing,40801,,Amal,POS2,0,0,0
+29-Dec-2024,Credit Card,20241229_80348,57322,Multiplex Karting - ADULTS,40801,,Omnia,POS5,360,18,378
+29-Dec-2024,,20241229_80349,57321,Mazaya++ [2] - Get Tired Playi,40801,,Amal,POS2,0,0,0
+29-Dec-2024,Credit Card,20241229_80350,57323,Bungee Blast - Out Door,40801,,Maurene ,POS8,74.29,3.71,78
+29-Dec-2024,Credit Card,20241229_80351,57323,Bungee Blast - Out Door,40801,,Maurene ,POS8,74.29,3.71,78
+29-Dec-2024,Credit Card,20241229_80352,57321,Get Tired Playing ,40801,,Omnia,POS5,598.1,29.9,628
+29-Dec-2024,,20241229_80353,57321,Mazaya++ - Get Tired Playing ,40801,,Amal,POS2,0,0,0
+29-Dec-2024,Credit Card,20241229_80354,57162,50 AED Top Up - Redemption,40801, ,Amr,POS9,47.62,2.38,50
+29-Dec-2024,Credit Card,20241229_80355,57323,Carousel - RO,40801,,Maurene ,POS8,20,1,21
+29-Dec-2024,Credit Card,20241229_80356,57052,Card Deposit,40801,,Omnia,POS5,4.76,0.24,5
+29-Dec-2024,Credit Card,20241229_80356,57322,Multiplex Karting - ADULTS,40801,,Omnia,POS5,120,6,126
+29-Dec-2024,Cash,20241229_80357,57323,Carousel - RO,40801,,Maurene ,POS8,40,2,42
+29-Dec-2024,Credit Card,20241229_80358,57321,Discovery Pass + 1 Redemption ,40801,,Amal,POS2,287.62,14.38,302
+29-Dec-2024,Cash,20241229_80359,57162,50 AED Top Up - Redemption,40801, ,Amr,POS9,47.62,2.38,50
+29-Dec-2024,Credit Card,20241229_80360,51305,Socks,40801,,Amal,POS2,9.52,0.48,10
+29-Dec-2024,,20241229_80361,57321,Mazaya++ [2] - Get Tired Playi,40801, ,Amr,POS4,0,0,0
+29-Dec-2024,Credit Card,20241229_80362,57052,Card Deposit,40801, ,Amr,POS9,4.76,0.24,5
+29-Dec-2024,Credit Card,20241229_80362,57162,100 Credit Top Up - Redemption,40801, ,Amr,POS9,95.24,4.76,100
+29-Dec-2024,Credit Card,20241229_80363,57321,Toddler Pass,40801, ,Amr,POS4,99,4.95,103.95
+29-Dec-2024,Credit Card,20241229_80364,57052,Card Deposit,40801, ,Amr,POS9,4.76,0.24,5
+29-Dec-2024,Credit Card,20241229_80364,57162,50 AED Top Up - Redemption,40801, ,Amr,POS9,47.62,2.38,50
+29-Dec-2024,Cash,20241229_80365,57323,Spot Sale,40801,,Sirjana,Tablet 2,333.33,16.67,350
+29-Dec-2024,,20241229_80366,57321,Mazaya++ [2] - Get Tired Playi,40801,,Omnia,POS5,0,0,0
+29-Dec-2024,Cash,20241229_80367,57323,Spot Sale,40801,,Sirjana,Tablet 2,47.62,2.38,50
+29-Dec-2024,Credit Card,20241229_80368,57162,50 AED Top Up - Redemption,40801, ,Amr,POS9,47.62,2.38,50
+29-Dec-2024,Credit Card,20241229_80369,57323,Bungee Blast - Out Door,40801,,Maurene ,POS8,37.14,1.86,39
+29-Dec-2024,Credit Card,20241229_80370,57162,100 Credit Top Up - Redemption,40801, ,Amr,POS9,95.24,4.76,100
+29-Dec-2024,Credit Card,20241229_80371,57162,100 Credit Top Up - Redemption,40801, ,Amr,POS9,95.24,4.76,100
+29-Dec-2024,Credit Card,20241229_80372,57323,Bungee Blast - Out Door,40801,,Maurene ,POS8,37.14,1.86,39
+29-Dec-2024,Credit Card,20241229_80373,51605,Fluid Art - Meduim Fluid Bear ,40801,,Manisha,POS7,178.1,8.9,187
+29-Dec-2024,Credit Card,20241229_80373,51605,Tray Bear - 21cm,40801,,Manisha,POS7,152,7.6,159.6
+29-Dec-2024,Cash,20241229_80374,57052,Card Deposit,40801,,Omnia,POS5,4.76,0.24,5
+29-Dec-2024,Cash,20241229_80374,57322,Multiplex Karting - ADULTS,40801,,Omnia,POS5,120,6,126
+29-Dec-2024,Cash,20241229_80374,57322,Multiplex Karting - JUNIOR,40801,,Omnia,POS5,160,8,168
+29-Dec-2024,Credit Card,20241229_80375,51605,Fluid Art - Meduim Fluid Bear ,40801,,Manisha,POS7,178.1,8.9,187
+29-Dec-2024,Credit Card,20241229_80376,57323,Carousel - RO,40801,,Maurene ,POS8,40,2,42
+29-Dec-2024,Credit Card,20241229_80377,57323,Carousel - RO,40801,,Maurene ,POS8,20,1,21
+29-Dec-2024,Cash,20241229_80378,57323,Spot Sale,40801,,Sirjana,Tablet 2,190.48,9.52,200

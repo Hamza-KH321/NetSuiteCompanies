@@ -1,0 +1,5 @@
+{
+    "success": true,
+    "message": "Inventory Adjustment created successfully.",
+    "id": 576264
+}

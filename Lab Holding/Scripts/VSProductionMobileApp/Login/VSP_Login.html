@@ -1,0 +1,56 @@
+<!-- @fileName VSP_Login.html -->
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>VS Production Login</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="VSP_Login.css">
+</head>
+<body>
+    <main class="login-shell">
+        <section class="login-panel">
+            <div class="login-brand">
+                <img class="{{COMPANY_LOGO_CLASS}}" src="{{COMPANY_LOGO_URL}}" alt="{{COMPANY_LEGAL_NAME}}">
+                <div class="{{BRAND_MARK_CLASS}}">VS</div>
+                <div>
+                    <div class="company-legal-name">{{COMPANY_LEGAL_NAME}}</div>
+                    <h1>VS Production</h1>
+                </div>
+            </div>
+            <form id="loginForm" novalidate>
+                <div class="field">
+                    <label for="username">Employee Email or ID</label>
+                    <div class="input-wrap">
+                        <input id="username" name="username" type="text" autocomplete="username" placeholder="you@company.com" required>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label for="password">Password</label>
+                    <div class="input-wrap">
+                        <input id="password" name="password" type="password" autocomplete="current-password" placeholder="••••••••" required>
+                        <button type="button" class="toggle-password" id="togglePassword" aria-label="Show password">
+                            <svg class="eye" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7Z"/><circle cx="12" cy="12" r="3"/></svg>
+                            <svg class="eye-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17.94 17.94A10.94 10.94 0 0 1 12 19c-7 0-11-7-11-7a21.6 21.6 0 0 1 5.06-6.06M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 7 11 7a21.6 21.6 0 0 1-2.61 3.61M14.12 14.12a3 3 0 1 1-4.24-4.24"/><path d="M1 1l22 22"/></svg>
+                        </button>
+                    </div>
+                </div>
+
+                <p id="errorMessage" class="error-message">{{ERROR_MESSAGE}}</p>
+
+                <button type="submit" id="submitButton">
+                    <span class="btn-label">
+                        <span class="btn-text">Log In</span>
+                        <span class="btn-spinner"></span>
+                    </span>
+                </button>
+            </form>
+        </section>
+    </main>
+    <script src="VSP_Login.js"></script>
+</body>
+</html>

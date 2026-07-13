@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="POS_Dashboard.css">
+
+</head>
+
+<body>
+    <button class="logout-btn" onclick="logout()">Logout</button>
+
+    <div class="dashboard-container">
+        <div class="dashboard-header">
+            <h1>Dashboard</h1>
+            <p>Welcome back! Choose an option to continue</p>
+        </div>
+
+        <div class="cards-grid">
+            <div class="card" onclick="navigateTo('order')">
+                <div class="card-icon">🛒</div>
+                <h2 class="card-title">Make an Order</h2>
+                <p class="card-description">Create and manage new orders for your customers</p>
+            </div>
+
+            <div class="card" onclick="navigateTo('tables')">
+                <div class="card-icon">🪑</div>
+                <h2 class="card-title">Tables/Floors</h2>
+                <p class="card-description">Manage table arrangements and floor layouts</p>
+            </div>
+
+            <div class="card" onclick="navigateTo('reports')">
+                <div class="card-icon">📊</div>
+                <h2 class="card-title">Reports</h2>
+                <p class="card-description">View analytics and generate business reports</p>
+            </div>
+
+            <div class="card" onclick="navigateTo('settings')">
+                <div class="card-icon">⚙️</div>
+                <h2 class="card-title">Settings</h2>
+                <p class="card-description">Configure system preferences and options</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let NAV_URLS = {};
+
+        // Fetch navigation URLs once page loads
+        fetch(window.location.href, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ action: 'get_navigation_urls' })
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (!data.success) throw new Error('Navigation URLs not returned');
+                NAV_URLS = data;
+            })
+            .catch(err => {
+                console.error(err);
+                alert('Failed to load navigation');
+            });
+
+        function navigateTo(page) {
+
+            if (page === 'order') {
+                if (!NAV_URLS.orderUrl) {
+                    alert('Order page not available');
+                    return;
+                }
+                window.location.href = NAV_URLS.orderUrl;
+                return;
+            }
+
+            if (page === 'tables') {
+                if (!NAV_URLS.tablesUrl) {
+                    alert('Tables/Floors page not available');
+                    return;
+                }
+                window.location.href = NAV_URLS.tablesUrl;
+                return;
+            }
+
+            alert('Navigating to: ' + page.charAt(0).toUpperCase() + page.slice(1));
+        }
+
+        function logout() {
+            if (!NAV_URLS.loginUrl) {
+                alert('Login page not available');
+                return;
+            }
+
+            if (confirm('Are you sure you want to logout?')) {
+                sessionStorage.clear();
+                localStorage.clear();
+                window.location.href = NAV_URLS.loginUrl;
+            }
+        }
+    </script>
+
+</body>
+
+</html>

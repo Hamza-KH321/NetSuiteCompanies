@@ -1,0 +1,5 @@
+{
+    "success": true,
+    "message": "Item Receipt created successfully.",
+    "id": 576269
+}

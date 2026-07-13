@@ -1,0 +1,37 @@
+* custentity_vs_custfoodics_id (Custom Entity Fields)
+	Field Name: Customer Foodics ID.
+	Field Type: Free-Form Text.
+	Store Value.
+	Applies To: Customer.
+	Display: Subtab Main, Display Type Normal. 
+	NOTE: Customer Form in the classification section .
+
+* custbody_vs_order_number (Transaction Body Fields)
+	Field Name: Order Number.
+	Field Type: Free-Form Text.
+	Store Value.
+	Applies To: Sale.
+	Display: Display type is Disabled.
+	NOTE: Sales Order Form in the custom subtab the field is disabled.
+
+* custitem_vs_sku_code (Custom Item Field)
+	Field Name: SKU CODE.	
+	Field Type: Free-Form Text.
+	Store Value and Show In List.
+	Applies To Kit/Package.
+	Display in the Main Subtab and Display Type will be Normal.
+ 	Go to List => Accounting => Items => choose Kit/Package.
+
+* custbody_foodics_id (Transaction Body Field in sales order screen Classification section)
+	Field Name: FOODICS ORDER ID
+	Field Type: Free-Form Text.
+	Store Value.
+	Applies To: Sales.
+	Display: Display type is Normal.
+
+* custitem_vs_items_foodics_id (Custom Item field)
+	Field Name: Foodics ID.
+	Field Type: Free-Form Text.
+	Store Value.
+	Applies To: Noninventory item, inventory item, Kit/Package, Assembly/Bill of 	Materials, sybType is Both.
+	Display Type: Normal.

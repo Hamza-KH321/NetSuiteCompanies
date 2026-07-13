@@ -1,0 +1,72 @@
+{
+	"info": {
+		"_postman_id": "b6233947-97d2-40e2-94fa-d14ba20b8d46",
+		"name": "VitaCare Case",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "28321459"
+	},
+	"item": [
+		{
+			"name": "Create Case",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"value": "cd7f72c0851d4366a261005b3783908e",
+						"type": "text"
+					},
+					{
+						"key": "User-Agent",
+						"value": "Mozilla/5.0",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"subject\" : \"Test Subject\",\r\n    \"Name\" : \"8977\",\r\n    \"Email\" : \"test@mail.com\",\r\n    \"Phone\" :\"12345689\",\r\n    \"Message\" : \"TEST MESSAGE\",\r\n    \"CaseType\" : \"Technical\",\r\n    \"Branch\": \"Jeddah\",\r\n    \"Username\": \"15\",\r\n    \"Address\": \"Test Address\",\r\n    \"CaseCategory\": \"4\",\r\n    \"CaseSubCategory\": \"64\",\r\n    \"Attachment\": \"\",\r\n    \"priority\": \"1\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://7065838.extforms.netsuite.com/app/site/hosting/scriptlet.nl?script=1944&deploy=1&compid=7065838&ns-at=AAEJ7tMQxkHfYUaBRSqJ1lQ7pFqtGd7ZwV-qDyZpUYc0_7hXjzY",
+					"protocol": "https",
+					"host": [
+						"7065838",
+						"extforms",
+						"netsuite",
+						"com"
+					],
+					"path": [
+						"app",
+						"site",
+						"hosting",
+						"scriptlet.nl"
+					],
+					"query": [
+						{
+							"key": "script",
+							"value": "1944"
+						},
+						{
+							"key": "deploy",
+							"value": "1"
+						},
+						{
+							"key": "compid",
+							"value": "7065838"
+						},
+						{
+							"key": "ns-at",
+							"value": "AAEJ7tMQxkHfYUaBRSqJ1lQ7pFqtGd7ZwV-qDyZpUYc0_7hXjzY"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

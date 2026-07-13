@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sales Order Lines</title>
+    <link rel="stylesheet" type="text/css"
+        href="https://6371802.app.netsuite.com/core/media/media.nl?id=39175&c=6371802&h=OiY67wAmXdo3u7q9jJ-lYuooepM7bnpj9tcjwBKHbQrd_8Ye&_xt=.css">
+</head>
+<body>
+    <div class="container">
+        <h2>📄 Sales Order Line Items</h2>
+        <button class="primary-btn" id="backBtn" style="margin-top: 20px;">🔙 Back to Sales Orders</button>
+
+        <div class="so-table-wrapper">
+            <table class="so-table">
+                <thead>
+                    <tr>
+                        <th>Item</th>
+                        <th>Units</th>
+                        <th>Rate</th>
+                        <th>Quantity</th>
+                        <th>Amount</th>
+                    </tr>
+                </thead>
+                <tbody id="soLinesBody">
+                    <!-- Filled by JS -->
+                </tbody>
+            </table>
+        </div>
+
+        <br />
+    </div>
+
+    <!-- 🔄 Loading Overlay -->
+    <div id="loadingOverlay" class="loading-overlay" style="display: none;">
+        <div class="loading-spinner"></div>
+        <div class="loading-text">Loading, please wait...</div>
+    </div>
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const soid = urlParams.get("soid");
+
+        async function fetchSOLines() {
+            if (!soid) {
+                alert("Missing Sales Order ID in URL.");
+                return;
+            }
+
+            showLoading(true);
+            try {
+                const response = await fetch(window.location.href, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ action: "getSalesOrderLines", soid })
+                });
+
+                const data = await response.json();
+                const tbody = document.getElementById("soLinesBody");
+                tbody.innerHTML = '';
+
+                if (data.rows && Array.isArray(data.rows)) {
+                    data.rows.forEach(row => {
+                        const tr = document.createElement("tr");
+
+                        const rate = parseFloat(row.rate || 0);
+                        const amount = parseFloat(row.amount || 0);
+
+                        tr.innerHTML = `
+                            <td>${row.item}</td>
+                            <td>${row.unit}</td>
+                            <td>${rate.toLocaleString(undefined, { minimumFractionDigits: 2 })}</td>
+                            <td>${row.quantity}</td>
+                            <td>${amount.toLocaleString(undefined, { minimumFractionDigits: 2 })}</td>
+                        `;
+
+                        tbody.appendChild(tr);
+                    });
+                } else {
+                    tbody.innerHTML = '<tr><td colspan="5">No lines found.</td></tr>';
+                }
+            } catch (error) {
+                alert("Failed to fetch sales order lines.");
+                console.error(error);
+            } finally {
+                showLoading(false);
+            }
+        }
+
+        async function fetchBackUrl() {
+            try {
+                const response = await fetch(window.location.href, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ action: "getBackUrl" })
+                });
+
+                const data = await response.json();
+                const backBtn = document.getElementById("backBtn");
+
+                if (data.backUrl) {
+                    backBtn.onclick = () => {
+                        window.location.href = data.backUrl;
+                    };
+                } else {
+                    backBtn.disabled = true;
+                }
+            } catch (error) {
+                alert("Failed to get back URL.");
+                console.error(error);
+            } finally {
+            }
+        }
+
+        function showLoading(show) {
+            const overlay = document.getElementById("loadingOverlay");
+            overlay.style.display = show ? "flex" : "none";
+        }
+
+        window.onload = function () {
+            fetchSOLines();
+            fetchBackUrl();
+        };
+    </script>
+</body>
+</html>

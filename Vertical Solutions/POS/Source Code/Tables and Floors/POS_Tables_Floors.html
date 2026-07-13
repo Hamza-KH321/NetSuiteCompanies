@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tables & Floors</title>
+    <link rel="stylesheet" href="POS_Tables_Floors.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="header-left">
+                <button class="back-button" onclick="goToDashboard()">
+                    <span>←</span>
+                    <span>Back to Dashboard</span>
+                </button>
+                <h1>Tables & Floors</h1>
+            </div>
+
+            <div class="header-right">
+                <div class="legend">
+                    <div class="legend-item">
+                        <div class="legend-dot available"></div>
+                        <span>Available</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-dot in-use"></div>
+                        <span>In-Use</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-dot dirty"></div>
+                        <span>Dirty</span>
+                    </div>
+                </div>
+                
+                <button class="add-table-button" onclick="openAddTableModal()">
+                    <span class="plus-icon">+</span>
+                    <span>Add Table</span>
+                </button>
+            </div>
+        </div>
+
+        <div id="tablesContainer">
+            <div class="loading">Loading tables...</div>
+        </div>
+    </div>
+
+    <!-- SUCCESS MESSAGE -->
+    <div id="successMessage" class="success-message hidden">
+        <div class="success-content">
+            <span class="success-icon">✓</span>
+            <span class="success-text">Table created successfully!</span>
+        </div>
+    </div>
+
+    <!-- UPDATE SUCCESS MESSAGE -->
+    <div id="updateMessage" class="success-message hidden">
+        <div class="success-content">
+            <span class="success-icon">✓</span>
+            <span class="success-text">Table updated successfully!</span>
+        </div>
+    </div>
+
+    <!-- ADD TABLE MODAL -->
+    <div id="addTableModal" class="modal hidden">
+        <div class="modal-overlay" onclick="closeAddTableModal()"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Add New Table</h3>
+                <button class="modal-close" onclick="closeAddTableModal()">×</button>
+            </div>
+
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>Table Number</label>
+                    <input type="text" id="newTableNumber" placeholder="Enter table number">
+                </div>
+
+                <div class="form-group">
+                    <label>Number of Chairs</label>
+                    <input type="number" id="newTableChairs" value="4" min="1" max="12">
+                </div>
+            </div>
+
+            <div class="modal-actions">
+                <button class="btn-cancel" onclick="closeAddTableModal()">Cancel</button>
+                <button class="btn-save" onclick="saveNewTable()">Save Table</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Track original values for each table
+        var tableOriginalValues = {};
+
+        window.addEventListener('DOMContentLoaded', function () {
+            initializeTables();
+        });
+
+        function initializeTables() {
+            var tables = window.POS_DATA && window.POS_DATA.POS_TABLES ? window.POS_DATA.POS_TABLES : [];
+            var container = document.getElementById('tablesContainer');
+
+            if (!tables || tables.length === 0) {
+                container.innerHTML = '<div class="no-tables">No tables available. Click "Add Table" to create your first table.</div>';
+                return;
+            }
+
+            var gridHtml = '<div class="tables-grid">';
+
+            tables.forEach(function (table) {
+                var statusValue = getStatusValue(table.status);
+                var statusClass = getStatusClassFromValue(statusValue);
+                var statusLabel = getStatusLabel(table.status);
+                var chairs = parseInt(table.chairs) || 4;
+
+                // Store original values
+                tableOriginalValues[table.id] = {
+                    status: statusValue,
+                    chairs: chairs
+                };
+
+                gridHtml += '<div class="table-card ' + statusClass + '" data-table-id="' + table.id + '" id="card-' + table.id + '">';
+                gridHtml += '<div class="table-number">Table ' + table.tableNumber + '</div>';
+                gridHtml += '<div class="table-visual" id="visual-' + table.id + '">' + generateTableSVG(chairs, statusClass) + '</div>';
+
+                gridHtml += '<div class="table-info">';
+                gridHtml += '<div class="info-row">';
+                gridHtml += '<span class="info-label">Status:</span>';
+                gridHtml += '<select class="status-select" id="status-' + table.id + '" onchange="handleTableChange(' + table.id + ')">';
+                gridHtml += '<option value="1" ' + (statusValue === '1' ? 'selected' : '') + '>Available</option>';
+                gridHtml += '<option value="2" ' + (statusValue === '2' ? 'selected' : '') + '>In-Use</option>';
+                gridHtml += '<option value="3" ' + (statusValue === '3' ? 'selected' : '') + '>Dirty</option>';
+                gridHtml += '</select>';
+                gridHtml += '</div>';
+
+                gridHtml += '<div class="info-row">';
+                gridHtml += '<span class="info-label">Chairs:</span>';
+                gridHtml += '<input type="number" class="chairs-input" id="chairs-' + table.id + '" min="1" max="12" value="' + chairs + '" '
+                    + 'onchange="handleTableChange(' + table.id + ')">';
+                gridHtml += '</div>';
+                gridHtml += '</div>';
+
+                // Save button (hidden by default)
+                gridHtml += '<div class="save-section hidden" id="save-section-' + table.id + '">';
+                gridHtml += '<button class="btn-save-changes" onclick="saveTableChanges(' + table.id + ')">Save Changes</button>';
+                gridHtml += '<button class="btn-cancel-changes" onclick="cancelTableChanges(' + table.id + ')">Cancel</button>';
+                gridHtml += '</div>';
+
+                gridHtml += '</div>';
+            });
+
+            gridHtml += '</div>';
+            container.innerHTML = gridHtml;
+        }
+
+        function handleTableChange(tableId) {
+            var currentStatus = document.getElementById('status-' + tableId).value;
+            var currentChairs = document.getElementById('chairs-' + tableId).value;
+            var original = tableOriginalValues[tableId];
+
+            // Check if values have changed
+            var hasChanged = (currentStatus !== original.status) || (parseInt(currentChairs) !== original.chairs);
+
+            // Show/hide save buttons
+            var saveSection = document.getElementById('save-section-' + tableId);
+            if (hasChanged) {
+                saveSection.classList.remove('hidden');
+            } else {
+                saveSection.classList.add('hidden');
+            }
+
+            // Update visual preview
+            var statusClass = getStatusClassFromValue(currentStatus);
+            updateTableVisual(tableId, currentChairs, statusClass);
+        }
+
+        function updateTableVisual(tableId, chairs, statusClass) {
+            var visual = document.getElementById('visual-' + tableId);
+            visual.innerHTML = generateTableSVG(parseInt(chairs), statusClass);
+            
+            // Update card border color
+            var card = document.getElementById('card-' + tableId);
+            card.className = 'table-card ' + statusClass;
+        }
+
+        function saveTableChanges(tableId) {
+            var status = document.getElementById('status-' + tableId).value;
+            var chairs = document.getElementById('chairs-' + tableId).value;
+
+            var payload = {
+                action: 'update_table',
+                id: tableId,
+                status: status,
+                chairs: chairs
+            };
+
+            try {
+                fetch(window.location.href, {
+                    method: 'POST',
+                    body: JSON.stringify(payload)
+                })
+                .then(function (r) { return r.json(); })
+                .then(function (res) {
+                    if (res.success) {
+                        // Update original values
+                        tableOriginalValues[tableId] = {
+                            status: status,
+                            chairs: parseInt(chairs)
+                        };
+
+                        // Hide save buttons
+                        document.getElementById('save-section-' + tableId).classList.add('hidden');
+
+                        // Show success message
+                        showUpdateMessage();
+                    } else {
+                        alert(res.message || 'Failed to update table');
+                    }
+                })
+                .catch(function(err) {
+                    console.error(err);
+                    alert('Error updating table');
+                });
+            } catch (e) {
+                console.error(e);
+                alert('Error updating table');
+            }
+        }
+
+        function cancelTableChanges(tableId) {
+            var original = tableOriginalValues[tableId];
+            
+            // Reset to original values
+            document.getElementById('status-' + tableId).value = original.status;
+            document.getElementById('chairs-' + tableId).value = original.chairs;
+
+            // Update visual
+            var statusClass = getStatusClassFromValue(original.status);
+            updateTableVisual(tableId, original.chairs, statusClass);
+
+            // Hide save buttons
+            document.getElementById('save-section-' + tableId).classList.add('hidden');
+        }
+
+        function openAddTableModal() {
+            document.getElementById('addTableModal').classList.remove('hidden');
+            document.getElementById('newTableNumber').value = '';
+            document.getElementById('newTableChairs').value = '4';
+            document.getElementById('newTableNumber').focus();
+        }
+
+        function closeAddTableModal() {
+            document.getElementById('addTableModal').classList.add('hidden');
+        }
+
+        function showSuccessMessage() {
+            var msg = document.getElementById('successMessage');
+            msg.classList.remove('hidden');
+            setTimeout(function() {
+                msg.classList.add('hidden');
+            }, 3000);
+        }
+
+        function showUpdateMessage() {
+            var msg = document.getElementById('updateMessage');
+            msg.classList.remove('hidden');
+            setTimeout(function() {
+                msg.classList.add('hidden');
+            }, 3000);
+        }
+
+        function saveNewTable() {
+            var tableNumber = document.getElementById('newTableNumber').value.trim();
+            var chairs = document.getElementById('newTableChairs').value;
+
+            if (!tableNumber) {
+                alert('Please enter a table number');
+                return;
+            }
+
+            try {
+                var payload = {
+                    action: 'create_table',
+                    tableNumber: tableNumber,
+                    chairs: chairs
+                };
+
+                fetch(window.location.href, {
+                    method: 'POST',
+                    body: JSON.stringify(payload)
+                })
+                .then(function (r) { return r.json(); })
+                .then(function (res) {
+                    if (res.success) {
+                        closeAddTableModal();
+                        showSuccessMessage();
+                        setTimeout(function() {
+                            location.reload();
+                        }, 1500);
+                    } else {
+                        alert(res.message || 'Failed to create table');
+                    }
+                })
+                .catch(function(err) {
+                    console.error(err);
+                    alert('Error creating table');
+                });
+            } catch (e) {
+                console.error(e);
+                alert('Error creating table');
+            }
+        }
+
+        function generateTableSVG(chairCount, statusClass) {
+            var size = 120;
+            var tableSize = 50;
+            var chairSize = 12;
+            var centerX = size / 2;
+            var centerY = size / 2;
+            var radius = tableSize / 2 + 15;
+            var tableColor = getTableColor(statusClass);
+
+            var svg = '<svg width="' + size + '" height="' + size + '" viewBox="0 0 ' + size + ' ' + size + '">';
+
+            for (var i = 0; i < chairCount; i++) {
+                var angle = (2 * Math.PI * i) / chairCount - Math.PI / 2;
+                var chairX = centerX + radius * Math.cos(angle) - chairSize / 2;
+                var chairY = centerY + radius * Math.sin(angle) - chairSize / 2;
+
+                svg += '<rect x="' + chairX + '" y="' + chairY + '" width="' + chairSize + '" height="' + chairSize + '" rx="2" fill="#718096" stroke="#4a5568" stroke-width="1"/>';
+            }
+
+            svg += '<circle cx="' + centerX + '" cy="' + centerY + '" r="' + (tableSize / 2) + '" fill="' + tableColor + '" stroke="#2d3748" stroke-width="2"/>';
+            svg += '</svg>';
+            return svg;
+        }
+
+        function getTableColor(statusClass) {
+            if (statusClass === 'available') return '#48bb78';
+            if (statusClass === 'in-use') return '#f56565';
+            if (statusClass === 'dirty') return '#ed8936';
+            return '#a0aec0';
+        }
+
+        function getStatusValue(status) {
+            if (!status) return '1';
+            var s = status.toString().toLowerCase().trim();
+            if (s === '1' || s.indexOf('available') !== -1) return '1';
+            if (s === '2' || s.indexOf('in-use') !== -1 || s.indexOf('occupied') !== -1) return '2';
+            if (s === '3' || s.indexOf('dirty') !== -1) return '3';
+            return '1';
+        }
+
+        function getStatusClassFromValue(statusValue) {
+            if (statusValue === '1') return 'available';
+            if (statusValue === '2') return 'in-use';
+            if (statusValue === '3') return 'dirty';
+            return 'available';
+        }
+
+        function getStatusLabel(status) {
+            if (!status) return 'Available';
+            var s = status.toString().toLowerCase().trim();
+            if (s === '1' || s.indexOf('available') !== -1) return 'Available';
+            if (s === '2' || s.indexOf('in-use') !== -1 || s.indexOf('occupied') !== -1) return 'In Use';
+            if (s === '3' || s.indexOf('dirty') !== -1) return 'Dirty';
+            return status;
+        }
+
+        function goToDashboard() {
+            window.history.back();
+        }
+    </script>
+</body>
+</html>

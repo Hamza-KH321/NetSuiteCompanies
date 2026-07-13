@@ -1,0 +1,133 @@
+<?xml version="1.0"?><!DOCTYPE pdf PUBLIC "-//big.faceless.org//report" "report-1.1.dtd">
+<pdf>
+<head>
+<link name="NotoSansArabic" type="font" subtype="opentype" src="${nsfont.NotoSansArabic_Regular}" src-bold="${nsfont.NotoSansArabic_Bold}" bytes="2" subset="false"/>
+	<link name="NotoSans" type="font" subtype="truetype" src="${nsfont.NotoSans_Regular}" src-bold="${nsfont.NotoSans_Bold}" src-italic="${nsfont.NotoSans_Italic}" src-bolditalic="${nsfont.NotoSans_BoldItalic}" bytes="2" />
+	<#if .locale == "zh_CN">
+		<link name="NotoSansCJKsc" type="font" subtype="opentype" src="${nsfont.NotoSansCJKsc_Regular}" src-bold="${nsfont.NotoSansCJKsc_Bold}" bytes="2" />
+	<#elseif .locale == "zh_TW">
+		<link name="NotoSansCJKtc" type="font" subtype="opentype" src="${nsfont.NotoSansCJKtc_Regular}" src-bold="${nsfont.NotoSansCJKtc_Bold}" bytes="2" />
+	<#elseif .locale == "ja_JP">
+		<link name="NotoSansCJKjp" type="font" subtype="opentype" src="${nsfont.NotoSansCJKjp_Regular}" src-bold="${nsfont.NotoSansCJKjp_Bold}" bytes="2" />
+	<#elseif .locale == "ko_KR">
+		<link name="NotoSansCJKkr" type="font" subtype="opentype" src="${nsfont.NotoSansCJKkr_Regular}" src-bold="${nsfont.NotoSansCJKkr_Bold}" bytes="2" />
+	<#elseif .locale == "th_TH">
+		<link name="NotoSansThai" type="font" subtype="opentype" src="${nsfont.NotoSansThai_Regular}" src-bold="${nsfont.NotoSansThai_Bold}" bytes="2" />
+	</#if>
+<macrolist>
+<macro id="nlheader">
+<table>
+<tr>
+<td font-size = "20px"><b>Receipt Voucher<br/>Tabuk Investment Co. (Al Ula).</b></td>
+</tr>
+</table>
+</macro>
+<macro id="nlfooter">
+<p></p>
+</macro>
+</macrolist>
+    <style type="text/css">* {
+			<#if .locale == "zh_CN">
+				font-family: NotoSans, NotoSansCJKsc, sans-serif;
+			<#elseif .locale == "zh_TW">
+				font-family: NotoSans, NotoSansCJKtc, sans-serif;
+			<#elseif .locale == "ja_JP">
+				font-family: NotoSans, NotoSansCJKjp, sans-serif;
+			<#elseif .locale == "ko_KR">
+				font-family: NotoSans, NotoSansCJKkr, sans-serif;
+			<#elseif .locale == "th_TH">
+				font-family: NotoSans, NotoSansThai, sans-serif;
+			<#else>
+				font-family: NotoSans, sans-serif;
+			</#if>
+			}
+</style>
+</head>
+<body padding="0.5in 0.5in 0.5in 0.5in" header = "nlheader" header-height = "8%" footer = "nlfooter" footer-height = "10%" size="Letter-LANDSCAPE">
+    <table width = "100%" border = "1" cellspacing = "2">
+            <tr>
+                <td font-size = "13px"><b>RV Type</b></td>
+                <td font-size = "11px">RV Type data</td>
+                <td>&nbsp;</td>
+                <td font-size = "13px"><b>Net of Vat Amount</b></td>
+                <td font-size = "11px">Net of Vst Amount data</td>
+            </tr>
+            <tr>
+                <td font-size = "13px"><b>Number/Date</b></td>
+                <td font-size = "11px">${record.tranid}  ${record.trandate}</td>
+                <td>&nbsp;</td>
+                <td font-size = "13px"><b>Gross Amount</b></td>
+                <td font-size = "11px">Gross Amount data</td>
+            </tr>
+            <tr>
+                <td font-size = "13px"><b>PO Number/Date</b></td>
+                <td font-size = "11px">${record.createdfrom}</td>
+                <td>&nbsp;</td>
+                <td font-size = "13px"><B>Created By/On</B></td>
+                <td font-size = "11px">Created By/On data</td>
+            </tr>
+            <tr>
+                <td font-size = "13px"><b>Challan Number &amp; Date</b></td>
+                <td font-size = "11px">Challan Number &amp; Date data</td>
+                <td>&nbsp;</td>
+                <td font-size = "13px"><b>Confirmed By/On</b></td>
+                <td font-size = "11px">Confirmed By/On data</td>
+            </tr>
+            <tr>
+                <td font-size = "13px"><b>Invoice Number &amp; Date</b></td>
+                <td font-size = "11px">invoice number data</td>
+                <td>&nbsp;</td>
+                <td font-size = "13px"><b>Attachment</b></td>
+                <td font-size = "11px">Attachment data </td>
+            </tr>
+            <tr>
+                <td font-size = "13px"><b>Vendor</b></td>
+                <td font-size = "11px">${record.entity}</td>
+                <td>&nbsp;</td>
+                <td font-size = "13px"><b>Currency</b></td>
+                <td font-size = "11px">${record.currencysymbol}</td>
+            </tr>
+            <tr>
+                <td font-size = "13px"><b>Vendor Name</b></td>
+                <td font-size = "11px">${record.entity}</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td font-size = "13px"><b>Remarks</b></td>
+                <td font-size = "11px">${record.memo}</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>
+    </table>
+<br/>
+<#list record.item as item>
+<table width = "100%">
+        <thead>
+<#if item_index == 0>
+            <tr>
+                <th><b>SI#</b></th>
+                <th><b>Item ID</b></th>
+                <th><B>Description</B></th>
+                <th><b>Unit</b></th>
+                <th><B>Qty</B></th>
+                <th><b>Item Rate</b></th>
+                <th><b>To Location</b></th>
+            </tr>
+</#if>
+        </thead>
+            <tr>
+                <td>${item?index + 1}</td>
+                <td>${item.item}</td>
+                <td>${item.description}</td>
+                <td>${item.units}</td>
+                <td>${item.quantity}</td>
+                <td>${item.rate}</td>
+                <td>${record.location}</td>
+            </tr>
+    </table>
+</#list>
+</body>
+</pdf>
