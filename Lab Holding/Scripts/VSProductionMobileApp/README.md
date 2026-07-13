@@ -15,12 +15,15 @@ Upload the files to these File Cabinet paths by default:
 - `SuiteScripts/VSProductionMobileApp/App/SL_VSP_External_App.js`
 - `SuiteScripts/VSProductionMobileApp/App/Services/VSP_App_Service.js`
 - `SuiteScripts/VSProductionMobileApp/App/Services/User_Service.js`
+- `SuiteScripts/VSProductionMobileApp/App/Services/ProductionOrder_Service.js`
 - `SuiteScripts/VSProductionMobileApp/App/Shared/VSP_Constants.js`
 - `SuiteScripts/VSProductionMobileApp/App/SharedHeader/VSP_Header.css`
 - `SuiteScripts/VSProductionMobileApp/App/SharedHeader/VSP_Header.js`
 - `SuiteScripts/VSProductionMobileApp/App/SharedHeader/VSP_Common.css`
 - `SuiteScripts/VSProductionMobileApp/App/Home/VSP_Home.html`
 - `SuiteScripts/VSProductionMobileApp/App/Home/VSP_Home.js`
+- `SuiteScripts/VSProductionMobileApp/App/ManageIngredients/VSP_ManageIngredients.html`
+- `SuiteScripts/VSProductionMobileApp/App/ManageIngredients/VSP_ManageIngredients.js`
 
 For SuiteBundle installs, set script parameter `custscript_vsp_portal_root_path_login` on the Login Suitelet deployment and `custscript_vsp_portal_root_path` on the App Suitelet deployment to the installed bundle folder, for example:
 
@@ -62,3 +65,28 @@ Fields:
 - `custrecord_vs_session_start`: Date/Time
 - `custrecord_vs_session_end`: Date/Time
 - `custrecord_vs_session_active`: Checkbox
+
+### VS Production Order (used by Manage Ingredients)
+
+Record ID: `customrecord_vs_prod_production_order`
+
+Looked up by its `name` field (the Production Order Number, e.g. `FSO000682`).
+
+Fields read:
+
+- `name`: Production Order Number
+- `custrecord_vs_prod_production_recipe`: List/Record, Recipe
+- `custrecord_vs_prod_production_qty`: Order Quantity
+- `custrecord_vs_prod_prodord_processinginf`: Order Notes (best-effort mapping &mdash; adjust `FIELD_PRODORD_NOTES` in `VSP_Constants.js` if this isn't the right field)
+
+### VS Production Order Items (ingredient lines)
+
+Record ID: `customrecord_vs_prod_prodorder_items`
+
+Fields:
+
+- `custrecord_vs_prod_productionorder`: List/Record, parent link back to `customrecord_vs_prod_production_order`
+- `custrecord_vs_prod_prodorder_item`: List/Record, Item
+- `custrecord_vs_production_prod_units`: List/Record, Units
+- `custrecord_vs_prod_prodord_item_qtyrecip`: Float, Quantity Per Recipe (read-only "Qty (Recipe)" on the Manage Ingredients screen)
+- `custrecord_vs_prod_prodord_item_qty`: Float, Quantity (editable "Input Qty" on the Manage Ingredients screen &mdash; this is the field the mobile app writes back to)

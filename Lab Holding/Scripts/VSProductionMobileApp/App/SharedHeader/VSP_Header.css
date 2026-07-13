@@ -9,12 +9,14 @@
     --line: #e7e9f5;
     --indigo: #4f46e5;
     --indigo-dark: #3d33c7;
+    --indigo-soft: #eeecfd;
     --amber: #ff7a1a;
     --amber-bg: #fff2e6;
     --danger: #e0344a;
     --danger-bg: #fdeced;
     --success: #12875a;
     --radius-md: 14px;
+    --header-h: 60px;
     --font-display: "Plus Jakarta Sans", "Segoe UI", -apple-system, BlinkMacSystemFont, sans-serif;
     --font-body: "Inter", "Segoe UI", -apple-system, BlinkMacSystemFont, sans-serif;
 }
@@ -29,39 +31,75 @@ body {
     color: var(--ink);
     background: var(--bg);
     -webkit-font-smoothing: antialiased;
+    -webkit-tap-highlight-color: transparent;
 }
 
 .hidden {
     display: none !important;
 }
 
+/* ---------- Minimal top header ---------- */
+
 .app-header {
-    min-height: 68px;
+    height: var(--header-h);
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    gap: 16px;
-    padding: 12px 22px;
+    gap: 10px;
+    padding: 0 10px 0 6px;
+    padding-top: env(safe-area-inset-top);
     background: var(--panel);
     border-bottom: 1px solid var(--line);
     position: sticky;
     top: 0;
-    z-index: 10;
+    z-index: 20;
+}
+
+.icon-btn {
+    flex: 0 0 auto;
+    display: grid;
+    place-items: center;
+    width: 40px;
+    height: 40px;
+    border: 0;
+    border-radius: 10px;
+    background: transparent;
+    color: var(--ink);
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.icon-btn:hover {
+    background: var(--bg);
+}
+
+.icon-btn svg {
+    width: 21px;
+    height: 21px;
+}
+
+.icon-btn.logout-btn {
+    color: var(--muted);
+}
+
+.icon-btn.logout-btn:hover {
+    background: var(--danger-bg);
+    color: var(--danger);
 }
 
 .brand {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 10px;
     min-width: 0;
+    flex: 1 1 auto;
 }
 
 .company-logo,
 .brand-fallback {
-    width: 42px;
-    height: 42px;
+    width: 34px;
+    height: 34px;
     flex: 0 0 auto;
-    border-radius: 11px;
+    border-radius: 10px;
     object-fit: contain;
 }
 
@@ -72,126 +110,224 @@ body {
     color: #fff;
     font-family: var(--font-display);
     font-weight: 800;
-    font-size: 13px;
-    box-shadow: 0 8px 16px -6px rgba(79, 70, 229, 0.5);
+    font-size: 12px;
+    box-shadow: 0 6px 14px -6px rgba(79, 70, 229, 0.5);
+}
+
+.brand-text {
+    min-width: 0;
+    line-height: 1.25;
 }
 
 .company-title {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 6px;
     min-width: 0;
 }
 
 .company-name {
-    max-width: 260px;
+    max-width: 46vw;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
     font-family: var(--font-display);
-    font-size: 15px;
+    font-size: 14px;
     font-weight: 700;
     letter-spacing: -0.01em;
 }
 
 .sandbox-badge {
     flex: 0 0 auto;
-    padding: 2px 8px;
+    padding: 1px 6px;
     border-radius: 999px;
     background: var(--amber-bg);
     color: #b35400;
-    font-size: 10.5px;
+    font-size: 9.5px;
     font-weight: 800;
     letter-spacing: 0.04em;
-    line-height: 1.6;
+    line-height: 1.5;
     text-transform: uppercase;
 }
 
-.user-name {
-    margin-top: 1px;
+.user-meta {
+    max-width: 60vw;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
     color: var(--muted);
-    font-size: 12.5px;
+    font-size: 11.5px;
     font-weight: 500;
 }
 
-.header-actions {
+/* ---------- Side navigation drawer ---------- */
+
+.nav-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 30;
+    background: rgba(15, 17, 32, 0.44);
+    backdrop-filter: blur(1px);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+}
+
+.nav-overlay.is-open {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.side-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    z-index: 31;
+    width: min(84vw, 300px);
+    display: flex;
+    flex-direction: column;
+    background: var(--panel);
+    box-shadow: 20px 0 50px -20px rgba(18, 23, 43, 0.35);
+    transform: translateX(-100%);
+    transition: transform 0.24s cubic-bezier(0.32, 0.72, 0, 1);
+    padding-top: env(safe-area-inset-top);
+    padding-bottom: env(safe-area-inset-bottom);
+}
+
+.side-nav.is-open {
+    transform: translateX(0);
+}
+
+.side-nav-header {
     display: flex;
     align-items: center;
-    gap: 8px;
-    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 16px 14px;
+    border-bottom: 1px solid var(--line);
 }
 
-.header-actions .button-link,
-.header-actions button {
-    display: inline-flex;
+.side-nav-user {
+    display: flex;
     align-items: center;
-    gap: 6px;
+    gap: 10px;
+    min-width: 0;
 }
 
-.header-actions svg {
-    width: 16px;
-    height: 16px;
+.user-avatar {
+    width: 42px;
+    height: 42px;
+    flex: 0 0 auto;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    background: var(--indigo-soft);
+    color: var(--indigo);
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 15px;
+}
+
+.side-nav-name {
+    font-family: var(--font-display);
+    font-size: 14.5px;
+    font-weight: 700;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.side-nav-sub {
+    margin-top: 1px;
+    color: var(--muted);
+    font-size: 11.5px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.side-nav-links {
+    flex: 1 1 auto;
+    overflow-y: auto;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.nav-link {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    height: 46px;
+    padding: 0 12px;
+    border-radius: 12px;
+    color: var(--ink);
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background 0.12s ease;
+}
+
+.nav-link:hover {
+    background: var(--bg);
+}
+
+.nav-link.is-active {
+    background: var(--indigo-soft);
+    color: var(--indigo-dark);
+}
+
+.nav-link svg {
+    width: 19px;
+    height: 19px;
     flex: 0 0 auto;
 }
 
-#logoutButton:hover {
-    background: var(--danger-bg);
-    border-color: var(--danger-bg);
+.side-nav-footer {
+    padding: 8px 10px 10px;
+    border-top: 1px solid var(--line);
+}
+
+.side-logout-btn {
+    width: 100%;
+    height: 46px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 12px;
+    padding: 0 12px;
+    border: 0;
+    border-radius: 12px;
+    background: transparent;
     color: var(--danger);
+    font-family: var(--font-body);
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
 }
 
-@media (max-width: 1000px) {
-    .app-header {
-        align-items: stretch;
-        flex-direction: column;
-        gap: 12px;
-    }
+.side-logout-btn:hover {
+    background: var(--danger-bg);
 }
 
-@media (max-width: 600px) {
+.side-logout-btn svg {
+    width: 19px;
+    height: 19px;
+    flex: 0 0 auto;
+}
+
+@media (min-width: 768px) {
     .app-header {
-        min-height: auto;
-        padding: 10px 14px;
-        gap: 10px;
-    }
-
-    .brand {
-        gap: 10px;
-    }
-
-    .company-logo,
-    .brand-fallback {
-        width: 36px;
-        height: 36px;
-        border-radius: 10px;
+        padding: 0 24px;
     }
 
     .company-name {
-        max-width: 150px;
-        font-size: 14px;
+        max-width: 320px;
     }
 
-    .company-title {
-        align-items: flex-start;
-        flex-direction: column;
-        gap: 2px;
-    }
-
-    .sandbox-badge {
-        font-size: 10px;
-    }
-
-    .user-name {
-        font-size: 11.5px;
-    }
-
-    .header-actions {
-        width: 100%;
-    }
-
-    .header-actions .button-link,
-    .header-actions button {
-        flex: 1 1 100%;
-        justify-content: center;
+    .user-meta {
+        max-width: 360px;
     }
 }

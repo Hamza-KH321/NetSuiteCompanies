@@ -44,6 +44,8 @@ body {
     display: grid;
     place-items: center;
     padding: 24px;
+    padding-top: calc(24px + env(safe-area-inset-top));
+    padding-bottom: calc(24px + env(safe-area-inset-bottom));
     overflow: hidden;
 }
 
@@ -183,7 +185,7 @@ input {
     background: #f4f5fa;
     padding: 0 16px;
     font-family: var(--font-body);
-    font-size: 15px;
+    font-size: 16px;
     color: var(--ink);
     transition: border-color 0.15s ease, background 0.15s ease;
 }

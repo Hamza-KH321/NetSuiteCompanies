@@ -14,31 +14,28 @@
 <body>
     <div id="sharedHeader"></div>
     <main class="app-main">
-        <div class="toolbar">
-            <div>
-                <h1>VS Production</h1>
-                <p>Production mobile app placeholder homepage.</p>
-            </div>
-        </div>
-
-        <section class="panel">
-            <h2>Home</h2>
-            <p id="homeMessage">Loading user context...</p>
-            <div class="detail-grid">
-                <div>
-                    <span>Employee</span>
+        <section class="hero-card">
+            <p class="hero-eyebrow">Home</p>
+            <h1 id="greeting">Welcome</h1>
+            <p id="homeMessage" class="hero-message">Loading user context...</p>
+            <div class="chip-row" id="chipRow">
+                <span class="chip">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
                     <strong id="employeeName">-</strong>
-                </div>
-                <div>
-                    <span>Subsidiary</span>
+                </span>
+                <span class="chip">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M5 21V7l7-4 7 4v14"/><path d="M9 21v-6h6v6"/></svg>
                     <strong id="subsidiaryName">-</strong>
-                </div>
-                <div>
-                    <span>Location</span>
+                </span>
+                <span class="chip">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
                     <strong id="locationName">-</strong>
-                </div>
+                </span>
             </div>
         </section>
+
+        <h2 class="section-title hidden" id="quickActionsTitle">Quick Actions</h2>
+        <div class="quick-actions" id="quickActions"></div>
     </main>
 
     <div id="loadingOverlay" class="loading-overlay">

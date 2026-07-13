@@ -10,8 +10,9 @@ define([
     'N/runtime',
     '../../Util/LIB_VSP_External_Session.js',
     '../../Util/LIB_VSP_Subscription_Check.js',
-    './User_Service.js'
-], function (file, log, url, runtime, sessionLib, subscriptionCheck, userService) {
+    './User_Service.js',
+    './ProductionOrder_Service.js'
+], function (file, log, url, runtime, sessionLib, subscriptionCheck, userService, productionOrderService) {
     var LOGIN_SCRIPT_ID = 'customscript_vsp_external_login';
     var LOGIN_DEPLOYMENT_ID = 'customdeploy_vsp_external_login';
     var APP_SCRIPT_ID = 'customscript_vsp_external_app';
@@ -25,8 +26,16 @@ define([
         home: {
             html: 'App/Home/VSP_Home.html',
             js: 'App/Home/VSP_Home.js'
+        },
+        manageIngredients: {
+            html: 'App/ManageIngredients/VSP_ManageIngredients.html',
+            js: 'App/ManageIngredients/VSP_ManageIngredients.js'
         }
     };
+    var NAV_PAGES = [
+        { id: 'home', label: 'Home' },
+        { id: 'manageIngredients', label: 'Manage Ingredients' }
+    ];
 
     function onRequest(context) {
         if (!ensureSubscription(context, context.request.method === 'POST')) return;
@@ -68,6 +77,40 @@ define([
                     success: true,
                     data: getHomeBootstrap(userId)
                 });
+                return;
+            }
+
+            if (action === 'bootstrapManageIngredients') {
+                writeJson(context.response, {
+                    success: true,
+                    data: getManageIngredientsBootstrap(userId)
+                });
+                return;
+            }
+
+            if (action === 'lookupProductionOrder') {
+                var orderNumber = String(body.orderNumber || '').trim();
+                if (!orderNumber) {
+                    writeJson(context.response, { success: false, message: 'Enter a production order number.' });
+                    return;
+                }
+
+                var orderId = productionOrderService.findOrderIdByNumber(orderNumber);
+                if (!orderId) {
+                    writeJson(context.response, { success: false, message: 'Production order "' + orderNumber + '" was not found.' });
+                    return;
+                }
+
+                writeJson(context.response, {
+                    success: true,
+                    data: productionOrderService.getOrderWithLines(orderId)
+                });
+                return;
+            }
+
+            if (action === 'saveIngredientQuantities') {
+                productionOrderService.updateLineQuantities(body.lines || []);
+                writeJson(context.response, { success: true });
                 return;
             }
 
@@ -128,8 +171,28 @@ define([
     function getHomeBootstrap(userId) {
         return {
             user: userService.getUserContext(userId),
-            homeUrl: getAppUrl('home')
+            homeUrl: getAppUrl('home'),
+            navItems: getNavItems('home')
         };
+    }
+
+    function getManageIngredientsBootstrap(userId) {
+        return {
+            user: userService.getUserContext(userId),
+            homeUrl: getAppUrl('home'),
+            navItems: getNavItems('manageIngredients')
+        };
+    }
+
+    function getNavItems(activePageKey) {
+        return NAV_PAGES.map(function (page) {
+            return {
+                id: page.id,
+                label: page.label,
+                href: getAppUrl(page.id),
+                active: page.id === activePageKey
+            };
+        });
     }
 
     function portalPath(relativePath) {
@@ -139,7 +202,7 @@ define([
     }
 
     function getPageKey(page) {
-        if (page === 'home') return page;
+        if (PAGE_FILES[page]) return page;
         return 'home';
     }
 
