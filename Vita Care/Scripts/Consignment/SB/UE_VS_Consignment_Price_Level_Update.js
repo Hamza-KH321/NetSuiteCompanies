@@ -19,15 +19,31 @@ define(['N/record', 'N/log'], function (record, log) {
             var recId = rec.id;
             var recType = rec.type;
 
-            var isConsignment = rec.getValue({
-                fieldId: 'custbody_vs_consignment_order'
-            });
+            var isConsignment = rec.getValue({ fieldId: 'custbody_vs_consignment_order' });
+            var customerId = rec.getValue({ fieldId: 'entity' });
 
-            log.debug('Checkbox Value', isConsignment);
+            log.debug('Consignment Checkbox', isConsignment);
 
             if (!isConsignment) {
-                log.debug('EXIT', 'Checkbox not checked');
+                log.debug('EXIT', 'Consignment checkbox not checked');
                 return;
+            }
+
+
+            log.debug('Customer', customerId);
+
+            if (customerId) {
+
+                var customerRec = record.load({ type: record.Type.CUSTOMER, id: customerId });
+
+                var isConsignmentOperation = customerRec.getValue({ fieldId: 'custentityconsignment_operation' });
+
+                log.debug('Customer Consignment Operation', isConsignmentOperation);
+
+                if (isConsignmentOperation) {
+                    log.debug('EXIT', 'Customer is Consignment Operation. Keeping original price level.');
+                    return;
+                }
             }
 
             var loadedRec = record.load({
@@ -36,9 +52,7 @@ define(['N/record', 'N/log'], function (record, log) {
                 isDynamic: true
             });
 
-            var lineCount = loadedRec.getLineCount({
-                sublistId: 'item'
-            });
+            var lineCount = loadedRec.getLineCount({ sublistId: 'item' });
 
             log.debug('Line Count', lineCount);
 
@@ -46,21 +60,11 @@ define(['N/record', 'N/log'], function (record, log) {
 
                 try {
 
-                    loadedRec.selectLine({
-                        sublistId: 'item',
-                        line: i
-                    });
+                    loadedRec.selectLine({ sublistId: 'item', line: i });
 
-                    loadedRec.setCurrentSublistValue({
-                        sublistId: 'item',
-                        fieldId: 'price',
-                        value: 22
-                    });
+                    loadedRec.setCurrentSublistValue({ sublistId: 'item', fieldId: 'price', value: 25 });
 
-                    var rate = loadedRec.getCurrentSublistValue({
-                        sublistId: 'item',
-                        fieldId: 'rate'
-                    });
+                    var rate = loadedRec.getCurrentSublistValue({ sublistId: 'item', fieldId: 'rate' });
 
                     log.debug('Line Rate', 'Line: ' + i + ' | Rate: ' + rate);
 
@@ -68,17 +72,12 @@ define(['N/record', 'N/log'], function (record, log) {
 
                         log.debug('Removing Line', 'Line: ' + i);
 
-                        loadedRec.removeLine({
-                            sublistId: 'item',
-                            line: i
-                        });
+                        loadedRec.removeLine({ sublistId: 'item', line: i });
 
                         continue;
                     }
 
-                    loadedRec.commitLine({
-                        sublistId: 'item'
-                    });
+                    loadedRec.commitLine({ sublistId: 'item' });
 
                     log.debug('Line Updated', 'Line: ' + i);
 
