@@ -172,6 +172,11 @@ define(['N/runtime', 'N/file', 'N/search', 'N/record', 'N/log'],
                     isDynamic: false
                 });
 
+                rmaRecord.setValue({
+                    fieldId: 'custbody_vs_do_not_run_validation',
+                    value: true
+                });
+
                 var lineCount = rmaRecord.getLineCount({
                     sublistId: 'item'
                 });
