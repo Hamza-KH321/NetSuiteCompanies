@@ -73,7 +73,7 @@ define(['N/record', 'N/search', 'N/file', 'N/https', 'N/log'],
 							var fileName = url.split('/').pop();
 							log.debug('FileName', fileName);
 
-                            var mimeType = response.headers['Content-Type'] || response.headers['content-type'];
+							var mimeType = response.headers['Content-Type'] || response.headers['content-type'];
 							var fileType;
 
 							switch (mimeType) {
