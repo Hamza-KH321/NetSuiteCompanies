@@ -27,7 +27,7 @@ define(['N/record', 'N/search', 'N/log', 'N/file', 'N/https', 'N/encode'],
 
                 let Case = record.create({ type: 'supportcase' });
 
-                Case.setValue({ fieldId: 'customform', value: 310 });
+                Case.setValue({ fieldId: 'customform', value: 310 }); // External Case
                 Case.setValue({ fieldId: 'custevent_vs_createdfromodoo', value: true });
                 Case.setValue({ fieldId: 'custevent7', value: false });
 
@@ -150,13 +150,64 @@ define(['N/record', 'N/search', 'N/log', 'N/file', 'N/https', 'N/encode'],
                     Case.setValue({ fieldId: 'custevent_vs_casebranch', value: branchInternalId });
                 }
 
+                // Invoice
+                if (request.InvoiceCode) {
+                    try {
+                        log.debug('Invoice Search', 'Searching InvoiceCode: ' + request.InvoiceCode);
+
+                        let invoiceResults = search.create({
+                            type: search.Type.INVOICE,
+                            filters: [
+                                ['tranid', 'is', request.InvoiceCode],
+                                'AND',
+                                ['mainline', 'is', 'T']
+                            ],
+                            columns: [
+                                search.createColumn({ name: 'internalid' }),
+                                search.createColumn({ name: 'tranid' })
+                            ]
+                        }).run().getRange({
+                            start: 0,
+                            end: 1
+                        });
+
+                        log.debug('Invoice Search Results', invoiceResults);
+
+                        if (invoiceResults && invoiceResults.length > 0) {
+                            let invoiceInternalId = invoiceResults[0].id;
+
+                            log.debug('Invoice Found', {
+                                invoiceCode: request.InvoiceCode,
+                                invoiceInternalId: invoiceInternalId
+                            });
+
+                            Case.setValue({
+                                fieldId: 'custevent_vs_case_invoice',
+                                value: invoiceInternalId
+                            });
+
+                            log.debug('Invoice Set on Case', invoiceInternalId);
+                        } else {
+                            log.error('Invoice Not Found', 'InvoiceCode: ' + request.InvoiceCode);
+                            return context.response.write('Invoice not found: ' + request.InvoiceCode);
+                        }
+
+                    } catch (e) {
+                        log.error('Invoice Search Error', e);
+                        return context.response.write('Error while searching for invoice: ' + (e.message || e));
+                    }
+                }
+
                 if (request.priority) {
                     Case.setValue({ fieldId: 'priority', value: request.priority });
                 }
 
                 Case.setValue({ fieldId: 'status', value: 1 });
 
-                let CaseId = Case.save({ enableSourcing: true, ignoreMandatoryFields: true });
+                let CaseId = Case.save({
+                    enableSourcing: true,
+                    ignoreMandatoryFields: true
+                });
                 log.debug('Case Saved', 'Case ID: ' + CaseId);
 
                 // Get Case Number
