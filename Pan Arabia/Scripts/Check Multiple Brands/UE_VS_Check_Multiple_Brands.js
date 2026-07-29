@@ -36,7 +36,7 @@ define(['N/record'], function (record) {
 
         // Define class value groups
         // Brands
-        var cgwClasses = [7, 1, 3, 8]; // Carilex, Genadyne, and WELLEL
+        var cgwClasses = [7, 1, 3, 8]; // Carilex,a Genadyne, and WELLEL
         var tfmClasses = [9, 2, 4, 5, 13]; // F-M-T-T, Ferris, Medskin, Tristel, and Tulip
         var urgoClasses = [6, 18]; // URGO and Vashe
         var hoClasses = [10]; // H.O
@@ -57,7 +57,7 @@ define(['N/record'], function (record) {
         var hasTFM = containsClass(tfmClasses);
         var hasURGO = containsClass(urgoClasses);
         var hasHO = containsClass(hoClasses);
-        var hasflen = containsClass(flenClasses);
+        var hasflen = containsClass(flnClasses);
 
         log.debug('Brand Check:',
             {
