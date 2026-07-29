@@ -36,11 +36,11 @@ define(['N/record'], function (record) {
 
         // Define class value groups
         // Brands
-        var cgwClasses = [7, 1, 3, 8];
-        var tfmClasses = [9, 2, 4, 5, 13];
-        var urgoClasses = [6];
-        var hoClasses = [10];
-        var flenClasses = [16, 17];
+        var cgwClasses = [7, 1, 3, 8]; // Carilex, Genadyne, and WELLEL
+        var tfmClasses = [9, 2, 4, 5, 13]; // F-M-T-T, Ferris, Medskin, Tristel, and Tulip
+        var urgoClasses = [6, 18]; // URGO and Vashe
+        var hoClasses = [10]; // H.O
+        var flnClasses = [16, 17]; // U.F and Flen
 
         // Function to check if any class value exists in a specific group
         function containsClass(classArray) {
