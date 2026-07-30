@@ -164,7 +164,8 @@ define(['N/record', 'N/search', 'N/log', 'N/file', 'N/https', 'N/encode'],
                             ],
                             columns: [
                                 search.createColumn({ name: 'internalid' }),
-                                search.createColumn({ name: 'tranid' })
+                                search.createColumn({ name: 'tranid' }),
+                                search.createColumn({ name: 'location' })
                             ]
                         }).run().getRange({
                             start: 0,
@@ -174,27 +175,66 @@ define(['N/record', 'N/search', 'N/log', 'N/file', 'N/https', 'N/encode'],
                         log.debug('Invoice Search Results', invoiceResults);
 
                         if (invoiceResults && invoiceResults.length > 0) {
+
                             let invoiceInternalId = invoiceResults[0].id;
+
+                            let invoiceLocation = invoiceResults[0].getValue({
+                                name: 'location'
+                            });
 
                             log.debug('Invoice Found', {
                                 invoiceCode: request.InvoiceCode,
-                                invoiceInternalId: invoiceInternalId
+                                invoiceInternalId: invoiceInternalId,
+                                invoiceLocation: invoiceLocation
                             });
 
+                            // Set Invoice on Case
                             Case.setValue({
                                 fieldId: 'custevent_vs_case_invoice',
                                 value: invoiceInternalId
                             });
 
                             log.debug('Invoice Set on Case', invoiceInternalId);
+
+                            // Set Invoice Location on Case
+                            if (invoiceLocation) {
+                                Case.setValue({
+                                    fieldId: 'custevent9',
+                                    value: invoiceLocation
+                                });
+
+                                log.debug('Invoice Location Set on Case', {
+                                    fieldId: 'custevent9',
+                                    locationInternalId: invoiceLocation
+                                });
+                            } else {
+                                log.debug(
+                                    'Invoice Location',
+                                    'Invoice does not have a location'
+                                );
+                            }
+
                         } else {
-                            log.error('Invoice Not Found', 'InvoiceCode: ' + request.InvoiceCode);
-                            return context.response.write('Invoice not found: ' + request.InvoiceCode);
+                            log.error(
+                                'Invoice Not Found',
+                                'InvoiceCode: ' + request.InvoiceCode
+                            );
+
+                            return context.response.write(
+                                'Invoice not found: ' + request.InvoiceCode
+                            );
                         }
 
                     } catch (e) {
-                        log.error('Invoice Search Error', e);
-                        return context.response.write('Error while searching for invoice: ' + (e.message || e));
+                        log.error('Invoice Search Error', {
+                            name: e.name,
+                            message: e.message,
+                            stack: e.stack
+                        });
+
+                        return context.response.write(
+                            'Error while searching for invoice: ' + (e.message || e)
+                        );
                     }
                 }
 
