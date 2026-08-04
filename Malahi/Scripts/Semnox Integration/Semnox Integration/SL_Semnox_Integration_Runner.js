@@ -74,7 +74,7 @@ define(['N/ui/serverWidget', 'N/task', 'N/log', 'N/redirect', 'N/runtime'],
                                 '<div><b>Progress:</b> ' + percentage + '%</div>' +
                                 '<div><b>Stage:</b> ' + stage + '</div>' +
                                 '</div>' +
-                                '<script>setTimeout(function(){ location.reload(); }, 5000);</script>';
+                                '<script>setTimeout(function(){ location.reload(); }, 9000);</script>';
 
                         } else {
 
