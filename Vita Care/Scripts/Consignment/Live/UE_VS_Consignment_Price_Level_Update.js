@@ -28,6 +28,22 @@ define(['N/record', 'N/log'], function (record, log) {
                 return;
             }
 
+            log.debug('Customer', customerId);
+
+            if (customerId) {
+
+                var customerRec = record.load({ type: record.Type.CUSTOMER, id: customerId });
+
+                var isConsignmentOperation = customerRec.getValue({ fieldId: 'custentityconsignment_operation' });
+
+                log.debug('Customer Consignment Operation', isConsignmentOperation);
+
+                if (isConsignmentOperation) {
+                    log.debug('EXIT', 'Customer is Consignment Operation. Keeping original price level.');
+                    return;
+                }
+            }
+
             var loadedRec = record.load({ type: recType, id: recId, isDynamic: true });
 
             var lineCount = loadedRec.getLineCount({ sublistId: 'item' });
