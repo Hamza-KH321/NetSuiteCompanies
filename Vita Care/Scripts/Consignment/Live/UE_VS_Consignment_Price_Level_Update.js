@@ -18,7 +18,7 @@ define(['N/record', 'N/log'], function (record, log) {
             var rec = context.newRecord;
             var recId = rec.id;
             var recType = rec.type;
-
+            var customerId = rec.getValue({fieldId: 'entity'});
             var isConsignment = rec.getValue({ fieldId: 'custbody_vs_consignment_order' });
 
             log.debug('Checkbox Value', isConsignment);

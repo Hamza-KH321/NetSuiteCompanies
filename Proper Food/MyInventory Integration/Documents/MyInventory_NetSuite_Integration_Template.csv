@@ -1,0 +1,4 @@
+﻿Company Code / Client,Booking Number,Period,Posting Date,Invoice Date,Invoice Due Date,Invoice Number,Interface Transaction Number,Document Number,Account Type,Account Codes,Contra Account Type,Contra Account,Debit/Credit Marker,Amount,VAT,VAT Rate,Tax Key,Description,Cost Center Number
+PFC/FS (Holding),NA,26-Aug,16/8/2026,16/8/2026,15/9/2026,123,123,123,NA,60304,NA,NA,NA,105,5,0.05,NA,AbdulMajidMohammedManualCarpentry,test Location
+PFC/FS (Holding),NA,26-Aug,17/8/2026,17/8/2026,16/9/2026,1234,1234,1234,NA,60402,NA,NA,NA,1050,50,0.05,NA,AbsharSweetShop,test Location
+PFC/FS (Holding),NA,26-Aug,18/8/2026,18/8/2026,17/9/2026,12345,12345,12345,NA,60602,NA,NA,NA,10500,500,0.05,NA,AbdulGhafoorTrading,test Location
