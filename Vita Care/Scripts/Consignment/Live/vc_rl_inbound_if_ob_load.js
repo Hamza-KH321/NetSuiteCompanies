@@ -502,7 +502,7 @@ define(['N/record', "N/xml", 'N/search', 'N/config', 'N/runtime', './moment.min.
 												});
 											}
 										}
-										soRecToUpdate.setValue({ fieldId: 'location', value: 6 });
+										soRecToUpdate.setValue({ fieldId: 'location', value: toLocation }); // Consignment Location inside Customer Record
 										soRecToUpdate.setValue({ fieldId: 'custbody_vs_original_warehouse', value: oldLocation });
 
 										var soSavedId = soRecToUpdate.save({ enableSourcing: true, ignoreMandatoryFields: true });
@@ -1319,6 +1319,10 @@ define(['N/record', "N/xml", 'N/search', 'N/config', 'N/runtime', './moment.min.
 
 									if (strType == "lotnumberedinventoryitem") {
 
+                                      log.audit("Expired ? "+expiryDate+"? "+ isExpired(expiryDate));
+                                      
+                                      status = isExpired(expiryDate)?5:1 ;
+
 										if (lot && lib.isNotNull(lot)) {
 											//check if lot exists
 											var objLotSearch = search.create(
@@ -1374,6 +1378,11 @@ define(['N/record', "N/xml", 'N/search', 'N/config', 'N/runtime', './moment.min.
 
 									}
 									else if (strType == "inventoryitem") {
+
+                                     log.audit("Inv item Expired ? "+expiryDate+"? "+ isExpired(expiryDate));
+                                      
+                                      status = isExpired(expiryDate)?5:1 ;
+                                      
 										if (objCopyItemInventoryDetails[id]) {
 											objCopyItemInventoryDetails[id].quantity += parseInt(quantity);
 											objCopyItemInventoryDetails[id].status = status;
@@ -1703,12 +1712,19 @@ define(['N/record', "N/xml", 'N/search', 'N/config', 'N/runtime', './moment.min.
 										var id = objItemSearch[0].id;
 										var lot = objElement.batch_nbr;
 										var intQty = objElement.shipped_qty;
+                                        var expiryDate = objElement.expiry_date;  
 										var intSeqNbr = objElement.seq_nbr;
 										var strStatus = 1;
 										//item type
 										var strType = objItemSearch[0].recordType;
 
 										if (strType == "lotnumberedinventoryitem") {
+
+
+                                      log.audit("Expired ? "+expiryDate+"? "+ isExpired(expiryDate));
+                                      status = isExpired(expiryDate)?5:1 ;
+                                      log.debug("The status for "+lot+" has been set to "+strStatus)
+                                          
 											if (lot && lib.isNotNull(lot)) {
 												//check if lot exists
 												var objLotSearch = search.create(
@@ -1729,10 +1745,12 @@ define(['N/record', "N/xml", 'N/search', 'N/config', 'N/runtime', './moment.min.
 													}).run().getRange(0, 1);
 
 
-												log.debug("~lot: " + lot + " and the looked up lot is " + objLotSearch[0].id);
 												if (objLotSearch.length > 0)
+                                                {
+												log.debug("~lot: " + lot + " and the looked up lot is " + objLotSearch[0].id);
 													lot = objLotSearch[0].getValue('inventorynumber');
-												log.debug('new lot is ' + lot)
+                                                }
+                                                  log.debug('new lot is ' + lot)
 
 
 
@@ -1746,7 +1764,7 @@ define(['N/record', "N/xml", 'N/search', 'N/config', 'N/runtime', './moment.min.
 														else {
 															objNewInvtDetails[id][lot] = {};
 															objNewInvtDetails[id][lot].quantity = parseInt(intQty);
-															objNewInvtDetails[id][lot].status = strStatus;
+															objNewInvtDetails[id][lot].status = status;
 															objNewInvtDetails[id][lot].seqNbr = intSeqNbr;
 														}
 														objNewInvtDetails[id].quantity += parseInt(intQty);
@@ -1756,7 +1774,7 @@ define(['N/record', "N/xml", 'N/search', 'N/config', 'N/runtime', './moment.min.
 														objNewInvtDetails[id][lot] = {};
 														objNewInvtDetails[id].quantity = parseInt(intQty);
 														objNewInvtDetails[id][lot].quantity = parseInt(intQty);
-														objNewInvtDetails[id][lot].status = strStatus;
+														objNewInvtDetails[id][lot].status = status;
 														objNewInvtDetails[id][lot].seqNbr = intSeqNbr;
 													}
 												}
@@ -1773,15 +1791,20 @@ define(['N/record', "N/xml", 'N/search', 'N/config', 'N/runtime', './moment.min.
 											}
 										}
 										else if (strType == "inventoryitem") {
+
+                                      log.audit("Expired ? "+expiryDate+"? "+ isExpired(expiryDate));
+                                      status = isExpired(expiryDate)?5:1 ;
+                                      log.debug("The status for "+lot+" has been set to "+strStatus)
+                                          
 											if (objNewInvtDetails[id]) {
 												objNewInvtDetails[id].quantity += parseInt(intQty);
-												objNewInvtDetails[id].status = strStatus;
+												objNewInvtDetails[id].status = status;
 												objNewInvtDetails[id].seqNbr = intSeqNbr;
 											}
 											else {
 												objNewInvtDetails[id] = {};
 												objNewInvtDetails[id].quantity = parseInt(intQty);
-												objNewInvtDetails[id].status = strStatus;
+												objNewInvtDetails[id].status = status;
 												objNewInvtDetails[id].seqNbr = intSeqNbr;
 											}
 										}
@@ -1875,6 +1898,7 @@ define(['N/record', "N/xml", 'N/search', 'N/config', 'N/runtime', './moment.min.
 											if (lot != "quantity" && objNewInvtDetails[intItemId][lot]) {
 												log.debug("item for each:", intItemId);
 												log.debug("lot for each: ", lot);
+                                              
 												log.debug("inventory for each: ", objNewInvtDetails[intItemId][lot]);
 												log.audit('Line Count', objInvDetailSubRec.getLineCount('inventoryassignment'));
 
@@ -1903,7 +1927,7 @@ define(['N/record', "N/xml", 'N/search', 'N/config', 'N/runtime', './moment.min.
 
 
 
-
+log.debug("Status to set is "+objNewInvtDetails[intItemId][lot].status);
 												objInvDetailSubRec.setCurrentSublistValue(
 													{
 														sublistId: 'inventoryassignment',
@@ -2055,6 +2079,57 @@ define(['N/record', "N/xml", 'N/search', 'N/config', 'N/runtime', './moment.min.
 					});
 			}
 		}
+
+         function isExpired(expDateStr) {
+  // Parse string YYYYMMDD → year, month, day
+  //2025-09-30
+           expDateStr = expDateStr.replace('-','').replace('-','').replace('-','');
+           
+log.audit("Expiration check for "+expDateStr+" against today "+getTodayYYYYMMDD());
+log.audit("Expiration result "+(parseInt(expDateStr) < parseInt(getTodayYYYYMMDD())))
+
+  if(!expDateStr)
+    expDateStr = '21001104'
+  var year1 = (getTodayYYYYMMDD().slice(0, 4));
+  var month1 = (getTodayYYYYMMDD().slice(4, 6));
+     log.debug("Month 1 is "+month1)
+  var day1 = (getTodayYYYYMMDD().slice(6, 8));
+
+  var year2 = (expDateStr.slice(0, 4));
+  var month2 = (expDateStr.slice(4, 6));
+  var day2 = (expDateStr.slice(6, 8));
+
+  // JS months are 0-based, so subtract 1
+  var date1 = new Date(year1, Number(month1) - 1, day1); //today
+  var date2 = new Date(year2, Number(month2) - 1, day2); //exp
+log.debug("Today yyyymmdd is "+getTodayYYYYMMDD()+ " And exp is "+expDateStr);
+     log.debug("day1 "+day1+" month1 "+month1+" year1 "+year1)
+     log.debug("day2 "+day2+" month2 "+month2+" year2 "+year2)
+     log.debug("Date 1 " +date1+" date2 "+date2)
+  // difference in ms → days
+  var diffMs = date2 - date1;
+     log.debug("diffm"+diffMs)
+  log.debug("Diff is "+(diffMs / (1000 * 60 * 60 * 24)));
+     
+     log.audit("Is expired? "+(diffMs / (1000 * 60 * 60 * 24))<=90)
+     
+     return (diffMs / (1000 * 60 * 60 * 24))<=120;
+    
+
+
+
+  return parseInt(expDateStr) < parseInt(getTodayYYYYMMDD());
+
+}
+
+   function getTodayYYYYMMDD() {
+  var today = new Date();
+  var year = today.getFullYear();
+  var month = (today.getMonth() + 1 < 10 ? "0" : "") + (today.getMonth() + 1);
+  var day = (today.getDate() < 10 ? "0" : "") + today.getDate();
+  return "" + year + month + day;
+}
+      
 		return {
 			post: doPost
 		};

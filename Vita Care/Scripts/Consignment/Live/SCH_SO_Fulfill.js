@@ -225,7 +225,7 @@ define(['N/record', "N/xml", 'N/search', 'N/config', 'N/runtime', './moment.min.
 										var objData = arrInventoryData[idx];
 
 										log.debug('---- LOOP INDEX ----', idx);
-										log.debug('Raw Line Data', JSON.stringify(objData));
+										// log.debug('Raw Line Data', JSON.stringify(objData));
 
 										var itemId = lib.toInt(objData.order_dtl_cust_field_2);
 										var lotNumber = objData.batch_nbr;
@@ -310,7 +310,7 @@ define(['N/record', "N/xml", 'N/search', 'N/config', 'N/runtime', './moment.min.
 												});
 											}
 										}
-										soRecToUpdate.setValue({ fieldId: 'location', value: 6 });
+										soRecToUpdate.setValue({ fieldId: 'location', value: toLocation }); // Consignment Location inside Customer Record
 										soRecToUpdate.setValue({ fieldId: 'custbody_vs_original_warehouse', value: oldLocation });
 
 										var soSavedId = soRecToUpdate.save({ enableSourcing: true, ignoreMandatoryFields: true });
