@@ -35,9 +35,9 @@ define(['N/log', 'N/search'], function (log, search) {
             var bdManagers = [];
 
             if (location == 2 || location == 17) { // Jeddah and Smart basket jeddah WH
-                if (poClassType === 'Non Pharma') bdManagers = [209120, 425160]; // 425160 ahmad saleh , 379964 Rawan, 421041 omar baker
+                if (poClassType === 'Non Pharma') bdManagers = [209120, 425160]; // 425160 ahmad saleh , 379964 Rawan, 
                 else if (poClassType === 'Pharma') bdManagers = [146766]; // sheta 146766
-                else if (poClassType === 'Medical') bdManagers = [425160];
+                else if (poClassType === 'Medical') bdManagers = [421041]; // E-149 Omar Bakr 421041
                 else if (poClassType === 'Animal Health') bdManagers = [501399];
                 else if (poClassType === 'Private Label') bdManagers = [209120];
             }
