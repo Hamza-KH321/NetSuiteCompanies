@@ -1,6 +1,7 @@
 /**
  * @NApiVersion 2.1
  * @NScriptType Suitelet
+ * @fileName SL || Shoof API Pay Single Vendor
  */
 define(['N/record', 'N/search', 'N/log'], function (record, search, log) {
 

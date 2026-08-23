@@ -1,6 +1,7 @@
 /**
  * @NApiVersion 2.1
  * @NScriptType Suitelet
+ * @fileName SL || Shoof API Customer Deposit
  */
 define(['N/record', 'N/log'], (record, log) => {
 

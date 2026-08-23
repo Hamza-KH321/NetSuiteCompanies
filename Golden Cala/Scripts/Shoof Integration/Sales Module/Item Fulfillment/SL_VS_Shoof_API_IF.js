@@ -1,6 +1,7 @@
 /**
  * @NApiVersion 2.1
  * @NScriptType Suitelet
+ * @fileName SL || Shoof API IF
  */
 define(['N/record', 'N/log', 'N/search'], function (record, log, search) {
 
@@ -69,7 +70,7 @@ define(['N/record', 'N/log', 'N/search'], function (record, log, search) {
                 isDynamic: true
             });
 
-            fulfillment.setValue({ fieldId: 'customform', value: 168 }); // Shoof Item Fulfillment	
+            fulfillment.setValue({ fieldId: 'customform', value: 170 }); // Shoof Item Fulfillment	
             fulfillment.setValue({ fieldId: 'custbody_vs_shoof_transaction', value: true });	
 
             var lineCount = fulfillment.getLineCount({ sublistId: 'item' });

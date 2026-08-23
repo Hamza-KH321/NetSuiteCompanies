@@ -1,6 +1,7 @@
 /**
  * @NApiVersion 2.1
  * @NScriptType Suitelet
+ * @fileName SL || Shoof API IR
  */
 define(['N/record', 'N/search', 'N/log'], function (record, search, log) {
 
@@ -116,7 +117,7 @@ define(['N/record', 'N/search', 'N/log'], function (record, search, log) {
                 log.debug('PO_VENDOR_VALIDATION_WARNING', vendorCheckError);
             }
 
-            itemReceiptRecord.setValue({ fieldId: 'customform', value: 140 }); // Shoof Item Receipt form
+            itemReceiptRecord.setValue({ fieldId: 'customform', value: 165 }); // Shoof Item Receipt form
             itemReceiptRecord.setValue({ fieldId: 'landedcostmethod', value: 'VALUE' });
 
             log.debug('landedCostFields', {
@@ -249,7 +250,7 @@ define(['N/record', 'N/search', 'N/log'], function (record, search, log) {
                     isDynamic: true
                 });
 
-                vendorBillRecord.setValue({ fieldId: 'customform', value: 165 }); // Shoof Bill
+                vendorBillRecord.setValue({ fieldId: 'customform', value: 164 }); // Shoof Bill
                 vendorBillRecord.setValue({ fieldId: 'approvalstatus', value: 2 }); // Approved
                 vendorBillInternalId = vendorBillRecord.save({
                     enableSourcing: true,

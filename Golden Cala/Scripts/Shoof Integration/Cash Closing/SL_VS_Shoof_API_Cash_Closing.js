@@ -1,6 +1,7 @@
 /**
  * @NApiVersion 2.1
  * @NScriptType Suitelet
+ * @fileName SL || Shoof API Cash Closing
  */
 define(['N/record', 'N/log'], function (record, log) {
 

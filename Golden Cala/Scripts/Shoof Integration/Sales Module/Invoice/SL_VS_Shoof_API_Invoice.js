@@ -1,6 +1,7 @@
 /**
  * @NApiVersion 2.1
  * @NScriptType Suitelet
+ * @fileName SL || Shoof API Invoice
  */
 define(['N/record', 'N/log', 'N/search'], function (record, log, search) {
 

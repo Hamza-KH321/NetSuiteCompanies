@@ -1,6 +1,7 @@
 /**
  * @NApiVersion 2.1
  * @NScriptType Suitelet
+ * @fileName SL || Shoof API SO
  */
 define(['N/record', 'N/log', 'N/search'], function (record, log, search) {
 
@@ -75,7 +76,7 @@ define(['N/record', 'N/log', 'N/search'], function (record, log, search) {
 
             var soRecord = record.create({ type: record.Type.SALES_ORDER, isDynamic: true });
 
-            soRecord.setValue({ fieldId: 'customform', value: 167 }); // Shoof Sales Order
+            soRecord.setValue({ fieldId: 'customform', value: 172 }); // Shoof Sales Order
             soRecord.setValue({ fieldId: 'entity', value: entityId });
             soRecord.setValue({ fieldId: 'orderstatus', value: 'B' }); // Pending Fulfillment
             soRecord.setValue({ fieldId: 'custbody_vs_shoof_transaction', value: true });

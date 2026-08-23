@@ -1,6 +1,7 @@
 /**
  * @NApiVersion 2.1
  * @NScriptType Suitelet
+ * @fileName SL || Shoof API PO
  */
 define(['N/record', 'N/search', 'N/log'], function (record, search, log) {
 
@@ -117,7 +118,7 @@ define(['N/record', 'N/search', 'N/log'], function (record, search, log) {
 
             var purchaseOrderRecord = record.create({ type: record.Type.PURCHASE_ORDER, isDynamic: true });
 
-            purchaseOrderRecord.setValue({ fieldId: 'customform', value: 164 }); // Shoof PO 
+            purchaseOrderRecord.setValue({ fieldId: 'customform', value: 167 }); // Shoof PO 
             purchaseOrderRecord.setValue({ fieldId: 'entity', value: vendorInternalId });
             purchaseOrderRecord.setValue({ fieldId: 'subsidiary', value: 2 }); // Golden Cala
             purchaseOrderRecord.setValue({ fieldId: 'custbody_vs_shoof_transaction', value: true });
