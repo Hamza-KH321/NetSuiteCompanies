@@ -1,6 +1,7 @@
 /**
  * @NApiVersion 2.1
  * @NScriptType Suitelet
+ * @fileName SL || Shoof API Transfer Order
  */
 define(['N/record', 'N/search', 'N/log'], (record, search, log) => {
 
@@ -27,7 +28,7 @@ define(['N/record', 'N/search', 'N/log'], (record, search, log) => {
                 isDynamic: true
             });
 
-            toRec.setValue({ fieldId: 'customform', value: 171 }); // Shoof Transfer Order
+            toRec.setValue({ fieldId: 'customform', value: 174 }); // Shoof Transfer Order
             toRec.setValue({ fieldId: 'subsidiary', value: 2 });
             toRec.setValue({ fieldId: 'orderstatus', value: 'B' });
             toRec.setValue({ fieldId: 'custbody_vs_shoof_transaction', value: true });

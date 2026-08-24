@@ -1,0 +1,815 @@
+{
+  "info": {
+    "_postman_id": "d8ab4305-4199-41bf-b834-457aea2361f0",
+    "name": "GC Shoof Integration",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "28321459"
+  },
+  "item": [
+    {
+      "name": "Purchase Order API",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "User-Agent",
+            "value": "Mozilla/5.0",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"entity\": \"1238\",\r\n  \"location\": 24,\r\n  \"currency\": \"SAR\",\r\n  \"custbody_vs_shoof_transaction_id\": \"SHOOF-PO-10001\",\r\n  \"items\": [\r\n    {\r\n      \"id\": 1,\r\n      \"quantity\": 100,\r\n      \"rate\": 25.5, \r\n      \"taxable\": \"No\"\r\n    }\r\n  ]\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://6371802-sb2.extforms.netsuite.com/app/site/hosting/scriptlet.nl?script=2146&deploy=1&compid=6371802_SB2&ns-at=AAEJ7tMQhOMs3XHtHX5rToKlaJhxb3PoxSwApwC_gA8HyIwO1Hc",
+          "protocol": "https",
+          "host": [
+            "6371802-sb2",
+            "extforms",
+            "netsuite",
+            "com"
+          ],
+          "path": [
+            "app",
+            "site",
+            "hosting",
+            "scriptlet.nl"
+          ],
+          "query": [
+            {
+              "key": "script",
+              "value": "2146"
+            },
+            {
+              "key": "deploy",
+              "value": "1"
+            },
+            {
+              "key": "compid",
+              "value": "6371802_SB2"
+            },
+            {
+              "key": "ns-at",
+              "value": "AAEJ7tMQhOMs3XHtHX5rToKlaJhxb3PoxSwApwC_gA8HyIwO1Hc"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Cash Closing",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "User-Agent",
+            "value": "Mozilla/5.0",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"trxNum\": 1212,\r\n  \"memo\": \"Cash closing for Day 15\",\r\n  \"date\": \"13/10/2025\",\r\n  \"type\": \"Cash Closing\",\r\n  \"currency\": \"SAR\",\r\n  \"amount\": 1000,\r\n  \"shortage\": 200\r\n}\r\n",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://6371802-sb2.extforms.netsuite.com/app/site/hosting/scriptlet.nl?script=2144&deploy=1&compid=6371802_SB2&ns-at=AAEJ7tMQIJSXECl5ujN--IDZBaRzmvo10gXsYGCXpwkQQVIBDbQ",
+          "protocol": "https",
+          "host": [
+            "6371802-sb2",
+            "extforms",
+            "netsuite",
+            "com"
+          ],
+          "path": [
+            "app",
+            "site",
+            "hosting",
+            "scriptlet.nl"
+          ],
+          "query": [
+            {
+              "key": "script",
+              "value": "2144"
+            },
+            {
+              "key": "deploy",
+              "value": "1"
+            },
+            {
+              "key": "compid",
+              "value": "6371802_SB2"
+            },
+            {
+              "key": "ns-at",
+              "value": "AAEJ7tMQIJSXECl5ujN--IDZBaRzmvo10gXsYGCXpwkQQVIBDbQ"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Item Receipt (PO) API",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "User-Agent",
+            "value": "Mozilla/5.0",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"entity\": 1238,\r\n  \"createdfrom\": 1721878,\r\n  \"LandedCostCategory\" : \"Custom Duty - Purchase Expenses\",\r\n  \"LandedCostAmount\" : 10,\r\n  \"items\": [\r\n    {\r\n      \"id\": \"1\",\r\n      \"quantity\": 100,\r\n      \"inventoryAssignments\": [\r\n        { \"inventoryNumber\": \"LOT-Shoof-1\", \"quantity\": 50 },\r\n        { \"inventoryNumber\": \"LOT-Shoof-2\", \"quantity\": 50 }\r\n      ]\r\n    }\r\n  ]\r\n}\r\n",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://6371802-sb2.extforms.netsuite.com/app/site/hosting/scriptlet.nl?script=2147&deploy=1&compid=6371802_SB2&ns-at=AAEJ7tMQ815F60zxVOgUX-5f6hXhZ3AXJe_RA-Z5h_KEOiKMnbQ",
+          "protocol": "https",
+          "host": [
+            "6371802-sb2",
+            "extforms",
+            "netsuite",
+            "com"
+          ],
+          "path": [
+            "app",
+            "site",
+            "hosting",
+            "scriptlet.nl"
+          ],
+          "query": [
+            {
+              "key": "script",
+              "value": "2147"
+            },
+            {
+              "key": "deploy",
+              "value": "1"
+            },
+            {
+              "key": "compid",
+              "value": "6371802_SB2"
+            },
+            {
+              "key": "ns-at",
+              "value": "AAEJ7tMQ815F60zxVOgUX-5f6hXhZ3AXJe_RA-Z5h_KEOiKMnbQ"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Bill API",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "User-Agent",
+            "value": "Mozilla/5.0",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"entity\": \"CICCARELLI Tooth Paste Factory\",\r\n  \"createdfrom\": 576090,\r\n  \"itemreceipts\": [576091]\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://6371802-sb2.extforms.netsuite.com/app/site/hosting/scriptlet.nl?script=2148&deploy=1&compid=6371802_SB2&ns-at=AAEJ7tMQQv3-yrRPSS-ek-9D5ogCvjBWajjPLRBzmH0lXkblrJs",
+          "protocol": "https",
+          "host": [
+            "6371802-sb2",
+            "extforms",
+            "netsuite",
+            "com"
+          ],
+          "path": [
+            "app",
+            "site",
+            "hosting",
+            "scriptlet.nl"
+          ],
+          "query": [
+            {
+              "key": "script",
+              "value": "2148"
+            },
+            {
+              "key": "deploy",
+              "value": "1"
+            },
+            {
+              "key": "compid",
+              "value": "6371802_SB2"
+            },
+            {
+              "key": "ns-at",
+              "value": "AAEJ7tMQQv3-yrRPSS-ek-9D5ogCvjBWajjPLRBzmH0lXkblrJs"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Vendor Payment API",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "User-Agent",
+            "value": "Mozilla/5.0",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"vendor\": 1238,   // vendor internal id\r\n  \"account\": 234,   // account internal id (bank/cash)\r\n  \"amount\": 100   // total amount to pay\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://6371802-sb2.extforms.netsuite.com/app/site/hosting/scriptlet.nl?script=2148&deploy=1&compid=6371802_SB2&ns-at=AAEJ7tMQQv3-yrRPSS-ek-9D5ogCvjBWajjPLRBzmH0lXkblrJs",
+          "protocol": "https",
+          "host": [
+            "6371802-sb2",
+            "extforms",
+            "netsuite",
+            "com"
+          ],
+          "path": [
+            "app",
+            "site",
+            "hosting",
+            "scriptlet.nl"
+          ],
+          "query": [
+            {
+              "key": "script",
+              "value": "2148"
+            },
+            {
+              "key": "deploy",
+              "value": "1"
+            },
+            {
+              "key": "compid",
+              "value": "6371802_SB2"
+            },
+            {
+              "key": "ns-at",
+              "value": "AAEJ7tMQQv3-yrRPSS-ek-9D5ogCvjBWajjPLRBzmH0lXkblrJs"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Sales Order API",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "User-Agent",
+            "value": "Mozilla/5.0",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"location\": 24,\r\n  \"custbody_vs_shoof_transaction_id\": \"SHOOF-SO-20003\",\r\n  \"custbody_vs_shoof_customer\": \"John Doe\",\r\n  \"custbody_vs_shoof_sales_rep\": \"Jane Smith\",\r\n  \"items\": [\r\n    { \"sku\": \"1\", \"quantity\": 1, \"rate\": 150.75, \"taxable\": \"No\",  \"DiscountType\": \"8926\", \"DiscountAmount\": \"10\"}\r\n  ],\r\n  \"customerdeposit\": {\r\n    \"payment\": 10\r\n  },\r\n  \"paymentmethod\": [\r\n    {\r\n      \"custrecord_vs_method\": \"Visa\",\r\n      \"custrecord_vs_payment_amount\": 50.75,\r\n      \"custrecord_vs_machine_id\": \"MCH-01\"\r\n    },\r\n    {\r\n      \"custrecord_vs_method\": \"Cash\",\r\n      \"custrecord_vs_payment_amount\": 100,\r\n      \"custrecord_vs_machine_id\": \"MCH-02\"\r\n    }\r\n  ]\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://6371802-sb2.extforms.netsuite.com/app/site/hosting/scriptlet.nl?script=2149&deploy=1&compid=6371802_SB2&ns-at=AAEJ7tMQ4wbnB1YbOrL17UeOHNxvvRKNdePv6djPULzoGv1mu5Q",
+          "protocol": "https",
+          "host": [
+            "6371802-sb2",
+            "extforms",
+            "netsuite",
+            "com"
+          ],
+          "path": [
+            "app",
+            "site",
+            "hosting",
+            "scriptlet.nl"
+          ],
+          "query": [
+            {
+              "key": "script",
+              "value": "2149"
+            },
+            {
+              "key": "deploy",
+              "value": "1"
+            },
+            {
+              "key": "compid",
+              "value": "6371802_SB2"
+            },
+            {
+              "key": "ns-at",
+              "value": "AAEJ7tMQ4wbnB1YbOrL17UeOHNxvvRKNdePv6djPULzoGv1mu5Q"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Item Fulfillment (SO) API",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "User-Agent",
+            "value": "Mozilla/5.0",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"createdfrom\": 1721882,\r\n  \"items\": [\r\n    {\r\n      \"sku\": \"1\",\r\n      \"inventoryAssignments\": [\r\n        { \"inventoryNumber\": \"LOT-Shoof-1\", \"quantity\": 1 }\r\n      ]\r\n    }\r\n    //,\r\n    // {\r\n    //   \"sku\": \"2\",\r\n    //   \"inventoryAssignments\": [\r\n    //     { \"inventoryNumber\": \"LOT-Shoof-2\", \"quantity\": 1 }\r\n    //   ]\r\n    // }\r\n  ]\r\n}\r\n",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://6371802-sb2.extforms.netsuite.com/app/site/hosting/scriptlet.nl?script=2150&deploy=1&compid=6371802_SB2&ns-at=AAEJ7tMQGS4aYhZZdL2eIFqS7M78iZUa0iqCf3mcvCMs_X3Ptgw",
+          "protocol": "https",
+          "host": [
+            "6371802-sb2",
+            "extforms",
+            "netsuite",
+            "com"
+          ],
+          "path": [
+            "app",
+            "site",
+            "hosting",
+            "scriptlet.nl"
+          ],
+          "query": [
+            {
+              "key": "script",
+              "value": "2150"
+            },
+            {
+              "key": "deploy",
+              "value": "1"
+            },
+            {
+              "key": "compid",
+              "value": "6371802_SB2"
+            },
+            {
+              "key": "ns-at",
+              "value": "AAEJ7tMQGS4aYhZZdL2eIFqS7M78iZUa0iqCf3mcvCMs_X3Ptgw"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Invoice API",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "User-Agent",
+            "value": "Mozilla/5.0",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"salesorderid\": 1721882\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://6371802-sb2.extforms.netsuite.com/app/site/hosting/scriptlet.nl?script=2151&deploy=1&compid=6371802_SB2&ns-at=AAEJ7tMQyjsmMvo6130KlTsHZzH-DeyUVI5UtfBGKd0fQiE40TY",
+          "protocol": "https",
+          "host": [
+            "6371802-sb2",
+            "extforms",
+            "netsuite",
+            "com"
+          ],
+          "path": [
+            "app",
+            "site",
+            "hosting",
+            "scriptlet.nl"
+          ],
+          "query": [
+            {
+              "key": "script",
+              "value": "2151"
+            },
+            {
+              "key": "deploy",
+              "value": "1"
+            },
+            {
+              "key": "compid",
+              "value": "6371802_SB2"
+            },
+            {
+              "key": "ns-at",
+              "value": "AAEJ7tMQyjsmMvo6130KlTsHZzH-DeyUVI5UtfBGKd0fQiE40TY"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Customer Deposit API",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "User-Agent",
+            "value": "Mozilla/5.0",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"salesOrderId\": 1721882,\r\n  \"payment\": 50,\r\n  \"paymentmethod\": [\r\n    { \"custrecord_vs_method\": \"Visa\", \"custrecord_vs_payment_amount\": 25, \"custrecord_vs_machine_id\": \"MCH-01\" },\r\n    { \"custrecord_vs_method\": \"Cash\", \"custrecord_vs_payment_amount\": 25, \"custrecord_vs_machine_id\": \"MCH-02\" }\r\n  ]\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://6371802-sb2.extforms.netsuite.com/app/site/hosting/scriptlet.nl?script=2152&deploy=1&compid=6371802_SB2&ns-at=AAEJ7tMQ1JGQFgjOQA1Oj_YVsSykgb115lCACv5LF4IyV6ofc18",
+          "protocol": "https",
+          "host": [
+            "6371802-sb2",
+            "extforms",
+            "netsuite",
+            "com"
+          ],
+          "path": [
+            "app",
+            "site",
+            "hosting",
+            "scriptlet.nl"
+          ],
+          "query": [
+            {
+              "key": "script",
+              "value": "2152"
+            },
+            {
+              "key": "deploy",
+              "value": "1"
+            },
+            {
+              "key": "compid",
+              "value": "6371802_SB2"
+            },
+            {
+              "key": "ns-at",
+              "value": "AAEJ7tMQ1JGQFgjOQA1Oj_YVsSykgb115lCACv5LF4IyV6ofc18"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Item Creation API",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "User-Agent",
+            "value": "Mozilla/5.0",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"itemid\": \"SHF-Item-1004\",\r\n  \"custitem_vs_sku\": \"4\",\r\n  \"unitstype\": \"PCS\",\r\n  \"class\": \"Lensme\",\r\n  \"custitem_vs_product_color\": \"Test Color\",\r\n  \"custitem_vs_product_type\": \"Test Product Type\",\r\n  \"custitem39\": \"-14\",\r\n  \"taxschedule\": \"Yes\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://6371802-sb2.extforms.netsuite.com/app/site/hosting/scriptlet.nl?script=2145&deploy=1&compid=6371802_SB2&ns-at=AAEJ7tMQupcxsVbW0IIQXs_w4cFWUem7_llU1Y4_LuJddGsGIuE",
+          "protocol": "https",
+          "host": [
+            "6371802-sb2",
+            "extforms",
+            "netsuite",
+            "com"
+          ],
+          "path": [
+            "app",
+            "site",
+            "hosting",
+            "scriptlet.nl"
+          ],
+          "query": [
+            {
+              "key": "script",
+              "value": "2145"
+            },
+            {
+              "key": "deploy",
+              "value": "1"
+            },
+            {
+              "key": "compid",
+              "value": "6371802_SB2"
+            },
+            {
+              "key": "ns-at",
+              "value": "AAEJ7tMQupcxsVbW0IIQXs_w4cFWUem7_llU1Y4_LuJddGsGIuE"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Inventory Adjustment API",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "User-Agent",
+            "value": "Mozilla/5.0",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"lines\": [\r\n    {\r\n      \"sku\": \"1\",\r\n      \"location\": 24,\r\n      \"quantity\": 100,\r\n      \"unitcost\": 12.5,\r\n      \"lots\": [\r\n        { \"lotNumber\": \"LOT-Shoof-1\", \"quantity\": 50 },\r\n        { \"lotNumber\": \"LOT-Shoof-6\", \"quantity\": 50 }\r\n      ]\r\n    }\r\n    ,\r\n    {\r\n      \"sku\": \"2\",\r\n      \"location\": 24,\r\n      \"quantity\": -1,\r\n      \"unitcost\": 12.5,\r\n      \"lots\": [\r\n        { \"lotNumber\": \"LOT-Shoof-3\", \"quantity\": -1 }\r\n      ]\r\n    }\r\n  ]\r\n}\r\n",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://6371802-sb2.extforms.netsuite.com/app/site/hosting/scriptlet.nl?script=2153&deploy=1&compid=6371802_SB2&ns-at=AAEJ7tMQZxe5Zlku-fm5JjFB-ul_GoZDdYIKKR-e1mCn3ZzVLJk",
+          "protocol": "https",
+          "host": [
+            "6371802-sb2",
+            "extforms",
+            "netsuite",
+            "com"
+          ],
+          "path": [
+            "app",
+            "site",
+            "hosting",
+            "scriptlet.nl"
+          ],
+          "query": [
+            {
+              "key": "script",
+              "value": "2153"
+            },
+            {
+              "key": "deploy",
+              "value": "1"
+            },
+            {
+              "key": "compid",
+              "value": "6371802_SB2"
+            },
+            {
+              "key": "ns-at",
+              "value": "AAEJ7tMQZxe5Zlku-fm5JjFB-ul_GoZDdYIKKR-e1mCn3ZzVLJk"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Transfer Order API",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "User-Agent",
+            "value": "Mozilla/5.0",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"fromLocation\": 24,\r\n  \"toLocation\": 25,\r\n  \"lines\": [\r\n    {\r\n      \"sku\": \"1\",\r\n      \"quantity\": 2\r\n    },\r\n    {\r\n      \"sku\": \"2\",\r\n      \"quantity\": 5\r\n    }\r\n  ]\r\n}\r\n",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://6371802-sb2.extforms.netsuite.com/app/site/hosting/scriptlet.nl?script=2154&deploy=1&compid=6371802_SB2&ns-at=AAEJ7tMQyTym7Jaa3mOpH1xWAAn4qV6a23kf2h2faQGrE_BKjYI",
+          "protocol": "https",
+          "host": [
+            "6371802-sb2",
+            "extforms",
+            "netsuite",
+            "com"
+          ],
+          "path": [
+            "app",
+            "site",
+            "hosting",
+            "scriptlet.nl"
+          ],
+          "query": [
+            {
+              "key": "script",
+              "value": "2154"
+            },
+            {
+              "key": "deploy",
+              "value": "1"
+            },
+            {
+              "key": "compid",
+              "value": "6371802_SB2"
+            },
+            {
+              "key": "ns-at",
+              "value": "AAEJ7tMQyTym7Jaa3mOpH1xWAAn4qV6a23kf2h2faQGrE_BKjYI"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "IF TO API",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "User-Agent",
+            "value": "Mozilla/5.0",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"transferOrderId\": 1721889,\r\n  \"lines\": [\r\n    {\r\n      \"sku\": \"1\",\r\n      \"quantity\": 2,\r\n      \"lots\": [\r\n        { \"lotNumber\": \"LOT-Shoof-1\", \"quantity\": 2 }\r\n    ]\r\n    },\r\n    {\r\n      \"sku\": \"2\",\r\n      \"quantity\": 5,\r\n      \"lots\": [\r\n        { \"lotNumber\": \"LOT-Shoof-1\", \"quantity\": 3 },\r\n        { \"lotNumber\": \"LOT-Shoof-2\", \"quantity\": 2 }\r\n      ]\r\n    }\r\n  ]\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://6371802-sb2.extforms.netsuite.com/app/site/hosting/scriptlet.nl?script=2155&deploy=1&compid=6371802_SB2&ns-at=AAEJ7tMQJo7j5l7jBorI6cLHFBBOhHRwb7ZVnxoaP2Z7tXsv8BY",
+          "protocol": "https",
+          "host": [
+            "6371802-sb2",
+            "extforms",
+            "netsuite",
+            "com"
+          ],
+          "path": [
+            "app",
+            "site",
+            "hosting",
+            "scriptlet.nl"
+          ],
+          "query": [
+            {
+              "key": "script",
+              "value": "2155"
+            },
+            {
+              "key": "deploy",
+              "value": "1"
+            },
+            {
+              "key": "compid",
+              "value": "6371802_SB2"
+            },
+            {
+              "key": "ns-at",
+              "value": "AAEJ7tMQJo7j5l7jBorI6cLHFBBOhHRwb7ZVnxoaP2Z7tXsv8BY"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "IR TO API",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "User-Agent",
+            "value": "Mozilla/5.0",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"transferOrderId\": 1721889,\r\n  \"items\": [\r\n    { \"id\": \"1\", \"quantity\": 2 }\r\n  ]\r\n}\r\n",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://6371802-sb2.extforms.netsuite.com/app/site/hosting/scriptlet.nl?script=2156&deploy=1&compid=6371802_SB2&ns-at=AAEJ7tMQhyDqIRyM0FIHubEfiksVKlkPFpKhvuAUuD1HQ45ULKk",
+          "protocol": "https",
+          "host": [
+            "6371802-sb2",
+            "extforms",
+            "netsuite",
+            "com"
+          ],
+          "path": [
+            "app",
+            "site",
+            "hosting",
+            "scriptlet.nl"
+          ],
+          "query": [
+            {
+              "key": "script",
+              "value": "2156"
+            },
+            {
+              "key": "deploy",
+              "value": "1"
+            },
+            {
+              "key": "compid",
+              "value": "6371802_SB2"
+            },
+            {
+              "key": "ns-at",
+              "value": "AAEJ7tMQhyDqIRyM0FIHubEfiksVKlkPFpKhvuAUuD1HQ45ULKk"
+            }
+          ]
+        }
+      },
+      "response": []
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseURL",
+      "value": "",
+      "type": "default"
+    }
+  ]
+}

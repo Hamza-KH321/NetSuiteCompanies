@@ -1,6 +1,7 @@
 /**
  * @NApiVersion 2.1
  * @NScriptType Suitelet
+ * @fileName SL || Shoof API Inventory Adjustment
  */
 define(['N/record', 'N/search', 'N/log'], (record, search, log) => {
 
@@ -20,7 +21,7 @@ define(['N/record', 'N/search', 'N/log'], (record, search, log) => {
 
             let adjRec = record.create({ type: record.Type.INVENTORY_ADJUSTMENT, isDynamic: true });
 
-            adjRec.setValue({ fieldId: 'customform', value: 170 }); // Shoof Inventory Adjustment
+            adjRec.setValue({ fieldId: 'customform', value: 173 }); // Shoof Inventory Adjustment
             adjRec.setValue({ fieldId: 'subsidiary', value: 2 });
             adjRec.setValue({ fieldId: 'custbody_vs_shoof_transaction', value: true });
             adjRec.setValue({ fieldId: 'account', value: 350 });
