@@ -229,11 +229,6 @@
     <table style="width: 100%;">
       <tr>
         <td style="align: left; font-weight: bold; vertical-align: bottom; font-size: 9px">Customer Data بيانات العميل</td>
-        <!--
-        <td style="width: 15%; align: right;">
-          <img src="https://7939761-sb1.app.netsuite.com/core/media/media.nl?id=1274&amp;c=7939761_SB1&amp;h=tdOW3b2cZshFS15T-YSst1xKWhMvXf8q5KNAsNUgbhViGTfO" style="height: 100%; width: 100%" />
-        </td>
-        -->
         <td style="align: right; font-weight: bold; vertical-align: bottom; font-size: 9px">Supplier Data بيانات المورد</td>
       </tr>
     </table>
@@ -265,14 +260,12 @@
                 <td class="infolabel">CR Number رقم السجل التجاري</td>
               </tr>
               <tr>
-                <!-- <td align="right">${record.entity.custentity32}</td> -->
                 <td class="infovalue">${record.custbody_vs_referencenumber}</td>
                 <td class="infolabel"> Customer reference number</td>
               </tr>
               <tr>
                 <td class="infovalue">
                   <p style="text-align: center;">
-                    <#-- تحقق إذا فيه عنوان -->
                     <#if record.custbody_vs_address1fromcustomer?has_content>
                       <#assign addressData = record.custbody_vs_address1fromcustomer?eval >
                       <#assign addr = addressData[0] >
@@ -304,9 +297,6 @@
             <tr>
               <td class="infovalue">${record.memo}</td>
               <td class="infolabel">Release Number رقم الدفعة</td>
-              <!-- <td style="align:left;">Customer Reference Number:</td> -->
-              <!-- <td style="align:center;">${record.custbody_vs_referencenumber}</td>
-              <td style="align:right; font-size: 7pt;" align="center">: الرقم المرجعي للعميل</td> -->
             </tr>
           </table>
         </td>
@@ -352,209 +342,62 @@
     </table>
 
     <!-- ============================== ITEMS TABLE ============================== -->
-    <#if record.custbody_vs_nd?boolean>
+    <#if record.item?has_content>
+      <table style="width: 100%; border: 1px solid #000000; border-collapse: collapse; margin-top: 10px;">
+        <tr style="border-bottom: 1px solid #000000">
+          <td style="border-right: 1px solid #000000">#</td>
+          <td style="align: right; border-right: 1px solid #000000"><p style="text-align: center; font-size: 6pt">كود السلعة او الخدمة Product Id</p></td>
+          <td colspan="3" style="border-right: 1px solid #000000"><p style="text-align: center; font-size: 6pt">وصف الخدمة أو السلعة Description</p></td>
+          <td style="border-right: 1px solid #000000"><p style="text-align: center; font-size: 6pt"> Location</p></td>
+          <td style="border-right: 1px solid #000000"><p style="text-align: center; font-size: 6pt"> Country </p></td>
+          <td style="border-right: 1px solid #000000"><p style="text-align: center; font-size: 6pt"> Manufacturer </p></td>
+          <td style="border-right: 1px solid #000000"><p style="text-align: center; font-size: 6pt"> Rate</p></td>
+          <td style="border-right: 1px solid #000000"><p style="text-align: center; font-size: 6pt;"> الوحدة Unit</p></td>
+          <td style="border-right: 1px solid #000000"><p style="text-align: center; font-size: 6pt;"> QTY </p></td>
+          <td style="border-right: 1px solid #000000"><p style="text-align: center; font-size: 6pt;">Lot Number</p></td>
+          <td style="border-right: 1px solid #000000"><p style="text-align: center; font-size: 6pt;">Ex Date</p></td>
+          <td style="border-right: 1px solid #000000"><p style="text-align: center; font-size: 6pt;">  الكمية المجانية</p></td>
+        </tr>
 
-      <!-- ND branch: NUPCO columns -->
-      <#if record.item?has_content>
-        <table style="width: 100%; border: 1px solid #000000; border-collapse: collapse; margin-top: 10px;">
-          <tr style="border-bottom: 1px solid #000000">
-            <td style="border-right: 1px solid #000000">#</td>
-            <td style="border-right: 1px solid #000000; text-align: center"><p style="text-align: center; font-size: 6pt">كود السلعة او الخدمة Product Id</p></td>
-            <td style="border-right: 1px solid #000000"><p style="text-align: center; font-size: 6pt"> NUPCO Code</p></td>
-            <td style="border-right: 1px solid #000000"><p style="text-align: center; font-size: 6pt"> NUPCO Price</p></td>
-            <td style="border-right: 1px solid #000000" colspan="2"><p style="text-align: center; font-size: 6pt"> NUPCO Description</p></td>
-            <td style="border-right: 1px solid #000000"><p style="text-align: center; font-size: 6pt"> Location</p></td>
-            <td style="border-right: 1px solid #000000"><p style="text-align: center; font-size: 6pt"> Country </p></td>
-            <td style="border-right: 1px solid #000000"><p style="text-align: center; font-size: 6pt"> Manufacturer </p></td>
-            <td style="border-right: 1px solid #000000"><p style="text-align: center; font-size: 6pt">Customer Reference</p></td>
-            <#if record.custbody_vs_mohdata?boolean>
-              <td style="border-right: 1px solid #000000"><p style="text-align: center; font-size: 6pt"> MOH Code</p></td>
-            </#if>
-            <#if record.custbody_vs_moddata?boolean>
-              <td style="border-right: 1px solid #000000"><p style="text-align: center; font-size: 6pt"> MOD Code</p></td>
-            </#if>
-            <td style="border-right: 1px solid #000000"><p style="text-align: center; font-size: 6pt;">Lot Number</p></td>
-            <td style="border-right: 1px solid #000000"><p style="text-align: center; font-size: 6pt;">Quantity</p></td>
-            <td style="border-right: 1px solid #000000"><p style="text-align: center; font-size: 6pt;">Ex Date</p></td>
-            <td style="border-right: 1px solid #000000"><p style="text-align: center; font-size: 6pt;">  الكمية المجانية</p></td>
-            <!-- <td><p style="text-align: center; font-size: 8pt"> الخصم Discount</p></td> -->
-          </tr>
+        <#assign totalQuantityRemaining = 0 />
 
-          <#assign totalQuantityRemaining = 0 />
-
-          <#-- Example to handle JSON data in NetSuite Advanced PDF -->
-          <#list record.item as item>
-            <#if item.custcol_vs_inventory_details_json?has_content>
-              <#assign objData = item.custcol_vs_inventory_details_json?eval />
-              <#if objData?size gt 0>
-                <#list objData as data>
-                  <tr style="border-bottom: 1px solid #000000">
-                    <td style="border-right: 1px solid #000000">${item_index+1}</td>
-                    <td align="center" style="border-right: 1px solid #000000"><p style="text-align: center; font-size: 6pt">${item.custcol_vsitemid}</p></td>
-                    <td style="border-right: 1px solid #000000"><p class="itemname" style="text-align: center; font-size: 6pt">${item.custcol_vs_nupcocode}</p></td>
-                    <td style="border-right: 1px solid #000000"><p class="itemname" style="text-align: center; font-size: 6pt">${item.custcol_vs_nupcoprice}</p></td>
-                    <td style="border-right: 1px solid #000000" colspan="2"><p class="itemname" style="text-align: center; font-size: 6pt">${item.custcol_vs_nupcodescription}</p></td>
-                    <td style="border-right: 1px solid #000000"><p class="itemname" style="text-align: center; font-size: 6pt">${item.location}</p></td>
-                    <td align="center" style="border-right: 1px solid #000000"><p style="text-align: center; font-size: 6pt">${item.custcol_vs_item_country}</p></td>
-                    <td align="center" style="border-right: 1px solid #000000"><p style="text-align: center; font-size: 6pt">${item.custcol_vs_manufacturer}</p></td>
-                    <td style="border-right: 1px solid #000000"><p class="itemname" style="text-align: center; font-size: 6pt">${item.custcol_vs_customerreference}</p></td>
-                    <#if record.custbody_vs_mohdata?boolean>
-                      <td style="border-right: 1px solid #000000"><p class="itemname" style="text-align: center; font-size: 6pt">${item.custcol_vs_mohcode}</p></td>
-                    </#if>
-                    <#if record.custbody_vs_moddata?boolean>
-                      <td style="border-right: 1px solid #000000"><p class="itemname" style="text-align: center; font-size: 6pt">${item.custcol_vs_modcode}</p></td>
-                    </#if>
-                    <td align="center" line-height="150%" style="border-right: 1px solid #000000"><p style="text-align: center; font-size: 6pt">${data.lotNumber} </p></td>
-                    <td align="center" line-height="150%" style="border-right: 1px solid #000000"><p style="text-align: center; font-size: 6pt">${data.quantity}</p></td>
-                    <td align="center" line-height="150%" style="border-right: 1px solid #000000"><p style="text-align: center; font-size: 6pt">${data.expirationdate}</p></td>
-                  </tr>
-                </#list>
-              </#if>
-            <#else>
-              <tr style="border-bottom: 1px solid #000000">
-                <td style="border-right: 1px solid #000000">${item_index+1}</td>
-                <td align="center" style="border-right: 1px solid #000000"><p style="text-align: center; font-size: 6pt">${item.custcol_vsitemid}</p></td>
-                <td style="border-right: 1px solid #000000"><p class="itemname" style="text-align: center; font-size: 6pt">${item.custcol_vs_nupcocode}</p></td>
-                <td style="border-right: 1px solid #000000"><p class="itemname" style="text-align: center; font-size: 6pt">${item.custcol_vs_nupcoprice}</p></td>
-                <td style="border-right: 1px solid #000000" colspan="2"><p class="itemname" style="text-align: center; font-size: 6pt">${item.custcol_vs_nupcodescription}</p></td>
-                <td style="border-right: 1px solid #000000"><p class="itemname" style="text-align: center; font-size: 6pt">${item.location}</p></td>
-                <td align="center" style="border-right: 1px solid #000000"><p style="text-align: center; font-size: 6pt">${item.custcol_vs_item_country}</p></td>
-                <td align="center" style="border-right: 1px solid #000000"><p style="text-align: center; font-size: 6pt">${item.custcol_vs_manufacturer}</p></td>
-                <td style="border-right: 1px solid #000000"><p class="itemname" style="text-align: center; font-size: 6pt">${item.custcol_vs_customerreference}</p></td>
-                <#if record.custbody_vs_mohdata?boolean>
-                  <td style="border-right: 1px solid #000000"><p class="itemname" style="text-align: center; font-size: 6pt">${item.custcol_vs_mohcode}</p></td>
-                </#if>
-                <#if record.custbody_vs_moddata?boolean>
-                  <td style="border-right: 1px solid #000000"><p class="itemname" style="text-align: center; font-size: 6pt">${item.custcol_vs_modcode}</p></td>
-                </#if>
-                <td align="center" line-height="150%" style="border-right: 1px solid #000000"><p style="text-align: center; font-size: 6pt">${data.lotNumber} </p></td>
-                <td align="center" line-height="150%" style="border-right: 1px solid #000000"><p style="text-align: center; font-size: 6pt">${data.quantity}</p></td>
-                <td align="center" line-height="150%" style="border-right: 1px solid #000000"><p style="text-align: center; font-size: 6pt">${data.expirationdate}</p></td>
-                <td align="center" line-height="150%" style="border-right: 1px solid #000000"><p style="text-align: center; font-size: 6pt"></p></td>
-              </tr>
-            </#if>
-            <#assign totalQuantityRemaining += item.quantity />
+        <#list record.item as item>
+          <#assign objData = item.custcol_vs_inventory_details_json?eval />
+          <#list objData as data>
+            <tr style="border-bottom: 1px solid #000000">
+              <td style="border-right: 1px solid #000000">${item_index+1}</td>
+              <td align="center" style="border-right: 1px solid #000000"><p style="text-align: center; font-size: 6pt">${item.custcol_vsitemid}</p></td>
+              <td colspan="3" style="border-right: 1px solid #000000"><p class="itemname" style="text-align: left; font-size: 6pt">${item.displayname}</p></td>
+              <td style="border-right: 1px solid #000000"><p class="itemname" style="text-align: center; font-size: 6pt">${item.location}</p></td>
+              <td align="center" style="border-right: 1px solid #000000"><p style="text-align: center; font-size: 6pt">${item.custcol_vs_item_country}</p></td>
+              <td align="center" style="border-right: 1px solid #000000"><p style="text-align: center; font-size: 6pt">${item.custcol_vs_manufacturer}</p></td>
+              <td align="center" style="border-right: 1px solid #000000"><p style="text-align: center; font-size: 6pt">${item.rate}</p></td>
+              <td align="center" line-height="150%" style="border-right: 1px solid #000000"><p style="text-align: center; font-size: 6pt">${item.unitsdisplay}</p></td>
+              <td align="center" line-height="150%" style="border-right: 1px solid #000000"><p style="text-align: center; font-size: 6pt">${data.quantity} </p></td>
+              <td align="center" line-height="150%" style="border-right: 1px solid #000000"><p style="text-align: center; font-size: 6pt">${data.lotNumber} </p></td>
+              <td align="center" line-height="150%" style="border-right: 1px solid #000000"><p style="text-align: center; font-size: 6pt">${data.expirationdate}</p></td>
+              <td align="center" line-height="150%" style="border-right: 1px solid #000000"><p style="text-align: center; font-size: 6pt"></p></td>
+            </tr>
           </#list>
-        </table>
-      </#if>
-
-      <#assign totalAmount = 0>
-      <#list record.item as item>
-        <#assign totalAmount = totalAmount + item.amount>
-      </#list>
-
-      <#assign taxamt = 0>
-      <#list record.item as item>
-        <#assign taxamt = taxamt + item.tax1amt>
-      </#list>
-
-      <#assign grossamt = 0>
-      <#list record.item as item>
-        <#assign grossamt = grossamt + item.grossamt>
-      </#list>
-
-    <#else>
-
-      <!-- Default branch: Description columns -->
-      <#if record.item?has_content>
-        <table style="width: 100%; border: 1px solid #000000; border-collapse: collapse; margin-top: 10px;">
-          <tr style="border-bottom: 1px solid #000000">
-            <td style="border-right: 1px solid #000000">#</td>
-            <td style="align: right; border-right: 1px solid #000000"><p style="text-align: center; font-size: 6pt">كود السلعة او الخدمة Product Id </p></td>
-            <#if record.custbody_vsbothdes?boolean>
-              <td colspan="3" style="border-right: 1px solid #000000"><p style="text-align: center; font-size: 6pt"> Description</p></td>
-              <td colspan="3" style="border-right: 1px solid #000000"><p style="text-align: center; font-size: 6pt"> وصف الخدمة أو السلعة</p></td>
-            <#else>
-              <td colspan="3" style="border-right: 1px solid #000000"><p style="text-align: center; font-size: 6pt"> وصف الخدمة أو السلعة Description</p></td>
-            </#if>
-            <td style="border-right: 1px solid #000000"><p style="text-align: center; font-size: 6pt"> Location</p></td>
-            <td style="border-right: 1px solid #000000"><p style="text-align: center; font-size: 6pt"> Country </p></td>
-            <td style="border-right: 1px solid #000000"><p style="text-align: center; font-size: 6pt"> Manufacturer </p></td>
-            <td style="border-right: 1px solid #000000"><p style="text-align: center; font-size: 6pt;"> الوحدة Unit</p></td>
-            <td style="border-right: 1px solid #000000"><p style="text-align: center; font-size: 6pt;">Lot Number</p></td>
-            <td style="border-right: 1px solid #000000"><p style="text-align: center; font-size: 6pt;"> QTY </p></td>
-            <td style="border-right: 1px solid #000000"><p style="text-align: center; font-size: 6pt;">Ex Date</p></td>
-            <td style="border-right: 1px solid #000000"><p style="text-align: center; font-size: 6pt;">  الكمية المجانية</p></td>
-          </tr>
-
-          <#assign totalQuantityRemaining = 0 />
-
-          <#-- Example to handle JSON data in NetSuite Advanced PDF -->
-          <#list record.item as item>
-            <#if item.custcol_vs_inventory_details_json?has_content>
-              <#assign objData = item.custcol_vs_inventory_details_json?eval />
-              <#if objData?size gt 0>
-                <#list objData as data>
-                  <tr style="border-bottom: 1px solid #000000">
-                    <td style="border-right: 1px solid #000000">${item_index+1}</td>
-                    <td align="center" style="border-right: 1px solid #000000"><p style="text-align: center; font-size: 6pt">${item.custcol_vsitemid}</p></td>
-                    <#if record.custbody_vsbothdes?boolean>
-                      <td colspan="3" style="border-right: 1px solid #000000"><p class="itemname" style="text-align: left; font-size: 6pt">${item.custcol_vs_description}</p></td>
-                      <td colspan="3" style="border-right: 1px solid #000000"><p class="itemname" style="text-align: left; font-size: 6pt">${data.itemARDisc}</p></td>
-                    <#else>
-                      <#if record.custbody_vs_arabicdis?boolean>
-                        <td colspan="3" style="border-right: 1px solid #000000"><p class="itemname" style="text-align: left; font-size: 6pt">${data.itemARDisc}</p></td>
-                      <#else>
-                        <td colspan="3" style="border-right: 1px solid #000000"><p class="itemname" style="text-align: left; font-size: 6pt">${item.description}</p></td>
-                      </#if>
-                    </#if>
-                    <td style="border-right: 1px solid #000000"><p class="itemname" style="text-align: center; font-size: 6pt">${item.location}</p></td>
-                    <td align="center" style="border-right: 1px solid #000000"><p style="text-align: center; font-size: 6pt">${item.custcol_vs_item_country}</p></td>
-                    <td align="center" style="border-right: 1px solid #000000"><p style="text-align: center; font-size: 6pt">${item.custcol_vs_manufacturer}</p></td>
-                    <td align="center" line-height="150%" style="border-right: 1px solid #000000"><p style="text-align: center; font-size: 6pt">${item.unitsdisplay}</p></td>
-                    <td align="center" line-height="150%" style="border-right: 1px solid #000000"><p style="text-align: center; font-size: 6pt">${data.lotNumber} </p></td>
-                    <td align="center" line-height="150%" style="border-right: 1px solid #000000"><p style="text-align: center; font-size: 6pt">${data.quantity} </p></td>
-                    <td align="center" line-height="150%" style="border-right: 1px solid #000000"><p style="text-align: center; font-size: 6pt">${data.expirationdate}</p></td>
-                    <td align="center" line-height="150%" style="border-right: 1px solid #000000"><p style="text-align: center; font-size: 6pt"></p></td>
-                  </tr>
-                </#list>
-              </#if>
-            <#else>
-              <tr style="border-bottom: 1px solid #000000">
-                <td style="border-right: 1px solid #000000">${item_index+1}</td>
-                <td align="center" style="border-right: 1px solid #000000"><p style="text-align: center; font-size: 6pt">${item.custcol_vsitemid}</p></td>
-                <#if record.custbody_vsbothdes?boolean>
-                  <td colspan="3" style="border-right: 1px solid #000000"><p class="itemname" style="text-align: left; font-size: 6pt">${item.description}</p></td>
-                  <td colspan="3" style="border-right: 1px solid #000000"><p class="itemname" style="text-align: left; font-size: 6pt">${data.itemARDisc}</p></td>
-                <#else>
-                  <#if record.custbody_vs_arabicdis?boolean>
-                    <td colspan="3" style="border-right: 1px solid #000000"><p class="itemname" style="text-align: left; font-size: 6pt">${data.itemARDisc}</p></td>
-                  <#else>
-                    <td colspan="3" style="border-right: 1px solid #000000"><p class="itemname" style="text-align: left; font-size: 6pt">${item.description}</p></td>
-                  </#if>
-                </#if>
-                <td style="border-right: 1px solid #000000"><p class="itemname" style="text-align: center; font-size: 6pt">${item.location}</p></td>
-                <td align="center" style="border-right: 1px solid #000000"><p style="text-align: center; font-size: 6pt">${item.custcol_vs_item_country}</p></td>
-                <td align="center" style="border-right: 1px solid #000000"><p style="text-align: center; font-size: 6pt">${item.custcol_vs_manufacturer}</p></td>
-                <td align="center" style="border-right: 1px solid #000000"><p style="text-align: center; font-size: 6pt">${item.rate}</p></td>
-                <td align="center" line-height="150%" style="border-right: 1px solid #000000"><p style="text-align: center; font-size: 6pt">${item.unitsdisplay}</p></td>
-                <td align="center" line-height="150%" style="border-right: 1px solid #000000"><p style="text-align: center; font-size: 6pt">${data.quantity} </p></td>
-                <td align="center" line-height="150%" style="border-right: 1px solid #000000"><p style="text-align: center; font-size: 6pt">${data.lotNumber} </p></td>
-                <td align="center" line-height="150%" style="border-right: 1px solid #000000"><p style="text-align: center; font-size: 6pt">${data.expirationdate}</p></td>
-                <td align="center" line-height="150%" style="border-right: 1px solid #000000"><p style="text-align: center; font-size: 6pt"></p></td>
-              </tr>
-            </#if>
-            <#assign totalQuantityRemaining += item.quantity />
-          </#list>
-        </table>
-      </#if>
-
-      <#assign totalAmount = 0>
-      <#list record.item as item>
-        <#assign totalAmount = totalAmount + item.amount>
-      </#list>
-
-      <#assign taxamt = 0>
-      <#list record.item as item>
-        <#assign taxamt = taxamt + item.tax1amt>
-      </#list>
-
-      <#assign grossamt = 0>
-      <#list record.item as item>
-        <#assign grossamt = grossamt + item.grossamt>
-      </#list>
-
+          <#assign totalQuantityRemaining += item.quantity />
+        </#list>
+      </table>
     </#if>
+
+    <#assign totalAmount = 0>
+    <#list record.item as item>
+      <#assign totalAmount = totalAmount + item.amount>
+    </#list>
+
+    <#assign taxamt = 0>
+    <#list record.item as item>
+      <#assign taxamt = taxamt + item.tax1amt>
+    </#list>
+
+    <#assign grossamt = 0>
+    <#list record.item as item>
+      <#assign grossamt = grossamt + item.grossamt>
+    </#list>
 
   </body>
 </pdf>

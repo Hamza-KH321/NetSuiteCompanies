@@ -2,52 +2,60 @@
  * @NApiVersion 2.1
  * @NScriptType Suitelet
  * @NModuleScope SameAccount
- * @fileName Delivery Note
+ * @fileName SL || Delivery Note Print
  */
-define(['N/file', 'N/email', 'N/record', 'N/redirect', 'N/ui/serverWidget', 'N/render', 'N/search', 'N/https'],
-    /**
-     * @param {email} email
-     * @param {record} record
-     * @param {redirect} redirect
-     * @param {serverWidget} serverWidget
-     * @param {render} render
-     * @param {file} file
-     */
-    function (file, email, record, redirect, serverWidget, render, search, https) {
-        function onRequest(context) {
-            try {
 
-                var request = context.request;
-                var response = context.response;
-                var id1 = request.parameters.tranid;
+define(['N/file', 'N/record', 'N/render',], function (file, record, render,) {
 
-                if (!id1) {
-                    response.write('custom_id parameter missing');
-                }
+    function onRequest(context) {
+        try {
 
-                var rec = record.load({
-                    type: 'itemfulfillment',
-                    id: id1,
-                    isDynamic: true
-                });
+            var request = context.request;
+            var response = context.response;
+            var id1 = request.parameters.tranid;
 
-                var renderer = render.create();
-                var template = file.load('SuiteScripts/DeliveryNoteXML.xml');
-
-                renderer.templateContent = template.getContents();
-                renderer.addRecord('record', rec);
-
-                var xml = renderer.renderAsString();
-
-                context.response.renderPdf(xml);
-
-            } catch (err) {
-                response.write(err + ' (line number: ' + err.lineno + ')');
+            if (!id1) {
+                log.error('Missing tranid', 'tranid parameter is missing');
+                response.write('custom_id parameter missing');
                 return;
             }
-        }
-        return {
-            onRequest: onRequest
-        };
 
-    });
+            var rec = record.load({
+                type: 'itemfulfillment',
+                id: id1,
+                isDynamic: true
+            });
+
+            var renderer = render.create();
+            var template = file.load({ id: 'SuiteScripts/DeliveryNoteXML.xml' });
+
+            renderer.templateContent = template.getContents();
+
+            renderer.addRecord('record', rec);
+
+            var xml = renderer.renderAsString();
+
+            context.response.renderPdf(xml);
+
+            log.debug('Delivery Note PDF generated', {
+                internalId: id1
+            });
+
+        } catch (e) {
+
+            log.error('Error in Delivery Note Suitelet', {
+                name: e.name,
+                message: e.message,
+                stack: e.stack
+            });
+
+            context.response.write(
+                e + ' (line number: ' + e.lineno + ')'
+            );
+        }
+    }
+
+    return {
+        onRequest: onRequest
+    };
+});
