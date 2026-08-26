@@ -291,7 +291,7 @@
               <td class="infolabel">Invoice Date تاريخ الفاتورة</td>
             </tr>
             <tr>
-              <td class="infovalue">#${record.custbody_vs_po_ref}</td>
+              <td class="infovalue">${record.custbody_vs_po_ref}</td>
               <td class="infolabel"> PO Number رقم امر الشراء</td>
             </tr>
             <tr>
@@ -348,15 +348,13 @@
           <td style="border-right: 1px solid #000000">#</td>
           <td style="align: right; border-right: 1px solid #000000"><p style="text-align: center; font-size: 6pt">كود السلعة او الخدمة Product Id</p></td>
           <td colspan="3" style="border-right: 1px solid #000000"><p style="text-align: center; font-size: 6pt">وصف الخدمة أو السلعة Description</p></td>
-          <td style="border-right: 1px solid #000000"><p style="text-align: center; font-size: 6pt"> Location</p></td>
-          <td style="border-right: 1px solid #000000"><p style="text-align: center; font-size: 6pt"> Country </p></td>
-          <td style="border-right: 1px solid #000000"><p style="text-align: center; font-size: 6pt"> Manufacturer </p></td>
-          <td style="border-right: 1px solid #000000"><p style="text-align: center; font-size: 6pt"> Rate</p></td>
-          <td style="border-right: 1px solid #000000"><p style="text-align: center; font-size: 6pt;"> الوحدة Unit</p></td>
-          <td style="border-right: 1px solid #000000"><p style="text-align: center; font-size: 6pt;"> QTY </p></td>
+          <td style="border-right: 1px solid #000000"><p style="text-align: center; font-size: 6pt">Location</p></td>
+          <td style="border-right: 1px solid #000000"><p style="text-align: center; font-size: 6pt">Country </p></td>
+          <td style="border-right: 1px solid #000000"><p style="text-align: center; font-size: 6pt">Manufacturer </p></td>
+          <td style="border-right: 1px solid #000000"><p style="text-align: center; font-size: 6pt;">الوحدة Unit</p></td>
+          <td style="border-right: 1px solid #000000"><p style="text-align: center; font-size: 6pt;">QTY </p></td>
           <td style="border-right: 1px solid #000000"><p style="text-align: center; font-size: 6pt;">Lot Number</p></td>
           <td style="border-right: 1px solid #000000"><p style="text-align: center; font-size: 6pt;">Ex Date</p></td>
-          <td style="border-right: 1px solid #000000"><p style="text-align: center; font-size: 6pt;">  الكمية المجانية</p></td>
         </tr>
 
         <#assign totalQuantityRemaining = 0 />
@@ -370,13 +368,11 @@
               <td colspan="3" style="border-right: 1px solid #000000"><p class="itemname" style="text-align: left; font-size: 6pt">${item.displayname}</p></td>
               <td style="border-right: 1px solid #000000"><p class="itemname" style="text-align: center; font-size: 6pt">${item.location}</p></td>
               <td align="center" style="border-right: 1px solid #000000"><p style="text-align: center; font-size: 6pt">${item.custcol_vs_item_country}</p></td>
-              <td align="center" style="border-right: 1px solid #000000"><p style="text-align: center; font-size: 6pt">${item.custcol_vs_manufacturer}</p></td>
-              <td align="center" style="border-right: 1px solid #000000"><p style="text-align: center; font-size: 6pt">${item.rate}</p></td>
+              <td align="center" style="border-right: 1px solid #000000"><p style="text-align: center; font-size: 6pt">${item.custcol_vs_item_brand?split(":")[1]?trim}</p></td>
               <td align="center" line-height="150%" style="border-right: 1px solid #000000"><p style="text-align: center; font-size: 6pt">${item.unitsdisplay}</p></td>
               <td align="center" line-height="150%" style="border-right: 1px solid #000000"><p style="text-align: center; font-size: 6pt">${data.quantity} </p></td>
               <td align="center" line-height="150%" style="border-right: 1px solid #000000"><p style="text-align: center; font-size: 6pt">${data.lotNumber} </p></td>
               <td align="center" line-height="150%" style="border-right: 1px solid #000000"><p style="text-align: center; font-size: 6pt">${data.expirationdate}</p></td>
-              <td align="center" line-height="150%" style="border-right: 1px solid #000000"><p style="text-align: center; font-size: 6pt"></p></td>
             </tr>
           </#list>
           <#assign totalQuantityRemaining += item.quantity />
