@@ -61,18 +61,48 @@ define(['N/sftp', 'N/file', 'N/record', 'N/search', 'N/log', 'N/runtime'],
                 var rows = parseCsv(fileObj.getContents());
                 if (!rows.length) return;
 
-                var groups = {};
+                var validRows = [];
+
                 rows.forEach(function (r) {
+                    var amount = r.Taxable_Net_Amount;
 
-                    // log.debug('CSV_ROW_DEBUG', {
-                    //     site: r.Site_Name,
-                    //     payment: r.Payment_Method,
-                    //     product: r.Product_Name
-                    // });
+                    if (amount == null || amount.toString().trim() == '') {
+                        log.debug('ROW_SKIPPED_EMPTY_AMOUNT', {
+                            site: r.Site_Name,
+                            product: r.Product_Name,
+                            amount: amount
+                        });
+                        return;
+                    }
 
+                    var numericAmount = parseFloat(amount.toString().replace(/,/g, ''));
+
+                    if (isNaN(numericAmount) || numericAmount == 0) {
+                        log.debug('ROW_SKIPPED_ZERO_AMOUNT', {
+                            site: r.Site_Name,
+                            product: r.Product_Name,
+                            amount: amount
+                        });
+                        return;
+                    }
+
+                    validRows.push(r);
+                });
+
+                if (!validRows.length) {
+                    log.debug('NO_VALID_ROWS', 'All CSV rows have zero or empty amounts');
+                    return;
+                }
+
+                var groups = {};
+
+                validRows.forEach(function (r) {
                     var key = normalize(r.Site_Name) + '||' + normalize(r.Payment_Method || 'No Payment');
 
-                    if (!groups[key]) groups[key] = [];
+                    if (!groups[key]) {
+                        groups[key] = [];
+                    }
+
                     groups[key].push(r);
                 });
 

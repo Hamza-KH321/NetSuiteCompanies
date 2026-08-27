@@ -51,7 +51,10 @@ define(['N/sftp', 'N/file', 'N/record', 'N/search', 'N/log'],
                 var filename = obj.name;
 
                 var conn = connectSftp();
-                if (!conn) return;
+
+                if (!conn) {
+                    return;
+                }
 
                 var fileObj = conn.download({
                     filename: filename,
@@ -59,22 +62,70 @@ define(['N/sftp', 'N/file', 'N/record', 'N/search', 'N/log'],
                 });
 
                 var rows = parseCsv(fileObj.getContents());
-                if (!rows.length) return;
+
+                if (!rows.length) {
+                    log.debug('MAP_NO_ROWS', 'No rows found in file: ' + filename);
+                    return;
+                }
 
                 var groups = {};
+                var skippedRows = 0;
+                var validRows = 0;
+
                 rows.forEach(function (r) {
 
-                    // log.debug('CSV_ROW_DEBUG', {
-                    //     site: r.Site_Name,
-                    //     payment: r.Payment_Method,
-                    //     product: r.Product_Name
-                    // });
+                    var amount = r.Taxable_Net_Amount;
+
+                    if (amount == null || amount.toString().trim() == '') {
+                        skippedRows++;
+
+                        log.debug('ROW_SKIPPED_EMPTY_AMOUNT', {
+                            site: r.Site_Name,
+                            paymentMethod: r.Payment_Method,
+                            product: r.Product_Name,
+                            amount: amount
+                        });
+
+                        return;
+                    }
+
+                    var numericAmount = parseFloat(amount.toString().replace(/,/g, ''));
+
+                    if (isNaN(numericAmount) || numericAmount == 0) {
+                        skippedRows++;
+
+                        log.debug('ROW_SKIPPED_ZERO_AMOUNT', {
+                            site: r.Site_Name,
+                            paymentMethod: r.Payment_Method,
+                            product: r.Product_Name,
+                            amount: amount
+                        });
+
+                        return;
+                    }
+
+                    validRows++;
 
                     var key = normalize(r.Site_Name) + '||' + normalize(r.Payment_Method || 'No Payment');
 
-                    if (!groups[key]) groups[key] = [];
+                    if (!groups[key]) {
+                        groups[key] = [];
+                    }
+
                     groups[key].push(r);
                 });
+
+                log.debug('MAP_ROW_SUMMARY', {
+                    filename: filename,
+                    totalRows: rows.length,
+                    validRows: validRows,
+                    skippedRows: skippedRows
+                });
+
+                if (!validRows) {
+                    log.debug('MAP_NO_VALID_ROWS', 'All rows have zero or empty amounts');
+                    return;
+                }
 
                 for (var k in groups) {
                     context.write(k, JSON.stringify({
@@ -84,6 +135,11 @@ define(['N/sftp', 'N/file', 'N/record', 'N/search', 'N/log'],
                 }
 
             } catch (e) {
+                log.error('MAP_ERROR', {
+                    error: e.message,
+                    stack: e.stack || 'NO_STACK'
+                });
+
                 logError('map: ' + e.message);
             }
         }
