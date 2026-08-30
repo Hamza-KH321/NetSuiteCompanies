@@ -150,7 +150,7 @@ define(['N/record', 'N/search', 'N/log', 'N/file', 'N/https', 'N/encode'],
                     Case.setValue({ fieldId: 'custevent_vs_casebranch', value: branchInternalId });
                 }
 
-                // Invoice
+                                // Invoice
                 if (request.InvoiceCode) {
                     try {
                         log.debug('Invoice Search', 'Searching InvoiceCode: ' + request.InvoiceCode);
@@ -199,12 +199,12 @@ define(['N/record', 'N/search', 'N/log', 'N/file', 'N/https', 'N/encode'],
                             // Set Invoice Location on Case
                             if (invoiceLocation) {
                                 Case.setValue({
-                                    fieldId: 'custevent9',
+                                    fieldId: 'custevent_vs_case_warehouse',
                                     value: invoiceLocation
                                 });
 
                                 log.debug('Invoice Location Set on Case', {
-                                    fieldId: 'custevent9',
+                                    fieldId: 'custevent_vs_case_warehouse',
                                     locationInternalId: invoiceLocation
                                 });
                             } else {
@@ -244,10 +244,7 @@ define(['N/record', 'N/search', 'N/log', 'N/file', 'N/https', 'N/encode'],
 
                 Case.setValue({ fieldId: 'status', value: 1 });
 
-                let CaseId = Case.save({
-                    enableSourcing: true,
-                    ignoreMandatoryFields: true
-                });
+                let CaseId = Case.save({ enableSourcing: true, ignoreMandatoryFields: true });
                 log.debug('Case Saved', 'Case ID: ' + CaseId);
 
                 // Get Case Number
