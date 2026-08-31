@@ -4,7 +4,7 @@
  * @fileName UE || Inventory Details IF
  */
 
-define(['N/log', 'N/format'], function (log, format) {
+define(['N/log', 'N/format', 'N/search'], function (log, format, search) {
 
     function beforeSubmit(context) {
         try {
@@ -56,18 +56,47 @@ define(['N/log', 'N/format'], function (log, format) {
 
                     for (var j = 0; j < assignmentCount; j++) {
 
-                        var lotNumber = inventoryDetail.getSublistText({
+                        var lotNumberId = inventoryDetail.getSublistValue({
                             sublistId: 'inventoryassignment',
                             fieldId: 'issueinventorynumber',
                             line: j
                         });
 
-                        if (!lotNumber) {
-                            lotNumber = inventoryDetail.getSublistText({
+                        if (!lotNumberId) {
+                            lotNumberId = inventoryDetail.getSublistValue({
                                 sublistId: 'inventoryassignment',
                                 fieldId: 'receiptinventorynumber',
                                 line: j
                             });
+                        }
+
+                        var lotNumber = lotNumberId || '';
+
+                        if (lotNumberId) {
+                            try {
+
+                                var inventoryNumberData = search.lookupFields({
+                                    type: 'inventorynumber',
+                                    id: lotNumberId,
+                                    columns: ['inventorynumber']
+                                });
+
+                                if (inventoryNumberData.inventorynumber) {
+                                    lotNumber = inventoryNumberData.inventorynumber;
+                                }
+
+                            } catch (lotError) {
+
+                                log.error('Error getting inventory number', {
+                                    line: i,
+                                    assignmentLine: j,
+                                    inventoryNumberId: lotNumberId,
+                                    name: lotError.name,
+                                    message: lotError.message,
+                                    stack: lotError.stack
+                                });
+
+                            }
                         }
 
                         var quantity = inventoryDetail.getSublistValue({
@@ -91,25 +120,46 @@ define(['N/log', 'N/format'], function (log, format) {
                             });
                         }
 
-                        var status = inventoryDetail.getSublistText({
+                        var status = inventoryDetail.getSublistValue({
                             sublistId: 'inventoryassignment',
                             fieldId: 'inventorystatus',
                             line: j
                         });
 
-                        if (!status) {
-                            status = inventoryDetail.getSublistValue({
-                                sublistId: 'inventoryassignment',
-                                fieldId: 'inventorystatus',
-                                line: j
-                            });
+                        var statusText = status || '';
+
+                        if (status) {
+                            try {
+
+                                var statusData = search.lookupFields({
+                                    type: 'inventorystatus',
+                                    id: status,
+                                    columns: ['name']
+                                });
+
+                                if (statusData.name) {
+                                    statusText = statusData.name;
+                                }
+
+                            } catch (statusError) {
+
+                                log.error('Error getting inventory status', {
+                                    line: i,
+                                    assignmentLine: j,
+                                    statusId: status,
+                                    name: statusError.name,
+                                    message: statusError.message,
+                                    stack: statusError.stack
+                                });
+
+                            }
                         }
 
                         var detail = {
-                            lotNumber: lotNumber || '',
+                            lotNumber: lotNumber,
                             quantity: Number(quantity) || 0,
                             expirationdate: formattedDate,
-                            status: status || ''
+                            status: statusText
                         };
 
                         detailsArray.push(detail);
