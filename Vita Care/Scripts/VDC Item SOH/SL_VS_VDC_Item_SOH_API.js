@@ -1,15 +1,13 @@
 /**
  * @NApiVersion 2.1
  * @NScriptType Suitelet
- * @fileName SL || VDC Item SOH
+ * @fileName SL || VDC Item SOH API
  */
-define(['N/search', 'N/ui/serverWidget', 'N/log'], function(search, serverWidget, log) {
+define(['N/search', 'N/log'], function(search, log) {
 
     var CONFIG = {
         PAGE_SIZE: 1000,
-        FORM_TITLE: 'Item Receipt vs Invoice Comparison',
-        DATE_FIELD_ID: 'custpage_fromdate',
-        SUBLIST_ID: 'custpage_results',
+        DATE_PARAM: 'fromDate',
         VDC_FALLBACK: {
             '1': 'Abha',
             '2': 'Eastern'
@@ -24,12 +22,10 @@ define(['N/search', 'N/ui/serverWidget', 'N/log'], function(search, serverWidget
             'AND',
             ['custbody24', 'anyof', '2', '1'],
             'AND',
-            ['item.custitem36', 'is', 'T']
+            ['item.custitem36', 'is', 'T'],
+            'AND',
+            ['trandate', 'onorafter', fromDate]
         ];
-
-        if (fromDate) {
-            filters.push('AND', ['trandate', 'onorafter', fromDate]);
-        }
 
         return search.create({
             type: 'itemreceipt',
@@ -51,12 +47,10 @@ define(['N/search', 'N/ui/serverWidget', 'N/log'], function(search, serverWidget
             'AND',
             ['item.custitem36', 'is', 'T'],
             'AND',
-            ['type', 'anyof', 'CustInvc']
+            ['type', 'anyof', 'CustInvc'],
+            'AND',
+            ['trandate', 'onorafter', fromDate]
         ];
-
-        if (fromDate) {
-            filters.push('AND', ['trandate', 'onorafter', fromDate]);
-        }
 
         return search.create({
             type: 'invoice',
@@ -109,7 +103,9 @@ define(['N/search', 'N/ui/serverWidget', 'N/log'], function(search, serverWidget
             var key = buildKey(r.itemId, r.vdcId);
             if (!map[key]) {
                 map[key] = {
+                    itemId: r.itemId,
                     itemText: r.itemText,
+                    vdcId: r.vdcId,
                     vdcText: r.vdcText,
                     received: 0,
                     fulfilled: 0
@@ -122,7 +118,9 @@ define(['N/search', 'N/ui/serverWidget', 'N/log'], function(search, serverWidget
             var key = buildKey(r.itemId, r.vdcId);
             if (!map[key]) {
                 map[key] = {
+                    itemId: r.itemId,
                     itemText: r.itemText,
+                    vdcId: r.vdcId,
                     vdcText: r.vdcText,
                     received: 0,
                     fulfilled: 0
@@ -137,8 +135,10 @@ define(['N/search', 'N/ui/serverWidget', 'N/log'], function(search, serverWidget
                 var entry = map[key];
                 var rawTotal = entry.received - entry.fulfilled;
                 merged.push({
-                    itemText: entry.itemText,
-                    vdcText: entry.vdcText,
+                    itemId: entry.itemId,
+                    item: entry.itemText,
+                    vdcId: entry.vdcId,
+                    vdc: entry.vdcText,
                     received: entry.received,
                     fulfilled: entry.fulfilled,
                     total: rawTotal < 0 ? 0 : rawTotal
@@ -147,67 +147,71 @@ define(['N/search', 'N/ui/serverWidget', 'N/log'], function(search, serverWidget
         }
 
         merged.sort(function(a, b) {
-            if (a.itemText !== b.itemText) {
-                return a.itemText < b.itemText ? -1 : 1;
+            if (a.item !== b.item) {
+                return a.item < b.item ? -1 : 1;
             }
-            return a.vdcText < b.vdcText ? -1 : (a.vdcText > b.vdcText ? 1 : 0);
+            return a.vdc < b.vdc ? -1 : (a.vdc > b.vdc ? 1 : 0);
         });
 
         return merged;
     }
 
-    function buildForm(fromDate, rows) {
-        var form = serverWidget.createForm({ title: CONFIG.FORM_TITLE });
-
-        var dateField = form.addField({
-            id: CONFIG.DATE_FIELD_ID,
-            type: serverWidget.FieldType.DATE,
-            label: 'From Date (On or After)'
-        });
-
-        if (fromDate) {
-            dateField.defaultValue = fromDate;
+    function getComparisonData(fromDate) {
+        if (!fromDate) {
+            return {
+                success: false,
+                error: 'Missing required parameter: ' + CONFIG.DATE_PARAM + ' (expected format MM/DD/YYYY).'
+            };
         }
 
-        form.addSubmitButton({ label: 'Search' });
-
-        var sublist = form.addSublist({
-            id: CONFIG.SUBLIST_ID,
-            type: serverWidget.SublistType.LIST,
-            label: 'Results'
-        });
-
-        sublist.addField({ id: 'item', type: serverWidget.FieldType.TEXT, label: 'Item' });
-        sublist.addField({ id: 'vdc', type: serverWidget.FieldType.TEXT, label: 'VDC' });
-        sublist.addField({ id: 'received', type: serverWidget.FieldType.TEXT, label: 'Received Qty' });
-        sublist.addField({ id: 'fulfilled', type: serverWidget.FieldType.TEXT, label: 'Fulfilled Qty' });
-        sublist.addField({ id: 'total', type: serverWidget.FieldType.TEXT, label: 'Total (Rec - Ful)' });
-
-        rows.forEach(function(row, index) {
-            sublist.setSublistValue({ id: 'item', line: index, value: row.itemText });
-            sublist.setSublistValue({ id: 'vdc', line: index, value: row.vdcText });
-            sublist.setSublistValue({ id: 'received', line: index, value: String(row.received) });
-            sublist.setSublistValue({ id: 'fulfilled', line: index, value: String(row.fulfilled) });
-            sublist.setSublistValue({ id: 'total', line: index, value: String(row.total) });
-        });
-
-        return form;
-    }
-
-    function onRequest(context) {
         try {
-            var fromDate = context.request.parameters[CONFIG.DATE_FIELD_ID] || '';
-
             var receiptRows = runSummarySearch(getItemReceiptSearch(fromDate));
             var invoiceRows = runSummarySearch(getInvoiceSearch(fromDate));
             var mergedRows = mergeResults(receiptRows, invoiceRows);
-            var form = buildForm(fromDate, mergedRows);
 
-            context.response.writePage(form);
+            return {
+                success: true,
+                fromDate: fromDate,
+                count: mergedRows.length,
+                results: mergedRows
+            };
+        } catch (e) {
+            log.error({ title: 'getComparisonData error', details: e });
+            return {
+                success: false,
+                error: e.message
+            };
+        }
+    }
+
+    function onRequest(context) {
+        var fromDate = '';
+        var responseBody = {};
+
+        try {
+            if (context.request.method === 'GET') {
+                fromDate = context.request.parameters[CONFIG.DATE_PARAM];
+            } else if (context.request.method === 'POST') {
+                var body = {};
+                try {
+                    body = JSON.parse(context.request.body || '{}');
+                } catch (parseError) {
+                    body = context.request.parameters;
+                }
+                fromDate = body[CONFIG.DATE_PARAM];
+            }
+
+            responseBody = getComparisonData(fromDate);
         } catch (e) {
             log.error({ title: 'onRequest error', details: e });
-            context.response.write({ output: 'An error occurred: ' + e.message });
+            responseBody = {
+                success: false,
+                error: e.message
+            };
         }
+
+        context.response.setHeader({ name: 'Content-Type', value: 'application/json' });
+        context.response.write({ output: JSON.stringify(responseBody) });
     }
 
     return {
