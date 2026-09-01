@@ -61,30 +61,39 @@ define(['N/record', 'N/search', 'N/log'], function (record, search, log) {
                 if (!isNumericValue(line.quantity)) {
                     return sendErrorResponse(responseObject, 'VALIDATION_ERROR', 'Line: "quantity" must be a number.', { line: i + 1, quantity: line.quantity });
                 }
-                if (!Array.isArray(line.inventoryAssignments) || !line.inventoryAssignments.length) {
-                    return sendErrorResponse(responseObject, 'VALIDATION_ERROR', 'Line: "inventoryAssignments" is mandatory and must be a non-empty array.', {
-                        line: i + 1,
-                        inventoryAssignmentsExample: [{ inventoryNumber: "LOT-ABC", quantity: 1 }]
-                    });
-                }
 
-                var totalAssigned = 0;
-                for (var a = 0; a < line.inventoryAssignments.length; a++) {
-                    var assign = line.inventoryAssignments[a] || {};
-                    if (!assign.inventoryNumber || String(assign.inventoryNumber).trim() === '') {
-                        return sendErrorResponse(responseObject, 'VALIDATION_ERROR', 'Each inventory assignment needs "inventoryNumber".', { line: i + 1, assignment: a + 1 });
-                    }
-                    if (!isNumericValue(assign.quantity)) {
-                        return sendErrorResponse(responseObject, 'VALIDATION_ERROR', 'Each inventory assignment needs numeric "quantity".', { line: i + 1, assignment: a + 1 });
-                    }
-                    totalAssigned += parseFloat(assign.quantity);
-                }
+                if (Array.isArray(line.inventoryAssignments) && line.inventoryAssignments.length) {
 
-                if (Math.abs(totalAssigned - parseFloat(line.quantity)) > 1e-9) {
-                    return sendErrorResponse(responseObject, 'VALIDATION_ERROR',
-                        'Sum of inventoryAssignments.quantity must equal line.quantity.', {
-                        line: i + 1, quantity: line.quantity, assignedTotal: totalAssigned
-                    });
+                    var totalAssigned = 0;
+
+                    for (var a = 0; a < line.inventoryAssignments.length; a++) {
+                        var assign = line.inventoryAssignments[a] || {};
+
+                        if (!assign.inventoryNumber || String(assign.inventoryNumber).trim() == '') {
+                            return sendErrorResponse(responseObject, 'VALIDATION_ERROR', 'Each inventory assignment needs "inventoryNumber".', {
+                                line: i + 1,
+                                assignment: a + 1
+                            });
+                        }
+
+                        if (!isNumericValue(assign.quantity)) {
+                            return sendErrorResponse(responseObject, 'VALIDATION_ERROR', 'Each inventory assignment needs numeric "quantity".', {
+                                line: i + 1,
+                                assignment: a + 1
+                            });
+                        }
+
+                        totalAssigned += parseFloat(assign.quantity);
+                    }
+
+                    if (Math.abs(totalAssigned - parseFloat(line.quantity)) > 1e-9) {
+                        return sendErrorResponse(responseObject, 'VALIDATION_ERROR',
+                            'Sum of inventoryAssignments.quantity must equal line.quantity.', {
+                            line: i + 1,
+                            quantity: line.quantity,
+                            assignedTotal: totalAssigned
+                        });
+                    }
                 }
             }
 
@@ -201,34 +210,62 @@ define(['N/record', 'N/search', 'N/log'], function (record, search, log) {
                 itemReceiptRecord.setCurrentSublistValue({ sublistId: 'item', fieldId: 'itemreceive', value: true });
                 itemReceiptRecord.setCurrentSublistValue({ sublistId: 'item', fieldId: 'quantity', value: parseFloat(payloadLine.quantity) });
 
-                var inventoryDetailSubrecord = itemReceiptRecord.getCurrentSublistSubrecord({
-                    sublistId: 'item',
-                    fieldId: 'inventorydetail'
-                });
+                var inventoryDetailSubrecord = null;
 
                 try {
-                    var existingAssignments = inventoryDetailSubrecord.getLineCount({ sublistId: 'inventoryassignment' });
-                    for (var r = existingAssignments - 1; r >= 0; r--) {
-                        inventoryDetailSubrecord.removeLine({ sublistId: 'inventoryassignment', line: r, ignoreRecalc: true });
-                    }
-                } catch (clearErr) {
-                    log.debug('ASSIGNMENTS_CLEAR_WARNING', clearErr);
+                    inventoryDetailSubrecord = itemReceiptRecord.getCurrentSublistSubrecord({
+                        sublistId: 'item',
+                        fieldId: 'inventorydetail'
+                    });
+                } catch (inventoryDetailError) {
+                    log.debug('INVENTORY_DETAIL_NOT_AVAILABLE', {
+                        line: idx + 1,
+                        itemId: lineItemId,
+                        error: inventoryDetailError
+                    });
                 }
 
-                for (var aa = 0; aa < payloadLine.inventoryAssignments.length; aa++) {
-                    var payloadAssign = payloadLine.inventoryAssignments[aa];
-                    inventoryDetailSubrecord.selectNewLine({ sublistId: 'inventoryassignment' });
-                    inventoryDetailSubrecord.setCurrentSublistValue({
-                        sublistId: 'inventoryassignment',
-                        fieldId: 'receiptinventorynumber',
-                        value: String(payloadAssign.inventoryNumber)
-                    });
-                    inventoryDetailSubrecord.setCurrentSublistValue({
-                        sublistId: 'inventoryassignment',
-                        fieldId: 'quantity',
-                        value: parseFloat(payloadAssign.quantity)
-                    });
-                    inventoryDetailSubrecord.commitLine({ sublistId: 'inventoryassignment' });
+                if (inventoryDetailSubrecord && Array.isArray(payloadLine.inventoryAssignments) && payloadLine.inventoryAssignments.length) {
+
+                    try {
+                        var existingAssignments = inventoryDetailSubrecord.getLineCount({
+                            sublistId: 'inventoryassignment'
+                        });
+
+                        for (var r = existingAssignments - 1; r >= 0; r--) {
+                            inventoryDetailSubrecord.removeLine({
+                                sublistId: 'inventoryassignment',
+                                line: r,
+                                ignoreRecalc: true
+                            });
+                        }
+                    } catch (clearErr) {
+                        log.debug('ASSIGNMENTS_CLEAR_WARNING', clearErr);
+                    }
+
+                    for (var aa = 0; aa < payloadLine.inventoryAssignments.length; aa++) {
+                        var payloadAssign = payloadLine.inventoryAssignments[aa];
+
+                        inventoryDetailSubrecord.selectNewLine({
+                            sublistId: 'inventoryassignment'
+                        });
+
+                        inventoryDetailSubrecord.setCurrentSublistValue({
+                            sublistId: 'inventoryassignment',
+                            fieldId: 'receiptinventorynumber',
+                            value: String(payloadAssign.inventoryNumber)
+                        });
+
+                        inventoryDetailSubrecord.setCurrentSublistValue({
+                            sublistId: 'inventoryassignment',
+                            fieldId: 'quantity',
+                            value: parseFloat(payloadAssign.quantity)
+                        });
+
+                        inventoryDetailSubrecord.commitLine({
+                            sublistId: 'inventoryassignment'
+                        });
+                    }
                 }
 
                 itemReceiptRecord.commitLine({ sublistId: 'item' });

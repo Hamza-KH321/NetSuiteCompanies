@@ -1,3 +1,5 @@
+With Inventory Details
+
 {
   "entity": 1238,
   "createdfrom": 576218,
@@ -9,6 +11,21 @@
         { "inventoryNumber": "LOT-Shoof-1", "quantity": 3 },
         { "inventoryNumber": "LOT-Shoof-2", "quantity": 2 }
       ]
+    }
+  ]
+}
+
+
+Without Inventory Details
+{
+  "entity": 8754,
+  "createdfrom": 1721917,
+  "LandedCostCategory" : "Custom Duty - Purchase Expenses",
+  "LandedCostAmount" : 10,
+  "items": [
+    {
+      "id": "16",
+      "quantity": 100
     }
   ]
 }
