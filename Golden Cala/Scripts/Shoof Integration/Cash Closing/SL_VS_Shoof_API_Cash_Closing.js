@@ -26,18 +26,20 @@ define(['N/record', 'N/log'], function (record, log) {
     // Account mapping with internal IDs (and account numbers in comments)
     var ACCOUNT_MAP = {
         'Cash Closing': {
-            debit: 1293,   // 11314
-            credit: 1290,  // 11011
-            shortage: 1292 // 11013
+            debit: 1293,
+            credit: 1290,
+            variance: 1292
         },
+
         'Credit Closing': {
-            debit: 1293,   // 11314
-            credit: 1291,  // 11012
-            shortage: 1292 // 11013
+            debit: 1293,
+            credit: 1291,
+            variance: 1292
         },
+
         'Deposit': {
-            debit: 1246,   // 11208
-            credit: 1293   // 11314
+            debit: 1246,
+            credit: 1293
         }
     };
 
@@ -81,10 +83,10 @@ define(['N/record', 'N/log'], function (record, log) {
             errors.push('amount is required and must be a number greater than 0.');
         }
 
-        // Shortage validation
-        var shortage = Number(body.shortage || 0);
-        if (!isFinite(shortage) || shortage < 0) {
-            errors.push('shortage must be a number greater than or equal to 0.');
+        // Variance validation
+        var variance = Number(body.variance || 0);
+        if (!isFinite(variance)) {
+            errors.push('variance must be a valid number.');
         }
 
         // Currency validation
@@ -120,11 +122,11 @@ define(['N/record', 'N/log'], function (record, log) {
             }
 
             // Special validation for Deposit
-            if (normalizedType === 'Deposit' && shortage > 0) {
+            if (normalizedType == 'Deposit' && variance != 0) {
                 return sendJson(context, 400, {
                     success: false,
-                    code: 'INVALID_SHORTAGE',
-                    message: 'Shortage must be 0 for Deposit transactions.'
+                    code: 'INVALID_VARIANCE',
+                    message: 'Variance must be 0 for Deposit transactions.'
                 });
             }
 
@@ -147,26 +149,59 @@ define(['N/record', 'N/log'], function (record, log) {
 
             // Debit line
             var debitAmount = amount;
-            if (normalizedType !== 'Deposit' && shortage > 0) {
-                debitAmount = amount - shortage;
+            var creditAmount = amount;
+
+            if (normalizedType != 'Deposit' && variance > 0) {
+                debitAmount = amount - variance;
+            }
+
+            if (normalizedType != 'Deposit' && variance < 0) {
+                creditAmount = amount - Math.abs(variance);
+            }
+
+            var debitAccount = accounts.debit;
+            var creditAccount = accounts.credit;
+
+            if (variance < 0) {
+                debitAccount = accounts.credit;
+                creditAccount = accounts.debit;
             }
 
             journalEntry.selectNewLine({ sublistId: 'line' });
-            journalEntry.setCurrentSublistValue({ sublistId: 'line', fieldId: 'account', value: accounts.debit });
+            journalEntry.setCurrentSublistValue({ sublistId: 'line', fieldId: 'account', value: debitAccount });
             journalEntry.setCurrentSublistValue({ sublistId: 'line', fieldId: 'debit', value: round2(debitAmount) });
             journalEntry.commitLine({ sublistId: 'line' });
 
             // Credit line
             journalEntry.selectNewLine({ sublistId: 'line' });
-            journalEntry.setCurrentSublistValue({ sublistId: 'line', fieldId: 'account', value: accounts.credit });
-            journalEntry.setCurrentSublistValue({ sublistId: 'line', fieldId: 'credit', value: round2(amount) });
+            journalEntry.setCurrentSublistValue({ sublistId: 'line', fieldId: 'account', value: creditAccount });
+            journalEntry.setCurrentSublistValue({ sublistId: 'line', fieldId: 'credit', value: round2(creditAmount) });
             journalEntry.commitLine({ sublistId: 'line' });
 
             // Shortage line (if applicable)
-            if (normalizedType !== 'Deposit' && shortage > 0) {
+            if (normalizedType != 'Deposit' && variance != 0) {
+
                 journalEntry.selectNewLine({ sublistId: 'line' });
-                journalEntry.setCurrentSublistValue({ sublistId: 'line', fieldId: 'account', value: accounts.shortage });
-                journalEntry.setCurrentSublistValue({ sublistId: 'line', fieldId: 'debit', value: round2(shortage) });
+                journalEntry.setCurrentSublistValue({
+                    sublistId: 'line',
+                    fieldId: 'account',
+                    value: accounts.variance
+                });
+
+                if (variance > 0) {
+                    journalEntry.setCurrentSublistValue({
+                        sublistId: 'line',
+                        fieldId: 'debit',
+                        value: round2(variance)
+                    });
+                } else {
+                    journalEntry.setCurrentSublistValue({
+                        sublistId: 'line',
+                        fieldId: 'credit',
+                        value: round2(Math.abs(variance))
+                    });
+                }
+
                 journalEntry.commitLine({ sublistId: 'line' });
             }
 
@@ -176,7 +211,7 @@ define(['N/record', 'N/log'], function (record, log) {
                 id: journalEntryId,
                 type: normalizedType,
                 amount: amount,
-                shortage: shortage,
+                variance: variance,
                 currency: currencyIso,
                 date: dateText
             });

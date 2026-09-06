@@ -1,0 +1,19 @@
+{
+    "customerId": 6559,
+    "locationId": 19,
+    "memo": "Shoof Credit Memo Test",
+    "items": [
+        {
+            "sku": "1",
+            "quantity": 2,
+            "rate": 50,
+            "lotNumber": "LOT001"
+        },
+        {
+            "sku": "2",
+            "quantity": 1,
+            "rate": 100,
+            "lotNumber": "LOT002"
+        }
+    ]
+}

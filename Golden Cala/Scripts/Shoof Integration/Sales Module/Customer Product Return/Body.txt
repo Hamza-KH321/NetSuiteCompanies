@@ -1,0 +1,14 @@
+{
+    "invoiceId": 1721885,
+    "memo": "Customer return Shoof Test",
+    "items": [
+        {
+            "sku": "1",
+            "quantity": 1
+        },
+        {
+            "sku": "ABC123",
+            "quantity": 2
+        }
+    ]
+}

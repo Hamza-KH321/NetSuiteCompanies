@@ -1,0 +1,14 @@
+{
+    "purchaseOrderId": 12345,
+    "memo": "Vendor return Shoof Test",
+    "items": [
+        {
+            "sku": "ABC123",
+            "quantity": 2
+        },
+        {
+            "sku": "XYZ456",
+            "quantity": 1
+        }
+    ]
+}

@@ -41,10 +41,10 @@ define(['N/search', 'N/record', 'N/log'], function (search, record, log) {
             var fulfillmentId = searchResult.id;
             var createdFrom = searchResult.values.createdfrom.value;
 
-            log.debug('MAP START', {
-                fulfillmentId: fulfillmentId,
-                createdFrom: createdFrom
-            });
+            // log.debug('MAP START', {
+            //     fulfillmentId: fulfillmentId,
+            //     createdFrom: createdFrom
+            // });
 
             // Load IF
             var ifRecord = record.load({
@@ -66,10 +66,10 @@ define(['N/search', 'N/record', 'N/log'], function (search, record, log) {
             var ifLineCount = ifRecord.getLineCount({ sublistId: 'item' });
             var invLineCount = invoice.getLineCount({ sublistId: 'item' });
 
-            log.debug('LINE COUNTS', {
-                ifLines: ifLineCount,
-                invLines: invLineCount
-            });
+            // log.debug('LINE COUNTS', {
+            //     ifLines: ifLineCount,
+            //     invLines: invLineCount
+            // });
 
             for (var i = 0; i < invLineCount; i++) {
                 try {
@@ -78,10 +78,10 @@ define(['N/search', 'N/record', 'N/log'], function (search, record, log) {
 
                     var invItem = invoice.getCurrentSublistValue({ sublistId: 'item', fieldId: 'item' });
 
-                    log.debug('PROCESS INVOICE LINE', {
-                        line: i,
-                        item: invItem
-                    });
+                    // log.debug('PROCESS INVOICE LINE', {
+                    //     line: i,
+                    //     item: invItem
+                    // });
 
                     var matchedLine = -1;
 
@@ -102,7 +102,7 @@ define(['N/search', 'N/record', 'N/log'], function (search, record, log) {
                     // ❌ Remove lines NOT in this fulfillment
                     if (matchedLine == -1) {
 
-                        log.debug('REMOVE LINE NOT IN IF', invItem);
+                        // log.debug('REMOVE LINE NOT IN IF', invItem);
 
                         invoice.removeLine({ sublistId: 'item', line: i });
 
@@ -112,10 +112,10 @@ define(['N/search', 'N/record', 'N/log'], function (search, record, log) {
                         continue;
                     }
 
-                    log.debug('MATCH FOUND', {
-                        invLine: i,
-                        ifLine: matchedLine
-                    });
+                    // log.debug('MATCH FOUND', {
+                    //     invLine: i,
+                    //     ifLine: matchedLine
+                    // });
 
                     // ✅ Set correct quantity from IF
                     var ifQty = ifRecord.getSublistValue({ sublistId: 'item', fieldId: 'quantity', line: matchedLine });
@@ -149,7 +149,7 @@ define(['N/search', 'N/record', 'N/log'], function (search, record, log) {
                             // Clear existing
                             var existingCount = invDetailInv.getLineCount({sublistId: 'inventoryassignment'});
 
-                            log.debug('CLEAR EXISTING ASSIGNMENTS', existingCount);
+                            // log.debug('CLEAR EXISTING ASSIGNMENTS', existingCount);
 
                             for (var x = existingCount - 1; x >= 0; x--) {
                                 invDetailInv.removeLine({ sublistId: 'inventoryassignment', line: x });
@@ -157,17 +157,17 @@ define(['N/search', 'N/record', 'N/log'], function (search, record, log) {
 
                             var assignCount = invDetailIF.getLineCount({ sublistId: 'inventoryassignment' });
 
-                            log.debug('ASSIGN COUNT FROM IF', assignCount);
+                            // log.debug('ASSIGN COUNT FROM IF', assignCount);
 
                             for (var k = 0; k < assignCount; k++) {
 
                                 var lotId = invDetailIF.getSublistValue({ sublistId: 'inventoryassignment', fieldId: 'issueinventorynumber', line: k });
                                 var qty = invDetailIF.getSublistValue({ sublistId: 'inventoryassignment', fieldId: 'quantity', line: k });
 
-                                log.debug('COPY INVENTORY DETAIL', {
-                                    lotId: lotId,
-                                    qty: qty
-                                });
+                                // log.debug('COPY INVENTORY DETAIL', {
+                                //     lotId: lotId,
+                                //     qty: qty
+                                // });
 
                                 invDetailInv.selectNewLine({ sublistId: 'inventoryassignment' });
 
