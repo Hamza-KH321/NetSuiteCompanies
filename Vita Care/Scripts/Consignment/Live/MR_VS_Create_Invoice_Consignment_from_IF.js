@@ -102,7 +102,7 @@ define(['N/search', 'N/record', 'N/log'], function (search, record, log) {
                     // ❌ Remove lines NOT in this fulfillment
                     if (matchedLine == -1) {
 
-                        // log.debug('REMOVE LINE NOT IN IF', invItem);
+                        log.debug('REMOVE LINE NOT IN IF', invItem);
 
                         invoice.removeLine({ sublistId: 'item', line: i });
 
