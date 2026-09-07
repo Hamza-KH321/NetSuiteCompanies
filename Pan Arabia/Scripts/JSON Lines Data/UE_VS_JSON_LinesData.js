@@ -34,6 +34,18 @@ define(['N/search', 'N/log'], function(search, log) {
                         line: i
                     });
 
+                    var itemDisplay = newRecord.getSublistValue({
+                        sublistId: 'recmachcustrecord_vs_parent',
+                        fieldId: 'custrecord_vs_item_display',
+                        line: i
+                    });
+
+                    log.debug('Line Item Details', {
+                        line: i,
+                        itemId: itemId,
+                        itemDisplay: itemDisplay
+                    });
+
                     var itemDescription = '';
 
                     if (itemId) {
@@ -64,7 +76,7 @@ define(['N/search', 'N/log'], function(search, log) {
                     }
 
                     var lineObj = {
-                        "custrecord_vs_item": itemId || "",
+                        "custrecord_vs_item": itemDisplay || "",
                         "custrecord_vs_description": itemDescription,
                         "custrecord_vs_unit_items": newRecord.getSublistValue({
                             sublistId: 'recmachcustrecord_vs_parent',
