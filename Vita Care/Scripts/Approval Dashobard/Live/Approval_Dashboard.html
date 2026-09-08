@@ -97,6 +97,7 @@
                 <div style="display: flex; justify-content: center; gap: 10px;">
                     <button class="approve-btn" onclick="approveSelected()">Approve Selected</button>
                     <button class="reject-btn" onclick="rejectSelected()">Reject Selected</button>
+                    <button id="approveBDBtn" class="approve-btn" onclick="approveBDSelected()" disabled>Approve &amp; Request BD Approval</button>
                 </div>
             </div>
         </div>
@@ -182,6 +183,7 @@
                         cb.checked = checked;
                         selectedMap[cb.dataset.id] = checked;
                     });
+                    updateApproveBDButtonState();
                 });
             }
         };
@@ -243,7 +245,7 @@
                 paginated.forEach(function (row) {
                     var checked = selectedMap[row.transaction_id] ? 'checked' : '';
                     table.innerHTML +=
-                        '<tr data-current-state="' + row.current_state + '" data-workflow-id="' + row.workflow_id + '">' +
+                        '<tr data-current-state="' + row.current_state + '" data-workflow-id="' + row.workflow_id + '" data-bd-eligible="' + (row.bd_request_eligible ? '1' : '0') + '">' +
                         '<td><input type="checkbox" class="approval-checkbox" data-id="' + row.transaction_id + '" ' + checked + '></td>' +
                         '<td>' + row.transaction_type + '</td>' +
                         '<td><a href="/app/accounting/transactions/rtnauth.nl?id=' + row.transaction_id + '&whence=" target="_blank" style="color:#1e90ff;text-decoration:none;font-weight:500;">' + row.transaction_number + '</a></td>' +
@@ -268,11 +270,16 @@
                                 headerBox.checked = checkedCount === pageCheckboxes.length;
                                 headerBox.indeterminate = checkedCount > 0 && checkedCount < pageCheckboxes.length;
                             }
+
+                            updateApproveBDButtonState();
                         });
                     });
+
+                    updateApproveBDButtonState();
                 }, 0);
             } else {
                 table.innerHTML = '<tr><td colspan="6" class="no-data" style="text-align:center;">No Transactions for Approval</td></tr>';
+                updateApproveBDButtonState();
             }
 
             updatePaginationControls(totalPages);
@@ -350,6 +357,31 @@
 
         function rejectSelected() {
             handleWorkflowAction("reject");
+        }
+
+        function approveBDSelected() {
+            handleWorkflowAction("approveBD");
+        }
+
+        // The 3rd button only unlocks when there's at least one selected row
+        // AND every selected row is currently on a level that supports it
+        // (flagged server-side via data-bd-eligible on each row).
+        function updateApproveBDButtonState() {
+            var btn = document.getElementById("approveBDBtn");
+            if (!btn) return;
+
+            var checkboxes = document.querySelectorAll('.approval-checkbox:checked');
+            if (checkboxes.length === 0) {
+                btn.disabled = true;
+                return;
+            }
+
+            var allEligible = Array.from(checkboxes).every(function (cb) {
+                var row = cb.closest('tr');
+                return row && row.dataset.bdEligible === '1';
+            });
+
+            btn.disabled = !allEligible;
         }
 
         function getSelectedIds() {
