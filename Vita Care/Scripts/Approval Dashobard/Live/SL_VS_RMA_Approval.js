@@ -29,7 +29,7 @@ define(['N/log', 'N/runtime', 'N/workflow'], function (log, runtime, workflow) {
         },
         'Non Wasfati ASM Riyadh': {
             users: {
-                516377: { approve: 'workflowaction2294', reject: 'workflowaction2295' },
+                509907: { approve: 'workflowaction2294', reject: 'workflowaction2295' },
                 190893: { approve: 'workflowaction2296', reject: 'workflowaction2297' }
             }
         },

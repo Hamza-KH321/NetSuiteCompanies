@@ -53,7 +53,7 @@ define(['N/file', 'N/search', 'N/log', 'N/render', 'N/runtime'], function (file,
         },
         'Non Wasfati ASM Riyadh': {
             users: {
-                516377: { approve: 'workflowaction2294', reject: 'workflowaction2295' },
+                509907: { approve: 'workflowaction2294', reject: 'workflowaction2295' },
                 190893: { approve: 'workflowaction2296', reject: 'workflowaction2297' }
             }
         },
@@ -175,6 +175,7 @@ define(['N/file', 'N/search', 'N/log', 'N/render', 'N/runtime'], function (file,
                     search.createColumn({ name: "amount" }),
                     search.createColumn({ name: "entity" }),
                     search.createColumn({ name: "location" }),
+                    search.createColumn({ name: "custbody8" }),
                     search.createColumn({ name: "currentstate", join: "workflow" }),
                     search.createColumn({ name: "workflow", join: "workflow" }),
                     search.createColumn({ name: "custbody_vs_current_rma_approval_state" })
@@ -228,6 +229,7 @@ define(['N/file', 'N/search', 'N/log', 'N/render', 'N/runtime'], function (file,
                             transaction_type: result.getText('type'),
                             entity: result.getText('entity') || '',
                             location: result.getText('location') || '',
+                            rma_type: result.getText('custbody8') || '',
                             current_state: currentStateForPayload,
                             workflow_id: workflowScriptId,
                             // lets the frontend enable/disable the 3rd button without guessing

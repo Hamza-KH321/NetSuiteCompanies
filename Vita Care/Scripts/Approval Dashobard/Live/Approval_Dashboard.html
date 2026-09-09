@@ -46,6 +46,7 @@
                         <th>Document Number</th>
                         <th>Customer</th>
                         <th>Warehouse</th>
+                        <th>RMA Type</th>
                         <th>Transaction Date</th>
                         <th>Amount</th>
                     </tr>
@@ -65,6 +66,10 @@
                             <input type="text" id="location_filter" placeholder="Filter..."
                                 style="width: 90%; padding: 4px 6px; border: 1px solid #ccc; border-radius: 4px; font-size: 13px;">
                         </th>
+                        <th>
+                            <input type="text" id="rma_type_filter" placeholder="Filter..."
+                                style="width: 90%; padding: 4px 6px; border: 1px solid #ccc; border-radius: 4px; font-size: 13px;">
+                        </th>
                         <th></th>
                         <th></th>
                     </tr>
@@ -79,7 +84,7 @@
         <tr><td>✔</td><td>Return</td><td>RA124</td><td>Customer B</td><td>2025-07-02</td><td>$150</td></tr> -->
                         <!-- Add many rows -->
                         <tr>
-                            <td colspan="6" class="no-data" style="text-align: center;">No Transactions for Approval
+                            <td colspan="7" class="no-data" style="text-align: center;">No Transactions for Approval
                             </td>
                         </tr>
                     </tbody>
@@ -97,7 +102,8 @@
                 <div style="display: flex; justify-content: center; gap: 10px;">
                     <button class="approve-btn" onclick="approveSelected()">Approve Selected</button>
                     <button class="reject-btn" onclick="rejectSelected()">Reject Selected</button>
-                    <button id="approveBDBtn" class="approve-btn" onclick="approveBDSelected()" disabled>Approve &amp; Request BD Approval</button>
+                    <button id="approveBDBtn" class="approve-btn" onclick="approveBDSelected()" disabled>Approve &amp;
+                        Request BD Approval</button>
                 </div>
             </div>
         </div>
@@ -130,6 +136,7 @@
         let activeDocumentNumber = "";
         let activeEntity = "";
         let activeLocation = "";
+        let activeRmaType = "";
 
         window.onload = function () {
             toggleRMADashboard();
@@ -186,6 +193,15 @@
                     updateApproveBDButtonState();
                 });
             }
+
+            var rmaTypeFilter = document.getElementById("rma_type_filter");
+            if (rmaTypeFilter) {
+                rmaTypeFilter.addEventListener("input", function () {
+                    activeRmaType = this.value.toLowerCase().trim();
+                    currentPage = 1;
+                    displayTransactions();
+                });
+            }
         };
 
         function fetchTransactions() {
@@ -221,8 +237,10 @@
                     (t.entity && t.entity.toLowerCase().includes(activeEntity));
                 var matchLoc = !activeLocation ||
                     (t.location && t.location.toLowerCase().includes(activeLocation));
-                return matchDoc && matchEntity && matchLoc;
-            });
+                var matchRmaType = !activeRmaType ||
+                    (t.rma_type && t.rma_type.toLowerCase().includes(activeRmaType));   // ADDED
+                return matchDoc && matchEntity && matchLoc && matchRmaType;
+            });;
 
             var totalPages = Math.max(1, Math.ceil(filtered.length / rowsPerPage));
 
@@ -251,6 +269,7 @@
                         '<td><a href="/app/accounting/transactions/rtnauth.nl?id=' + row.transaction_id + '&whence=" target="_blank" style="color:#1e90ff;text-decoration:none;font-weight:500;">' + row.transaction_number + '</a></td>' +
                         '<td>' + row.entity + '</td>' +
                         '<td>' + (row.location || '') + '</td>' +
+                        '<td>' + (row.rma_type || '') + '</td>' + 
                         '<td>' + row.date + '</td>' +
                         '<td>' + new Intl.NumberFormat('en-US', { style: 'currency', currency: 'SAR' }).format(Math.abs(Number(row.total))) + '</td>' +
                         '</tr>';
@@ -278,7 +297,7 @@
                     updateApproveBDButtonState();
                 }, 0);
             } else {
-                table.innerHTML = '<tr><td colspan="6" class="no-data" style="text-align:center;">No Transactions for Approval</td></tr>';
+                table.innerHTML = '<tr><td colspan="7" class="no-data" style="text-align:center;">No Transactions for Approval</td></tr>';
                 updateApproveBDButtonState();
             }
 
@@ -564,7 +583,7 @@
             // Show RMA table
             rmaContainer.style.display = "block";
 
-            table.innerHTML = `<tr><td colspan="6" class="no-data" style="text-align: center;">Loading RMA data...</td></tr>`;
+            table.innerHTML = `<tr><td colspan="7" class="no-data" style="text-align: center;">Loading RMA data...</td></tr>`;
             loading.style.display = "flex";
 
             fetchTransactions();
