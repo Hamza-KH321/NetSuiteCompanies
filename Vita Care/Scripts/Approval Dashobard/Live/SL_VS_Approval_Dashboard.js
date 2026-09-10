@@ -15,7 +15,7 @@ define(['N/file', 'N/search', 'N/log', 'N/render', 'N/runtime'], function (file,
             447: { roles: [], users: [] },                           // SR Coordinator Reject (Initial)
             448: { roles: [3, 1061, 1052, 1062], users: [336219, 55093] },  // Supply Chain Leader Approval
             449: { roles: [3], users: [379965, 55093] },             // Supply Chain Reject (SR Cord)
-            450: { roles: [3, 1070], users: [435054] },              // Commercial Director Approval
+            450: { roles: [3, 1070], users: [435054, 4334] },              // Commercial Director Approval
             452: { roles: [3, 1061, 1052, 1062], users: [336219] }   // Comm Director Reject (Supply Chain)
         }
         // NOTE: workflow 237 (customworkflow_vs_rma_approval) intentionally removed —

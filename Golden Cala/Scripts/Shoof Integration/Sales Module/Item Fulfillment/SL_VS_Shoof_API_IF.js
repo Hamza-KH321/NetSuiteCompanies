@@ -71,7 +71,7 @@ define(['N/record', 'N/log', 'N/search'], function (record, log, search) {
             });
 
             fulfillment.setValue({ fieldId: 'customform', value: 170 }); // Shoof Item Fulfillment	
-            fulfillment.setValue({ fieldId: 'custbody_vs_shoof_transaction', value: true });	
+            fulfillment.setValue({ fieldId: 'custbody_vs_shoof_transaction', value: true });
 
             var lineCount = fulfillment.getLineCount({ sublistId: 'item' });
 
@@ -88,6 +88,11 @@ define(['N/record', 'N/log', 'N/search'], function (record, log, search) {
                     continue;
                 }
 
+                var locationId = fulfillment.getCurrentSublistValue({
+                    sublistId: 'item',
+                    fieldId: 'location'
+                });
+
                 fulfillment.setCurrentSublistValue({ sublistId: 'item', fieldId: 'itemreceive', value: true });
 
                 var inventoryDetail = fulfillment.getCurrentSublistSubrecord({ sublistId: 'item', fieldId: 'inventorydetail' });
@@ -103,10 +108,22 @@ define(['N/record', 'N/log', 'N/search'], function (record, log, search) {
                         return sendErrorResponse(response, 'VALIDATION_ERROR', 'Each inventory assignment requires inventoryNumber and numeric quantity.', { sku: payloadLine.sku });
                     }
 
-                    var lotInternalId = findInventoryNumberId(assign.inventoryNumber);
-                    if (!lotInternalId) {
-                        return sendErrorResponse(response, 'VALIDATION_ERROR', 'Lot number not found in NetSuite.', { sku: payloadLine.sku, lot: assign.inventoryNumber });
+                    var lotResult = findInventoryNumberId(
+                        assign.inventoryNumber,
+                        itemId,
+                        locationId
+                    );
+
+                    if (!lotResult.success) {
+                        return sendErrorResponse(
+                            response,
+                            lotResult.code,
+                            lotResult.message,
+                            lotResult.details
+                        );
                     }
+
+                    var lotInternalId = lotResult.internalId;
 
                     inventoryDetail.selectNewLine({ sublistId: 'inventoryassignment' });
                     inventoryDetail.setCurrentSublistValue({ sublistId: 'inventoryassignment', fieldId: 'issueinventorynumber', value: lotInternalId });
@@ -175,18 +192,85 @@ define(['N/record', 'N/log', 'N/search'], function (record, log, search) {
         return itemId ? parseInt(itemId, 10) : null;
     }
 
-    function findInventoryNumberId(lotNumber) {
-        var lotId = null;
-        var lotSearch = search.create({
-            type: 'inventorynumber',
-            filters: [['inventorynumber', 'is', lotNumber]],
-            columns: ['internalid']
-        });
-        lotSearch.run().each(function (result) {
-            lotId = result.getValue('internalid');
-            return false;
-        });
-        return lotId ? parseInt(lotId, 10) : null;
+    function findInventoryNumberId(lotNumber, itemId, locationId) {
+
+        try {
+
+            log.debug('Searching Inventory Number', {
+                lotNumber: lotNumber,
+                itemId: itemId,
+                locationId: locationId
+            });
+
+            var lotId = null;
+
+            var lotSearch = search.create({
+                type: 'inventorynumber',
+                filters: [
+                    ['inventorynumber', 'is', lotNumber],
+                    'AND',
+                    ['item', 'anyof', itemId],
+                    'AND',
+                    ['location', 'anyof', locationId]
+                ],
+                columns: ['internalid']
+            });
+
+            lotSearch.run().each(function (result) {
+
+                lotId = result.getValue('internalid');
+
+                return false;
+            });
+
+            if (!lotId) {
+
+                log.error('LOT_NOT_FOUND', {
+                    lotNumber: lotNumber,
+                    itemId: itemId,
+                    locationId: locationId
+                });
+
+                return {
+                    success: false,
+                    code: 'LOT_NOT_FOUND',
+                    message: 'The lot number "' + lotNumber + '" is not correct for this item/location. Please check the inventory.',
+                    details: {
+                        lotNumber: lotNumber,
+                        itemId: itemId,
+                        locationId: locationId
+                    }
+                };
+            }
+
+            return {
+                success: true,
+                internalId: parseInt(lotId, 10)
+            };
+
+        } catch (e) {
+
+            log.error('FIND_INVENTORY_NUMBER_ERROR', {
+                lotNumber: lotNumber,
+                itemId: itemId,
+                locationId: locationId,
+                name: e.name || '',
+                message: e.message || '',
+                stack: e.stack || ''
+            });
+
+            return {
+                success: false,
+                code: 'LOT_SEARCH_ERROR',
+                message: 'Unable to validate the lot number. Please check the inventory.',
+                details: {
+                    lotNumber: lotNumber,
+                    itemId: itemId,
+                    locationId: locationId,
+                    error: e.message || ''
+                }
+            };
+        }
     }
 
     return { onRequest: onRequest };
