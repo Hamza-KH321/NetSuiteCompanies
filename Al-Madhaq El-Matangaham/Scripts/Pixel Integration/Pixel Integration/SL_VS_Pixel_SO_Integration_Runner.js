@@ -109,10 +109,10 @@ define(['N/ui/serverWidget', 'N/task', 'N/log', 'N/redirect', 'N/runtime'],
 
                     var mrTask = task.create({
                         taskType: task.TaskType.MAP_REDUCE,
-                        scriptId: 'customscript_vs_mr_pixel_so_integration',
-                        deploymentId: 'customdeploy_vs_mr_pixel_so_integration',
+                        scriptId: 'customscript_vs_mr_pixel_so_integration_',
+                        deploymentId: 'customdeploy_vs_mr_pixel_so_integration_',
                         params: {
-                            custscript_vs_pixel_api_url: apiUrl
+                            custscript_vs_pixel_api_url_runner: apiUrl
                         }
                     });
 

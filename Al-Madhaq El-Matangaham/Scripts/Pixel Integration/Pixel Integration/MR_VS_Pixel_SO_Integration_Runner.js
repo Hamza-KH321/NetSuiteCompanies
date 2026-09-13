@@ -1,7 +1,7 @@
 /**
  * @NApiVersion 2.1
  * @NScriptType MapReduceScript
- * @fileName MR || Pixel SO Integration
+ * @fileName MR || Pixel SO Integration Runner
  */
 define(['N/https', 'N/record', 'N/search', 'N/runtime', 'N/log', 'N/format'],
     function (https, record, search, runtime, log, format) {
@@ -30,11 +30,11 @@ define(['N/https', 'N/record', 'N/search', 'N/runtime', 'N/log', 'N/format'],
             try {
 
                 const urlParam = runtime.getCurrentScript().getParameter({
-                    name: 'custscript_vs_pixel_api_url'
+                    name: 'custscript_vs_pixel_api_url_runner'
                 });
 
                 if (!urlParam) {
-                    throw new Error('Missing script parameter custscript_vs_pixel_api_url.');
+                    throw new Error('Missing script parameter custscript_vs_pixel_api_url_runner.');
                 }
 
                 log.audit('PIXEL Fetch', urlParam);
