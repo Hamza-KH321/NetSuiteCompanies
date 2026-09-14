@@ -250,7 +250,7 @@ define(['N/ui/serverWidget', 'N/https', 'N/search', 'N/log', 'N/file', 'N/url', 
                     var refCode = trimSafe(row['REFCODE']);
                     var productName = trimSafe(row['Product_Name']);
                     var paymentMethod = trimSafe(row['Payment_Method']);
-                    var branch = trimSafe(row['Branch']);
+                    var snum = trimSafe(row['SNUM']);
 
                     if (refCode) {
 
@@ -278,9 +278,9 @@ define(['N/ui/serverWidget', 'N/https', 'N/search', 'N/log', 'N/file', 'N/url', 
                         paymentMap[paymentMethod] = true;
                     }
 
-                    if (branch) {
+                    if (snum) {
 
-                        branchMap[branch] = true;
+                        branchMap[snum] = true;
                     }
                 }
 
@@ -320,7 +320,7 @@ define(['N/ui/serverWidget', 'N/https', 'N/search', 'N/log', 'N/file', 'N/url', 
                 );
 
                 log.debug(
-                    'Distinct Branches',
+                    'Distinct SNUM Values',
                     branches
                 );
 
@@ -619,6 +619,11 @@ define(['N/ui/serverWidget', 'N/https', 'N/search', 'N/log', 'N/file', 'N/url', 
                     branches.length
                 );
 
+                log.debug(
+                    'SNUM Values Sent To Location Search',
+                    branches
+                );
+
                 var locationSearch = search.create({
                     type: 'location',
                     filters: filters,
@@ -638,6 +643,11 @@ define(['N/ui/serverWidget', 'N/https', 'N/search', 'N/log', 'N/file', 'N/url', 
                 var locationResults =
                     getAllResults(locationSearch);
 
+                log.debug(
+                    'Location Search Results Count',
+                    locationResults.length
+                );
+
                 var mappedBranches = {};
 
                 for (var j = 0; j < locationResults.length; j++) {
@@ -648,28 +658,56 @@ define(['N/ui/serverWidget', 'N/https', 'N/search', 'N/log', 'N/file', 'N/url', 
                         })
                     );
 
+                    var locationName = trimSafe(
+                        locationResults[j].getValue({
+                            name: 'name'
+                        })
+                    );
+
+                    var locationInternalId = trimSafe(
+                        locationResults[j].getValue({
+                            name: 'internalid'
+                        })
+                    );
+
+                    log.debug(
+                        'Location Branch Mapping',
+                        {
+                            locationInternalId: locationInternalId,
+                            locationName: locationName,
+                            branchId: branchId
+                        }
+                    );
+
                     if (branchId) {
-                        mappedBranches[branchId] = true;
+
+                        mappedBranches[branchId] = {
+                            internalId: locationInternalId,
+                            name: locationName
+                        };
                     }
                 }
 
                 for (var x = 0; x < branches.length; x++) {
 
-                    if (mappedBranches[branches[x]]) {
+                    var snum = trimSafe(branches[x]);
+
+                    if (mappedBranches[snum]) {
 
                         result.correct++;
 
                     } else {
 
                         result.missing++;
+
                         result.missingValues.push(
-                            branches[x]
+                            snum
                         );
                     }
                 }
 
                 log.audit(
-                    'Branch Validation',
+                    'Branch / SNUM Validation',
                     result
                 );
 
@@ -685,7 +723,6 @@ define(['N/ui/serverWidget', 'N/https', 'N/search', 'N/log', 'N/file', 'N/url', 
                 throw e;
             }
         }
-
 
         function addResultsToForm(
             form,
