@@ -10,19 +10,22 @@ define(['N/log', 'N/runtime', 'N/workflow'], function (log, runtime, workflow) {
      * Vendor-approval-style level map (must stay identical to
      * the map in SL_VS_Approval_Dashboard.js).
      * ===================================================== */
-    const RMA_V2_WORKFLOW_SCRIPT_ID = 'customworkflow_vs_workflow_rma_approval'; 
+    const RMA_V2_WORKFLOW_SCRIPT_ID = 'customworkflow_vs_workflow_rma_approval';
 
     const RMA_V2_SHARED_LEVELS = {
         'AR Team Approval': {
             approve: 'workflowaction2287',
-            reject:  'workflowaction2288',
+            reject: 'workflowaction2288',
             allowedUsers: [187285, 491508, 450826, 66004]
         }
     };
 
     const RMA_V2_PERUSER_LEVELS = {
         'Non Wasfati ASM Jeddah': {
-            users: { 4334: { approve: 'workflowaction2277', reject: 'workflowaction2278' } }
+            users: {
+                4353: { approve: 'workflowaction2277', reject: 'workflowaction2278' },
+                304193: { approve: 'workflowaction2277', reject: 'workflowaction2278' },
+            }
         },
         'Wasfati ASM': {
             users: { 14374: { approve: 'workflowaction2259', reject: 'workflowaction2260' } }
@@ -35,7 +38,8 @@ define(['N/log', 'N/runtime', 'N/workflow'], function (log, runtime, workflow) {
         },
         'SR Coordinator Riyadh': {
             users: {
-                410588: { approve: 'workflowaction2300', reject: 'workflowaction2301', approveBD: 'workflowaction2302' }
+                379965: { approve: 'workflowaction2300', reject: 'workflowaction2301', approveBD: 'workflowaction2302' },
+                55093: { approve: 'workflowaction2300', reject: 'workflowaction2301', approveBD: 'workflowaction2302' }
             }
         },
         'BD Approval Riyadh': {
@@ -60,7 +64,10 @@ define(['N/log', 'N/runtime', 'N/workflow'], function (log, runtime, workflow) {
             }
         },
         'CS RMA leader Approval': {
-            users: { 55093: { approve: 'workflowaction2312', reject: 'workflowaction2313' } }
+            users: { 
+                55093: { approve: 'workflowaction2312', reject: 'workflowaction2313' }, 
+                336219: { approve: 'workflowaction2312', reject: 'workflowaction2313' }, 
+            }
         },
         'Transaction RMA Approval Jeddah': {
             users: { 432836: { approve: 'workflowaction2316', reject: 'workflowaction2317' } }

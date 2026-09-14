@@ -29,13 +29,13 @@ define(['N/file', 'N/search', 'N/log', 'N/render', 'N/runtime'], function (file,
      * custbody_vs_current_rma_approval_state on the record.
      * ===================================================== */
     const RMA_V2_WORKFLOW_NUMERIC_ID = '373'; // used only in the search filter
-    const RMA_V2_WORKFLOW_SCRIPT_ID  = 'customworkflow_vs_workflow_rma_approval'; // TODO: confirm actual script id — required by workflow.trigger()
+    const RMA_V2_WORKFLOW_SCRIPT_ID = 'customworkflow_vs_workflow_rma_approval'; // TODO: confirm actual script id — required by workflow.trigger()
 
     // Levels where a single action pair is shared by every allowed user (plus Admin)
     const RMA_V2_SHARED_LEVELS = {
         'AR Team Approval': {
             approve: 'workflowaction2287',
-            reject:  'workflowaction2288',
+            reject: 'workflowaction2288',
             allowedUsers: [187285, 491508, 450826, 66004]
         }
     };
@@ -46,7 +46,10 @@ define(['N/file', 'N/search', 'N/log', 'N/render', 'N/runtime'], function (file,
     // Anyone else not explicitly listed can VIEW these rows but not act.
     const RMA_V2_PERUSER_LEVELS = {
         'Non Wasfati ASM Jeddah': {
-            users: { 4334: { approve: 'workflowaction2277', reject: 'workflowaction2278' } }
+            users: {
+                4353: { approve: 'workflowaction2277', reject: 'workflowaction2278' },
+                304193: { approve: 'workflowaction2277', reject: 'workflowaction2278' },
+            }
         },
         'Wasfati ASM': {
             users: { 14374: { approve: 'workflowaction2259', reject: 'workflowaction2260' } }
@@ -59,7 +62,8 @@ define(['N/file', 'N/search', 'N/log', 'N/render', 'N/runtime'], function (file,
         },
         'SR Coordinator Riyadh': {
             users: {
-                410588: { approve: 'workflowaction2300', reject: 'workflowaction2301', approveBD: 'workflowaction2302' }
+                379965: { approve: 'workflowaction2300', reject: 'workflowaction2301', approveBD: 'workflowaction2302' },
+                55093: { approve: 'workflowaction2300', reject: 'workflowaction2301', approveBD: 'workflowaction2302' },
             }
         },
         'BD Approval Riyadh': {
@@ -84,7 +88,10 @@ define(['N/file', 'N/search', 'N/log', 'N/render', 'N/runtime'], function (file,
             }
         },
         'CS RMA leader Approval': {
-            users: { 55093: { approve: 'workflowaction2312', reject: 'workflowaction2313' } }
+            users: { 
+                55093: { approve: 'workflowaction2312', reject: 'workflowaction2313' },
+                336219: { approve: 'workflowaction2312', reject: 'workflowaction2313' },
+            }
         },
         'Transaction RMA Approval Jeddah': {
             users: { 432836: { approve: 'workflowaction2316', reject: 'workflowaction2317' } }
@@ -166,7 +173,7 @@ define(['N/file', 'N/search', 'N/log', 'N/render', 'N/runtime'], function (file,
                         "AND",
                         [[["workflow.workflow", "anyof", "238"], "AND", ["custbody8", "anyof", "3", "1"]],
                             "OR",
-                            [["workflow.workflow", "anyof", RMA_V2_WORKFLOW_NUMERIC_ID], "AND", ["custbody8", "anyof", "2"]]]
+                        [["workflow.workflow", "anyof", RMA_V2_WORKFLOW_NUMERIC_ID], "AND", ["custbody8", "anyof", "2"]]]
                     ],
                 columns: [
                     search.createColumn({ name: "type" }),
