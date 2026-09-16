@@ -4,7 +4,7 @@
  * @fileName SL || Shoof API Credit Memo
  */
 
-define(['N/record', 'N/search', 'N/log'], function(record, search, log) {
+define(['N/record', 'N/search', 'N/log'], function (record, search, log) {
 
     function onRequest(context) {
 
@@ -102,10 +102,10 @@ define(['N/record', 'N/search', 'N/log'], function(record, search, log) {
                     );
                 }
 
-                if (!item.lotNumber) {
+                if (!Object.prototype.hasOwnProperty.call(item, 'lotNumber')) {
                     errors.push(
-                        'lotNumber is required for item at index ' +
-                        i + '.'
+                        'lotNumber is required in the request body for item at index ' +
+                        i + '. If no lot number is required, send lotNumber as an empty string.'
                     );
                 }
             }
@@ -266,47 +266,50 @@ define(['N/record', 'N/search', 'N/log'], function(record, search, log) {
                         fieldId: 'inventorydetail'
                     });
 
-                log.debug('Inventory Detail Created', {
+                log.debug('Inventory Detail Check', {
                     sku: requestedSku,
                     itemId: itemId,
                     lotNumber: lotNumber,
                     quantity: requestedQuantity
                 });
 
-                inventoryDetail.selectNewLine({
-                    sublistId: 'inventoryassignment'
-                });
+                if (lotNumber != '') {
 
-                inventoryDetail.setCurrentSublistValue({
-                    sublistId: 'inventoryassignment',
-                    fieldId: 'receiptinventorynumber',
-                    value: lotNumber
-                });
+                    inventoryDetail.selectNewLine({
+                        sublistId: 'inventoryassignment'
+                    });
 
-                inventoryDetail.setCurrentSublistValue({
-                    sublistId: 'inventoryassignment',
-                    fieldId: 'quantity',
-                    value: requestedQuantity
-                });
+                    inventoryDetail.setCurrentSublistValue({
+                        sublistId: 'inventoryassignment',
+                        fieldId: 'receiptinventorynumber',
+                        value: lotNumber
+                    });
 
-                inventoryDetail.commitLine({
-                    sublistId: 'inventoryassignment'
-                });
+                    inventoryDetail.setCurrentSublistValue({
+                        sublistId: 'inventoryassignment',
+                        fieldId: 'quantity',
+                        value: requestedQuantity
+                    });
 
-                log.audit('Inventory Detail Added', {
-                    sku: requestedSku,
-                    itemId: itemId,
-                    lotNumber: lotNumber,
-                    quantity: requestedQuantity
-                });
+                    inventoryDetail.commitLine({
+                        sublistId: 'inventoryassignment'
+                    });
 
-                /*
-                 * Commit Credit Memo Line
-                 */
+                    log.audit('Inventory Detail Added', {
+                        sku: requestedSku,
+                        itemId: itemId,
+                        lotNumber: lotNumber,
+                        quantity: requestedQuantity
+                    });
 
-                creditMemo.commitLine({
-                    sublistId: 'item'
-                });
+                } else {
+
+                    log.audit('Inventory Detail Skipped', {
+                        sku: requestedSku,
+                        itemId: itemId,
+                        reason: 'lotNumber is empty'
+                    });
+                }
 
                 log.audit('Credit Memo Item Added', {
                     sku: requestedSku,

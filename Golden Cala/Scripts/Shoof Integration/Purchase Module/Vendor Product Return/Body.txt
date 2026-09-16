@@ -1,14 +1,18 @@
 {
-    "purchaseOrderId": 12345,
+    "vendorId": 1234,
     "memo": "Vendor return Shoof Test",
     "items": [
         {
             "sku": "ABC123",
-            "quantity": 2
+            "quantity": 2,
+            "rate": 100,
+            "location": 5
         },
         {
             "sku": "XYZ456",
-            "quantity": 1
+            "quantity": 1,
+            "rate": 50,
+            "location": 5
         }
     ]
 }

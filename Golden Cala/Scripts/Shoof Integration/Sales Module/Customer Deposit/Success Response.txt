@@ -1,6 +1,18 @@
 {
     "success": true,
-    "message": "Customer Deposit created successfully",
-    "salesOrderId": 576229,
-    "depositId": 576244
+    "message": "Customer Deposit created and applied to Invoice successfully.",
+    "salesOrderId": 1721882,
+    "salesOrderTranId": "SO -42079",
+    "depositId": 1721956,
+    "depositApplicationId": 1721957,
+    "invoiceId": "1721885",
+    "invoiceTranId": "INV -64926",
+    "payment": 141.75,
+    "appliedAmount": 141.75,
+    "linkedToSalesOrder": false,
+    "appliedToInvoice": true,
+    "paymentMethodIds": [
+        9,
+        10
+    ]
 }

@@ -1,17 +1,18 @@
 {
-  "createdfrom": 576083,
+  "createdfrom": 12345,
   "items": [
     {
-      "item": 6095,
+      "sku": "SKU-001",
       "inventoryAssignments": [
-        { "inventoryNumber": "LOT-XYZ-069", "quantity": 1 }
+        {
+          "inventoryNumber": "LOT-ABC",
+          "quantity": 2
+        }
       ]
     },
     {
-      "item": 6096,
-      "inventoryAssignments": [
-        { "inventoryNumber": "LOT-ABC-0069", "quantity": 1 }
-      ]
+      "sku": "SKU-001",
+      "inventoryAssignments": []
     }
   ]
 }

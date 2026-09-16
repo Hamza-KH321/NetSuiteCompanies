@@ -1,0 +1,13 @@
+{
+    "salesOrderId": 12345,
+    "items": [
+        {
+            "sku": "ABC123",
+            "newqty": 10
+        },
+        {
+            "sku": "XYZ456",
+            "newqty": 5
+        }
+    ]
+}

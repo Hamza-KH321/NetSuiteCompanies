@@ -51,8 +51,22 @@ define(['N/record', 'N/log', 'N/search'], function (record, log, search) {
                 if (!line.sku) {
                     return sendErrorResponse(response, 'VALIDATION_ERROR', 'Each item must include "sku".', { line: i + 1 });
                 }
-                if (!Array.isArray(line.inventoryAssignments) || !line.inventoryAssignments.length) {
-                    return sendErrorResponse(response, 'VALIDATION_ERROR', 'Each item must include inventoryAssignments array.', { line: i + 1 });
+                if (!Object.prototype.hasOwnProperty.call(line, 'inventoryAssignments')) {
+                    return sendErrorResponse(
+                        response,
+                        'VALIDATION_ERROR',
+                        'Each item must include "inventoryAssignments". If no inventory assignment is required, send an empty array.',
+                        { line: i + 1 }
+                    );
+                }
+
+                if (!Array.isArray(line.inventoryAssignments)) {
+                    return sendErrorResponse(
+                        response,
+                        'VALIDATION_ERROR',
+                        '"inventoryAssignments" must be an array.',
+                        { line: i + 1 }
+                    );
                 }
 
                 var itemId = findItemBySKU(line.sku);

@@ -1,0 +1,14 @@
+{
+    "success": true,
+    "message": "Sales Order quantities updated successfully.",
+    "salesOrderId": 1721945,
+    "tranId": "SO -42084",
+    "updatedItems": [
+        {
+            "sku": "190",
+            "line": 0,
+            "oldqty": 1,
+            "newqty": 10
+        }
+    ]
+}

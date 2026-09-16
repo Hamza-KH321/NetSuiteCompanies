@@ -9,6 +9,7 @@ define(['N/record', 'N/search', 'N/log'], function(record, search, log) {
     function onRequest(context) {
 
         if (context.request.method != 'POST') {
+
             return sendJson(context, 405, {
                 success: false,
                 code: 'METHOD_NOT_ALLOWED',
@@ -16,320 +17,306 @@ define(['N/record', 'N/search', 'N/log'], function(record, search, log) {
             });
         }
 
-        var bodyStr = context.request.body || '{}';
-        var body;
+        var body = {};
 
         try {
-            body = JSON.parse(bodyStr);
-        } catch (e) {
 
-            log.error('INVALID_JSON', e);
+            var bodyStr = context.request.body || '{}';
 
-            return sendJson(context, 400, {
-                success: false,
-                code: 'INVALID_JSON',
-                message: 'Request body must be valid JSON.'
-            });
-        }
+            try {
+                body = JSON.parse(bodyStr);
+            } catch (parseError) {
 
-        log.audit('Shoof VRA API - Incoming', body);
+                log.error('INVALID_JSON', {
+                    name: parseError.name || '',
+                    message: parseError.message || '',
+                    stack: parseError.stack || ''
+                });
 
-        var errors = [];
+                return sendJson(context, 400, {
+                    success: false,
+                    code: 'INVALID_JSON',
+                    message: 'Request body must be valid JSON.'
+                });
+            }
 
-        // Purchase Order validation
-        var purchaseOrderId = body.purchaseOrderId;
+            log.audit('Shoof VRA API - Incoming Request', body);
 
-        if (purchaseOrderId == undefined ||
-            purchaseOrderId == null ||
-            purchaseOrderId == '') {
+            var errors = [];
 
-            errors.push('purchaseOrderId is required.');
+            /*
+             * Vendor Validation
+             */
 
-        } else if (!isValidNumber(purchaseOrderId)) {
+            var vendorId = body.vendorId;
 
-            errors.push(
-                'purchaseOrderId must be a valid internal ID.'
-            );
-        }
+            if (vendorId == undefined ||
+                vendorId == null ||
+                vendorId == '') {
 
-        // Items validation
-        if (!body.items ||
-            !Array.isArray(body.items) ||
-            body.items.length == 0) {
+                errors.push('vendorId is required.');
 
-            errors.push(
-                'items is required and must contain at least one item.'
-            );
+            } else if (!isValidNumber(vendorId)) {
 
-        } else {
+                errors.push(
+                    'vendorId must be a valid internal ID.'
+                );
+            }
 
-            for (var i = 0; i < body.items.length; i++) {
+            /*
+             * Items Validation
+             */
 
-                if (!body.items[i].sku) {
-                    errors.push(
-                        'sku is required for item at index ' + i + '.'
-                    );
-                }
+            if (!body.items ||
+                !Array.isArray(body.items) ||
+                body.items.length == 0) {
 
-                var quantity = Number(body.items[i].quantity);
+                errors.push(
+                    'items is required and must contain at least one item.'
+                );
 
-                if (!isFinite(quantity) || quantity <= 0) {
-                    errors.push(
-                        'quantity must be greater than 0 for item at index ' +
-                        i + '.'
-                    );
+            } else {
+
+                for (var i = 0; i < body.items.length; i++) {
+
+                    var item = body.items[i];
+
+                    if (!item.sku) {
+
+                        errors.push(
+                            'sku is required for item at index ' + i + '.'
+                        );
+                    }
+
+                    var quantity = Number(item.quantity);
+
+                    if (!isFinite(quantity) || quantity <= 0) {
+
+                        errors.push(
+                            'quantity must be greater than 0 for item at index ' +
+                            i + '.'
+                        );
+                    }
+
+                    var rate = Number(item.rate);
+
+                    if (!isFinite(rate) || rate < 0) {
+
+                        errors.push(
+                            'rate is required and must be a number greater than or equal to 0 for item at index ' +
+                            i + '.'
+                        );
+                    }
+
+                    if (item.location == undefined ||
+                        item.location == null ||
+                        item.location == '') {
+
+                        errors.push(
+                            'location is required for item at index ' +
+                            i + '.'
+                        );
+
+                    } else if (!isValidNumber(item.location)) {
+
+                        errors.push(
+                            'location must be a valid internal ID for item at index ' +
+                            i + '.'
+                        );
+                    }
                 }
             }
-        }
 
-        if (errors.length) {
-            return sendJson(context, 400, {
-                success: false,
-                code: 'VALIDATION_ERROR',
-                message: errors.join(' ')
-            });
-        }
+            if (errors.length) {
 
-        try {
+                return sendJson(context, 400, {
+                    success: false,
+                    code: 'VALIDATION_ERROR',
+                    message: errors.join(' ')
+                });
+            }
 
-            // Load Purchase Order
-            var purchaseOrder = record.load({
-                type: record.Type.PURCHASE_ORDER,
-                id: Number(purchaseOrderId),
-                isDynamic: false
-            });
+            vendorId = Number(vendorId);
 
-            var poLineCount = purchaseOrder.getLineCount({
-                sublistId: 'item'
-            });
+            /*
+             * Create Standalone Vendor Return Authorization
+             */
 
-            log.audit('Purchase Order Loaded', {
-                purchaseOrderId: purchaseOrderId,
-                lineCount: poLineCount
-            });
-
-            // Transform Purchase Order to Vendor Return Authorization
-            var vendorReturnAuthorization = record.transform({
-                fromType: record.Type.PURCHASE_ORDER,
-                fromId: Number(purchaseOrderId),
-                toType: record.Type.VENDOR_RETURN_AUTHORIZATION,
+            var vendorReturnAuthorization = record.create({
+                type: record.Type.VENDOR_RETURN_AUTHORIZATION,
                 isDynamic: true
             });
 
-            log.audit('Purchase Order Transformed', {
-                purchaseOrderId: purchaseOrderId
+            log.audit('Standalone VRA Created In Memory', {
+                vendorId: vendorId
             });
 
-            // Set Shoof Form
+            /*
+             * Set Header Fields
+             */
+
             vendorReturnAuthorization.setValue({
                 fieldId: 'customform',
                 value: 176
             });
 
-            // Set Shoof Transaction checkbox
+            vendorReturnAuthorization.setValue({
+                fieldId: 'entity',
+                value: vendorId
+            });
+
             vendorReturnAuthorization.setValue({
                 fieldId: 'custbody_vs_shoof_transaction',
                 value: true
             });
 
-            // Set Order Status - Pending Return
             vendorReturnAuthorization.setValue({
                 fieldId: 'orderstatus',
                 value: 'B'
             });
 
-            // Set Memo
             if (body.memo) {
+
                 vendorReturnAuthorization.setValue({
                     fieldId: 'memo',
                     value: String(body.memo)
                 });
             }
 
-            // Remove all transformed PO lines
-            var vraLineCount = vendorReturnAuthorization.getLineCount({
-                sublistId: 'item'
+            log.debug('VRA Header Set', {
+                vendorId: vendorId,
+                memo: body.memo || ''
             });
 
-            for (var j = vraLineCount - 1; j >= 0; j--) {
+            /*
+             * Add Items
+             */
 
-                vendorReturnAuthorization.removeLine({
-                    sublistId: 'item',
-                    line: j
-                });
-            }
+            for (var j = 0; j < body.items.length; j++) {
 
-            // Add requested items
-            for (var k = 0; k < body.items.length; k++) {
+                try {
 
-                var requestedSku = String(body.items[k].sku).trim();
-                var requestedQuantity = Number(body.items[k].quantity);
+                    var requestedSku =
+                        String(body.items[j].sku).trim();
 
-                var foundLine = -1;
+                    var requestedQuantity =
+                        Number(body.items[j].quantity);
 
-                // Find SKU on Purchase Order
-                for (var l = 0; l < poLineCount; l++) {
+                    var requestedRate =
+                        Number(body.items[j].rate);
 
-                    var itemId = purchaseOrder.getSublistValue({
-                        sublistId: 'item',
-                        fieldId: 'item',
-                        line: l
-                    });
+                    var requestedLocation =
+                        Number(body.items[j].location);
+
+                    /*
+                     * Find Item by Shoof SKU
+                     */
+
+                    var itemId = findItemBySKU(requestedSku);
 
                     if (!itemId) {
-                        continue;
+
+                        throw new Error(
+                            'SKU "' +
+                            requestedSku +
+                            '" was not found in NetSuite.'
+                        );
                     }
 
-                    var skuSearch = search.create({
-                        type: search.Type.ITEM,
-                        filters: [
-                            ['internalid', 'anyof', itemId]
-                        ],
-                        columns: [
-                            'custitem_vs_sku'
-                        ]
-                    });
-
-                    var skuResult = skuSearch.run().getRange({
-                        start: 0,
-                        end: 1
-                    });
-
-                    var sku = '';
-
-                    if (skuResult.length > 0) {
-                        sku = skuResult[0].getValue({
-                            name: 'custitem_vs_sku'
-                        });
-                    }
-
-                    log.debug('PO Item SKU Check', {
-                        line: l,
+                    log.debug('VRA Item Found', {
+                        sku: requestedSku,
                         itemId: itemId,
-                        sku: sku,
-                        requestedSku: requestedSku
+                        quantity: requestedQuantity,
+                        rate: requestedRate,
+                        location: requestedLocation
                     });
 
-                    if (sku &&
-                        String(sku).trim() == requestedSku) {
+                    /*
+                     * Add VRA Line
+                     */
 
-                        foundLine = l;
-                        break;
-                    }
-                }
+                    vendorReturnAuthorization.selectNewLine({
+                        sublistId: 'item'
+                    });
 
-                if (foundLine == -1) {
-                    throw new Error(
-                        'SKU "' + requestedSku +
-                        '" was not found on Purchase Order ' +
-                        purchaseOrderId + '.'
-                    );
-                }
+                    vendorReturnAuthorization.setCurrentSublistValue({
+                        sublistId: 'item',
+                        fieldId: 'item',
+                        value: itemId
+                    });
 
-                // Get PO Quantity
-                var poQuantity = Number(purchaseOrder.getSublistValue({
-                    sublistId: 'item',
-                    fieldId: 'quantity',
-                    line: foundLine
-                })) || 0;
+                    vendorReturnAuthorization.setCurrentSublistValue({
+                        sublistId: 'item',
+                        fieldId: 'quantity',
+                        value: requestedQuantity
+                    });
 
-                if (requestedQuantity > Math.abs(poQuantity)) {
-                    throw new Error(
-                        'Return quantity for SKU "' +
-                        requestedSku +
-                        '" cannot be greater than PO quantity ' +
-                        Math.abs(poQuantity) + '.'
-                    );
-                }
-
-                // Get Item
-                var purchaseOrderItemId = purchaseOrder.getSublistValue({
-                    sublistId: 'item',
-                    fieldId: 'item',
-                    line: foundLine
-                });
-
-                // Get Rate
-                var rate = purchaseOrder.getSublistValue({
-                    sublistId: 'item',
-                    fieldId: 'rate',
-                    line: foundLine
-                });
-
-                // Get Location
-                var location = purchaseOrder.getSublistValue({
-                    sublistId: 'item',
-                    fieldId: 'location',
-                    line: foundLine
-                });
-
-                // Add VRA Line
-                vendorReturnAuthorization.selectNewLine({
-                    sublistId: 'item'
-                });
-
-                vendorReturnAuthorization.setCurrentSublistValue({
-                    sublistId: 'item',
-                    fieldId: 'item',
-                    value: purchaseOrderItemId
-                });
-
-                vendorReturnAuthorization.setCurrentSublistValue({
-                    sublistId: 'item',
-                    fieldId: 'quantity',
-                    value: requestedQuantity
-                });
-
-                if (rate != null && rate != '') {
                     vendorReturnAuthorization.setCurrentSublistValue({
                         sublistId: 'item',
                         fieldId: 'rate',
-                        value: rate
+                        value: requestedRate
                     });
-                }
 
-                if (location) {
                     vendorReturnAuthorization.setCurrentSublistValue({
                         sublistId: 'item',
                         fieldId: 'location',
-                        value: location
+                        value: requestedLocation
                     });
+
+                    vendorReturnAuthorization.commitLine({
+                        sublistId: 'item'
+                    });
+
+                    log.audit('VRA Item Added', {
+                        sku: requestedSku,
+                        itemId: itemId,
+                        quantity: requestedQuantity,
+                        rate: requestedRate,
+                        location: requestedLocation
+                    });
+
+                } catch (lineError) {
+
+                    log.error('VRA_LINE_ERROR', {
+                        line: j + 1,
+                        name: lineError.name || '',
+                        message: lineError.message || '',
+                        stack: lineError.stack || ''
+                    });
+
+                    throw lineError;
                 }
-
-                vendorReturnAuthorization.commitLine({
-                    sublistId: 'item'
-                });
-
-                log.audit('VRA Item Added', {
-                    sku: requestedSku,
-                    poLine: foundLine,
-                    quantity: requestedQuantity
-                });
             }
 
-            // Save VRA
-            var vendorReturnAuthorizationId =
-                vendorReturnAuthorization.save();
+            /*
+             * Save VRA
+             */
 
-            log.audit('Vendor Return Authorization Created', {
+            var vendorReturnAuthorizationId =
+                vendorReturnAuthorization.save({
+                    enableSourcing: true,
+                    ignoreMandatoryFields: false
+                });
+
+            log.audit('Standalone Vendor Return Authorization Created', {
                 id: vendorReturnAuthorizationId,
-                purchaseOrderId: purchaseOrderId,
+                vendorId: vendorId,
                 itemCount: body.items.length
             });
 
             return sendJson(context, 200, {
                 success: true,
                 id: vendorReturnAuthorizationId,
-                purchaseOrderId: Number(purchaseOrderId),
+                vendorId: vendorId,
                 message: 'Vendor Return Authorization created successfully.'
             });
 
         } catch (e) {
 
             log.error('VRA_CREATE_ERROR', {
-                name: e.name,
-                message: e.message,
-                stack: e.stack,
+                name: e.name || '',
+                message: e.message || '',
+                stack: e.stack || '',
                 body: body
             });
 
@@ -343,17 +330,80 @@ define(['N/record', 'N/search', 'N/log'], function(record, search, log) {
         }
     }
 
+    /*
+     * Find Item by Shoof SKU
+     */
+
+    function findItemBySKU(sku) {
+
+        try {
+
+            var itemSearch = search.create({
+                type: search.Type.ITEM,
+                filters: [
+                    ['custitem_vs_sku', 'is', sku]
+                ],
+                columns: [
+                    'internalid'
+                ]
+            }).run().getRange({
+                start: 0,
+                end: 1
+            });
+
+            if (itemSearch && itemSearch.length > 0) {
+
+                return itemSearch[0].getValue({
+                    name: 'internalid'
+                });
+            }
+
+            return null;
+
+        } catch (e) {
+
+            log.error('FIND_ITEM_BY_SKU_ERROR', {
+                sku: sku,
+                name: e.name || '',
+                message: e.message || '',
+                stack: e.stack || ''
+            });
+
+            throw e;
+        }
+    }
+
+    /*
+     * Send JSON Response
+     */
+
     function sendJson(context, status, obj) {
 
-        context.response.addHeader({
-            name: 'Content-Type',
-            value: 'application/json'
-        });
+        try {
+
+            context.response.addHeader({
+                name: 'Content-Type',
+                value: 'application/json'
+            });
+
+        } catch (headerError) {
+
+            log.debug('HEADER_ERROR', {
+                name: headerError.name || '',
+                message: headerError.message || ''
+            });
+        }
 
         context.response.status = status;
 
-        context.response.write(JSON.stringify(obj));
+        context.response.write(
+            JSON.stringify(obj)
+        );
     }
+
+    /*
+     * Validate Number
+     */
 
     function isValidNumber(value) {
 

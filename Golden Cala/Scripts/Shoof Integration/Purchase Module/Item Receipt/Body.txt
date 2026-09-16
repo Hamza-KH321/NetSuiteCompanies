@@ -1,31 +1,23 @@
-With Inventory Details
-
 {
-  "entity": 1238,
-  "createdfrom": 576218,
+  "entity": 1234,
+  "createdfrom": 5678,
+  "LandedCostCategory": "Sea freight-Purchase expenses",
+  "LandedCostAmount": 100,
   "items": [
     {
-      "id": "12345",
-      "quantity": 5,
+      "id": "SKU-001",
+      "quantity": 2,
       "inventoryAssignments": [
-        { "inventoryNumber": "LOT-Shoof-1", "quantity": 3 },
-        { "inventoryNumber": "LOT-Shoof-2", "quantity": 2 }
+        {
+          "inventoryNumber": "LOT-ABC",
+          "quantity": 2
+        }
       ]
-    }
-  ]
-}
-
-
-Without Inventory Details
-{
-  "entity": 8754,
-  "createdfrom": 1721917,
-  "LandedCostCategory" : "Custom Duty - Purchase Expenses",
-  "LandedCostAmount" : 10,
-  "items": [
+    },
     {
-      "id": "16",
-      "quantity": 100
+      "id": "SKU-002",
+      "quantity": 5,
+      "inventoryAssignments": []
     }
   ]
 }

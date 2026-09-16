@@ -36,13 +36,46 @@ define(['N/record', 'N/search', 'N/log'], (record, search, log) => {
                     throw new Error('Item not found for SKU: ' + line.sku);
                 }
 
-                if (!Array.isArray(line.lots) || line.lots.length === 0) {
-                    throw new Error('No lot details provided for SKU: ' + line.sku);
+                if (!Object.prototype.hasOwnProperty.call(line, 'lots')) {
+                    throw new Error(
+                        'Lots must be provided for SKU: ' + line.sku +
+                        '. If no lot is required, send lotNumber as empty and quantity as 0.'
+                    );
                 }
 
-                let totalLotQty = line.lots.reduce((sum, lot) => sum + parseFloat(lot.quantity || 0), 0);
-                if (parseFloat(totalLotQty) !== parseFloat(line.quantity)) {
-                    throw new Error(`Total lot qty (${totalLotQty}) does not match line qty (${line.quantity}) for SKU: ${line.sku}`);
+                if (!Array.isArray(line.lots)) {
+                    throw new Error(
+                        'lots must be an array for SKU: ' + line.sku
+                    );
+                }
+
+                var hasLot = false;
+                var totalLotQty = 0;
+
+                for (var l = 0; l < line.lots.length; l++) {
+
+                    var lot = line.lots[l];
+
+                    if (!lot.lotNumber || String(lot.lotNumber).trim() == '') {
+                        continue;
+                    }
+
+                    if (!isFinite(parseFloat(lot.quantity)) || parseFloat(lot.quantity) <= 0) {
+                        throw new Error(
+                            'Lot quantity must be greater than 0 for SKU: ' + line.sku
+                        );
+                    }
+
+                    hasLot = true;
+                    totalLotQty += parseFloat(lot.quantity);
+                }
+
+                if (hasLot && parseFloat(totalLotQty) != parseFloat(line.quantity)) {
+                    throw new Error(
+                        'Total lot qty (' + totalLotQty +
+                        ') does not match line qty (' + line.quantity +
+                        ') for SKU: ' + line.sku
+                    );
                 }
 
                 adjRec.selectNewLine({ sublistId: 'inventory' });
@@ -57,14 +90,56 @@ define(['N/record', 'N/search', 'N/log'], (record, search, log) => {
                     adjRec.setCurrentSublistValue({ sublistId: 'inventory', fieldId: 'unitcost', value: parseFloat(line.unitcost) });
                 }
 
-                let invDetail = adjRec.getCurrentSublistSubrecord({ sublistId: 'inventory', fieldId: 'inventorydetail' });
+                if (hasLot) {
 
-                line.lots.forEach(lot => {
-                    invDetail.selectNewLine({ sublistId: 'inventoryassignment' });
-                    invDetail.setCurrentSublistValue({ sublistId: 'inventoryassignment', fieldId: 'receiptinventorynumber', value: lot.lotNumber });
-                    invDetail.setCurrentSublistValue({ sublistId: 'inventoryassignment', fieldId: 'quantity', value: lot.quantity });
-                    invDetail.commitLine({ sublistId: 'inventoryassignment' });
-                });
+                    var invDetail = adjRec.getCurrentSublistSubrecord({
+                        sublistId: 'inventory',
+                        fieldId: 'inventorydetail'
+                    });
+
+                    for (var m = 0; m < line.lots.length; m++) {
+
+                        var lotAssignment = line.lots[m];
+
+                        if (!lotAssignment.lotNumber ||
+                            String(lotAssignment.lotNumber).trim() == '') {
+                            continue;
+                        }
+
+                        invDetail.selectNewLine({
+                            sublistId: 'inventoryassignment'
+                        });
+
+                        invDetail.setCurrentSublistValue({
+                            sublistId: 'inventoryassignment',
+                            fieldId: 'receiptinventorynumber',
+                            value: String(lotAssignment.lotNumber)
+                        });
+
+                        invDetail.setCurrentSublistValue({
+                            sublistId: 'inventoryassignment',
+                            fieldId: 'quantity',
+                            value: parseFloat(lotAssignment.quantity)
+                        });
+
+                        invDetail.commitLine({
+                            sublistId: 'inventoryassignment'
+                        });
+
+                        log.debug('Inventory Assignment Added', {
+                            sku: line.sku,
+                            lotNumber: lotAssignment.lotNumber,
+                            quantity: lotAssignment.quantity
+                        });
+                    }
+
+                } else {
+
+                    log.debug('Inventory Assignment Skipped', {
+                        sku: line.sku,
+                        reason: 'No lot number provided'
+                    });
+                }
 
                 adjRec.commitLine({ sublistId: 'inventory' });
             });

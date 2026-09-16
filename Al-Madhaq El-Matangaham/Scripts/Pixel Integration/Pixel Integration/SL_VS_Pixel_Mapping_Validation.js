@@ -238,10 +238,9 @@ define(['N/ui/serverWidget', 'N/https', 'N/search', 'N/log', 'N/file', 'N/url', 
             try {
 
                 var itemMap = {};
+                var emptyRefCodeMap = {};
                 var paymentMap = {};
                 var branchMap = {};
-                var hasEmptyRefCode = false;
-                var emptyRefCodeProductName = '';
 
                 for (var i = 0; i < rows.length; i++) {
 
@@ -252,6 +251,10 @@ define(['N/ui/serverWidget', 'N/https', 'N/search', 'N/log', 'N/file', 'N/url', 
                     var paymentMethod = trimSafe(row['Payment_Method']);
                     var snum = trimSafe(row['SNUM']);
 
+                    /*
+                     * Items with REFCODE:
+                     * Use REFCODE as the unique mapping key.
+                     */
                     if (refCode) {
 
                         if (!itemMap[refCode]) {
@@ -264,12 +267,19 @@ define(['N/ui/serverWidget', 'N/https', 'N/search', 'N/log', 'N/file', 'N/url', 
 
                     } else {
 
-                        hasEmptyRefCode = true;
+                        /*
+                         * Items without REFCODE:
+                         * Use Product_Name as the unique key.
+                         */
+                        if (productName) {
 
-                        if (!emptyRefCodeProductName) {
+                            if (!emptyRefCodeMap[productName]) {
 
-                            emptyRefCodeProductName =
-                                productName;
+                                emptyRefCodeMap[productName] = {
+                                    refCode: '',
+                                    productName: productName
+                                };
+                            }
                         }
                     }
 
@@ -290,12 +300,19 @@ define(['N/ui/serverWidget', 'N/https', 'N/search', 'N/log', 'N/file', 'N/url', 
 
                 });
 
-                if (hasEmptyRefCode) {
+                /*
+                 * Add distinct products with empty REFCODE.
+                 */
+                var emptyRefCodeItems =
+                    Object.keys(emptyRefCodeMap).map(function (key) {
 
-                    items.push({
-                        refCode: '',
-                        productName: emptyRefCodeProductName
+                        return emptyRefCodeMap[key];
+
                     });
+
+                for (var e = 0; e < emptyRefCodeItems.length; e++) {
+
+                    items.push(emptyRefCodeItems[e]);
                 }
 
                 var paymentMethods =
@@ -310,8 +327,8 @@ define(['N/ui/serverWidget', 'N/https', 'N/search', 'N/log', 'N/file', 'N/url', 
                 );
 
                 log.debug(
-                    'Empty REFCODE From Pixel',
-                    hasEmptyRefCode
+                    'Distinct Empty REFCODE Items',
+                    emptyRefCodeItems
                 );
 
                 log.debug(

@@ -62,7 +62,22 @@ define(['N/record', 'N/search', 'N/log'], function (record, search, log) {
                     return sendErrorResponse(responseObject, 'VALIDATION_ERROR', 'Line: "quantity" must be a number.', { line: i + 1, quantity: line.quantity });
                 }
 
-                if (Array.isArray(line.inventoryAssignments) && line.inventoryAssignments.length) {
+                if (!Object.prototype.hasOwnProperty.call(line, 'inventoryAssignments')) {
+                    return sendErrorResponse(responseObject, 'VALIDATION_ERROR',
+                        'Line: "inventoryAssignments" is mandatory and must be an array.', {
+                        line: i + 1
+                    });
+                }
+
+                if (!Array.isArray(line.inventoryAssignments)) {
+                    return sendErrorResponse(responseObject, 'VALIDATION_ERROR',
+                        'Line: "inventoryAssignments" must be an array.', {
+                        line: i + 1,
+                        inventoryAssignments: line.inventoryAssignments
+                    });
+                }
+
+                if (line.inventoryAssignments.length) {
 
                     var totalAssigned = 0;
 
@@ -70,14 +85,16 @@ define(['N/record', 'N/search', 'N/log'], function (record, search, log) {
                         var assign = line.inventoryAssignments[a] || {};
 
                         if (!assign.inventoryNumber || String(assign.inventoryNumber).trim() == '') {
-                            return sendErrorResponse(responseObject, 'VALIDATION_ERROR', 'Each inventory assignment needs "inventoryNumber".', {
+                            return sendErrorResponse(responseObject, 'VALIDATION_ERROR',
+                                'Each inventory assignment needs "inventoryNumber".', {
                                 line: i + 1,
                                 assignment: a + 1
                             });
                         }
 
                         if (!isNumericValue(assign.quantity)) {
-                            return sendErrorResponse(responseObject, 'VALIDATION_ERROR', 'Each inventory assignment needs numeric "quantity".', {
+                            return sendErrorResponse(responseObject, 'VALIDATION_ERROR',
+                                'Each inventory assignment needs numeric "quantity".', {
                                 line: i + 1,
                                 assignment: a + 1
                             });
