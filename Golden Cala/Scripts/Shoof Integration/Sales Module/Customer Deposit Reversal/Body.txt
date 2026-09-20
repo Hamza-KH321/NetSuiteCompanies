@@ -1,0 +1,5 @@
+{
+    "customerInternalId": "2606",
+    "memo": "Deposit reversal for customer",
+    "amount": 10
+}

@@ -1,0 +1,9 @@
+{
+    "success": true,
+    "message": "Deposit reversal journal entry created successfully.",
+    "journalEntryInternalId": 1721972,
+    "customerInternalId": "2606",
+    "customerDepositsAccount": "979",
+    "amount": 10,
+    "memo": "Deposit reversal for customer"
+}
