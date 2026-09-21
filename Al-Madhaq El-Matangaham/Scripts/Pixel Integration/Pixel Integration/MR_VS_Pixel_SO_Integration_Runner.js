@@ -29,13 +29,21 @@ define(['N/https', 'N/record', 'N/search', 'N/runtime', 'N/log', 'N/format'],
 
             try {
 
-                const urlParam = runtime.getCurrentScript().getParameter({
+                var currentScript = runtime.getCurrentScript();
+
+                var urlParam = currentScript.getParameter({
                     name: 'custscript_vs_pixel_api_url_runner'
                 });
+
+                var transactFilter = trimSafe(currentScript.getParameter({
+                    name: 'custscript_vs_pixel_transact_filter'
+                }));
 
                 if (!urlParam) {
                     throw new Error('Missing script parameter custscript_vs_pixel_api_url_runner.');
                 }
+
+                log.audit('TRANSACT Filter', transactFilter || 'ALL');
 
                 log.audit('PIXEL Fetch', urlParam);
 
@@ -46,9 +54,43 @@ define(['N/https', 'N/record', 'N/search', 'N/runtime', 'N/log', 'N/format'],
                 }
 
                 const csv = resp.body || '';
-                const rows = parseCSV(csv);
+                var rows = parseCSV(csv);
 
-                log.audit('PIXEL Parsed Rows', rows.length);
+                log.audit('PIXEL Parsed Rows Before Filter', rows.length);
+
+                if (transactFilter) {
+
+                    var filteredRows = [];
+
+                    for (var i = 0; i < rows.length; i++) {
+
+                        var rowTransact = trimSafe(rows[i]['TRANSACT']);
+
+                        if (rowTransact == transactFilter) {
+                            filteredRows.push(rows[i]);
+                        }
+                    }
+
+                    rows = filteredRows;
+
+                    log.audit('PIXEL TRANSACT Filter Applied', {
+                        transact: transactFilter,
+                        rowsAfterFilter: rows.length
+                    });
+
+                } else {
+
+                    log.audit('PIXEL TRANSACT Filter', 'Empty - processing all transactions');
+                }
+
+                if (rows.length == 0) {
+
+                    log.audit('No Transactions Found', {
+                        transact: transactFilter || 'ALL'
+                    });
+
+                    return [];
+                }
 
                 return rows;
 
@@ -86,9 +128,44 @@ define(['N/https', 'N/record', 'N/search', 'N/runtime', 'N/log', 'N/format'],
                 const firstRow = JSON.parse(context.values[0]);
                 const snum = trimSafe(firstRow['SNUM']);
 
-                const locationId = findLocationByBranchId(snum);
+                // ----- Validate All REFCODE Values Before Creating Sales Order -----
 
-                const so = record.create({ type: record.Type.SALES_ORDER, isDynamic: true });
+                for (var v = 0; v < context.values.length; v++) {
+
+                    try {
+
+                        var validationRow = JSON.parse(context.values[v]);
+                        var validationRefCode = trimSafe(validationRow['REFCODE']);
+                        var validationItemName = trimSafe(validationRow['Product_Name']) || 'Unknown Item';
+
+                        if (!validationRefCode) {
+
+                            throw new Error(
+                                'Sales Order stopped. REFCODE is empty. ' +
+                                'Product: "' + validationItemName + '"' +
+                                ' | Payment: "' + payment + '"' +
+                                ' | Branch: "' + branch + '"' +
+                                ' | SNUM: "' + snum + '"'
+                            );
+                        }
+
+                    } catch (validationErr) {
+
+                        log.error('REFCODE Validation Error', validationErr);
+                        throw validationErr;
+                    }
+                }
+
+                log.audit('REFCODE Validation Passed', {
+                    payment: payment,
+                    branch: branch,
+                    lineCount: context.values.length
+                });
+
+                var so = record.create({
+                    type: record.Type.SALES_ORDER,
+                    isDynamic: true
+                });
 
                 so.setValue({ fieldId: 'customform', value: PIXEL_FORM_ID });
                 so.setValue({ fieldId: PIXEL_SO_FLAG_FIELD, value: true });
@@ -132,9 +209,39 @@ define(['N/https', 'N/record', 'N/search', 'N/runtime', 'N/log', 'N/format'],
                 so.setText({ fieldId: 'custbody_ium_payment_method', text: payment });
                 so.setText({ fieldId: 'custbody_ium_payment_mode', text: paymentModeText });
 
-                if (locationId) {
-                    so.setValue({ fieldId: 'location', value: Number(locationId) });
+                var locationData = findLocationByBranchId(snum);
+
+                if (locationData && locationData.locationId) {
+
+                    so.setValue({
+                        fieldId: 'location',
+                        value: Number(locationData.locationId)
+                    });
+
+                    if (locationData.brandId) {
+
+                        so.setValue({
+                            fieldId: 'class',
+                            value: Number(locationData.brandId)
+                        });
+
+                        log.audit('Location Brand Applied', {
+                            locationId: locationData.locationId,
+                            brandId: locationData.brandId,
+                            salesOrderField: 'class'
+                        });
+
+                    } else {
+
+                        log.audit('Location Brand Missing', {
+                            locationId: locationData.locationId,
+                            branch: branch,
+                            snum: snum
+                        });
+                    }
+
                 } else {
+
                     throw new Error(
                         'Branch "' + branch + '" (SNUM: ' + snum + ') is not mapped to any Location in NetSuite.'
                     );
@@ -358,25 +465,60 @@ define(['N/https', 'N/record', 'N/search', 'N/runtime', 'N/log', 'N/format'],
 
         function findLocationByBranchId(branchId) {
 
-            const branchTrim = trimSafe(branchId);
-            if (!branchTrim) return null;
+            var branchTrim = trimSafe(branchId);
+
+            if (!branchTrim) {
+                return null;
+            }
 
             try {
 
-                const s = search.create({
+                var s = search.create({
                     type: 'location',
-                    filters: [['custrecord_5826_loc_branch_id', 'is', branchTrim]],
-                    columns: ['internalid']
+                    filters: [
+                        ['custrecord_5826_loc_branch_id', 'is', branchTrim]
+                    ],
+                    columns: [
+                        'internalid',
+                        'custrecord_vs_location_brand'
+                    ]
                 });
 
-                const res = s.run().getRange({ start: 0, end: 1 });
+                var res = s.run().getRange({
+                    start: 0,
+                    end: 1
+                });
 
                 if (res && res.length) {
-                    return res[0].getValue('internalid');
+
+                    var locationId = res[0].getValue({
+                        name: 'internalid'
+                    });
+
+                    var brandId = res[0].getValue({
+                        name: 'custrecord_vs_location_brand'
+                    });
+
+                    log.debug('Location Found', {
+                        branch: branchTrim,
+                        locationId: locationId,
+                        brandId: brandId
+                    });
+
+                    return {
+                        locationId: locationId,
+                        brandId: brandId
+                    };
                 }
 
             } catch (e) {
-                log.error('Location Search Error', e);
+
+                log.error('Location Search Error', {
+                    branch: branchTrim,
+                    error: e
+                });
+
+                throw e;
             }
 
             return null;

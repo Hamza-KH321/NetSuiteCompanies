@@ -32,6 +32,12 @@ define(['N/ui/serverWidget', 'N/task', 'N/log', 'N/redirect', 'N/runtime'],
                         label: 'To Date'
                     });
 
+                    var transactField = form.addField({
+                        id: 'custpage_transact',
+                        type: serverWidget.FieldType.TEXT,
+                        label: 'Pixel TRANSACT'
+                    });
+
                     form.addFieldGroup({
                         id: 'custpage_task_status',
                         label: 'Task Status'
@@ -91,8 +97,14 @@ define(['N/ui/serverWidget', 'N/task', 'N/log', 'N/redirect', 'N/runtime'],
 
                     var fromDate = context.request.parameters.custpage_from_date;
                     var toDate = context.request.parameters.custpage_to_date;
+                    var transact = context.request.parameters.custpage_transact;
 
-                    log.debug('POST Values', 'From: ' + fromDate + ' | To: ' + toDate);
+                    log.debug(
+                        'POST Values',
+                        'From: ' + fromDate +
+                        ' | To: ' + toDate +
+                        ' | Pixel TRANSACT: ' + transact
+                    );
 
                     var formattedFrom = convertDateFormat(fromDate);
                     var formattedTo = convertDateFormat(toDate);
@@ -112,7 +124,8 @@ define(['N/ui/serverWidget', 'N/task', 'N/log', 'N/redirect', 'N/runtime'],
                         scriptId: 'customscript_vs_mr_pixel_so_integration_',
                         deploymentId: 'customdeploy_vs_mr_pixel_so_integration_',
                         params: {
-                            custscript_vs_pixel_api_url_runner: apiUrl
+                            custscript_vs_pixel_api_url_runner: apiUrl,
+                            custscript_vs_pixel_transact_filter: transact
                         }
                     });
 
