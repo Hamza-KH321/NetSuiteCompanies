@@ -246,6 +246,23 @@ define(['N/ui/serverWidget', 'N/https', 'N/search', 'N/log', 'N/file', 'N/url', 
 
                     var row = rows[i];
 
+                    var prodType = trimSafe(row['prodtype']);
+
+                    if (prodType == '100') {
+
+                        log.debug(
+                            'Discount Line Ignored',
+                            {
+                                rowNumber: i + 1,
+                                prodType: prodType,
+                                refCode: trimSafe(row['REFCODE']),
+                                productName: trimSafe(row['Product_Name'])
+                            }
+                        );
+
+                        continue;
+                    }
+
                     var refCode = trimSafe(row['REFCODE']);
                     var productName = trimSafe(row['Product_Name']);
                     var paymentMethod = trimSafe(row['Payment_Method']);

@@ -43,7 +43,7 @@ define(['N/log', 'N/search'], function (log, search) {
             }
             else if (location == 1) { // Riyadh
                 if (poClassType === 'Non Pharma' || poClassType === 'Pharma' || poClassType === 'Medical') {
-                    bdManagers = [374756, 255065]; // Sameh Alshafei 425366, Sarah Alassar 374756
+                    bdManagers = [374756]; // Sameh Alshafei 425366, Sarah Alassar 374756
                 }
                 else if (poClassType === 'Animal Health') bdManagers = [501399];
                 else if (poClassType === 'Private Lable') bdManagers = [209120];
