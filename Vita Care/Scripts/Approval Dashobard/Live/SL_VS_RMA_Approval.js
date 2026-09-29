@@ -32,7 +32,7 @@ define(['N/log', 'N/runtime', 'N/workflow'], function (log, runtime, workflow) {
         },
         'Non Wasfati ASM Riyadh': {
             users: {
-                509907: { approve: 'workflowaction2294', reject: 'workflowaction2295' },
+                502116: { approve: 'workflowaction2294', reject: 'workflowaction2295' },
                 190893: { approve: 'workflowaction2296', reject: 'workflowaction2297' }
             }
         },
@@ -64,9 +64,9 @@ define(['N/log', 'N/runtime', 'N/workflow'], function (log, runtime, workflow) {
             }
         },
         'CS RMA leader Approval': {
-            users: { 
-                55093: { approve: 'workflowaction2312', reject: 'workflowaction2313' }, 
-                336219: { approve: 'workflowaction2312', reject: 'workflowaction2313' }, 
+            users: {
+                55093: { approve: 'workflowaction2312', reject: 'workflowaction2313' },
+                336219: { approve: 'workflowaction2312', reject: 'workflowaction2313' },
             }
         },
         'Transaction RMA Approval Jeddah': {
@@ -74,6 +74,9 @@ define(['N/log', 'N/runtime', 'N/workflow'], function (log, runtime, workflow) {
         },
         'Transaction RMA Approval Riyadh': {
             users: { 351338: { approve: 'workflowaction2320', reject: 'workflowaction2321' } }
+        },
+        'Initial': {
+            users: { 379965: { submit: 'workflowaction2256' } }
         }
     };
 
@@ -133,7 +136,7 @@ define(['N/log', 'N/runtime', 'N/workflow'], function (log, runtime, workflow) {
              * UNCHANGED — do not modify this map or switch logic.
              * ===================================================== */
             var stateIdToScriptIdMap = {
-                446: 'workflowstate267', 447: 'workflowstate268', 449: 'workflowstate270',
+                445: 'workflowstate266', 446: 'workflowstate267', 447: 'workflowstate268', 449: 'workflowstate270',
                 448: 'workflowstate269', 450: 'workflowstate271', 452: 'workflowstate273',
                 426: 'workflowstate254', 439: 'workflowstate260', 425: 'workflowstate253',
                 444: 'workflowstate265', 427: 'workflowstate255', 440: 'workflowstate261',
@@ -199,6 +202,7 @@ define(['N/log', 'N/runtime', 'N/workflow'], function (log, runtime, workflow) {
                         switch (currentState) {
                             case 'workflowstate267': stateId = currentState; actionId = action === 'approve' ? 'workflowaction1449' : 'workflowaction1450'; break;
                             case 'workflowstate268': if (action === 'approve') { stateId = currentState; actionId = 'workflowaction1453'; } break;
+                            case 'workflowstate266': if (action === 'submit') { stateId = currentState; actionId = 'workflowaction1441'; } break;
                             case 'workflowstate270': stateId = currentState; actionId = action === 'approve' ? 'workflowaction1473' : 'workflowaction1474'; break;
                             case 'workflowstate269': stateId = currentState; actionId = action === 'approve' ? 'workflowaction1470' : 'workflowaction1471'; break;
                             case 'workflowstate271': stateId = currentState; actionId = action === 'approve' ? 'workflowaction1480' : 'workflowaction1481'; break;

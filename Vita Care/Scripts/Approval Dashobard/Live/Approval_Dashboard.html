@@ -100,8 +100,10 @@
             <!-- Approve/Reject Buttons -->
             <div id="rmaApproveContainer" style="margin-top: 15px; display: none;">
                 <div style="display: flex; justify-content: center; gap: 10px;">
-                    <button class="approve-btn" onclick="approveSelected()">Approve Selected</button>
-                    <button class="reject-btn" onclick="rejectSelected()">Reject Selected</button>
+                    <button id="submitBtn" class="approve-btn" onclick="submitSelected()" disabled>Submit for
+                        Approval</button>
+                    <button id="approveBtn" class="approve-btn" onclick="approveSelected()">Approve Selected</button>
+                    <button id="rejectBtn" class="reject-btn" onclick="rejectSelected()">Reject Selected</button>
                     <button id="approveBDBtn" class="approve-btn" onclick="approveBDSelected()" disabled>Approve &amp;
                         Request BD Approval</button>
                 </div>
@@ -263,13 +265,13 @@
                 paginated.forEach(function (row) {
                     var checked = selectedMap[row.transaction_id] ? 'checked' : '';
                     table.innerHTML +=
-                        '<tr data-current-state="' + row.current_state + '" data-workflow-id="' + row.workflow_id + '" data-bd-eligible="' + (row.bd_request_eligible ? '1' : '0') + '">' +
+                        '<tr data-current-state="' + row.current_state + '" data-workflow-id="' + row.workflow_id + '" data-bd-eligible="' + (row.bd_request_eligible ? '1' : '0') + '" data-submit-eligible="' + (row.submit_eligible ? '1' : '0') + '">' +
                         '<td><input type="checkbox" class="approval-checkbox" data-id="' + row.transaction_id + '" ' + checked + '></td>' +
                         '<td>' + row.transaction_type + '</td>' +
                         '<td><a href="/app/accounting/transactions/rtnauth.nl?id=' + row.transaction_id + '&whence=" target="_blank" style="color:#1e90ff;text-decoration:none;font-weight:500;">' + row.transaction_number + '</a></td>' +
                         '<td>' + row.entity + '</td>' +
                         '<td>' + (row.location || '') + '</td>' +
-                        '<td>' + (row.rma_type || '') + '</td>' + 
+                        '<td>' + (row.rma_type || '') + '</td>' +
                         '<td>' + row.date + '</td>' +
                         '<td>' + new Intl.NumberFormat('en-US', { style: 'currency', currency: 'SAR' }).format(Math.abs(Number(row.total))) + '</td>' +
                         '</tr>';
@@ -382,25 +384,38 @@
             handleWorkflowAction("approveBD");
         }
 
+        function submitSelected() {
+            handleWorkflowAction("submit");
+        }
+
         // The 3rd button only unlocks when there's at least one selected row
         // AND every selected row is currently on a level that supports it
         // (flagged server-side via data-bd-eligible on each row).
         function updateApproveBDButtonState() {
-            var btn = document.getElementById("approveBDBtn");
-            if (!btn) return;
+            var bdBtn = document.getElementById("approveBDBtn");
+            var submitBtn = document.getElementById("submitBtn");
+            var approveBtn = document.getElementById("approveBtn");
+            var rejectBtn = document.getElementById("rejectBtn");
+            if (!bdBtn || !submitBtn || !approveBtn || !rejectBtn) return;
 
-            var checkboxes = document.querySelectorAll('.approval-checkbox:checked');
+            var checkboxes = Array.from(document.querySelectorAll('.approval-checkbox:checked'));
             if (checkboxes.length === 0) {
-                btn.disabled = true;
+                bdBtn.disabled = true;
+                submitBtn.disabled = true;
+                approveBtn.disabled = false;
+                rejectBtn.disabled = false;
                 return;
             }
 
-            var allEligible = Array.from(checkboxes).every(function (cb) {
-                var row = cb.closest('tr');
-                return row && row.dataset.bdEligible === '1';
-            });
+            var rows = checkboxes.map(function (cb) { return cb.closest('tr'); });
+            var allBD = rows.every(function (r) { return r && r.dataset.bdEligible === '1'; });
+            var allSubmit = rows.every(function (r) { return r && r.dataset.submitEligible === '1'; });
+            var anySubmit = rows.some(function (r) { return r && r.dataset.submitEligible === '1'; });
 
-            btn.disabled = !allEligible;
+            bdBtn.disabled = !allBD;
+            submitBtn.disabled = !allSubmit;      // only when every selected row is in the Initial state
+            approveBtn.disabled = anySubmit;      // Approve/Reject are invalid on Initial rows
+            rejectBtn.disabled = anySubmit;
         }
 
         function getSelectedIds() {

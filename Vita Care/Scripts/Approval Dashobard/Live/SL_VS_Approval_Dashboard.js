@@ -9,9 +9,11 @@ define(['N/file', 'N/search', 'N/log', 'N/render', 'N/runtime'], function (file,
      * WORKFLOW 238 — customworkflow_vs_rma_approval_refusal
      * UNCHANGED — do not modify this map.
      * ===================================================== */
+    const RMA_238_INITIAL_STATE_ID = 445;
     const approvalAccessMap = {
         238: {
-            446: { roles: [3], users: [379965, 55093] },             // SR Coordinator Review
+            [RMA_238_INITIAL_STATE_ID]: { roles: [3], users: [379965] },  // Initial - Submit for Approval
+            446: { roles: [3], users: [379965, 55093] },            // SR Coordinator Review
             447: { roles: [], users: [] },                           // SR Coordinator Reject (Initial)
             448: { roles: [3, 1061, 1052, 1062], users: [336219, 55093] },  // Supply Chain Leader Approval
             449: { roles: [3], users: [379965, 55093] },             // Supply Chain Reject (SR Cord)
@@ -56,7 +58,7 @@ define(['N/file', 'N/search', 'N/log', 'N/render', 'N/runtime'], function (file,
         },
         'Non Wasfati ASM Riyadh': {
             users: {
-                509907: { approve: 'workflowaction2294', reject: 'workflowaction2295' },
+                502116: { approve: 'workflowaction2294', reject: 'workflowaction2295' },
                 190893: { approve: 'workflowaction2296', reject: 'workflowaction2297' }
             }
         },
@@ -88,7 +90,7 @@ define(['N/file', 'N/search', 'N/log', 'N/render', 'N/runtime'], function (file,
             }
         },
         'CS RMA leader Approval': {
-            users: { 
+            users: {
                 55093: { approve: 'workflowaction2312', reject: 'workflowaction2313' },
                 336219: { approve: 'workflowaction2312', reject: 'workflowaction2313' },
             }
@@ -98,8 +100,10 @@ define(['N/file', 'N/search', 'N/log', 'N/render', 'N/runtime'], function (file,
         },
         'Transaction RMA Approval Riyadh': {
             users: { 351338: { approve: 'workflowaction2320', reject: 'workflowaction2321' } }
+        },
+        'Initial': {
+            users: { 379965: { submit: 'workflowaction2256' } }
         }
-        // 'Initial' state deliberately excluded — never shown in this dashboard.
     };
 
     // Levels where a 3rd "Approve & Request BD Approval" action exists
@@ -240,7 +244,10 @@ define(['N/file', 'N/search', 'N/log', 'N/render', 'N/runtime'], function (file,
                             current_state: currentStateForPayload,
                             workflow_id: workflowScriptId,
                             // lets the frontend enable/disable the 3rd button without guessing
-                            bd_request_eligible: RMA_V2_BD_REQUEST_LEVELS.indexOf(currentStateForPayload) !== -1
+                            bd_request_eligible: RMA_V2_BD_REQUEST_LEVELS.indexOf(currentStateForPayload) !== -1,
+                            submit_eligible: (workflowId === 238)
+                                ? currentStateForPayload === RMA_238_INITIAL_STATE_ID
+                                : currentStateForPayload === 'Initial'
                         });
                     }
                 });
