@@ -89,7 +89,7 @@ define(['N/log', 'N/runtime', 'N/workflow'], function (log, runtime, workflow) {
     function resolveActionV2(levelName, actionType, userId, roleId) {
         const shared = RMA_V2_SHARED_LEVELS[levelName];
         if (shared) {
-            const authorized = roleId === 3 || shared.allowedUsers.indexOf(userId) !== -1;
+            const authorized = shared.allowedUsers.indexOf(userId) !== -1;
             if (!authorized) return null;
             // shared levels only support approve/reject, never the BD-request variant
             return actionType === 'approveBD' ? null : (shared[actionType] || null);
@@ -97,11 +97,6 @@ define(['N/log', 'N/runtime', 'N/workflow'], function (log, runtime, workflow) {
 
         const perUser = RMA_V2_PERUSER_LEVELS[levelName];
         if (perUser) {
-            // Admin can act on ANY level, on behalf of any of the named approvers there.
-            if (roleId === 3) {
-                const anyEntry = Object.values(perUser.users).find(function (u) { return u[actionType]; });
-                return anyEntry ? anyEntry[actionType] : null;
-            }
 
             const userEntry = perUser.users[userId];
             if (!userEntry) return null;

@@ -115,8 +115,6 @@ define(['N/file', 'N/search', 'N/log', 'N/render', 'N/runtime'], function (file,
      * rows for levels they're named on (shared or per-user).
      * ===================================================== */
     function isLevelVisibleToUser(levelName, userId, roleId) {
-        if (roleId === 3) return true;
-
         var shared = RMA_V2_SHARED_LEVELS[levelName];
         if (shared) return shared.allowedUsers.indexOf(userId) !== -1;
 
