@@ -121,6 +121,21 @@ define(['N/log', 'N/runtime', 'N/workflow'], function (log, runtime, workflow) {
             var currentUserId = currentUser.id;
             var currentUserRole = currentUser.role;
 
+            // Only role 3 or user 379965 may submit for approval
+            if (action === 'submit' && currentUserRole !== 3 && currentUserId !== 379965) {
+                context.response.setHeader({ name: 'Content-Type', value: 'application/json' });
+                context.response.write(JSON.stringify({
+                    result: records.map(function (r) {
+                        return {
+                            recordId: r.recordId,
+                            status: 'error',
+                            message: 'You are not authorized to submit for approval.'
+                        };
+                    })
+                }));
+                return;
+            }
+
             log.debug('requestBody', requestBody);
 
             /* =====================================================

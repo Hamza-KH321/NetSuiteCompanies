@@ -10,6 +10,8 @@ define(['N/file', 'N/search', 'N/log', 'N/render', 'N/runtime'], function (file,
      * UNCHANGED — do not modify this map.
      * ===================================================== */
     const RMA_238_INITIAL_STATE_ID = 445;
+    const SUBMIT_ALLOWED_ROLES = [3];
+    const SUBMIT_ALLOWED_USERS = [379965];
     const approvalAccessMap = {
         238: {
             [RMA_238_INITIAL_STATE_ID]: { roles: [3], users: [379965] },  // Initial - Submit for Approval
@@ -147,6 +149,9 @@ define(['N/file', 'N/search', 'N/log', 'N/render', 'N/runtime'], function (file,
                 }
                 else if (requestData.action === 'search') {
                     var transactions = getReturnAuthorizations(userId, roleId);
+                    transactions.can_submit =
+                        SUBMIT_ALLOWED_ROLES.indexOf(roleId) !== -1 ||
+                        SUBMIT_ALLOWED_USERS.indexOf(userId) !== -1;
                     context.response.write(JSON.stringify(transactions));
                 }
             }

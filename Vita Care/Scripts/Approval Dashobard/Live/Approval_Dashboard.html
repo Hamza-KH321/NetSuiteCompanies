@@ -100,7 +100,8 @@
             <!-- Approve/Reject Buttons -->
             <div id="rmaApproveContainer" style="margin-top: 15px; display: none;">
                 <div style="display: flex; justify-content: center; gap: 10px;">
-                    <button id="submitBtn" class="approve-btn" onclick="submitSelected()" disabled>Submit for
+                    <button id="submitBtn" class="approve-btn" onclick="submitSelected()" disabled
+                        style="display:none;">Submit for
                         Approval</button>
                     <button id="approveBtn" class="approve-btn" onclick="approveSelected()">Approve Selected</button>
                     <button id="rejectBtn" class="reject-btn" onclick="rejectSelected()">Reject Selected</button>
@@ -219,6 +220,7 @@
                 .then(response => response.json())
                 .then(data => {
                     allTransactions = data.results || [];
+                    document.getElementById("submitBtn").style.display = data.can_submit ? "" : "none";
                     currentPage = 1;
                     displayTransactions();
                 })
