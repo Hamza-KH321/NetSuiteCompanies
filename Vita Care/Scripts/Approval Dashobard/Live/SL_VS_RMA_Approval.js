@@ -160,6 +160,11 @@ define(['N/log', 'N/runtime', 'N/workflow'], function (log, runtime, workflow) {
                 var recordId = rec.recordId;
                 var workflowId = rec.workflowId;
 
+                if (runtime.getCurrentScript().getRemainingUsage() < 50) {
+                    responseDetails.push({ recordId, status: 'error', message: 'Governance limit reached, please retry this record.' });
+                    return;
+                }
+
                 /* -------- NEW: Workflow 373 (V2) -------- */
                 if (workflowId === RMA_V2_WORKFLOW_SCRIPT_ID) {
                     var levelName = rec.currentState; // text value from custbody_vs_current_rma_approval_state
