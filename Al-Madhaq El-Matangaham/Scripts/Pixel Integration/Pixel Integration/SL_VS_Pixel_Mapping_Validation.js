@@ -242,25 +242,62 @@ define(['N/ui/serverWidget', 'N/https', 'N/search', 'N/log', 'N/file', 'N/url', 
                 var paymentMap = {};
                 var branchMap = {};
 
+
                 for (var i = 0; i < rows.length; i++) {
 
                     var row = rows[i];
 
-                    var prodType = trimSafe(row['prodtype']);
 
-                    if (prodType == '100') {
+                    var prodType = '';
+                    var amountText = '';
+                    var rowKeys = Object.keys(row);
 
-                        log.debug(
-                            'Discount Line Ignored',
-                            {
+                    for (var k = 0; k < rowKeys.length; k++) {
+                        var key = trimSafe(rowKeys[k]).toLowerCase();
+
+                        if (key == 'prodtype') {
+                            prodType = trimSafe(row[rowKeys[k]]);
+                        }
+
+                        if (key == 'total_including_tax') {
+                            amountText = trimSafe(row[rowKeys[k]]);
+                        }
+                    }
+
+                    var amount = Number(amountText.replace(/,/g, ''));
+
+                    log.debug('Pixel Line Check', {
+                        rowNumber: i + 1,
+                        prodType: prodType,
+                        amount: amountText
+                    });
+
+                    if (prodType == '100' || prodType == '101') {
+                        log.debug('Discount Line Ignored', {
+                            rowNumber: i + 1,
+                            prodType: prodType,
+                            refCode: trimSafe(row['REFCODE']),
+                            productName: trimSafe(row['Product_Name']),
+                            amount: amountText
+                        });
+
+                        continue;
+                    }
+
+                    if (/^\d+$/.test(prodType)) {
+                        var prodTypeNumber = parseInt(prodType, 10);
+
+                        if (prodTypeNumber >= 0 && prodTypeNumber <= 12 && amount < 0) {
+                            log.debug('Negative Amount Line Ignored', {
                                 rowNumber: i + 1,
                                 prodType: prodType,
                                 refCode: trimSafe(row['REFCODE']),
-                                productName: trimSafe(row['Product_Name'])
-                            }
-                        );
+                                productName: trimSafe(row['Product_Name']),
+                                amount: amountText
+                            });
 
-                        continue;
+                            continue;
+                        }
                     }
 
                     var refCode = trimSafe(row['REFCODE']);
@@ -268,14 +305,9 @@ define(['N/ui/serverWidget', 'N/https', 'N/search', 'N/log', 'N/file', 'N/url', 
                     var paymentMethod = trimSafe(row['Payment_Method']);
                     var snum = trimSafe(row['SNUM']);
 
-                    /*
-                     * Items with REFCODE:
-                     * Use REFCODE as the unique mapping key.
-                     */
                     if (refCode) {
 
                         if (!itemMap[refCode]) {
-
                             itemMap[refCode] = {
                                 refCode: refCode,
                                 productName: productName
@@ -284,14 +316,9 @@ define(['N/ui/serverWidget', 'N/https', 'N/search', 'N/log', 'N/file', 'N/url', 
 
                     } else {
 
-                        /*
-                         * Items without REFCODE:
-                         * Use Product_Name as the unique key.
-                         */
                         if (productName) {
 
                             if (!emptyRefCodeMap[productName]) {
-
                                 emptyRefCodeMap[productName] = {
                                     refCode: '',
                                     productName: productName
@@ -301,12 +328,10 @@ define(['N/ui/serverWidget', 'N/https', 'N/search', 'N/log', 'N/file', 'N/url', 
                     }
 
                     if (paymentMethod) {
-
                         paymentMap[paymentMethod] = true;
                     }
 
                     if (snum) {
-
                         branchMap[snum] = true;
                     }
                 }

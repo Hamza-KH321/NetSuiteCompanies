@@ -25,6 +25,26 @@ define(['N/https', 'N/record', 'N/search', 'N/runtime', 'N/log', 'N/format'],
             return (v == null) ? '' : String(v).trim();
         };
 
+
+        function getRowValue(row, fieldName) {
+            var keys = Object.keys(row || {});
+            var target = String(fieldName).toLowerCase().replace(/[^a-z0-9]/g, '');
+
+            for (var i = 0; i < keys.length; i++) {
+                var current = String(keys[i]).toLowerCase().replace(/[^a-z0-9]/g, '');
+
+                if (current == target) {
+                    return row[keys[i]];
+                }
+
+                // Support PRODTY if that is the actual API header
+                if (target == 'prodtype' && current == 'prodty') {
+                    return row[keys[i]];
+                }
+            }
+
+            return '';
+        }
         function getInputData() {
 
             try {
@@ -83,6 +103,75 @@ define(['N/https', 'N/record', 'N/search', 'N/runtime', 'N/log', 'N/format'],
                     log.audit('PIXEL TRANSACT Filter', 'Empty - processing all transactions');
                 }
 
+
+                // ----- Identify Pixel Orders Containing Discounts -----
+
+                var discountTransacts = {};
+
+                for (var i = 0; i < rows.length; i++) {
+
+                    var rowTransact = trimSafe(getRowValue(rows[i], 'TRANSACT'));
+                    var prodType = trimSafe(getRowValue(rows[i], 'prodtype'));
+
+                    if ((prodType == '100' || prodType == '101') && rowTransact) {
+
+                        discountTransacts[rowTransact] = true;
+
+                        log.audit('Discount Order Identified', {
+                            transact: rowTransact,
+                            prodType: prodType
+                        });
+                    }
+                }
+
+                // ----- Filter Negative Lines and Mark Discount Orders -----
+
+                var processedRows = [];
+
+                for (var i = 0; i < rows.length; i++) {
+
+                    var row = rows[i];
+
+                    var prodType = trimSafe(getRowValue(row, 'prodtype'));
+                    var transact = trimSafe(getRowValue(row, 'TRANSACT'));
+                    var amount = toNumber(getRowValue(row, 'Total_Including_Tax'), 0);
+
+                    var prodTypeNumber = parseInt(prodType, 10);
+
+                    // Ignore negative lines for prodtype 0 to 12
+                    if (/^\d+$/.test(prodType) &&
+                        prodTypeNumber >= 0 &&
+                        prodTypeNumber <= 12 &&
+                        amount < 0) {
+
+                        log.audit('Negative Line Ignored', {
+                            transact: transact,
+                            prodType: prodType,
+                            amount: amount,
+                            refCode: trimSafe(row['REFCODE'])
+                        });
+
+                        continue;
+                    }
+
+                    // Mark discount lines
+                    row['_pixelIsDiscountLine'] =
+                        (prodType == '100' || prodType == '101');
+
+                    // Mark all rows belonging to discounted Pixel orders
+                    row['_pixelHasDiscount'] =
+                        (discountTransacts[transact] == true);
+
+                    processedRows.push(row);
+                }
+
+                rows = processedRows;
+
+                log.audit('PIXEL Rows After Filtering', {
+                    totalRows: rows.length,
+                    discountOrders: Object.keys(discountTransacts).length
+                });
+
                 if (rows.length == 0) {
 
                     log.audit('No Transactions Found', {
@@ -101,32 +190,103 @@ define(['N/https', 'N/record', 'N/search', 'N/runtime', 'N/log', 'N/format'],
             }
         }
 
+
         function map(context) {
 
-            const row = JSON.parse(context.value);
+            try {
 
-            const payment = trimSafe(row['Payment_Method']);
-            const branch = trimSafe(row['Branch']);
+                var row = JSON.parse(context.value);
 
-            const key = payment + '|' + branch;
+                var payment = trimSafe(row['Payment_Method']);
+                var branch = trimSafe(row['Branch']);
+                var hasDiscount = row['_pixelHasDiscount'] == true;
 
-            context.write({ key: key, value: row });
+                var orderType = hasDiscount ? 'DISCOUNT' : 'NORMAL';
+
+                var snum = trimSafe(row['SNUM']);
+
+                var key = payment + '|' + branch + '|' + snum + '|' + orderType;
+
+                log.debug('Pixel Order Grouping', {
+                    transact: trimSafe(row['TRANSACT']),
+                    payment: payment,
+                    branch: branch,
+                    orderType: orderType,
+                    groupKey: key
+                });
+
+                context.write({
+                    key: key,
+                    value: row
+                });
+
+            } catch (e) {
+
+                log.error('Map Error', {
+                    error: e.message || e,
+                    value: context.value
+                });
+
+                throw e;
+            }
         }
 
         function reduce(context) {
 
+
             const parts = context.key.split('|');
             const payment = trimSafe(parts[0]);
             const branch = trimSafe(parts[1]);
+            const orderType = trimSafe(parts[3]);
+
+            const hasDiscount = (orderType == 'DISCOUNT');
 
             let soId = null;
             let lineCount = 0;
             let lineErrors = 0;
+            var totalDiscount = 0;
 
             try {
 
                 const firstRow = JSON.parse(context.values[0]);
                 const snum = trimSafe(firstRow['SNUM']);
+
+
+                // ----- Calculate Combined Discount -----
+
+                if (hasDiscount) {
+
+                    for (var d = 0; d < context.values.length; d++) {
+
+                        var discountRow = JSON.parse(context.values[d]);
+
+                        if (discountRow['_pixelIsDiscountLine'] == true) {
+
+                            var discountAmount = toNumber(
+                                getRowValue(discountRow, 'Total_Including_Tax'),
+                                0
+                            );
+
+                            // API already provides discount as negative
+                            totalDiscount += discountAmount;
+
+                            log.debug('Discount Amount Collected', {
+                                transact: trimSafe(discountRow['TRANSACT']),
+                                prodType: getRowValue(discountRow, 'prodtype'),
+                                amount: discountAmount,
+                                totalDiscount: totalDiscount
+                            });
+                        }
+                    }
+
+                    totalDiscount = Math.round(totalDiscount * 100) / 100;
+
+                    log.audit('Combined Discount Calculated', {
+                        payment: payment,
+                        branch: branch,
+                        totalDiscount: totalDiscount
+                    });
+                }
 
                 // ----- Validate All REFCODE Values Before Creating Sales Order -----
 
@@ -134,10 +294,22 @@ define(['N/https', 'N/record', 'N/search', 'N/runtime', 'N/log', 'N/format'],
 
                     try {
 
+
                         var validationRow = JSON.parse(context.values[v]);
+
+                        // Skip discount lines from item validation
+                        if (validationRow['_pixelIsDiscountLine'] == true) {
+
+                            log.debug('Discount Line Skipped in Validation', {
+                                transact: trimSafe(validationRow['TRANSACT']),
+                                prodType: getRowValue(validationRow, 'prodtype')
+                            });
+
+                            continue;
+                        }
+
                         var validationRefCode = trimSafe(validationRow['REFCODE']);
                         var validationItemName = trimSafe(validationRow['Product_Name']) || 'Unknown Item';
-
                         if (!validationRefCode) {
 
                             throw new Error(
@@ -247,11 +419,17 @@ define(['N/https', 'N/record', 'N/search', 'N/runtime', 'N/log', 'N/format'],
                     );
                 }
 
+
                 var upcList = [];
 
                 for (var i = 0; i < context.values.length; i++) {
 
                     var rowObj = JSON.parse(context.values[i]);
+
+                    if (rowObj['_pixelIsDiscountLine'] == true) {
+                        continue;
+                    }
+
                     var code = trimSafe(rowObj['REFCODE']);
 
                     if (code && upcList.indexOf(code) == -1) {
@@ -295,12 +473,25 @@ define(['N/https', 'N/record', 'N/search', 'N/runtime', 'N/log', 'N/format'],
                     log.debug('Item Cache Built', Object.keys(itemCache).length);
                 }
 
+
                 for (let i = 0; i < context.values.length; i++) {
 
                     const row = JSON.parse(context.values[i]);
                     let refCode = '';
 
                     try {
+
+                        // Do not create discount lines as items
+                        if (row['_pixelIsDiscountLine'] == true) {
+
+                            log.debug('Discount Line Excluded from Items', {
+                                transact: trimSafe(row['TRANSACT']),
+                                prodType: getRowValue(row, 'prodtype'),
+                                amount: getRowValue(row, 'Total_Including_Tax')
+                            });
+
+                            continue;
+                        }
 
                         refCode = trimSafe(row['REFCODE']);
                         const qty = toNumber(row['QUAN'], 0);
@@ -362,12 +553,47 @@ define(['N/https', 'N/record', 'N/search', 'N/runtime', 'N/log', 'N/format'],
                     }
                 }
 
+
                 if (lineCount == 0) {
                     throw new Error('No valid lines to save for this Sales Order.');
                 }
 
-                var totalAmount = so.getValue({ fieldId: 'total' });
+                // ----- Apply Combined Header Discount -----
 
+                if (hasDiscount) {
+
+                    if (totalDiscount < 0) {
+
+                        so.setValue({
+                            fieldId: 'discountitem',
+                            value: 7480
+                        });
+
+                        so.setValue({
+                            fieldId: 'discountrate',
+                            value: totalDiscount
+                        });
+
+                        log.audit('Header Discount Applied', {
+                            discountItem: 7480,
+                            discountRate: totalDiscount,
+                            payment: payment,
+                            branch: branch
+                        });
+
+                    } else {
+
+                        log.audit('No Negative Discount Amount', {
+                            payment: payment,
+                            branch: branch,
+                            totalDiscount: totalDiscount
+                        });
+                    }
+                }
+
+                var totalAmount = so.getValue({
+                    fieldId: 'total'
+                });
                 so.selectNewLine({ sublistId: 'recmachcustrecord_ium_payment_so' });
 
                 so.setCurrentSublistText({ sublistId: 'recmachcustrecord_ium_payment_so', fieldId: 'custrecord_ium_payment_method', text: payment });
