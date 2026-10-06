@@ -60,8 +60,14 @@ define(['N/file', 'N/search', 'N/log', 'N/render', 'N/runtime'], function (file,
         },
         'Non Wasfati ASM Riyadh': {
             users: {
-                502116: { approve: 'workflowaction2294', reject: 'workflowaction2295' },
-                190893: { approve: 'workflowaction2296', reject: 'workflowaction2297' }
+                502116: {
+                    approve: 'workflowaction2294', reject: 'workflowaction2295',
+                    regionRule: { notEquals: '2' }   // not Eastern
+                },
+                190893: {
+                    approve: 'workflowaction2296', reject: 'workflowaction2297',
+                    regionRule: { equals: '2' }      // Eastern only
+                }
             }
         },
         'SR Coordinator Riyadh': {
@@ -111,19 +117,29 @@ define(['N/file', 'N/search', 'N/log', 'N/render', 'N/runtime'], function (file,
     // Levels where a 3rd "Approve & Request BD Approval" action exists
     const RMA_V2_BD_REQUEST_LEVELS = ['SR Coordinator Riyadh', 'SR Coordinator Jeddah'];
 
+    function isRegionAllowed(userEntry, regionText) {
+        if (!userEntry || !userEntry.regionRule) return true;
+        var region = (regionText || '').trim();
+        if (userEntry.regionRule.equals !== undefined) return region === userEntry.regionRule.equals;
+        if (userEntry.regionRule.notEquals !== undefined) return region !== userEntry.regionRule.notEquals;
+        return true;
+    }
+
     /* =====================================================
      * VISIBILITY (which rows a user is allowed to SEE)
      * Admin (role 3) sees everything. Everyone else sees only
      * rows for levels they're named on (shared or per-user).
      * ===================================================== */
-    function isLevelVisibleToUser(levelName, userId, roleId) {
+    function isLevelVisibleToUser(levelName, userId, roleId, regionText) {
         var shared = RMA_V2_SHARED_LEVELS[levelName];
         if (shared) return shared.allowedUsers.indexOf(userId) !== -1;
 
         var perUser = RMA_V2_PERUSER_LEVELS[levelName];
-        if (perUser) return Object.prototype.hasOwnProperty.call(perUser.users, userId);
-
-        return false; // unknown level name (e.g. 'Initial') — never shown
+        if (perUser) {
+            if (!Object.prototype.hasOwnProperty.call(perUser.users, userId)) return false;
+            return isRegionAllowed(perUser.users[userId], regionText);
+        }
+        return false;
     }
 
     function onRequest(context) {
@@ -192,7 +208,8 @@ define(['N/file', 'N/search', 'N/log', 'N/render', 'N/runtime'], function (file,
                     search.createColumn({ name: "custbody8" }),
                     search.createColumn({ name: "currentstate", join: "workflow" }),
                     search.createColumn({ name: "workflow", join: "workflow" }),
-                    search.createColumn({ name: "custbody_vs_current_rma_approval_state" })
+                    search.createColumn({ name: "custbody_vs_current_rma_approval_state" }),
+                    search.createColumn({ name: "custbody_vs_region" })
                 ]
             });
 
@@ -224,9 +241,10 @@ define(['N/file', 'N/search', 'N/log', 'N/render', 'N/runtime'], function (file,
 
                     } else if (String(workflowId) === RMA_V2_WORKFLOW_NUMERIC_ID) {
                         const levelName = result.getValue('custbody_vs_current_rma_approval_state');
+                        const regionText = String(result.getValue('custbody_vs_region') || '');
 
                         if (levelName && (RMA_V2_SHARED_LEVELS[levelName] || RMA_V2_PERUSER_LEVELS[levelName])) {
-                            include = isLevelVisibleToUser(levelName, userId, roleId);
+                            include = isLevelVisibleToUser(levelName, userId, roleId, regionText);
                         }
                         // 'Initial' or unknown/blank level names are never included
 

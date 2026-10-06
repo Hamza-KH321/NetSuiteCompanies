@@ -95,7 +95,7 @@ define(['N/file', 'N/runtime', 'N/search', 'N/record', 'N/workflow', 'N/log', 'N
         }
 
         const EMPLOYEE_LEVEL_MAP = {
-            '292': 'E-292',   // Mohammed Abdelsalam
+            '292': 'E-282',   // Rami Ibrahim
             '10': 'E-10',    // Mostafa I Yakoub
             '16': 'E-16',    // Oday Tayseer Othman
             '30': 'E-30',    // Muhannad Mahmoud Musleh
@@ -196,7 +196,7 @@ define(['N/file', 'N/runtime', 'N/search', 'N/record', 'N/workflow', 'N/log', 'N
         // Canonical level values
         'AR': 'workflowaction_clientapproval_approve_ar',
         'SalesManager': 'workflowaction_clientapproval_approve_sm',
-        'E-292': 'workflowaction_clientapproval_approve_al',
+        'E-282': 'workflowaction_clientapproval_approve_al',
         'E-10': 'workflowaction_clientapproval_approve_ya',
         'E-16': 'workflowaction_clientapproval_approve_od',
         'E-30': 'workflowaction_clientapproval_approve_mu',
@@ -213,7 +213,7 @@ define(['N/file', 'N/runtime', 'N/search', 'N/record', 'N/workflow', 'N/log', 'N
         // Canonical level values
         'AR': 'workflowaction1920',
         'SalesManager': 'workflowaction1998',
-        'E-292': 'workflowaction2012',
+        'E-282': 'workflowaction2012',
         'E-10': 'workflowaction2005',
         'E-16': 'workflowaction1923',
         'E-30': 'workflowaction1926',

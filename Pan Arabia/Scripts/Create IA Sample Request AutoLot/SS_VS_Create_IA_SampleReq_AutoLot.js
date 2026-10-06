@@ -13,6 +13,7 @@ define(['N/record', 'N/search', 'N/runtime', 'N/log', 'N/email'], function (reco
 
             var newRecord = record.load({ type: rectype, id: recid });
             var internalID = newRecord.getValue({ fieldId: "id" });
+            var recordId = newRecord.getValue({ fieldId: "recordid" });
             var location = newRecord.getValue({ fieldId: "custrecord_vs_warehouse" });
             var headerNotes = newRecord.getValue({ fieldId: "custrecord_vs_memo" });
             var IACreated = newRecord.getValue({ fieldId: "custrecord_vs_iacreated" });
@@ -121,12 +122,13 @@ define(['N/record', 'N/search', 'N/runtime', 'N/log', 'N/email'], function (reco
                     var subject = 'Sample Request Inventory Adjustment Created (#' + adjustmentId + ')';
                     var body =
                         'Kindly Note An Inventory Adjustment has been created for the Sample Request.<br><br>' +
+                        '<strong>Record ID:</strong> ' + recordId + '<br>' + // <-- add
                         '<strong>Inventory Adjustment:</strong> <a href="' + inventoryAdjustmentUrl + '">View Inventory Adjustment</a><br>' +
                         '<strong>Sample Request:</strong> <a href="' + sampleRequestUrl + '">View Sample Request</a><br>';
 
                     email.send({
                         author: 414,
-                        recipients: ['m.isleem@pamedco.com', 'muhsink@pamedco.com', 'jafpmr@pamedco.com'],
+                        recipients: ['m.isleem@pamedco.com', 'operations@pamedco.com'],
                         subject: subject,
                         body: body,
                         isHtml: true

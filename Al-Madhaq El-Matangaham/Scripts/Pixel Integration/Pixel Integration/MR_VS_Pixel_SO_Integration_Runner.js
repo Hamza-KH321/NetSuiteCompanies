@@ -113,7 +113,7 @@ define(['N/https', 'N/record', 'N/search', 'N/runtime', 'N/log', 'N/format'],
                     var rowTransact = trimSafe(getRowValue(rows[i], 'TRANSACT'));
                     var prodType = trimSafe(getRowValue(rows[i], 'prodtype'));
 
-                    if ((prodType == '100' || prodType == '101') && rowTransact) {
+                    if (prodType == '100' && rowTransact) {
 
                         discountTransacts[rowTransact] = true;
 
@@ -138,6 +138,20 @@ define(['N/https', 'N/record', 'N/search', 'N/runtime', 'N/log', 'N/format'],
 
                     var prodTypeNumber = parseInt(prodType, 10);
 
+                    // Ignore prodtype 101 completely
+                    if (prodType == '101') {
+
+                        log.audit('Prodtype 101 Ignored', {
+                            transact: transact,
+                            prodType: prodType,
+                            amount: amount,
+                            refCode: trimSafe(row['REFCODE']),
+                            productName: trimSafe(row['Product_Name'])
+                        });
+
+                        continue;
+                    }
+
                     // Ignore negative lines for prodtype 0 to 12
                     if (/^\d+$/.test(prodType) &&
                         prodTypeNumber >= 0 &&
@@ -156,7 +170,7 @@ define(['N/https', 'N/record', 'N/search', 'N/runtime', 'N/log', 'N/format'],
 
                     // Mark discount lines
                     row['_pixelIsDiscountLine'] =
-                        (prodType == '100' || prodType == '101');
+                        (prodType == '100');
 
                     // Mark all rows belonging to discounted Pixel orders
                     row['_pixelHasDiscount'] =
@@ -166,6 +180,67 @@ define(['N/https', 'N/record', 'N/search', 'N/runtime', 'N/log', 'N/format'],
                 }
 
                 rows = processedRows;
+
+                // ----- Resolve Location and Brand For Grouping -----
+
+                var locationCache = {};
+
+                for (var i = 0; i < rows.length; i++) {
+
+                    try {
+
+                        var groupingSnum = trimSafe(rows[i]['SNUM']);
+
+                        if (!groupingSnum) {
+                            throw new Error(
+                                'SNUM is missing for Pixel transaction "' +
+                                trimSafe(rows[i]['TRANSACT']) + '".'
+                            );
+                        }
+
+                        if (!locationCache[groupingSnum]) {
+
+                            var groupingLocationData = findLocationByBranchId(groupingSnum);
+
+                            if (!groupingLocationData || !groupingLocationData.locationId) {
+                                throw new Error(
+                                    'Branch "' + trimSafe(rows[i]['Branch']) +
+                                    '" (SNUM: ' + groupingSnum +
+                                    ') is not mapped to any Location in NetSuite.'
+                                );
+                            }
+
+                            locationCache[groupingSnum] = {
+                                locationId: String(groupingLocationData.locationId),
+                                brandId: groupingLocationData.brandId
+                                    ? String(groupingLocationData.brandId)
+                                    : ''
+                            };
+
+                            log.audit('Grouping Location/Brand Resolved', {
+                                snum: groupingSnum,
+                                locationId: locationCache[groupingSnum].locationId,
+                                brandId: locationCache[groupingSnum].brandId
+                            });
+                        }
+
+                        rows[i]['_pixelLocationId'] =
+                            locationCache[groupingSnum].locationId;
+
+                        rows[i]['_pixelBrandId'] =
+                            locationCache[groupingSnum].brandId;
+
+                    } catch (groupingErr) {
+
+                        log.error('Grouping Location/Brand Error', {
+                            transact: trimSafe(rows[i]['TRANSACT']),
+                            snum: trimSafe(rows[i]['SNUM']),
+                            error: groupingErr.message || groupingErr
+                        });
+
+                        throw groupingErr;
+                    }
+                }
 
                 log.audit('PIXEL Rows After Filtering', {
                     totalRows: rows.length,
@@ -204,8 +279,16 @@ define(['N/https', 'N/record', 'N/search', 'N/runtime', 'N/log', 'N/format'],
                 var orderType = hasDiscount ? 'DISCOUNT' : 'NORMAL';
 
                 var snum = trimSafe(row['SNUM']);
+                var transact = trimSafe(row['TRANSACT']);
 
-                var key = payment + '|' + branch + '|' + snum + '|' + orderType;
+                var locationId = trimSafe(row['_pixelLocationId']);
+                var brandId = trimSafe(row['_pixelBrandId']);
+
+                var key = payment + '|' +
+                    locationId + '|' +
+                    brandId + '|' +
+                    orderType + '|' +
+                    (hasDiscount ? transact : 'GROUP');
 
                 log.debug('Pixel Order Grouping', {
                     transact: trimSafe(row['TRANSACT']),
@@ -234,24 +317,30 @@ define(['N/https', 'N/record', 'N/search', 'N/runtime', 'N/log', 'N/format'],
         function reduce(context) {
 
 
-            const parts = context.key.split('|');
-            const payment = trimSafe(parts[0]);
-            const branch = trimSafe(parts[1]);
-            const orderType = trimSafe(parts[3]);
+            var parts = context.key.split('|');
 
-            const hasDiscount = (orderType == 'DISCOUNT');
+            var payment = trimSafe(parts[0]);
+            var locationId = trimSafe(parts[1]);
+            var brandId = trimSafe(parts[2]);
+            var orderType = trimSafe(parts[3]);
+            var transact = trimSafe(parts[4]);
 
-            let soId = null;
-            let lineCount = 0;
-            let lineErrors = 0;
+            var hasDiscount = (orderType == 'DISCOUNT');
+
+            var soId = null;
+            var lineCount = 0;
+            var lineErrors = 0;
             var totalDiscount = 0;
+            var snum = '';
+            var branch = '';
 
             try {
 
-                const firstRow = JSON.parse(context.values[0]);
-                const snum = trimSafe(firstRow['SNUM']);
+                var firstRow = JSON.parse(context.values[0]);
 
-
+                snum = trimSafe(firstRow['SNUM']);
+                branch = trimSafe(firstRow['Branch']);
+                
                 // ----- Calculate Combined Discount -----
 
                 if (hasDiscount) {
@@ -365,6 +454,14 @@ define(['N/https', 'N/record', 'N/search', 'N/runtime', 'N/log', 'N/format'],
                     throw new Error('Payment Method is missing from source data.');
                 }
 
+                var paymentMethodId = findPaymentMethodId(payment);
+
+                if (!paymentMethodId) {
+                    throw new Error(
+                        'Payment Method "' + payment + '" was not found in NetSuite.'
+                    );
+                }
+
                 // validate mapping (important)
                 try {
                     so.setText({ fieldId: 'entity', text: payment });
@@ -378,7 +475,7 @@ define(['N/https', 'N/record', 'N/search', 'N/runtime', 'N/log', 'N/format'],
 
                 so.setText({ fieldId: 'entity', text: payment });
                 so.setValue({ fieldId: 'orderstatus', value: 'B' });
-                so.setText({ fieldId: 'custbody_ium_payment_method', text: payment });
+                so.setValue({ fieldId: 'custbody_ium_payment_method', value: Number(paymentMethodId) });
                 so.setText({ fieldId: 'custbody_ium_payment_mode', text: paymentModeText });
 
                 var locationData = findLocationByBranchId(snum);
@@ -596,7 +693,7 @@ define(['N/https', 'N/record', 'N/search', 'N/runtime', 'N/log', 'N/format'],
                 });
                 so.selectNewLine({ sublistId: 'recmachcustrecord_ium_payment_so' });
 
-                so.setCurrentSublistText({ sublistId: 'recmachcustrecord_ium_payment_so', fieldId: 'custrecord_ium_payment_method', text: payment });
+                so.setCurrentSublistValue({ sublistId: 'recmachcustrecord_ium_payment_so', fieldId: 'custrecord_ium_payment_method', value: Number(paymentMethodId) });
                 so.setCurrentSublistValue({ sublistId: 'recmachcustrecord_ium_payment_so', fieldId: 'custrecord_ium_oayment_amount', value: totalAmount });
 
                 so.commitLine({ sublistId: 'recmachcustrecord_ium_payment_so' });
@@ -667,6 +764,70 @@ define(['N/https', 'N/record', 'N/search', 'N/runtime', 'N/log', 'N/format'],
             }
 
             return data;
+        }
+
+        function findPaymentMethodId(paymentName) {
+
+            try {
+
+                var paymentTrim = trimSafe(paymentName);
+
+                if (!paymentTrim) {
+                    return null;
+                }
+
+                log.debug('Searching Payment Method', {
+                    apiPayment: paymentTrim
+                });
+
+                var paymentSearch = search.create({
+                    type: 'paymentmethod',
+                    filters: [
+                        ['name', 'is', paymentTrim]
+                    ],
+                    columns: [
+                        'internalid',
+                        'name'
+                    ]
+                });
+
+                var results = paymentSearch.run().getRange({
+                    start: 0,
+                    end: 100
+                });
+
+                for (var i = 0; i < results.length; i++) {
+
+                    var name = trimSafe(results[i].getValue('name'));
+                    var internalId = results[i].getValue('internalid');
+
+                    if (name.toLowerCase() == paymentTrim.toLowerCase()) {
+
+                        log.audit('Payment Method Found', {
+                            apiPayment: paymentTrim,
+                            netsuitePaymentMethod: name,
+                            internalId: internalId
+                        });
+
+                        return internalId;
+                    }
+                }
+
+                log.error('Payment Method Not Found', {
+                    apiPayment: paymentTrim
+                });
+
+                return null;
+
+            } catch (e) {
+
+                log.error('Payment Method Search Error', {
+                    payment: paymentName,
+                    error: e.message || e
+                });
+
+                throw e;
+            }
         }
 
         function findItemByUPC(upc) {

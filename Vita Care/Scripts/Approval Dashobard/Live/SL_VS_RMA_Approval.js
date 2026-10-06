@@ -3,7 +3,7 @@
  * @NScriptType Suitelet
  * @fileName SL || RMA Approval
  */
-define(['N/log', 'N/runtime', 'N/workflow'], function (log, runtime, workflow) {
+define(['N/log', 'N/runtime', 'N/workflow', 'N/search'], function (log, runtime, workflow, search) {
 
     /* =====================================================
      * WORKFLOW 373 — Workflow RMA Approval (Market Return) V2
@@ -32,8 +32,14 @@ define(['N/log', 'N/runtime', 'N/workflow'], function (log, runtime, workflow) {
         },
         'Non Wasfati ASM Riyadh': {
             users: {
-                502116: { approve: 'workflowaction2294', reject: 'workflowaction2295' },
-                190893: { approve: 'workflowaction2296', reject: 'workflowaction2297' }
+                502116: {
+                    approve: 'workflowaction2294', reject: 'workflowaction2295',
+                    regionRule: { notEquals: '2' }   // not Eastern
+                },
+                190893: {
+                    approve: 'workflowaction2296', reject: 'workflowaction2297',
+                    regionRule: { equals: '2' }      // Eastern only
+                }
             }
         },
         'SR Coordinator Riyadh': {
@@ -80,30 +86,51 @@ define(['N/log', 'N/runtime', 'N/workflow'], function (log, runtime, workflow) {
         }
     };
 
+    function isRegionAllowed(userEntry, regionText) {
+        if (!userEntry || !userEntry.regionRule) return true;
+        var region = (regionText || '').trim();
+        if (userEntry.regionRule.equals !== undefined) return region === userEntry.regionRule.equals;
+        if (userEntry.regionRule.notEquals !== undefined) return region !== userEntry.regionRule.notEquals;
+        return true;
+    }
+
+    function getRegionText(recordId) {
+        var f = search.lookupFields({
+            type: 'returnauthorization',
+            id: recordId,
+            columns: ['custbody_vs_region']
+        });
+        var v = f.custbody_vs_region;
+        // list field returns [{ value: '3', text: 'Western' }] or []
+        if (Array.isArray(v)) return v.length ? String(v[0].value) : '';
+        return v ? String(v) : '';
+    }
+
     /* =====================================================
      * RESOLVE ACTION for a 373 (V2) record — mirrors
      * vendor approval's resolveAction(): no stateId is
      * passed to workflow.trigger(), same as vendor.
      * actionType is one of 'approve' | 'reject' | 'approveBD'
      * ===================================================== */
-    function resolveActionV2(levelName, actionType, userId, roleId) {
+    function resolveActionV2(levelName, actionType, userId, roleId, recordId) {
         const shared = RMA_V2_SHARED_LEVELS[levelName];
         if (shared) {
             const authorized = shared.allowedUsers.indexOf(userId) !== -1;
             if (!authorized) return null;
-            // shared levels only support approve/reject, never the BD-request variant
             return actionType === 'approveBD' ? null : (shared[actionType] || null);
         }
 
         const perUser = RMA_V2_PERUSER_LEVELS[levelName];
         if (perUser) {
-
             const userEntry = perUser.users[userId];
             if (!userEntry) return null;
+
+            if (userEntry.regionRule && !isRegionAllowed(userEntry, getRegionText(recordId))) {
+                return null;
+            }
             return userEntry[actionType] || null;
         }
-
-        return null; // unknown level (e.g. 'Initial', or bad data)
+        return null;
     }
 
     function onRequest(context) {
@@ -174,7 +201,7 @@ define(['N/log', 'N/runtime', 'N/workflow'], function (log, runtime, workflow) {
                     });
 
                     try {
-                        var actionId = resolveActionV2(levelName, action, currentUserId, currentUserRole);
+                        var actionId = resolveActionV2(levelName, action, currentUserId, currentUserRole, recordId);
 
                         if (!actionId) {
                             throw new Error('You are not authorized to ' + action + ' this record at its current level (' + levelName + '), or that action is not available here.');
