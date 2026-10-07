@@ -5,367 +5,435 @@
  */
 
 define(['N/record', 'N/search', 'N/log'],
-function (record, search, log) {
+    function (record, search, log) {
 
-    function onRequest(context) {
-        try {
-
-            log.debug('START', 'Suitelet Triggered');
-
-            if (context.request.method != 'POST') {
-                context.response.write(JSON.stringify({
-                    success: false,
-                    message: 'Only POST allowed'
-                }));
-                return;
-            }
-
-            var body = context.request.body;
-            log.debug('Request Body', body);
-
-            var requestData = JSON.parse(body);
-
-            var soNumber = requestData.soNumber;
-            var items = requestData.items;
-
-            if (!soNumber || !items || !items.length) {
-                throw 'Missing required parameters';
-            }
-
-            // =====================================
-            // Map Item Name → Internal ID
-            // =====================================
-
-            var itemNameToIdMap = {};
-
+        function onRequest(context) {
             try {
 
-                var itemFilters = [];
+                log.debug('START', 'Suitelet Triggered');
+
+                if (context.request.method != 'POST') {
+                    context.response.write(JSON.stringify({
+                        success: false,
+                        message: 'Only POST allowed'
+                    }));
+                    return;
+                }
+
+                var body = context.request.body;
+                log.debug('Request Body', body);
+
+                var requestData = JSON.parse(body);
+
+                var soNumber = requestData.soNumber;
+                var items = requestData.items;
+
+                if (!soNumber || !items || !items.length) {
+                    throw 'Missing required parameters';
+                }
+
+                // =====================================
+                // Map Item Name → Internal ID
+                // =====================================
+
+                var itemNameToIdMap = {};
+
+                try {
+
+                    var itemFilters = [];
+
+                    for (var i = 0; i < items.length; i++) {
+
+                        if (i > 0) {
+                            itemFilters.push('OR');
+                        }
+
+                        itemFilters.push(['itemid', 'is', items[i].item]);
+                    }
+
+                    var itemSearch = search.create({
+                        type: search.Type.ITEM,
+                        filters: itemFilters,
+                        columns: ['internalid', 'itemid']
+                    });
+
+                    itemSearch.run().each(function (result) {
+
+                        var name = result.getValue('itemid');
+                        var id = result.getValue('internalid');
+
+                        itemNameToIdMap[name] = id;
+
+                        return true;
+                    });
+
+                    // log.debug('Item Map', itemNameToIdMap);
+
+                } catch (e) {
+                    log.error('Item Mapping Error', e);
+                    throw e;
+                }
+
+                // =====================================
+                // Get Sales Order Internal ID
+                // =====================================
+
+                var soSearch = search.create({
+                    type: search.Type.SALES_ORDER,
+                    filters: [['tranid', 'is', soNumber]],
+                    columns: ['internalid']
+                });
+
+                var soResult = soSearch.run().getRange({ start: 0, end: 1 });
+
+                if (!soResult || !soResult.length) {
+                    throw 'Sales Order not found';
+                }
+
+                var soId = soResult[0].getValue('internalid');
+                // log.debug('Sales Order ID', soId);
+
+                // =====================================
+                // Transform SO → Item Fulfillment
+                // =====================================
+
+                var ifRecord = record.transform({
+                    fromType: record.Type.SALES_ORDER,
+                    fromId: soId,
+                    toType: record.Type.ITEM_FULFILLMENT,
+                    isDynamic: true
+                });
+
+                ifRecord.setValue({
+                    fieldId: 'shipstatus',
+                    value: 'C'
+                });
+
+                log.debug('Item Fulfillment Created', 'Dynamic Mode');
+
+                // =====================================
+                // Collect All Lots
+                // =====================================
+
+                var allLotNumbers = [];
 
                 for (var i = 0; i < items.length; i++) {
 
-                    if (i > 0) {
-                        itemFilters.push('OR');
-                    }
+                    var invList = items[i].inventory;
 
-                    itemFilters.push(['itemid', 'is', items[i].item]);
-                }
+                    if (invList && invList.length) {
 
-                var itemSearch = search.create({
-                    type: search.Type.ITEM,
-                    filters: itemFilters,
-                    columns: ['internalid', 'itemid']
-                });
+                        for (var j = 0; j < invList.length; j++) {
 
-                itemSearch.run().each(function (result) {
+                            var lotNum = invList[j].receiptinventorynumber;
 
-                    var name = result.getValue('itemid');
-                    var id = result.getValue('internalid');
-
-                    itemNameToIdMap[name] = id;
-
-                    return true;
-                });
-
-                // log.debug('Item Map', itemNameToIdMap);
-
-            } catch (e) {
-                log.error('Item Mapping Error', e);
-                throw e;
-            }
-
-            // =====================================
-            // Get Sales Order Internal ID
-            // =====================================
-
-            var soSearch = search.create({
-                type: search.Type.SALES_ORDER,
-                filters: [['tranid', 'is', soNumber]],
-                columns: ['internalid']
-            });
-
-            var soResult = soSearch.run().getRange({ start: 0, end: 1 });
-
-            if (!soResult || !soResult.length) {
-                throw 'Sales Order not found';
-            }
-
-            var soId = soResult[0].getValue('internalid');
-            // log.debug('Sales Order ID', soId);
-
-            // =====================================
-            // Transform SO → Item Fulfillment
-            // =====================================
-
-            var ifRecord = record.transform({
-                fromType: record.Type.SALES_ORDER,
-                fromId: soId,
-                toType: record.Type.ITEM_FULFILLMENT,
-                isDynamic: true
-            });
-
-            ifRecord.setValue({
-                fieldId: 'shipstatus',
-                value: 'C'
-            });
-
-            log.debug('Item Fulfillment Created', 'Dynamic Mode');
-
-            // =====================================
-            // Collect All Lots
-            // =====================================
-
-            var allLotNumbers = [];
-
-            for (var i = 0; i < items.length; i++) {
-
-                var invList = items[i].inventory;
-
-                if (invList && invList.length) {
-
-                    for (var j = 0; j < invList.length; j++) {
-
-                        var lotNum = invList[j].receiptinventorynumber;
-
-                        if (allLotNumbers.indexOf(lotNum) == -1) {
-                            allLotNumbers.push(lotNum);
+                            if (allLotNumbers.indexOf(lotNum) == -1) {
+                                allLotNumbers.push(lotNum);
+                            }
                         }
                     }
                 }
-            }
 
-            // log.debug('All Lot Numbers', allLotNumbers);
+                // log.debug('All Lot Numbers', allLotNumbers);
 
-            // =====================================
-            // Build Item IDs for Lot Search
-            // =====================================
+                // =====================================
+                // Build Item IDs for Lot Search
+                // =====================================
 
-            var itemIds = [];
+                var itemIds = [];
 
-            for (var i = 0; i < items.length; i++) {
+                for (var i = 0; i < items.length; i++) {
 
-                var mappedId = itemNameToIdMap[items[i].item];
+                    var mappedId = itemNameToIdMap[items[i].item];
 
-                if (mappedId && itemIds.indexOf(mappedId) == -1) {
-                    itemIds.push(mappedId);
-                }
-            }
-
-            // =====================================
-            // Lot Search (FIXED)
-            // =====================================
-
-            var lotMap = {};
-
-            if (allLotNumbers.length) {
-
-                var lotFilters = [];
-
-                for (var i = 0; i < allLotNumbers.length; i++) {
-
-                    if (i > 0) {
-                        lotFilters.push('OR');
-                    }
-
-                    lotFilters.push(['inventorynumber', 'is', allLotNumbers[i]]);
-                }
-
-                if (itemIds.length) {
-                    lotFilters.push('AND');
-                    lotFilters.push(['item', 'anyof', itemIds]);
-                }
-
-                // log.debug('Lot Filters', JSON.stringify(lotFilters));
-
-                var lotSearch = search.create({
-                    type: 'inventorynumber',
-                    filters: lotFilters,
-                    columns: [
-                        'inventorynumber',
-                        'internalid',
-                        'item',
-                        'location'
-                    ]
-                });
-
-                lotSearch.run().each(function (result) {
-
-                    try {
-
-                        var lotName = result.getValue('inventorynumber');
-                        var lotInternalId = result.getValue('internalid');
-                        var itemId = result.getValue('item');
-                        var locationId = result.getValue('location');
-
-                        var key = itemId + '|' + lotName + '|' + locationId;
-
-                        lotMap[key] = lotInternalId;
-
-                        // log.debug('Lot Mapping', key);
-
-                        return true;
-
-                    } catch (innerErr) {
-                        log.error('Lot Mapping Error', innerErr);
-                        return true;
-                    }
-                });
-            }
-
-            // log.debug('Lot Map', lotMap);
-
-            // =====================================
-            // Process Lines
-            // =====================================
-
-            var lineCount = ifRecord.getLineCount({ sublistId: 'item' });
-            // log.debug('IF Line Count', lineCount);
-
-            for (var i = 0; i < lineCount; i++) {
-
-                ifRecord.selectLine({
-                    sublistId: 'item',
-                    line: i
-                });
-
-                var currentItem = ifRecord.getCurrentSublistValue({
-                    sublistId: 'item',
-                    fieldId: 'item'
-                });
-
-                var locationId = ifRecord.getCurrentSublistValue({
-                    sublistId: 'item',
-                    fieldId: 'location'
-                });
-
-                // log.debug('Processing Line', {
-                //     line: i,
-                //     item: currentItem,
-                //     location: locationId
-                // });
-
-                var jsonItem = null;
-
-                for (var j = 0; j < items.length; j++) {
-
-                    var mappedItemId = itemNameToIdMap[items[j].item];
-
-                    if (mappedItemId == currentItem) {
-                        jsonItem = items[j];
-                        break;
+                    if (mappedId && itemIds.indexOf(mappedId) == -1) {
+                        itemIds.push(mappedId);
                     }
                 }
 
-                if (!jsonItem) {
+                // =====================================
+                // Lot Search (FIXED)
+                // =====================================
 
-                    // log.debug('Skipping Line', 'No matching JSON item');
+                var lotMap = {};
+
+                if (allLotNumbers.length) {
+
+                    var lotFilters = [];
+
+                    for (var i = 0; i < allLotNumbers.length; i++) {
+
+                        if (i > 0) {
+                            lotFilters.push('OR');
+                        }
+
+                        lotFilters.push(['inventorynumber', 'is', allLotNumbers[i]]);
+                    }
+
+                    if (itemIds.length) {
+                        lotFilters.push('AND');
+                        lotFilters.push(['item', 'anyof', itemIds]);
+                    }
+
+                    // log.debug('Lot Filters', JSON.stringify(lotFilters));
+
+                    var lotSearch = search.create({
+                        type: 'inventorynumber',
+                        filters: lotFilters,
+                        columns: [
+                            'inventorynumber',
+                            'internalid',
+                            'item',
+                            'location',
+                            'quantityavailable'
+                        ]
+                    });
+
+                    lotSearch.run().each(function (result) {
+
+                        try {
+
+                            var lotName = result.getValue('inventorynumber');
+                            var lotInternalId = result.getValue('internalid');
+                            var itemId = result.getValue('item');
+                            var locationId = result.getValue('location');
+                            var quantityAvailable = parseFloat(result.getValue('quantityavailable')) || 0;
+
+                            var key = itemId + '|' + lotName + '|' + locationId;
+
+                            lotMap[key] = {
+                                internalId: lotInternalId,
+                                quantityAvailable: quantityAvailable
+                            };
+
+                            log.debug('Lot Mapping', {
+                                key: key,
+                                lotInternalId: lotInternalId,
+                                quantityAvailable: quantityAvailable
+                            });
+
+                            return true;
+
+                        } catch (innerErr) {
+                            log.error('Lot Mapping Error', innerErr);
+                            return true;
+                        }
+                    });
+                }
+
+                // log.debug('Lot Map', lotMap);
+
+                // =====================================
+                // Process Lines
+                // =====================================
+
+                var lineCount = ifRecord.getLineCount({ sublistId: 'item' });
+                // log.debug('IF Line Count', lineCount);
+
+                for (var i = 0; i < lineCount; i++) {
+
+                    ifRecord.selectLine({
+                        sublistId: 'item',
+                        line: i
+                    });
+
+                    var currentItem = ifRecord.getCurrentSublistValue({
+                        sublistId: 'item',
+                        fieldId: 'item'
+                    });
+
+                    var locationId = ifRecord.getCurrentSublistValue({
+                        sublistId: 'item',
+                        fieldId: 'location'
+                    });
+
+                    // log.debug('Processing Line', {
+                    //     line: i,
+                    //     item: currentItem,
+                    //     location: locationId
+                    // });
+
+                    var jsonItem = null;
+
+                    for (var j = 0; j < items.length; j++) {
+
+                        var mappedItemId = itemNameToIdMap[items[j].item];
+
+                        if (mappedItemId == currentItem) {
+                            jsonItem = items[j];
+                            break;
+                        }
+                    }
+
+                    if (!jsonItem) {
+
+                        // log.debug('Skipping Line', 'No matching JSON item');
+
+                        ifRecord.setCurrentSublistValue({
+                            sublistId: 'item',
+                            fieldId: 'itemreceive',
+                            value: false
+                        });
+
+                        ifRecord.commitLine({ sublistId: 'item' });
+                        continue;
+                    }
 
                     ifRecord.setCurrentSublistValue({
                         sublistId: 'item',
                         fieldId: 'itemreceive',
-                        value: false
+                        value: true
                     });
 
-                    ifRecord.commitLine({ sublistId: 'item' });
-                    continue;
-                }
-
-                ifRecord.setCurrentSublistValue({
-                    sublistId: 'item',
-                    fieldId: 'itemreceive',
-                    value: true
-                });
-
-                ifRecord.setCurrentSublistValue({
-                    sublistId: 'item',
-                    fieldId: 'quantity',
-                    value: jsonItem.quantity
-                });
-
-                var inventoryList = jsonItem.inventory;
-
-                if (inventoryList && inventoryList.length) {
-
-                    var inventoryDetail = ifRecord.getCurrentSublistSubrecord({
+                    ifRecord.setCurrentSublistValue({
                         sublistId: 'item',
-                        fieldId: 'inventorydetail'
+                        fieldId: 'quantity',
+                        value: jsonItem.quantity
                     });
 
-                    for (var k = 0; k < inventoryList.length; k++) {
+                    var inventoryList = jsonItem.inventory;
 
-                        var lotNumber = inventoryList[k].receiptinventorynumber;
+                    if (inventoryList && inventoryList.length) {
 
-                        var key = currentItem + '|' + lotNumber + '|' + locationId;
+                        var inventoryDetail = ifRecord.getCurrentSublistSubrecord({
+                            sublistId: 'item',
+                            fieldId: 'inventorydetail'
+                        });
 
-                        var lotInternalId = lotMap[key];
+                        for (var k = 0; k < inventoryList.length; k++) {
 
-                        // log.debug('Lot Resolution', {
-                        //     key: key,
-                        //     lotInternalId: lotInternalId
-                        // });
+                            var lotNumber = inventoryList[k].receiptinventorynumber;
 
-                        if (!lotInternalId) {
-                            throw 'Lot not valid for item/location: ' + lotNumber;
+                            var key = currentItem + '|' + lotNumber + '|' + locationId;
+
+                            var lotInfo = lotMap[key];
+
+                            if (!lotInfo) {
+                                throw 'Lot not valid for item/location: ' + lotNumber;
+                            }
+
+                            var lotInternalId = lotInfo.internalId;
+                            var requestedLotQuantity = parseFloat(inventoryList[k].quantity) || 0;
+
+                            log.debug('Lot Availability Check', {
+                                item: jsonItem.item,
+                                lotNumber: lotNumber,
+                                locationId: locationId,
+                                requestedQuantity: requestedLotQuantity,
+                                availableQuantity: lotInfo.quantityAvailable
+                            });
+
+                            if (requestedLotQuantity > lotInfo.quantityAvailable) {
+                                throw 'Insufficient inventory for Item: ' +
+                                jsonItem.item +
+                                ' | Lot: ' +
+                                lotNumber +
+                                ' | Requested: ' +
+                                requestedLotQuantity +
+                                ' | Available: ' +
+                                lotInfo.quantityAvailable;
+                            }
+
+                            inventoryDetail.selectNewLine({
+                                sublistId: 'inventoryassignment'
+                            });
+
+                            inventoryDetail.setCurrentSublistValue({
+                                sublistId: 'inventoryassignment',
+                                fieldId: 'issueinventorynumber',
+                                value: lotInternalId
+                            });
+
+                            inventoryDetail.setCurrentSublistValue({
+                                sublistId: 'inventoryassignment',
+                                fieldId: 'quantity',
+                                value: inventoryList[k].quantity
+                            });
+
+                            inventoryDetail.commitLine({
+                                sublistId: 'inventoryassignment'
+                            });
+
+                            // log.debug('Inventory Assigned', lotNumber);
                         }
+                    }
 
-                        inventoryDetail.selectNewLine({
-                            sublistId: 'inventoryassignment'
+                    try {
+
+                        log.debug('Before Item Line Commit', {
+                            line: i,
+                            itemInternalId: currentItem,
+                            item: jsonItem.item,
+                            requestedQuantity: jsonItem.quantity,
+                            locationId: locationId,
+                            inventory: inventoryList
                         });
 
-                        inventoryDetail.setCurrentSublistValue({
-                            sublistId: 'inventoryassignment',
-                            fieldId: 'issueinventorynumber',
-                            value: lotInternalId
+                        ifRecord.commitLine({
+                            sublistId: 'item'
                         });
 
-                        inventoryDetail.setCurrentSublistValue({
-                            sublistId: 'inventoryassignment',
-                            fieldId: 'quantity',
-                            value: inventoryList[k].quantity
+                        log.debug('Item Line Committed Successfully', {
+                            line: i,
+                            item: jsonItem.item,
+                            quantity: jsonItem.quantity
                         });
 
-                        inventoryDetail.commitLine({
-                            sublistId: 'inventoryassignment'
+                    } catch (commitError) {
+
+                        log.error('Item Fulfillment Line Commit Error', {
+                            line: i,
+                            itemInternalId: currentItem,
+                            item: jsonItem.item,
+                            requestedQuantity: jsonItem.quantity,
+                            locationId: locationId,
+                            inventory: inventoryList,
+                            errorName: commitError.name,
+                            errorMessage: commitError.message
                         });
 
-                        // log.debug('Inventory Assigned', lotNumber);
+                        throw 'Unable to fulfill item ' +
+                        jsonItem.item +
+                        ' | Requested Qty: ' +
+                        jsonItem.quantity +
+                        ' | Location: ' +
+                        locationId +
+                        ' | Inventory: ' +
+                        JSON.stringify(inventoryList) +
+                        ' | NetSuite Error: ' +
+                        commitError.message;
                     }
                 }
 
-                ifRecord.commitLine({
-                    sublistId: 'item'
+                // =====================================
+                // Save
+                // =====================================
+
+                var ifId = ifRecord.save({
+                    enableSourcing: true,
+                    ignoreMandatoryFields: false
                 });
+
+                // log.debug('Item Fulfillment Saved', ifId);
+
+                context.response.write(JSON.stringify({
+                    success: true,
+                    fulfillmentId: ifId
+                }));
+
+            } catch (e) {
+
+                log.error('ERROR', e);
+
+                context.response.write(JSON.stringify({
+                    success: false,
+                    message: e.toString()
+                }));
             }
-
-            // =====================================
-            // Save
-            // =====================================
-
-            var ifId = ifRecord.save({
-                enableSourcing: true,
-                ignoreMandatoryFields: false
-            });
-
-            // log.debug('Item Fulfillment Saved', ifId);
-
-            context.response.write(JSON.stringify({
-                success: true,
-                fulfillmentId: ifId
-            }));
-
-        } catch (e) {
-
-            log.error('ERROR', e);
-
-            context.response.write(JSON.stringify({
-                success: false,
-                message: e.toString()
-            }));
         }
-    }
 
-    return {
-        onRequest: onRequest
-    };
+        return {
+            onRequest: onRequest
+        };
 
-});
+    });
