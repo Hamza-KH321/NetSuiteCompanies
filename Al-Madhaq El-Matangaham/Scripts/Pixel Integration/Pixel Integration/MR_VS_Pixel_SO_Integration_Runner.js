@@ -340,7 +340,7 @@ define(['N/https', 'N/record', 'N/search', 'N/runtime', 'N/log', 'N/format'],
 
                 snum = trimSafe(firstRow['SNUM']);
                 branch = trimSafe(firstRow['Branch']);
-                
+
                 // ----- Calculate Combined Discount -----
 
                 if (hasDiscount) {
@@ -591,10 +591,19 @@ define(['N/https', 'N/record', 'N/search', 'N/runtime', 'N/log', 'N/format'],
                         }
 
                         refCode = trimSafe(row['REFCODE']);
+
                         const qty = toNumber(row['QUAN'], 0);
                         const taxAmt = toNumber(row['Tax_Amount'], 0);
-                        var rawRate = toNumber(row['Total_Excluding_Tax'], 0);
+                        var rawRate = toNumber(getRowValue(row, 'UNIT_PRICE'), 0);
                         var rate = rawRate < 0 ? 0 : rawRate;
+
+                        log.audit('Pixel Unit Price Applied', {
+                            transact: trimSafe(row['TRANSACT']),
+                            itemCode: trimSafe(row['REFCODE']),
+                            quantity: qty,
+                            unitPrice: rawRate,
+                            rateApplied: rate
+                        });
 
                         var itemName = trimSafe(row['Product_Name']) || 'Unknown Item';
 
