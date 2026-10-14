@@ -7,21 +7,21 @@ define(['N/https', 'N/record', 'N/search', 'N/runtime', 'N/log', 'N/format'],
     function (https, record, search, runtime, log, format) {
 
         // ----- Constants & Config -----
-        const PIXEL_FORM_ID = 117;
-        const PIXEL_SO_FLAG_FIELD = 'custbody_vs_pixel_transaction';
-        const PIXEL_ERROR_REC = 'customrecord_vs_pixel_integration_errors';
-        const PIXEL_ERR_DATE_FIELD = 'custrecord_vs_date_time_created';
-        const PIXEL_ERR_MSG_FIELD = 'custrecord_vs_error_message';
+        var PIXEL_FORM_ID = 117;
+        var PIXEL_SO_FLAG_FIELD = 'custbody_vs_pixel_transaction';
+        var PIXEL_ERROR_REC = 'customrecord_vs_pixel_integration_errors';
+        var PIXEL_ERR_DATE_FIELD = 'custrecord_vs_date_time_created';
+        var PIXEL_ERR_MSG_FIELD = 'custrecord_vs_error_message';
 
-        const TAX_CODE_TAXABLE_15 = 6;
-        const TAX_CODE_NON_TAXABLE_0 = 7;
+        var TAX_CODE_TAXABLE_15 = 6;
+        var TAX_CODE_NON_TAXABLE_0 = 7;
 
-        const FLD_TXN_NO = 'custcol_vs_pixel_transaction_no';
-        const FLD_CASHIER = 'custcol_vs_cashier_name';
-        const FLD_POS_ID = 'custcol_vs_pos_id';
-        const FLD_UNIQUEID = 'custcol_vs_unique_id';
+        var FLD_TXN_NO = 'custcol_vs_pixel_transaction_no';
+        var FLD_CASHIER = 'custcol_vs_cashier_name';
+        var FLD_POS_ID = 'custcol_vs_pos_id';
+        var FLD_UNIQUEID = 'custcol_vs_unique_id';
 
-        const trimSafe = function (v) {
+        var trimSafe = function (v) {
             return (v == null) ? '' : String(v).trim();
         };
 
@@ -67,13 +67,13 @@ define(['N/https', 'N/record', 'N/search', 'N/runtime', 'N/log', 'N/format'],
 
                 log.audit('PIXEL Fetch', urlParam);
 
-                const resp = https.get({ url: urlParam });
+                var resp = https.get({ url: urlParam });
 
                 if (resp.code < 200 || resp.code >= 300) {
                     throw new Error('API call failed. HTTP ' + resp.code);
                 }
 
-                const csv = resp.body || '';
+                var csv = resp.body || '';
                 var rows = parseCSV(csv);
 
                 log.audit('PIXEL Parsed Rows Before Filter', rows.length);
@@ -571,10 +571,10 @@ define(['N/https', 'N/record', 'N/search', 'N/runtime', 'N/log', 'N/format'],
                 }
 
 
-                for (let i = 0; i < context.values.length; i++) {
+                for (var k = 0; k < context.values.length; k++) {
 
-                    const row = JSON.parse(context.values[i]);
-                    let refCode = '';
+                    var row = JSON.parse(context.values[k]);
+                    var refCode = '';
 
                     try {
 
@@ -592,17 +592,27 @@ define(['N/https', 'N/record', 'N/search', 'N/runtime', 'N/log', 'N/format'],
 
                         refCode = trimSafe(row['REFCODE']);
 
-                        const qty = toNumber(row['QUAN'], 0);
-                        const taxAmt = toNumber(row['Tax_Amount'], 0);
+                        var qty = toNumber(row['QUAN'], 0);
+
+                        // Line tax amount comes directly from the API column Tax_Amount
+                        var taxAmt = toNumber(getRowValue(row, 'Tax_Amount'), 0);
+                        taxAmt = Math.round(taxAmt * 100) / 100;
+
                         var rawRate = toNumber(getRowValue(row, 'UNIT_PRICE'), 0);
                         var rate = rawRate < 0 ? 0 : rawRate;
+
+                        // Line gross amount (incl. tax) comes directly from the API column Total_Including_Tax
+                        var lineGross = toNumber(getRowValue(row, 'Total_Including_Tax'), 0);
+                        lineGross = Math.round(lineGross * 100) / 100;
 
                         log.audit('Pixel Unit Price Applied', {
                             transact: trimSafe(row['TRANSACT']),
                             itemCode: trimSafe(row['REFCODE']),
                             quantity: qty,
                             unitPrice: rawRate,
-                            rateApplied: rate
+                            rateApplied: rate,
+                            taxAmountFromApi: taxAmt,
+                            grossAmountFromApi: lineGross
                         });
 
                         var itemName = trimSafe(row['Product_Name']) || 'Unknown Item';
@@ -628,13 +638,56 @@ define(['N/https', 'N/record', 'N/search', 'N/runtime', 'N/log', 'N/format'],
 
                         so.selectNewLine({ sublistId: 'item' });
 
+                        // 1) Item + Quantity
                         so.setCurrentSublistValue({ sublistId: 'item', fieldId: 'item', value: Number(itemId) });
                         so.setCurrentSublistValue({ sublistId: 'item', fieldId: 'quantity', value: qty });
+
+                        // 2) Rate (UNIT_PRICE, excluding tax)
                         so.setCurrentSublistValue({ sublistId: 'item', fieldId: 'rate', value: rate });
 
-                        const taxCodeId = taxAmt > 0 ? TAX_CODE_TAXABLE_15 : TAX_CODE_NON_TAXABLE_0;
+                        // 3) Tax code first (it triggers a tax recalculation)
+                        var taxCodeId = taxAmt > 0 ? TAX_CODE_TAXABLE_15 : TAX_CODE_NON_TAXABLE_0;
 
                         so.setCurrentSublistValue({ sublistId: 'item', fieldId: 'taxcode', value: taxCodeId });
+
+                        // 4) Line amount from API (Total_Including_Tax) -> Gross Amt column
+                        so.setCurrentSublistValue({ sublistId: 'item', fieldId: 'grossamt', value: lineGross });
+
+                        // 5) Tax amount from API (Tax_Amount) overrides the calculated tax
+                        if (taxAmt > 0) {
+                            so.setCurrentSublistValue({ sublistId: 'item', fieldId: 'tax1amt', value: taxAmt });
+                        }
+
+                        // 6) Read back and compare with the API numbers
+                        var nsGross = Number(so.getCurrentSublistValue({ sublistId: 'item', fieldId: 'grossamt' })) || 0;
+                        var nsTax = Number(so.getCurrentSublistValue({ sublistId: 'item', fieldId: 'tax1amt' })) || 0;
+                        var nsAmount = Number(so.getCurrentSublistValue({ sublistId: 'item', fieldId: 'amount' })) || 0;
+
+                        var grossDiff = Math.round((nsGross - lineGross) * 100) / 100;
+                        var taxDiff = Math.round((nsTax - taxAmt) * 100) / 100;
+
+                        log.audit('Pixel Line Amounts Applied', {
+                            transact: trimSafe(row['TRANSACT']),
+                            itemCode: refCode,
+                            quantity: qty,
+                            rate: rate,
+                            taxCodeId: taxCodeId,
+                            apiGross: lineGross,
+                            apiTax: taxAmt,
+                            nsAmount: nsAmount,
+                            nsTax: nsTax,
+                            nsGross: nsGross
+                        });
+
+                        if (Math.abs(grossDiff) > 0.01 || Math.abs(taxDiff) > 0.01) {
+                            log.error('Pixel Line Amount Mismatch', {
+                                transact: trimSafe(row['TRANSACT']),
+                                itemCode: refCode,
+                                grossDiff: grossDiff,
+                                taxDiff: taxDiff
+                            });
+                        }
+
                         so.setCurrentSublistValue({ sublistId: 'item', fieldId: FLD_TXN_NO, value: trimSafe(row['TRANSACT']) });
                         so.setCurrentSublistValue({ sublistId: 'item', fieldId: FLD_CASHIER, value: trimSafe(row['Cashier_Name']) });
                         so.setCurrentSublistValue({ sublistId: 'item', fieldId: FLD_POS_ID, value: trimSafe(row['POS']) });
@@ -729,19 +782,19 @@ define(['N/https', 'N/record', 'N/search', 'N/runtime', 'N/log', 'N/format'],
 
         function parseCSV(csvText) {
 
-            const rows = [];
-            let i = 0, field = '', row = [], inQuotes = false;
+            var rows = [];
+            var i = 0, field = '', row = [], inQuotes = false;
 
             function pushField() { row.push(field); field = ''; }
             function pushRow() { rows.push(row); row = []; }
 
             while (i < csvText.length) {
 
-                const c = csvText[i];
+                var c = csvText[i];
 
                 if (inQuotes) {
                     if (c == '"') {
-                        const next = csvText[i + 1];
+                        var next = csvText[i + 1];
                         if (next == '"') { field += '"'; i += 2; continue; }
                         inQuotes = false; i++; continue;
                     }
@@ -761,13 +814,13 @@ define(['N/https', 'N/record', 'N/search', 'N/runtime', 'N/log', 'N/format'],
 
             if (rows.length == 0) return [];
 
-            const header = rows[0].map(function (h) { return trimSafe(h); });
-            const data = [];
+            var header = rows[0].map(function (h) { return trimSafe(h); });
+            var data = [];
 
-            for (let r = 1; r < rows.length; r++) {
-                const obj = {};
-                for (let c = 0; c < header.length; c++) {
-                    obj[header[c]] = rows[r][c] != null ? String(rows[r][c]) : '';
+            for (var r = 1; r < rows.length; r++) {
+                var obj = {};
+                for (var col = 0; col < header.length; col++) {
+                    obj[header[col]] = rows[r][col] != null ? String(rows[r][col]) : '';
                 }
                 data.push(obj);
             }
@@ -841,16 +894,16 @@ define(['N/https', 'N/record', 'N/search', 'N/runtime', 'N/log', 'N/format'],
 
         function findItemByUPC(upc) {
 
-            const upcTrim = trimSafe(upc);
+            var upcTrim = trimSafe(upc);
             if (!upcTrim) return null;
 
-            const s = search.create({
+            var s = search.create({
                 type: 'item',
                 filters: [['upccode', 'is', upcTrim]],
                 columns: ['internalid']
             });
 
-            const res = s.run().getRange({ start: 0, end: 1 });
+            var res = s.run().getRange({ start: 0, end: 1 });
 
             if (res && res.length) {
                 return res[0].getValue('internalid');
@@ -925,8 +978,8 @@ define(['N/https', 'N/record', 'N/search', 'N/runtime', 'N/log', 'N/format'],
         }
 
         function toNumber(x, fallback) {
-            const n = parseFloat(String(x).replace(/,/g, ''));
-            return Number.isFinite(n) ? n : fallback;
+            var n = parseFloat(String(x).replace(/,/g, ''));
+            return isFinite(n) ? n : fallback;
         }
 
         function convertApiDate(apiDate) {
@@ -966,7 +1019,7 @@ define(['N/https', 'N/record', 'N/search', 'N/runtime', 'N/log', 'N/format'],
 
             try {
 
-                const recId = record.create({
+                var recId = record.create({
                     type: PIXEL_ERROR_REC
                 }).setValue({
                     fieldId: PIXEL_ERR_DATE_FIELD,
