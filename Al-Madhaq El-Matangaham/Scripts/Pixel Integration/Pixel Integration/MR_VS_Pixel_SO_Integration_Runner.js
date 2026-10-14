@@ -276,6 +276,7 @@ define(['N/https', 'N/record', 'N/search', 'N/runtime', 'N/log', 'N/format'],
                 var branch = trimSafe(row['Branch']);
                 var hasDiscount = row['_pixelHasDiscount'] == true;
 
+
                 var orderType = hasDiscount ? 'DISCOUNT' : 'NORMAL';
 
                 var snum = trimSafe(row['SNUM']);
@@ -288,7 +289,7 @@ define(['N/https', 'N/record', 'N/search', 'N/runtime', 'N/log', 'N/format'],
                     locationId + '|' +
                     brandId + '|' +
                     orderType + '|' +
-                    (hasDiscount ? transact : 'GROUP');
+                    'GROUP';
 
                 log.debug('Pixel Order Grouping', {
                     transact: trimSafe(row['TRANSACT']),
