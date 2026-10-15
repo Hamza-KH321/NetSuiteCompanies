@@ -4,8 +4,10 @@
  * @fileName SL || Pixel Sales Report Download
  */
 
-define(['N/ui/serverWidget', 'N/https', 'N/log', 'N/file'],
-    function (serverWidget, https, log, file) {
+define(['N/ui/serverWidget', 'N/log'],
+    function (serverWidget, log) {
+
+        var API_BASE = 'https://eoi.wecreatives.agency/api/HQEOI/DownloadSalesReport';
 
         function onRequest(context) {
             try {
@@ -52,49 +54,45 @@ define(['N/ui/serverWidget', 'N/https', 'N/log', 'N/file'],
 
                     log.debug('Formatted Dates', formattedFrom + ' - ' + formattedTo);
 
-                    var apiUrl =
-                        'https://eoi.wecreatives.agency/api/HQEOI/DownloadSalesReport?fromDate='
-                        + formattedFrom +
-                        '&toDate=' +
-                        formattedTo;
+                    var apiUrl = API_BASE
+                        + '?fromDate=' + encodeURIComponent(formattedFrom)
+                        + '&toDate=' + encodeURIComponent(formattedTo);
 
                     log.debug('API URL', apiUrl);
 
-                    var response = https.get({
-                        url: apiUrl
-                    });
+                    // The CSV can exceed NetSuite's 10 MB in-memory limit, so the
+                    // user's browser downloads it directly from the API instead of
+                    // routing the data through this Suitelet.
+                    var html =
+                        '<!DOCTYPE html>' +
+                        '<html><head><meta charset="utf-8"><title>Pixel Sales Report</title></head>' +
+                        '<body style="font-family:Arial,Helvetica,sans-serif;padding:24px;">' +
+                        '<h3>Pixel Sales Report</h3>' +
+                        '<p>Period: ' + escapeHtml(formattedFrom) + ' to ' + escapeHtml(formattedTo) + '</p>' +
+                        '<p>Your download should start automatically.</p>' +
+                        '<p><a href="' + escapeHtml(apiUrl) + '">Click here if it does not start.</a></p>' +
+                        '<p><a href="javascript:history.back()">&larr; Back</a></p>' +
+                        '<script>' +
+                        'window.location.href = ' + JSON.stringify(apiUrl).replace(/</g, '\\u003c') + ';' +
+                        '</script>' +
+                        '</body></html>';
 
-                    if (response.code < 200 || response.code >= 300) {
-                        throw new Error('API Call Failed. HTTP Code: ' + response.code);
-                    }
-
-                    var csvContent = response.body || '';
-
-                    log.debug('CSV Length', csvContent.length);
-
-                    var fileName =
-                        'Pixel_Sales_Report_' +
-                        formattedFrom +
-                        '_to_' +
-                        formattedTo +
-                        '.csv';
-
-                    var csvFile = file.create({
-                        name: fileName,
-                        fileType: file.Type.CSV,
-                        contents: csvContent
-                    });
-
-                    context.response.writeFile({
-                        file: csvFile,
-                        isInline: false
-                    });
+                    context.response.write(html);
                 }
 
             } catch (e) {
                 log.error('Suitelet Error', e);
                 context.response.write('Error: ' + e.message);
             }
+        }
+
+        function escapeHtml(str) {
+            return String(str)
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;')
+                .replace(/'/g, '&#39;');
         }
 
         function convertDateFormat(dateStr) {

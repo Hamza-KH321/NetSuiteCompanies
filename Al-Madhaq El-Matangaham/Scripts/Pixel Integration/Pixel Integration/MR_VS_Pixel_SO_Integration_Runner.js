@@ -21,30 +21,22 @@ define(['N/https', 'N/record', 'N/search', 'N/runtime', 'N/log', 'N/format'],
         var FLD_POS_ID = 'custcol_vs_pos_id';
         var FLD_UNIQUEID = 'custcol_vs_unique_id';
 
+        // Header aliases (normalized header -> canonical key used in the code).
+        // Replaces the old getRowValue() lookup: matching is now done once per CSV header.
+        var HEADER_ALIASES = {
+            'transact': 'TRANSACT',
+            'prodtype': 'prodtype',
+            'prodty': 'prodtype',
+            'totalincludingtax': 'Total_Including_Tax',
+            'totalexcludingtax': 'Total_Excluding_Tax',
+            'taxamount': 'Tax_Amount',
+            'unitprice': 'UNIT_PRICE'
+        };
+
         var trimSafe = function (v) {
             return (v == null) ? '' : String(v).trim();
         };
 
-
-        function getRowValue(row, fieldName) {
-            var keys = Object.keys(row || {});
-            var target = String(fieldName).toLowerCase().replace(/[^a-z0-9]/g, '');
-
-            for (var i = 0; i < keys.length; i++) {
-                var current = String(keys[i]).toLowerCase().replace(/[^a-z0-9]/g, '');
-
-                if (current == target) {
-                    return row[keys[i]];
-                }
-
-                // Support PRODTY if that is the actual API header
-                if (target == 'prodtype' && current == 'prodty') {
-                    return row[keys[i]];
-                }
-            }
-
-            return '';
-        }
         function getInputData() {
 
             try {
@@ -110,14 +102,14 @@ define(['N/https', 'N/record', 'N/search', 'N/runtime', 'N/log', 'N/format'],
 
                 for (var i = 0; i < rows.length; i++) {
 
-                    var rowTransact = trimSafe(getRowValue(rows[i], 'TRANSACT'));
-                    var prodType = trimSafe(getRowValue(rows[i], 'prodtype'));
+                    var rowTransact = trimSafe(rows[i]['TRANSACT']);
+                    var prodType = trimSafe(rows[i]['prodtype']);
 
                     if (prodType == '100' && rowTransact) {
 
                         discountTransacts[rowTransact] = true;
 
-                        log.audit('Discount Order Identified', {
+                        log.debug('Discount Order Identified', {
                             transact: rowTransact,
                             prodType: prodType
                         });
@@ -132,16 +124,16 @@ define(['N/https', 'N/record', 'N/search', 'N/runtime', 'N/log', 'N/format'],
 
                     var row = rows[i];
 
-                    var prodType = trimSafe(getRowValue(row, 'prodtype'));
-                    var transact = trimSafe(getRowValue(row, 'TRANSACT'));
-                    var amount = toNumber(getRowValue(row, 'Total_Including_Tax'), 0);
+                    var prodType = trimSafe(row['prodtype']);
+                    var transact = trimSafe(row['TRANSACT']);
+                    var amount = toNumber(row['Total_Including_Tax'], 0);
 
                     var prodTypeNumber = parseInt(prodType, 10);
 
                     // Ignore prodtype 101 completely
                     if (prodType == '101') {
 
-                        log.audit('Prodtype 101 Ignored', {
+                        log.debug('Prodtype 101 Ignored', {
                             transact: transact,
                             prodType: prodType,
                             amount: amount,
@@ -158,7 +150,7 @@ define(['N/https', 'N/record', 'N/search', 'N/runtime', 'N/log', 'N/format'],
                         prodTypeNumber <= 12 &&
                         amount < 0) {
 
-                        log.audit('Negative Line Ignored', {
+                        log.debug('Negative Line Ignored', {
                             transact: transact,
                             prodType: prodType,
                             amount: amount,
@@ -181,9 +173,10 @@ define(['N/https', 'N/record', 'N/search', 'N/runtime', 'N/log', 'N/format'],
 
                 rows = processedRows;
 
-                // ----- Resolve Location and Brand For Grouping -----
+                // ----- Resolve Location, Brand and Payment Method For Grouping -----
 
                 var locationCache = {};
+                var paymentMethodCache = {};
 
                 for (var i = 0; i < rows.length; i++) {
 
@@ -217,7 +210,7 @@ define(['N/https', 'N/record', 'N/search', 'N/runtime', 'N/log', 'N/format'],
                                     : ''
                             };
 
-                            log.audit('Grouping Location/Brand Resolved', {
+                            log.debug('Grouping Location/Brand Resolved', {
                                 snum: groupingSnum,
                                 locationId: locationCache[groupingSnum].locationId,
                                 brandId: locationCache[groupingSnum].brandId
@@ -239,6 +232,25 @@ define(['N/https', 'N/record', 'N/search', 'N/runtime', 'N/log', 'N/format'],
                         });
 
                         throw groupingErr;
+                    }
+
+                    // Payment method id, resolved once per distinct payment name.
+                    // If it cannot be resolved here, reduce() falls back to its own lookup
+                    // and reports the same error per group as before.
+                    var rowPayment = trimSafe(rows[i]['Payment_Method']);
+
+                    if (rowPayment) {
+
+                        if (!paymentMethodCache.hasOwnProperty(rowPayment)) {
+
+                            try {
+                                paymentMethodCache[rowPayment] = findPaymentMethodId(rowPayment) || '';
+                            } catch (pmErr) {
+                                paymentMethodCache[rowPayment] = '';
+                            }
+                        }
+
+                        rows[i]['_pixelPaymentMethodId'] = paymentMethodCache[rowPayment];
                     }
                 }
 
@@ -279,9 +291,6 @@ define(['N/https', 'N/record', 'N/search', 'N/runtime', 'N/log', 'N/format'],
 
                 var orderType = hasDiscount ? 'DISCOUNT' : 'NORMAL';
 
-                var snum = trimSafe(row['SNUM']);
-                var transact = trimSafe(row['TRANSACT']);
-
                 var locationId = trimSafe(row['_pixelLocationId']);
                 var brandId = trimSafe(row['_pixelBrandId']);
 
@@ -317,14 +326,12 @@ define(['N/https', 'N/record', 'N/search', 'N/runtime', 'N/log', 'N/format'],
 
         function reduce(context) {
 
-
             var parts = context.key.split('|');
 
             var payment = trimSafe(parts[0]);
             var locationId = trimSafe(parts[1]);
             var brandId = trimSafe(parts[2]);
             var orderType = trimSafe(parts[3]);
-            var transact = trimSafe(parts[4]);
 
             var hasDiscount = (orderType == 'DISCOUNT');
 
@@ -332,97 +339,122 @@ define(['N/https', 'N/record', 'N/search', 'N/runtime', 'N/log', 'N/format'],
             var lineCount = 0;
             var lineErrors = 0;
             var totalDiscount = 0;
+            var expectedGross = 0;
             var snum = '';
             var branch = '';
 
             try {
 
-                var firstRow = JSON.parse(context.values[0]);
+                // ----- Parse every value ONCE -----
+
+                var rows = [];
+
+                for (var p = 0; p < context.values.length; p++) {
+                    rows.push(JSON.parse(context.values[p]));
+                }
+
+                var firstRow = rows[0];
 
                 snum = trimSafe(firstRow['SNUM']);
                 branch = trimSafe(firstRow['Branch']);
 
-                // ----- Calculate Combined Discount -----
+                // ----- Single pass: combined discount + REFCODE validation + UPC list -----
 
-                if (hasDiscount) {
+                var upcList = [];
+                var upcSeen = {};
 
-                    for (var d = 0; d < context.values.length; d++) {
+                for (var v = 0; v < rows.length; v++) {
 
-                        var discountRow = JSON.parse(context.values[d]);
+                    var vRow = rows[v];
 
-                        if (discountRow['_pixelIsDiscountLine'] == true) {
+                    if (vRow['_pixelIsDiscountLine'] == true) {
 
-                            var discountAmount = toNumber(
-                                getRowValue(discountRow, 'Total_Including_Tax'),
-                                0
-                            );
+                        if (hasDiscount) {
+
+                            var discountAmount = toNumber(vRow['Total_Excluding_Tax'], 0);
+
+                            log.debug('Discount Amount Collected', {
+                                transact: trimSafe(vRow['TRANSACT']),
+                                prodType: vRow['prodtype'],
+                                totalExcludingTax: discountAmount,
+                                totalIncludingTax: vRow['Total_Including_Tax']
+                            });
 
                             // API already provides discount as negative
                             totalDiscount += discountAmount;
-
-                            log.debug('Discount Amount Collected', {
-                                transact: trimSafe(discountRow['TRANSACT']),
-                                prodType: getRowValue(discountRow, 'prodtype'),
-                                amount: discountAmount,
-                                totalDiscount: totalDiscount
-                            });
                         }
+
+                        // Discount lines are skipped from item validation and item lookup
+                        continue;
                     }
+
+                    var validationRefCode = trimSafe(vRow['REFCODE']);
+
+                    if (!validationRefCode) {
+
+                        var validationItemName = trimSafe(vRow['Product_Name']) || 'Unknown Item';
+
+                        var validationErr = new Error(
+                            'Sales Order stopped. REFCODE is empty. ' +
+                            'Product: "' + validationItemName + '"' +
+                            ' | Payment: "' + payment + '"' +
+                            ' | Branch: "' + branch + '"' +
+                            ' | SNUM: "' + snum + '"'
+                        );
+
+                        log.error('REFCODE Validation Error', validationErr);
+                        throw validationErr;
+                    }
+
+                    if (!upcSeen[validationRefCode]) {
+                        upcSeen[validationRefCode] = true;
+                        upcList.push(validationRefCode);
+                    }
+                }
+
+                if (hasDiscount) {
 
                     totalDiscount = Math.round(totalDiscount * 100) / 100;
 
-                    log.audit('Combined Discount Calculated', {
+                    log.debug('Combined Discount Calculated', {
                         payment: payment,
                         branch: branch,
                         totalDiscount: totalDiscount
                     });
                 }
 
-                // ----- Validate All REFCODE Values Before Creating Sales Order -----
-
-                for (var v = 0; v < context.values.length; v++) {
-
-                    try {
-
-
-                        var validationRow = JSON.parse(context.values[v]);
-
-                        // Skip discount lines from item validation
-                        if (validationRow['_pixelIsDiscountLine'] == true) {
-
-                            log.debug('Discount Line Skipped in Validation', {
-                                transact: trimSafe(validationRow['TRANSACT']),
-                                prodType: getRowValue(validationRow, 'prodtype')
-                            });
-
-                            continue;
-                        }
-
-                        var validationRefCode = trimSafe(validationRow['REFCODE']);
-                        var validationItemName = trimSafe(validationRow['Product_Name']) || 'Unknown Item';
-                        if (!validationRefCode) {
-
-                            throw new Error(
-                                'Sales Order stopped. REFCODE is empty. ' +
-                                'Product: "' + validationItemName + '"' +
-                                ' | Payment: "' + payment + '"' +
-                                ' | Branch: "' + branch + '"' +
-                                ' | SNUM: "' + snum + '"'
-                            );
-                        }
-
-                    } catch (validationErr) {
-
-                        log.error('REFCODE Validation Error', validationErr);
-                        throw validationErr;
-                    }
-                }
-
-                log.audit('REFCODE Validation Passed', {
+                log.debug('REFCODE Validation Passed', {
                     payment: payment,
                     branch: branch,
-                    lineCount: context.values.length
+                    lineCount: rows.length
                 });
+
+                // ----- Validate header data BEFORE creating the record -----
+
+                if (!payment) {
+                    throw new Error('Payment Method is missing from source data.');
+                }
+
+                if (!locationId) {
+                    throw new Error(
+                        'Branch "' + branch + '" (SNUM: ' + snum + ') is not mapped to any Location in NetSuite.'
+                    );
+                }
+
+                // Payment method id was resolved once in getInputData; fall back to a lookup if missing
+                var paymentMethodId = trimSafe(firstRow['_pixelPaymentMethodId']);
+
+                if (!paymentMethodId) {
+                    paymentMethodId = findPaymentMethodId(payment);
+                }
+
+                if (!paymentMethodId) {
+                    throw new Error(
+                        'Payment Method "' + payment + '" was not found in NetSuite.'
+                    );
+                }
+
+                // ----- Create Sales Order -----
 
                 var so = record.create({
                     type: record.Type.SALES_ORDER,
@@ -444,29 +476,17 @@ define(['N/https', 'N/record', 'N/search', 'N/runtime', 'N/log', 'N/format'],
                         so.setText({ fieldId: 'trandate', text: formattedTranDate });
 
                     } else {
-                        log.audit('OPENDATE Missing', 'Using system default date.');
+                        log.debug('OPENDATE Missing', 'Using system default date.');
                     }
 
                 } catch (dateErr) {
                     log.error('Error Setting Transaction Date', dateErr);
                 }
 
-                if (!payment) {
-                    throw new Error('Payment Method is missing from source data.');
-                }
-
-                var paymentMethodId = findPaymentMethodId(payment);
-
-                if (!paymentMethodId) {
-                    throw new Error(
-                        'Payment Method "' + payment + '" was not found in NetSuite.'
-                    );
-                }
-
-                // validate mapping (important)
+                // Set customer ONCE (also validates the payment -> customer mapping)
                 try {
                     so.setText({ fieldId: 'entity', text: payment });
-                } catch (e) {
+                } catch (entityErr) {
                     throw new Error(
                         'Payment Method "' + payment + '" is not mapped to any Customer in NetSuite.'
                     );
@@ -474,66 +494,39 @@ define(['N/https', 'N/record', 'N/search', 'N/runtime', 'N/log', 'N/format'],
 
                 var paymentModeText = (payment.toLowerCase() == 'cash') ? 'Paid' : 'Credit';
 
-                so.setText({ fieldId: 'entity', text: payment });
                 so.setValue({ fieldId: 'orderstatus', value: 'B' });
                 so.setValue({ fieldId: 'custbody_ium_payment_method', value: Number(paymentMethodId) });
                 so.setText({ fieldId: 'custbody_ium_payment_mode', text: paymentModeText });
 
-                var locationData = findLocationByBranchId(snum);
+                // Location / brand come from the group key (already resolved in getInputData)
+                so.setValue({
+                    fieldId: 'location',
+                    value: Number(locationId)
+                });
 
-                if (locationData && locationData.locationId) {
+                if (brandId) {
 
                     so.setValue({
-                        fieldId: 'location',
-                        value: Number(locationData.locationId)
+                        fieldId: 'class',
+                        value: Number(brandId)
                     });
 
-                    if (locationData.brandId) {
-
-                        so.setValue({
-                            fieldId: 'class',
-                            value: Number(locationData.brandId)
-                        });
-
-                        log.audit('Location Brand Applied', {
-                            locationId: locationData.locationId,
-                            brandId: locationData.brandId,
-                            salesOrderField: 'class'
-                        });
-
-                    } else {
-
-                        log.audit('Location Brand Missing', {
-                            locationId: locationData.locationId,
-                            branch: branch,
-                            snum: snum
-                        });
-                    }
+                    log.debug('Location Brand Applied', {
+                        locationId: locationId,
+                        brandId: brandId,
+                        salesOrderField: 'class'
+                    });
 
                 } else {
 
-                    throw new Error(
-                        'Branch "' + branch + '" (SNUM: ' + snum + ') is not mapped to any Location in NetSuite.'
-                    );
+                    log.debug('Location Brand Missing', {
+                        locationId: locationId,
+                        branch: branch,
+                        snum: snum
+                    });
                 }
 
-
-                var upcList = [];
-
-                for (var i = 0; i < context.values.length; i++) {
-
-                    var rowObj = JSON.parse(context.values[i]);
-
-                    if (rowObj['_pixelIsDiscountLine'] == true) {
-                        continue;
-                    }
-
-                    var code = trimSafe(rowObj['REFCODE']);
-
-                    if (code && upcList.indexOf(code) == -1) {
-                        upcList.push(code);
-                    }
-                }
+                // ----- Item lookup by UPC -----
 
                 var itemCache = {};
 
@@ -571,23 +564,17 @@ define(['N/https', 'N/record', 'N/search', 'N/runtime', 'N/log', 'N/format'],
                     log.debug('Item Cache Built', Object.keys(itemCache).length);
                 }
 
+                // ----- Item lines -----
 
-                for (var k = 0; k < context.values.length; k++) {
+                for (var k = 0; k < rows.length; k++) {
 
-                    var row = JSON.parse(context.values[k]);
+                    var row = rows[k];
                     var refCode = '';
 
                     try {
 
                         // Do not create discount lines as items
                         if (row['_pixelIsDiscountLine'] == true) {
-
-                            log.debug('Discount Line Excluded from Items', {
-                                transact: trimSafe(row['TRANSACT']),
-                                prodType: getRowValue(row, 'prodtype'),
-                                amount: getRowValue(row, 'Total_Including_Tax')
-                            });
-
                             continue;
                         }
 
@@ -596,25 +583,15 @@ define(['N/https', 'N/record', 'N/search', 'N/runtime', 'N/log', 'N/format'],
                         var qty = toNumber(row['QUAN'], 0);
 
                         // Line tax amount comes directly from the API column Tax_Amount
-                        var taxAmt = toNumber(getRowValue(row, 'Tax_Amount'), 0);
+                        var taxAmt = toNumber(row['Tax_Amount'], 0);
                         taxAmt = Math.round(taxAmt * 100) / 100;
 
-                        var rawRate = toNumber(getRowValue(row, 'UNIT_PRICE'), 0);
+                        var rawRate = toNumber(row['UNIT_PRICE'], 0);
                         var rate = rawRate < 0 ? 0 : rawRate;
 
                         // Line gross amount (incl. tax) comes directly from the API column Total_Including_Tax
-                        var lineGross = toNumber(getRowValue(row, 'Total_Including_Tax'), 0);
+                        var lineGross = toNumber(row['Total_Including_Tax'], 0);
                         lineGross = Math.round(lineGross * 100) / 100;
-
-                        log.audit('Pixel Unit Price Applied', {
-                            transact: trimSafe(row['TRANSACT']),
-                            itemCode: trimSafe(row['REFCODE']),
-                            quantity: qty,
-                            unitPrice: rawRate,
-                            rateApplied: rate,
-                            taxAmountFromApi: taxAmt,
-                            grossAmountFromApi: lineGross
-                        });
 
                         var itemName = trimSafe(row['Product_Name']) || 'Unknown Item';
 
@@ -659,36 +636,6 @@ define(['N/https', 'N/record', 'N/search', 'N/runtime', 'N/log', 'N/format'],
                             so.setCurrentSublistValue({ sublistId: 'item', fieldId: 'tax1amt', value: taxAmt });
                         }
 
-                        // 6) Read back and compare with the API numbers
-                        var nsGross = Number(so.getCurrentSublistValue({ sublistId: 'item', fieldId: 'grossamt' })) || 0;
-                        var nsTax = Number(so.getCurrentSublistValue({ sublistId: 'item', fieldId: 'tax1amt' })) || 0;
-                        var nsAmount = Number(so.getCurrentSublistValue({ sublistId: 'item', fieldId: 'amount' })) || 0;
-
-                        var grossDiff = Math.round((nsGross - lineGross) * 100) / 100;
-                        var taxDiff = Math.round((nsTax - taxAmt) * 100) / 100;
-
-                        log.audit('Pixel Line Amounts Applied', {
-                            transact: trimSafe(row['TRANSACT']),
-                            itemCode: refCode,
-                            quantity: qty,
-                            rate: rate,
-                            taxCodeId: taxCodeId,
-                            apiGross: lineGross,
-                            apiTax: taxAmt,
-                            nsAmount: nsAmount,
-                            nsTax: nsTax,
-                            nsGross: nsGross
-                        });
-
-                        if (Math.abs(grossDiff) > 0.01 || Math.abs(taxDiff) > 0.01) {
-                            log.error('Pixel Line Amount Mismatch', {
-                                transact: trimSafe(row['TRANSACT']),
-                                itemCode: refCode,
-                                grossDiff: grossDiff,
-                                taxDiff: taxDiff
-                            });
-                        }
-
                         so.setCurrentSublistValue({ sublistId: 'item', fieldId: FLD_TXN_NO, value: trimSafe(row['TRANSACT']) });
                         so.setCurrentSublistValue({ sublistId: 'item', fieldId: FLD_CASHIER, value: trimSafe(row['Cashier_Name']) });
                         so.setCurrentSublistValue({ sublistId: 'item', fieldId: FLD_POS_ID, value: trimSafe(row['POS']) });
@@ -699,6 +646,7 @@ define(['N/https', 'N/record', 'N/search', 'N/runtime', 'N/log', 'N/format'],
                         so.commitLine({ sublistId: 'item' });
 
                         lineCount++;
+                        expectedGross += lineGross;
 
                     } catch (lineErr) {
 
@@ -734,7 +682,7 @@ define(['N/https', 'N/record', 'N/search', 'N/runtime', 'N/log', 'N/format'],
                             value: totalDiscount
                         });
 
-                        log.audit('Header Discount Applied', {
+                        log.debug('Header Discount Applied', {
                             discountItem: 7480,
                             discountRate: totalDiscount,
                             payment: payment,
@@ -743,7 +691,7 @@ define(['N/https', 'N/record', 'N/search', 'N/runtime', 'N/log', 'N/format'],
 
                     } else {
 
-                        log.audit('No Negative Discount Amount', {
+                        log.debug('No Negative Discount Amount', {
                             payment: payment,
                             branch: branch,
                             totalDiscount: totalDiscount
@@ -754,6 +702,24 @@ define(['N/https', 'N/record', 'N/search', 'N/runtime', 'N/log', 'N/format'],
                 var totalAmount = so.getValue({
                     fieldId: 'total'
                 });
+
+                // Group-level sanity check (replaces the old per-line read-back).
+                // Only meaningful when there is no header discount.
+                if (!hasDiscount) {
+
+                    expectedGross = Math.round(expectedGross * 100) / 100;
+
+                    if (Math.abs(Number(totalAmount) - expectedGross) > 0.05) {
+                        log.error('Pixel SO Total Mismatch', {
+                            payment: payment,
+                            branch: branch,
+                            apiGrossTotal: expectedGross,
+                            nsTotal: totalAmount,
+                            lineCount: lineCount
+                        });
+                    }
+                }
+
                 so.selectNewLine({ sublistId: 'recmachcustrecord_ium_payment_so' });
 
                 so.setCurrentSublistValue({ sublistId: 'recmachcustrecord_ium_payment_so', fieldId: 'custrecord_ium_payment_method', value: Number(paymentMethodId) });
@@ -816,12 +782,25 @@ define(['N/https', 'N/record', 'N/search', 'N/runtime', 'N/log', 'N/format'],
             if (rows.length == 0) return [];
 
             var header = rows[0].map(function (h) { return trimSafe(h); });
+
+            // Normalize headers ONCE: work out which canonical alias (if any) each column maps to
+            var headerAlias = header.map(function (h) {
+                var norm = String(h).toLowerCase().replace(/[^a-z0-9]/g, '');
+                var alias = HEADER_ALIASES[norm];
+                return (alias && alias !== h) ? alias : null;
+            });
+
             var data = [];
 
             for (var r = 1; r < rows.length; r++) {
                 var obj = {};
                 for (var col = 0; col < header.length; col++) {
-                    obj[header[col]] = rows[r][col] != null ? String(rows[r][col]) : '';
+                    var val = rows[r][col] != null ? String(rows[r][col]) : '';
+                    obj[header[col]] = val;
+
+                    if (headerAlias[col] && obj[headerAlias[col]] === undefined) {
+                        obj[headerAlias[col]] = val;
+                    }
                 }
                 data.push(obj);
             }
@@ -866,7 +845,7 @@ define(['N/https', 'N/record', 'N/search', 'N/runtime', 'N/log', 'N/format'],
 
                     if (name.toLowerCase() == paymentTrim.toLowerCase()) {
 
-                        log.audit('Payment Method Found', {
+                        log.debug('Payment Method Found', {
                             apiPayment: paymentTrim,
                             netsuitePaymentMethod: name,
                             internalId: internalId
