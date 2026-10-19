@@ -10,6 +10,9 @@ define(['N/runtime', 'N/search', 'N/ui/serverWidget', 'N/log'],
         var ALLOWED_USER_IDS = [434250, 392873, 453643];
         var ALLOWED_ROLE_ID = 3; // Administrator
 
+        // Set to true to show the "Fill Remaining Quantity" button again (for the allowed users)
+        var SHOW_FILL_REMAINING_BUTTON = false;
+
         // Checkbox body field on the RMA, set by the "Fill Remaining Quantity" button
         var FLAG_FIELD = 'custbody_vs_fill_remaining_qty';
 
@@ -55,11 +58,13 @@ define(['N/runtime', 'N/search', 'N/ui/serverWidget', 'N/log'],
                     functionName: 'deleteZeroItems'
                 });
 
-                scriptContext.form.addButton({
-                    id: 'custpage_btn_fill_remaining_qty',
-                    label: 'Fill Remaining Quantity',
-                    functionName: 'fillRemainingQuantity'
-                });
+                if (SHOW_FILL_REMAINING_BUTTON) {
+                    scriptContext.form.addButton({
+                        id: 'custpage_btn_fill_remaining_qty',
+                        label: 'Fill Remaining Quantity',
+                        functionName: 'fillRemainingQuantity'
+                    });
+                }
             } catch (e) {
                 log.error('beforeLoad - Delete Zero Items button', e);
             }
