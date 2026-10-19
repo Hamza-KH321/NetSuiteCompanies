@@ -37,6 +37,11 @@ define(['N/record', 'N/search', 'N/log'],
                 // =====================================
 
                 var itemNameToIdMap = {};
+                var itemDisplayNameMap = {};
+                var currentErrorItem = {
+                    sku: '',
+                    productName: ''
+                };
 
                 try {
 
@@ -54,16 +59,23 @@ define(['N/record', 'N/search', 'N/log'],
                     var itemSearch = search.create({
                         type: search.Type.ITEM,
                         filters: itemFilters,
-                        columns: ['internalid', 'itemid']
+                        columns: ['internalid', 'itemid', 'displayname']
                     });
 
                     itemSearch.run().each(function (result) {
 
                         var name = result.getValue('itemid');
                         var id = result.getValue('internalid');
+                        var displayName = result.getValue('displayname') || name;
 
                         itemNameToIdMap[name] = id;
+                        itemDisplayNameMap[name] = displayName;
 
+                        log.debug('Item Details Mapped', {
+                            sku: name,
+                            productName: displayName,
+                            internalId: id
+                        });
                         return true;
                     });
 
@@ -279,6 +291,13 @@ define(['N/record', 'N/search', 'N/log'],
                         continue;
                     }
 
+                    currentErrorItem = {
+                        sku: jsonItem.item,
+                        productName: itemDisplayNameMap[jsonItem.item] || jsonItem.item
+                    };
+
+                    log.debug('Current Fulfillment Item', currentErrorItem);
+
                     ifRecord.setCurrentSublistValue({
                         sublistId: 'item',
                         fieldId: 'itemreceive',
@@ -421,15 +440,28 @@ define(['N/record', 'N/search', 'N/log'],
                     fulfillmentId: ifId
                 }));
 
+
             } catch (e) {
 
-                log.error('ERROR', e);
+                var errorMessage = e.message || e.toString();
+
+                log.error('Item Fulfillment Error', {
+                    sku: currentErrorItem.sku,
+                    productName: currentErrorItem.productName,
+                    reason: errorMessage,
+                    error: e
+                });
 
                 context.response.write(JSON.stringify({
                     success: false,
-                    message: e.toString()
+                    errors: [{
+                        sku: currentErrorItem.sku || 'N/A',
+                        productName: currentErrorItem.productName || 'N/A',
+                        reason: errorMessage
+                    }]
                 }));
             }
+
         }
 
         return {

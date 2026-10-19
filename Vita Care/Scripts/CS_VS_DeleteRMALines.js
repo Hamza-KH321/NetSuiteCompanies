@@ -1,18 +1,11 @@
 /**
- * @NApiVersion 2.0
+ * @NApiVersion 2.1
  * @NScriptType ClientScript
  * @NModuleScope SameAccount
  */
 define(['N/log', 'N/currentRecord'],
     function(log, currentRecord) {
        
-        /**
-         * Function definition to be triggered before record is saved.
-         *
-         * @param {Object} scriptContext
-         * @param {Record} scriptContext.currentRecord - Current record
-         * @Since 2015.2
-         */
         function saveRecord(scriptContext) {
             try {
                 var transactionRecord = currentRecord.get();
@@ -37,7 +30,7 @@ define(['N/log', 'N/currentRecord'],
                 }
                 return true;
             } catch (error) {
-                log.error('ERRORRRRRRRR!!' , error);
+                log.error('ERROR' , error);
             }
         }
     
