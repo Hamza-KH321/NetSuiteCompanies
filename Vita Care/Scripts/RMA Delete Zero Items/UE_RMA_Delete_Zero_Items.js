@@ -7,7 +7,7 @@
 define(['N/runtime', 'N/search', 'N/ui/serverWidget', 'N/log'],
     function (runtime, search, serverWidget, log) {
 
-        var ALLOWED_USER_IDS = [434250, 392873, 453643];
+        var ALLOWED_USER_IDS = [434250, 392873, 453643, 411999];
         var ALLOWED_ROLE_ID = 3; // Administrator
 
         // Set to true to show the "Fill Remaining Quantity" button again (for the allowed users)
