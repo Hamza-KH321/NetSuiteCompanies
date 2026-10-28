@@ -2,6 +2,7 @@
  * @NApiVersion 2.1
  * @NScriptType UserEventScript
  * @NModuleScope SameAccount
+ * @fileName UE || Check Multiple Brands Sample Request
  */
 define(['N/record'], function (record) {
 
@@ -38,6 +39,7 @@ define(['N/record'], function (record) {
         var urgoClasses = [6, 18]; // URGO and Vashe
         var hoClasses = [10]; // H.O
         var flnClasses = [16, 17]; // U.F and Flen
+        var VasheClasses = [19]; // Vashe
 
         // Function to check if any class value exists in a specific group
         function containsClass(classArray) {
@@ -55,6 +57,7 @@ define(['N/record'], function (record) {
         var hasURGO = containsClass(urgoClasses);
         var hasHO = containsClass(hoClasses);
         var hasFln = containsClass(flnClasses);
+        var hasVashe = containsClass(VasheClasses);
 
         // Set checkboxes based on class values
         newRecord.setValue({ fieldId: 'custrecord_vs_cgw_brand', value: hasCGW });
@@ -62,6 +65,7 @@ define(['N/record'], function (record) {
         newRecord.setValue({ fieldId: 'custrecord_vs_urgo_brand', value: hasURGO });
         newRecord.setValue({ fieldId: 'custrecord_vs_ho_brand', value: hasHO });
         newRecord.setValue({ fieldId: 'custrecord_vs_flen_brand', value: hasFln });
+        newRecord.setValue({ fieldId: 'custrecord_vs_vashe_brand', value: hasVashe });
 
         // Set "approved" checkboxes if the brand is NOT found
         newRecord.setValue({ fieldId: 'custrecord_vs_cgw_approved', value: !hasCGW });
@@ -69,6 +73,7 @@ define(['N/record'], function (record) {
         newRecord.setValue({ fieldId: 'custrecord_vs_urgo_approved', value: !hasURGO });
         newRecord.setValue({ fieldId: 'custrecord_vs_ho_approved', value: !hasHO });
         newRecord.setValue({ fieldId: 'custrecord_vs_flen_approved', value: !hasFln });
+        newRecord.setValue({ fieldId: 'custrecord_vs_vashe_approved', value: !hasVashe });
     }
 
     return {

@@ -4,6 +4,7 @@
  * @NModuleScope SameAccount
  * @fileName UE || Check Multiple Brands
  */
+
 define(['N/record'], function (record) {
 
     function beforeSubmit(context) {
@@ -41,6 +42,7 @@ define(['N/record'], function (record) {
         var urgoClasses = [6, 18]; // URGO and Vashe
         var hoClasses = [10]; // H.O
         var flnClasses = [16, 17]; // U.F and Flen
+        var VasheClasses = [19]; // Vashe
 
         // Function to check if any class value exists in a specific group
         function containsClass(classArray) {
@@ -58,6 +60,7 @@ define(['N/record'], function (record) {
         var hasURGO = containsClass(urgoClasses);
         var hasHO = containsClass(hoClasses);
         var hasflen = containsClass(flnClasses);
+        var hasVashe = containsClass(VasheClasses);
 
         log.debug('Brand Check:',
             {
@@ -66,6 +69,7 @@ define(['N/record'], function (record) {
                 hasURGO: hasURGO,
                 hasHO: hasHO,
                 hasflen: hasflen,
+                hasVashe: hasVashe,
             }
         );
 
@@ -75,6 +79,7 @@ define(['N/record'], function (record) {
         newRecord.setValue({ fieldId: 'custbody_vs_urgo_brand', value: hasURGO });
         newRecord.setValue({ fieldId: 'custbody_vs_ho_brand', value: hasHO });
         newRecord.setValue({ fieldId: 'custbody_vs_flen_brand', value: hasflen });
+        newRecord.setValue({ fieldId: 'custbody_vs_vashe_brand', value: hasVashe });
 
         // Set "approved" checkboxes if the brand is NOT found
         newRecord.setValue({ fieldId: 'custbody_vs_cgw_approved', value: !hasCGW });
@@ -82,6 +87,7 @@ define(['N/record'], function (record) {
         newRecord.setValue({ fieldId: 'custbody_vs_urgo_approved', value: !hasURGO });
         newRecord.setValue({ fieldId: 'custbody_vs_ho_approved', value: !hasHO });
         newRecord.setValue({ fieldId: 'custbody_vs_flen_approved', value: !hasflen });
+        newRecord.setValue({ fieldId: 'custbody_vs_vashe_approved', value: !hasVashe });
 
     }
 
