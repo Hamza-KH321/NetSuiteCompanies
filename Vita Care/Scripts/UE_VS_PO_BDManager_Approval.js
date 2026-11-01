@@ -35,18 +35,18 @@ define(['N/log', 'N/search'], function (log, search) {
             var bdManagers = [];
 
             if (location == 2 || location == 17) { // Jeddah and Smart basket jeddah WH
-                if (poClassType === 'Non Pharma') bdManagers = [209120, 425160]; // 425160 ahmad saleh , 379964 Rawan, 
-                else if (poClassType === 'Pharma') bdManagers = [146766]; // sheta 146766
-                else if (poClassType === 'Medical') bdManagers = [421041]; // E-149 Omar Bakr 421041
-                else if (poClassType === 'Animal Health') bdManagers = [501399];
-                else if (poClassType === 'Private Label') bdManagers = [209120];
+                if (poClassType == 'Non Pharma') bdManagers = [209120, 425160]; // 425160 ahmad saleh , 379964 Rawan, 
+                else if (poClassType == 'Pharma') bdManagers = [146766]; // sheta 146766
+                else if (poClassType == 'Medical') bdManagers = [421041]; // E-149 Omar Bakr 421041
+                else if (poClassType == 'Animal Health') bdManagers = [501399];
+                else if (poClassType == 'Private Label') bdManagers = [209120];
             }
             else if (location == 1) { // Riyadh
-                if (poClassType === 'Non Pharma' || poClassType === 'Pharma' || poClassType === 'Medical') {
+                if (poClassType == 'Non Pharma' || poClassType == 'Pharma' || poClassType == 'Medical') {
                     bdManagers = [374756]; // Sameh Alshafei 425366, Sarah Alassar 374756, ahmad saleh 425160
                 }
-                else if (poClassType === 'Animal Health') bdManagers = [501399];
-                else if (poClassType === 'Private Lable') bdManagers = [209120];
+                else if (poClassType == 'Animal Health') bdManagers = [501399];
+                else if (poClassType == 'Private Label') bdManagers = [209120];
             }
 
             // ===========================
