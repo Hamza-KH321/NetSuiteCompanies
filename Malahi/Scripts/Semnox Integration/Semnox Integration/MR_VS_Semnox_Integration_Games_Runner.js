@@ -182,7 +182,7 @@ define(['N/record', 'N/search', 'N/file', 'N/format', 'N/runtime', 'N/log'],
                     if (isNaN(amt)) amt = 0;
 
                     var profile = clean(r[idx.profile]);
-                    if (CONFIG.ALLOWED_GAME_PROFILES.indexOf(norm(profile)) === -1) { skippedProfile++; continue; }
+                    if (CONFIG.ALLOWED_GAME_PROFILES.indexOf(norm(profile)) === -1) { skippedProfile++; continue; } // Remove this line to use all items in the report
 
                     var pm = clean(r[idx.pm]);
                     var loc = clean(r[idx.loc]);
