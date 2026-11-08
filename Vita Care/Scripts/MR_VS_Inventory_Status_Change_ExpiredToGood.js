@@ -17,7 +17,9 @@ define(['N/record', 'N/search', 'N/runtime', 'N/log'], function (record, search,
                         "AND",
                         ["formulatext: CASE WHEN FLOOR({inventorynumber.expirationdate} - {today}) > 90  THEN 'T' ELSE 'F' END", "is", "T"],
                         "AND",
-                        ["formulatext: {item.class}", "startswith", "Medical"]
+                        ["formulatext: {item.class}", "startswith", "Medical"],
+                        "AND",
+                        ["location", "anyof", "2", "1"] // Jeddah and Riyadh
                         // "AND",
                         // ["item", "anyof", "1090"]
                     ],

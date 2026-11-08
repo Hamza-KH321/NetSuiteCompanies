@@ -1,6 +1,7 @@
 /**
  * @NApiVersion 2.1
  * @NScriptType MapReduceScript
+ * @fileName MR || Inv Stat Change Damage/Quar to Exp
  */
 define(['N/record', 'N/search', 'N/runtime', 'N/log'], function (record, search, runtime, log) {
     function getInputData() {
@@ -13,7 +14,9 @@ define(['N/record', 'N/search', 'N/runtime', 'N/log'], function (record, search,
                     "AND",
                     ["item.isinactive", "is", "F"],
                     "AND",
-                    ["formulatext: case when FLOOR({inventorynumber.expirationdate} - {today}) <= 90 then 'T' else 'F' END", "is", "T"]
+                    ["formulatext: case when FLOOR({inventorynumber.expirationdate} - {today}) <= 90 then 'T' else 'F' END", "is", "T"],
+                    "AND",
+                    ["location", "anyof", "2", "1"] // Jeddah and Riyadh
                 ],
                 columns: [
                     search.createColumn({ name: "item" }),

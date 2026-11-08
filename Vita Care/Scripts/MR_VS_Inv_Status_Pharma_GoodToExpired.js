@@ -27,6 +27,8 @@ define(['N/record', 'N/search', 'N/runtime', 'N/log'], function (record, search,
                     ["formulatext: CASE WHEN {location} = {inventorynumber.location} then 'T' ELSE 'F' END", "is", "T"],
                     "AND",
                     [["formulatext: {item.class}", "startswith", "Pharma"], "OR", ["formulatext: {item.class}", "startswith", "Non Pharma"]],
+                    "AND",
+                    ["location", "anyof", "2", "1"] // Jeddah and Riyadh
 
                     // "AND",
                     // ["item", "anyof", "1170", "1061", "2242", "3335"],

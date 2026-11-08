@@ -1,6 +1,7 @@
 /**
  * @NApiVersion 2.1
  * @NScriptType MapReduceScript
+ * @fileName MR || Animal Inv Stat Good to Expired
  */
 define(['N/record', 'N/search', 'N/runtime', 'N/log'], function (record, search, runtime, log) {
     function getInputData() {
@@ -16,7 +17,9 @@ define(['N/record', 'N/search', 'N/runtime', 'N/log'], function (record, search,
                         "AND",
                         ["formulatext: case when FLOOR({inventorynumber.expirationdate} - {today}) <= 15 then 'T' else 'F' END", "is", "T"],
                         "AND",
-                        ["formulatext: {item.class}", "startswith", "Animal"] // Animal Items
+                        ["formulatext: {item.class}", "startswith", "Animal"],
+                        "AND",
+                        ["location", "anyof", "2", "1"] // Jeddah and Riyadh
                     ],
                 columns:
                     [
