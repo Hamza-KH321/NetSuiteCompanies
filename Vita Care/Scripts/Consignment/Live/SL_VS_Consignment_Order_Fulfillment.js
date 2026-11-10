@@ -7,8 +7,47 @@
 define(['N/record', 'N/search', 'N/log'],
     function (record, search, log) {
 
+        function getErrorMessage(e) {
+            try {
+
+                if (e == null) {
+                    return 'Unknown error: Empty error object';
+                }
+
+                if (typeof e == 'string') {
+                    return e;
+                }
+
+                if (e.message && typeof e.message == 'string') {
+                    return e.message;
+                }
+
+                if (e.name && typeof e.name == 'string') {
+                    return e.name;
+                }
+
+                var errorJson = JSON.stringify(e);
+
+                if (errorJson && errorJson != '{}') {
+                    return errorJson;
+                }
+
+                return String(e);
+
+            } catch (error) {
+                return 'Unable to extract error message: ' + String(error);
+            }
+        }
+
         function onRequest(context) {
             try {
+
+                var currentErrorItem = {
+                    sku: '',
+                    productName: ''
+                };
+
+                var soNumber = '';
 
                 log.debug('START', 'Suitelet Triggered');
 
@@ -38,10 +77,6 @@ define(['N/record', 'N/search', 'N/log'],
 
                 var itemNameToIdMap = {};
                 var itemDisplayNameMap = {};
-                var currentErrorItem = {
-                    sku: '',
-                    productName: ''
-                };
 
                 try {
 
@@ -441,26 +476,34 @@ define(['N/record', 'N/search', 'N/log'],
                 }));
 
 
+
             } catch (e) {
 
-                var errorMessage = e.message || e.toString();
+                var errorMessage = getErrorMessage(e);
 
-                log.error('Item Fulfillment Error', {
-                    sku: currentErrorItem.sku,
-                    productName: currentErrorItem.productName,
-                    reason: errorMessage,
-                    error: e
+                var errorDetails = {
+                    salesOrder: soNumber || 'N/A',
+                    sku: currentErrorItem.sku || 'N/A',
+                    productName: currentErrorItem.productName || 'N/A',
+                    errorName: e && e.name ? String(e.name) : 'UNKNOWN',
+                    errorMessage: errorMessage
+                };
+
+                log.error({
+                    title: 'Item Fulfillment Error',
+                    details: JSON.stringify(errorDetails)
                 });
 
                 context.response.write(JSON.stringify({
                     success: false,
                     errors: [{
-                        sku: currentErrorItem.sku || 'N/A',
-                        productName: currentErrorItem.productName || 'N/A',
+                        sku: errorDetails.sku,
+                        productName: errorDetails.productName,
                         reason: errorMessage
                     }]
                 }));
             }
+
 
         }
 

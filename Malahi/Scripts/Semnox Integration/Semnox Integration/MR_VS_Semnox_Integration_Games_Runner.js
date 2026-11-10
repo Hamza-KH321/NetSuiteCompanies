@@ -3,18 +3,26 @@
  * @NScriptType MapReduceScript
  * @fileName MR || Semnox Integration Games Runner
  */
-define(['N/record', 'N/search', 'N/file', 'N/format', 'N/runtime', 'N/log'],
-    function (record, search, file, format, runtime, log) {
+define(['N/sftp', 'N/record', 'N/search', 'N/format', 'N/runtime', 'N/log'],
+    function (sftp, record, search, format, runtime, log) {
 
         // ===================== CONFIG =====================
         var CONFIG = {
             CUSTOM_FORM: 115,
             APPROVAL_STATUS_APPROVED: 2,
             SYSTEM_SEMNOX: 1,
-            ALLOWED_GAME_PROFILES: ['time based'],   // lower-case; only Time Based for now
             ERROR_RECORD: 'customrecord_vs_semnox_errors',
             FILE_PREFIX: 'Malahi_Games_Report_',     // + DDMMYY + .csv
-            FILE_EXT: '.csv'
+            FILE_EXT: '.csv',
+            SFTP_URL: 's-058b76ee20b54b28a.server.transfer.ap-southeast-1.amazonaws.com',
+            SFTP_PORT: 22,
+            SFTP_USERNAME: 'mudassir',
+            SFTP_PASSWORD_GUID: 'custsecret_vs_semnox_password',
+            SFTP_HOST_KEY: 'AAAAB3NzaC1yc2EAAAADAQABAAACAQC1EXWmDzbwdW1UZC9I3sZhZsyQVQ6GQzNm4gIg7uDxbwfjGnEw8TjiHkJkfpX36PJ0pCVX7wW3ycI8z6LjPZ7ATUjiaMgxG6pamd4PZieBtQdzjr9UltnnhwY3fdUnWR+mBj57Lwr74WvXaGQPfuO0AdLy6MtVZP1QKwf9Va8Is97Ys9UdHrgcElOciHk3X5p6JPNp04c6pn8Lauf/T7qQ6uBZR0cN7q2hhlVLTCDZmzJwxZQm+PyJcKZT755SBZ4CaP/7iRR8qWuMu58DtFCqwxP9zboCEs7ECMPbA3fGKAgDkOVWD6EfUsB74YaKfX4Nra3+/Lye2cZzf75TEG59kjg8Ao8+FikYyx3CZEOY+A/8Y/1dUBIZXPoQUgVgw8HmaS6fzUyh8l7D8zkroxM3KeI8p+REZs8cLpy/hZY1w9kUUVlN2jMbWMODZg7ooS+FWoaURjZ34RYQvkXwDwgaXwtHKN+67NHjJqEIi5gbWbgwAI0Bt7VNkdTeBfONmk/tO+3CwZNAeI9v0x+OiT7bIvY7T4vLOaxPUKC+oJOwcEZxrfjDXoOIL6C1bcG1sFDuxtH3gHMqWpIg+Ejkl36+jNnQpWg+F2MLoMgtOtGR2NFFmFCh+X/dwvruuUVXP9OzoY9VNWbIRracMWrgOJA2d9MOfvobmdY2MwnBRLXZkQ==',
+            SFTP_DIR: '/malahi-semnox-sftp',
+            SFTP_FILE_FOLDER: '/netsuiteOracle',
+            ITEM_PARENT_ID: '950',                    // internal id of the parent item "Semnox item"
+            ITEM_NAME_PREFIX: 'Semnox item :'         // removed from the item name before matching
         };
 
         // ===================== HELPERS =====================
@@ -73,7 +81,18 @@ define(['N/record', 'N/search', 'N/file', 'N/format', 'N/runtime', 'N/log'],
             return rows;
         }
 
-        /** Finds the CSV in the File Cabinet by name: Malahi_Games_Report_DDMMYY.csv */
+        function connectSftp() {
+            return sftp.createConnection({
+                url: CONFIG.SFTP_URL,
+                port: CONFIG.SFTP_PORT,
+                username: CONFIG.SFTP_USERNAME,
+                passwordGuid: CONFIG.SFTP_PASSWORD_GUID,
+                hostKey: CONFIG.SFTP_HOST_KEY,
+                directory: CONFIG.SFTP_DIR
+            });
+        }
+
+        /** Downloads the CSV from the SFTP server by name: Malahi_Games_Report_DDMMYY.csv */
         function getCsvFile(reportDateParam) {
             var d = format.parse({ value: reportDateParam, type: format.Type.DATE });
             var dd = ('0' + d.getDate()).slice(-2);
@@ -81,21 +100,22 @@ define(['N/record', 'N/search', 'N/file', 'N/format', 'N/runtime', 'N/log'],
             var yy = String(d.getFullYear()).slice(-2);
             var fileName = CONFIG.FILE_PREFIX + dd + mm + yy + CONFIG.FILE_EXT;
 
-            var fileId = null;
-            search.create({
-                type: 'file',
-                filters: [['name', 'is', fileName]],
-                columns: ['internalid']
-            }).run().each(function (r) {
-                fileId = r.id;
-                return false;
-            });
-
-            if (!fileId) {
-                throw new Error('The games report file "' + fileName + '" was not found in the File Cabinet. ' +
-                    'Please upload it and run the integration again.');
+            var contents;
+            try {
+                var conn = connectSftp();
+                var sftpFile = conn.download({ filename: fileName, directory: CONFIG.SFTP_FILE_FOLDER });
+                contents = sftpFile.getContents();
+            } catch (e) {
+                throw new Error('The games report file "' + fileName + '" could not be downloaded from the SFTP server (folder ' +
+                    CONFIG.SFTP_FILE_FOLDER + '). Please check that the file was delivered and run the integration again. ' +
+                    'Technical detail: ' + (e.message || e));
             }
-            return { file: file.load({ id: fileId }), name: fileName };
+
+            return {
+                contents: contents,
+                name: fileName,
+                date: dd + '/' + mm + '/' + d.getFullYear()   // DD/MM/YYYY, taken from the file name
+            };
         }
 
         /** Generic lookup: returns { lowercaseName: internalId } for the given names. */
@@ -133,6 +153,27 @@ define(['N/record', 'N/search', 'N/file', 'N/format', 'N/runtime', 'N/log'],
             return map;
         }
 
+        /** Loads the active sub-items of "Semnox item": returns { lowercaseName: internalId } */
+        function loadSemnoxItems() {
+            var map = {};
+            var paged = search.create({
+                type: 'item',
+                filters: [['isinactive', 'is', 'F'], 'AND', ['parent', 'anyof', CONFIG.ITEM_PARENT_ID]],
+                columns: [search.createColumn({
+                    name: 'formulatext',
+                    formula: "REPLACE({name}, '" + CONFIG.ITEM_NAME_PREFIX + "', '')"
+                })]
+            }).runPaged({ pageSize: 1000 });
+
+            paged.pageRanges.forEach(function (pr) {
+                paged.fetch({ index: pr.index }).data.forEach(function (r) {
+                    var name = norm(r.getValue({ name: 'formulatext' }));
+                    if (name && !map[name]) map[name] = r.id;
+                });
+            });
+            return map;
+        }
+
         // ===================== STAGES =====================
 
         function getInputData() {
@@ -146,14 +187,13 @@ define(['N/record', 'N/search', 'N/file', 'N/format', 'N/runtime', 'N/log'],
 
                 // ---- 1. Read the CSV ----
                 var csv = getCsvFile(reportDate);
-                var rows = parseCsv(csv.file.getContents());
+                var rows = parseCsv(csv.contents);
                 if (rows.length < 2) {
                     throw new Error('The file "' + csv.name + '" is empty or has no data rows.');
                 }
 
                 var header = rows[0].map(function (h) { return norm(h); });
                 var idx = {
-                    date: header.indexOf('date'),
                     pm: header.indexOf('payment method'),
                     profile: header.indexOf('game profile'),
                     game: header.indexOf('game name'),
@@ -171,7 +211,7 @@ define(['N/record', 'N/search', 'N/file', 'N/format', 'N/runtime', 'N/log'],
                 // ---- 2. Filter + group ----
                 var groups = {};
                 var pmNames = {}, locNames = {}, profileNames = {};
-                var skippedZero = 0, skippedProfile = 0;
+                var skippedZero = 0;
 
                 for (var i = 1; i < rows.length; i++) {
                     var r = rows[i];
@@ -182,24 +222,21 @@ define(['N/record', 'N/search', 'N/file', 'N/format', 'N/runtime', 'N/log'],
                     if (isNaN(amt)) amt = 0;
 
                     var profile = clean(r[idx.profile]);
-                    if (CONFIG.ALLOWED_GAME_PROFILES.indexOf(norm(profile)) === -1) { skippedProfile++; continue; } // Remove this line to use all items in the report
 
                     var pm = clean(r[idx.pm]);
                     var loc = clean(r[idx.loc]);
-                    var dateStr = clean(r[idx.date]);
                     var gameName = clean(r[idx.game]);
 
-                    if (!pm || !loc || !dateStr) {
-                        logError('Row ' + (i + 1) + ' in "' + csv.name + '" was skipped because the Payment Method, ' +
-                            'Location or Date is empty.');
+                    if (!pm || !loc) {
+                        logError('Row ' + (i + 1) + ' in "' + csv.name + '" was skipped because the Payment Method ' +
+                            'or Location is empty.');
                         continue;
                     }
 
-                    // One file = one day, so group by payment method + location only.
-                    // The invoice date is taken from the first row of each group.
+                    // Group by payment method + location. The invoice date comes from the file name.
                     var gKey = norm(pm) + '|' + norm(loc);
                     if (!groups[gKey]) {
-                        groups[gKey] = { paymentMethod: pm, location: loc, date: dateStr, lines: {} };
+                        groups[gKey] = { paymentMethod: pm, location: loc, date: csv.date, lines: {} };
                     }
                     var lKey = norm(profile) + '|' + norm(gameName);
                     var line = groups[gKey].lines[lKey];
@@ -218,7 +255,6 @@ define(['N/record', 'N/search', 'N/file', 'N/format', 'N/runtime', 'N/log'],
                     file: csv.name,
                     totalRows: rows.length - 1,
                     skippedZeroQty: skippedZero,
-                    skippedOtherProfiles: skippedProfile,
                     invoicesToCreate: Object.keys(groups).length
                 });
 
@@ -227,9 +263,7 @@ define(['N/record', 'N/search', 'N/file', 'N/format', 'N/runtime', 'N/log'],
                     Object.keys(pmNames).map(function (k) { return pmNames[k]; }));
                 var locationMap = lookupByNames('location', ['name'],
                     Object.keys(locNames).map(function (k) { return locNames[k]; }));
-                var itemMap = lookupByNames('item', ['itemid'],
-                    Object.keys(profileNames).map(function (k) { return profileNames[k]; }),
-                    [['type', 'anyof', ['Service']]]);
+                var itemMap = loadSemnoxItems();
 
                 // ---- 4. Report missing master data once per name, skip affected groups ----
                 var reported = {};
@@ -262,8 +296,8 @@ define(['N/record', 'N/search', 'N/file', 'N/format', 'N/runtime', 'N/log'],
                         var itemId = itemMap[norm(l.profile)];
                         if (!itemId) {
                             ok = false;
-                            reportOnce('i', l.profile, 'The service item "' + l.profile + '" (Game Profile) was not found in NetSuite. ' +
-                                'Invoices that use this item were not created. Please create a Service item with this exact name and run again.');
+                            reportOnce('i', l.profile, 'The service item "' + l.profile + '" (Game Profile) was not found under the parent item "Semnox item" in NetSuite. ' +
+                                'Invoices that use this item were not created. Please create a Service item with this exact name as a sub-item of "Semnox item" and run again.');
                             return;
                         }
                         var qty = round(l.qty, 4);
@@ -279,15 +313,12 @@ define(['N/record', 'N/search', 'N/file', 'N/format', 'N/runtime', 'N/log'],
 
                     if (ok && lines.length) {
                         output.push({
-                            key: gKey,
-                            value: {
-                                paymentMethod: g.paymentMethod,
-                                location: g.location,
-                                date: g.date,
-                                customerId: customerId,
-                                locationId: locationId,
-                                lines: lines
-                            }
+                            paymentMethod: g.paymentMethod,
+                            location: g.location,
+                            date: g.date,
+                            customerId: customerId,
+                            locationId: locationId,
+                            lines: lines
                         });
                     }
                 });
