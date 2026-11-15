@@ -1,4 +1,4 @@
-Host: pfcsftp.dyndns.org  
+Host: pfcsftp.dyndns.org
 
 Port: 22
 
