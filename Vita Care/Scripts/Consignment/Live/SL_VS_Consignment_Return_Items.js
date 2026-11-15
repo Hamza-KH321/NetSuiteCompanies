@@ -50,7 +50,7 @@ define(['N/record', 'N/search', 'N/log'], function (record, search, log) {
             });
 
             var result;
-            
+
 
             // =========================
             // MAIN LOGIC
@@ -59,12 +59,16 @@ define(['N/record', 'N/search', 'N/log'], function (record, search, log) {
 
                 log.debug('beforeSales TRUE', 'Entering logic');
 
-                if (orderStatus == 'A' || orderStatus == 'B') {
-
-                    log.debug('STATUS A DETECTED', 'Updating existing Inventory Transfer');
+                if (orderStatus == 'A' || orderStatus == 'B' || orderStatus == 'D') {
 
                     result = createTransferOrder(soRec, soId, items);
 
+                } else {
+
+                    result = {
+                        success: false,
+                        error: 'Unsupported Sales Order status: ' + orderStatus
+                    };
                 }
 
             } else {
