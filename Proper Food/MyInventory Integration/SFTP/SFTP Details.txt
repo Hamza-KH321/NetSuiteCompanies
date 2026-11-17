@@ -2,10 +2,8 @@ Host: pfcsftp.dyndns.org
 
 Port: 22
 
-Protocol: SFTP
-
 Username: SFTP
 
 Password: Pfc@2026
 
- 
+Protocol: SFTP

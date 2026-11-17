@@ -146,6 +146,7 @@ define(['N/record', 'N/search', 'N/log'], function (record, search, log) {
             toRec.setValue({ fieldId: 'incoterm', value: 1 });
             toRec.setValue({ fieldId: 'location', value: fromLocation });
             toRec.setValue({ fieldId: 'transferlocation', value: toLocation });
+            toRec.setValue({ fieldId: 'custbody_vs_consignment_to', value: true });
             toRec.setValue({ fieldId: 'custbody_vs_consignment_sales_order', value: soId });
 
             // =========================
