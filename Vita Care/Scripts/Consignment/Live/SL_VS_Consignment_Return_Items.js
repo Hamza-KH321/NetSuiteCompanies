@@ -51,7 +51,6 @@ define(['N/record', 'N/search', 'N/log'], function (record, search, log) {
 
             var result;
 
-
             // =========================
             // MAIN LOGIC
             // =========================
@@ -118,19 +117,24 @@ define(['N/record', 'N/search', 'N/log'], function (record, search, log) {
         }
     }
 
+    // =========================
+    // CREATE TRANSFER ORDER
+    // =========================
     function createTransferOrder(soRec, soId, items) {
         try {
+
+            var fromLocation = soRec.getValue('location');
+            var toLocation = soRec.getValue('custbody_vs_original_warehouse');
+
             var itemMap = getItemsMap(items);
-            var lotMap = getLotMap(items);
+            var lotMap = getLotMap(items, itemMap, fromLocation);
 
             log.debug('createTransferOrder START', {
                 soId: soId,
                 items: items,
-                itemMap: itemMap
+                itemMap: itemMap,
+                lotMap: lotMap
             });
-
-            var fromLocation = soRec.getValue('location');
-            var toLocation = soRec.getValue('custbody_vs_original_warehouse');
 
             log.debug('Locations', {
                 fromLocation: fromLocation,
@@ -183,11 +187,13 @@ define(['N/record', 'N/search', 'N/log'], function (record, search, log) {
 
                         log.debug('Batch', batches[k]);
 
-                        var lotInternalId = lotMap[batches[k].lot.toString()];
+                        // lot is resolved per item, so the same lot number on another item is never picked
+                        var lotKey = internalItemId + '_' + batches[k].lot.toString();
+                        var lotInternalId = lotMap[lotKey];
 
                         if (!lotInternalId) {
-                            log.error('Lot Not Found In Map', batches[k].lot);
-                            throw 'Lot not found: ' + batches[k].lot;
+                            log.error('Lot Not Found In Map', lotKey);
+                            throw 'Lot not found: ' + batches[k].lot + ' for item ' + itemObj.item;
                         }
 
                         invDetail.selectNewLine({ sublistId: 'inventoryassignment' });
@@ -326,6 +332,9 @@ define(['N/record', 'N/search', 'N/log'], function (record, search, log) {
         }
     }
 
+    // =========================
+    // ITEM MAP (itemid -> internal id)
+    // =========================
     function getItemsMap(items) {
         try {
 
@@ -377,85 +386,58 @@ define(['N/record', 'N/search', 'N/log'], function (record, search, log) {
         }
     }
 
-    function getLotMap(items) {
+    // =========================
+    // LOT MAP (item internal id + lot number -> inventory number internal id)
+    // Lot numbers are only unique per item, so the item and source location are part of the search
+    // =========================
+    function getLotMap(items, itemMap, fromLocation) {
         try {
 
-            log.debug('getLotMap START', items);
+            log.debug('getLotMap START', {
+                items: items,
+                fromLocation: fromLocation
+            });
 
-            var lotValues = [];
+            var map = {};
 
             for (var i = 0; i < items.length; i++) {
+
+                var itemInternalId = itemMap[items[i].item.toString()];
                 var batches = items[i].batches || [];
 
                 for (var j = 0; j < batches.length; j++) {
 
                     var lot = batches[j].lot.toString();
+                    var key = itemInternalId + '_' + lot;
 
-                    if (lotValues.indexOf(lot) == -1) {
-                        lotValues.push(lot);
-                    }
-                }
-            }
-
-            log.debug('Unique Lot Values', lotValues);
-
-            if (!lotValues || lotValues.length == 0) {
-                return {};
-            }
-
-            var map = {};
-
-            var lotSearch = search.create({
-                type: 'inventorynumber',
-                filters: [
-                    ['inventorynumber', 'is', lotValues[0]]
-                ],
-                columns: ['internalid', 'inventorynumber']
-            });
-
-            // 🔴 IMPORTANT: inventorynumber does NOT support "anyof" for text
-            // so we build OR expression manually
-
-            if (lotValues.length > 1) {
-
-                var filters = [];
-
-                for (var k = 0; k < lotValues.length; k++) {
-
-                    if (k > 0) {
-                        filters.push('OR');
+                    if (map[key]) {
+                        continue;
                     }
 
-                    filters.push(['inventorynumber', 'is', lotValues[k]]);
+                    var lotSearch = search.create({
+                        type: 'inventorynumber',
+                        filters: [
+                            ['item', 'anyof', itemInternalId],
+                            'AND',
+                            ['inventorynumber', 'is', lot],
+                            'AND',
+                            ['location', 'anyof', fromLocation]
+                        ],
+                        columns: ['internalid', 'inventorynumber']
+                    });
+
+                    var res = lotSearch.run().getRange({ start: 0, end: 1 });
+
+                    if (!res || res.length == 0) {
+                        log.error('Lot Missing In Result', key);
+                        throw 'Lot ' + lot + ' not found for item ' + items[i].item + ' in location ' + fromLocation;
+                    }
+
+                    map[key] = res[0].getValue('internalid');
                 }
-
-                lotSearch = search.create({
-                    type: 'inventorynumber',
-                    filters: filters,
-                    columns: ['internalid', 'inventorynumber']
-                });
             }
-
-            lotSearch.run().each(function (res) {
-
-                var lotNumber = res.getValue('inventorynumber');
-                var internalId = res.getValue('internalid');
-
-                map[lotNumber.toString()] = internalId;
-
-                return true;
-            });
 
             log.debug('Lot Map Built', map);
-
-            // 🔴 Validate all lots found
-            for (var x = 0; x < lotValues.length; x++) {
-
-                if (!map[lotValues[x]]) {
-                    log.error('Lot Missing In Result', lotValues[x]);
-                    throw 'Lot not found: ' + lotValues[x];
-                }
-            }
 
             return map;
 
